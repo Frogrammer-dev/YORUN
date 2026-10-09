@@ -8,43 +8,20 @@ import type * as Leaflet from "leaflet";
 import { boundsSizeMeters, mapAlive, setBasemap, useLeafletMap, type Basemap } from "@/components/map/useLeafletMap";
 import type { RouteCandidate } from "@/lib/route/fit";
 import type { FinderRequest, FinderResponse } from "@/lib/route/finder.worker";
-import { fetchOverpassTiles, splitBBox, type BBox, type RoadDetail } from "@/lib/route/osm";
-import { fetchElevation, type ElevationProfile } from "@/lib/route/elevation";
-import { overlap } from "@/lib/route/discover";
-import { recognizeCourses, type Recognized } from "@/lib/art/recognize";
-import { doodleKo } from "@/lib/art/doodleNames";
-import { SHAPES, groupLines, type ShapeGroup, type ShapeId } from "@/lib/route/shapes";
-import { CustomShapeInput } from "@/components/route/CustomShapeInput";
+import { fetchOverpassTiles, splitBBox, type BBox } from "@/lib/route/osm";
+import { fetchElevation } from "@/lib/route/elevation";
+import { recognizeCourses } from "@/lib/art/recognize";
+import { SIMILARITY_MIN, moveLines, nameDiscoveries } from "@/lib/route/present";
+import { AREAS, DEFAULT_SETTINGS, MAX_SIDE, MIN_SIDE, RANGES, type AreaId, type FinderSettingsValue } from "@/components/route/finderOptions";
+import { FinderSettings } from "@/components/route/FinderSettings";
+import { CourseList } from "@/components/route/CourseList";
+import { SelectedCourse, type ElevationState } from "@/components/route/SelectedCourse";
 import { savePlannedRoute } from "@/lib/run/storage";
 import { toGpx } from "@/lib/run/tracker";
 import { downloadBlob } from "@/lib/render/png";
-import { BrandMark, Icon, PathThumb, latlngToXY } from "@/components/Icon";
+import { BrandMark, Icon } from "@/components/Icon";
 
-const RANGES = [
-  { label: "2~5km", min: 2000, max: 5000 },
-  { label: "3~8km", min: 3000, max: 8000 },
-  { label: "5~12km", min: 5000, max: 12000 },
-  { label: "8~16km", min: 8000, max: 16000 },
-] as const;
-
-const DETAILS: Array<{ id: RoadDetail; label: string; hint: string }> = [
-  { id: "simple", label: "큰길 위주", hint: "골목·보도·진입로를 빼고 이어진 길만 써서 선이 깔끔해요 (추천)" },
-  { id: "normal", label: "보통", hint: "생활도로까지 쓰되 도로 옆 보도·횡단보도·진입로는 빼요" },
-  { id: "detailed", label: "상세", hint: "모든 보행로를 써요. 그림은 촘촘하지만 삐죽해질 수 있어요" },
-];
-
-const MAX_SIDE = 9000;
-/** 찾을 영역: 지금 화면, 또는 지도 가운데를 중심으로 한 정사각형 (한 변 km) */
-const AREAS = [
-  { id: "screen", label: "지금 화면", km: 0 },
-  { id: "2", label: "2km", km: 2 },
-  { id: "5", label: "5km", km: 5 },
-  { id: "10", label: "10km", km: 10 },
-  { id: "15", label: "15km", km: 15 },
-] as const;
-type AreaId = (typeof AREAS)[number]["id"];
 const ROUTE_COLOR = "#0EA5E9";
-const MIN_SIDE = 500;
 
 type Phase =
   | { kind: "idle" }
@@ -57,19 +34,11 @@ export function RouteFinderApp() {
   const router = useRouter();
   const mapEl = useRef<HTMLDivElement>(null);
   const { lm, basemapOk, setBasemapOk } = useLeafletMap(mapEl);
-  /** auto: 동네 고리 코스 추천, ShapeId: 기본 그림, custom: 직접 그린 그림 */
-  const [shape, setShape] = useState<ShapeId | "auto" | "custom">("auto");
-  const [custom, setCustom] = useState<ShapeGroup | null>(null);
-  const [area, setArea] = useState<AreaId>("screen");
+  const [settings, setSettings] = useState<FinderSettingsValue>(DEFAULT_SETTINGS);
+  const { shape, custom, area, range, detail, excludeSteps, avoidUnpaved, avoidMajor, preferLit } = settings;
   const areaRef = useRef<AreaId>("screen");
   const areaRect = useRef<Leaflet.Rectangle | null>(null);
-  const [avoidUnpaved, setAvoidUnpaved] = useState(false);
-  const [avoidMajor, setAvoidMajor] = useState(false);
-  const [preferLit, setPreferLit] = useState(false);
-  const [elev, setElev] = useState<Record<string, ElevationProfile | "loading" | "error">>({});
-  const [range, setRange] = useState(1);
-  const [excludeSteps, setExcludeSteps] = useState(true);
-  const [detail, setDetail] = useState<RoadDetail>("simple");
+  const [elev, setElev] = useState<Record<string, Exclude<ElevationState, undefined>>>({});
   const [basemap, setBasemapState] = useState<Basemap>("simple");
   const [showRoads, setShowRoads] = useState(false);
   const roadsRef = useRef<number[] | null>(null);
@@ -240,7 +209,7 @@ export function RouteFinderApp() {
   }
 
   function chooseArea(id: AreaId) {
-    setArea(id);
+    setSettings((v) => ({ ...v, area: id }));
     areaRef.current = id;
     if (!lm) return;
     drawAreaRect();
@@ -344,7 +313,7 @@ export function RouteFinderApp() {
       } else {
         roadsRef.current = m.roads;
         drawRoads();
-        const templ = m.result.candidates.filter((c) => c.similarity >= 50);
+        const templ = m.result.candidates.filter((c) => c.similarity >= SIMILARITY_MIN);
         const finish = (cands: RouteCandidate[], doodleError = false) => {
           if (id !== reqId.current) return;
           setPhase({ kind: "done", candidates: cands, partial: m.result.partial, dataTimestamp: m.graph.dataTimestamp, nodes: m.graph.nodes, discover, doodleError });
@@ -354,14 +323,8 @@ export function RouteFinderApp() {
         if (!discover) return finish(templ);
         // 동네 추천: 낙서 인식 모델이 '무엇처럼 보이는지' 이름을 붙인 코스를 앞에, 도형과 닮은 코스를 뒤에
         setPhase({ kind: "searching", fraction: 0.97, label: "낙서 인식" });
-        const pool = [...m.result.candidates, ...(m.result.pool ?? [])];
         // 그래픽 가속이 없는 기기에선 판정이 매우 느릴 수 있어 20초가 넘으면 도형 결과만 보여 준다
-        Promise.race([recognizeCourses(pool), new Promise<never>((_, fail) => window.setTimeout(() => fail(new Error("doodle_timeout")), 20_000))])
-          .then((rec) => {
-            const named = pickDoodles(pool, rec);
-            finish([...named, ...templ.filter((c) => !named.some((d) => overlap(c, d)))]);
-          })
-          .catch(() => finish(templ, true));
+        void nameDiscoveries(templ, [...m.result.candidates, ...(m.result.pool ?? [])], recognizeCourses, 20_000).then((r) => finish(r.candidates, r.doodleError));
       }
     };
     w.postMessage(req);
@@ -415,8 +378,8 @@ export function RouteFinderApp() {
   }
 
 
-  const tooBig = areaInfo && (areaInfo.w > MAX_SIDE || areaInfo.h > MAX_SIDE);
-  const busy = phase.kind === "fetching" || phase.kind === "searching";
+  // 넓이 제한은 '지금 화면'으로 찾을 때만 (정사각형 영역을 고르면 지도가 그 영역을 보이려고 축소된다)
+  const tooBig = area === "screen" && !!areaInfo && (areaInfo.w > MAX_SIDE || areaInfo.h > MAX_SIDE);
   const sel = phase.kind === "done" ? phase.candidates.find((c) => c.id === selected) : undefined;
 
   function goSettings() {
@@ -424,125 +387,18 @@ export function RouteFinderApp() {
     requestAnimationFrame(() => settingsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
   }
 
-  const settings = (
-    <section className="sheet-section" ref={settingsRef} aria-labelledby="settings-title">
-      <h2 id="settings-title">어떤 그림을 달릴까요?</h2>
-      <div className="shape-rail" role="radiogroup" aria-label="그림 모양">
-        <button
-          type="button"
-          role="radio"
-          aria-checked={shape === "auto"}
-          aria-label="동네 길로 만들 수 있는 코스 추천"
-          className="shape-tile shape-tile-wide"
-          onClick={() => setShape("auto")}
-        >
-          <span className="tick"><Icon name="check" size={12} strokeWidth={3} /></span>
-          <Icon name="sparkle" size={30} strokeWidth={1.8} />
-          동네 추천
-        </button>
-        <button
-          type="button"
-          role="radio"
-          aria-checked={shape === "custom"}
-          aria-label="찾고 싶은 그림 직접 그리기"
-          className="shape-tile shape-tile-wide"
-          onClick={() => setShape("custom")}
-        >
-          <span className="tick"><Icon name="check" size={12} strokeWidth={3} /></span>
-          {custom ? <PathThumb lines={groupLines(custom)} size={36} pad={3} width={2.5} /> : <Icon name="pencil" size={30} strokeWidth={1.8} />}
-          내 그림
-        </button>
-        {SHAPES.map((s) => (
-          <button key={s.id} type="button" role="radio" aria-checked={shape === s.id} aria-label={s.name} className="shape-tile" onClick={() => setShape(s.id as ShapeId)}>
-            <span className="tick"><Icon name="check" size={12} strokeWidth={3} /></span>
-            <PathThumb lines={[s.points]} size={36} pad={3} width={2.5} />
-            {s.name}
-          </button>
-        ))}
-      </div>
-      {shape === "auto" && <p className="hint">동네 길로 자연스럽게 이어지는 고리 코스를 먼저 찾고, 도형·동물·사물 {SHAPES.length}가지 중 어떤 그림과 닮았는지 알려 줘요. 같은 길을 되밟지 않아요.</p>}
-      {shape === "custom" && <CustomShapeInput value={custom} onChange={setCustom} />}
-
-      <fieldset className="seg-field">
-        <legend>찾을 영역</legend>
-        <div className="seg" role="radiogroup" aria-label="찾을 영역">
-          {AREAS.map((a) => (
-            <button key={a.id} type="button" role="radio" aria-checked={area === a.id} aria-label={a.km ? `지도 가운데 ${a.label} 사방` : a.label} className={`seg-btn ${area === a.id ? "seg-on" : ""}`} onClick={() => chooseArea(a.id)}>
-              {a.label}
-            </button>
-          ))}
-        </div>
-        <p className="hint">
-          {area === "screen"
-            ? `지금 보이는 지도에서 찾아요 (최대 ${MAX_SIDE / 1000}km × ${MAX_SIDE / 1000}km).`
-            : `지도 가운데를 중심으로 ${AREAS.find((a) => a.id === area)!.label} × ${AREAS.find((a) => a.id === area)!.label} 사각형에서 찾아요. 넓을수록 길 데이터를 여러 번 나눠 받고 탐색도 오래 걸려요.`}
-        </p>
-      </fieldset>
-
-      <fieldset className="seg-field">
-        <legend>코스 거리 (km)</legend>
-        <div className="seg" role="radiogroup" aria-label="코스 거리">
-          {RANGES.map((r, i) => (
-            <button key={r.label} type="button" role="radio" aria-checked={range === i} aria-label={r.label} className={`seg-btn ${range === i ? "seg-on" : ""}`} onClick={() => setRange(i)}>
-              {r.label.replace("~", "–").replace("km", "")}
-            </button>
-          ))}
-        </div>
-      </fieldset>
-
-      <fieldset className="seg-field">
-        <legend>길 단순화</legend>
-        <div className="seg" role="radiogroup" aria-label="길 단순화">
-          {DETAILS.map((d) => (
-            <button key={d.id} type="button" role="radio" aria-checked={detail === d.id} className={`seg-btn ${detail === d.id ? "seg-on" : ""}`} onClick={() => setDetail(d.id)}>
-              {d.label}
-            </button>
-          ))}
-        </div>
-        <p className="hint">{DETAILS.find((d) => d.id === detail)!.hint}</p>
-      </fieldset>
-
-      <label className="toggle-row">
-        계단 제외
-        <input type="checkbox" role="switch" className="switch" checked={excludeSteps} onChange={(e) => setExcludeSteps(e.target.checked)} />
-      </label>
-      <label className="toggle-row">
-        비포장 길 빼기 (흙·자갈)
-        <input type="checkbox" role="switch" className="switch" checked={avoidUnpaved} onChange={(e) => setAvoidUnpaved(e.target.checked)} />
-      </label>
-      <label className="toggle-row">
-        큰 차도 피하기
-        <input type="checkbox" role="switch" className="switch" checked={avoidMajor} onChange={(e) => setAvoidMajor(e.target.checked)} />
-      </label>
-      <label className="toggle-row">
-        가로등 있는 길 우선
-        <input type="checkbox" role="switch" className="switch" checked={preferLit} onChange={(e) => setPreferLit(e.target.checked)} />
-      </label>
-      <p className="hint">길 조건은 OpenStreetMap에 기록된 정보만 써요. 가로등·노면 정보가 없는 길이 많아 참고용이에요.</p>
-
-      <div className="sheet-cta">
-        {busy ? (
-          <div className="progress-cta" role="status">
-            <span>
-              {phase.kind === "fetching"
-                ? `지도 길 데이터를 받는 중…${phase.total > 1 ? ` (${Math.min(phase.done + 1, phase.total)}/${phase.total})` : ""}`
-                : `그림 맞춰 보는 중${phase.label ? ` · ${phase.label}` : ""}`}
-            </span>
-            {phase.kind === "searching" && <span className="num">{Math.round(phase.fraction * 100)}%</span>}
-            <i
-              className={`progress-bar ${phase.kind === "fetching" ? "progress-indeterminate" : ""}`}
-              style={phase.kind === "searching" ? { width: `${Math.round(phase.fraction * 100)}%` } : undefined}
-            />
-          </div>
-        ) : (
-          <button type="button" className={`btn btn-lg ${phase.kind === "done" ? "btn-ink" : "btn-primary"}`} onClick={() => void search()} disabled={!lm || !!tooBig || (shape === "custom" && !custom)}>
-            지금 보이는 지도에서 코스 찾기
-          </button>
-        )}
-        {tooBig && !busy && <p className="hint center">지도를 조금 더 확대해 주세요 (최대 {MAX_SIDE / 1000}km × {MAX_SIDE / 1000}km)</p>}
-      </div>
-      <p className="hint sheet-foot">지도 영역(좌표 범위)이 길 데이터를 받기 위해 OpenStreetMap 데이터 서버로 전송돼요. 내 정확한 위치는 보내지 않아요.</p>
-    </section>
+  const settingsPanel = (
+    <FinderSettings
+      ref={settingsRef}
+      value={settings}
+      onChange={(patch) => setSettings((v) => ({ ...v, ...patch }))}
+      onChooseArea={chooseArea}
+      progress={phase.kind === "fetching" || phase.kind === "searching" ? phase : null}
+      ready={!!lm}
+      tooBig={!!tooBig}
+      hasResults={phase.kind === "done"}
+      onSearch={() => void search()}
+    />
   );
 
   return (
@@ -615,74 +471,8 @@ export function RouteFinderApp() {
                 {phase.candidates.length === 0 && (
                   <p className="empty">이 영역·거리 조건에서는 그림이 잘 나오는 연결 코스를 찾지 못했어요. 지도를 옮기거나 거리 범위·그림·길 단순화를 바꿔 보세요. (끊긴 곳을 가짜 선으로 잇지 않아요.)</p>
                 )}
-                <ul className="cands">
-                  {phase.candidates.map((c) => (
-                    <li key={c.id}>
-                      <button type="button" className={`cand ${c.id === selected ? "cand-on" : ""}`} aria-pressed={c.id === selected} onClick={() => choose(c)} onMouseEnter={() => setHover(c.id)} onMouseLeave={() => setHover(null)}>
-                        <span className="cand-thumb">
-                          <PathThumb lines={[latlngToXY(c.latlngs)]} size={56} pad={5} width={3} stroke="#0EA5E9" />
-                        </span>
-                        <span className="cand-body">
-                          <span className="cand-top">
-                            <span className="cand-title">{c.doodle ? `${c.shapeName}처럼 보이는 코스` : phase.discover ? `${c.shapeName} 닮은 코스` : c.shapeName}</span>
-                            <span className={`cand-sim ${c.doodle ? "cand-ai" : ""}`}>{c.doodle ? `인식 ${c.similarity}%` : `유사도 ${c.similarity}`}</span>
-                          </span>
-                          <span className="cand-meta">
-                            <span className="num">{(c.lengthMeters / 1000).toFixed(2)}</span>
-                            <span className="unit">km</span>
-                            <span>· 약 {Math.round((c.lengthMeters / 1000) * 6.5)}분</span>
-                            {c.repeatRatio > 0.02 ? <span>· 같은 길 반복 {Math.round(c.repeatRatio * 100)}%</span> : null}
-                            {c.moves?.length ? <span>· 이동 {(c.moveMeters / 1000).toFixed(1)}km</span> : null}
-                          </span>
-                        </span>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-                {sel && (
-                  <>
-                    <p className="sel-desc">
-                      <strong>
-                        {sel.shapeName} 코스 · {(sel.lengthMeters / 1000).toFixed(2)}km
-                      </strong>{" "}
-                      —{" "}
-                      {sel.moves?.length
-                        ? `획 ${sel.moves.length + 1}개를 차례로 그려요. 획 사이 점선 ${(sel.moveMeters / 1000).toFixed(1)}km는 이동 구간이라 기록을 멈추고 이동하면 돼요.`
-                        : "초록 점에서 출발해 같은 곳으로 돌아오는 한붓 코스예요."}{" "}
-                      {sel.doodle
-                        ? `낙서 인식 모델(Quick, Draw! 345가지)이 이 코스 모양을 '${sel.shapeName}'(으)로 봤어요 (확신 ${sel.similarity}%). 사람 눈에는 다르게 보일 수 있어요.`
-                        : `원래 그림에서 평균 ${sel.meanDeviationMeters}m, 최대 ${sel.maxDeviationMeters}m 벗어나요.`}
-                    </p>
-                    <RoadInfo c={sel} elev={elev[sel.id]} />
-                    <div className="sel-legend" aria-hidden="true">
-                      <span>
-                        <i />달릴 길
-                      </span>
-                      {sel.outlines?.length !== 0 && (
-                        <span>
-                          <i className="lg-guide" />원래 그림
-                        </span>
-                      )}
-                      <span>
-                        <i className="lg-start" />출발·도착
-                      </span>
-                      {sel.moves?.length ? (
-                        <span>
-                          <i className="lg-move" />이동 구간
-                        </span>
-                      ) : null}
-                    </div>
-                    <div className="sheet-cta sheet-cta-split">
-                      <button type="button" className="btn btn-primary btn-lg" onClick={() => runThis(sel, phase.dataTimestamp)}>
-                        <Icon name="play" size={18} />
-                        이 코스로 달리기
-                      </button>
-                      <button type="button" className="btn btn-secondary btn-lg btn-square" onClick={() => exportGpx(sel)} aria-label="GPX 내보내기 (시계용)" title="GPX 내보내기 (시계용)">
-                        <Icon name="download" size={24} />
-                      </button>
-                    </div>
-                  </>
-                )}
+                <CourseList candidates={phase.candidates} selected={selected} discover={phase.discover} onChoose={choose} onHover={setHover} />
+                {sel && <SelectedCourse c={sel} elev={elev[sel.id]} onRun={() => runThis(sel, phase.dataTimestamp)} onExport={() => exportGpx(sel)} />}
                 {phase.candidates.length > 0 && phase.candidates[0].similarity < 65 && (
                   <p className="hint">그림이 또렷하지 않다면: 거리를 늘리면 그림이 커져 길 간격에 덜 뭉개지고, 바둑판처럼 반듯한 길이 많은 동네일수록 잘 나와요.</p>
                 )}
@@ -696,101 +486,10 @@ export function RouteFinderApp() {
               </section>
             )}
 
-            {settings}
+            {settingsPanel}
           </div>
         </aside>
       </div>
     </main>
   );
-}
-
-/** 코스 중 이동 구간들의 좌표 */
-function moveLines(c: { latlngs: [number, number][]; moves?: Array<[number, number]> }): [number, number][][] {
-  return (c.moves ?? []).map(([a, b]) => c.latlngs.slice(a, b + 1));
-}
-
-const pct = (v: number) => `${Math.round(v * 100)}%`;
-
-/** 고른 코스의 길 성격과 고도 */
-function RoadInfo({ c, elev }: { c: RouteCandidate; elev: ElevationProfile | "loading" | "error" | undefined }) {
-  const r = c.roadInfo;
-  return (
-    <div className="road-info">
-      <ul className="road-facts" aria-label="코스 길 정보">
-        <li>
-          <span>큰 차도</span>
-          <b className="num">{pct(r.major)}</b>
-        </li>
-        <li>
-          <span>비포장</span>
-          <b className="num">{pct(r.unpaved)}</b>
-        </li>
-        <li>
-          <span>가로등</span>
-          <b className="num">{r.lit === null ? "정보 없음" : pct(r.lit)}</b>
-        </li>
-        <li>
-          <span>계단</span>
-          <b className="num">{r.steps ? `${r.steps}곳` : "없음"}</b>
-        </li>
-        <li>
-          <span>오르막</span>
-          <b className="num">{elev === "loading" || elev === undefined ? "…" : elev === "error" ? "확인 못 함" : `${elev.ascent}m`}</b>
-        </li>
-      </ul>
-      {elev && elev !== "loading" && elev !== "error" && <ElevationChart p={elev} />}
-      <p className="hint">
-        길 정보는 OpenStreetMap 기록 기준이에요{r.lit !== null ? ` (가로등은 정보가 있는 ${pct(r.litKnown)} 구간 기준)` : ""}. 고도는 코스 좌표를 Open-Meteo 고도
-        서버로 보내 약 90m 간격 지형 자료로 계산한 값이라 다리·고가·터널은 반영되지 않아요.
-      </p>
-    </div>
-  );
-}
-
-function ElevationChart({ p }: { p: ElevationProfile }) {
-  const W = 300, H = 56;
-  const span = Math.max(10, p.max - p.min);
-  const total = p.dist[p.dist.length - 1] || 1;
-  const pts = p.elev.map((e, i) => `${((p.dist[i] / total) * W).toFixed(1)},${(H - 4 - ((e - p.min) / span) * (H - 12)).toFixed(1)}`);
-  return (
-    <figure className="elev-chart">
-      <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" role="img" aria-label={`고도 ${Math.round(p.min)}m부터 ${Math.round(p.max)}m, 오르막 합계 ${p.ascent}m`}>
-        <polygon points={`0,${H} ${pts.join(" ")} ${W},${H}`} className="elev-fill" />
-        <polyline points={pts.join(" ")} className="elev-line" />
-      </svg>
-      <figcaption>
-        <span className="num">{Math.round(p.min)}m</span> ~ <span className="num">{Math.round(p.max)}m</span>
-      </figcaption>
-    </figure>
-  );
-}
-
-/** 낙서 인식이 이 정도 이상 확신해야 '○○처럼 보이는 코스'로 보여 준다 */
-const DOODLE_MIN = 0.35;
-
-/** 인식 결과 → 보여 줄 코스: 확신 높은 순, 같은 자리·같은 이름은 2개까지, 최대 8개 */
-function pickDoodles(pool: RouteCandidate[], rec: Array<Recognized | null>): RouteCandidate[] {
-  const ranked = pool
-    .map((c, i) => ({ c, r: rec[i] }))
-    .filter((x): x is { c: RouteCandidate; r: Recognized } => !!x.r && x.r.prob >= DOODLE_MIN)
-    .sort((a, b) => b.r.prob - a.r.prob);
-  const out: RouteCandidate[] = [];
-  const perName = new Map<string, number>();
-  for (const { c, r } of ranked) {
-    if (out.length >= 8) break;
-    if ((perName.get(r.name) ?? 0) >= 2 || out.some((d) => overlap(c, d))) continue;
-    perName.set(r.name, (perName.get(r.name) ?? 0) + 1);
-    out.push({
-      ...c,
-      id: `dd-${c.id}`,
-      shapeId: "doodle",
-      shapeName: doodleKo(r.name),
-      // 모델이 본 이름은 처음 맞춰 본 그림과 다를 수 있으므로 그 그림 외곽선은 보여 주지 않는다
-      outline: [],
-      outlines: [],
-      similarity: Math.round(r.prob * 100),
-      doodle: { name: r.name, prob: r.prob },
-    });
-  }
-  return out;
 }
