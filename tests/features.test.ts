@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { binarize, traceOutlines } from "@/lib/art/trace";
 import { ascentOf, sampleAlong } from "@/lib/route/elevation";
 import { EDGE_LIT, EDGE_MAJOR, EDGE_STEPS, EDGE_UNPAVED, hasEdge, project, roadStats } from "@/lib/route/graph";
+import { StepBudget } from "@/lib/route/budget";
 import { findGroupRoutes } from "@/lib/route/group";
 import { graphFromOverpass, mergeOverpass, splitBBox, wayFlags, type OverpassJson } from "@/lib/route/osm";
 import { groupFromLoops } from "@/lib/route/shapes";
@@ -120,7 +121,7 @@ describe("여러 획 코스", () => {
     const [maxX, maxY] = project(g.origin, bbox.north, bbox.east);
     const sq = (x: number): [number, number][] => [[x, 0], [x + 100, 0], [x + 100, 100], [x, 100]];
     const group = groupFromLoops([sq(0), sq(160)], { order: "given", name: "네모 둘" })!;
-    const r = findGroupRoutes(g, group, { minMeters: 1500, maxMeters: 4000, region: { minX, minY, maxX, maxY }, timeBudgetMs: 120_000 });
+    const r = findGroupRoutes(g, group, { minMeters: 1500, maxMeters: 4000, region: { minX, minY, maxX, maxY }, budget: new StepBudget(1_000_000) });
     expect(r.candidates.length).toBeGreaterThan(0);
     const c = r.candidates[0];
     expect(c.moves).toHaveLength(1);

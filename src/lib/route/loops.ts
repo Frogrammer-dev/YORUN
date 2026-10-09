@@ -2,6 +2,7 @@
 // 블록 합집합의 테두리는 실제 길만 따라가고, 같은 길을 되밟거나 가시가 생기지 않는다.
 // 이렇게 모은 자연스러운 고리 코스가 어떤 그림을 닮았는지(이동·회전·균일 확대만 허용) 나중에 판정한다.
 
+import type { Budget } from "./budget";
 import type { RoadGraph } from "./graph";
 import { polylineLength, resample, type ShapeDef } from "./shapes";
 
@@ -336,7 +337,7 @@ const faceInside = (f: Face, r: Region) => f.minX >= r.minX && f.maxX <= r.maxX 
  * 블록 하나에서 시작해 이웃 블록을 하나씩 붙여 가며, 테두리 길이가 목표 범위에 들 때마다 고리를 기록한다.
  * 붙일 블록은 테두리가 덜 늘어나는(=모양이 덜 울퉁불퉁해지는) 것을 우선하되, 실행마다 무작위성을 달리해 다양한 고리를 얻는다.
  */
-export function growLoops(g: RoadGraph, m: BlockMap, region: Region, minM: number, maxM: number, opts: { seeds: number; deadline: number; seed?: number }): NaturalLoop[] {
+export function growLoops(g: RoadGraph, m: BlockMap, region: Region, minM: number, maxM: number, opts: { seeds: number; budget: Budget; fraction: number; seed?: number }): NaturalLoop[] {
   const rand = rng(opts.seed ?? 12345);
   const okFaces = m.faces.map((f) => faceInside(f, region) && f.perim < maxM);
   const ids = m.faces.map((_, i) => i).filter((i) => okFaces[i]);
@@ -384,7 +385,8 @@ export function growLoops(g: RoadGraph, m: BlockMap, region: Region, minM: numbe
   };
   const out: NaturalLoop[] = [];
   for (const seed of seeds) {
-    if (Date.now() > opts.deadline) break;
+    if (!opts.budget.ok(opts.fraction)) break;
+    opts.budget.spend();
     // 실행마다 성향을 다르게: 둥글게 뭉치기(k 큼) ~ 길쭉·울퉁불퉁(k 작음)
     const k = 0.3 + rand() * 3;
     const set = [seed];

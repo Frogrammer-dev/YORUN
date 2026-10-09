@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { StepBudget } from "@/lib/route/budget";
 import { discoverRoutes } from "@/lib/route/discover";
 import { hasEdge, project } from "@/lib/route/graph";
 import { buildBlocks, matchShape, traceUnion } from "@/lib/route/loops";
@@ -80,7 +81,7 @@ describe("동네 블록과 고리 코스", () => {
 
   it("동네 추천: 격자에서 반복 없는 실제 길 고리 코스를 찾고 닮은 그림을 붙인다", () => {
     const { g, region } = grid(21, 60); // 1.2km × 1.2km
-    const r = discoverRoutes(g, { mode: "discover", shapes: SHAPES, minMeters: 1500, maxMeters: 3500, region, timeBudgetMs: 120_000 });
+    const r = discoverRoutes(g, { mode: "discover", shapes: SHAPES, minMeters: 1500, maxMeters: 3500, region, budget: new StepBudget(1_000_000) });
     expect(r.candidates.length).toBeGreaterThan(0);
     const best = r.candidates[0];
     expect(best.shapeId).toBe("square");
@@ -103,7 +104,7 @@ describe("동네 블록과 고리 코스", () => {
     expect(tri.id).toBe("custom");
     expect(tri.points.length).toBe(4); // 꼭짓점 3개 + 닫는 점
     expect(Math.max(...tri.points.map((p) => p[1]))).toBeGreaterThan(0.4); // 위쪽 꼭짓점이 위(북쪽)
-    const r = discoverRoutes(g, { mode: "shape", shapes: [tri], minMeters: 1500, maxMeters: 3500, region, timeBudgetMs: 120_000 });
+    const r = discoverRoutes(g, { mode: "shape", shapes: [tri], minMeters: 1500, maxMeters: 3500, region, budget: new StepBudget(1_000_000) });
     expect(r.candidates.length).toBeGreaterThan(0);
     expect(r.candidates.every((c) => c.shapeId === "custom")).toBe(true);
   }, 60_000);

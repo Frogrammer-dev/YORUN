@@ -3,6 +3,7 @@
 // - 그림 지정·직접 그리기(shape): 동네 고리 + 그림 모양대로 블록을 칠한 고리 + 유연 맞추기(findRoutes) 중 잘 맞는 순으로
 
 import { dominantGridAngle, evaluatePath, findRoutes, toCandidate, type FindResult, type Placement, type Region, type RouteCandidate } from "./fit";
+import { budgetOf, type Budget } from "./budget";
 import { roadStats, type RoadGraph } from "./graph";
 import { buildBlocks, growLoops, loopSamples, matchShape, shapeSamples, unionForPlacement, type BlockMap, type NaturalLoop } from "./loops";
 import type { ShapeDef } from "./shapes";
@@ -31,7 +32,10 @@ export interface DiscoverOptions {
   region: Region;
   /** "discover": 동네 고리를 그림별로 판정해 닮은 순, "shape": 지정한 그림 하나를 여러 방법으로 찾기 */
   mode: "discover" | "shape";
+  /** 시간 예산(ms). budget을 주면 무시 */
   timeBudgetMs?: number;
+  /** 탐색 예산 (테스트는 단계 예산으로 결정적 결과) */
+  budget?: Budget;
   maxResults?: number;
   /** 낙서 인식용으로 함께 돌려줄 동네 고리 수 (discover 모드) */
   poolSize?: number;
@@ -51,7 +55,7 @@ function scoreLoop(g: RoadGraph, loop: NaturalLoop, shape: ShapeDef, tmpl: XY[],
 }
 
 /** 그림 모양대로 블록을 칠해 만든 고리들 (지정 그림용) */
-function guidedLoops(g: RoadGraph, m: BlockMap, shape: ShapeDef, o: DiscoverOptions, deadline: number): NaturalLoop[] {
+function guidedLoops(g: RoadGraph, m: BlockMap, shape: ShapeDef, o: DiscoverOptions, budget: Budget, fraction: number): NaturalLoop[] {
   const r = o.region;
   const W = r.maxX - r.minX, H = r.maxY - r.minY;
   const sMin = o.minMeters / (DETOUR * shape.perimeter);
@@ -67,7 +71,8 @@ function guidedLoops(g: RoadGraph, m: BlockMap, shape: ShapeDef, o: DiscoverOpti
     for (const rotDeg of rots)
       for (let cx = r.minX + scale * 0.5; cx <= r.maxX - scale * 0.5; cx += Math.max(80, scale * 0.18))
         for (let cy = r.minY + scale * 0.5; cy <= r.maxY - scale * 0.5; cy += Math.max(80, scale * 0.18)) {
-          if (Date.now() > deadline) return out;
+          if (!budget.ok(fraction)) return out;
+          budget.spend();
           const loop = unionForPlacement(g, m, shape, { cx, cy, scale, rotDeg }, r);
           if (!loop || loop.length < o.minMeters * 0.85 || loop.length > o.maxMeters * 1.15) continue;
           const key = loop.faces.slice().sort((a, b) => a - b).join(",");
@@ -152,11 +157,10 @@ export function overlap(a: RouteCandidate, b: RouteCandidate): boolean {
 }
 
 export function discoverRoutes(g: RoadGraph, o: DiscoverOptions): FindResult {
-  const started = Date.now();
   prepGraph = g;
   const W = o.region.maxX - o.region.minX, H = o.region.maxY - o.region.minY;
   const tiles = Math.max(1, Math.round(W / 4500)) * Math.max(1, Math.round(H / 4500));
-  const budget = o.timeBudgetMs ?? Math.min(75_000, 30_000 * tiles);
+  const budget = budgetOf(o, Math.min(75_000, 30_000 * tiles));
   const maxResults = o.maxResults ?? 8;
   let partial = false;
   o.onProgress?.(0.02, "동네 블록");
@@ -166,7 +170,8 @@ export function discoverRoutes(g: RoadGraph, o: DiscoverOptions): FindResult {
   o.onProgress?.(0.05, "동네 고리 코스");
   const natural = growLoops(g, m, o.region, o.minMeters, o.maxMeters, {
     seeds: Math.min(m.faces.length, 500 * tiles),
-    deadline: started + budget * (o.mode === "discover" ? 0.45 : 0.25),
+    budget,
+    fraction: o.mode === "discover" ? 0.45 : 0.25,
   });
   // 같은 블록 묶음은 하나만. 동물·사물은 그림 수가 많아 고리가 많으면 고르게 2000개만 비교한다 (기본 도형은 전부)
   const uniq = uniqueLoops(natural);
@@ -176,7 +181,7 @@ export function discoverRoutes(g: RoadGraph, o: DiscoverOptions): FindResult {
   // 2) 지정 그림이면: 그림 모양대로 블록을 칠한 고리도 더한다
   if (o.mode === "shape") {
     o.onProgress?.(0.3, "그림 모양 블록");
-    for (const pl of pools) pl.loops = [...natural, ...guidedLoops(g, m, pl.shape, o, started + budget * 0.5)];
+    for (const pl of pools) pl.loops = [...natural, ...guidedLoops(g, m, pl.shape, o, budget, 0.5)];
   }
 
   // 3) 그림마다: 빠른 판정(점 대응 맞추기)으로 상위 고리만 골라 정밀 평가
@@ -184,7 +189,8 @@ export function discoverRoutes(g: RoadGraph, o: DiscoverOptions): FindResult {
   let evaluated = 0;
   pools.forEach(({ shape, loops }, si) => {
     o.onProgress?.(0.5 + (0.4 * si) / pools.length, shape.name);
-    if (Date.now() - started > budget) {
+    // 지정 그림이면 마지막 유연 맞추기에 예산을 남긴다
+    if (!budget.ok(o.mode === "shape" ? 0.6 : 1)) {
       partial = true;
       return;
     }
@@ -200,11 +206,12 @@ export function discoverRoutes(g: RoadGraph, o: DiscoverOptions): FindResult {
       .slice(0, o.mode === "discover" && shape.kind && shape.kind !== "basic" ? 12 : 40);
     const scored: Array<{ p: Placement; e: ReturnType<typeof evaluatePath> & { fit: Placement } }> = [];
     for (const q of quick) {
-      if (Date.now() - started > budget) {
+      if (!budget.ok(o.mode === "shape" ? 0.6 : 1)) {
         partial = true;
         break;
       }
       const s = scoreLoop(g, q.loop, shape, tmpl, o.minMeters, o.maxMeters);
+      budget.spend();
       evaluated++;
       if (s) scored.push(s);
     }
@@ -213,9 +220,9 @@ export function discoverRoutes(g: RoadGraph, o: DiscoverOptions): FindResult {
   });
 
   // 4) 지정 그림이면 유연 맞추기 결과도 함께 겨룬다
-  if (o.mode === "shape" && Date.now() - started < budget) {
+  if (o.mode === "shape" && budget.ok()) {
     o.onProgress?.(0.9, "그림에 맞춘 코스");
-    const r = findRoutes(g, { shapes: o.shapes, minMeters: o.minMeters, maxMeters: o.maxMeters, region: o.region, resultsPerShape: 4, timeBudgetMs: Math.max(3000, budget - (Date.now() - started)) });
+    const r = findRoutes(g, { shapes: o.shapes, minMeters: o.minMeters, maxMeters: o.maxMeters, region: o.region, resultsPerShape: 4, budget });
     all.push(...r.candidates);
     partial ||= r.partial;
     evaluated += r.evaluated;

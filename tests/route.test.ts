@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { StepBudget } from "@/lib/route/budget";
 import { cleanClosedLoop, findRoutes, findThinSpikes, removeSpurs } from "@/lib/route/fit";
 import { PathFinder, hasEdge, project } from "@/lib/route/graph";
 import { buildOverpassQuery, graphFromOverpass, type OverpassJson } from "@/lib/route/osm";
@@ -137,7 +138,7 @@ describe("경로 탐색", () => {
     const g = graphFromOverpass(json, bbox);
     const [minX, minY] = project(g.origin, bbox.south, bbox.west);
     const [maxX, maxY] = project(g.origin, bbox.north, bbox.east);
-    const r = findRoutes(g, { shapes: ["square"], minMeters: 1500, maxMeters: 3500, region: { minX, minY, maxX, maxY } });
+    const r = findRoutes(g, { shapes: ["square"], minMeters: 1500, maxMeters: 3500, region: { minX, minY, maxX, maxY }, budget: new StepBudget(1_000_000) });
     expect(r.candidates.length).toBeGreaterThan(0);
     const c = r.candidates[0];
     expect(c.similarity).toBeGreaterThanOrEqual(80);
@@ -155,7 +156,7 @@ describe("경로 탐색", () => {
     const g = graphFromOverpass(json, bbox);
     const [minX, minY] = project(g.origin, bbox.south, bbox.west);
     const [maxX, maxY] = project(g.origin, bbox.north, bbox.east);
-    const r = findRoutes(g, { shapes: ["heart"], minMeters: 8000, maxMeters: 16000, region: { minX, minY, maxX, maxY } });
+    const r = findRoutes(g, { shapes: ["heart"], minMeters: 8000, maxMeters: 16000, region: { minX, minY, maxX, maxY }, budget: new StepBudget(1_000_000) });
     expect(r.candidates).toHaveLength(0);
   });
 

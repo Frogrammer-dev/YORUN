@@ -2,6 +2,7 @@
 // 그림 전체를 한 덩어리로 옮기고·키우고·돌려 보며 획마다 길 위 고리를 만들고, 획 사이는 '이동 구간'으로 잇는다.
 // 이동 구간은 그림이 아니므로 달리기 화면에서 점선으로 보여 주고, 기록을 멈추고 이동하도록 안내한다.
 
+import { budgetOf, type Budget } from "./budget";
 import { overlap } from "./discover";
 import {
   DistanceField,
@@ -30,7 +31,10 @@ export interface GroupOptions {
   minMeters: number;
   maxMeters: number;
   region: Region;
+  /** 시간 예산(ms). budget을 주면 무시 */
   timeBudgetMs?: number;
+  /** 탐색 예산 (테스트는 단계 예산으로 결정적 결과) */
+  budget?: Budget;
   maxResults?: number;
   onProgress?: (fraction: number, label: string) => void;
 }
@@ -71,11 +75,10 @@ const pathLen = (g: RoadGraph, p: number[]) => {
 };
 
 export function findGroupRoutes(g: RoadGraph, group: ShapeGroup, o: GroupOptions): FindResult {
-  const started = Date.now();
   const R = o.region;
   const W = R.maxX - R.minX, H = R.maxY - R.minY;
   const tiles = Math.max(1, Math.round(W / 4500)) * Math.max(1, Math.round(H / 4500));
-  const budget = o.timeBudgetMs ?? Math.min(75_000, 35_000 * tiles);
+  const budget = budgetOf(o, Math.min(75_000, 35_000 * tiles));
   const finder = new PathFinder(g);
   const blocks = buildBlocks(g, (W * H) / 4);
   const field = new DistanceField(g, R, Math.max(15, Math.max(W, H) / 450));
@@ -124,6 +127,7 @@ export function findGroupRoutes(g: RoadGraph, group: ShapeGroup, o: GroupOptions
   // 3) 획마다 길 위 고리 (유연 맞추기·블록 칠하기 중 나은 것) → 이동 구간으로 잇기
   /** 그림 전체 배치 하나 → 코스 (못 만들면 null) */
   const build = (P: Placement): RouteCandidate | null => {
+    budget.spend(parts.length);
     const per: Array<{ e: Evaluated; p: Placement }> = [];
     for (let i = 0; i < parts.length; i++) {
       const pp = partPlacement(P, parts[i]);
@@ -195,7 +199,7 @@ export function findGroupRoutes(g: RoadGraph, group: ShapeGroup, o: GroupOptions
 
   const cands: RouteCandidate[] = [];
   top.forEach((t, ti) => {
-    if (Date.now() - started > budget) {
+    if (!budget.ok()) {
       partial = true;
       return;
     }
@@ -217,7 +221,7 @@ export function findGroupRoutes(g: RoadGraph, group: ShapeGroup, o: GroupOptions
   seeds.forEach((s, si) => {
     let best = s;
     for (let k = 0; k < 12; k++) {
-      if (Date.now() - started > budget) {
+      if (!budget.ok()) {
         partial = true;
         break;
       }

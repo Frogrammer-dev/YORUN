@@ -8,6 +8,7 @@ import { PathFinder, pointSegDist, roadStats, unproject, type RoadGraph, type Ro
 import { SHAPE_BY_ID, anchorsOf, polylineLength, resample, type ShapeDef, type ShapeId, type ShapeKey } from "./shapes";
 import { rdpIndices } from "@/lib/art/rdp";
 import { buildFlexPath, refitPlacement } from "./flex";
+import { budgetOf, type Budget } from "./budget";
 
 /** 품질 조정값. 부산 광안리·서면, 서울 강남 실제 OSM 데이터 평가로 정했다 (tests/eval-quality.test.ts). */
 export const TUNING = {
@@ -95,7 +96,10 @@ export interface FindOptions {
   minMeters: number;
   maxMeters: number;
   region: Region;
+  /** 시간 예산(ms). budget을 주면 무시 */
   timeBudgetMs?: number;
+  /** 탐색 예산 (테스트는 단계 예산으로 결정적 결과) */
+  budget?: Budget;
   resultsPerShape?: number;
   method?: FitMethod;
   onProgress?: (fraction: number, label: string) => void;
@@ -497,14 +501,13 @@ function rng(seed: number) {
 }
 
 export function findRoutes(g: RoadGraph, opts: FindOptions): FindResult {
-  const started = Date.now();
   const region = opts.region;
   const regionW = region.maxX - region.minX, regionH = region.maxY - region.minY;
   // 넓은 영역은 약 4.5km 칸으로 나눠 칸마다 같은 수의 배치를 실제로 연결해 본다.
   // (빠른 추정 점수는 대략적이라, 영역 전체에서 상위만 고르면 좋은 자리를 놓친다)
   const tilesX = Math.max(1, Math.round(regionW / TILE)), tilesY = Math.max(1, Math.round(regionH / TILE));
   const tiles = tilesX * tilesY;
-  const budget = opts.timeBudgetMs ?? Math.min(75_000, 35_000 * tiles);
+  const budget = budgetOf(opts, Math.min(75_000, 35_000 * tiles));
   const perShape = opts.resultsPerShape ?? 3;
   const method = opts.method ?? "flex";
   const finder = new PathFinder(g);
@@ -519,7 +522,7 @@ export function findRoutes(g: RoadGraph, opts: FindOptions): FindResult {
     const shape = typeof sid === "string" ? SHAPE_BY_ID[sid] : sid;
     const report = (f: number) => opts.onProgress?.((si + f) / opts.shapes.length, shape.name);
     report(0);
-    if (Date.now() - started > budget) {
+    if (!budget.ok()) {
       partial = true;
       return;
     }
@@ -569,11 +572,12 @@ export function findRoutes(g: RoadGraph, opts: FindOptions): FindResult {
     for (let k = 0; k < TOP_PER_TILE; k++) for (const bucket of perTile) if (bucket[k]) top.push(bucket[k]);
     const scored: Array<{ p: Placement; e: Evaluated }> = [];
     top.forEach((t, i) => {
-      if (Date.now() - started > budget) {
+      if (!budget.ok()) {
         partial = true;
         return;
       }
       const e = routePlacement(g, finder, shape, t.p, opts.minMeters, opts.maxMeters, false, method);
+      budget.spend();
       evaluated++;
       if (e) scored.push({ p: e.fit ?? t.p, e });
       report(0.3 + (0.5 * (i + 1)) / top.length);
@@ -586,7 +590,7 @@ export function findRoutes(g: RoadGraph, opts: FindOptions): FindResult {
     const refined = scored.slice(0, refineN).map((s) => {
       let best = s;
       for (let k = 0; k < 10; k++) {
-        if (Date.now() - started > budget) {
+        if (!budget.ok()) {
           partial = true;
           break;
         }
@@ -598,6 +602,7 @@ export function findRoutes(g: RoadGraph, opts: FindOptions): FindResult {
         };
         if (!inside(placeShape(shape.points, p), region)) continue;
         const e = routePlacement(g, finder, shape, p, opts.minMeters, opts.maxMeters, false, method);
+        budget.spend();
         evaluated++;
         if (e && e.cost < best.e.cost) best = { p: e.fit ?? p, e };
       }
