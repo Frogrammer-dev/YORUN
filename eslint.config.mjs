@@ -5,6 +5,8 @@ import nextTs from "eslint-config-next/typescript";
 export default defineConfig([
   ...nextVitals,
   ...nextTs,
+  // Playwright 준비물의 use()는 React 훅이 아니다
+  { files: ["e2e/**"], rules: { "react-hooks/rules-of-hooks": "off" } },
   globalIgnores([
     // eslint-config-next 기본 제외
     ".next/**",

@@ -1,6 +1,6 @@
 // 디자인 검수용 화면 캡처: 시작 → 코스 찾기(빈/결과) → 달리기(시작 전/중/완료) → 작품방, 모바일(390) + 데스크톱(1280)
 // 길 데이터는 처음 한 번만 실제 Overpass에서 받아 SHOTS_CACHE에 저장 후 재사용. 바탕 지도는 실제 OpenFreeMap.
-// 사전 조건: 앱 실행 중 (:3123). 실행: node e2e/design-shots.mjs <출력폴더>
+// 사전 조건: 앱 실행 중 (:3123). 실행: node e2e/tools/design-shots.mjs <출력폴더> (실제 지도 서버 사용, 수동 디자인 검수용)
 import { chromium } from "playwright-core";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
