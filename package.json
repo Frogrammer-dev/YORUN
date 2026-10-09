@@ -1,0 +1,50 @@
+{
+  "name": "yorun",
+  "version": "0.1.0",
+  "private": true,
+  "description": "요런 — 달린 그림으로 꾸미는 나의 작품방 (P0 시제품)",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:db": "node supabase/tests/rpc-check.mjs supabase/migrations/0001_init.sql",
+    "test:e2e": "node e2e/guest-flow.mjs samples e2e/output",
+    "test:e2e:route": "node e2e/route-run-flow.mjs e2e/output",
+    "eval:quality": "vitest run tests/eval-quality.test.ts --reporter=verbose",
+    "predev": "node scripts/copy-maplibre-worker.mjs",
+    "prebuild": "node scripts/copy-maplibre-worker.mjs",
+    "postinstall": "node scripts/copy-maplibre-worker.mjs",
+    "test:e2e:basemap": "node e2e/basemap-live.mjs e2e/output",
+    "test:e2e:nav": "node e2e/navigation-stress.mjs"
+  },
+  "dependencies": {
+    "@maplibre/maplibre-gl-leaflet": "^0.1.4",
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.117.2",
+    "@tensorflow/tfjs-backend-cpu": "4.22.0",
+    "@tensorflow/tfjs-backend-webgl": "4.22.0",
+    "@tensorflow/tfjs-core": "4.22.0",
+    "@tensorflow/tfjs-layers": "4.22.0",
+    "leaflet": "^1.9.4",
+    "maplibre-gl": "^6.13.0",
+    "next": "^16.4.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "server-only": "^0.0.1",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.8",
+    "@types/jsdom": "^30.0.0",
+    "@types/leaflet": "^1.9.22",
+    "@types/node": "^26.6.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "jsdom": "^30.1.2",
+    "playwright-core": "^1.63.0",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.3"
+  }
+}

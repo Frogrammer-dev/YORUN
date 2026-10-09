@@ -1,0 +1,5 @@
+# 저장소에는 LF로 보관 (Windows·macOS 혼용 시 줄바꿈 차이로 생기는 가짜 변경 방지)
+* text=auto eol=lf
+*.bin binary
+*.png binary
+*.gpx text eol=lf

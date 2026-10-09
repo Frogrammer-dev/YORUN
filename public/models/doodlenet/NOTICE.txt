@@ -1,0 +1,5 @@
+DoodleNet (345 Quick, Draw! categories) — TensorFlow.js model
+Source: https://github.com/ml5js/ml5-data-and-models/tree/main/models/doodlenet (MIT License, Copyright (c) 2018 ml5, see LICENSE)
+Original model: DoodleNet by Yining Shi (https://github.com/yining1023/doodleNet)
+Training data: The Quick, Draw! Dataset by Google (https://github.com/googlecreativelab/quickdraw-dataset), CC BY 4.0
+Files are unmodified copies.
