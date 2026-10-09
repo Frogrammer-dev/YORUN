@@ -70,16 +70,20 @@ npm run dev            # http://localhost:3000  → /routes 에서 코스 찾기
 
 ## 시험
 
-| 명령 | 내용 | 결과 |
-|---|---|---|
-| `npm test` | GPX·작품·계약·방 배치·렌더 + **도로 그래프·교량 비연결·A\*·격자 위 네모 코스(연결·닫힘·반복 없음)·코스 진행/이탈/방향·GPS 필터·GPX 내보내기** | 69 통과 |
-| `npm run test:db` | DB 마이그레이션(RLS·RPC·권한) — PGlite | 45 통과 |
-| `npm run test:e2e:route` | 브라우저: 코스 찾기 → 길 단순화·바탕 지도·탐색 길 보기 → 선택 → 달리기(GPS 흉내로 코스 따라 이동) → 이탈 경고 → 새로고침 이어 달리기 → 종료 → 작품방 전시 → 360px. Overpass·타일은 가짜 응답 (`OVERPASS_FIXTURE`=실제 OSM JSON, `E2E_CENTER=lat,lon`) | 29 통과 (합성 격자·부산 광안리·서울 강남) |
-| `npm run test:e2e` | 브라우저: GPX 파일 → 작품방 흐름 | 23 통과 |
-| `npm run test:e2e:basemap` | 브라우저: **가짜 응답 없이 실제 지도 서버**로 바탕 지도가 키 없이 뜨는지, 키 필요·차단 서버를 쓰지 않는지, Worker·타일 오류가 없는지 | 12 통과 |
-| `npm run test:e2e:nav` | 브라우저 회귀: 길 데이터 받는 중 화면 이동, 확대 애니메이션 중 화면 이동(10회), 확대·바탕 지도 전환 반복에서 지도 오류(`getZoom` of null, `appendChild` of undefined)가 없는지 | 3 통과 |
+[![CI](https://github.com/Rico9204/yorun/actions/workflows/ci.yml/badge.svg)](https://github.com/Rico9204/yorun/actions/workflows/ci.yml)
 
-`test:e2e*`는 앱이 `:3123`에서 실행 중이어야 합니다 (`npm run build && npx next start -p 3123`).
+푸시·PR마다 GitHub Actions가 타입 검사 → lint → 단위·품질 회귀 테스트 → 빌드 → 브라우저 E2E를 돌립니다.
+층별 설명·원칙·명령은 [docs/testing.md](docs/testing.md)에 있습니다.
+
+| 명령 | 내용 |
+|---|---|
+| `npm run typecheck` · `npm run lint` | TypeScript 7 타입 검사 · ESLint (next core-web-vitals + typescript) |
+| `npm test` | 단위 테스트 (알고리즘·파서·계약·외부 서버 주고받기(MSW)·화면 조각·탐색 결정성) + 코스 품질 기준선 |
+| `npm run test:quality` | 고정한 실제 지도(강남 2곳)에서 코스 품질이 기준선보다 나빠지지 않았는지 (`:update`로 기준선 갱신) |
+| `npm run test:e2e` | Playwright: 작품방·코스 찾기·달리기·화면 이동 회귀·360px (외부 서버는 가짜 응답, 서버는 자동 기동) |
+| `npm run test:e2e:live` | 실제 바탕 지도 서버가 키 없이 뜨는지 (CI 제외) |
+| `npm run test:db` | DB 마이그레이션(RLS·RPC·권한) — PGlite |
+| `npm run eval:make-set` · `npm run eval:calibrate` | 사람 판정으로 점수 등급 기준선 보정 |
 
 실제 부산 수영·광안리 일대(약 2.5km 영역, OSM 4,151 노드) 측정: 9개 그림 전체 탐색 **1.4~4초**(헤드리스 Edge), 모든 그림에서 연결된 닫힌 코스(유사도 81~88, 3.1~6.2km, 같은 길 반복 0~0.6%).
 
@@ -92,7 +96,8 @@ src/components/    map/useLeafletMap · route/RouteFinderApp · run/RunApp · ro
 src/app/           / · /routes · /run · /room · /share/[token] · /api/* · manifest
 src/lib/(gpx|art|contracts|room|render|draft|server)   GPX → 작품 → 작품방 (명세 P0)
 supabase/          마이그레이션 + DB 검증 스크립트
-e2e/               브라우저 검수 스크립트 2종
+e2e/               Playwright 테스트(specs·fixtures) + 수동 디자인 캡처 도구(tools)
+tests/             단위·화면 조각·품질 기준선 테스트, 공용 가짜 응답(mocks), 고정 지도 데이터(fixtures)
 ```
 
 ## 아직 하지 않은 것 / 알려진 한계
