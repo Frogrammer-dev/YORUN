@@ -6,7 +6,7 @@
 import { chromium } from "playwright-core";
 const B = process.env.BASE_URL || "http://localhost:3123";
 let pass = 0, fail = 0;
-const ok = (n, c, x = "") => { c ? pass++ : fail++; console.log(`${c ? "PASS" : "FAIL"}  ${n}${x ? "  — " + x : ""}`); };
+const ok = (n, c, x = "") => { if (c) pass++; else fail++; console.log(`${c ? "PASS" : "FAIL"}  ${n}${x ? "  — " + x : ""}`); };
 const b = await chromium.launch({ executablePath: process.env.BROWSER_PATH || "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe", headless: true, args: ["--enable-unsafe-swiftshader", "--use-angle=swiftshader"] });
 const ctx = await b.newContext({ viewport: { width: 1280, height: 860 }, geolocation: { latitude: 35.1545, longitude: 129.114, accuracy: 10 }, permissions: ["geolocation"] });
 // 길 데이터 응답을 3초 늦춰 '받는 중에 화면 이동' 상황을 만든다 (실제 Overpass 응답 형식)

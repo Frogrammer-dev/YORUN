@@ -291,7 +291,10 @@ export function matchShape(
       let bd = Infinity, bp = dense[0];
       for (const q of dense) {
         const d = (q[0] - px) ** 2 + (q[1] - py) ** 2;
-        if (d < bd) (bd = d), (bp = q);
+        if (d < bd) {
+          bd = d;
+          bp = q;
+        }
       }
       return bp;
     });
@@ -458,7 +461,10 @@ export function unionForPlacement(g: RoadGraph, m: BlockMap, shape: ShapeDef, p:
         }
       }
     }
-    if (area > bestArea) (bestArea = area), (bestComp = cur);
+    if (area > bestArea) {
+      bestArea = area;
+      bestComp = cur;
+    }
   }
   inSet.fill(0);
   for (const f of bestComp) inSet[f] = 1;

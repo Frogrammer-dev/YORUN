@@ -56,7 +56,10 @@ function closestPair(g: RoadGraph, a: number[], b: number[]): [number, number] {
   for (const u of sub(a))
     for (const v of sub(b)) {
       const d = (g.x[u] - g.x[v]) ** 2 + (g.y[u] - g.y[v]) ** 2;
-      if (d < bd) (bd = d), (best = [u, v]);
+      if (d < bd) {
+        bd = d;
+        best = [u, v];
+      }
     }
   return best;
 }

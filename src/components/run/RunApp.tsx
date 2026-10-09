@@ -52,6 +52,7 @@ export function RunApp() {
   const isWide = useMediaQuery("(min-width: 861px)");
   // 시작할 때마다 새 추적기: 시작 전 위치가 진행률에 섞이지 않게 한다.
   const [trackerKey, setTrackerKey] = useState(0);
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- 달리기를 새로 시작할 때(trackerKey 증가) 추적기를 새로 만든다
   const tracker = useMemo(() => (route ? new RouteTracker(route.latlngs) : null), [route, trackerKey]);
   const layers = useRef<{ me?: Leaflet.CircleMarker; acc?: Leaflet.Circle; track?: Leaflet.Polyline; casing?: Leaflet.Polyline; guide?: Leaflet.Polyline } | null>(null);
   const wakeLock = useRef<{ release: () => Promise<void> } | null>(null);
@@ -65,6 +66,7 @@ export function RunApp() {
   // 코스·진행 중 기록 불러오기
   useEffect(() => {
     const r = loadPlannedRoute();
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 브라우저 전용 값(저장소·위치·로그인 세션)은 서버 렌더와 어긋나지 않게 첫 화면 뒤 효과에서 읽는다
     setRoute(r);
     const active = loadActiveRun();
     if (active && active.record.segments.length && (active.routeId === (r?.id ?? null))) {
@@ -114,6 +116,7 @@ export function RunApp() {
   // 위치 추적 (화면이 켜져 있는 동안. 웹 앱은 백그라운드 위치 기록이 제한된다)
   useEffect(() => {
     if (!("geolocation" in navigator)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- 브라우저 전용 값(저장소·위치·로그인 세션)은 서버 렌더와 어긋나지 않게 첫 화면 뒤 효과에서 읽는다
       setGpsState("unsupported");
       return;
     }
@@ -135,6 +138,7 @@ export function RunApp() {
   useEffect(() => {
     if (!pos || !tracker || status === "ready") return;
     const g = tracker.update(pos.lat, pos.lon);
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 새 GPS 위치(외부 입력)가 올 때마다 추적기를 한 번 갱신한 결과다. 추적기는 상태를 가지므로 렌더 중 계산할 수 없다
     setGuide(g);
     if (status === "running") {
       setOffStreak((s) => {
@@ -273,7 +277,7 @@ export function RunApp() {
     const km = Math.floor(record.distanceMeters / 1000);
     if (status === "running" && km > lastKm.current) announce(setSayPolite, `${km}킬로미터, ${formatDuration(elapsed)}`);
     lastKm.current = km;
-  }, [record.distanceMeters, status, elapsed]);
+  }, [record.distanceMeters, status, elapsed, announce]);
 
   useEffect(() => {
     const prev = lastStatus.current;
@@ -282,7 +286,7 @@ export function RunApp() {
     if (status === "paused") announce(setSayPolite, "일시정지했어요");
     else if (status === "running" && prev === "paused") announce(setSayPolite, "다시 시작했어요");
     else if (status === "running") announce(setSayPolite, "달리기를 시작했어요");
-  }, [status]);
+  }, [status, announce]);
 
   useEffect(() => {
     if (status !== "running" || !guide?.nextTurn || offRoute) return;
@@ -294,20 +298,20 @@ export function RunApp() {
       announce(setSayAlert, `${Math.max(0, Math.round(t.inMeters / 10) * 10)}미터 앞 ${TURN_LABEL[t.dir]}`);
       lastTurn.current = { key, stage };
     }
-  }, [guide, status, offRoute]);
+  }, [guide, status, offRoute, announce]);
 
   useEffect(() => {
     if (offRoute && !wasOff.current) announce(setSayAlert, `코스에서 ${Math.round(guide?.offRouteMeters ?? 0)}미터 벗어났어요. 코스 쪽으로 돌아가 주세요.`);
     else if (!offRoute && wasOff.current && status === "running") announce(setSayAlert, "코스로 돌아왔어요");
     wasOff.current = offRoute;
-  }, [offRoute, guide, status]);
+  }, [offRoute, guide, status, announce]);
 
   useEffect(() => {
     if (lastGps.current === gpsState) return;
     lastGps.current = gpsState;
     if (gpsState === "ok") announce(setSayPolite, "GPS 신호가 양호해요");
     else if (gpsState === "weak") announce(setSayPolite, "GPS 신호가 약해요");
-  }, [gpsState]);
+  }, [gpsState, announce]);
 
   if (!loaded) return <main className="run-page"><p role="status" style={{ padding: 24 }}>불러오는 중…</p></main>;
 

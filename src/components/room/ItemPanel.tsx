@@ -17,7 +17,12 @@ export function ItemPanel({ room, item, artwork, onClose }: { room: RoomApi; ite
   const [detail, setDetail] = useState<ArtworkView | null>(artwork.geometry ? artwork : null);
   const [confirmDelete, setConfirmDelete] = useState(false);
 
-  useEffect(() => setTitle(artwork.title), [artwork.title]);
+  // 다른 작품으로 바뀌면 제목 입력값을 그 작품 제목으로 되돌린다 (렌더 중 이전 값 비교: React 권장 방식)
+  const [titleOf, setTitleOf] = useState(artwork.title);
+  if (titleOf !== artwork.title) {
+    setTitleOf(artwork.title);
+    setTitle(artwork.title);
+  }
   useEffect(() => {
     if (compare && !detail) void room.loadDetail(artwork.id).then(setDetail);
   }, [compare, detail, artwork.id, room]);
@@ -197,23 +202,27 @@ export function ItemPanel({ room, item, artwork, onClose }: { room: RoomApi; ite
 /** FR-07: 정규화 기준선(회색)과 전시용 선(색)을 나란히 비교. 지도·원 위치는 없음. */
 function CompareView({ art, color }: { art: ArtworkView; color: string }) {
   const g = art.geometry!;
-  const pts = (seg: Pt[]) => seg.map(([u, v]) => `${(u * 200).toFixed(2)},${(v * 200).toFixed(2)}`).join(" ");
   const render = g.sourceSegments.map((seg, i) => g.renderIndices[i].map((k) => seg[k]));
-  const Box = ({ lines, stroke, label }: { lines: Pt[][]; stroke: string; label: string }) => (
+  return (
+    <div className="compare">
+      <CompareBox lines={g.sourceSegments} stroke="#555" label={`정규화 기준선 (${g.sourceSegments.flat().length}점)`} />
+      <CompareBox lines={render} stroke={color} label={`전시용 선 (${render.flat().length}점)`} />
+    </div>
+  );
+}
+
+const ptsAttr = (seg: Pt[]) => seg.map(([u, v]) => `${(u * 200).toFixed(2)},${(v * 200).toFixed(2)}`).join(" ");
+
+function CompareBox({ lines, stroke, label }: { lines: Pt[][]; stroke: string; label: string }) {
+  return (
     <figure className="compare-fig">
       <svg viewBox="0 0 200 200" role="img" aria-label={label}>
         <rect width={200} height={200} fill="#fff" stroke="#ddd" />
         {lines.map((l, i) =>
-          l.length === 1 ? <circle key={i} cx={l[0][0] * 200} cy={l[0][1] * 200} r={2} fill={stroke} /> : <polyline key={i} points={pts(l)} fill="none" stroke={stroke} strokeWidth={1.5} />,
+          l.length === 1 ? <circle key={i} cx={l[0][0] * 200} cy={l[0][1] * 200} r={2} fill={stroke} /> : <polyline key={i} points={ptsAttr(l)} fill="none" stroke={stroke} strokeWidth={1.5} />,
         )}
       </svg>
       <figcaption>{label}</figcaption>
     </figure>
-  );
-  return (
-    <div className="compare">
-      <Box lines={g.sourceSegments} stroke="#555" label={`정규화 기준선 (${g.sourceSegments.flat().length}점)`} />
-      <Box lines={render} stroke={color} label={`전시용 선 (${render.flat().length}점)`} />
-    </div>
   );
 }

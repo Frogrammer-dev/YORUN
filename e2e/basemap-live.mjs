@@ -8,7 +8,7 @@ const B = process.env.BASE_URL || "http://localhost:3123";
 const OUT = process.argv[2] || "e2e/output";
 mkdirSync(OUT, { recursive: true });
 let pass = 0, fail = 0;
-const ok = (n, c, x = "") => { c ? pass++ : fail++; console.log(`${c ? "PASS" : "FAIL"}  ${n}${x ? "  — " + x : ""}`); };
+const ok = (n, c, x = "") => { if (c) pass++; else fail++; console.log(`${c ? "PASS" : "FAIL"}  ${n}${x ? "  — " + x : ""}`); };
 
 const browser = await chromium.launch({
   executablePath: process.env.BROWSER_PATH || "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe",

@@ -54,7 +54,10 @@ export function keypointsOf(shape: ShapeDef, maxCount = 16): Array<{ pt: XY; wei
     let bi = 0, bd = Infinity;
     for (let i = 0; i < out.length; i++) {
       const d = Math.hypot(out[i].pt[0] - f[0], out[i].pt[1] - f[1]);
-      if (d < bd) (bd = d), (bi = i);
+      if (d < bd) {
+        bd = d;
+        bi = i;
+      }
     }
     out[bi] = { pt: [f[0], f[1]], weight: 1 };
   }

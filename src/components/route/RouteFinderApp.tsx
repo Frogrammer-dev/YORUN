@@ -133,6 +133,7 @@ export function RouteFinderApp() {
       lm.map.off("resize", refit);
       cancelAnimationFrame(raf);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- 지도·ref만 쓰는 함수라 매 렌더 다시 실행할 필요가 없다 (지도 생성 시 한 번 연결)
   }, [lm]);
 
   const locate = useCallback((auto: boolean) => {

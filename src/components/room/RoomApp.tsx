@@ -43,6 +43,7 @@ export function RoomApp() {
   useEffect(() => {
     const sb = browserSupabase();
     if (!sb) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- 브라우저 전용 값(저장소·위치·로그인 세션)은 서버 렌더와 어긋나지 않게 첫 화면 뒤 효과에서 읽는다
       setSession({ kind: "guest" });
       return;
     }

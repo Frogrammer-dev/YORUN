@@ -13,7 +13,7 @@ mkdirSync(OUT, { recursive: true });
 const [cLat, cLon] = (process.env.E2E_CENTER || "35.1545,129.114").split(",").map(Number);
 const CENTER = { latitude: cLat, longitude: cLon };
 let pass = 0, fail = 0;
-const ok = (n, c, x = "") => { c ? pass++ : fail++; console.log(`${c ? "PASS" : "FAIL"}  ${n}${x ? "  — " + x : ""}`); };
+const ok = (n, c, x = "") => { if (c) pass++; else fail++; console.log(`${c ? "PASS" : "FAIL"}  ${n}${x ? "  — " + x : ""}`); };
 const vis = (loc, timeout = 10000) => loc.first().waitFor({ state: "visible", timeout }).then(() => true, () => false);
 
 function syntheticGrid() {

@@ -78,7 +78,10 @@ export function buildGraph(
     size.set(r, (size.get(r) ?? 0) + 1);
   }
   let best = -1, bestSize = 0;
-  for (const [r, s] of size) if (s > bestSize) (best = r), (bestSize = s);
+  for (const [r, s] of size) if (s > bestSize) {
+    best = r;
+    bestSize = s;
+  }
 
   const remap = new Int32Array(n0).fill(-1);
   const keepLat: number[] = [], keepLon: number[] = [];
@@ -168,7 +171,10 @@ export class SpatialIndex {
           if (!list) continue;
           for (const v of list) {
             const d = (this.g.x[v] - px) ** 2 + (this.g.y[v] - py) ** 2;
-            if (d < bestD) (bestD = d), (best = v);
+            if (d < bestD) {
+              bestD = d;
+              best = v;
+            }
           }
         }
       }

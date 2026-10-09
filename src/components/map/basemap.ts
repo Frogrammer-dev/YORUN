@@ -94,7 +94,7 @@ function safeLayerClass(L: typeof Leaflet, plugin: PluginModule) {
       if (alive(this)) proto._zoomEnd.call(this);
     },
     // 원본은 예약 안에서 바로 this._map을 쓰므로, 예약된 처리 안에서 생존을 확인하도록 감싼다
-    _transitionEnd(this: GlLayer, e: unknown) {
+    _transitionEnd(this: GlLayer) {
       L.Util.requestAnimFrame(() => {
         if (!alive(this)) return;
         const self = this as unknown as Record<string, unknown> & { _map: Leaflet.Map; _glMap: { _actualCanvas: HTMLElement; once: (ev: string, f: () => void) => void; jumpTo: (o: object) => void } };

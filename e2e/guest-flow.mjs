@@ -12,7 +12,7 @@ const OUT = process.argv[3] || "e2e/output";
 mkdirSync(OUT, { recursive: true });
 let pass = 0, fail = 0;
 const vis = (loc) => loc.first().waitFor({ state: "visible", timeout: 8000 }).then(() => true, () => false);
-const ok = (n, c, x = "") => { c ? pass++ : fail++; console.log(`${c ? "PASS" : "FAIL"}  ${n}${x ? "  — " + x : ""}`); };
+const ok = (n, c, x = "") => { if (c) pass++; else fail++; console.log(`${c ? "PASS" : "FAIL"}  ${n}${x ? "  — " + x : ""}`); };
 
 const browser = await chromium.launch({ executablePath: process.env.BROWSER_PATH || "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe", headless: true });
 const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, acceptDownloads: true, locale: "ko-KR" });

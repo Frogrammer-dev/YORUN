@@ -94,7 +94,10 @@ export function binarize(gray: Uint8Array, alpha?: Uint8Array): Uint8Array {
     sumB += t * hist[t];
     const mB = sumB / wB, mF = (sum - sumB) / wF;
     const between = wB * wF * (mB - mF) ** 2;
-    if (between > best) (best = between), (thr = t);
+    if (between > best) {
+      best = between;
+      thr = t;
+    }
   }
   const out = new Uint8Array(gray.length);
   let ink = 0;

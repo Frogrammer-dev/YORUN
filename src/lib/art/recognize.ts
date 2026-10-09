@@ -48,7 +48,10 @@ export async function recognizeCourses(courses: Array<{ latlngs: [number, number
     for (let k = 0; k < ROTATIONS.length; k++) for (const g of guesses[i * ROTATIONS.length + k]) avg[g.index] += g.prob / ROTATIONS.length;
     let best = -1, bp = 0;
     avg.forEach((p, j) => {
-      if (!DOODLE_SKIP.has(clf.classes[j]) && p > bp) (bp = p), (best = j);
+      if (!DOODLE_SKIP.has(clf.classes[j]) && p > bp) {
+        bp = p;
+        best = j;
+      }
     });
     return best < 0 ? null : { name: clf.classes[best], prob: bp };
   });
