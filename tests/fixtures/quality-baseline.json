@@ -1,0 +1,52 @@
+{
+  "gangnam-center": {
+    "fit": {
+      "heart": {
+        "similarity": 73,
+        "zigzagPerKm": 1.9
+      },
+      "star": {
+        "similarity": 68,
+        "zigzagPerKm": 2.8
+      },
+      "square": {
+        "similarity": 87,
+        "zigzagPerKm": 0.3
+      },
+      "cat": {
+        "similarity": 69,
+        "zigzagPerKm": 3.1
+      }
+    },
+    "discover": {
+      "count": 8,
+      "top": 86,
+      "top5": 76.4
+    }
+  },
+  "gangnam-southwest": {
+    "fit": {
+      "heart": {
+        "similarity": 69,
+        "zigzagPerKm": 2.9
+      },
+      "star": {
+        "similarity": 65,
+        "zigzagPerKm": 4.6
+      },
+      "square": {
+        "similarity": 91,
+        "zigzagPerKm": 0
+      },
+      "cat": {
+        "similarity": 64,
+        "zigzagPerKm": 3.6
+      }
+    },
+    "discover": {
+      "count": 8,
+      "top": 84,
+      "top5": 73.8
+    }
+  }
+}
