@@ -68,6 +68,14 @@ describe("넓은 영역", () => {
     expect(tiles[8].north).toBeCloseTo(b.north, 9);
   });
 
+  it("화면에서 고른 10km 정사각형은 계산 오차가 있어도 정확히 2×2칸", () => {
+    // 앱이 지도 가운데로 만드는 방식 그대로 (위도별 경도 보정)
+    for (const lat of [35.1545, 37.5665, 33.45]) {
+      const dLat = 10_000 / 111_195 / 2, dLon = 10_000 / (111_195 * Math.cos((lat * Math.PI) / 180)) / 2;
+      expect(splitBBox({ south: lat - dLat, west: 129.11 - dLon, north: lat + dLat, east: 129.11 + dLon }, 5000), String(lat)).toHaveLength(4);
+    }
+  });
+
   it("칸 경계에 겹친 길·점은 한 번만 합친다", () => {
     const a = JSON.stringify({ osm3s: { timestamp_osm_base: "t" }, elements: [{ type: "node", id: 1 }, { type: "node", id: 2 }, { type: "way", id: 9 }] });
     const b = JSON.stringify({ elements: [{ type: "node", id: 2 }, { type: "node", id: 3 }, { type: "way", id: 9 }] });

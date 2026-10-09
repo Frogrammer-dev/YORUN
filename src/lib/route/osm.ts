@@ -207,7 +207,8 @@ export function wayFlags(tags: Record<string, string> | undefined): number {
 export function splitBBox(b: BBox, maxSide = 5000): BBox[] {
   const latM = (b.north - b.south) * 111_195;
   const lonM = (b.east - b.west) * 111_195 * Math.cos((((b.north + b.south) / 2) * Math.PI) / 180);
-  const ny = Math.max(1, Math.ceil(latM / maxSide)), nx = Math.max(1, Math.ceil(lonM / maxSide));
+  // 좌표 계산의 아주 작은 오차로 10km가 10,000.3m가 되어 칸이 하나 더 생기지 않게 1% 여유를 둔다
+  const ny = Math.max(1, Math.ceil(latM / maxSide - 0.01)), nx = Math.max(1, Math.ceil(lonM / maxSide - 0.01));
   const out: BBox[] = [];
   for (let i = 0; i < ny; i++)
     for (let j = 0; j < nx; j++)
