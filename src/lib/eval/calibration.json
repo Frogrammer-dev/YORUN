@@ -1,0 +1,7 @@
+{
+  "note": "점수 등급 기준선. 사람 판정 자료로 npm run eval:calibrate 를 돌리면 갱신된다. 아래 값은 아직 보정 전 잠정값이다.",
+  "calibrated": false,
+  "labels": 0,
+  "doodle": { "show": 35, "fair": 50, "clear": 70 },
+  "similarity": { "show": 50, "fair": 65, "clear": 80 }
+}

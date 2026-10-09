@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>코스 판정</title>
+<style>
+  :root { --bg: #f5f6f8; --surface: #fff; --text: #111318; --text-2: #4a505c; --line: #e3e5ea; --brand: #0a72d6; --ok: #0f9d58; --no: #d92d20; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #0b0c0f; --surface: #16181d; --text: #f4f5f7; --text-2: #b4bac5; --line: #2a2e36; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.5 system-ui, "Malgun Gothic", sans-serif; }
+  main { max-width: 560px; margin: 0 auto; padding: 16px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+  svg { width: 100%; aspect-ratio: 1; display: block; background: var(--bg); border-radius: 10px; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .q { font-size: 18px; margin: 12px 0; }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; }
+  button { flex: 1; min-height: 48px; border: 0; border-radius: 12px; font: inherit; font-weight: 700; cursor: pointer; }
+  .yes { background: var(--ok); color: #fff; } .no { background: var(--no); color: #fff; } .skip, .ghost { background: var(--line); color: var(--text); }
+  .meta { color: var(--text-2); font-size: 14px; }
+  progress { width: 100%; }
+</style>
+</head>
+<body>
+<main>
+  <h1>코스 판정</h1>
+  <p class="meta">점수는 보여 주지 않아요. 지도 없이 코스 선만 보고, 적힌 이름으로 <b>알아볼 수 있는지</b>만 골라 주세요. 키보드: Y / N / S(모르겠음) / ←(되돌리기)</p>
+  <progress id="prog" max="1" value="0"></progress>
+  <div class="card" id="card"></div>
+  <p class="meta" id="done" hidden>끝! 아래 버튼으로 판정 결과(JSON)를 저장해 <code>eval/labels/</code>에 넣고 <code>npm run eval:calibrate</code>를 실행하세요.</p>
+  <div class="row" style="margin-top:12px"><button class="ghost" id="save">판정 결과 저장 (JSON)</button></div>
+</main>
+<script>
+  const ITEMS = /*__ITEMS__*/[];
+  const KEY = "label-set:" + ITEMS.length;
+  let answers = {};
+  try { answers = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch {}
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(answers)); } catch {} };
+  const history = [];
+  function next() { return ITEMS.find((it) => !(it.id in answers)); }
+  function path(pts, box) {
+    const [x0, y0, s, pad] = box;
+    return pts.map(([x, y], i) => `${i ? "L" : "M"}${(pad + (x - x0) * s).toFixed(1)} ${(pad + (y0 - y) * s).toFixed(1)}`).join("");
+  }
+  function render() {
+    const it = next();
+    const n = Object.keys(answers).length;
+    document.getElementById("prog").max = ITEMS.length;
+    document.getElementById("prog").value = n;
+    document.getElementById("done").hidden = !!it;
+    const card = document.getElementById("card");
+    if (!it) { card.innerHTML = `<p>${ITEMS.length}개 모두 판정했어요.</p>`; return; }
+    const all = it.line.concat(it.outline || []);
+    const xs = all.map((p) => p[0]), ys = all.map((p) => p[1]);
+    const x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.max(...ys), y1 = Math.min(...ys);
+    const s = 280 / Math.max(x1 - x0, y0 - y1), pad = 20, box = [x0, y0, s, pad];
+    card.innerHTML = `
+      <svg viewBox="0 0 320 320" role="img" aria-label="코스 선">
+        <path d="${path(it.line, box)}" fill="none" stroke="var(--brand)" stroke-width="3" stroke-linejoin="round" />
+      </svg>
+      <p class="q">이 코스가 <b>‘${it.name}’</b>처럼 보이나요?</p>
+      <div class="row"><button class="yes" data-a="1">예 (Y)</button><button class="no" data-a="0">아니요 (N)</button><button class="skip" data-a="s">모르겠음 (S)</button></div>
+      <p class="meta">${n + 1} / ${ITEMS.length}</p>`;
+    card.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => answer(it, b.dataset.a)));
+  }
+  function answer(it, a) { answers[it.id] = a === "s" ? null : a === "1"; history.push(it.id); save(); render(); }
+  document.addEventListener("keydown", (e) => {
+    const it = next();
+    if (e.key === "ArrowLeft" && history.length) { delete answers[history.pop()]; save(); render(); return; }
+    if (!it) return;
+    const k = e.key.toLowerCase();
+    if (k === "y") answer(it, "1"); else if (k === "n") answer(it, "0"); else if (k === "s") answer(it, "s");
+  });
+  document.getElementById("save").addEventListener("click", () => {
+    const out = ITEMS.filter((it) => it.id in answers && answers[it.id] !== null).map((it) => ({ id: it.id, kind: it.kind, name: it.name, score: it.score, recognized: answers[it.id] }));
+    const blob = new Blob([JSON.stringify({ savedAt: new Date().toISOString(), items: out }, null, 2)], { type: "application/json" });
+    const a = Object.assign(document.createElement("a"), { href: URL.createObjectURL(blob), download: `labels-${Date.now()}.json` });
+    a.click();
+  });
+  render();
+</script>
+</body>
+</html>
