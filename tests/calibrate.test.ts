@@ -35,9 +35,10 @@ describe("점수 기준선 보정", () => {
     expect(at(grades.show).lower).toBeGreaterThanOrEqual(0.4);
   });
 
-  it("목표를 못 맞추면(표본 부족·전부 실패) 기존 기준선 유지", () => {
+  it("자료가 없으면 유지, 자료가 있으나 목표를 못 맞추면 표시 거절", () => {
     const few: Judged[] = [{ score: 90, recognized: true }];
-    expect(calibrate(few, { show: 35, fair: 50, clear: 70 }).grades).toEqual({ show: 35, fair: 50, clear: 70 });
+    expect(calibrate([], { show: 35, fair: 50, clear: 70 })).toMatchObject({ grades: { show: 35, fair: 50, clear: 70 }, status: "unobserved" });
+    expect(calibrate(few, { show: 35, fair: 50, clear: 70 })).toMatchObject({ grades: { show: 101, fair: 101, clear: 101 }, status: "unavailable" });
     expect(pickThreshold(reliabilityTable(Array.from({ length: 50 }, () => ({ score: 99, recognized: false })), [50]), 0.4)).toBeNull();
   });
 });

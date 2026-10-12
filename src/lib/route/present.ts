@@ -26,7 +26,7 @@ export const DOODLE_PER_NAME = 2;
 export function pickDoodles(pool: RouteCandidate[], rec: Array<Recognized | null>): RouteCandidate[] {
   const ranked = pool
     .map((c, i) => ({ c, r: rec[i] }))
-    .filter((x): x is { c: RouteCandidate; r: Recognized } => !!x.r && x.r.prob >= DOODLE_MIN)
+    .filter((x): x is { c: RouteCandidate; r: Recognized } => !!x.r && (x.r.model === "clip" ? x.r.accepted === true : x.r.prob >= DOODLE_MIN))
     .sort((a, b) => b.r.prob - a.r.prob);
   const out: RouteCandidate[] = [];
   const perName = new Map<string, number>();
@@ -38,12 +38,12 @@ export function pickDoodles(pool: RouteCandidate[], rec: Array<Recognized | null
       ...c,
       id: `dd-${c.id}`,
       shapeId: "doodle",
-      shapeName: doodleKo(r.name),
+      shapeName: r.label ?? doodleKo(r.name),
       // 모델이 본 이름은 처음 맞춰 본 그림과 다를 수 있으므로 그 그림 외곽선은 보여 주지 않는다
       outline: [],
       outlines: [],
       similarity: Math.round(r.prob * 100),
-      doodle: { name: r.name, prob: r.prob },
+      doodle: { name: r.name, prob: r.prob, ...(r.model ? { model: r.model, margin: r.margin } : {}) },
     });
   }
   return out;
@@ -89,5 +89,6 @@ export function courseTitle(c: RouteCandidate, discover: boolean): string {
 
 /** 목록 배지: 낙서 인식은 등급 (모델 확신도 숫자는 사람이 알아보는 비율과 달라 그대로 보이지 않는다), 도형은 유사도 */
 export function courseBadge(c: RouteCandidate): string {
+  if (c.doodle?.model === "clip") return "AI 해석 · 실험";
   return c.doodle ? `인식 · ${courseGrade(c)}` : `유사도 ${c.similarity}`;
 }

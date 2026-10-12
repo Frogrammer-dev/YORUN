@@ -1,0 +1,187 @@
+{
+  "average": 77.16666666666667,
+  "unroundedAverage": 77.13303808915855,
+  "target": 80,
+  "achieved": false,
+  "appliedToApp": false,
+  "originalBaselineAverage": 65.75,
+  "previousCombinedAverage": 76.75,
+  "annealPhase0Average": 76.83333333333333,
+  "automaticControlledNarrowAverage": 76.83333333333333,
+  "automaticPipelineDistinctFromSavedUnion": true,
+  "source": "combined-strict-v11/results.json",
+  "preservedPathPlacementStart": true,
+  "additionalRefit": false,
+  "pass80": 3,
+  "cases": [
+    {
+      "caseId": "gwangalli-square",
+      "baseline": 64,
+      "annealPhase0": 71,
+      "current": 71,
+      "unrounded": 70.59505858434491,
+      "method": "large-segment/results"
+    },
+    {
+      "caseId": "gwangalli-heart",
+      "baseline": 65,
+      "annealPhase0": 75,
+      "current": 75,
+      "unrounded": 75.40912652871306,
+      "method": "loops-beam-refit/results"
+    },
+    {
+      "caseId": "gwangalli-star",
+      "baseline": 62,
+      "annealPhase0": 73,
+      "current": 73,
+      "unrounded": 72.53071170289307,
+      "method": "anneal-loops-phase0/results"
+    },
+    {
+      "caseId": "gwangalli-cat",
+      "baseline": 62,
+      "annealPhase0": 70,
+      "current": 71,
+      "unrounded": 70.56617224223233,
+      "method": "controlled-narrow"
+    },
+    {
+      "caseId": "seomyeon-square",
+      "baseline": 62,
+      "annealPhase0": 85,
+      "current": 85,
+      "unrounded": 84.84621194746742,
+      "method": "controlled-narrow"
+    },
+    {
+      "caseId": "seomyeon-heart",
+      "baseline": 59,
+      "annealPhase0": 75,
+      "current": 75,
+      "unrounded": 74.92099420168155,
+      "method": "ordered-turn-ablation/results"
+    },
+    {
+      "caseId": "seomyeon-star",
+      "baseline": 58,
+      "annealPhase0": 70,
+      "current": 72,
+      "unrounded": 72.11706960314068,
+      "method": "controlled-narrow"
+    },
+    {
+      "caseId": "seomyeon-cat",
+      "baseline": 63,
+      "annealPhase0": 72,
+      "current": 73,
+      "unrounded": 73.18174624266689,
+      "method": "controlled-narrow"
+    },
+    {
+      "caseId": "gangnam-square",
+      "baseline": 87,
+      "annealPhase0": 98,
+      "current": 98,
+      "unrounded": 98.20369348204706,
+      "method": "controlled-narrow"
+    },
+    {
+      "caseId": "gangnam-heart",
+      "baseline": 68,
+      "annealPhase0": 81,
+      "current": 81,
+      "unrounded": 80.69588986366374,
+      "method": "controlled-narrow"
+    },
+    {
+      "caseId": "gangnam-star",
+      "baseline": 69,
+      "annealPhase0": 77,
+      "current": 77,
+      "unrounded": 77.47510842362753,
+      "method": "combined-turn-v10/results"
+    },
+    {
+      "caseId": "gangnam-cat",
+      "baseline": 70,
+      "annealPhase0": 75,
+      "current": 75,
+      "unrounded": 75.05467424742423,
+      "method": "large-segment/results"
+    }
+  ],
+  "controlledAreaComparison": {
+    "source": "controlled-area/results.json",
+    "summary": {
+      "narrow": {
+        "caseCount": 12,
+        "denominator": 12,
+        "baselineAverage": 65.75,
+        "pipelineAverage": 76.83333333333333,
+        "failures": 0,
+        "totalElapsedMs": 549406
+      },
+      "wide": {
+        "caseCount": 12,
+        "denominator": 12,
+        "baselineAverage": 65.41666666666667,
+        "pipelineAverage": 76.66666666666667,
+        "failures": 0,
+        "totalElapsedMs": 685569
+      }
+    },
+    "distanceMeaning": "Straight-line estimates relative to graph origin; nearest is minimum actual route-node distance, route center is length-weighted edge-midpoint centroid, start is first route node; none are walking access distances",
+    "includedInSavedUnion": false,
+    "holdoutStatus": "complete",
+    "incumbentMappingStatus": "complete-all-12-valid",
+    "preservation": {
+      "source": "controlled-area/incumbent-preserve.json",
+      "summary": {
+        "caseCount": 12,
+        "denominator": 12,
+        "narrowAverage": 76.83333333333333,
+        "wideAverage": 76.66666666666667,
+        "preservedAverage": 77.25,
+        "wideMappingFailures": 0
+      },
+      "searchBudgetMultiplier": 2,
+      "extraSearchPerformed": false,
+      "nearestNodeSubstitution": false,
+      "intermediateRoadNodesInserted": 0,
+      "includedInSavedUnion": false
+    }
+  },
+  "holdoutEvaluation": {
+    "source": "controlled-holdout/results.json",
+    "summary": {
+      "caseCount": 12,
+      "denominator": 12,
+      "baselineAverage": 65.83333333333333,
+      "pipelineAverage": 76.5,
+      "failures": 0,
+      "totalElapsedMs": 472178
+    },
+    "sameParametersAsControlled": true,
+    "additionalTuning": false,
+    "includedInOriginalAverage": false,
+    "all12Improved": true,
+    "manualSeeds": false,
+    "savedBestRoutesUsed": false,
+    "protocolHash": "3b9893ce79f6e713dad2781ae7c3f493fb7def586ba90a4277283766d7a3e317",
+    "paramsHash": "41a4acded396ce5bf65a666f98aa339d80e94a18c44bf2fdfde4e2fa8f15a054"
+  },
+  "appIntegration": {
+    "date": "2026-10-12",
+    "connected": true,
+    "boundedVariant": true,
+    "offlineScoreGuaranteed": false,
+    "nearbyDefault": false,
+    "report": "app-integration-20261012.md",
+    "unitTestsPassed": 30,
+    "browserTestsPassed": 5,
+    "recognitionMockedInBrowserTests": true,
+    "delayedRecognitionSelectionTestPassed": true,
+    "localAppRunning": "http://127.0.0.1:3002/routes"
+  }
+}

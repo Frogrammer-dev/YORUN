@@ -16,6 +16,7 @@ export default defineConfig([
     // 빌드 산출물·외부 배포본·테스트 결과
     "public/vendor/**",
     "public/models/**",
+    "eval/recognition/**",
     "e2e/output/**",
     "test-results/**",
     "playwright-report/**",

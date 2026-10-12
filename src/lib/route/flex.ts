@@ -17,6 +17,9 @@ export interface FlexPlacement {
 
 /** 품질 조정값 (tests/eval-quality.test.ts 와 실제 데이터로 맞춘다) */
 export const FLEX = {
+  /** Experimental anchor density; unchanged default until real-road validation. */
+  keypointCount: 16,
+  cornersOnly: false,
   /** 기준점이 움직일 수 있는 반경 = 모양 크기 × 이 값 (최소 minRadius m) */
   radius: 0.1,
   minRadius: 45,
@@ -236,7 +239,9 @@ export interface FlexResult {
 
 /** 배치 하나에 대해 기준점 교차점을 함께 골라 한붓 경로를 만든다. 못 이으면 null. */
 export function buildFlexPath(g: RoadGraph, shape: ShapeDef, p: FlexPlacement): FlexResult | null {
-  let kps = keypointsOf(shape);
+  let kps = FLEX.cornersOnly && shape.corners
+    ? shape.points.slice(0, -1).map(pt => ({ pt: [...pt] as XY, weight: 1 }))
+    : keypointsOf(shape, FLEX.keypointCount);
   // 각도가 가장 덜 중요한 점에서 시작한다 (DP에서 시작점 각도는 반영하지 못함)
   let s0 = 0;
   for (let i = 1; i < kps.length; i++) if (kps[i].weight < kps[s0].weight) s0 = i;

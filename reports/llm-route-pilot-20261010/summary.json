@@ -1,0 +1,307 @@
+{
+  "date": "2026-10-10",
+  "target": 80,
+  "methods": {
+    "기존 알고리즘": {
+      "mean": 65.75,
+      "max": 87,
+      "atLeast80": 1,
+      "cases": 12,
+      "failures": 0
+    },
+    "LLM 제안 + 보정 1차": {
+      "mean": 63.17,
+      "max": 73,
+      "atLeast80": 0,
+      "cases": 12,
+      "failures": 0
+    },
+    "LLM 제안 + 보정 2차": {
+      "mean": 64.0,
+      "max": 75,
+      "atLeast80": 0,
+      "cases": 12,
+      "failures": 0
+    },
+    "LLM 제안 + 고정 연결": {
+      "mean": 60.67,
+      "max": 67,
+      "atLeast80": 0,
+      "cases": 12,
+      "failures": 0
+    }
+  },
+  "protocol": {
+    "target": 80,
+    "minMeters": 3000,
+    "maxMeters": 8000,
+    "shapes": [
+      "square",
+      "heart",
+      "star",
+      "cat"
+    ],
+    "areas": [
+      {
+        "id": "gwangalli",
+        "name": "광안리",
+        "bbox": {
+          "south": 35.143,
+          "west": 129.1,
+          "north": 35.166,
+          "east": 129.128
+        }
+      },
+      {
+        "id": "seomyeon",
+        "name": "서면",
+        "bbox": {
+          "south": 35.145,
+          "west": 129.048,
+          "north": 35.17,
+          "east": 129.076
+        }
+      },
+      {
+        "id": "gangnam",
+        "name": "강남",
+        "bbox": {
+          "south": 37.49,
+          "west": 127.02,
+          "north": 37.515,
+          "east": 127.051
+        }
+      }
+    ],
+    "graphDetail": "simple",
+    "baselineStepBudget": 80,
+    "llmMaxSeeds": 5,
+    "refinementsPerSeed": 10,
+    "method": "flex",
+    "ranking": "unchanged cost; failures count as zero",
+    "model": "Codex session LLM; manually authored proposals, not autonomous API execution"
+  },
+  "source": {
+    "file": "roads-261009-b480965b.sqlite",
+    "schema": "1",
+    "timestamp": "2026-10-09T20:21:04Z",
+    "source": "https://download.geofabrik.de/asia/south-korea-261009.osm.pbf",
+    "checksum": "b480965b3fbc84411961aa76d5454366",
+    "ways": "1734403",
+    "region": "South Korea"
+  },
+  "limitations": [
+    "현재 Codex 대화 LLM의 수동 작성 배치 제안. 별도 LLM API 실행 및 모델 간 비교는 수행하지 않음.",
+    "1차는 도로 지도만 보고 제안. 2차는 1차 경로·점수와 기존 결과 그림도 확인한 적응적 수정. 새로운 지역의 독립 평가가 아님.",
+    "LLM은 위치·크기·방향을 제안하고 실제 길 연결은 기존 그래프 알고리즘 사용. LLM이 전체 경로를 직접 생성한 실험이 아님.",
+    "80점은 기존 기하학 유사도 점수. 사람이 알아보는 비율이나 이미지 인식 정확도 80%와 다름.",
+    "전체 12조건을 유지. 3~8km, 닫힌 경로, 중복 구간 20% 이하, 영역 안에 있는 코스만 유효. 실패는 0점.",
+    "기존은 사례당 64~68회 경로 연결 평가, LLM은 라운드당 최대 55회. 2차 누적 비용은 더 크므로 같은 계산량 비교로 해석하지 않음."
+  ],
+  "cases": [
+    {
+      "caseId": "gwangalli-square",
+      "area": "광안리",
+      "shape": "네모",
+      "dataSha256": "e31aa49adb02b6ec5e74759ad5fb3b2111084013df6ff48391ebd88d42ddf828",
+      "baseline": 64,
+      "round1": 47,
+      "round2": 47,
+      "rigid": 47,
+      "baselineEvaluated": 68,
+      "round1Evaluated": 47,
+      "round2Evaluated": 54,
+      "llmLengthMeters": 4579,
+      "llmZigzagPerKm": 4.1,
+      "llmFeatureCoverage": 1,
+      "llmSpikes": 2
+    },
+    {
+      "caseId": "gwangalli-heart",
+      "area": "광안리",
+      "shape": "하트",
+      "dataSha256": "e31aa49adb02b6ec5e74759ad5fb3b2111084013df6ff48391ebd88d42ddf828",
+      "baseline": 65,
+      "round1": 64,
+      "round2": 65,
+      "rigid": 62,
+      "baselineEvaluated": 64,
+      "round1Evaluated": 55,
+      "round2Evaluated": 55,
+      "llmLengthMeters": 4687,
+      "llmZigzagPerKm": 4.5,
+      "llmFeatureCoverage": 1,
+      "llmSpikes": 0
+    },
+    {
+      "caseId": "gwangalli-star",
+      "area": "광안리",
+      "shape": "별",
+      "dataSha256": "e31aa49adb02b6ec5e74759ad5fb3b2111084013df6ff48391ebd88d42ddf828",
+      "baseline": 62,
+      "round1": 62,
+      "round2": 62,
+      "rigid": 66,
+      "baselineEvaluated": 68,
+      "round1Evaluated": 55,
+      "round2Evaluated": 55,
+      "llmLengthMeters": 4710,
+      "llmZigzagPerKm": 3.2,
+      "llmFeatureCoverage": 1,
+      "llmSpikes": 0
+    },
+    {
+      "caseId": "gwangalli-cat",
+      "area": "광안리",
+      "shape": "고양이",
+      "dataSha256": "e31aa49adb02b6ec5e74759ad5fb3b2111084013df6ff48391ebd88d42ddf828",
+      "baseline": 62,
+      "round1": 61,
+      "round2": 61,
+      "rigid": 56,
+      "baselineEvaluated": 68,
+      "round1Evaluated": 40,
+      "round2Evaluated": 25,
+      "llmLengthMeters": 4809,
+      "llmZigzagPerKm": 4.2,
+      "llmFeatureCoverage": 1,
+      "llmSpikes": 0
+    },
+    {
+      "caseId": "seomyeon-square",
+      "area": "서면",
+      "shape": "네모",
+      "dataSha256": "a0cfff6d6c89046910ed26f36bc6a56bc3671d65dfb341af33303f0e11e785c0",
+      "baseline": 62,
+      "round1": 73,
+      "round2": 73,
+      "rigid": 64,
+      "baselineEvaluated": 68,
+      "round1Evaluated": 55,
+      "round2Evaluated": 55,
+      "llmLengthMeters": 3491,
+      "llmZigzagPerKm": 1.7,
+      "llmFeatureCoverage": 1,
+      "llmSpikes": 0
+    },
+    {
+      "caseId": "seomyeon-heart",
+      "area": "서면",
+      "shape": "하트",
+      "dataSha256": "a0cfff6d6c89046910ed26f36bc6a56bc3671d65dfb341af33303f0e11e785c0",
+      "baseline": 59,
+      "round1": 61,
+      "round2": 65,
+      "rigid": 56,
+      "baselineEvaluated": 68,
+      "round1Evaluated": 55,
+      "round2Evaluated": 55,
+      "llmLengthMeters": 4565,
+      "llmZigzagPerKm": 2.4,
+      "llmFeatureCoverage": 1,
+      "llmSpikes": 0
+    },
+    {
+      "caseId": "seomyeon-star",
+      "area": "서면",
+      "shape": "별",
+      "dataSha256": "a0cfff6d6c89046910ed26f36bc6a56bc3671d65dfb341af33303f0e11e785c0",
+      "baseline": 58,
+      "round1": 59,
+      "round2": 59,
+      "rigid": 60,
+      "baselineEvaluated": 68,
+      "round1Evaluated": 55,
+      "round2Evaluated": 55,
+      "llmLengthMeters": 4942,
+      "llmZigzagPerKm": 2,
+      "llmFeatureCoverage": 0.9,
+      "llmSpikes": 0
+    },
+    {
+      "caseId": "seomyeon-cat",
+      "area": "서면",
+      "shape": "고양이",
+      "dataSha256": "a0cfff6d6c89046910ed26f36bc6a56bc3671d65dfb341af33303f0e11e785c0",
+      "baseline": 63,
+      "round1": 63,
+      "round2": 63,
+      "rigid": 53,
+      "baselineEvaluated": 68,
+      "round1Evaluated": 55,
+      "round2Evaluated": 55,
+      "llmLengthMeters": 4837,
+      "llmZigzagPerKm": 2.5,
+      "llmFeatureCoverage": 1,
+      "llmSpikes": 0
+    },
+    {
+      "caseId": "gangnam-square",
+      "area": "강남",
+      "shape": "네모",
+      "dataSha256": "3263a3fc9739978d75a7ef73b3b793100b9aa4372c07a14d2c5730ef6caf9df5",
+      "baseline": 87,
+      "round1": 70,
+      "round2": 75,
+      "rigid": 66,
+      "baselineEvaluated": 68,
+      "round1Evaluated": 44,
+      "round2Evaluated": 55,
+      "llmLengthMeters": 4247,
+      "llmZigzagPerKm": 1.6,
+      "llmFeatureCoverage": 1,
+      "llmSpikes": 0
+    },
+    {
+      "caseId": "gangnam-heart",
+      "area": "강남",
+      "shape": "하트",
+      "dataSha256": "3263a3fc9739978d75a7ef73b3b793100b9aa4372c07a14d2c5730ef6caf9df5",
+      "baseline": 68,
+      "round1": 65,
+      "round2": 65,
+      "rigid": 64,
+      "baselineEvaluated": 64,
+      "round1Evaluated": 55,
+      "round2Evaluated": 55,
+      "llmLengthMeters": 4703,
+      "llmZigzagPerKm": 4,
+      "llmFeatureCoverage": 1,
+      "llmSpikes": 0
+    },
+    {
+      "caseId": "gangnam-star",
+      "area": "강남",
+      "shape": "별",
+      "dataSha256": "3263a3fc9739978d75a7ef73b3b793100b9aa4372c07a14d2c5730ef6caf9df5",
+      "baseline": 69,
+      "round1": 67,
+      "round2": 67,
+      "rigid": 67,
+      "baselineEvaluated": 67,
+      "round1Evaluated": 55,
+      "round2Evaluated": 55,
+      "llmLengthMeters": 5475,
+      "llmZigzagPerKm": 3.5,
+      "llmFeatureCoverage": 1,
+      "llmSpikes": 0
+    },
+    {
+      "caseId": "gangnam-cat",
+      "area": "강남",
+      "shape": "고양이",
+      "dataSha256": "3263a3fc9739978d75a7ef73b3b793100b9aa4372c07a14d2c5730ef6caf9df5",
+      "baseline": 70,
+      "round1": 66,
+      "round2": 66,
+      "rigid": 67,
+      "baselineEvaluated": 68,
+      "round1Evaluated": 55,
+      "round2Evaluated": 55,
+      "llmLengthMeters": 5321,
+      "llmZigzagPerKm": 3.8,
+      "llmFeatureCoverage": 1,
+      "llmSpikes": 0
+    }
+  ]
+}

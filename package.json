@@ -4,6 +4,9 @@
   "private": true,
   "description": "요런 — 달린 그림으로 꾸미는 나의 작품방 (P0 시제품)",
   "scripts": {
+    "lab": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/recognition-lab.mjs",
+    "test:lab-api": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test scripts/recognition-lab/*.test.mjs",
+    "test:lab-ui": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/recognition-lab/ui-check.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -11,6 +14,7 @@
     "test": "vitest run",
     "test:db": "node supabase/tests/rpc-check.mjs supabase/migrations/0001_init.sql",
     "eval:quality": "vitest run tests/eval-quality.test.ts --reporter=verbose",
+    "eval:llm-routes": "cross-env LLM_ROUTE_PILOT=1 vitest run tests/eval/llm-route-pilot.test.ts",
     "predev": "node scripts/copy-maplibre-worker.mjs",
     "prebuild": "node scripts/copy-maplibre-worker.mjs",
     "postinstall": "node scripts/copy-maplibre-worker.mjs",
@@ -22,7 +26,9 @@
     "test:e2e:live": "playwright test --project=live",
     "test:e2e:report": "playwright show-report",
     "eval:make-set": "cross-env MAKE_LABEL_SET=1 vitest run tests/eval/label-set.test.ts",
-    "eval:calibrate": "cross-env CALIBRATE=1 vitest run tests/eval/calibrate-run.test.ts"
+    "eval:calibrate": "cross-env CALIBRATE=1 vitest run tests/eval/calibrate-run.test.ts",
+    "eval:branches": "cross-env BRANCH_EVAL=1 vitest run tests/eval/branches.test.ts",
+    "eval:blind-set": "cross-env BLIND_SET=1 vitest run tests/eval/blind-set.test.ts && node tests/eval/blind-shots.mjs"
   },
   "dependencies": {
     "@maplibre/maplibre-gl-leaflet": "^0.1.4",

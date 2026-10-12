@@ -11,3 +11,11 @@ playwright-report/
 blob-report/
 # 사람 판정용 평가 세트 (npm run eval:make-set 으로 다시 만든다). 판정 결과 eval/labels/는 커밋한다
 eval/label-set/
+# (실험) 왕복 가지 붙이기 미리보기 (npm run eval:branches 로 다시 만든다)
+eval/branch-preview/
+# 블라인드 판정 세트 (npm run eval:blind-set 으로 다시 만든다). 판정 결과는 eval/labels/에 둔다
+eval/blind/
+# Frozen recognition experiments, rendered inputs and local API caches
+eval/recognition/
+
+/data/roads/

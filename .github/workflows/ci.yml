@@ -27,6 +27,8 @@ jobs:
       - run: npm run lint
       # 단위 테스트 + 코스 품질 기준선(고정 지도 데이터, 단계 예산이라 결과가 항상 같다)
       - run: npm test
+      # Offline recognition experiment contracts and API adapter (mock responses only)
+      - run: npm run test:lab-api
       # DB 마이그레이션(RLS·RPC·권한) — PGlite, 외부 DB 불필요
       - run: npm run test:db
 

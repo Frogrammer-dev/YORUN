@@ -69,7 +69,7 @@ export function createHandlers(o: MockOptions = {}): HttpHandler[] {
     http.post(OVERPASS_URL, async ({ request }) => {
       const body = await request.text();
       const query = new URLSearchParams(body).get("data") ?? "";
-      const b = bboxOfQuery(query);
+      const b = request.headers.get("content-type")?.includes("application/json") ? JSON.parse(body) as BBox : bboxOfQuery(query);
       if (!b) return HttpResponse.json({ error: "bad query" }, { status: 400 });
       o.onOverpass?.(b);
       return HttpResponse.json((o.overpass ?? gridOverpass)(b) as Parameters<typeof HttpResponse.json>[0]);

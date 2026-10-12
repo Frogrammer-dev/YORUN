@@ -1,0 +1,113 @@
+{
+  "average": 76.83333333333333,
+  "unroundedAverage": 76.74769059803562,
+  "target": 80,
+  "achieved": false,
+  "appliedToApp": false,
+  "source": "anneal-loops-phase0/results.json",
+  "cases": [
+    {
+      "caseId": "gwangalli-square",
+      "baseline": 64,
+      "combined": 71,
+      "current": 71,
+      "unrounded": 70.59505858434491,
+      "geometryImprovement": false
+    },
+    {
+      "caseId": "gwangalli-heart",
+      "baseline": 65,
+      "combined": 75,
+      "current": 75,
+      "unrounded": 75.40912652871306,
+      "geometryImprovement": false
+    },
+    {
+      "caseId": "gwangalli-star",
+      "baseline": 62,
+      "combined": 72,
+      "current": 73,
+      "unrounded": 72.53071170289306,
+      "geometryImprovement": true
+    },
+    {
+      "caseId": "gwangalli-cat",
+      "baseline": 62,
+      "combined": 70,
+      "current": 70,
+      "unrounded": 70.1959027306532,
+      "geometryImprovement": false
+    },
+    {
+      "caseId": "seomyeon-square",
+      "baseline": 62,
+      "combined": 85,
+      "current": 85,
+      "unrounded": 84.82361780765197,
+      "geometryImprovement": false
+    },
+    {
+      "caseId": "seomyeon-heart",
+      "baseline": 59,
+      "combined": 75,
+      "current": 75,
+      "unrounded": 74.83509712120372,
+      "geometryImprovement": false
+    },
+    {
+      "caseId": "seomyeon-star",
+      "baseline": 58,
+      "combined": 70,
+      "current": 70,
+      "unrounded": 70.239514295413,
+      "geometryImprovement": false
+    },
+    {
+      "caseId": "seomyeon-cat",
+      "baseline": 63,
+      "combined": 72,
+      "current": 72,
+      "unrounded": 71.65753244865583,
+      "geometryImprovement": false
+    },
+    {
+      "caseId": "gangnam-square",
+      "baseline": 87,
+      "combined": 98,
+      "current": 98,
+      "unrounded": 98.01696692074047,
+      "geometryImprovement": false
+    },
+    {
+      "caseId": "gangnam-heart",
+      "baseline": 68,
+      "combined": 81,
+      "current": 81,
+      "unrounded": 80.51213857880995,
+      "geometryImprovement": false
+    },
+    {
+      "caseId": "gangnam-star",
+      "baseline": 69,
+      "combined": 77,
+      "current": 77,
+      "unrounded": 77.101946209924,
+      "geometryImprovement": false
+    },
+    {
+      "caseId": "gangnam-cat",
+      "baseline": 70,
+      "combined": 75,
+      "current": 75,
+      "unrounded": 75.05467424742424,
+      "geometryImprovement": false
+    }
+  ],
+  "previousCombinedAverage": 76.75,
+  "previousCombinedUnroundedAverage": 76.708630282117,
+  "originalBaselineAverage": 65.75,
+  "pass80": 3,
+  "phaseZero": "nearest actual node to template first vertex, direction agrees with template signed area; no score-based seam search",
+  "sameEdgeOutputs": "diagnostic only, never promoted as geometry improvement",
+  "geometryPromotion": "must beat both original and phase-zero incumbent scores"
+}

@@ -2,6 +2,8 @@
 // 루트 탐색 Web Worker: 화면(지도 조작)이 멈추지 않게 그래프 생성·탐색을 별도 스레드에서 수행한다.
 
 import { discoverRoutes } from "./discover";
+import { TimeBudget } from "./budget";
+import { budgetSlice, improveRoutes } from "./qualitySearch";
 import type { FindResult } from "./fit";
 import { project, type RoadGraph } from "./graph";
 import { findGroupRoutes } from "./group";
@@ -32,6 +34,10 @@ export type FinderRequest = {
   avoidUnpaved?: boolean;
   avoidMajor?: boolean;
   preferLit?: boolean;
+  /** (실험) 동네 추천에 왕복 가지를 붙인 코스도 넣기 */
+  branches?: boolean;
+  /** Keep selected-area candidates while comparing nearby streets as well. */
+  nearby?: boolean;
 };
 
 export type FinderResponse =
@@ -47,6 +53,7 @@ export type FinderResponse =
   | { type: "error"; reqId: number; code: "bad_data" | "no_roads" | "no_cache" | "internal"; message: string };
 
 let cache: { key: string; json: OverpassJson; graph: RoadGraph } | null = null;
+const innerGraphs = new WeakMap<RoadGraph, Map<string, RoadGraph>>();
 
 const ctx = self as unknown as DedicatedWorkerGlobalScope;
 
@@ -80,28 +87,67 @@ ctx.onmessage = (ev: MessageEvent<FinderRequest>) => {
       post({ type: "error", reqId: req.reqId, code: "no_roads", message: "이 영역에는 달릴 수 있는 길 데이터가 거의 없어요." });
       return;
     }
-    const [minX, minY] = project(graph.origin, req.region.south, req.region.west);
-    const [maxX, maxY] = project(graph.origin, req.region.north, req.region.east);
+    if (req.region.south < req.dataBox.south || req.region.north > req.dataBox.north || req.region.west < req.dataBox.west || req.region.east > req.dataBox.east) throw new Error("검색 영역의 길 데이터를 다시 받아야 해요.");
+    const compareNearby = !!req.nearby && !req.custom?.parts.some((_,i)=>i>0) && JSON.stringify(req.region) !== JSON.stringify(req.dataBox);
+    let localGraph = graph;
+    if (compareNearby) {
+      const innerKey = `${req.region.south},${req.region.west},${req.region.north},${req.region.east}`;
+      const maps = innerGraphs.get(graph) ?? new Map<string,RoadGraph>();
+      localGraph = maps.get(innerKey) ?? graphFromOverpass(cache!.json,req.region,gopts);
+      maps.set(innerKey,localGraph);
+      if (maps.size > 2) maps.delete(maps.keys().next().value!);
+      innerGraphs.set(graph,maps);
+    }
+    const [minX, minY] = project(localGraph.origin, req.region.south, req.region.west);
+    const [maxX, maxY] = project(localGraph.origin, req.region.north, req.region.east);
     const region = { minX, minY, maxX, maxY };
     const onProgress = (fraction: number, label: string) => post({ type: "progress", reqId: req.reqId, fraction, label });
     const prefs = { avoidMajor: req.avoidMajor, preferLit: req.preferLit };
     let result: FindResult;
     if (req.mode === "shape" && req.custom && req.custom.parts.length > 1) {
       // 여러 획 그림: 그림 전체를 함께 놓고 획 사이를 이동 구간으로 잇는다
-      result = findGroupRoutes(graph, req.custom, { minMeters: req.minMeters, maxMeters: req.maxMeters, region, onProgress });
+      result = findGroupRoutes(localGraph, req.custom, { minMeters: req.minMeters, maxMeters: req.maxMeters, region, onProgress });
     } else {
       const target = req.custom ? req.custom.parts[0].shape : req.shape ? SHAPE_BY_ID[req.shape] : null;
-      result = discoverRoutes(graph, {
+      const shapes = req.mode === "shape" && target ? [target] : SHAPES;
+      const budget = new TimeBudget(compareNearby ? 75_000 : Math.min(75_000, 45_000 * Math.max(1, Math.round((maxX-minX)/4500)) * Math.max(1, Math.round((maxY-minY)/4500))));
+      const localEnd = compareNearby ? .6 : 1;
+      result = discoverRoutes(localGraph, {
         mode: req.mode === "shape" && target ? "shape" : "discover",
-        shapes: req.mode === "shape" && target ? [target] : SHAPES,
+        shapes,
         minMeters: req.minMeters,
         maxMeters: req.maxMeters,
         region,
         prefs,
         // 동네 추천: 낙서 인식 모델로 이름을 붙여 볼 동네 고리도 함께 돌려준다
         poolSize: 300,
-        onProgress,
+        branchPool: req.branches ? 300 : 0,
+        budget: budgetSlice(budget,0,.3*localEnd),
+        onProgress: (fraction,label) => onProgress(fraction*.3*localEnd,label),
       });
+      result = improveRoutes(localGraph,result,{
+        mode: req.mode === "shape" && target ? "shape" : "discover", shapes, region,
+        minMeters:req.minMeters, maxMeters:req.maxMeters, prefs,
+        budget:budgetSlice(budget,.3*localEnd,localEnd),
+        onProgress:(fraction,label)=>onProgress((.3+fraction*.7)*localEnd,label),
+      });
+      if (compareNearby && budget.ok()) {
+        const [wideMinX,wideMinY]=project(graph.origin,req.dataBox.south,req.dataBox.west);
+        const [wideMaxX,wideMaxY]=project(graph.origin,req.dataBox.north,req.dataBox.east);
+        const previous = result;
+        const wider = improveRoutes(graph,result,{
+          mode:req.mode === "shape" && target ? "shape" : "discover", shapes,
+          region:{minX:wideMinX,minY:wideMinY,maxX:wideMaxX,maxY:wideMaxY},
+          minMeters:req.minMeters,maxMeters:req.maxMeters,prefs,
+          budget:budgetSlice(budget,localEnd,1),
+          onProgress:(fraction,label)=>onProgress(localEnd+fraction*(1-localEnd),`주변 동네 ${label}`.trim()),
+        });
+        // Keep an already validated local best if wider graph mapping or time limits lose it.
+        if ((wider.candidates[0]?.similarity ?? -1) < (previous.candidates[0]?.similarity ?? -1)) {
+          wider.candidates = [previous.candidates[0],...wider.candidates.filter(c=>c.id!==previous.candidates[0].id)].slice(0,8);
+        }
+        result = wider;
+      }
     }
     const roads: number[] = [];
     for (let a = 0; a < graph.n; a++)

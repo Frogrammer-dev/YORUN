@@ -3,6 +3,7 @@
 // - 그림 지정·직접 그리기(shape): 동네 고리 + 그림 모양대로 블록을 칠한 고리 + 유연 맞추기(findRoutes) 중 잘 맞는 순으로
 
 import { dominantGridAngle, evaluatePath, findRoutes, toCandidate, type FindResult, type Placement, type Region, type RouteCandidate } from "./fit";
+import { branchLoops, type BranchedLoop } from "./branches";
 import { budgetOf, type Budget } from "./budget";
 import { roadStats, type RoadGraph } from "./graph";
 import { buildBlocks, growLoops, loopSamples, matchShape, shapeSamples, unionForPlacement, type BlockMap, type NaturalLoop } from "./loops";
@@ -39,6 +40,8 @@ export interface DiscoverOptions {
   maxResults?: number;
   /** 낙서 인식용으로 함께 돌려줄 동네 고리 수 (discover 모드) */
   poolSize?: number;
+  /** (실험) 왕복 가지를 붙인 동네 고리를 이만큼 낙서 인식 후보에 더한다 (discover 모드) */
+  branchPool?: number;
   /** 길 조건 선호: 큰 차도 피하기·가로등 있는 길 우선 (순위에 반영) */
   prefs?: { avoidMajor?: boolean; preferLit?: boolean };
   onProgress?: (fraction: number, label: string) => void;
@@ -110,6 +113,19 @@ function plainCandidate(g: RoadGraph, loop: NaturalLoop, i: number): RouteCandid
   };
 }
 
+/** 왕복 가지를 붙인 동네 고리 (낙서 인식이 이름을 붙인다) */
+function branchedCandidate(g: RoadGraph, b: BranchedLoop, i: number): RouteCandidate {
+  const branchMeters = b.branches.reduce((s, x) => s + x.length, 0);
+  return {
+    ...plainCandidate(g, { faces: b.loop.faces, path: b.path, length: b.length }, i),
+    id: `branch-${i}-${b.loop.path[0]}-${b.branches.map((x) => x.nodes[x.nodes.length - 1]).join("-")}`,
+    shapeName: "가지 붙인 동네 고리",
+    // 가지는 갔다가 같은 길로 돌아오므로 왕복 중 한 번이 반복이다
+    repeatRatio: Math.round((branchMeters / b.length) * 1000) / 1000,
+    branchMeters: Math.round(branchMeters),
+  };
+}
+
 /** 같은 블록 묶음으로 된 고리는 하나만 */
 function uniqueLoops(loops: NaturalLoop[]): NaturalLoop[] {
   const seen = new Set<string>();
@@ -168,11 +184,14 @@ export function discoverRoutes(g: RoadGraph, o: DiscoverOptions): FindResult {
 
   // 1) 동네 고리 모으기
   o.onProgress?.(0.05, "동네 고리 코스");
-  const natural = growLoops(g, m, o.region, o.minMeters, o.maxMeters, {
+  // 가지를 붙일 고리는 가지 왕복만큼 짧아도 되므로 더 짧은 고리부터 모은다 (그림 판정에는 목표 거리 안의 고리만 쓴다)
+  const branching = o.mode === "discover" && (o.branchPool ?? 0) > 0;
+  const grown = growLoops(g, m, o.region, branching ? o.minMeters * 0.5 : o.minMeters, o.maxMeters, {
     seeds: Math.min(m.faces.length, 500 * tiles),
     budget,
     fraction: o.mode === "discover" ? 0.45 : 0.25,
   });
+  const natural = branching ? grown.filter((l) => l.length >= o.minMeters) : grown;
   // 같은 블록 묶음은 하나만. 동물·사물은 그림 수가 많아 고리가 많으면 고르게 2000개만 비교한다 (기본 도형은 전부)
   const uniq = uniqueLoops(natural);
   const capped = uniq.length > 2000 ? uniq.filter((_, i) => i % Math.ceil(uniq.length / 2000) === 0) : uniq;
@@ -255,6 +274,10 @@ export function discoverRoutes(g: RoadGraph, o: DiscoverOptions): FindResult {
     const step = Math.max(1, Math.ceil(inRange.length / o.poolSize!));
     const fromLoops = inRange.filter((_, i) => i % step === 0).map((l, i) => plainCandidate(g, l, i));
     pool = [...fromTemplates, ...fromLoops];
+    if (branching) {
+      const branched = branchLoops(g, uniqueLoops(grown), { minMeters: o.minMeters, maxMeters: o.maxMeters, max: o.branchPool! });
+      pool.push(...branched.map((b, i) => branchedCandidate(g, b, i)));
+    }
   }
   return { candidates: chosen, partial, evaluated, pool };
 }

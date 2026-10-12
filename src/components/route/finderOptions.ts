@@ -1,6 +1,6 @@
 // 코스 찾기 화면의 선택지와 설정 형식
 
-import type { RoadDetail } from "@/lib/route/osm";
+import type { BBox, RoadDetail } from "@/lib/route/osm";
 import type { ShapeGroup, ShapeId } from "@/lib/route/shapes";
 
 export const RANGES = [
@@ -44,6 +44,10 @@ export interface FinderSettingsValue {
   avoidUnpaved: boolean;
   avoidMajor: boolean;
   preferLit: boolean;
+  /** (실험) 동네 추천에 왕복 가지(꼬리·다리)를 붙인 코스도 넣기 */
+  branches: boolean;
+  /** Opt-in comparison with nearby roads while preserving the original area results. */
+  nearby: boolean;
 }
 
 export const DEFAULT_SETTINGS: FinderSettingsValue = {
@@ -56,7 +60,22 @@ export const DEFAULT_SETTINGS: FinderSettingsValue = {
   avoidUnpaved: false,
   avoidMajor: false,
   preferLit: false,
+  branches: false,
+  nearby: false,
 };
 
 /** 탐색 진행 상태 (설정 칸의 진행 표시용) */
 export type SearchProgress = { kind: "fetching"; done: number; total: number } | { kind: "searching"; fraction: number; label: string };
+
+/** Expand around the same center without ever shrinking the requested area. */
+export function nearbyDataBox(bbox: BBox): BBox {
+  const centerLat=(bbox.south+bbox.north)/2,centerLon=(bbox.west+bbox.east)/2;
+  const height=(bbox.north-bbox.south)*111_195;
+  const width=(bbox.east-bbox.west)*111_195*Math.cos(centerLat*Math.PI/180);
+  const factor=Math.min(1.8,15_000/Math.max(width,height));
+  if(!Number.isFinite(factor)||factor<=1||width<=0||height<=0)return bbox;
+  const halfLat=(bbox.north-bbox.south)*factor/2,halfLon=(bbox.east-bbox.west)*factor/2;
+  const expanded={south:centerLat-halfLat,west:centerLon-halfLon,north:centerLat+halfLat,east:centerLon+halfLon};
+  if(expanded.south>bbox.south||expanded.west>bbox.west||expanded.north<bbox.north||expanded.east<bbox.east)return bbox;
+  return expanded;
+}

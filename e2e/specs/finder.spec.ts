@@ -2,6 +2,14 @@
 import type { Page } from "@playwright/test";
 import { expect, perfBudget, searchCourses, test, waitForMap } from "../fixtures";
 
+// These tests exercise route finding and UI; model inference is covered separately.
+test.beforeEach(async ({page})=>{
+  await page.route('**/api/recognition',async route=>{
+    const body=route.request().postDataJSON() as {lines:unknown[]};
+    await route.fulfill({json:{results:body.lines.map(()=>({name:'square',prob:.5,accepted:false,model:'clip'}))}});
+  });
+});
+
 async function openFinder(page: Page) {
   await page.goto("/");
   await page.getByRole("link", { name: /내 주변 드로잉 코스 찾기/ }).click();
@@ -22,12 +30,25 @@ async function drawStroke(page: Page, pts: Array<[number, number]>) {
 }
 
 test("동네 추천: 길 데이터 한 번 받아 코스 목록·선·안내 표시", async ({ page, apiCalls }) => {
+  let release!: ()=>void;
+  const gate=new Promise<void>(resolve=>{release=resolve;});
+  await page.route('**/api/recognition',async route=>{
+    const {lines}=route.request().postDataJSON() as {lines:unknown[]};
+    await gate;
+    await route.fulfill({json:{results:lines.map((_,i)=>({name:'toast',label:'토스트',prob:.95,accepted:i===0,model:'clip'}))}});
+  });
   await openFinder(page);
   await expect(page.getByText(/화면 영역 \d/)).toBeVisible();
   const ms = await searchCourses(page);
   perfBudget("동네 추천 (합성 바둑판, 낙서 인식 포함)", ms, 45_000);
   expect(apiCalls.overpass).toHaveLength(1);
   await expect(page.locator(".cand").first()).toBeVisible();
+  await expect(page.getByText(/코스는 먼저 보여 드리고/)).toBeVisible();
+  await page.locator('.cand').first().click();
+  const chosenTitle=await page.locator('.cand[aria-pressed="true"] .cand-title').innerText();
+  release();
+  await expect(page.getByText(/코스는 먼저 보여 드리고/)).toHaveCount(0);
+  await expect(page.locator('.cand[aria-pressed="true"] .cand-title')).toHaveText(chosenTitle);
   await expect(page.getByText(/지도 데이터 기준 .*통행 가능 여부/)).toBeVisible();
   expect(await page.locator("path.leaflet-interactive").count()).toBeGreaterThanOrEqual(2);
   await expect(page.getByRole("radio", { name: "큰길 위주" })).toHaveAttribute("aria-checked", "true");
@@ -50,6 +71,27 @@ test("같은 영역에서 그림만 바꾸면 길 데이터를 다시 받지 않
   expect(apiCalls.overpass).toHaveLength(1);
 });
 
+test("주변 동네 비교: 원래 영역을 유지하고 넓힌 길 데이터를 재사용한다", async ({ page, apiCalls }) => {
+  test.setTimeout(300_000);
+  await openFinder(page);
+  await page.getByRole("radio", { name: "지도 가운데 2km 사방" }).click();
+  await page.getByRole("radio", { name: "네모" }).click();
+  await searchCourses(page);
+  await expect(page.locator(".cand").first()).toBeVisible();
+  const original = apiCalls.overpass[0];
+  await page.getByRole("switch", { name: "주변 동네도 비교" }).check();
+  await searchCourses(page);
+  await expect(page.locator(".cand").first()).toBeVisible();
+  expect(apiCalls.overpass).toHaveLength(2);
+  const expanded = apiCalls.overpass[1];
+  expect((expanded.north-expanded.south)/(original.north-original.south)).toBeCloseTo(1.8,2);
+  expect((expanded.north+expanded.south)/2).toBeCloseTo((original.north+original.south)/2,5);
+  await page.getByRole("radio", { name: /하트/ }).click();
+  await searchCourses(page);
+  expect(apiCalls.overpass).toHaveLength(2);
+  expect((await page.locator(".cand-title").allInnerTexts()).every(t=>t.includes("하트"))).toBe(true);
+});
+
 test("고른 코스의 길 정보와 고도", async ({ page, apiCalls }) => {
   await openFinder(page);
   await page.getByRole("radio", { name: "네모" }).click();
@@ -59,6 +101,14 @@ test("고른 코스의 길 정보와 고도", async ({ page, apiCalls }) => {
   await expect(page.locator(".road-facts li", { hasText: /오르막\s*\d+m/ })).toBeVisible();
   await expect(page.locator(".elev-chart")).toBeVisible();
   expect(apiCalls.elevation).toBeGreaterThanOrEqual(1);
+  await expect(page.getByText("토스트로 상상해 보기")).toBeVisible();
+  const actual = page.locator('.shape-explanation path[stroke="#0EA5E9"]');
+  const path = await actual.getAttribute("d");
+  await page.getByRole("checkbox", { name: "꾸밈선", exact: true }).uncheck();
+  await expect(page.locator('.shape-explanation g[stroke="#9864C6"]')).toHaveCount(0);
+  expect(await actual.getAttribute("d")).toBe(path);
+  await page.getByRole("checkbox", { name: "꾸밈선", exact: true }).check();
+  await expect(page.locator('.shape-explanation g[stroke="#9864C6"]')).toHaveCount(1);
 });
 
 test("글자로 찾기: 'LO' → 획 2개, 획 사이 이동 구간 점선", async ({ page }) => {

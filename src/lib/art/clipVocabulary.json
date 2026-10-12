@@ -1,0 +1,1727 @@
+[
+  {
+    "english": "flashlight",
+    "label": "손전등",
+    "excluded": false
+  },
+  {
+    "english": "belt",
+    "label": "벨트",
+    "excluded": false
+  },
+  {
+    "english": "mushroom",
+    "label": "버섯",
+    "excluded": false
+  },
+  {
+    "english": "pond",
+    "label": "연못",
+    "excluded": true
+  },
+  {
+    "english": "strawberry",
+    "label": "딸기",
+    "excluded": false
+  },
+  {
+    "english": "pineapple",
+    "label": "파인애플",
+    "excluded": false
+  },
+  {
+    "english": "sun",
+    "label": "해",
+    "excluded": false
+  },
+  {
+    "english": "cow",
+    "label": "소",
+    "excluded": false
+  },
+  {
+    "english": "ear",
+    "label": "귀",
+    "excluded": false
+  },
+  {
+    "english": "bush",
+    "label": "덤불",
+    "excluded": true
+  },
+  {
+    "english": "pliers",
+    "label": "펜치",
+    "excluded": false
+  },
+  {
+    "english": "watermelon",
+    "label": "수박",
+    "excluded": false
+  },
+  {
+    "english": "apple",
+    "label": "사과",
+    "excluded": false
+  },
+  {
+    "english": "baseball",
+    "label": "야구공",
+    "excluded": false
+  },
+  {
+    "english": "feather",
+    "label": "깃털",
+    "excluded": false
+  },
+  {
+    "english": "shoe",
+    "label": "신발",
+    "excluded": false
+  },
+  {
+    "english": "leaf",
+    "label": "나뭇잎",
+    "excluded": false
+  },
+  {
+    "english": "lollipop",
+    "label": "막대사탕",
+    "excluded": false
+  },
+  {
+    "english": "crown",
+    "label": "왕관",
+    "excluded": false
+  },
+  {
+    "english": "ocean",
+    "label": "바다",
+    "excluded": true
+  },
+  {
+    "english": "horse",
+    "label": "말",
+    "excluded": false
+  },
+  {
+    "english": "mountain",
+    "label": "산",
+    "excluded": false
+  },
+  {
+    "english": "mosquito",
+    "label": "모기",
+    "excluded": false
+  },
+  {
+    "english": "mug",
+    "label": "머그컵",
+    "excluded": false
+  },
+  {
+    "english": "hospital",
+    "label": "병원",
+    "excluded": false
+  },
+  {
+    "english": "saw",
+    "label": "톱",
+    "excluded": false
+  },
+  {
+    "english": "castle",
+    "label": "성",
+    "excluded": false
+  },
+  {
+    "english": "angel",
+    "label": "천사",
+    "excluded": false
+  },
+  {
+    "english": "underwear",
+    "label": "속옷",
+    "excluded": false
+  },
+  {
+    "english": "traffic_light",
+    "label": "신호등",
+    "excluded": false
+  },
+  {
+    "english": "cruise_ship",
+    "label": "유람선",
+    "excluded": false
+  },
+  {
+    "english": "marker",
+    "label": "마커",
+    "excluded": false
+  },
+  {
+    "english": "blueberry",
+    "label": "블루베리",
+    "excluded": true
+  },
+  {
+    "english": "flamingo",
+    "label": "홍학",
+    "excluded": false
+  },
+  {
+    "english": "face",
+    "label": "얼굴",
+    "excluded": false
+  },
+  {
+    "english": "hockey_stick",
+    "label": "하키 스틱",
+    "excluded": false
+  },
+  {
+    "english": "bucket",
+    "label": "양동이",
+    "excluded": false
+  },
+  {
+    "english": "campfire",
+    "label": "모닥불",
+    "excluded": false
+  },
+  {
+    "english": "asparagus",
+    "label": "아스파라거스",
+    "excluded": false
+  },
+  {
+    "english": "skateboard",
+    "label": "스케이트보드",
+    "excluded": false
+  },
+  {
+    "english": "door",
+    "label": "문",
+    "excluded": false
+  },
+  {
+    "english": "suitcase",
+    "label": "여행가방",
+    "excluded": false
+  },
+  {
+    "english": "skull",
+    "label": "해골",
+    "excluded": false
+  },
+  {
+    "english": "cloud",
+    "label": "구름",
+    "excluded": true
+  },
+  {
+    "english": "paint_can",
+    "label": "페인트 통",
+    "excluded": false
+  },
+  {
+    "english": "hockey_puck",
+    "label": "하키 퍽",
+    "excluded": true
+  },
+  {
+    "english": "steak",
+    "label": "스테이크",
+    "excluded": false
+  },
+  {
+    "english": "house_plant",
+    "label": "화분",
+    "excluded": false
+  },
+  {
+    "english": "sleeping_bag",
+    "label": "침낭",
+    "excluded": false
+  },
+  {
+    "english": "bench",
+    "label": "벤치",
+    "excluded": false
+  },
+  {
+    "english": "snowman",
+    "label": "눈사람",
+    "excluded": false
+  },
+  {
+    "english": "arm",
+    "label": "팔",
+    "excluded": false
+  },
+  {
+    "english": "crayon",
+    "label": "크레용",
+    "excluded": false
+  },
+  {
+    "english": "fan",
+    "label": "선풍기",
+    "excluded": false
+  },
+  {
+    "english": "shovel",
+    "label": "삽",
+    "excluded": false
+  },
+  {
+    "english": "leg",
+    "label": "다리(몸)",
+    "excluded": false
+  },
+  {
+    "english": "washing_machine",
+    "label": "세탁기",
+    "excluded": false
+  },
+  {
+    "english": "harp",
+    "label": "하프",
+    "excluded": false
+  },
+  {
+    "english": "toothbrush",
+    "label": "칫솔",
+    "excluded": false
+  },
+  {
+    "english": "tree",
+    "label": "나무",
+    "excluded": false
+  },
+  {
+    "english": "bear",
+    "label": "곰",
+    "excluded": false
+  },
+  {
+    "english": "rake",
+    "label": "갈퀴",
+    "excluded": false
+  },
+  {
+    "english": "megaphone",
+    "label": "확성기",
+    "excluded": false
+  },
+  {
+    "english": "knee",
+    "label": "무릎",
+    "excluded": false
+  },
+  {
+    "english": "guitar",
+    "label": "기타",
+    "excluded": false
+  },
+  {
+    "english": "calculator",
+    "label": "계산기",
+    "excluded": false
+  },
+  {
+    "english": "hurricane",
+    "label": "태풍",
+    "excluded": true
+  },
+  {
+    "english": "grapes",
+    "label": "포도",
+    "excluded": true
+  },
+  {
+    "english": "paintbrush",
+    "label": "붓",
+    "excluded": false
+  },
+  {
+    "english": "couch",
+    "label": "소파",
+    "excluded": false
+  },
+  {
+    "english": "nose",
+    "label": "코",
+    "excluded": false
+  },
+  {
+    "english": "square",
+    "label": "네모",
+    "excluded": true
+  },
+  {
+    "english": "wristwatch",
+    "label": "손목시계",
+    "excluded": false
+  },
+  {
+    "english": "penguin",
+    "label": "펭귄",
+    "excluded": false
+  },
+  {
+    "english": "bridge",
+    "label": "다리",
+    "excluded": false
+  },
+  {
+    "english": "octagon",
+    "label": "팔각형",
+    "excluded": true
+  },
+  {
+    "english": "submarine",
+    "label": "잠수함",
+    "excluded": false
+  },
+  {
+    "english": "screwdriver",
+    "label": "드라이버",
+    "excluded": false
+  },
+  {
+    "english": "rollerskates",
+    "label": "롤러스케이트",
+    "excluded": false
+  },
+  {
+    "english": "ladder",
+    "label": "사다리",
+    "excluded": false
+  },
+  {
+    "english": "wine_bottle",
+    "label": "와인병",
+    "excluded": false
+  },
+  {
+    "english": "cake",
+    "label": "케이크",
+    "excluded": false
+  },
+  {
+    "english": "bracelet",
+    "label": "팔찌",
+    "excluded": true
+  },
+  {
+    "english": "broom",
+    "label": "빗자루",
+    "excluded": false
+  },
+  {
+    "english": "yoga",
+    "label": "요가",
+    "excluded": false
+  },
+  {
+    "english": "finger",
+    "label": "손가락",
+    "excluded": false
+  },
+  {
+    "english": "fish",
+    "label": "물고기",
+    "excluded": false
+  },
+  {
+    "english": "line",
+    "label": "선",
+    "excluded": true
+  },
+  {
+    "english": "truck",
+    "label": "트럭",
+    "excluded": false
+  },
+  {
+    "english": "snake",
+    "label": "뱀",
+    "excluded": false
+  },
+  {
+    "english": "bus",
+    "label": "버스",
+    "excluded": false
+  },
+  {
+    "english": "stitches",
+    "label": "바늘땀",
+    "excluded": true
+  },
+  {
+    "english": "snorkel",
+    "label": "스노클",
+    "excluded": false
+  },
+  {
+    "english": "shorts",
+    "label": "반바지",
+    "excluded": false
+  },
+  {
+    "english": "bowtie",
+    "label": "나비넥타이",
+    "excluded": false
+  },
+  {
+    "english": "pickup_truck",
+    "label": "픽업트럭",
+    "excluded": false
+  },
+  {
+    "english": "tooth",
+    "label": "이빨",
+    "excluded": false
+  },
+  {
+    "english": "snail",
+    "label": "달팽이",
+    "excluded": false
+  },
+  {
+    "english": "foot",
+    "label": "발",
+    "excluded": false
+  },
+  {
+    "english": "crab",
+    "label": "게",
+    "excluded": false
+  },
+  {
+    "english": "school_bus",
+    "label": "스쿨버스",
+    "excluded": false
+  },
+  {
+    "english": "train",
+    "label": "기차",
+    "excluded": false
+  },
+  {
+    "english": "dresser",
+    "label": "서랍장",
+    "excluded": false
+  },
+  {
+    "english": "sock",
+    "label": "양말",
+    "excluded": false
+  },
+  {
+    "english": "tractor",
+    "label": "트랙터",
+    "excluded": false
+  },
+  {
+    "english": "map",
+    "label": "지도",
+    "excluded": true
+  },
+  {
+    "english": "hedgehog",
+    "label": "고슴도치",
+    "excluded": false
+  },
+  {
+    "english": "coffee_cup",
+    "label": "커피잔",
+    "excluded": false
+  },
+  {
+    "english": "computer",
+    "label": "컴퓨터",
+    "excluded": false
+  },
+  {
+    "english": "matches",
+    "label": "성냥",
+    "excluded": false
+  },
+  {
+    "english": "beard",
+    "label": "수염",
+    "excluded": true
+  },
+  {
+    "english": "frog",
+    "label": "개구리",
+    "excluded": false
+  },
+  {
+    "english": "crocodile",
+    "label": "악어",
+    "excluded": false
+  },
+  {
+    "english": "bathtub",
+    "label": "욕조",
+    "excluded": false
+  },
+  {
+    "english": "rain",
+    "label": "비",
+    "excluded": true
+  },
+  {
+    "english": "moon",
+    "label": "달",
+    "excluded": false
+  },
+  {
+    "english": "bee",
+    "label": "벌",
+    "excluded": false
+  },
+  {
+    "english": "knife",
+    "label": "칼",
+    "excluded": false
+  },
+  {
+    "english": "boomerang",
+    "label": "부메랑",
+    "excluded": false
+  },
+  {
+    "english": "lighthouse",
+    "label": "등대",
+    "excluded": false
+  },
+  {
+    "english": "chandelier",
+    "label": "샹들리에",
+    "excluded": false
+  },
+  {
+    "english": "jail",
+    "label": "감옥",
+    "excluded": false
+  },
+  {
+    "english": "pool",
+    "label": "수영장",
+    "excluded": false
+  },
+  {
+    "english": "stethoscope",
+    "label": "청진기",
+    "excluded": false
+  },
+  {
+    "english": "frying_pan",
+    "label": "프라이팬",
+    "excluded": false
+  },
+  {
+    "english": "cell_phone",
+    "label": "휴대폰",
+    "excluded": false
+  },
+  {
+    "english": "binoculars",
+    "label": "쌍안경",
+    "excluded": false
+  },
+  {
+    "english": "purse",
+    "label": "지갑",
+    "excluded": false
+  },
+  {
+    "english": "lantern",
+    "label": "랜턴",
+    "excluded": false
+  },
+  {
+    "english": "birthday_cake",
+    "label": "생일 케이크",
+    "excluded": false
+  },
+  {
+    "english": "clarinet",
+    "label": "클라리넷",
+    "excluded": false
+  },
+  {
+    "english": "palm_tree",
+    "label": "야자수",
+    "excluded": false
+  },
+  {
+    "english": "aircraft_carrier",
+    "label": "항공모함",
+    "excluded": false
+  },
+  {
+    "english": "vase",
+    "label": "꽃병",
+    "excluded": false
+  },
+  {
+    "english": "eraser",
+    "label": "지우개",
+    "excluded": false
+  },
+  {
+    "english": "shark",
+    "label": "상어",
+    "excluded": false
+  },
+  {
+    "english": "skyscraper",
+    "label": "고층 빌딩",
+    "excluded": false
+  },
+  {
+    "english": "bicycle",
+    "label": "자전거",
+    "excluded": false
+  },
+  {
+    "english": "sink",
+    "label": "세면대",
+    "excluded": false
+  },
+  {
+    "english": "teapot",
+    "label": "찻주전자",
+    "excluded": false
+  },
+  {
+    "english": "circle",
+    "label": "동그라미",
+    "excluded": true
+  },
+  {
+    "english": "tornado",
+    "label": "회오리",
+    "excluded": true
+  },
+  {
+    "english": "bird",
+    "label": "새",
+    "excluded": false
+  },
+  {
+    "english": "stereo",
+    "label": "오디오",
+    "excluded": false
+  },
+  {
+    "english": "mouth",
+    "label": "입",
+    "excluded": false
+  },
+  {
+    "english": "key",
+    "label": "열쇠",
+    "excluded": false
+  },
+  {
+    "english": "hot_dog",
+    "label": "핫도그",
+    "excluded": false
+  },
+  {
+    "english": "spoon",
+    "label": "숟가락",
+    "excluded": false
+  },
+  {
+    "english": "laptop",
+    "label": "노트북",
+    "excluded": false
+  },
+  {
+    "english": "cup",
+    "label": "컵",
+    "excluded": false
+  },
+  {
+    "english": "bottlecap",
+    "label": "병뚜껑",
+    "excluded": true
+  },
+  {
+    "english": "The_Great_Wall_of_China",
+    "label": "만리장성",
+    "excluded": true
+  },
+  {
+    "english": "The_Mona_Lisa",
+    "label": "모나리자",
+    "excluded": false
+  },
+  {
+    "english": "smiley_face",
+    "label": "웃는 얼굴",
+    "excluded": false
+  },
+  {
+    "english": "waterslide",
+    "label": "워터슬라이드",
+    "excluded": false
+  },
+  {
+    "english": "eyeglasses",
+    "label": "안경",
+    "excluded": false
+  },
+  {
+    "english": "ceiling_fan",
+    "label": "천장 선풍기",
+    "excluded": false
+  },
+  {
+    "english": "lobster",
+    "label": "바닷가재",
+    "excluded": false
+  },
+  {
+    "english": "moustache",
+    "label": "콧수염",
+    "excluded": true
+  },
+  {
+    "english": "carrot",
+    "label": "당근",
+    "excluded": false
+  },
+  {
+    "english": "garden",
+    "label": "정원",
+    "excluded": false
+  },
+  {
+    "english": "police_car",
+    "label": "경찰차",
+    "excluded": false
+  },
+  {
+    "english": "postcard",
+    "label": "엽서",
+    "excluded": true
+  },
+  {
+    "english": "necklace",
+    "label": "목걸이",
+    "excluded": true
+  },
+  {
+    "english": "helmet",
+    "label": "헬멧",
+    "excluded": false
+  },
+  {
+    "english": "blackberry",
+    "label": "블랙베리",
+    "excluded": true
+  },
+  {
+    "english": "beach",
+    "label": "해변",
+    "excluded": false
+  },
+  {
+    "english": "golf_club",
+    "label": "골프채",
+    "excluded": false
+  },
+  {
+    "english": "car",
+    "label": "자동차",
+    "excluded": false
+  },
+  {
+    "english": "panda",
+    "label": "판다",
+    "excluded": false
+  },
+  {
+    "english": "alarm_clock",
+    "label": "자명종",
+    "excluded": false
+  },
+  {
+    "english": "t-shirt",
+    "label": "티셔츠",
+    "excluded": false
+  },
+  {
+    "english": "dog",
+    "label": "강아지",
+    "excluded": false
+  },
+  {
+    "english": "bread",
+    "label": "빵",
+    "excluded": false
+  },
+  {
+    "english": "wine_glass",
+    "label": "와인잔",
+    "excluded": false
+  },
+  {
+    "english": "lighter",
+    "label": "라이터",
+    "excluded": false
+  },
+  {
+    "english": "flower",
+    "label": "꽃",
+    "excluded": false
+  },
+  {
+    "english": "bandage",
+    "label": "반창고",
+    "excluded": false
+  },
+  {
+    "english": "drill",
+    "label": "드릴",
+    "excluded": false
+  },
+  {
+    "english": "butterfly",
+    "label": "나비",
+    "excluded": false
+  },
+  {
+    "english": "swan",
+    "label": "백조",
+    "excluded": false
+  },
+  {
+    "english": "owl",
+    "label": "부엉이",
+    "excluded": false
+  },
+  {
+    "english": "raccoon",
+    "label": "너구리",
+    "excluded": false
+  },
+  {
+    "english": "squiggle",
+    "label": "꼬불선",
+    "excluded": true
+  },
+  {
+    "english": "calendar",
+    "label": "달력",
+    "excluded": false
+  },
+  {
+    "english": "giraffe",
+    "label": "기린",
+    "excluded": false
+  },
+  {
+    "english": "elephant",
+    "label": "코끼리",
+    "excluded": false
+  },
+  {
+    "english": "trumpet",
+    "label": "트럼펫",
+    "excluded": false
+  },
+  {
+    "english": "rabbit",
+    "label": "토끼",
+    "excluded": false
+  },
+  {
+    "english": "trombone",
+    "label": "트롬본",
+    "excluded": false
+  },
+  {
+    "english": "sheep",
+    "label": "양",
+    "excluded": false
+  },
+  {
+    "english": "onion",
+    "label": "양파",
+    "excluded": false
+  },
+  {
+    "english": "church",
+    "label": "교회",
+    "excluded": false
+  },
+  {
+    "english": "flip_flops",
+    "label": "슬리퍼",
+    "excluded": false
+  },
+  {
+    "english": "spreadsheet",
+    "label": "표",
+    "excluded": true
+  },
+  {
+    "english": "pear",
+    "label": "배",
+    "excluded": false
+  },
+  {
+    "english": "clock",
+    "label": "시계",
+    "excluded": false
+  },
+  {
+    "english": "roller_coaster",
+    "label": "롤러코스터",
+    "excluded": false
+  },
+  {
+    "english": "parachute",
+    "label": "낙하산",
+    "excluded": false
+  },
+  {
+    "english": "kangaroo",
+    "label": "캥거루",
+    "excluded": false
+  },
+  {
+    "english": "duck",
+    "label": "오리",
+    "excluded": false
+  },
+  {
+    "english": "remote_control",
+    "label": "리모컨",
+    "excluded": false
+  },
+  {
+    "english": "compass",
+    "label": "나침반",
+    "excluded": false
+  },
+  {
+    "english": "monkey",
+    "label": "원숭이",
+    "excluded": false
+  },
+  {
+    "english": "rainbow",
+    "label": "무지개",
+    "excluded": false
+  },
+  {
+    "english": "tennis_racquet",
+    "label": "테니스 라켓",
+    "excluded": false
+  },
+  {
+    "english": "lion",
+    "label": "사자",
+    "excluded": false
+  },
+  {
+    "english": "pencil",
+    "label": "연필",
+    "excluded": false
+  },
+  {
+    "english": "string_bean",
+    "label": "강낭콩",
+    "excluded": false
+  },
+  {
+    "english": "oven",
+    "label": "오븐",
+    "excluded": false
+  },
+  {
+    "english": "star",
+    "label": "별",
+    "excluded": false
+  },
+  {
+    "english": "cat",
+    "label": "고양이",
+    "excluded": false
+  },
+  {
+    "english": "pizza",
+    "label": "피자",
+    "excluded": true
+  },
+  {
+    "english": "soccer_ball",
+    "label": "축구공",
+    "excluded": false
+  },
+  {
+    "english": "syringe",
+    "label": "주사기",
+    "excluded": false
+  },
+  {
+    "english": "flying_saucer",
+    "label": "비행접시",
+    "excluded": false
+  },
+  {
+    "english": "eye",
+    "label": "눈",
+    "excluded": false
+  },
+  {
+    "english": "cookie",
+    "label": "쿠키",
+    "excluded": true
+  },
+  {
+    "english": "floor_lamp",
+    "label": "스탠드",
+    "excluded": false
+  },
+  {
+    "english": "mouse",
+    "label": "쥐",
+    "excluded": false
+  },
+  {
+    "english": "toilet",
+    "label": "변기",
+    "excluded": false
+  },
+  {
+    "english": "toaster",
+    "label": "토스터",
+    "excluded": false
+  },
+  {
+    "english": "The_Eiffel_Tower",
+    "label": "에펠탑",
+    "excluded": false
+  },
+  {
+    "english": "airplane",
+    "label": "비행기",
+    "excluded": false
+  },
+  {
+    "english": "stove",
+    "label": "가스레인지",
+    "excluded": false
+  },
+  {
+    "english": "cello",
+    "label": "첼로",
+    "excluded": false
+  },
+  {
+    "english": "stop_sign",
+    "label": "정지 표지판",
+    "excluded": false
+  },
+  {
+    "english": "tent",
+    "label": "텐트",
+    "excluded": false
+  },
+  {
+    "english": "diving_board",
+    "label": "다이빙대",
+    "excluded": false
+  },
+  {
+    "english": "light_bulb",
+    "label": "전구",
+    "excluded": false
+  },
+  {
+    "english": "hammer",
+    "label": "망치",
+    "excluded": false
+  },
+  {
+    "english": "scorpion",
+    "label": "전갈",
+    "excluded": false
+  },
+  {
+    "english": "headphones",
+    "label": "헤드폰",
+    "excluded": false
+  },
+  {
+    "english": "basket",
+    "label": "바구니",
+    "excluded": false
+  },
+  {
+    "english": "spider",
+    "label": "거미",
+    "excluded": false
+  },
+  {
+    "english": "paper_clip",
+    "label": "클립",
+    "excluded": false
+  },
+  {
+    "english": "sweater",
+    "label": "스웨터",
+    "excluded": false
+  },
+  {
+    "english": "ice_cream",
+    "label": "아이스크림",
+    "excluded": false
+  },
+  {
+    "english": "envelope",
+    "label": "봉투",
+    "excluded": true
+  },
+  {
+    "english": "sea_turtle",
+    "label": "바다거북",
+    "excluded": false
+  },
+  {
+    "english": "donut",
+    "label": "도넛",
+    "excluded": true
+  },
+  {
+    "english": "hat",
+    "label": "모자",
+    "excluded": false
+  },
+  {
+    "english": "hourglass",
+    "label": "모래시계",
+    "excluded": false
+  },
+  {
+    "english": "broccoli",
+    "label": "브로콜리",
+    "excluded": true
+  },
+  {
+    "english": "jacket",
+    "label": "재킷",
+    "excluded": false
+  },
+  {
+    "english": "backpack",
+    "label": "배낭",
+    "excluded": false
+  },
+  {
+    "english": "book",
+    "label": "책",
+    "excluded": false
+  },
+  {
+    "english": "lightning",
+    "label": "번개",
+    "excluded": false
+  },
+  {
+    "english": "drums",
+    "label": "드럼",
+    "excluded": false
+  },
+  {
+    "english": "snowflake",
+    "label": "눈송이",
+    "excluded": true
+  },
+  {
+    "english": "radio",
+    "label": "라디오",
+    "excluded": false
+  },
+  {
+    "english": "banana",
+    "label": "바나나",
+    "excluded": false
+  },
+  {
+    "english": "camel",
+    "label": "낙타",
+    "excluded": false
+  },
+  {
+    "english": "canoe",
+    "label": "카누",
+    "excluded": false
+  },
+  {
+    "english": "toothpaste",
+    "label": "치약",
+    "excluded": false
+  },
+  {
+    "english": "chair",
+    "label": "의자",
+    "excluded": false
+  },
+  {
+    "english": "picture_frame",
+    "label": "액자",
+    "excluded": true
+  },
+  {
+    "english": "parrot",
+    "label": "앵무새",
+    "excluded": false
+  },
+  {
+    "english": "sandwich",
+    "label": "샌드위치",
+    "excluded": false
+  },
+  {
+    "english": "lipstick",
+    "label": "립스틱",
+    "excluded": false
+  },
+  {
+    "english": "pants",
+    "label": "바지",
+    "excluded": false
+  },
+  {
+    "english": "violin",
+    "label": "바이올린",
+    "excluded": false
+  },
+  {
+    "english": "brain",
+    "label": "뇌",
+    "excluded": false
+  },
+  {
+    "english": "power_outlet",
+    "label": "콘센트",
+    "excluded": false
+  },
+  {
+    "english": "triangle",
+    "label": "세모",
+    "excluded": true
+  },
+  {
+    "english": "hamburger",
+    "label": "햄버거",
+    "excluded": false
+  },
+  {
+    "english": "dragon",
+    "label": "용",
+    "excluded": false
+  },
+  {
+    "english": "bulldozer",
+    "label": "불도저",
+    "excluded": false
+  },
+  {
+    "english": "cannon",
+    "label": "대포",
+    "excluded": false
+  },
+  {
+    "english": "dolphin",
+    "label": "돌고래",
+    "excluded": false
+  },
+  {
+    "english": "zebra",
+    "label": "얼룩말",
+    "excluded": false
+  },
+  {
+    "english": "animal_migration",
+    "label": "동물 이동",
+    "excluded": true
+  },
+  {
+    "english": "camouflage",
+    "label": "위장무늬",
+    "excluded": true
+  },
+  {
+    "english": "scissors",
+    "label": "가위",
+    "excluded": false
+  },
+  {
+    "english": "basketball",
+    "label": "농구공",
+    "excluded": false
+  },
+  {
+    "english": "elbow",
+    "label": "팔꿈치",
+    "excluded": false
+  },
+  {
+    "english": "umbrella",
+    "label": "우산",
+    "excluded": false
+  },
+  {
+    "english": "windmill",
+    "label": "풍차",
+    "excluded": false
+  },
+  {
+    "english": "table",
+    "label": "탁자",
+    "excluded": false
+  },
+  {
+    "english": "rifle",
+    "label": "소총",
+    "excluded": false
+  },
+  {
+    "english": "hexagon",
+    "label": "육각형",
+    "excluded": true
+  },
+  {
+    "english": "potato",
+    "label": "감자",
+    "excluded": false
+  },
+  {
+    "english": "anvil",
+    "label": "모루",
+    "excluded": false
+  },
+  {
+    "english": "sword",
+    "label": "검",
+    "excluded": false
+  },
+  {
+    "english": "peanut",
+    "label": "땅콩",
+    "excluded": false
+  },
+  {
+    "english": "axe",
+    "label": "도끼",
+    "excluded": false
+  },
+  {
+    "english": "television",
+    "label": "텔레비전",
+    "excluded": false
+  },
+  {
+    "english": "rhinoceros",
+    "label": "코뿔소",
+    "excluded": false
+  },
+  {
+    "english": "baseball_bat",
+    "label": "야구 방망이",
+    "excluded": false
+  },
+  {
+    "english": "speedboat",
+    "label": "쾌속정",
+    "excluded": false
+  },
+  {
+    "english": "sailboat",
+    "label": "돛단배",
+    "excluded": false
+  },
+  {
+    "english": "zigzag",
+    "label": "지그재그",
+    "excluded": true
+  },
+  {
+    "english": "garden_hose",
+    "label": "정원 호스",
+    "excluded": false
+  },
+  {
+    "english": "river",
+    "label": "강",
+    "excluded": true
+  },
+  {
+    "english": "house",
+    "label": "집",
+    "excluded": false
+  },
+  {
+    "english": "pillow",
+    "label": "베개",
+    "excluded": false
+  },
+  {
+    "english": "ant",
+    "label": "개미",
+    "excluded": false
+  },
+  {
+    "english": "tiger",
+    "label": "호랑이",
+    "excluded": false
+  },
+  {
+    "english": "stairs",
+    "label": "계단",
+    "excluded": false
+  },
+  {
+    "english": "cooler",
+    "label": "아이스박스",
+    "excluded": false
+  },
+  {
+    "english": "see_saw",
+    "label": "시소",
+    "excluded": false
+  },
+  {
+    "english": "piano",
+    "label": "피아노",
+    "excluded": false
+  },
+  {
+    "english": "fireplace",
+    "label": "벽난로",
+    "excluded": false
+  },
+  {
+    "english": "popsicle",
+    "label": "아이스바",
+    "excluded": false
+  },
+  {
+    "english": "dumbbell",
+    "label": "아령",
+    "excluded": false
+  },
+  {
+    "english": "mailbox",
+    "label": "우체통",
+    "excluded": false
+  },
+  {
+    "english": "barn",
+    "label": "헛간",
+    "excluded": false
+  },
+  {
+    "english": "hot_tub",
+    "label": "온수 욕조",
+    "excluded": false
+  },
+  {
+    "english": "teddy-bear",
+    "label": "곰인형",
+    "excluded": false
+  },
+  {
+    "english": "fork",
+    "label": "포크",
+    "excluded": false
+  },
+  {
+    "english": "dishwasher",
+    "label": "식기세척기",
+    "excluded": false
+  },
+  {
+    "english": "peas",
+    "label": "완두콩",
+    "excluded": true
+  },
+  {
+    "english": "hot_air_balloon",
+    "label": "열기구",
+    "excluded": false
+  },
+  {
+    "english": "keyboard",
+    "label": "키보드",
+    "excluded": false
+  },
+  {
+    "english": "microwave",
+    "label": "전자레인지",
+    "excluded": false
+  },
+  {
+    "english": "wheel",
+    "label": "바퀴",
+    "excluded": true
+  },
+  {
+    "english": "fire_hydrant",
+    "label": "소화전",
+    "excluded": false
+  },
+  {
+    "english": "van",
+    "label": "승합차",
+    "excluded": false
+  },
+  {
+    "english": "camera",
+    "label": "카메라",
+    "excluded": false
+  },
+  {
+    "english": "whale",
+    "label": "고래",
+    "excluded": false
+  },
+  {
+    "english": "candle",
+    "label": "양초",
+    "excluded": false
+  },
+  {
+    "english": "octopus",
+    "label": "문어",
+    "excluded": false
+  },
+  {
+    "english": "pig",
+    "label": "돼지",
+    "excluded": false
+  },
+  {
+    "english": "swing_set",
+    "label": "그네",
+    "excluded": false
+  },
+  {
+    "english": "helicopter",
+    "label": "헬리콥터",
+    "excluded": false
+  },
+  {
+    "english": "saxophone",
+    "label": "색소폰",
+    "excluded": false
+  },
+  {
+    "english": "passport",
+    "label": "여권",
+    "excluded": false
+  },
+  {
+    "english": "bat",
+    "label": "박쥐",
+    "excluded": false
+  },
+  {
+    "english": "ambulance",
+    "label": "구급차",
+    "excluded": false
+  },
+  {
+    "english": "diamond",
+    "label": "다이아몬드",
+    "excluded": true
+  },
+  {
+    "english": "goatee",
+    "label": "염소수염",
+    "excluded": true
+  },
+  {
+    "english": "fence",
+    "label": "울타리",
+    "excluded": false
+  },
+  {
+    "english": "grass",
+    "label": "풀",
+    "excluded": true
+  },
+  {
+    "english": "mermaid",
+    "label": "인어",
+    "excluded": false
+  },
+  {
+    "english": "motorbike",
+    "label": "오토바이",
+    "excluded": false
+  },
+  {
+    "english": "microphone",
+    "label": "마이크",
+    "excluded": false
+  },
+  {
+    "english": "toe",
+    "label": "발가락",
+    "excluded": false
+  },
+  {
+    "english": "cactus",
+    "label": "선인장",
+    "excluded": false
+  },
+  {
+    "english": "nail",
+    "label": "못",
+    "excluded": false
+  },
+  {
+    "english": "telephone",
+    "label": "전화기",
+    "excluded": false
+  },
+  {
+    "english": "hand",
+    "label": "손",
+    "excluded": false
+  },
+  {
+    "english": "squirrel",
+    "label": "다람쥐",
+    "excluded": false
+  },
+  {
+    "english": "streetlight",
+    "label": "가로등",
+    "excluded": false
+  },
+  {
+    "english": "bed",
+    "label": "침대",
+    "excluded": false
+  },
+  {
+    "english": "firetruck",
+    "label": "소방차",
+    "excluded": false
+  }
+]

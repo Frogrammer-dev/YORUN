@@ -70,6 +70,10 @@ npm run dev            # http://localhost:3000  → /routes 에서 코스 찾기
 
 ## 시험
 
+### 이미지 인식 비교 실험
+
+`npm run lab -- all --run experiment-01 --limit 24 --channel msedge`로 동일 후보의 이진·회색 입력 비교와 블라인드 사람 평가 화면을 만듭니다. 결과는 `eval/recognition/experiment-01/`에 저장합니다. 선택형 SigLIP 2·CLIP 및 서버 VLM 실행, 평가 JSON 집계는 [실험실 사용법](docs/recognition-lab.md)을 참고하세요. 기본 실행은 외부 AI를 호출하지 않습니다.
+
 [![CI](https://github.com/Rico9204/yorun/actions/workflows/ci.yml/badge.svg)](https://github.com/Rico9204/yorun/actions/workflows/ci.yml)
 
 푸시·PR마다 GitHub Actions가 타입 검사 → lint → 단위·품질 회귀 테스트 → 빌드 → 브라우저 E2E를 돌립니다.
@@ -110,3 +114,5 @@ tests/             단위·화면 조각·품질 기준선 테스트, 공용 가
 - **MapLibre Worker 파일**: 타일 처리 Worker를 `public/vendor/`로 복사해 앱이 직접 제공합니다. `npm install`·`npm run dev`·`npm run build` 때 자동으로 복사됩니다 (`scripts/copy-maplibre-worker.mjs`).
 - **공공 API**: 아직 쓰지 않습니다. 명세 15.2~15.3절 후보(전국보안등정보 → 야간 밝은 길 가중치, 기상청 단기예보 → 달리기 시각 추천)는 데이터 검증 표를 채운 뒤 경로 비용에 넣는 것이 다음 단계입니다.
 - 작품방 저장·공유는 실제 Supabase 프로젝트에서 시험하지 않았습니다 (DB 로직은 PGlite로 검증).
+
+한국 길 데이터 설치·갱신 및 배포 방법: [docs/local-roads.md](docs/local-roads.md).

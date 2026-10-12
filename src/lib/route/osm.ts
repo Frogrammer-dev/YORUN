@@ -30,12 +30,12 @@ export const HIGHWAY_FACTOR: Record<string, number> = {
   steps: 3,
 };
 
-export const OVERPASS_ENDPOINTS = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"];
+export const OVERPASS_ENDPOINTS = ["https://overpass-api.de/api/interpreter", "https://overpass.private.coffee/api/interpreter"];
 
 export function buildOverpassQuery(b: BBox): string {
   const kinds = Object.keys(HIGHWAY_FACTOR).join("|");
   const box = [b.south, b.west, b.north, b.east].map((v) => v.toFixed(6)).join(",");
-  return `[out:json][timeout:180];way["highway"~"^(${kinds})$"]["area"!="yes"](${box});(._;>;);out body qt;`;
+  return `[out:json][timeout:30];way["highway"~"^(${kinds})$"]["area"!="yes"](${box});(._;>;);out body qt;`;
 }
 
 interface OsmNode {
@@ -164,13 +164,25 @@ export function graphFromOverpass(json: OverpassJson, bbox: BBox, opts: GraphOpt
   return buildGraph(origin, lats, lons, pruneDeadEnds(edges, lats.length), json.osm3s?.timestamp_osm_base ?? null);
 }
 
-/** 브라우저에서 Overpass 호출. 실패하면 다음 서버를 시도한다. */
+/** 브라우저는 동일 출처 API를 사용해 CORS·브라우저 식별 정보 차이를 피한다. */
 export async function fetchOverpass(bbox: BBox, signal?: AbortSignal): Promise<{ text: string; endpoint: string }> {
+  if (typeof window === "undefined") return fetchOverpassUpstream(bbox, signal);
+  const res = await fetch("/api/overpass", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(bbox), signal });
+  if (!res.ok) {
+    const failure = await res.json().catch(() => ({})) as { error?: string };
+    throw new Error(failure.error || `road_data_${res.status}`);
+  }
+  return { text: await res.text(), endpoint: res.headers.get("X-Overpass-Endpoint") ?? "app-server" };
+}
+
+/** Server-side upstream request, with app identification and bounded failover. */
+export async function fetchOverpassUpstream(bbox: BBox, signal?: AbortSignal): Promise<{ text: string; endpoint: string }> {
   const body = new URLSearchParams({ data: buildOverpassQuery(bbox) });
   let lastErr: unknown = null;
   for (const ep of OVERPASS_ENDPOINTS) {
     try {
-      const res = await fetch(ep, { method: "POST", body, signal, headers: { Accept: "application/json" } });
+      const timeout = AbortSignal.timeout(40_000);
+      const res = await fetch(ep, { method: "POST", body: body.toString(), cache: "no-store", signal: signal ? AbortSignal.any([signal, timeout]) : timeout, headers: { "Content-Type": "application/x-www-form-urlencoded", Accept: "application/json", "User-Agent": "Yorun/0.1 (running-route prototype; OpenStreetMap walking-road query)" } });
       if (res.status === 429 || res.status === 504) {
         lastErr = new Error(`overpass_busy_${res.status}`);
         continue;
@@ -179,10 +191,13 @@ export async function fetchOverpass(bbox: BBox, signal?: AbortSignal): Promise<{
         lastErr = new Error(`overpass_${res.status}`);
         continue;
       }
-      return { text: await res.text(), endpoint: ep };
+      const text = await res.text();
+      const data = JSON.parse(text);
+      if (!Array.isArray(data.elements) || data.remark) { lastErr = new Error("overpass_busy_invalid_data"); continue; }
+      return { text, endpoint: ep };
     } catch (e) {
-      if ((e as Error).name === "AbortError") throw e;
-      lastErr = e;
+      if (signal?.aborted) throw e;
+      lastErr = (e as Error).name === "TimeoutError" ? new Error("overpass_busy_timeout") : e;
     }
   }
   throw lastErr ?? new Error("overpass_failed");

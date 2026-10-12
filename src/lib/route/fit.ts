@@ -74,7 +74,7 @@ export interface RouteCandidate {
   /** 지나는 길의 성격 (큰 차도·비포장·가로등·계단) */
   roadInfo: RoadStats;
   /** 낙서 인식 모델이 붙인 이름 (Quick, Draw! 갈래 이름과 확률) */
-  doodle?: { name: string; prob: number };
+  doodle?: { name: string; prob: number; model?: "clip"; margin?: number };
   /** 0~100. 경로가 모양 선에서 평균적으로 벗어난 정도(모양 크기 대비)로 계산 */
   similarity: number;
   meanDeviationMeters: number;
@@ -87,6 +87,8 @@ export interface RouteCandidate {
   featureCoverage: number;
   /** 같은 길을 두 번 이상 지나는 거리 비율 */
   repeatRatio: number;
+  /** (실험) 왕복 가지의 한 방향 길이 합 (m). 가지를 붙인 코스에만 있다 */
+  branchMeters?: number;
   cost: number;
 }
 

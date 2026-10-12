@@ -24,6 +24,17 @@ const box = (side: number): BBox => {
 };
 
 describe("길 데이터 (Overpass)", () => {
+  it("includes app identification and fails over when a server returns an HTML error with status 200", async () => {
+    let userAgent = "";
+    server.use(http.post(OVERPASS_ENDPOINTS[0], ({ request }) => {
+      userAgent = request.headers.get("user-agent") ?? "";
+      return new HttpResponse("<html>Unavailable</html>", { status: 200 });
+    }));
+    const result = await fetchOverpass(box(500));
+    expect(userAgent).toContain("Yorun/");
+    expect(result.endpoint).toBe(OVERPASS_ENDPOINTS[1]);
+    expect(JSON.parse(result.text).elements.length).toBeGreaterThan(0);
+  });
   it("요청한 영역의 길을 받아 그래프를 만든다", async () => {
     const b = box(1000);
     const { text, endpoint } = await fetchOverpass(b);

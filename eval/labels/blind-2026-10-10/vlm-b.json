@@ -1,0 +1,425 @@
+{
+ "who": "VLM-B(Sonnet)",
+ "items": [
+  {
+   "id": "c01",
+   "guess": "그냥 다각형",
+   "conf": 1,
+   "match": false,
+   "agree": 3
+  },
+  {
+   "id": "c02",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 2
+  },
+  {
+   "id": "c03",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c04",
+   "guess": "하트",
+   "conf": 2,
+   "match": true,
+   "agree": 3
+  },
+  {
+   "id": "c05",
+   "guess": "그냥 다각형",
+   "conf": 1,
+   "match": false,
+   "agree": 2
+  },
+  {
+   "id": "c06",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 3
+  },
+  {
+   "id": "c07",
+   "guess": "사탕",
+   "conf": 2,
+   "match": false,
+   "agree": 3
+  },
+  {
+   "id": "c08",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 3
+  },
+  {
+   "id": "c09",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 2
+  },
+  {
+   "id": "c10",
+   "guess": "그냥 다각형",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c11",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c12",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c13",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 2
+  },
+  {
+   "id": "c14",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 3
+  },
+  {
+   "id": "c15",
+   "guess": "그냥 다각형",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c16",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c17",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c18",
+   "guess": "그냥 사각형",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c19",
+   "guess": "그냥 다각형",
+   "conf": 1,
+   "match": false,
+   "agree": 4
+  },
+  {
+   "id": "c20",
+   "guess": "그냥 사각형",
+   "conf": 1,
+   "match": false,
+   "agree": 2
+  },
+  {
+   "id": "c21",
+   "guess": "그냥 다각형",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c22",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c23",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c24",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c25",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c26",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c27",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c28",
+   "guess": "L자 모양",
+   "conf": 2,
+   "match": false,
+   "agree": 3
+  },
+  {
+   "id": "c29",
+   "guess": "그냥 다각형",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c30",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c31",
+   "guess": "그냥 다각형",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c32",
+   "guess": "그냥 사각형",
+   "conf": 1,
+   "match": false,
+   "agree": 2
+  },
+  {
+   "id": "c33",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 2
+  },
+  {
+   "id": "c34",
+   "guess": "그냥 다각형",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c35",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 2
+  },
+  {
+   "id": "c36",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c37",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 2
+  },
+  {
+   "id": "c38",
+   "guess": "그냥 사각형",
+   "conf": 1,
+   "match": true,
+   "agree": 4
+  },
+  {
+   "id": "c39",
+   "guess": "그냥 사각형",
+   "conf": 1,
+   "match": true,
+   "agree": 4
+  },
+  {
+   "id": "c40",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 2
+  },
+  {
+   "id": "c41",
+   "guess": "그냥 사각형",
+   "conf": 1,
+   "match": true,
+   "agree": 4
+  },
+  {
+   "id": "c42",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 2
+  },
+  {
+   "id": "c43",
+   "guess": "그냥 사각형",
+   "conf": 1,
+   "match": true,
+   "agree": 4
+  },
+  {
+   "id": "c44",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 2
+  },
+  {
+   "id": "c45",
+   "guess": "그냥 다각형",
+   "conf": 1,
+   "match": false,
+   "agree": 2
+  },
+  {
+   "id": "c46",
+   "guess": "별",
+   "conf": 2,
+   "match": true,
+   "agree": 3
+  },
+  {
+   "id": "c47",
+   "guess": "그냥 다각형",
+   "conf": 1,
+   "match": false,
+   "agree": 2
+  },
+  {
+   "id": "c48",
+   "guess": "별",
+   "conf": 2,
+   "match": true,
+   "agree": 4
+  },
+  {
+   "id": "c49",
+   "guess": "그냥 다각형",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c50",
+   "guess": "망치",
+   "conf": 2,
+   "match": false,
+   "agree": 2
+  },
+  {
+   "id": "c51",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c52",
+   "guess": "하트",
+   "conf": 1,
+   "match": true,
+   "agree": 2
+  },
+  {
+   "id": "c53",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c54",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c55",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c56",
+   "guess": "그냥 다각형",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c57",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c58",
+   "guess": "L자 모양",
+   "conf": 2,
+   "match": false,
+   "agree": 3
+  },
+  {
+   "id": "c59",
+   "guess": "모르겠음",
+   "conf": 1,
+   "match": false,
+   "agree": 1
+  },
+  {
+   "id": "c60",
+   "guess": "그냥 사각형",
+   "conf": 1,
+   "match": true,
+   "agree": 4
+  }
+ ]
+}

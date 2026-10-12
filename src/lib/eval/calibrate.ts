@@ -54,11 +54,12 @@ export interface Grades {
 /** 목표: 보여 주는 코스의 40%, '그럭저럭'은 60%, '또렷함'은 80% 이상을 사람이 알아볼 것 (95% 하한 기준) */
 export const TARGETS = { show: 0.4, fair: 0.6, clear: 0.8 } as const;
 
-/** 판정 자료 → 등급 기준선. 기준을 못 찾는 등급은 기존 값을 유지한다 */
-export function calibrate(items: Judged[], current: Grades, thresholds = Array.from({ length: 81 }, (_, i) => 20 + i)): { grades: Grades; table: Row[] } {
+/** No evidence leaves settings untouched. Failed evidence disables a grade (101 > any score). */
+export function calibrate(items: Judged[], current: Grades, thresholds = Array.from({ length: 81 }, (_, i) => 20 + i)): { grades: Grades; table: Row[]; status: "unobserved" | "validated" | "unavailable" } {
   const table = reliabilityTable(items, thresholds);
-  const show = pickThreshold(table, TARGETS.show) ?? current.show;
-  const fair = Math.max(show, pickThreshold(table, TARGETS.fair) ?? current.fair);
-  const clear = Math.max(fair, pickThreshold(table, TARGETS.clear) ?? current.clear);
-  return { grades: { show, fair, clear }, table };
+  if (!items.length) return { grades: current, table, status: "unobserved" };
+  const show = pickThreshold(table, TARGETS.show) ?? 101;
+  const fair = Math.max(show, pickThreshold(table, TARGETS.fair) ?? 101);
+  const clear = Math.max(fair, pickThreshold(table, TARGETS.clear) ?? 101);
+  return { grades: { show, fair, clear }, table, status: show <= 100 ? "validated" : "unavailable" };
 }

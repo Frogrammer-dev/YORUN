@@ -6,6 +6,18 @@ import { makeCandidate } from "./helpers/candidate";
 const spread = (n: number) => Array.from({ length: n }, (_, i) => makeCandidate({}, [37.5 + i * 0.05, 127]));
 
 describe("낙서 인식 결과 고르기", () => {
+  it("CLIP uses its rejection decision, not the legacy probability threshold", () => {
+    const pool = spread(3);
+    const out = pickDoodles(pool, [
+      { name: "hammer", label: "망치", prob: .32, model: "clip", accepted: true, margin: .006 },
+      { name: "sheep", prob: .95, model: "clip", accepted: false },
+      { name: "phone", prob: .95, model: "clip" },
+    ]);
+    expect(out).toHaveLength(1);
+    expect(out[0].shapeName).toBe("망치");
+    expect(courseBadge(out[0])).toBe("AI 해석 · 실험");
+    expect(out[0].latlngs).toEqual(pool[0].latlngs);
+  });
   it("확신이 기준 미만이거나 판정 못 한 코스는 빼고, 확신 높은 순으로", () => {
     const pool = spread(4);
     const out = pickDoodles(pool, [{ name: "sheep", prob: 0.5 }, null, { name: "owl", prob: DOODLE_MIN - 0.01 }, { name: "lion", prob: 0.9 }]);

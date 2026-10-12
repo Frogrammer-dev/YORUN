@@ -1,0 +1,482 @@
+[
+ {
+  "id": "c01",
+  "method": "discover",
+  "name": "네모",
+  "score": 75,
+  "lengthMeters": 3521,
+  "condition": "gangnam-center 3~8km"
+ },
+ {
+  "id": "c02",
+  "method": "doodle",
+  "name": "톱",
+  "score": 66,
+  "lengthMeters": 3149,
+  "condition": "gangnam-center 3~8km"
+ },
+ {
+  "id": "c03",
+  "method": "doodle",
+  "name": "양",
+  "score": 77,
+  "lengthMeters": 7218,
+  "condition": "gangnam-southwest 3~8km"
+ },
+ {
+  "id": "c04",
+  "method": "discover",
+  "name": "하트",
+  "score": 70,
+  "lengthMeters": 3131,
+  "condition": "gangnam-southwest 3~8km"
+ },
+ {
+  "id": "c05",
+  "method": "shape",
+  "name": "고양이",
+  "score": 63,
+  "lengthMeters": 4681,
+  "condition": "gangnam-southwest 2~5km"
+ },
+ {
+  "id": "c06",
+  "method": "shape",
+  "name": "고래",
+  "score": 71,
+  "lengthMeters": 5841,
+  "condition": "gangnam-center 3~8km"
+ },
+ {
+  "id": "c07",
+  "method": "shape",
+  "name": "물고기",
+  "score": 69,
+  "lengthMeters": 3652,
+  "condition": "gangnam-southwest 3~8km"
+ },
+ {
+  "id": "c08",
+  "method": "shape",
+  "name": "번개",
+  "score": 70,
+  "lengthMeters": 4583,
+  "condition": "gangnam-center 2~5km"
+ },
+ {
+  "id": "c09",
+  "method": "doodle",
+  "name": "고슴도치",
+  "score": 89,
+  "lengthMeters": 5483,
+  "condition": "gangnam-southwest 3~8km"
+ },
+ {
+  "id": "c10",
+  "method": "doodle",
+  "name": "고슴도치",
+  "score": 82,
+  "lengthMeters": 2306,
+  "condition": "gangnam-southwest 2~5km"
+ },
+ {
+  "id": "c11",
+  "method": "discover",
+  "name": "거북이",
+  "score": 71,
+  "lengthMeters": 3005,
+  "condition": "gangnam-center 3~8km"
+ },
+ {
+  "id": "c12",
+  "method": "doodle",
+  "name": "양",
+  "score": 78,
+  "lengthMeters": 2987,
+  "condition": "gangnam-center 2~5km"
+ },
+ {
+  "id": "c13",
+  "method": "shape",
+  "name": "세모",
+  "score": 70,
+  "lengthMeters": 3277,
+  "condition": "gangnam-southwest 2~5km"
+ },
+ {
+  "id": "c14",
+  "method": "doodle",
+  "name": "고슴도치",
+  "score": 90,
+  "lengthMeters": 4299,
+  "condition": "gangnam-southwest 3~8km"
+ },
+ {
+  "id": "c15",
+  "method": "shape",
+  "name": "토끼",
+  "score": 66,
+  "lengthMeters": 4460,
+  "condition": "gangnam-southwest 3~8km"
+ },
+ {
+  "id": "c16",
+  "method": "shape",
+  "name": "집",
+  "score": 69,
+  "lengthMeters": 3441,
+  "condition": "gangnam-center 3~8km"
+ },
+ {
+  "id": "c17",
+  "method": "doodle",
+  "name": "고슴도치",
+  "score": 68,
+  "lengthMeters": 2273,
+  "condition": "gangnam-center 2~5km"
+ },
+ {
+  "id": "c18",
+  "method": "doodle",
+  "name": "양",
+  "score": 76,
+  "lengthMeters": 3412,
+  "condition": "gangnam-center 2~5km"
+ },
+ {
+  "id": "c19",
+  "method": "discover",
+  "name": "네모",
+  "score": 78,
+  "lengthMeters": 3527,
+  "condition": "gangnam-southwest 3~8km"
+ },
+ {
+  "id": "c20",
+  "method": "discover",
+  "name": "다이아몬드",
+  "score": 78,
+  "lengthMeters": 2337,
+  "condition": "gangnam-southwest 2~5km"
+ },
+ {
+  "id": "c21",
+  "method": "shape",
+  "name": "고양이",
+  "score": 69,
+  "lengthMeters": 4533,
+  "condition": "gangnam-center 2~5km"
+ },
+ {
+  "id": "c22",
+  "method": "shape",
+  "name": "물고기",
+  "score": 66,
+  "lengthMeters": 4900,
+  "condition": "gangnam-center 2~5km"
+ },
+ {
+  "id": "c23",
+  "method": "discover",
+  "name": "다이아몬드",
+  "score": 76,
+  "lengthMeters": 4003,
+  "condition": "gangnam-center 3~8km"
+ },
+ {
+  "id": "c24",
+  "method": "doodle",
+  "name": "양",
+  "score": 85,
+  "lengthMeters": 2793,
+  "condition": "gangnam-southwest 2~5km"
+ },
+ {
+  "id": "c25",
+  "method": "doodle",
+  "name": "고슴도치",
+  "score": 82,
+  "lengthMeters": 3116,
+  "condition": "gangnam-center 3~8km"
+ },
+ {
+  "id": "c26",
+  "method": "shape",
+  "name": "토끼",
+  "score": 74,
+  "lengthMeters": 4450,
+  "condition": "gangnam-center 3~8km"
+ },
+ {
+  "id": "c27",
+  "method": "doodle",
+  "name": "고슴도치",
+  "score": 87,
+  "lengthMeters": 3860,
+  "condition": "gangnam-southwest 2~5km"
+ },
+ {
+  "id": "c28",
+  "method": "shape",
+  "name": "하트",
+  "score": 71,
+  "lengthMeters": 2291,
+  "condition": "gangnam-southwest 2~5km"
+ },
+ {
+  "id": "c29",
+  "method": "discover",
+  "name": "다이아몬드",
+  "score": 74,
+  "lengthMeters": 3918,
+  "condition": "gangnam-center 3~8km"
+ },
+ {
+  "id": "c30",
+  "method": "doodle",
+  "name": "캥거루",
+  "score": 64,
+  "lengthMeters": 5339,
+  "condition": "gangnam-center 3~8km"
+ },
+ {
+  "id": "c31",
+  "method": "shape",
+  "name": "집",
+  "score": 64,
+  "lengthMeters": 3405,
+  "condition": "gangnam-southwest 3~8km"
+ },
+ {
+  "id": "c32",
+  "method": "discover",
+  "name": "다이아몬드",
+  "score": 79,
+  "lengthMeters": 2627,
+  "condition": "gangnam-center 2~5km"
+ },
+ {
+  "id": "c33",
+  "method": "doodle",
+  "name": "톱",
+  "score": 82,
+  "lengthMeters": 4724,
+  "condition": "gangnam-southwest 2~5km"
+ },
+ {
+  "id": "c34",
+  "method": "discover",
+  "name": "다이아몬드",
+  "score": 72,
+  "lengthMeters": 2829,
+  "condition": "gangnam-southwest 2~5km"
+ },
+ {
+  "id": "c35",
+  "method": "doodle",
+  "name": "톱",
+  "score": 81,
+  "lengthMeters": 4791,
+  "condition": "gangnam-southwest 3~8km"
+ },
+ {
+  "id": "c36",
+  "method": "discover",
+  "name": "자동차",
+  "score": 70,
+  "lengthMeters": 2000,
+  "condition": "gangnam-center 2~5km"
+ },
+ {
+  "id": "c37",
+  "method": "doodle",
+  "name": "고슴도치",
+  "score": 80,
+  "lengthMeters": 7621,
+  "condition": "gangnam-center 3~8km"
+ },
+ {
+  "id": "c38",
+  "method": "discover",
+  "name": "네모",
+  "score": 84,
+  "lengthMeters": 4544,
+  "condition": "gangnam-southwest 3~8km"
+ },
+ {
+  "id": "c39",
+  "method": "discover",
+  "name": "네모",
+  "score": 86,
+  "lengthMeters": 4489,
+  "condition": "gangnam-center 3~8km"
+ },
+ {
+  "id": "c40",
+  "method": "shape",
+  "name": "번개",
+  "score": 69,
+  "lengthMeters": 3627,
+  "condition": "gangnam-southwest 3~8km"
+ },
+ {
+  "id": "c41",
+  "method": "discover",
+  "name": "네모",
+  "score": 76,
+  "lengthMeters": 4674,
+  "condition": "gangnam-center 2~5km"
+ },
+ {
+  "id": "c42",
+  "method": "doodle",
+  "name": "톱",
+  "score": 73,
+  "lengthMeters": 4085,
+  "condition": "gangnam-southwest 3~8km"
+ },
+ {
+  "id": "c43",
+  "method": "discover",
+  "name": "네모",
+  "score": 73,
+  "lengthMeters": 3359,
+  "condition": "gangnam-center 2~5km"
+ },
+ {
+  "id": "c44",
+  "method": "shape",
+  "name": "나비",
+  "score": 67,
+  "lengthMeters": 4542,
+  "condition": "gangnam-southwest 2~5km"
+ },
+ {
+  "id": "c45",
+  "method": "doodle",
+  "name": "톱",
+  "score": 71,
+  "lengthMeters": 2840,
+  "condition": "gangnam-center 2~5km"
+ },
+ {
+  "id": "c46",
+  "method": "shape",
+  "name": "별",
+  "score": 62,
+  "lengthMeters": 4420,
+  "condition": "gangnam-center 2~5km"
+ },
+ {
+  "id": "c47",
+  "method": "discover",
+  "name": "다이아몬드",
+  "score": 68,
+  "lengthMeters": 4033,
+  "condition": "gangnam-southwest 3~8km"
+ },
+ {
+  "id": "c48",
+  "method": "shape",
+  "name": "별",
+  "score": 66,
+  "lengthMeters": 3862,
+  "condition": "gangnam-southwest 2~5km"
+ },
+ {
+  "id": "c49",
+  "method": "discover",
+  "name": "다이아몬드",
+  "score": 69,
+  "lengthMeters": 3538,
+  "condition": "gangnam-southwest 3~8km"
+ },
+ {
+  "id": "c50",
+  "method": "shape",
+  "name": "나무",
+  "score": 72,
+  "lengthMeters": 3984,
+  "condition": "gangnam-southwest 3~8km"
+ },
+ {
+  "id": "c51",
+  "method": "shape",
+  "name": "사과",
+  "score": 72,
+  "lengthMeters": 3623,
+  "condition": "gangnam-center 3~8km"
+ },
+ {
+  "id": "c52",
+  "method": "shape",
+  "name": "하트",
+  "score": 64,
+  "lengthMeters": 4935,
+  "condition": "gangnam-center 2~5km"
+ },
+ {
+  "id": "c53",
+  "method": "shape",
+  "name": "나무",
+  "score": 74,
+  "lengthMeters": 3948,
+  "condition": "gangnam-center 3~8km"
+ },
+ {
+  "id": "c54",
+  "method": "doodle",
+  "name": "톱",
+  "score": 79,
+  "lengthMeters": 4844,
+  "condition": "gangnam-southwest 2~5km"
+ },
+ {
+  "id": "c55",
+  "method": "doodle",
+  "name": "고슴도치",
+  "score": 68,
+  "lengthMeters": 3819,
+  "condition": "gangnam-center 2~5km"
+ },
+ {
+  "id": "c56",
+  "method": "discover",
+  "name": "다이아몬드",
+  "score": 76,
+  "lengthMeters": 2650,
+  "condition": "gangnam-center 2~5km"
+ },
+ {
+  "id": "c57",
+  "method": "doodle",
+  "name": "양",
+  "score": 94,
+  "lengthMeters": 6160,
+  "condition": "gangnam-center 3~8km"
+ },
+ {
+  "id": "c58",
+  "method": "discover",
+  "name": "하트",
+  "score": 71,
+  "lengthMeters": 2291,
+  "condition": "gangnam-southwest 2~5km"
+ },
+ {
+  "id": "c59",
+  "method": "discover",
+  "name": "자동차",
+  "score": 70,
+  "lengthMeters": 2066,
+  "condition": "gangnam-southwest 2~5km"
+ },
+ {
+  "id": "c60",
+  "method": "discover",
+  "name": "네모",
+  "score": 80,
+  "lengthMeters": 4646,
+  "condition": "gangnam-southwest 2~5km"
+ }
+]

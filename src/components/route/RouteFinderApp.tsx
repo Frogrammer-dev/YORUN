@@ -12,7 +12,7 @@ import { fetchOverpassTiles, splitBBox, type BBox } from "@/lib/route/osm";
 import { fetchElevation } from "@/lib/route/elevation";
 import { recognizeCourses } from "@/lib/art/recognize";
 import { SIMILARITY_MIN, moveLines, nameDiscoveries } from "@/lib/route/present";
-import { AREAS, DEFAULT_SETTINGS, MAX_SIDE, MIN_SIDE, RANGES, type AreaId, type FinderSettingsValue } from "@/components/route/finderOptions";
+import { AREAS, DEFAULT_SETTINGS, MAX_SIDE, MIN_SIDE, RANGES, nearbyDataBox, type AreaId, type FinderSettingsValue } from "@/components/route/finderOptions";
 import { FinderSettings } from "@/components/route/FinderSettings";
 import { CourseList } from "@/components/route/CourseList";
 import { SelectedCourse, type ElevationState } from "@/components/route/SelectedCourse";
@@ -27,7 +27,7 @@ type Phase =
   | { kind: "idle" }
   | { kind: "fetching"; done: number; total: number }
   | { kind: "searching"; fraction: number; label: string }
-  | { kind: "done"; candidates: RouteCandidate[]; partial: boolean; dataTimestamp: string | null; nodes: number; discover: boolean; doodleError?: boolean }
+  | { kind: "done"; candidates: RouteCandidate[]; partial: boolean; dataTimestamp: string | null; nodes: number; discover: boolean; doodleError?: boolean; naming?: boolean }
   | { kind: "error"; message: string };
 
 export function RouteFinderApp() {
@@ -35,7 +35,7 @@ export function RouteFinderApp() {
   const mapEl = useRef<HTMLDivElement>(null);
   const { lm, basemapOk, setBasemapOk } = useLeafletMap(mapEl);
   const [settings, setSettings] = useState<FinderSettingsValue>(DEFAULT_SETTINGS);
-  const { shape, custom, area, range, detail, excludeSteps, avoidUnpaved, avoidMajor, preferLit } = settings;
+  const { shape, custom, area, range, detail, excludeSteps, avoidUnpaved, avoidMajor, preferLit, branches, nearby } = settings;
   const areaRef = useRef<AreaId>("screen");
   const areaRect = useRef<Leaflet.Rectangle | null>(null);
   const [elev, setElev] = useState<Record<string, Exclude<ElevationState, undefined>>>({});
@@ -45,13 +45,15 @@ export function RouteFinderApp() {
   const roadLayer = useRef<Leaflet.Polyline | null>(null);
   const [phase, setPhase] = useState<Phase>({ kind: "idle" });
   const [selected, setSelected] = useState<string | null>(null);
+  const selectedRef = useRef<string | null>(null);
+  useEffect(() => { selectedRef.current = selected; }, [selected]);
   const [hover, setHover] = useState<string | null>(null);
   const [areaInfo, setAreaInfo] = useState<{ w: number; h: number } | null>(null);
   const workerRef = useRef<Worker | null>(null);
   const showRoadsRef = useRef(false);
   const reqId = useRef(0);
   const layers = useRef<Leaflet.LayerGroup | null>(null);
-  const searchedBox = useRef<{ bbox: BBox; rect: Leaflet.Rectangle | null; fetchedKey: string; area: AreaId } | null>(null);
+  const searchedBox = useRef<{ bbox: BBox; dataBox: BBox; nearby: boolean; rect: Leaflet.Rectangle | null; fetchedKey: string; area: AreaId } | null>(null);
   const abortRef = useRef<AbortController | null>(null);
   /** 사용자가 지도를 직접 움직였거나 탐색을 시작했으면, 늦게 도착한 첫 위치로 지도를 옮기지 않는다. */
   const userTookOver = useRef(false);
@@ -234,51 +236,59 @@ export function RouteFinderApp() {
       setPhase({ kind: "error", message: "영역이 너무 좁아요. 지도를 조금 축소해 주세요." });
       return;
     }
-    const bbox: BBox = { south: b.getSouth(), west: b.getWest(), north: b.getNorth(), east: b.getEast() };
+    let bbox: BBox = { south: b.getSouth(), west: b.getWest(), north: b.getNorth(), east: b.getEast() };
     const r = RANGES[range];
     if (shape === "custom" && !custom) {
       setPhase({ kind: "error", message: "찾고 싶은 그림을 먼저 그려 주세요." });
       return;
     }
     const discover = shape === "auto";
+    const compareNearby = nearby && !(shape === "custom" && custom && custom.parts.length > 1);
     const id = ++reqId.current;
     setSelected(null);
+    selectedRef.current = null;
     layers.current?.clearLayers();
 
-    const key = `${bbox.south},${bbox.west},${bbox.north},${bbox.east}`;
     let texts: string[] | null = null;
-    // 지금 화면이 이미 길 데이터를 받은 영역 안이면 다시 받지 않고 그 영역 전체에서 찾는다.
-    const prev = searchedBox.current?.bbox;
-    // 탐색 뒤 사용자가 지도를 움직이지 않았다면(앱이 코스로 확대만 했다면) 같은 영역으로 본다.
-    // 찾을 영역 설정을 바꿨다면 지도를 안 움직였어도 다른 영역이다.
-    const within = (!!prev && !userMoved.current && searchedBox.current?.area === area) || (!!prev && bbox.south >= prev.south && bbox.north <= prev.north && bbox.west >= prev.west && bbox.east <= prev.east);
+    const previous = searchedBox.current;
+    const prev = previous?.bbox;
+    // App-driven zoom to a chosen route keeps the original search rectangle.
+    const reuseRegion = (!!prev && !userMoved.current && previous?.area === area) || (!!prev && bbox.south >= prev.south && bbox.north <= prev.north && bbox.west >= prev.west && bbox.east <= prev.east);
+    if (reuseRegion && prev) bbox = prev;
+    const dataBox = compareNearby ? nearbyDataBox(bbox) : bbox;
+    const key = `${dataBox.south},${dataBox.west},${dataBox.north},${dataBox.east}`;
+    // A changed nearby option or data extent must refresh the worker's raw data cache.
+    const within = reuseRegion && previous?.nearby === compareNearby && previous.fetchedKey === key;
     userMoved.current = false;
     fitTarget.current = null;
     if (!within) {
-      setPhase({ kind: "fetching", done: 0, total: splitBBox(bbox).length });
+      setPhase({ kind: "fetching", done: 0, total: splitBBox(dataBox).length });
       abortRef.current?.abort();
       const ac = new AbortController();
       abortRef.current = ac;
       try {
         // 넓은 영역은 5km 칸으로 나눠 차례로 받는다
-        texts = await fetchOverpassTiles(bbox, ac.signal, (done, total) => {
+        texts = await fetchOverpassTiles(dataBox, ac.signal, (done, total) => {
           if (id === reqId.current) setPhase({ kind: "fetching", done, total });
         });
       } catch (e) {
         if ((e as Error).name === "AbortError") return;
+        if (id !== reqId.current) return;
         setPhase({
           kind: "error",
-          message: /busy/.test(String((e as Error)?.message))
-            ? "지도 데이터 서버가 바빠요. 잠시 뒤 다시 시도해 주세요."
-            : "지도 길 데이터를 받지 못했어요. 네트워크를 확인하고 다시 시도해 주세요.",
+          message: String((e as Error)?.message) === "road_data_unavailable"
+            ? "저장된 한국 길 데이터를 열지 못했어요. 서버의 데이터 설치 상태를 확인해 주세요."
+            : String((e as Error)?.message) === "road_area_too_large"
+              ? "길이 많은 지역이에요. 검색 범위를 줄여 주세요."
+              : "지도 길 데이터를 받지 못했어요. 연결을 확인하고 다시 시도해 주세요.",
         });
         return;
       }
       // 길 데이터를 받는 사이 다른 화면으로 이동했으면(지도 제거) 여기서 멈춘다
       if (!mapAlive(lm.map) || id !== reqId.current) return;
       searchedBox.current?.rect?.remove();
-      const rect = lm.L.rectangle(b, { color: "#111318", weight: 1.5, opacity: 0.45, fill: false, dashArray: "4 6", interactive: false });
-      searchedBox.current = { bbox, rect, fetchedKey: key, area };
+      const rect = lm.L.rectangle(lm.L.latLngBounds([bbox.south, bbox.west], [bbox.north, bbox.east]), { color: "#111318", weight: 1.5, opacity: 0.45, fill: false, dashArray: "4 6", interactive: false });
+      searchedBox.current = { bbox, dataBox, nearby: compareNearby, rect, fetchedKey: key, area };
     }
     if (id !== reqId.current) return;
     setPhase({ kind: "searching", fraction: 0, label: "" });
@@ -288,7 +298,7 @@ export function RouteFinderApp() {
       type: "find",
       reqId: id,
       texts,
-      dataBox: searchedBox.current!.bbox,
+      dataBox: searchedBox.current!.dataBox,
       region: searchedBox.current!.bbox,
       mode: discover ? "discover" : "shape",
       shape: shape !== "auto" && shape !== "custom" ? shape : undefined,
@@ -300,6 +310,8 @@ export function RouteFinderApp() {
       avoidUnpaved,
       avoidMajor,
       preferLit,
+      branches: discover && branches,
+      nearby: compareNearby,
     };
     w.onmessage = (ev: MessageEvent<FinderResponse>) => {
       const m = ev.data;
@@ -317,14 +329,20 @@ export function RouteFinderApp() {
         const finish = (cands: RouteCandidate[], doodleError = false) => {
           if (id !== reqId.current) return;
           setPhase({ kind: "done", candidates: cands, partial: m.result.partial, dataTimestamp: m.graph.dataTimestamp, nodes: m.graph.nodes, discover, doodleError });
-          // 첫 코스를 골라 그 코스로 확대한다. 확대는 탐색 영역 안쪽이라 같은 영역 재탐색 때 데이터를 그대로 재사용한다.
+          // 원래 영역·주변 비교 후보 모두 실제 경로 좌표에 맞춰 지도를 확대한다.
           if (cands[0]) choose(cands[0]);
         };
         if (!discover) return finish(templ);
-        // 동네 추천: 낙서 인식 모델이 '무엇처럼 보이는지' 이름을 붙인 코스를 앞에, 도형과 닮은 코스를 뒤에
-        setPhase({ kind: "searching", fraction: 0.97, label: "낙서 인식" });
-        // 그래픽 가속이 없는 기기에선 판정이 매우 느릴 수 있어 20초가 넘으면 도형 결과만 보여 준다
-        void nameDiscoveries(templ, [...m.result.candidates, ...(m.result.pool ?? [])], recognizeCourses, 20_000).then((r) => finish(r.candidates, r.doodleError));
+        // Show connected routes immediately; server interpretation can finish in the background.
+        finish(templ);
+        setPhase(p => p.kind === "done" ? { ...p, naming:true } : p);
+        void nameDiscoveries(templ, [...m.result.candidates, ...(m.result.pool ?? [])], recognizeCourses, 90_000).then((r) => {
+          if(id !== reqId.current) return;
+          const chosen=templ.find(c=>c.id===selectedRef.current);
+          const candidates=chosen && !r.candidates.some(c=>c.id===chosen.id) ? [...r.candidates,chosen] : r.candidates;
+          setPhase(p=>p.kind === "done" ? {...p,candidates,naming:false,doodleError:r.doodleError} : p);
+          if(!selectedRef.current && candidates[0])choose(candidates[0]);
+        });
       }
     };
     w.postMessage(req);
@@ -332,6 +350,7 @@ export function RouteFinderApp() {
 
   function choose(c: RouteCandidate) {
     setSelected(c.id);
+    selectedRef.current = c.id;
     // 고른 코스의 고도 (코스 좌표를 고도 서버로 보내므로 고른 코스만)
     if (!elev[c.id]) {
       setElev((m) => ({ ...m, [c.id]: "loading" }));
@@ -477,11 +496,12 @@ export function RouteFinderApp() {
                   <p className="hint">그림이 또렷하지 않다면: 거리를 늘리면 그림이 커져 길 간격에 덜 뭉개지고, 바둑판처럼 반듯한 길이 많은 동네일수록 잘 나와요.</p>
                 )}
                 <p className="hint">
-                  지도 데이터 기준 {phase.dataTimestamp ? new Date(phase.dataTimestamp).toLocaleString("ko-KR") : "시각 미확인"} · OpenStreetMap. 실제 통행 가능 여부, 공사·임시 통제, 보도 유무, 야간 조명은 확인하지
+                  저장된 한국 지도 데이터 기준 {phase.dataTimestamp ? new Date(phase.dataTimestamp).toLocaleString("ko-KR") : "시각 미확인"} · OpenStreetMap. 실제 통행 가능 여부, 공사·임시 통제, 보도 유무, 야간 조명은 확인하지
                   않았어요. 현장 안전을 먼저 확인해 주세요.
                   {phase.partial && " 시간 제한으로 일부 조합만 탐색했어요."}
-                  {phase.doodleError && " 낙서 인식 모델을 불러오지 못해 도형과 닮은 코스만 보여 줘요."}
-                  {phase.discover && !phase.doodleError && " '처럼 보이는 코스'는 DoodleNet(ml5.js, Quick, Draw! 데이터)이 기기 안에서 판정했어요."}
+                  {phase.doodleError && " 모양 인식을 사용할 수 없어 도형과 닮은 코스만 보여 줘요."}
+                  {phase.naming && " 코스는 먼저 보여 드리고, 어떤 모양처럼 보이는지 더 살펴보고 있어요."}
+                  {phase.discover && !phase.naming && !phase.doodleError && " '처럼 보이는 코스'는 CLIP이 해석한 실험 추천이에요. 위치를 제외한 외곽선만 앱 서버에서 처리해요."}
                 </p>
               </section>
             )}

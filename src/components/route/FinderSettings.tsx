@@ -33,7 +33,7 @@ export const FinderSettings = forwardRef<HTMLElement, FinderSettingsProps>(funct
   ref,
 ) {
   const area = AREAS.find((a) => a.id === v.area)!;
-  const toggle = (key: "excludeSteps" | "avoidUnpaved" | "avoidMajor" | "preferLit", label: string) => (
+  const toggle = (key: "excludeSteps" | "avoidUnpaved" | "avoidMajor" | "preferLit" | "branches" | "nearby", label: string) => (
     <label className="toggle-row">
       {label}
       <input type="checkbox" role="switch" className="switch" checked={v[key]} onChange={(e) => onChange({ [key]: e.target.checked })} />
@@ -80,6 +80,10 @@ export const FinderSettings = forwardRef<HTMLElement, FinderSettingsProps>(funct
         </p>
       </fieldset>
 
+      {toggle("nearby", "주변 동네도 비교")}
+      <p className="hint">선택한 영역의 코스를 유지하며 가까운 주변도 찾아요. 시간이 더 걸릴 수 있어요.</p>
+      {v.nearby && v.shape === "custom" && v.custom && v.custom.parts.length > 1 && <p className="hint">여러 획으로 된 그림은 선택한 영역에서 찾아요.</p>}
+
       <fieldset className="seg-field">
         <legend>코스 거리 (km)</legend>
         <div className="seg" role="radiogroup" aria-label="코스 거리">
@@ -108,6 +112,8 @@ export const FinderSettings = forwardRef<HTMLElement, FinderSettingsProps>(funct
       {toggle("avoidMajor", "큰 차도 피하기")}
       {toggle("preferLit", "가로등 있는 길 우선")}
       <p className="hint">길 조건은 OpenStreetMap에 기록된 정보만 써요. 가로등·노면 정보가 없는 길이 많아 참고용이에요.</p>
+      {v.shape === "auto" && toggle("branches", "실험: 꼬리·다리 붙인 코스도 찾기")}
+      {v.shape === "auto" && v.branches && <p className="hint">고리에 갔다가 같은 길로 돌아오는 가지를 붙여 봐요. 인식 결과가 엉뚱할 수 있어요.</p>}
 
       <div className="sheet-cta">
         {progress ? (

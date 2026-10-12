@@ -5,6 +5,7 @@ import type { ElevationProfile } from "@/lib/route/elevation";
 import type { RouteCandidate } from "@/lib/route/fit";
 import { Icon } from "@/components/Icon";
 import { courseGrade } from "@/lib/route/present";
+import { ShapeExplanation } from "./ShapeExplanation";
 
 export type ElevationState = ElevationProfile | "loading" | "error" | undefined;
 
@@ -19,10 +20,13 @@ export function SelectedCourse({ c, elev, onRun, onExport }: { c: RouteCandidate
         {c.moves?.length
           ? `획 ${c.moves.length + 1}개를 차례로 그려요. 획 사이 점선 ${(c.moveMeters / 1000).toFixed(1)}km는 이동 구간이라 기록을 멈추고 이동하면 돼요.`
           : "초록 점에서 출발해 같은 곳으로 돌아오는 한붓 코스예요."}{" "}
-        {c.doodle
+        {c.doodle?.model === "clip"
+          ? `AI가 외곽선을 '${c.shapeName}'(으)로 해석한 실험 추천이에요. 사람 눈에는 다르게 보일 수 있어요.`
+          : c.doodle
           ? `낙서 인식 모델(Quick, Draw! 345가지)이 이 코스 모양을 '${c.shapeName}'(으)로 봤어요 (${courseGrade(c)} · 모델 점수 ${c.similarity}). 사람 눈에는 다르게 보일 수 있어요.`
           : `원래 그림에서 평균 ${c.meanDeviationMeters}m, 최대 ${c.maxDeviationMeters}m 벗어나요.`}
       </p>
+      <ShapeExplanation key={c.id} c={c} />
       <RoadInfo c={c} elev={elev} />
       <div className="sel-legend" aria-hidden="true">
         <span>
