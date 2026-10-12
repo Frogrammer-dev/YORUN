@@ -17,3 +17,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - GitHub 계정: `Frogrammer-dev`
 
 설정은 `git config --local`로 되어 있다. 커밋 전에 `git config user.email`이 위 값인지 확인한다.
+
+## 경로 추천·그림 인식 작업 전
+
+`docs/recognition-route-handoff.md`(이전 작업 인계: 현재 결론, 고정 12조건 평가 규칙, 재현 자료)를 먼저 읽는다.
