@@ -11,7 +11,9 @@ import type { FinderRequest, FinderResponse } from "@/lib/route/finder.worker";
 import { fetchOverpassTiles, splitBBox, type BBox } from "@/lib/route/osm";
 import { fetchElevation } from "@/lib/route/elevation";
 import { recognizeCourses } from "@/lib/art/recognize";
-import { moveLines, nameDiscoveries } from "@/lib/route/present";
+import { moveLines, nameDiscoveries, pixelToLatLng } from "@/lib/route/present";
+import type { ShapeGroup } from "@/lib/route/shapes";
+import { artImageLayer } from "@/components/route/artImageLayer";
 import { PlaceSearch } from "@/components/route/PlaceSearch";
 import { AREAS, DEFAULT_SETTINGS, MAX_SIDE, MIN_SIDE, RANGES, nearbyDataBox, type AreaId, type FinderSettingsValue } from "@/components/route/finderOptions";
 import { FinderSettings } from "@/components/route/FinderSettings";
@@ -46,6 +48,8 @@ export function RouteFinderApp() {
   const roadLayer = useRef<Leaflet.Polyline | null>(null);
   /** 장소 검색으로 고른 곳 표시 (새로 고르면 바뀐다) */
   const placeMarker = useRef<Leaflet.CircleMarker | null>(null);
+  /** 지금 결과를 찾을 때 쓴 내 그림 (이미지 겹쳐 보기용, 찾은 뒤 그림을 바꿔도 결과와 맞게 유지) */
+  const searchedGroup = useRef<ShapeGroup | null>(null);
   const [phase, setPhase] = useState<Phase>({ kind: "idle" });
   // 낙서 인식 코스는 점수 척도가 달라(모델 확신도) 유사도로 거르지 않는다
   const visible = useMemo(() => (phase.kind === "done" ? phase.candidates.filter((c) => c.doodle || c.similarity >= minSimilarity) : []), [phase, minSimilarity]);
@@ -162,6 +166,11 @@ export function RouteFinderApp() {
       if (hovered) lm.L.polyline(hovered.latlngs, { ...round, color: "#4A505C", weight: 3, opacity: 0.55, interactive: false }).addTo(g);
       if (!active) for (const c of cands) lm.L.polyline(c.latlngs, { ...round, color: ROUTE_COLOR, weight: 3, opacity: 0.5 }).on("click", () => setSelected(c.id)).addTo(g);
       if (active) {
+        // 이미지로 만든 그림이면 원본 이미지를 첫 획 외곽선에 맞춰 반투명하게 코스 아래에 겹친다
+        const art = searchedGroup.current;
+        const part = art?.parts[0];
+        const toLL = active.shapeId === "custom" && art?.image && part?.frame && part.shape.points.length === active.outline.length ? pixelToLatLng(part.shape.points, active.outline, part.frame) : null;
+        if (toLL && art?.image) artImageLayer(lm.L, art.image.url, [toLL(0, 0), toLL(art.image.width, 0), toLL(0, art.image.height)]).addTo(g);
         lm.L.polyline(active.latlngs, { ...round, color: "#fff", weight: 10, opacity: 0.95, interactive: false }).addTo(g);
         lm.L.polyline(active.latlngs, { ...round, color: ROUTE_COLOR, weight: 6, opacity: 1, interactive: false }).addTo(g);
         // 획 사이 이동 구간: 그림이 아니므로 회색 점선으로 덮는다
@@ -299,6 +308,7 @@ export function RouteFinderApp() {
     setPhase({ kind: "searching", fraction: 0, label: "" });
 
     const w = workerRef.current;
+    searchedGroup.current = shape === "custom" ? custom : null;
     const req: FinderRequest = {
       type: "find",
       reqId: id,

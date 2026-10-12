@@ -230,6 +230,8 @@ export interface ShapePart {
   ox: number;
   oy: number;
   s: number;
+  /** 원본 화면 좌표(y 뒤집음)에서 획 좌표로: ((x - cx) / size, (-y - cy) / size). 이미지 겹쳐 보기용 */
+  frame?: { cx: number; cy: number; size: number };
 }
 
 /** 떨어진 여러 닫힌 획으로 된 그림 (예: 글자 "520"). 획 순서대로 달리고, 획 사이는 이동 구간으로 잇는다. */
@@ -237,6 +239,8 @@ export interface ShapeGroup {
   id: ShapeKey;
   name: string;
   parts: ShapePart[];
+  /** 이미지로 만든 그림의 원본 (지도에 반투명하게 겹쳐 보여 준다). width·height는 획 frame과 같은 화면 픽셀 크기 */
+  image?: { url: string; width: number; height: number };
 }
 
 /** 한 획짜리 그림 */
@@ -273,6 +277,8 @@ export function groupFromLoops(
     const raw = keep.slice(0, -1).map((i) => closed[i]);
     if (raw.length < 3) continue;
     const points = normalize(raw);
+    const rx = raw.map((p) => p[0]), ry = raw.map((p) => p[1]);
+    const frame = { cx: (Math.min(...rx) + Math.max(...rx)) / 2, cy: (Math.min(...ry) + Math.max(...ry)) / 2, size: Math.max(Math.max(...rx) - Math.min(...rx), Math.max(...ry) - Math.min(...ry)) };
     let a = 0;
     for (let i = 1; i < points.length; i++) a += points[i - 1][0] * points[i][1] - points[i][0] * points[i - 1][1];
     if (Math.abs(a / 2) < 0.03) continue; // 선 하나처럼 안쪽이 없는 획
@@ -282,6 +288,7 @@ export function groupFromLoops(
       ox: (cx - gx) / size,
       oy: (cy - gy) / size,
       s: ext / size,
+      frame,
     });
   }
   if (!parts.length) return null;

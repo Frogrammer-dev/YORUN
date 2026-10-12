@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { DOODLE_MAX, DOODLE_MIN, courseBadge, courseTitle, moveLines, nameDiscoveries, pickDoodles } from "@/lib/route/present";
+import { DOODLE_MAX, DOODLE_MIN, courseBadge, courseTitle, moveLines, nameDiscoveries, pickDoodles, pixelToLatLng } from "@/lib/route/present";
+import { groupFromLoops } from "@/lib/route/shapes";
+import { placeShape } from "@/lib/route/fit";
+import { makeOrigin, unproject } from "@/lib/route/graph";
 import { makeCandidate } from "./helpers/candidate";
 
 /** 서로 겹치지 않는 자리의 코스 n개 */
@@ -80,5 +83,21 @@ describe("목록 표시 문구", () => {
     const c = makeCandidate({ moves: [[1, 3]] });
     expect(moveLines(c)).toEqual([c.latlngs.slice(1, 4)]);
     expect(moveLines(makeCandidate())).toEqual([]);
+  });
+});
+
+describe("이미지 겹쳐 보기 위치", () => {
+  it("회전·확대·이동해 놓은 그림에서, 이미지의 윤곽 꼭짓점이 지도 외곽선 꼭짓점에 겹친다", () => {
+    // 이미지 안의 오각형 윤곽 (화면 픽셀, y 아래로)
+    const px: [number, number][] = [[60, 30], [200, 50], [180, 150], [90, 160], [40, 100]];
+    const part = groupFromLoops([px])!.parts[0];
+    const o = makeOrigin(35.15, 129.1);
+    const outline = placeShape(part.shape.points, { cx: 300, cy: -120, scale: 900, rotDeg: 37 }).map(([x, y]) => unproject(o, x, y));
+    const toLL = pixelToLatLng(part.shape.points, outline, part.frame!)!;
+    for (const [u, v] of px) {
+      const [lat, lon] = toLL(u, v);
+      const nearest = Math.min(...outline.map(([a, b]) => Math.hypot(a - lat, b - lon)));
+      expect(nearest).toBeLessThan(1e-6); // 약 0.1m
+    }
   });
 });

@@ -92,3 +92,37 @@ export function courseBadge(c: RouteCandidate): string {
   if (c.doodle?.model === "clip") return "AI 해석 · 실험";
   return c.doodle ? `인식 · ${courseGrade(c)}` : `유사도 ${c.similarity}`;
 }
+
+/**
+ * 이미지로 만든 그림의 윤곽을 코스 위에 겹치기: 획 좌표(points) → 지도 외곽선(outline)은 이동·회전·균일 확대라
+ * 두 점열로 그 변환을 구하고(최소제곱), 원본 화면 픽셀 좌표 → [위도, 경도] 함수를 돌려준다.
+ */
+export function pixelToLatLng(
+  points: readonly (readonly [number, number])[],
+  outline: readonly (readonly [number, number])[],
+  frame: { cx: number; cy: number; size: number },
+): ((u: number, v: number) => [number, number]) | null {
+  const n = Math.min(points.length, outline.length);
+  if (n < 2) return null;
+  const [lat0, lon0] = outline[0];
+  const kx = Math.cos((lat0 * Math.PI) / 180);
+  const W = outline.slice(0, n).map(([lat, lon]) => [(lon - lon0) * kx, lat - lat0]);
+  const Z = points.slice(0, n);
+  const mean = (a: readonly (readonly number[])[], i: number) => a.reduce((s, p) => s + p[i], 0) / n;
+  const zx = mean(Z, 0), zy = mean(Z, 1), wx = mean(W, 0), wy = mean(W, 1);
+  // 복소수 w = a·z + b 의 최소제곱 해
+  let re = 0, im = 0, den = 0;
+  for (let i = 0; i < n; i++) {
+    const dx = Z[i][0] - zx, dy = Z[i][1] - zy, ex = W[i][0] - wx, ey = W[i][1] - wy;
+    re += ex * dx + ey * dy;
+    im += ey * dx - ex * dy;
+    den += dx * dx + dy * dy;
+  }
+  if (!(den > 0)) return null;
+  const ar = re / den, ai = im / den;
+  return (u, v) => {
+    const x = (u - frame.cx) / frame.size - zx, y = (-v - frame.cy) / frame.size - zy;
+    const px = wx + ar * x - ai * y, py = wy + ai * x + ar * y;
+    return [lat0 + py, lon0 + px / kx];
+  };
+}

@@ -222,7 +222,6 @@ function ImageTab({ onChange }: { onChange: (g: ShapeGroup | null) => void }) {
         img.onerror = () => fail(new Error("load"));
         img.src = url;
       });
-      URL.revokeObjectURL(url);
       const k = 240 / Math.max(img.naturalWidth || 240, img.naturalHeight || 240);
       const c = document.createElement("canvas");
       c.width = Math.max(8, Math.round((img.naturalWidth || 240) * k));
@@ -230,7 +229,9 @@ function ImageTab({ onChange }: { onChange: (g: ShapeGroup | null) => void }) {
       c.getContext("2d")!.drawImage(img, 0, 0, c.width, c.height);
       const g = groupFromLoops(outlinesFromCanvas(c, "luma"), { order: "leftToRight", name: "내 그림", minPartRatio: 0.15, maxParts: MAX_PARTS, maxVertices: 28 });
       setError(g ? null : "윤곽을 찾지 못했어요. 배경과 그림이 또렷하게 구분되는 단순한 그림을 써 주세요.");
-      onChange(g);
+      // ponytail: 올릴 때마다 object URL 하나가 탭이 닫힐 때까지 남는다 (이미지 몇 장 수준이라 해제하지 않음)
+      if (!g) URL.revokeObjectURL(url);
+      onChange(g && { ...g, image: { url, width: c.width, height: c.height } });
     } catch {
       setError("이미지를 열지 못했어요.");
       onChange(null);
