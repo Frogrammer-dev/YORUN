@@ -43,7 +43,7 @@ export interface DiscoverOptions {
   /** (실험) 왕복 가지를 붙인 동네 고리를 이만큼 낙서 인식 후보에 더한다 (discover 모드) */
   branchPool?: number;
   /** 길 조건 선호: 큰 차도 피하기·가로등 있는 길 우선 (순위에 반영) */
-  prefs?: { avoidMajor?: boolean; preferLit?: boolean };
+  prefs?: { avoidMajor?: boolean; preferLit?: boolean; preferCarFree?: boolean };
   onProgress?: (fraction: number, label: string) => void;
 }
 
@@ -249,7 +249,7 @@ export function discoverRoutes(g: RoadGraph, o: DiscoverOptions): FindResult {
 
   // 5) 같은 자리 겹치는 코스를 빼고, 추천은 같은 동네 고리가 여러 그림으로 중복되지 않게
   const rank = (c: RouteCandidate) =>
-    c.cost + (o.prefs?.avoidMajor ? 0.15 * c.roadInfo.major : 0) + (o.prefs?.preferLit && c.roadInfo.lit !== null ? 0.05 * (1 - c.roadInfo.lit) : 0);
+    c.cost + (o.prefs?.avoidMajor ? 0.15 * c.roadInfo.major : 0) + (o.prefs?.preferLit && c.roadInfo.lit !== null ? 0.05 * (1 - c.roadInfo.lit) : 0) + (o.prefs?.preferCarFree ? 0.1 * (1 - c.roadInfo.carFree) : 0);
   all.sort((a, b) => rank(a) - rank(b));
   const chosen: RouteCandidate[] = [];
   const perShape = new Map<string, number>();

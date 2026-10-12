@@ -4,15 +4,18 @@
 import type { RouteCandidate } from "@/lib/route/fit";
 import { courseBadge, courseTitle } from "@/lib/route/present";
 import { PathThumb, latlngToXY } from "@/components/Icon";
+import type { ElevationState } from "@/components/route/SelectedCourse";
 
 export function CourseList({
   candidates,
+  elev = {},
   selected,
   discover,
   onChoose,
   onHover,
 }: {
   candidates: RouteCandidate[];
+  elev?: Record<string, ElevationState>;
   selected: string | null;
   discover: boolean;
   onChoose: (c: RouteCandidate) => void;
@@ -37,6 +40,7 @@ export function CourseList({
                 <span>· 약 {Math.round((c.lengthMeters / 1000) * 6.5)}분</span>
                 {c.repeatRatio > 0.02 ? <span>· 같은 길 반복 {Math.round(c.repeatRatio * 100)}%</span> : null}
                 {c.moves?.length ? <span>· 이동 {(c.moveMeters / 1000).toFixed(1)}km</span> : null}
+                {typeof elev[c.id] === "object" ? <span>· 오르막 {(elev[c.id] as { ascent: number }).ascent}m</span> : null}
               </span>
             </span>
           </button>

@@ -38,7 +38,11 @@ export function RouteFinderApp() {
   const mapEl = useRef<HTMLDivElement>(null);
   const { lm, basemapOk, setBasemapOk } = useLeafletMap(mapEl);
   const [settings, setSettings] = useState<FinderSettingsValue>(DEFAULT_SETTINGS);
-  const { shape, custom, area, range, detail, excludeSteps, avoidUnpaved, avoidMajor, preferLit, branches, nearby, minSimilarity } = settings;
+  const { mode, shape, custom, area, range, detail, excludeSteps, avoidUnpaved, avoidMajor, preferLit, preferCarFree, avoidTunnels, branches, nearby, minSimilarity, maxAscent } = settings;
+  const running = mode === "running";
+  /** 러닝 코스 출발점 [위도, 경도] (null: 찾을 때의 지도 가운데) */
+  const [start, setStart] = useState<[number, number] | null>(null);
+  const [pickingStart, setPickingStart] = useState(false);
   const areaRef = useRef<AreaId>("screen");
   const areaRect = useRef<Leaflet.Rectangle | null>(null);
   const [elev, setElev] = useState<Record<string, Exclude<ElevationState, undefined>>>({});
@@ -52,7 +56,18 @@ export function RouteFinderApp() {
   const searchedGroup = useRef<ShapeGroup | null>(null);
   const [phase, setPhase] = useState<Phase>({ kind: "idle" });
   // 낙서 인식 코스는 점수 척도가 달라(모델 확신도) 유사도로 거르지 않는다
-  const visible = useMemo(() => (phase.kind === "done" ? phase.candidates.filter((c) => c.doodle || c.similarity >= minSimilarity) : []), [phase, minSimilarity]);
+  // 오르막 상한: 고도를 아직 못 받았거나 실패한 코스는 판단할 수 없어 숨기지 않는다
+  const visible = useMemo(
+    () =>
+      phase.kind === "done"
+        ? phase.candidates.filter((c) => {
+            const e = elev[c.id];
+            if (c.shapeId !== "run") return c.doodle || c.similarity >= minSimilarity;
+            return maxAscent === null || typeof e !== "object" || e.ascent <= maxAscent;
+          })
+        : [],
+    [phase, minSimilarity, maxAscent, elev],
+  );
   const [selected, setSelected] = useState<string | null>(null);
   const selectedRef = useRef<string | null>(null);
   useEffect(() => { selectedRef.current = selected; }, [selected]);
@@ -240,9 +255,15 @@ export function RouteFinderApp() {
   async function search() {
     if (!lm || !workerRef.current) return;
     userTookOver.current = true;
-    const b = searchBounds();
+    const r = RANGES[range];
+    // 러닝 코스: 출발점 둘레 정사각형 (고리 지름 ≈ 거리/π, 여유를 둔다)
+    const origin: [number, number] = start ?? [lm.map.getCenter().lat, lm.map.getCenter().lng];
+    const half = Math.max(800, (r.max / (2 * Math.PI)) * 1.5);
+    const b = running
+      ? lm.L.latLngBounds([origin[0] - half / 111_195, origin[1] - half / (111_195 * Math.cos((origin[0] * Math.PI) / 180))], [origin[0] + half / 111_195, origin[1] + half / (111_195 * Math.cos((origin[0] * Math.PI) / 180))])
+      : searchBounds();
     const size = boundsSizeMeters(b);
-    if (area === "screen" && (size.w > MAX_SIDE || size.h > MAX_SIDE)) {
+    if (!running && area === "screen" && (size.w > MAX_SIDE || size.h > MAX_SIDE)) {
       setPhase({ kind: "error", message: `지도를 조금 더 확대해 주세요. 한 번에 찾을 수 있는 영역은 ${MAX_SIDE / 1000}km × ${MAX_SIDE / 1000}km 이하예요.` });
       return;
     }
@@ -251,13 +272,12 @@ export function RouteFinderApp() {
       return;
     }
     let bbox: BBox = { south: b.getSouth(), west: b.getWest(), north: b.getNorth(), east: b.getEast() };
-    const r = RANGES[range];
-    if (shape === "custom" && !custom) {
+    if (!running && shape === "custom" && !custom) {
       setPhase({ kind: "error", message: "찾고 싶은 그림을 먼저 그려 주세요." });
       return;
     }
-    const discover = shape === "auto";
-    const compareNearby = nearby && !(shape === "custom" && custom && custom.parts.length > 1);
+    const discover = !running && shape === "auto";
+    const compareNearby = !running && nearby && !(shape === "custom" && custom && custom.parts.length > 1);
     const id = ++reqId.current;
     setSelected(null);
     selectedRef.current = null;
@@ -267,7 +287,7 @@ export function RouteFinderApp() {
     const previous = searchedBox.current;
     const prev = previous?.bbox;
     // App-driven zoom to a chosen route keeps the original search rectangle.
-    const reuseRegion = (!!prev && !userMoved.current && previous?.area === area) || (!!prev && bbox.south >= prev.south && bbox.north <= prev.north && bbox.west >= prev.west && bbox.east <= prev.east);
+    const reuseRegion = (!running && !!prev && !userMoved.current && previous?.area === area) || (!!prev && bbox.south >= prev.south && bbox.north <= prev.north && bbox.west >= prev.west && bbox.east <= prev.east);
     if (reuseRegion && prev) bbox = prev;
     const dataBox = compareNearby ? nearbyDataBox(bbox) : bbox;
     const key = `${dataBox.south},${dataBox.west},${dataBox.north},${dataBox.east}`;
@@ -308,23 +328,27 @@ export function RouteFinderApp() {
     setPhase({ kind: "searching", fraction: 0, label: "" });
 
     const w = workerRef.current;
-    searchedGroup.current = shape === "custom" ? custom : null;
+    searchedGroup.current = !running && shape === "custom" ? custom : null;
     const req: FinderRequest = {
       type: "find",
       reqId: id,
       texts,
       dataBox: searchedBox.current!.dataBox,
       region: searchedBox.current!.bbox,
-      mode: discover ? "discover" : "shape",
+      mode: running ? "running" : discover ? "discover" : "shape",
+      start: running ? origin : undefined,
       shape: shape !== "auto" && shape !== "custom" ? shape : undefined,
       custom: shape === "custom" ? custom! : undefined,
       minMeters: r.min,
       maxMeters: r.max,
       excludeSteps,
-      detail,
+      // 러닝 코스는 공원·강변 산책로까지 모든 보행로를 쓴다 (단순화는 그림 선을 깔끔하게 하려는 것)
+      detail: running ? "detailed" : detail,
       avoidUnpaved,
       avoidMajor,
       preferLit,
+      preferCarFree: running && preferCarFree,
+      avoidTunnels: running && avoidTunnels,
       branches: discover && branches,
       nearby: compareNearby,
     };
@@ -363,16 +387,54 @@ export function RouteFinderApp() {
     w.postMessage(req);
   }
 
+  // 출발점 고르기: 다음 지도 클릭 한 번을 출발점으로
+  useEffect(() => {
+    if (!lm || !pickingStart) return;
+    const el = lm.map.getContainer();
+    el.style.cursor = "crosshair";
+    const onClick = (e: Leaflet.LeafletMouseEvent) => {
+      setStart([e.latlng.lat, e.latlng.lng]);
+      setPickingStart(false);
+    };
+    lm.map.once("click", onClick);
+    return () => {
+      lm.map.off("click", onClick);
+      el.style.cursor = "";
+    };
+  }, [lm, pickingStart]);
+  // 고른 출발점 표시 (러닝 코스 모드에서만)
+  useEffect(() => {
+    if (!lm || !running || !start) return;
+    const marker = lm.L.circleMarker(start, { radius: 9, color: "#fff", weight: 3, fillColor: "#7C3AED", fillOpacity: 1, interactive: false })
+      .bindTooltip("출발점", { permanent: true, direction: "top", offset: [0, -10] })
+      .addTo(lm.map);
+    return () => void marker.remove();
+  }, [lm, running, start]);
+
+  /** 코스 고도는 한 번만 받는다 (고른 코스, 또는 오르막 상한을 켰을 때 모든 후보) */
+  const elevAsked = useRef(new Set<string>());
+  function loadElevation(c: RouteCandidate) {
+    if (elevAsked.current.has(c.id)) return;
+    elevAsked.current.add(c.id);
+    setElev((m) => ({ ...m, [c.id]: "loading" }));
+    fetchElevation(c.latlngs)
+      .then((p) => setElev((m) => ({ ...m, [c.id]: p })))
+      .catch(() => {
+        // 실패한 코스는 다시 고르면 다시 묻는다
+        elevAsked.current.delete(c.id);
+        setElev((m) => ({ ...m, [c.id]: "error" }));
+      });
+  }
+  useEffect(() => {
+    if (maxAscent === null || phase.kind !== "done") return;
+    for (const c of phase.candidates) if (c.shapeId === "run") loadElevation(c);
+  }, [phase, maxAscent]);
+
   function choose(c: RouteCandidate) {
     setSelected(c.id);
     selectedRef.current = c.id;
     // 고른 코스의 고도 (코스 좌표를 고도 서버로 보내므로 고른 코스만)
-    if (!elev[c.id]) {
-      setElev((m) => ({ ...m, [c.id]: "loading" }));
-      fetchElevation(c.latlngs)
-        .then((p) => setElev((m) => ({ ...m, [c.id]: p })))
-        .catch(() => setElev((m) => ({ ...m, [c.id]: "error" })));
-    }
+    loadElevation(c);
     if (lm) {
       const b = lm.L.latLngBounds(c.latlngs);
       fitTarget.current = b;
@@ -425,13 +487,30 @@ export function RouteFinderApp() {
     <FinderSettings
       ref={settingsRef}
       value={settings}
-      onChange={(patch) => setSettings((v) => ({ ...v, ...patch }))}
+      onChange={(patch) => {
+        // 종류를 바꾸면 이전 결과는 지운다 (드로잉 결과와 러닝 결과는 기준이 다르다)
+        if (patch.mode && patch.mode !== mode) {
+          reqId.current++;
+          setPhase({ kind: "idle" });
+          setSelected(null);
+          layers.current?.clearLayers();
+          setPickingStart(false);
+        }
+        setSettings((v) => ({ ...v, ...patch }));
+      }}
       onChooseArea={chooseArea}
       progress={phase.kind === "fetching" || phase.kind === "searching" ? phase : null}
       ready={!!lm}
       tooBig={!!tooBig}
       hasResults={phase.kind === "done"}
       onSearch={() => void search()}
+      start={start}
+      pickingStart={pickingStart}
+      onPickStart={() => setPickingStart((p) => !p)}
+      onClearStart={() => {
+        setStart(null);
+        setPickingStart(false);
+      }}
     />
   );
 
@@ -454,6 +533,7 @@ export function RouteFinderApp() {
                 userTookOver.current = true;
                 userMoved.current = true;
                 lm.map.setView([p.lat, p.lon], 15);
+                if (running) setStart([p.lat, p.lon]);
                 placeMarker.current?.remove();
                 placeMarker.current = lm.L.circleMarker([p.lat, p.lon], { radius: 9, color: "#fff", weight: 3, fillColor: "#E5484D", fillOpacity: 1 })
                   .bindTooltip(p.name, { permanent: true, direction: "top", offset: [0, -10] })
@@ -515,14 +595,18 @@ export function RouteFinderApp() {
                   </button>
                 </div>
                 {visible.length === 0 && phase.candidates.length > 0 && (
-                  <p className="empty">유사도 {minSimilarity} 이상인 코스가 없어요. 조건에서 최소 유사도를 낮추면 숨긴 {phase.candidates.length}개를 볼 수 있어요.</p>
+                  <p className="empty">
+                    {phase.candidates[0].shapeId === "run"
+                      ? `오르막 ${maxAscent}m 이하인 코스가 없어요. 조건에서 오르막 기준을 늘리면 숨긴 ${phase.candidates.length}개를 볼 수 있어요.`
+                      : `유사도 ${minSimilarity} 이상인 코스가 없어요. 조건에서 최소 유사도를 낮추면 숨긴 ${phase.candidates.length}개를 볼 수 있어요.`}
+                  </p>
                 )}
                 {phase.candidates.length === 0 && (
                   <p className="empty">이 영역·거리 조건에서는 그림이 잘 나오는 연결 코스를 찾지 못했어요. 지도를 옮기거나 거리 범위·그림·길 단순화를 바꿔 보세요. (끊긴 곳을 가짜 선으로 잇지 않아요.)</p>
                 )}
-                <CourseList candidates={visible} selected={selected} discover={phase.discover} onChoose={choose} onHover={setHover} />
+                <CourseList candidates={visible} elev={elev} selected={selected} discover={phase.discover} onChoose={choose} onHover={setHover} />
                 {sel && <SelectedCourse c={sel} elev={elev[sel.id]} onRun={() => runThis(sel, phase.dataTimestamp)} onExport={() => exportGpx(sel)} />}
-                {visible.length > 0 && visible[0].similarity < 65 && (
+                {visible.length > 0 && visible[0].shapeId !== "run" && visible[0].similarity < 65 && (
                   <p className="hint">그림이 또렷하지 않다면: 거리를 늘리면 그림이 커져 길 간격에 덜 뭉개지고, 바둑판처럼 반듯한 길이 많은 동네일수록 잘 나와요.</p>
                 )}
                 <p className="hint">

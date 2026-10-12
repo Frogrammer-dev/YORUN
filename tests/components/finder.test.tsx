@@ -44,7 +44,7 @@ describe("고른 코스", () => {
 
   it("길 정보·고도 그래프, 달리기·GPX 버튼", async () => {
     const onRun = vi.fn(), onExport = vi.fn();
-    const c = makeCandidate({ roadInfo: { major: 0.5, unpaved: 0.1, lit: 0.75, litKnown: 0.4, steps: 2 } });
+    const c = makeCandidate({ roadInfo: { major: 0.5, unpaved: 0.1, lit: 0.75, litKnown: 0.4, steps: 2, carFree: 0, tunnels: 0 } });
     render(<SelectedCourse c={c} elev={{ dist: [0, 500, 1000], elev: [20, 50, 20], ascent: 30, min: 20, max: 50 }} onRun={onRun} onExport={onExport} />);
     const facts = screen.getByRole("list", { name: "코스 길 정보" });
     expect(within(facts).getByText("50%")).toBeTruthy();

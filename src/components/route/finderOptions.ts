@@ -17,6 +17,14 @@ export const DETAILS: Array<{ id: RoadDetail; label: string; hint: string }> = [
   { id: "detailed", label: "상세", hint: "모든 보행로를 써요. 그림은 촘촘하지만 삐죽해질 수 있어요" },
 ];
 
+/** 오르막 상한 선택지 */
+export const ASCENTS: Array<{ value: number | null; label: string }> = [
+  { value: null, label: "상관없음" },
+  { value: 30, label: "평탄 ≤30m" },
+  { value: 60, label: "완만 ≤60m" },
+  { value: 100, label: "≤100m" },
+];
+
 /** '지금 화면'으로 찾을 수 있는 한 변 최대 길이 (m) */
 export const MAX_SIDE = 9000;
 export const MIN_SIDE = 500;
@@ -34,7 +42,11 @@ export type AreaId = (typeof AREAS)[number]["id"];
 /** auto: 동네 고리 코스 추천, ShapeId: 기본 그림, custom: 직접 만든 그림 */
 export type ShapeChoice = ShapeId | "auto" | "custom";
 
+/** drawing: 그림 모양대로 달리는 코스, running: 그림과 무관하게 쾌적한 러닝 코스 */
+export type FinderMode = "drawing" | "running";
+
 export interface FinderSettingsValue {
+  mode: FinderMode;
   shape: ShapeChoice;
   custom: ShapeGroup | null;
   area: AreaId;
@@ -45,6 +57,12 @@ export interface FinderSettingsValue {
   avoidUnpaved: boolean;
   avoidMajor: boolean;
   preferLit: boolean;
+  /** 차 없는 길(보행로·산책로) 우선 */
+  preferCarFree: boolean;
+  /** 터널·지하도 피하기 */
+  avoidTunnels: boolean;
+  /** 오르막 합계 상한 (m). null이면 상관없음. 찾은 뒤 코스 고도를 받아 거른다 */
+  maxAscent: number | null;
   /** (실험) 동네 추천에 왕복 가지(꼬리·다리)를 붙인 코스도 넣기 */
   branches: boolean;
   /** Opt-in comparison with nearby roads while preserving the original area results. */
@@ -54,6 +72,7 @@ export interface FinderSettingsValue {
 }
 
 export const DEFAULT_SETTINGS: FinderSettingsValue = {
+  mode: "drawing",
   shape: "auto",
   custom: null,
   area: "screen",
@@ -63,6 +82,9 @@ export const DEFAULT_SETTINGS: FinderSettingsValue = {
   avoidUnpaved: false,
   avoidMajor: false,
   preferLit: false,
+  preferCarFree: false,
+  avoidTunnels: false,
+  maxAscent: null,
   branches: false,
   nearby: false,
   minSimilarity: SIMILARITY_MIN,

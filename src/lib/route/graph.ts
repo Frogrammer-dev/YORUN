@@ -393,6 +393,10 @@ export const EDGE_LIT = 4;
 export const EDGE_UNLIT = 8;
 /** 계단 */
 export const EDGE_STEPS = 16;
+/** 차가 다니지 않는 길 (보행로·산책로·보행자 거리·자전거길) */
+export const EDGE_CARFREE = 32;
+/** 터널·지하도·건물 통로 */
+export const EDGE_TUNNEL = 64;
 
 export interface RoadStats {
   /** 큰 차도 거리 비율 */
@@ -405,6 +409,10 @@ export interface RoadStats {
   litKnown: number;
   /** 계단 구간 수 */
   steps: number;
+  /** 차 없는 길 거리 비율 */
+  carFree: number;
+  /** 터널·지하도 구간 수 */
+  tunnels: number;
 }
 
 function edgeFlags(g: RoadGraph, a: number, b: number): number {
@@ -414,8 +422,8 @@ function edgeFlags(g: RoadGraph, a: number, b: number): number {
 
 /** 경로(노드 목록)가 지나는 길의 성격 요약 */
 export function roadStats(g: RoadGraph, path: number[]): RoadStats {
-  let total = 0, major = 0, unpaved = 0, lit = 0, known = 0, steps = 0;
-  let prevSteps = false;
+  let total = 0, major = 0, unpaved = 0, lit = 0, known = 0, steps = 0, carFree = 0, tunnels = 0;
+  let prevSteps = false, prevTunnel = false;
   for (let i = 1; i < path.length; i++) {
     const a = path[i - 1], b = path[i];
     const d = Math.hypot(g.x[a] - g.x[b], g.y[a] - g.y[b]);
@@ -425,10 +433,14 @@ export function roadStats(g: RoadGraph, path: number[]): RoadStats {
     if (f & EDGE_UNPAVED) unpaved += d;
     if (f & (EDGE_LIT | EDGE_UNLIT)) known += d;
     if (f & EDGE_LIT) lit += d;
+    if (f & EDGE_CARFREE) carFree += d;
+    const isTunnel = (f & EDGE_TUNNEL) !== 0;
+    if (isTunnel && !prevTunnel) tunnels++;
+    prevTunnel = isTunnel;
     const isSteps = (f & EDGE_STEPS) !== 0;
     if (isSteps && !prevSteps) steps++;
     prevSteps = isSteps;
   }
   const r = (v: number) => (total > 0 ? Math.round((v / total) * 100) / 100 : 0);
-  return { major: r(major), unpaved: r(unpaved), lit: known > 0 ? Math.round((lit / known) * 100) / 100 : null, litKnown: r(known), steps };
+  return { major: r(major), unpaved: r(unpaved), lit: known > 0 ? Math.round((lit / known) * 100) / 100 : null, litKnown: r(known), steps, carFree: r(carFree), tunnels };
 }

@@ -20,7 +20,9 @@ export function SelectedCourse({ c, elev, onRun, onExport }: { c: RouteCandidate
         {c.moves?.length
           ? `획 ${c.moves.length + 1}개를 차례로 그려요. 획 사이 점선 ${(c.moveMeters / 1000).toFixed(1)}km는 이동 구간이라 기록을 멈추고 이동하면 돼요.`
           : "초록 점에서 출발해 같은 곳으로 돌아오는 한붓 코스예요."}{" "}
-        {c.doodle?.model === "clip"
+        {c.shapeId === "run"
+          ? `쾌적도 ${c.similarity}점 — 큰 차도·차 없는 길·비포장·계단·터널·잦은 꺾임으로 매긴 잠정 점수예요.${c.repeatRatio > 0.02 ? ` 출발점에서 고리까지 ${Math.round(c.repeatRatio * 100)}%는 같은 길로 오가요.` : ""}`
+          : c.doodle?.model === "clip"
           ? `AI가 외곽선을 '${c.shapeName}'(으)로 해석한 실험 추천이에요. 사람 눈에는 다르게 보일 수 있어요.`
           : c.doodle
           ? `낙서 인식 모델(Quick, Draw! 345가지)이 이 코스 모양을 '${c.shapeName}'(으)로 봤어요 (${courseGrade(c)} · 모델 점수 ${c.similarity}). 사람 눈에는 다르게 보일 수 있어요.`
@@ -70,6 +72,14 @@ export function RoadInfo({ c, elev }: { c: RouteCandidate; elev: ElevationState 
         <li>
           <span>큰 차도</span>
           <b className="num">{pct(r.major)}</b>
+        </li>
+        <li>
+          <span>차 없는 길</span>
+          <b className="num">{pct(r.carFree)}</b>
+        </li>
+        <li>
+          <span>터널·지하도</span>
+          <b className="num">{r.tunnels ? `${r.tunnels}곳` : "없음"}</b>
         </li>
         <li>
           <span>비포장</span>

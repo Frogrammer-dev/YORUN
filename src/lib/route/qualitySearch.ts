@@ -26,7 +26,7 @@ export interface QualityOptions {
   minMeters: number;
   maxMeters: number;
   mode: 'discover' | 'shape';
-  prefs?: { avoidMajor?: boolean; preferLit?: boolean };
+  prefs?: { avoidMajor?: boolean; preferLit?: boolean; preferCarFree?: boolean };
   budget?: Budget;
   timeBudgetMs?: number;
   maxResults?: number;
@@ -64,7 +64,8 @@ export function improveRoutes(g: RoadGraph, initial: FindResult, o: QualityOptio
     candidate.id += `-q${(fingerprint>>>0).toString(36)}`;
     const quality = e.meanDev/(.08*c.placement.scale) + Math.log1p(.03*e.zigzagPerKm) - Math.log(.55+.45*e.featureCoverage) - e.spikes*Math.log(.9)
       + (o.prefs?.avoidMajor ? .15*candidate.roadInfo.major : 0)
-      + (o.prefs?.preferLit && candidate.roadInfo.lit !== null ? .05*(1-candidate.roadInfo.lit) : 0);
+      + (o.prefs?.preferLit && candidate.roadInfo.lit !== null ? .05*(1-candidate.roadInfo.lit) : 0)
+      + (o.prefs?.preferCarFree ? .1*(1-candidate.roadInfo.carFree) : 0);
     const key = `${shape.id}:${nodes.join(',')}`, old = entries.get(key);
     if (!old || quality < old.quality) entries.set(key,{candidate,nodes,quality});
   };

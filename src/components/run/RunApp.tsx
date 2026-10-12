@@ -476,7 +476,7 @@ export function RunApp() {
                   <span className="hud-label">그림 코스</span>
                   <h2>{route.shapeName}</h2>
                   <p>
-                    {route.shapeName} 코스 · {(route.lengthMeters / 1000).toFixed(2)}km · {route.shapeId === "doodle" ? `인식 ${route.similarity}%` : `유사도 ${route.similarity}`}
+                    {route.shapeName} 코스 · {(route.lengthMeters / 1000).toFixed(2)}km · {route.shapeId === "doodle" ? `인식 ${route.similarity}%` : route.shapeId === "run" ? `쾌적 ${route.similarity}` : `유사도 ${route.similarity}`}
                     {startDist !== null && ` · 출발점까지 ${startDist < 1000 ? `${Math.round(startDist)}m` : `${(startDist / 1000).toFixed(1)}km`}`}
                   </p>
                   {route.moves?.length ? (

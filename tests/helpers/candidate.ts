@@ -25,7 +25,7 @@ export function makeCandidate(over: Partial<RouteCandidate> = {}, at: [number, n
     moves: [],
     lengthMeters: 4200,
     moveMeters: 0,
-    roadInfo: { major: 0.25, unpaved: 0, lit: null, litKnown: 0, steps: 0 },
+    roadInfo: { major: 0.25, unpaved: 0, lit: null, litKnown: 0, steps: 0, carFree: 0, tunnels: 0 },
     similarity: 80,
     meanDeviationMeters: 12,
     maxDeviationMeters: 40,

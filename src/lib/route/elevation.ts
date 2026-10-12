@@ -1,4 +1,4 @@
-// 코스 고도: 코스 위 최대 100점의 높이를 Open-Meteo 고도 API(Copernicus DEM, 약 90m 해상도)로 받아 오르막을 계산한다.
+// 코스 고도: 코스 위 최대 60점의 높이를 Open-Meteo 고도 API(Copernicus DEM, 약 90m 해상도)로 받아 오르막을 계산한다.
 // 지도 길 데이터와 달리 코스 좌표가 외부 서버로 전송되므로, 사용자가 코스를 골랐을 때만 요청한다.
 
 export interface ElevationProfile {
@@ -50,10 +50,25 @@ export function ascentOf(elev: number[], hysteresis = 2): number {
   return Math.round(up);
 }
 
-export async function fetchElevation(latlngs: [number, number][], signal?: AbortSignal): Promise<ElevationProfile> {
-  const { pts, dist } = sampleAlong(latlngs, Math.min(100, Math.max(2, latlngs.length)));
+// Open-Meteo는 분당 요청 한도가 있다(좌표 수만큼 무겁게 센다). 후보 여러 개를 한꺼번에 물으면 429가 나므로
+// 요청을 하나씩 차례로 보내고, 한도에 걸리면 기다렸다가 다시 묻는다 (한도는 1분 단위로 풀린다).
+let queue: Promise<unknown> = Promise.resolve();
+
+export function fetchElevation(latlngs: [number, number][], signal?: AbortSignal, retryMs = 15_000): Promise<ElevationProfile> {
+  const run = queue.then(() => fetchOnce(latlngs, signal, retryMs));
+  queue = run.catch(() => undefined);
+  return run;
+}
+
+async function fetchOnce(latlngs: [number, number][], signal: AbortSignal | undefined, retryMs: number): Promise<ElevationProfile> {
+  // 고도 자료가 약 90m 간격이라 60점(8km 코스면 약 130m 간격)으로도 오르막 합계에 충분하다
+  const { pts, dist } = sampleAlong(latlngs, Math.min(60, Math.max(2, latlngs.length)));
   const url = `${ENDPOINT}?latitude=${pts.map((p) => p[0].toFixed(5)).join(",")}&longitude=${pts.map((p) => p[1].toFixed(5)).join(",")}`;
-  const res = await fetch(url, { signal });
+  let res = await fetch(url, { signal });
+  for (let attempt = 0; res.status === 429 && attempt < 4; attempt++) {
+    await new Promise((ok) => setTimeout(ok, retryMs));
+    res = await fetch(url, { signal });
+  }
   if (!res.ok) throw new Error(`elevation_${res.status}`);
   const j = (await res.json()) as { elevation?: number[] };
   const elev = j.elevation;

@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { binarize, traceOutlines } from "@/lib/art/trace";
 import { ascentOf, sampleAlong } from "@/lib/route/elevation";
-import { EDGE_LIT, EDGE_MAJOR, EDGE_STEPS, EDGE_UNPAVED, hasEdge, project, roadStats } from "@/lib/route/graph";
+import { EDGE_CARFREE, EDGE_LIT, EDGE_MAJOR, EDGE_STEPS, EDGE_TUNNEL, EDGE_UNPAVED, hasEdge, project, roadStats } from "@/lib/route/graph";
 import { StepBudget } from "@/lib/route/budget";
 import { findGroupRoutes } from "@/lib/route/group";
 import { graphFromOverpass, mergeOverpass, splitBBox, wayFlags, type OverpassJson } from "@/lib/route/osm";
@@ -48,6 +48,23 @@ describe("길 정보", () => {
     expect(s.major).toBeCloseTo(0.5, 2);
     expect(s.lit).toBe(1); // 가로등 정보가 있는 길(세로줄)은 모두 가로등 있음
     expect(s.litKnown).toBeCloseTo(0.5, 2);
+  });
+
+  it("차 없는 길·터널: 태그 판정, 우선·피하기는 길을 빼지 않고 비용만 바꾼다, 코스 비율·개수", () => {
+    expect(wayFlags({ highway: "footway" }) & EDGE_CARFREE).toBeTruthy();
+    expect(wayFlags({ highway: "residential" }) & EDGE_CARFREE).toBe(0);
+    expect(wayFlags({ highway: "footway", tunnel: "yes" }) & EDGE_TUNNEL).toBeTruthy();
+    expect(wayFlags({ highway: "service", tunnel: "building_passage" }) & EDGE_TUNNEL).toBeTruthy();
+    expect(wayFlags({ highway: "footway", tunnel: "no" }) & EDGE_TUNNEL).toBe(0);
+    // 가로줄은 산책로, 세로줄은 차도이고 1번 세로줄만 터널
+    const { json, bbox } = gridJson(5, 100, (i, h): Record<string, string> => (h ? { highway: "footway", name: "가" } : { highway: "residential", name: "세", ...(i === 1 ? { tunnel: "yes" } : {}) }));
+    const plain = graphFromOverpass(json, bbox, { excludeSteps: true, detail: "detailed" });
+    const pref = graphFromOverpass(json, bbox, { excludeSteps: true, detail: "detailed", preferCarFree: true, avoidTunnels: true });
+    expect(pref.edgeCount).toBe(plain.edgeCount);
+    const at = (i: number, j: number) => plain.nodeIndex.nearest(...project(plain.origin, LAT0 + dLat(i * 100), LON0 + dLon(j * 100)), 1);
+    const s = roadStats(plain, [at(0, 0), at(0, 1), at(1, 1), at(1, 0), at(0, 0)]);
+    expect(s.carFree).toBeCloseTo(0.5, 2);
+    expect(s.tunnels).toBe(1);
   });
 
   it("고도: 거리 기준 고른 표본, 잔물결은 오르막에서 뺀다", () => {

@@ -2,6 +2,7 @@
 // 루트 탐색 Web Worker: 화면(지도 조작)이 멈추지 않게 그래프 생성·탐색을 별도 스레드에서 수행한다.
 
 import { discoverRoutes } from "./discover";
+import { findRunningCourses } from "./runCourses";
 import { TimeBudget } from "./budget";
 import { budgetSlice, improveRoutes } from "./qualitySearch";
 import type { FindResult } from "./fit";
@@ -20,7 +21,9 @@ export type FinderRequest = {
   /** 그림을 놓을 탐색 영역 (dataBox 안) */
   region: BBox;
   /** discover: 동네 고리 코스를 먼저 찾아 닮은 그림을 붙인다, shape: 지정·직접 만든 그림을 찾는다 */
-  mode: "discover" | "shape";
+  mode: "discover" | "shape" | "running";
+  /** running 모드의 출발점 [위도, 경도] */
+  start?: [number, number];
   /** shape 모드에서 찾을 기본 그림 */
   shape?: ShapeId;
   /** shape 모드에서 사용자가 그리거나 글자·이미지로 만든 그림 (shape보다 우선). 여러 획일 수 있다 */
@@ -34,6 +37,8 @@ export type FinderRequest = {
   avoidUnpaved?: boolean;
   avoidMajor?: boolean;
   preferLit?: boolean;
+  preferCarFree?: boolean;
+  avoidTunnels?: boolean;
   /** (실험) 동네 추천에 왕복 가지를 붙인 코스도 넣기 */
   branches?: boolean;
   /** Keep selected-area candidates while comparing nearby streets as well. */
@@ -62,7 +67,7 @@ ctx.onmessage = (ev: MessageEvent<FinderRequest>) => {
   const post = (m: FinderResponse) => ctx.postMessage(m);
   try {
     const boxKey = `${req.dataBox.south},${req.dataBox.west},${req.dataBox.north},${req.dataBox.east}`;
-    const gopts: GraphOptions = { excludeSteps: req.excludeSteps, detail: req.detail, avoidUnpaved: req.avoidUnpaved, avoidMajor: req.avoidMajor, preferLit: req.preferLit };
+    const gopts: GraphOptions = { excludeSteps: req.excludeSteps, detail: req.detail, avoidUnpaved: req.avoidUnpaved, avoidMajor: req.avoidMajor, preferLit: req.preferLit, preferCarFree: req.preferCarFree, avoidTunnels: req.avoidTunnels };
     const key = `${boxKey}|${JSON.stringify(gopts)}`;
     let graph: RoadGraph;
     if (req.texts === null) {
@@ -102,9 +107,17 @@ ctx.onmessage = (ev: MessageEvent<FinderRequest>) => {
     const [maxX, maxY] = project(localGraph.origin, req.region.north, req.region.east);
     const region = { minX, minY, maxX, maxY };
     const onProgress = (fraction: number, label: string) => post({ type: "progress", reqId: req.reqId, fraction, label });
-    const prefs = { avoidMajor: req.avoidMajor, preferLit: req.preferLit };
+    const prefs = { avoidMajor: req.avoidMajor, preferLit: req.preferLit, preferCarFree: req.preferCarFree };
     let result: FindResult;
-    if (req.mode === "shape" && req.custom && req.custom.parts.length > 1) {
+    if (req.mode === "running") {
+      // 러닝 코스: 그림과 무관하게 출발점에서 돌아오는 쾌적한 고리
+      const r = findRunningCourses(localGraph, { start: project(localGraph.origin, req.start![0], req.start![1]), minMeters: req.minMeters, maxMeters: req.maxMeters, region, budget: new TimeBudget(25_000), prefs: { avoidMajor: req.avoidMajor, preferCarFree: req.preferCarFree }, onProgress });
+      if ("error" in r) {
+        post({ type: "error", reqId: req.reqId, code: "no_roads", message: "출발점 400m 안에 달릴 수 있는 길이 없어요. 출발점을 길 가까이로 옮겨 주세요." });
+        return;
+      }
+      result = r;
+    } else if (req.mode === "shape" && req.custom && req.custom.parts.length > 1) {
       // 여러 획 그림: 그림 전체를 함께 놓고 획 사이를 이동 구간으로 잇는다
       result = findGroupRoutes(localGraph, req.custom, { minMeters: req.minMeters, maxMeters: req.maxMeters, region, onProgress });
     } else {

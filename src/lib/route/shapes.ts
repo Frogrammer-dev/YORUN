@@ -8,7 +8,7 @@ export type ShapeId =
 /** 그림 갈래: 기본 도형 · 동물 · 사물 */
 export type ShapeKind = "basic" | "animal" | "object";
 /** 기본 그림 또는 사용자가 직접 그린 그림 */
-export type ShapeKey = ShapeId | "custom" | "doodle";
+export type ShapeKey = ShapeId | "custom" | "doodle" | "run";
 
 export interface ShapeDef {
   id: ShapeKey;

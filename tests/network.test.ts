@@ -77,14 +77,36 @@ describe("길 데이터 (Overpass)", () => {
 });
 
 describe("고도 (Open-Meteo)", () => {
-  it("코스 위 최대 100점을 한 번에 묻고 오르막을 계산한다", async () => {
+  it("코스 위 최대 60점을 한 번에 묻고 오르막을 계산한다", async () => {
     const line: [number, number][] = Array.from({ length: 300 }, (_, i) => [37.5 + i * 1e-4, 127]);
     const p = await fetchElevation(line);
     expect(elevationCalls).toBe(1);
-    expect(p.elev).toHaveLength(100);
+    expect(p.elev).toHaveLength(60);
     expect(p.min).toBeCloseTo(20, 0);
     expect(p.max).toBeCloseTo(50, 0);
     expect(p.ascent).toBeGreaterThan(25);
+  });
+
+  it("요청 한도(429)에 걸리면 기다렸다가 다시 묻고, 여러 코스는 하나씩 차례로 묻는다", async () => {
+    let calls = 0, inFlight = 0, maxInFlight = 0;
+    server.use(
+      http.get(/open-meteo/, async ({ request }) => {
+        calls++;
+        inFlight++;
+        maxInFlight = Math.max(maxInFlight, inFlight);
+        await new Promise((ok) => setTimeout(ok, 5));
+        inFlight--;
+        if (calls === 1) return HttpResponse.json({ error: true, reason: "Minutely API request limit exceeded" }, { status: 429 });
+        const n = (new URL(request.url).searchParams.get("latitude") ?? "").split(",").length;
+        return HttpResponse.json({ elevation: Array.from({ length: n }, (_, i) => 10 + i) });
+      }),
+    );
+    const line: [number, number][] = Array.from({ length: 100 }, (_, i) => [37.5 + i * 1e-4, 127]);
+    const [a, b] = await Promise.all([fetchElevation(line, undefined, 1), fetchElevation(line, undefined, 1)]);
+    expect(a.ascent).toBeGreaterThan(0);
+    expect(b.ascent).toBe(a.ascent);
+    expect(calls).toBe(3);
+    expect(maxInFlight).toBe(1);
   });
 
   it("서버 오류·잘못된 응답이면 실패로 알린다 (화면은 '확인 못 함')", async () => {

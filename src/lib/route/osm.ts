@@ -1,7 +1,7 @@
 // OpenStreetMap(Overpass) 보행 길 데이터 → 도로 그래프.
 // 지도 데이터는 현장 통행 가능 여부·공사·임시 통제를 보장하지 않는다 (15.3: 결과 화면에 미확인으로 표시).
 
-import { EDGE_LIT, EDGE_MAJOR, EDGE_STEPS, EDGE_UNLIT, EDGE_UNPAVED, buildGraph, makeOrigin, type RawEdge, type RoadGraph } from "./graph";
+import { EDGE_LIT, EDGE_MAJOR, EDGE_STEPS, EDGE_CARFREE, EDGE_TUNNEL, EDGE_UNLIT, EDGE_UNPAVED, buildGraph, makeOrigin, type RawEdge, type RoadGraph } from "./graph";
 
 export interface BBox {
   south: number;
@@ -72,6 +72,10 @@ export interface GraphOptions {
   avoidMajor?: boolean;
   /** 가로등 있는 길 우선 (lit=yes가 아닌 길에 벌점) */
   preferLit?: boolean;
+  /** 차 없는 길(보행로·산책로) 우선 (차도에 벌점) */
+  preferCarFree?: boolean;
+  /** 터널·지하도 피하기 (끊기지 않게 빼지 않고 큰 벌점) */
+  avoidTunnels?: boolean;
 }
 
 const MAJOR = /^(primary|secondary|tertiary|unclassified)$/;
@@ -155,6 +159,8 @@ export function graphFromOverpass(json: OverpassJson, bbox: BBox, opts: GraphOpt
     if (opts.avoidUnpaved && flags & EDGE_UNPAVED) continue;
     if (opts.avoidMajor && flags & EDGE_MAJOR) factor *= 2;
     if (opts.preferLit && !(flags & EDGE_LIT)) factor *= 1.3;
+    if (opts.preferCarFree && !(flags & EDGE_CARFREE)) factor *= 1.3;
+    if (opts.avoidTunnels && flags & EDGE_TUNNEL) factor *= 3;
     for (let i = 1; i < w.nodes.length; i++) {
       const a = idx.get(w.nodes[i - 1]), b = idx.get(w.nodes[i]);
       if (a === undefined || b === undefined || a === b) continue;
@@ -215,6 +221,9 @@ export function wayFlags(tags: Record<string, string> | undefined): number {
   if (/^(yes|24\/7|automatic|limited|interval)$/.test(tags.lit ?? "")) f |= EDGE_LIT;
   else if (tags.lit === "no") f |= EDGE_UNLIT;
   if (hw === "steps") f |= EDGE_STEPS;
+  // 차도 옆에 따로 그린 보도·횡단보도는 차 옆이라 '차 없는 길'로 치지 않는다
+  if (/^(footway|path|pedestrian|cycleway|track|steps)$/.test(hw) && !/^(sidewalk|crossing)$/.test(tags.footway ?? "")) f |= EDGE_CARFREE;
+  if (/^(yes|building_passage|passage|culvert)$/.test(tags.tunnel ?? "") || tags.covered === "yes") f |= EDGE_TUNNEL;
   return f;
 }
 
