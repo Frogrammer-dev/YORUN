@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 // 코스 찾기 화면 조각 (표시 전용 컴포넌트) 테스트
-import { render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { CourseList } from "@/components/route/CourseList";
@@ -57,6 +57,15 @@ describe("고른 코스", () => {
     await userEvent.click(screen.getByRole("button", { name: "GPX 내보내기 (시계용)" }));
     expect(onRun).toHaveBeenCalledOnce();
     expect(onExport).toHaveBeenCalledOnce();
+  });
+});
+
+describe("찾기 조건 · 최소 유사도", () => {
+  it("슬라이더를 움직이면 최소 유사도 값만 알린다", () => {
+    const onChange = vi.fn();
+    render(<FinderSettings value={DEFAULT_SETTINGS} onChange={onChange} onChooseArea={() => {}} progress={null} ready tooBig={false} hasResults={false} onSearch={() => {}} />);
+    fireEvent.change(screen.getByLabelText("최소 유사도"), { target: { value: "70" } });
+    expect(onChange).toHaveBeenCalledWith({ minSimilarity: 70 });
   });
 });
 

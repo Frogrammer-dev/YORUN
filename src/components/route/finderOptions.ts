@@ -2,6 +2,7 @@
 
 import type { BBox, RoadDetail } from "@/lib/route/osm";
 import type { ShapeGroup, ShapeId } from "@/lib/route/shapes";
+import { SIMILARITY_MIN } from "@/lib/route/present";
 
 export const RANGES = [
   { label: "2~5km", min: 2000, max: 5000 },
@@ -48,6 +49,8 @@ export interface FinderSettingsValue {
   branches: boolean;
   /** Opt-in comparison with nearby roads while preserving the original area results. */
   nearby: boolean;
+  /** 결과 목록에 보일 최소 유사도 (도형 닮음 점수, 다시 찾지 않고 바로 적용) */
+  minSimilarity: number;
 }
 
 export const DEFAULT_SETTINGS: FinderSettingsValue = {
@@ -62,6 +65,7 @@ export const DEFAULT_SETTINGS: FinderSettingsValue = {
   preferLit: false,
   branches: false,
   nearby: false,
+  minSimilarity: SIMILARITY_MIN,
 };
 
 /** 탐색 진행 상태 (설정 칸의 진행 표시용) */

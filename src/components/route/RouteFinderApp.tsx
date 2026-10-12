@@ -1,7 +1,7 @@
 "use client";
 // 드로잉 루트 찾기 (/routes): 지금 지도에 보이는 영역의 실제 길에서 한붓 그림 코스를 찾는다.
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type * as Leaflet from "leaflet";
@@ -11,7 +11,7 @@ import type { FinderRequest, FinderResponse } from "@/lib/route/finder.worker";
 import { fetchOverpassTiles, splitBBox, type BBox } from "@/lib/route/osm";
 import { fetchElevation } from "@/lib/route/elevation";
 import { recognizeCourses } from "@/lib/art/recognize";
-import { SIMILARITY_MIN, moveLines, nameDiscoveries } from "@/lib/route/present";
+import { moveLines, nameDiscoveries } from "@/lib/route/present";
 import { AREAS, DEFAULT_SETTINGS, MAX_SIDE, MIN_SIDE, RANGES, nearbyDataBox, type AreaId, type FinderSettingsValue } from "@/components/route/finderOptions";
 import { FinderSettings } from "@/components/route/FinderSettings";
 import { CourseList } from "@/components/route/CourseList";
@@ -35,7 +35,7 @@ export function RouteFinderApp() {
   const mapEl = useRef<HTMLDivElement>(null);
   const { lm, basemapOk, setBasemapOk } = useLeafletMap(mapEl);
   const [settings, setSettings] = useState<FinderSettingsValue>(DEFAULT_SETTINGS);
-  const { shape, custom, area, range, detail, excludeSteps, avoidUnpaved, avoidMajor, preferLit, branches, nearby } = settings;
+  const { shape, custom, area, range, detail, excludeSteps, avoidUnpaved, avoidMajor, preferLit, branches, nearby, minSimilarity } = settings;
   const areaRef = useRef<AreaId>("screen");
   const areaRect = useRef<Leaflet.Rectangle | null>(null);
   const [elev, setElev] = useState<Record<string, Exclude<ElevationState, undefined>>>({});
@@ -44,6 +44,8 @@ export function RouteFinderApp() {
   const roadsRef = useRef<number[] | null>(null);
   const roadLayer = useRef<Leaflet.Polyline | null>(null);
   const [phase, setPhase] = useState<Phase>({ kind: "idle" });
+  // 낙서 인식 코스는 점수 척도가 달라(모델 확신도) 유사도로 거르지 않는다
+  const visible = useMemo(() => (phase.kind === "done" ? phase.candidates.filter((c) => c.doodle || c.similarity >= minSimilarity) : []), [phase, minSimilarity]);
   const [selected, setSelected] = useState<string | null>(null);
   const selectedRef = useRef<string | null>(null);
   useEffect(() => { selectedRef.current = selected; }, [selected]);
@@ -175,8 +177,8 @@ export function RouteFinderApp() {
   );
 
   useEffect(() => {
-    if (phase.kind === "done") draw(phase.candidates, selected, hover);
-  }, [phase, selected, hover, draw]);
+    if (phase.kind === "done") draw(visible, selected, hover);
+  }, [phase, visible, selected, hover, draw]);
 
   /** 탐색에 쓴(단순화된) 길을 회색 선으로 겹쳐 보기 */
   function drawRoads() {
@@ -325,7 +327,7 @@ export function RouteFinderApp() {
       } else {
         roadsRef.current = m.roads;
         drawRoads();
-        const templ = m.result.candidates.filter((c) => c.similarity >= SIMILARITY_MIN);
+        const templ = m.result.candidates;
         const finish = (cands: RouteCandidate[], doodleError = false) => {
           if (id !== reqId.current) return;
           setPhase({ kind: "done", candidates: cands, partial: m.result.partial, dataTimestamp: m.graph.dataTimestamp, nodes: m.graph.nodes, discover, doodleError });
@@ -399,7 +401,7 @@ export function RouteFinderApp() {
 
   // 넓이 제한은 '지금 화면'으로 찾을 때만 (정사각형 영역을 고르면 지도가 그 영역을 보이려고 축소된다)
   const tooBig = area === "screen" && !!areaInfo && (areaInfo.w > MAX_SIDE || areaInfo.h > MAX_SIDE);
-  const sel = phase.kind === "done" ? phase.candidates.find((c) => c.id === selected) : undefined;
+  const sel = visible.find((c) => c.id === selected);
 
   function goSettings() {
     setSheetFull(true);
@@ -482,17 +484,20 @@ export function RouteFinderApp() {
             {phase.kind === "done" && (
               <section className="sheet-section" aria-label="찾은 코스">
                 <div className="sheet-head">
-                  <h2>찾은 코스 {phase.candidates.length}개</h2>
+                  <h2>찾은 코스 {visible.length}개</h2>
                   <button type="button" className="btn btn-ghost btn-sm" onClick={goSettings}>
                     조건 바꾸기
                   </button>
                 </div>
+                {visible.length === 0 && phase.candidates.length > 0 && (
+                  <p className="empty">유사도 {minSimilarity} 이상인 코스가 없어요. 조건에서 최소 유사도를 낮추면 숨긴 {phase.candidates.length}개를 볼 수 있어요.</p>
+                )}
                 {phase.candidates.length === 0 && (
                   <p className="empty">이 영역·거리 조건에서는 그림이 잘 나오는 연결 코스를 찾지 못했어요. 지도를 옮기거나 거리 범위·그림·길 단순화를 바꿔 보세요. (끊긴 곳을 가짜 선으로 잇지 않아요.)</p>
                 )}
-                <CourseList candidates={phase.candidates} selected={selected} discover={phase.discover} onChoose={choose} onHover={setHover} />
+                <CourseList candidates={visible} selected={selected} discover={phase.discover} onChoose={choose} onHover={setHover} />
                 {sel && <SelectedCourse c={sel} elev={elev[sel.id]} onRun={() => runThis(sel, phase.dataTimestamp)} onExport={() => exportGpx(sel)} />}
-                {phase.candidates.length > 0 && phase.candidates[0].similarity < 65 && (
+                {visible.length > 0 && visible[0].similarity < 65 && (
                   <p className="hint">그림이 또렷하지 않다면: 거리를 늘리면 그림이 커져 길 간격에 덜 뭉개지고, 바둑판처럼 반듯한 길이 많은 동네일수록 잘 나와요.</p>
                 )}
                 <p className="hint">

@@ -107,6 +107,14 @@ export const FinderSettings = forwardRef<HTMLElement, FinderSettingsProps>(funct
         <p className="hint">{DETAILS.find((d) => d.id === v.detail)!.hint}</p>
       </fieldset>
 
+      <label className="field">
+        <span>
+          최소 유사도 <span className="num">{v.minSimilarity}</span>
+        </span>
+        <input type="range" min={0} max={100} step={5} value={v.minSimilarity} aria-label="최소 유사도" onChange={(e) => onChange({ minSimilarity: Number(e.target.value) })} />
+      </label>
+      <p className="hint">이 점수보다 낮게 닮은 코스는 목록·지도에서 숨겨요. 찾은 뒤에 바꿔도 바로 적용돼요. (그림 인식 코스는 따로 판정해요)</p>
+
       {toggle("excludeSteps", "계단 제외")}
       {toggle("avoidUnpaved", "비포장 길 빼기 (흙·자갈)")}
       {toggle("avoidMajor", "큰 차도 피하기")}
