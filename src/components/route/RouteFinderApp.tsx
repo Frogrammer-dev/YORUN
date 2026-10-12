@@ -12,6 +12,7 @@ import { fetchOverpassTiles, splitBBox, type BBox } from "@/lib/route/osm";
 import { fetchElevation } from "@/lib/route/elevation";
 import { recognizeCourses } from "@/lib/art/recognize";
 import { moveLines, nameDiscoveries } from "@/lib/route/present";
+import { PlaceSearch } from "@/components/route/PlaceSearch";
 import { AREAS, DEFAULT_SETTINGS, MAX_SIDE, MIN_SIDE, RANGES, nearbyDataBox, type AreaId, type FinderSettingsValue } from "@/components/route/finderOptions";
 import { FinderSettings } from "@/components/route/FinderSettings";
 import { CourseList } from "@/components/route/CourseList";
@@ -43,6 +44,8 @@ export function RouteFinderApp() {
   const [showRoads, setShowRoads] = useState(false);
   const roadsRef = useRef<number[] | null>(null);
   const roadLayer = useRef<Leaflet.Polyline | null>(null);
+  /** 장소 검색으로 고른 곳 표시 (새로 고르면 바뀐다) */
+  const placeMarker = useRef<Leaflet.CircleMarker | null>(null);
   const [phase, setPhase] = useState<Phase>({ kind: "idle" });
   // 낙서 인식 코스는 점수 척도가 달라(모델 확신도) 유사도로 거르지 않는다
   const visible = useMemo(() => (phase.kind === "done" ? phase.candidates.filter((c) => c.doodle || c.similarity >= minSimilarity) : []), [phase, minSimilarity]);
@@ -435,6 +438,18 @@ export function RouteFinderApp() {
             <Link href="/room" className="map-pill">
               작품방
             </Link>
+            <PlaceSearch
+              onPick={(p) => {
+                if (!lm) return;
+                userTookOver.current = true;
+                userMoved.current = true;
+                lm.map.setView([p.lat, p.lon], 15);
+                placeMarker.current?.remove();
+                placeMarker.current = lm.L.circleMarker([p.lat, p.lon], { radius: 9, color: "#fff", weight: 3, fillColor: "#E5484D", fillOpacity: 1 })
+                  .bindTooltip(p.name, { permanent: true, direction: "top", offset: [0, -10] })
+                  .addTo(lm.map);
+              }}
+            />
           </div>
           <div className="map-fabs">
             <button type="button" className="map-fab" onClick={() => locate(false)} aria-label="내 위치로 이동" title="내 위치로 이동">

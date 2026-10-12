@@ -144,7 +144,7 @@ export const FinderSettings = forwardRef<HTMLElement, FinderSettingsProps>(funct
           </p>
         )}
       </div>
-      <p className="hint sheet-foot">지도 영역(좌표 범위)이 길 데이터를 받기 위해 OpenStreetMap 데이터 서버로 전송돼요. 내 정확한 위치는 보내지 않아요.</p>
+      <p className="hint sheet-foot">지도 영역(좌표 범위)이 길 데이터를 받기 위해 OpenStreetMap 데이터 서버로 전송돼요. 내 정확한 위치는 보내지 않아요. 지도 위 장소 검색을 쓰면 검색어가 카카오로 전송돼요.</p>
     </section>
   );
 });
