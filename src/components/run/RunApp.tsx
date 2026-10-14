@@ -12,7 +12,8 @@ import type { GpxTrack } from "@/lib/gpx/parser";
 import { setPendingArtwork } from "@/lib/client/pending";
 import { downloadBlob } from "@/lib/render/png";
 import { Icon, PathThumb, latlngToXY, type IconName } from "@/components/Icon";
-import { loadActiveRun, loadPlannedRoute, saveActiveRun, type PlannedRoute } from "@/lib/run/storage";
+import { awardRun, loadActiveRun, loadPlannedRoute, loadWallet, plannedRouteBadge, saveActiveRun, type PlannedRoute } from "@/lib/run/storage";
+import { DAILY_POINT_CAP, POINTS_PER_CHECKPOINT, cappedPoints, collectedCount, emptyRewards, isMissed, placeCheckpoints, stepRewards, type RewardState } from "@/lib/run/rewards";
 import {
   RouteTracker,
   TURN_LABEL,
@@ -57,11 +58,27 @@ export function RunApp() {
   const layers = useRef<{ me?: Leaflet.CircleMarker; acc?: Leaflet.Circle; track?: Leaflet.Polyline; casing?: Leaflet.Polyline; guide?: Leaflet.Polyline } | null>(null);
   const wakeLock = useRef<{ release: () => Promise<void> } | null>(null);
   const lastSave = useRef(0);
+  // 포인트: 코스 달리기는 그림 구간 100m마다 놓인 객체, 자유 달리기는 달린 거리 100m마다
+  const checkpoints = useMemo(() => (route ? placeCheckpoints(route.latlngs, route.moves) : []), [route]);
+  const checkpointsRef = useRef(checkpoints);
+  const [rewards, setRewards] = useState<RewardState>(() => emptyRewards(0));
+  const rewardsRef = useRef(rewards);
+  const resumeRewards = useRef<RewardState | null>(null);
+  const [todayPoints, setTodayPoints] = useState(0);
+  const [award, setAward] = useState<{ points: number; collected: number } | null>(null);
+  const [toast, setToast] = useState<{ text: string; key: number } | null>(null);
 
   const setRec = useCallback((r: RunRecord) => {
     recordRef.current = r;
     setRecord(r);
   }, []);
+  const setRew = useCallback((s: RewardState) => {
+    rewardsRef.current = s;
+    setRewards(s);
+  }, []);
+  useEffect(() => {
+    checkpointsRef.current = checkpoints;
+  }, [checkpoints]);
 
   // 코스·진행 중 기록 불러오기
   useEffect(() => {
@@ -71,7 +88,9 @@ export function RunApp() {
     const active = loadActiveRun();
     if (active && active.record.segments.length && (active.routeId === (r?.id ?? null))) {
       setResumeOffer({ ...active.record, resumedAt: null });
+      resumeRewards.current = active.rewards ?? null;
     }
+    setTodayPoints(loadWallet(Date.now()).dayPoints);
     setLoaded(true);
   }, []);
 
@@ -108,6 +127,28 @@ export function RunApp() {
     };
   }, [lm, route]);
 
+  // 포인트 객체: 주울 것(주황) · 주운 것(초록, 작게) · 지나쳐 놓친 것·오늘 한도를 넘은 것(회색)
+  const cpMarkers = useRef<Leaflet.CircleMarker[]>([]);
+  useEffect(() => {
+    if (!lm) return;
+    const g = lm.L.layerGroup().addTo(lm.map);
+    cpMarkers.current = checkpoints.map((c, i) =>
+      lm.L.circleMarker([c.lat, c.lon], { radius: 7, color: "#fff", weight: 2, fillColor: "#F59E0B", fillOpacity: 1 }).bindTooltip(`${(i + 1) * POINTS_PER_CHECKPOINT}m 지점 · ${POINTS_PER_CHECKPOINT}P`).addTo(g),
+    );
+    return () => {
+      g.remove();
+      cpMarkers.current = [];
+    };
+  }, [lm, checkpoints]);
+  const capReached = cappedPoints(collectedCount(rewards), todayPoints) >= DAILY_POINT_CAP - todayPoints;
+  useEffect(() => {
+    cpMarkers.current.forEach((m, i) => {
+      const got = rewards.got[i];
+      const grey = !got && (isMissed(rewards, i) || capReached);
+      m.setStyle({ radius: got ? 4 : 7, fillColor: got ? "#12B76A" : grey ? "#9CA3AF" : "#F59E0B", fillOpacity: got ? 0.8 : 1 });
+    });
+  }, [rewards, capReached, checkpoints]);
+
   // 목표 그림 밑그림은 출발 전에만 보여 준다 (달리는 중에는 달린 선과 경쟁하지 않게)
   useEffect(() => {
     layers.current?.guide?.setStyle({ opacity: status === "ready" ? 0.5 : 0 });
@@ -125,14 +166,18 @@ export function RunApp() {
         const fix = { lat: p.coords.latitude, lon: p.coords.longitude, accuracy: p.coords.accuracy, time: p.timestamp || Date.now() };
         setPos(fix);
         setGpsState(fix.accuracy <= 35 ? "ok" : "weak");
-        const res = addFix(recordRef.current, fix);
-        if (res.accepted) setRec(res.record);
+        const before = recordRef.current;
+        const res = addFix(before, fix);
+        if (!res.accepted) return;
+        setRec(res.record);
+        const seg = res.record.segments[res.record.segments.length - 1];
+        setRew(stepRewards(rewardsRef.current, checkpointsRef.current, fix, res.record.distanceMeters - before.distanceMeters, seg.length === 1).state);
       },
       (e) => setGpsState(e.code === e.PERMISSION_DENIED ? "denied" : "weak"),
       { enableHighAccuracy: true, maximumAge: 1000, timeout: 20000 },
     );
     return () => navigator.geolocation.clearWatch(id);
-  }, [setRec]);
+  }, [setRec, setRew]);
 
   // 안내 갱신
   useEffect(() => {
@@ -180,7 +225,7 @@ export function RunApp() {
       setNow(Date.now());
       if (Date.now() - lastSave.current > 5000) {
         lastSave.current = Date.now();
-        saveActiveRun({ routeId: route?.id ?? null, record: recordRef.current, savedAt: Date.now() });
+        saveActiveRun({ routeId: route?.id ?? null, record: recordRef.current, rewards: rewardsRef.current, savedAt: Date.now() });
       }
     }, 1000);
     return () => clearInterval(t);
@@ -206,6 +251,9 @@ export function RunApp() {
     if (status === "ready") {
       setTrackerKey((k) => k + 1);
       setGuide(null);
+      const saved = resumeOffer ? resumeRewards.current : null;
+      setRew(saved && saved.got.length === checkpoints.length ? saved : emptyRewards(checkpoints.length));
+      resumeRewards.current = null;
     }
     setRec(startOrResume(resumeOffer ?? recordRef.current, Date.now()));
     setResumeOffer(null);
@@ -216,18 +264,25 @@ export function RunApp() {
   function doPause() {
     const r = pause(recordRef.current, Date.now());
     setRec(r);
-    saveActiveRun({ routeId: route?.id ?? null, record: r, savedAt: Date.now() });
+    saveActiveRun({ routeId: route?.id ?? null, record: r, rewards: rewardsRef.current, savedAt: Date.now() });
     setStatus("paused");
   }
   function finish() {
     const r = pause(recordRef.current, Date.now());
     setRec(r);
+    const collected = collectedCount(rewardsRef.current);
+    const { points, wallet } = awardRun(r.startedAt ?? Date.now(), collected, Date.now());
+    setAward({ points, collected });
+    setTodayPoints(wallet.dayPoints);
     saveActiveRun(null);
     setStatus("finished");
   }
   function discard() {
     saveActiveRun(null);
     setRec(emptyRecord());
+    setRew(emptyRewards(checkpoints.length));
+    resumeRewards.current = null;
+    setAward(null);
     setResumeOffer(null);
     setGuide(null);
     setStatus("ready");
@@ -278,6 +333,25 @@ export function RunApp() {
     if (status === "running" && km > lastKm.current) announce(setSayPolite, `${km}킬로미터, ${formatDuration(elapsed)}`);
     lastKm.current = km;
   }, [record.distanceMeters, status, elapsed, announce]);
+
+  // 객체를 주울 때: 진동 + "+100P" 표시 + 낭독
+  const collected = collectedCount(rewards);
+  const livePoints = cappedPoints(collected, todayPoints);
+  const lastCollected = useRef(collected);
+  const toastTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+  useEffect(() => {
+    const prev = lastCollected.current;
+    lastCollected.current = collected;
+    if (status !== "running" || collected <= prev) return;
+    const gained = livePoints - cappedPoints(prev, todayPoints);
+    navigator.vibrate?.(80);
+    const text = gained > 0 ? `+${gained}P` : "오늘 적립 완료";
+    setToast({ text, key: collected });
+    announce(setSayPolite, gained > 0 ? `${gained}포인트 획득, 이번 달리기 ${livePoints}포인트` : `오늘 적립 한도 ${DAILY_POINT_CAP}포인트를 채웠어요`);
+    clearTimeout(toastTimer.current);
+    toastTimer.current = setTimeout(() => setToast(null), 1600);
+  }, [collected, livePoints, todayPoints, status, announce]);
+  useEffect(() => () => clearTimeout(toastTimer.current), []);
 
   useEffect(() => {
     const prev = lastStatus.current;
@@ -394,6 +468,11 @@ export function RunApp() {
           </div>
           {!isWide && topCard}
         </div>
+        {toast && (
+          <span key={toast.key} className="point-toast" aria-hidden="true">
+            {toast.text}
+          </span>
+        )}
         {!follow && status === "running" && (
           <button type="button" className="btn map-recenter" onClick={() => setFollow(true)}>
             <Icon name="locate" size={20} />
@@ -410,6 +489,9 @@ export function RunApp() {
               <div className="hud-hero-row">
                 <span className="hud-label">거리</span>
                 <span className="hud-hero-side">
+                  <span className="hud-points" data-stat="points" title={`오늘 ${(todayPoints + livePoints).toLocaleString()} / ${DAILY_POINT_CAP.toLocaleString()}P`}>
+                    {livePoints.toLocaleString()}P
+                  </span>
                   {status === "paused" && <span className="badge pause-badge">일시정지됨</span>}
                   {gpsState === "ok" && <span className="hud-gps">{gpsLabel}</span>}
                 </span>
@@ -476,8 +558,12 @@ export function RunApp() {
                   <span className="hud-label">그림 코스</span>
                   <h2>{route.shapeName}</h2>
                   <p>
-                    {route.shapeName} 코스 · {(route.lengthMeters / 1000).toFixed(2)}km · {route.shapeId === "doodle" ? `인식 ${route.similarity}%` : route.shapeId === "run" ? `쾌적 ${route.similarity}` : `유사도 ${route.similarity}`}
+                    {route.shapeName} 코스 · {(route.lengthMeters / 1000).toFixed(2)}km · {plannedRouteBadge(route)}
                     {startDist !== null && ` · 출발점까지 ${startDist < 1000 ? `${Math.round(startDist)}m` : `${(startDist / 1000).toFixed(1)}km`}`}
+                  </p>
+                  <p>
+                    포인트 객체 {checkpoints.length}개 · 최대 {(checkpoints.length * POINTS_PER_CHECKPOINT).toLocaleString()}P
+                    {todayPoints > 0 && ` · 오늘 적립 ${todayPoints.toLocaleString()} / ${DAILY_POINT_CAP.toLocaleString()}P`}
                   </p>
                   {route.moves?.length ? (
                     <p>
@@ -496,6 +582,10 @@ export function RunApp() {
                   <h2>자유 달리기</h2>
                   <p>
                     선택한 그림 코스가 없어요. <Link href="/routes">코스를 먼저 찾거나</Link>, 코스 없이 달려 그림을 그릴 수도 있어요.
+                  </p>
+                  <p>
+                    100m 달릴 때마다 {POINTS_PER_CHECKPOINT}P · 하루 최대 {DAILY_POINT_CAP.toLocaleString()}P
+                    {todayPoints > 0 && ` (오늘 ${todayPoints.toLocaleString()}P 적립)`}
                   </p>
                 </div>
               </div>
@@ -570,6 +660,17 @@ export function RunApp() {
             {route && (
               <div className="hud-progress">
                 <i style={{ width: `${pct}%` }} />
+              </div>
+            )}
+            {award && (
+              <div className="done-points">
+                <span className="hud-label">적립 포인트</span>
+                <strong data-stat="award">+{award.points.toLocaleString()}P</strong>
+                <p>
+                  {route ? `포인트 객체 ${award.collected}/${checkpoints.length}개` : `${award.collected * 100}m 적립`}
+                  {award.points < award.collected * POINTS_PER_CHECKPOINT && ` · 하루 최대 ${DAILY_POINT_CAP.toLocaleString()}P까지만 적립돼요`}
+                  {` · 오늘 ${todayPoints.toLocaleString()}P`}
+                </p>
               </div>
             )}
             <div className="done-actions">

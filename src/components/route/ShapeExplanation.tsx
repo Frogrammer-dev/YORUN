@@ -3,9 +3,48 @@
 import { useId, useState } from "react";
 import type { RouteCandidate } from "@/lib/route/fit";
 import { latlngToXY } from "@/components/Icon";
+import { commandsToSvgPath, normalizeRoadReferenceInput, normalizeRoadReferenceRenderLine } from "@/lib/art/roadReference";
 
 /** Illustration only: route coordinates, route storage and GPX are never modified. */
 export function ShapeExplanation({ c }: { c: RouteCandidate }) {
+  return c.semanticExplanation?.decision === "interpretation" ? <GeneratedShapeExplanation c={c} /> : <LegacyShapeExplanation c={c} />;
+}
+
+function GeneratedShapeExplanation({ c }: { c: RouteCandidate }) {
+  const [showRoute, setShowRoute] = useState(true);
+  const [showReference, setShowReference] = useState(true);
+  const [showImagined, setShowImagined] = useState(true);
+  const proposal = c.semanticExplanation;
+  if (proposal?.decision !== "interpretation") return null;
+  let route: string, reference: string, details: Array<{ name: string; path: string }>;
+  try {
+    const candidate = { id: proposal.candidateId, latlngs: c.latlngs };
+    if (normalizeRoadReferenceInput(candidate).fingerprint !== proposal.provenance.sourceFingerprint) return null;
+    route = normalizeRoadReferenceRenderLine(candidate).map(([x, y], i) => `${i ? "L" : "M"}${x} ${y}`).join(" ");
+    reference = commandsToSvgPath(proposal.reference.commands);
+    details = proposal.reference.imaginedParts.map(part => ({ name: part.name, path: commandsToSvgPath(part.commands) }));
+  } catch { return null; }
+  return <section className="shape-explanation" aria-label="AI가 만든 경로 참고 그림">
+    <div className="shape-explanation-head"><strong>{proposal.label.ko}로 해석해 보기</strong><span className="hint">AI 해석 · 실험</span></div>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: "8px 14px", fontSize: 12, marginTop: 8 }}>
+      <label><input type="checkbox" checked={showRoute} onChange={e => setShowRoute(e.target.checked)} /> 실제 경로</label>
+      <label><input type="checkbox" checked={showReference} onChange={e => setShowReference(e.target.checked)} /> 참고 그림</label>
+      {details.length > 0 && <label><input type="checkbox" checked={showImagined} onChange={e => setShowImagined(e.target.checked)} /> 꾸밈선</label>}
+    </div>
+    <svg viewBox="0 0 1 1" role="img" aria-label={`${proposal.label.ko} 해석. 파란 실선은 실제 경로, 주황 점선은 참고 그림, 보라 점선은 상상한 특징입니다.`}>
+      {showReference && <path data-layer="reference" d={reference} fill="none" stroke="#E89424" strokeWidth="0.009" strokeDasharray="0.02 0.015" strokeLinejoin="round" />}
+      {showRoute && <path data-layer="native-route" d={route} fill="none" stroke="#0EA5E9" strokeWidth="0.012" strokeLinejoin="round" strokeLinecap="round" />}
+      {showImagined && <g data-layer="imagined" stroke="#9864C6" strokeWidth="0.008" strokeDasharray="0.012 0.014" fill="none" strokeLinecap="round">{details.map((part, i) => <path key={i} d={part.path}><title>{part.name}</title></path>)}</g>}
+    </svg>
+    <p>{proposal.explanation}</p>
+    <p><strong>길에서 떠올린 부분:</strong> {proposal.reference.observedParts.map(part => part.name).join(" · ")}</p>
+    {details.length > 0 && <p><strong>상상해서 더한 특징:</strong> {details.map(part => part.name).join(" · ")}</p>}
+    {proposal.missingFeatures.length > 0 && <p><strong>길에서 보이지 않는 특징:</strong> {proposal.missingFeatures.join(" · ")}</p>}
+    <p className="hint">파란 실선만 달릴 길이에요. 주황 참고 그림과 보라 꾸밈선은 해석을 돕는 그림이에요. 닮았다는 판단은 사람마다 다를 수 있어요.</p>
+  </section>;
+}
+
+function LegacyShapeExplanation({ c }: { c: RouteCandidate }) {
   const [enabled, setEnabled] = useState(true);
   const clipId = useId().replace(/:/g, "");
   const key = c.doodle?.name ?? c.shapeId;

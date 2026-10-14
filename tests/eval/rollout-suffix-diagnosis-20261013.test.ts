@@ -1,0 +1,33 @@
+import { createHash } from 'node:crypto';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import path from 'node:path';
+import { expect, it } from 'vitest';
+import { exactRoadPortGraph } from '@/lib/route/exactRoadPortGraph';
+import { shapeGuidedPortRolloutBeamDiagnostic, type RolloutSearchTrace } from '@/lib/route/shapeGuidedPortRolloutBeamDiagnostic';
+import { project } from '@/lib/route/graph';
+import { graphFromOverpass, type BBox } from '@/lib/route/osm';
+import { SHAPE_BY_ID, type ShapeId } from '@/lib/route/shapes';
+import type { Placement } from '@/lib/route/fit';
+
+it.skipIf(!process.env.ROLLOUT_SUFFIX_DIAG)('replays one frozen automatic-pose arm with a literal observation-only search clone', () => {
+  const caseId = process.env.ROLLOUT_DIAG_CASE ?? 'gwangalli-cat'; expect(['gwangalli-cat', 'gwangalli-square']).toContain(caseId);
+  const [areaId, shapeId] = caseId.split('-'), sourceRoot = `eval/recognition/route-improvement/shape-guided-rollout-20261013/${areaId}`, out = path.resolve('eval/recognition/route-improvement/rollout-suffix-diagnosis-20261013', caseId); mkdirSync(out, { recursive: true });
+  const sha = (b: Buffer) => createHash('sha256').update(b).digest('hex'), core = readFileSync('src/lib/route/shapeGuidedPortRolloutBeam.ts'), frozen = JSON.parse(readFileSync(`${sourceRoot}/protocol-before-run.json`, 'utf8'));
+  expect(sha(core)).toBe(frozen.codeHashes['src/lib/route/shapeGuidedPortRolloutBeam.ts']);
+  const clone = readFileSync('src/lib/route/shapeGuidedPortRolloutBeamDiagnostic.ts', 'utf8');
+  const restored = clone.slice(0, clone.indexOf('\nexport interface RolloutSearchTrace')).replace(/\s*\/\* OBS_START \*\/[\s\S]*?\/\* OBS_END \*\/\n/g, '\n').replace('export function shapeGuidedPortRolloutBeamDiagnostic(', 'export function shapeGuidedPortRolloutBeam(').replace('poses: Placement[], feedback: boolean, observer: (trace: RolloutSearchTrace) => void)', 'poses: Placement[], feedback: boolean)');
+  expect(restored).toBe(core.toString());
+  const caseBytes = readFileSync(`${sourceRoot}/${caseId}.json`), row = JSON.parse(caseBytes.toString()) as { selectedPoses: Placement[] }, controlBytes = readFileSync(`${sourceRoot}/${caseId}-control.json`), control = JSON.parse(controlBytes.toString());
+  const original = JSON.parse(readFileSync('eval/recognition/route-improvement/offline-cascade-20261013/results.json', 'utf8')) as { cases: Array<{ caseId: string; bbox: BBox; sourceHash: string }> }, input = original.cases.find(c => c.caseId === caseId)!;
+  const roads = readFileSync(`eval/recognition/llm-routes-20261010/${areaId}-roads.json`); expect(sha(roads)).toBe(input.sourceHash);
+  const files = ['src/lib/route/shapeGuidedPortRolloutBeam.ts', 'src/lib/route/shapeGuidedPortRolloutBeamDiagnostic.ts', 'tests/eval/create-rollout-observer.mjs', 'tests/eval/rollout-suffix-diagnosis-20261013.test.ts', 'src/lib/route/exactRoadPortGraph.ts', 'src/lib/route/fit.ts', 'src/lib/route/graph.ts', 'src/lib/route/osm.ts', 'src/lib/route/shapes.ts'];
+  const hashes = Object.fromEntries(files.map(f => { const bytes = readFileSync(f); writeFileSync(path.join(out, `${path.basename(f)}.source`), bytes); return [f, sha(bytes)]; }));
+  const protocol = { caseId, hashes, bodyIdentity: true, observationOnly: true, originalAutomaticPoseReplay: true, noNewSeed: true, originalControlHash: sha(controlBytes), caseSourceHash: sha(caseBytes), roadHash: sha(roads), originalPolicyChanged: false, noHoldout: true };
+  writeFileSync(path.join(out, 'protocol-before-run.json'), JSON.stringify(protocol, null, 2));
+  const g = graphFromOverpass(JSON.parse(roads.toString()), input.bbox, { detail: 'simple', excludeSteps: true }), [minX, minY] = project(g.origin, input.bbox.south, input.bbox.west), [maxX, maxY] = project(g.origin, input.bbox.north, input.bbox.east), region = { minX, minY, maxX, maxY }, pg = exactRoadPortGraph(g, region), traces: RolloutSearchTrace[] = [];
+  const began = Date.now(), result = shapeGuidedPortRolloutBeamDiagnostic(g, pg, SHAPE_BY_ID[shapeId as ShapeId], region, row.selectedPoses, false, trace => traces.push(trace));
+  expect(result.pool).toEqual(control.pool); expect(result.diagnostics).toEqual(control.diagnostics);
+  for (const f of files) expect(sha(readFileSync(f))).toBe(hashes[f]);
+  const summary = { prefixCalls: traces.filter(t => !t.completion).length, suffixCalls: traces.filter(t => t.completion).length, prefixCapReached: traces.filter(t => !t.completion && t.capReached).length, suffixCapReached: traces.filter(t => t.completion && t.capReached).length, prefixHeapEmpty: traces.filter(t => !t.completion && t.heapEmpty).length, suffixHeapEmpty: traces.filter(t => t.completion && t.heapEmpty).length, prefixTargetReachedCalls: traces.filter(t => !t.completion && t.maxPhase >= t.targetPhase).length, suffixFinalPhaseReachedCalls: traces.filter(t => t.completion && t.maxPhase === t.lastPhase).length, strictResultCalls: traces.filter(t => t.results > 0).length, exactOriginalResult: true, elapsedMs: Date.now() - began };
+  writeFileSync(path.join(out, 'results.json'), JSON.stringify({ protocol, summary, traces, originalDiagnostics: result.diagnostics }, null, 2)); console.log(JSON.stringify(summary));
+}, 1800000);

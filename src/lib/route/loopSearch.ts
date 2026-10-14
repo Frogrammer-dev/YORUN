@@ -4,6 +4,9 @@ import type { RoadGraph } from './graph';
 import { buildBlocks, growLoops, matchShape, shapeSamples, unionForPlacement, type BlockMap, type NaturalLoop } from './loops';
 import type { ShapeDef } from './shapes';
 export interface BlockLoopSearchOptions {
+ fullRotation?: boolean;
+ /** Opt-in union of default/full fits and quick pools; performs extra work. */
+ preserveDefaultFits?: boolean;
  budget?: Budget;
  /** Absolute upper fraction of the shared budget, defaults to 1. */
  fraction?: number;
@@ -16,32 +19,56 @@ export function searchBlockLoops(g:RoadGraph,shape:ShapeDef,region:Region,seeds:
  const available=()=>!options.budget||options.budget.ok(options.fraction??1);
  if(!Number.isFinite(minMeters)||!Number.isFinite(maxMeters)||minMeters<=0||maxMeters<minMeters||region.maxX<=region.minX||region.maxY<=region.minY||!available())return {candidates:[] as RouteCandidate[],evaluated:0,blocks:options.blockMap?.faces.length??0,naturalCount:0};
  const m=options.blockMap??buildBlocks(g,(region.maxX-region.minX)*(region.maxY-region.minY)/4),tmpl=shapeSamples(shape),seen=new Set<string>();
- const all:RouteCandidate[]=[];let evaluated=0;
- const assess=(loop:NaturalLoop|null)=>{
+ const all:RouteCandidate[]=[];let evaluated=0,quickMatchingCalls=0,assessMatchingCalls=0;
+ const dual=!!options.fullRotation&&!!options.preserveDefaultFits;
+ const fitModes=dual?[false,true]:[options.fullRotation];
+ const seenPaths=new Map<string,Set<string>>();let additionalSeenFacePaths=0;
+ const assess=(loop:NaturalLoop|null,allowAdditionalPath=false)=>{
   if(!available()||!loop||loop.length<minMeters||loop.length>maxMeters)return;
-  const key=loop.faces.slice().sort((a,b)=>a-b).join(',');if(seen.has(key))return;seen.add(key);
+  const key=loop.faces.slice().sort((a,b)=>a-b).join(','),alreadySeen=seen.has(key);
+  if(alreadySeen&&(!dual||!allowAdditionalPath))return;
+  const pathKey=dual?loop.path.join(','):'';
+  if(alreadySeen&&seenPaths.get(key)?.has(pathKey))return;
+  if(alreadySeen)additionalSeenFacePaths++;
+  if(!dual)seen.add(key);
   const p=loop.path;if(p.length<4||p[0]!==p.at(-1)||!p.every((v,i)=>g.x[v]>=region.minX-1&&g.x[v]<=region.maxX+1&&g.y[v]>=region.minY-1&&g.y[v]<=region.maxY+1&&(!i||g.adjTo.slice(g.adjStart[p[i-1]],g.adjStart[p[i-1]+1]).includes(v))))return;
-  if(!available())return;
-  options.budget?.spend();
-  const xy=p.map(v=>[g.x[v],g.y[v]] as [number,number]);const fit=matchShape(xy,shape,tmpl,true);if(!fit)return;
-  if(!placeShape(shape.points,fit).every(([x,y])=>x>=region.minX&&x<=region.maxX&&y>=region.minY&&y<=region.maxY))return;
-  if(!available())return;
-  options.budget?.spend();
-  const e=evaluatePath(g,shape,fit,p,minMeters,maxMeters);evaluated++;
-  if(e.lengthMeters<minMeters||e.lengthMeters>maxMeters||e.repeatRatio>.2)return;
-  all.push(toCandidate(g,shape,fit,e));
+  const xy=p.map(v=>[g.x[v],g.y[v]] as [number,number]);
+  for(const fullRotation of fitModes){
+   if(!available())return;
+   options.budget?.spend();assessMatchingCalls++;
+   const fit=matchShape(xy,shape,tmpl,true,undefined,{fullRotation});if(!fit)continue;
+   if(!placeShape(shape.points,fit).every(([x,y])=>x>=region.minX&&x<=region.maxX&&y>=region.minY&&y<=region.maxY))continue;
+   if(!available())return;
+   options.budget?.spend();
+   const e=evaluatePath(g,shape,fit,p,minMeters,maxMeters);evaluated++;
+   if(e.lengthMeters<minMeters||e.lengthMeters>maxMeters||e.repeatRatio>.2)continue;
+   all.push(toCandidate(g,shape,fit,e));
+  }
+  // In dual mode both fits are assessed before marking this face set complete.
+  if(dual){seen.add(key);const paths=seenPaths.get(key)??new Set<string>();paths.add(pathKey);seenPaths.set(key,paths);}
  };
  const natural=growLoops(g,m,region,minMeters,maxMeters,{seeds:Math.min(2000,m.faces.length),budget:options.budget??new StepBudget(2000),fraction:options.budget?(options.naturalFraction??(options.fraction??1)*.35):1,seed:83721});
- const quick=natural.map(loop=>{if(!available())return {loop,fit:null};options.budget?.spend();return {loop,fit:matchShape(loop.path.map(v=>[g.x[v],g.y[v]] as [number,number]),shape,tmpl,false)};}).filter(q=>q.fit).sort((a,b)=>a.fit!.resid-b.fit!.resid);
+ const makeQuick=(fullRotation:boolean|undefined)=>natural.map(loop=>{if(!available())return {loop,fit:null};options.budget?.spend();quickMatchingCalls++;return {loop,fit:matchShape(loop.path.map(v=>[g.x[v],g.y[v]] as [number,number]),shape,tmpl,false,undefined,{fullRotation})};}).filter(q=>q.fit).sort((a,b)=>a.fit!.resid-b.fit!.resid);
+ const quick=makeQuick(dual?false:options.fullRotation),quickFull=dual?makeQuick(true):[];
+ // Finish the exact original default order before any new full-only faces can consume seen keys.
  for(const q of quick.slice(0,400)){if(!available())break;assess(q.loop);}
- const placements=[...seeds,...quick.slice(0,12).map(q=>q.fit!)];
- placementSearch: for(const p of placements)for(const dx of [-.04,0,.04])for(const dy of [-.04,0,.04])for(const ds of [.94,1,1.06])for(const dr of [-5,0,5])for(const threshold of [.3,.5,.7]){
-  if(!available())break placementSearch;
-  options.budget?.spend();
-  assess(unionForPlacement(g,m,shape,{cx:p.cx+dx*p.scale,cy:p.cy+dy*p.scale,scale:p.scale*ds,rotDeg:p.rotDeg+dr},region,threshold));
+ const basePlacements=[...seeds,...quick.slice(0,12).map(q=>q.fit!)],extraPlacements=dual?quickFull.slice(0,12).map(q=>q.fit!):[];
+ const placements=[...basePlacements,...extraPlacements];
+ const unionPlacements=(items:Placement[],allowAdditionalPath=false)=>{
+  placementSearch: for(const p of items)for(const dx of [-.04,0,.04])for(const dy of [-.04,0,.04])for(const ds of [.94,1,1.06])for(const dr of [-5,0,5])for(const threshold of [.3,.5,.7]){
+   if(!available())break placementSearch;
+   options.budget?.spend();
+   assess(unionForPlacement(g,m,shape,{cx:p.cx+dx*p.scale,cy:p.cy+dy*p.scale,scale:p.scale*ds,rotDeg:p.rotDeg+dr},region,threshold),allowAdditionalPath);
+  }
+ };
+ unionPlacements(basePlacements);
+ if(dual){
+  for(const q of quickFull.slice(0,400)){if(!available())break;assess(q.loop,true);}
+  unionPlacements(extraPlacements,true);
  }
  all.sort((a,b)=>b.similarity-a.similarity||a.cost-b.cost);
- return {candidates:all,evaluated,blocks:m.faces.length,naturalCount:natural.length};
+ const result={candidates:all,evaluated,blocks:m.faces.length,naturalCount:natural.length};
+ return dual?{...result,dualFitDiagnostics:{quickMatchingCalls,assessMatchingCalls,additionalSeenFacePaths,defaultStageCompletedFirst:true,defaultQuickTop:Math.min(400,quick.length),fullQuickTop:Math.min(400,quickFull.length),placementSeedCount:placements.length,defaultPlacementSeeds:Math.min(12,quick.length),fullPlacementSeeds:Math.min(12,quickFull.length),extraWork:true}}:result;
 }
 import { traceUnion } from './loops';
 /** Improve a saved road loop by flipping one neighboring block, keeping the original scoring rule. */

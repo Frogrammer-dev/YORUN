@@ -22,6 +22,8 @@ export function SelectedCourse({ c, elev, onRun, onExport }: { c: RouteCandidate
           : "초록 점에서 출발해 같은 곳으로 돌아오는 한붓 코스예요."}{" "}
         {c.shapeId === "run"
           ? `쾌적도 ${c.similarity}점 — 큰 차도·차 없는 길·비포장·계단·터널·잦은 꺾임으로 매긴 잠정 점수예요.${c.repeatRatio > 0.02 ? ` 출발점에서 고리까지 ${Math.round(c.repeatRatio * 100)}%는 같은 길로 오가요.` : ""}`
+          : c.semanticExplanation?.decision === "interpretation"
+          ? `AI가 실제 길의 외곽선에서 '${c.shapeName}'을 떠올리고 참고 그림을 만든 실험 추천이에요. 참고 그림과 꾸밈선은 달리는 길이 아니에요.`
           : c.doodle?.model === "clip"
           ? `AI가 외곽선을 '${c.shapeName}'(으)로 해석한 실험 추천이에요. 사람 눈에는 다르게 보일 수 있어요.`
           : c.doodle

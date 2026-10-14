@@ -11,7 +11,8 @@ import type { FinderRequest, FinderResponse } from "@/lib/route/finder.worker";
 import { fetchOverpassTiles, splitBBox, type BBox } from "@/lib/route/osm";
 import { fetchElevation } from "@/lib/route/elevation";
 import { recognizeCourses } from "@/lib/art/recognize";
-import { moveLines, nameDiscoveries, pixelToLatLng } from "@/lib/route/present";
+import { nameRoadDiscoveries } from "@/lib/art/roadReferenceClient";
+import { moveLines, pixelToLatLng } from "@/lib/route/present";
 import type { ShapeGroup } from "@/lib/route/shapes";
 import { artImageLayer } from "@/components/route/artImageLayer";
 import { PlaceSearch } from "@/components/route/PlaceSearch";
@@ -32,7 +33,7 @@ type Phase =
   | { kind: "idle" }
   | { kind: "fetching"; done: number; total: number }
   | { kind: "searching"; fraction: number; label: string }
-  | { kind: "done"; candidates: RouteCandidate[]; partial: boolean; dataTimestamp: string | null; nodes: number; discover: boolean; doodleError?: boolean; naming?: boolean }
+  | { kind: "done"; candidates: RouteCandidate[]; partial: boolean; dataTimestamp: string | null; nodes: number; discover: boolean; doodleError?: boolean; naming?: boolean; interpretationMode?: "server" | "clip"; referenceError?: boolean }
   | { kind: "error"; message: string };
 
 export function RouteFinderApp() {
@@ -64,7 +65,7 @@ export function RouteFinderApp() {
       phase.kind === "done"
         ? phase.candidates.filter((c) => {
             const e = elev[c.id];
-            if (c.shapeId !== "run") return c.doodle || c.similarity >= minSimilarity;
+            if (c.shapeId !== "run") return c.semanticExplanation?.decision === "interpretation" || c.doodle || c.similarity >= minSimilarity;
             return maxAscent === null || typeof e !== "object" || e.ascent <= maxAscent;
           })
         : [],
@@ -81,6 +82,7 @@ export function RouteFinderApp() {
   const layers = useRef<Leaflet.LayerGroup | null>(null);
   const searchedBox = useRef<{ bbox: BBox; dataBox: BBox; nearby: boolean; rect: Leaflet.Rectangle | null; fetchedKey: string; area: AreaId } | null>(null);
   const abortRef = useRef<AbortController | null>(null);
+  const referenceAbortRef = useRef<AbortController | null>(null);
   /** 사용자가 지도를 직접 움직였거나 탐색을 시작했으면, 늦게 도착한 첫 위치로 지도를 옮기지 않는다. */
   const userTookOver = useRef(false);
   const locMarker = useRef<Leaflet.LayerGroup | null>(null);
@@ -169,6 +171,8 @@ export function RouteFinderApp() {
     workerRef.current = w;
     return () => w.terminate();
   }, []);
+
+  useEffect(() => () => { reqId.current++; referenceAbortRef.current?.abort(); }, []);
 
   useEffect(() => {
     if (lm) void setBasemap(lm.L, lm.map, basemap).then(setBasemapOk);
@@ -292,6 +296,7 @@ export function RouteFinderApp() {
     const discover = !running && shape === "auto";
     const compareNearby = !running && nearby && !(shape === "custom" && custom && custom.parts.length > 1);
     const id = ++reqId.current;
+    referenceAbortRef.current?.abort();
     setSelected(null);
     selectedRef.current = null;
     layers.current?.clearLayers();
@@ -388,12 +393,17 @@ export function RouteFinderApp() {
         // Show connected routes immediately; server interpretation can finish in the background.
         finish(templ);
         setPhase(p => p.kind === "done" ? { ...p, naming:true } : p);
-        void nameDiscoveries(templ, [...m.result.candidates, ...(m.result.pool ?? [])], recognizeCourses, 90_000).then((r) => {
+        const interpretationAbort = new AbortController();
+        referenceAbortRef.current = interpretationAbort;
+        void nameRoadDiscoveries(templ, [...m.result.candidates, ...(m.result.pool ?? [])], recognizeCourses, { minMeters: r.min, maxMeters: r.max, signal: interpretationAbort.signal }).then((r) => {
           if(id !== reqId.current) return;
           const chosen=templ.find(c=>c.id===selectedRef.current);
           const candidates=chosen && !r.candidates.some(c=>c.id===chosen.id) ? [...r.candidates,chosen] : r.candidates;
-          setPhase(p=>p.kind === "done" ? {...p,candidates,naming:false,doodleError:r.doodleError} : p);
+          setPhase(p=>p.kind === "done" ? {...p,candidates,naming:false,doodleError:r.doodleError,interpretationMode:r.interpretationMode,referenceError:r.referenceError} : p);
           if(!selectedRef.current && candidates[0])choose(candidates[0]);
+        }).catch(() => {
+          if (id !== reqId.current || interpretationAbort.signal.aborted) return;
+          setPhase(p => p.kind === "done" ? { ...p, naming: false, doodleError: true } : p);
         });
       }
     };
@@ -476,6 +486,7 @@ export function RouteFinderApp() {
       moveMeters: c.moveMeters,
       lengthMeters: c.lengthMeters,
       similarity: c.similarity,
+      recognitionKind: c.semanticExplanation?.decision === "interpretation" ? "reference" : c.doodle?.model === "clip" ? "clip" : undefined,
       dataTimestamp,
     });
     router.push("/run");
@@ -504,6 +515,7 @@ export function RouteFinderApp() {
         // 종류를 바꾸면 이전 결과는 지운다 (드로잉 결과와 러닝 결과는 기준이 다르다)
         if (patch.mode && patch.mode !== mode) {
           reqId.current++;
+          referenceAbortRef.current?.abort();
           setPhase({ kind: "idle" });
           setSelected(null);
           layers.current?.clearLayers();
@@ -619,7 +631,7 @@ export function RouteFinderApp() {
                 )}
                 <CourseList candidates={visible} elev={elev} selected={selected} discover={phase.discover} onChoose={choose} onHover={setHover} />
                 {sel && <SelectedCourse c={sel} elev={elev[sel.id]} onRun={() => runThis(sel, phase.dataTimestamp)} onExport={() => exportGpx(sel)} />}
-                {visible.length > 0 && visible[0].shapeId !== "run" && visible[0].similarity < 65 && (
+                {visible.length > 0 && visible[0].shapeId !== "run" && !visible[0].semanticExplanation && !visible[0].doodle && visible[0].similarity < 65 && (
                   <p className="hint">그림이 또렷하지 않다면: 거리를 늘리면 그림이 커져 길 간격에 덜 뭉개지고, 바둑판처럼 반듯한 길이 많은 동네일수록 잘 나와요.</p>
                 )}
                 <p className="hint">
@@ -628,7 +640,9 @@ export function RouteFinderApp() {
                   {phase.partial && " 시간 제한으로 일부 조합만 탐색했어요."}
                   {phase.doodleError && " 모양 인식을 사용할 수 없어 도형과 닮은 코스만 보여 줘요."}
                   {phase.naming && " 코스는 먼저 보여 드리고, 어떤 모양처럼 보이는지 더 살펴보고 있어요."}
-                  {phase.discover && !phase.naming && !phase.doodleError && " '처럼 보이는 코스'는 CLIP이 해석한 실험 추천이에요. 위치를 제외한 외곽선만 앱 서버에서 처리해요."}
+                  {phase.discover && !phase.naming && phase.interpretationMode === "server" && " AI가 위치 정보를 제외한 선 그림을 보고 이름과 참고 그림을 함께 만든 실험 추천이에요. 선 그림은 외부 AI 서버에서 처리해요."}
+                  {phase.referenceError && " 참고 그림 생성을 사용할 수 없어 기존 모양 인식으로 살펴봤어요."}
+                  {phase.discover && !phase.naming && !phase.doodleError && phase.interpretationMode === "clip" && " '처럼 보이는 코스'는 CLIP이 해석한 실험 추천이에요. 위치를 제외한 외곽선만 앱 서버에서 처리해요."}
                 </p>
               </section>
             )}

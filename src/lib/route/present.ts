@@ -84,6 +84,7 @@ export function moveLines(c: { latlngs: [number, number][]; moves?: Array<[numbe
 /** 목록 제목: 낙서 인식 '○○처럼 보이는 코스', 동네 추천 '○○ 닮은 코스', 지정 그림은 이름 그대로 */
 export function courseTitle(c: RouteCandidate, discover: boolean): string {
   if (c.shapeId === "run") return `러닝 코스 · 차 없는 길 ${Math.round(c.roadInfo.carFree * 100)}%`;
+  if (c.semanticExplanation?.decision === "interpretation") return `${c.semanticExplanation.label.ko}처럼 보이는 코스`;
   if (c.doodle) return `${c.shapeName}처럼 보이는 코스`;
   return discover ? `${c.shapeName} 닮은 코스` : c.shapeName;
 }
@@ -91,6 +92,7 @@ export function courseTitle(c: RouteCandidate, discover: boolean): string {
 /** 목록 배지: 낙서 인식은 등급 (모델 확신도 숫자는 사람이 알아보는 비율과 달라 그대로 보이지 않는다), 도형은 유사도 */
 export function courseBadge(c: RouteCandidate): string {
   if (c.shapeId === "run") return `쾌적 ${c.similarity}`;
+  if (c.semanticExplanation?.decision === "interpretation") return "AI 해석 · 참고 그림";
   if (c.doodle?.model === "clip") return "AI 해석 · 실험";
   return c.doodle ? `인식 · ${courseGrade(c)}` : `유사도 ${c.similarity}`;
 }

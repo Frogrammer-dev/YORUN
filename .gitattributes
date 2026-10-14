@@ -3,3 +3,8 @@
 *.bin binary
 *.png binary
 *.gpx text eol=lf
+
+# 동결한 원본/독립 복사본은 실행 바이트 해시 재현을 위해 실제 줄바꿈을 보존한다.
+src/lib/route/globalSearch.ts -text
+src/lib/route/globalSearchAllPoseSeeds.ts -text
+src/lib/route/globalSearchScaleInterleaved.ts -text

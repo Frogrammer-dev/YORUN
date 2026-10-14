@@ -32,7 +32,7 @@ export function CourseList({
             <span className="cand-body">
               <span className="cand-top">
                 <span className="cand-title">{courseTitle(c, discover)}</span>
-                <span className={`cand-sim ${c.doodle ? "cand-ai" : ""}`}>{courseBadge(c)}</span>
+                <span className={`cand-sim ${c.doodle || c.semanticExplanation ? "cand-ai" : ""}`}>{courseBadge(c)}</span>
               </span>
               <span className="cand-meta">
                 <span className="num">{(c.lengthMeters / 1000).toFixed(2)}</span>

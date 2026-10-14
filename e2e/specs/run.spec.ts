@@ -66,6 +66,10 @@ test("코스를 따라 달리고, 이탈 경고·이어 달리기·종료 후 �
   const dist = parseFloat((await page.locator("[data-stat=distance]").innerText()).replace("km", ""));
   expect(dist).toBeGreaterThan(0.3);
   expect(parseInt(await page.locator("[data-stat=progress]").innerText())).toBeGreaterThan(0);
+  // 약 390m를 따라 달렸으니 100m 지점 객체를 2개 이상 주웠다 (100P 단위)
+  const livePoints = parseInt((await page.locator("[data-stat=points]").innerText()).replace(/[^\d]/g, ""));
+  expect(livePoints).toBeGreaterThanOrEqual(200);
+  expect(livePoints % 100).toBe(0);
   await expect(page.locator(".next-turn")).toBeVisible();
   await expect(page.getByText(/코스에서 \d+m 벗어났어요/)).toHaveCount(0);
 
@@ -83,6 +87,11 @@ test("코스를 따라 달리고, 이탈 경고·이어 달리기·종료 후 �
   await page.getByRole("button", { name: /종료/ }).click();
   await expect(page.getByRole("heading", { name: "달리기 완료" })).toBeVisible();
   expect(await page.evaluate(() => localStorage.getItem("runcanvas.activeRun"))).toBeNull();
+  // 새로고침 전에 주운 객체도 이어져 적립된다
+  const award = parseInt((await page.locator("[data-stat=award]").innerText()).replace(/[^\d]/g, ""));
+  expect(award).toBeGreaterThanOrEqual(livePoints);
+  const wallet = await page.evaluate(() => JSON.parse(localStorage.getItem("runcanvas.points") ?? "null"));
+  expect(wallet).toMatchObject({ balance: award, dayPoints: award });
 
   // 작품방에 걸기: 재개 전후 끊김을 이어 붙이지 않는다
   await page.getByRole("button", { name: /작품방에 걸기/ }).click();

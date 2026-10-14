@@ -9,6 +9,7 @@ import { SHAPE_BY_ID, anchorsOf, polylineLength, resample, type ShapeDef, type S
 import { rdpIndices } from "@/lib/art/rdp";
 import { buildFlexPath, refitPlacement } from "./flex";
 import { budgetOf, type Budget } from "./budget";
+import type { ParsedRoadReferenceProposal } from "@/lib/art/roadReference";
 
 /** 품질 조정값. 부산 광안리·서면, 서울 강남 실제 OSM 데이터 평가로 정했다 (tests/eval-quality.test.ts). */
 export const TUNING = {
@@ -75,6 +76,8 @@ export interface RouteCandidate {
   roadInfo: RoadStats;
   /** 낙서 인식 모델이 붙인 이름 (Quick, Draw! 갈래 이름과 확률) */
   doodle?: { name: string; prob: number; model?: "clip"; margin?: number };
+  /** Generated explanation only: never an original scoring outline or a runnable path. */
+  semanticExplanation?: ParsedRoadReferenceProposal;
   /** 0~100. 경로가 모양 선에서 평균적으로 벗어난 정도(모양 크기 대비)로 계산 */
   similarity: number;
   meanDeviationMeters: number;

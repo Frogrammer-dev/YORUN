@@ -272,6 +272,7 @@ export function matchShape(
   tmpl = shapeSamples(shape),
   refine = true,
   L: XY[] = loopSamples(loopXY),
+  options: { fullRotation?: boolean } = {},
 ): (LoopPlacement & { resid: number }) | null {
   let best: (LoopPlacement & { resid: number }) | null = null;
   const shifted: XY[] = new Array(N_MATCH);
@@ -279,7 +280,7 @@ export function matchShape(
     for (let i = 0; i < N_MATCH; i++) shifted[i] = L[(i + s) % N_MATCH];
     const r = procrustes(tmpl, shifted);
     // 위아래가 있는 그림은 45°보다 많이 돌리지 않는다 (거꾸로 된 하트·고양이 방지)
-    if (!shape.rotationFree && Math.abs(r.rotDeg) > 45 && !/^(square|diamond)$/.test(shape.id)) continue;
+    if (!options.fullRotation && !shape.rotationFree && Math.abs(r.rotDeg) > 45 && !/^(square|diamond)$/.test(shape.id)) continue;
     if (!best || r.resid < best.resid) best = r;
   }
   if (!best || !refine) return best;
@@ -300,7 +301,7 @@ export function matchShape(
       return bp;
     });
     const r = procrustes(tmpl, corr);
-    if (!shape.rotationFree && Math.abs(r.rotDeg) > 50 && !/^(square|diamond)$/.test(shape.id)) break;
+    if (!options.fullRotation && !shape.rotationFree && Math.abs(r.rotDeg) > 50 && !/^(square|diamond)$/.test(shape.id)) break;
     best = { ...r, resid: best.resid };
   }
   return best;

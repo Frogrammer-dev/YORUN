@@ -491,8 +491,16 @@ legend { font-weight: 700; font-size: var(--fs-callout); padding-right: var(--sp
 .done-page .btn-link { color: #E4E7EC; border: 1.5px solid rgba(255, 255, 255, .18); }
 .done-reason { display: flex; gap: 6px; align-items: flex-start; color: var(--warn-fill); font-size: var(--fs-caption); line-height: 1.4; margin: 0; }
 .done-note { font-size: var(--fs-caption); color: var(--hud-label); margin: 0; }
+/* 달리기 포인트 */
+.hud-points { font-family: var(--font-num); font-size: var(--fs-callout); font-weight: 700; color: #FBBF24; font-variant-numeric: tabular-nums; }
+.point-toast { position: absolute; z-index: 600; top: 38%; left: 50%; transform: translateX(-50%); padding: 8px 18px; border-radius: var(--r-pill); background: #F59E0B; color: #111318; font-family: var(--font-num); font-size: 24px; font-weight: 800; box-shadow: var(--sh-map); pointer-events: none; animation: point-pop 1.6s ease-out forwards; }
+@keyframes point-pop { 0% { opacity: 0; transform: translate(-50%, 12px) scale(.9); } 15% { opacity: 1; transform: translate(-50%, 0) scale(1); } 75% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%, -16px); } }
+.done-points { display: flex; flex-direction: column; gap: 6px; padding: var(--sp-3) var(--sp-4); border-radius: var(--r-sm); background: rgba(245, 158, 11, .12); }
+.done-points strong { font-family: var(--font-num); font-size: 32px; line-height: 1; font-weight: 700; color: #FBBF24; font-variant-numeric: tabular-nums; }
+.done-points p { margin: 0; font-size: var(--fs-caption); color: var(--hud-label); }
 
 @media (prefers-reduced-motion: reduce) {
+  .point-toast { animation: none; }
   .draw-path, .done-art .run-line { animation: none; stroke-dashoffset: 0; }
   .pulse, .hud-paused .hud-big, .progress-indeterminate { animation: none; }
   .btn, .map-fab { transition: none; }

@@ -1,0 +1,30 @@
+import { createHash } from 'node:crypto';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import path from 'node:path';
+import { expect, it } from 'vitest';
+import { exactRoadPortGraph } from '@/lib/route/exactRoadPortGraph';
+import { project } from '@/lib/route/graph';
+import { graphFromOverpass, type BBox } from '@/lib/route/osm';
+import type { RouteCandidate } from '@/lib/route/fit';
+import { shapeGuidedPortRolloutBeam } from '@/lib/route/shapeGuidedPortRolloutBeam';
+import { SHAPE_BY_ID } from '@/lib/route/shapes';
+import { rolloutPathAuditor } from './rollout-pilot-support';
+
+it.skipIf(!process.env.ROLLOUT_POSITIVE_CONTROL)('isolates known automatic placement from new coarse pose selection without claiming a search gain', () => {
+  const out = path.resolve('eval/recognition/route-improvement/rollout-positive-control-20261013'); mkdirSync(out, { recursive: true });
+  const sha = (b: Buffer) => createHash('sha256').update(b).digest('hex');
+  const source = readFileSync('src/lib/route/shapeGuidedPortRolloutBeam.ts'), prior = readFileSync('eval/recognition/route-improvement/offline-cascade-20261013/results.json');
+  const row = JSON.parse(prior.toString()).cases.find((r: { caseId: string }) => r.caseId === 'gwangalli-cat') as { candidate: RouteCandidate; bbox: BBox; sourceHash: string };
+  const roads = readFileSync('eval/recognition/llm-routes-20261010/gwangalli-roads.json'); expect(sha(roads)).toBe(row.sourceHash);
+  const protocol = { sourceHash: sha(source), inputHash: sha(prior), roadHash: sha(roads), caseId: 'gwangalli-cat', diagnosticAutomaticPlacementUsed: true, noAutomaticGainClaim: true, holdoutRead: false, feedback: false, poses: 1, unitBudgetUnchanged: 25000, unusedOtherUnitsNotRedistributed: true };
+  writeFileSync(path.join(out, 'protocol-before-run.json'), JSON.stringify(protocol, null, 2)); writeFileSync(path.join(out, 'shapeGuidedPortRolloutBeam.ts.source'), source);
+  const g = graphFromOverpass(JSON.parse(roads.toString()), row.bbox, { detail: 'simple', excludeSteps: true });
+  const [minX, minY] = project(g.origin, row.bbox.south, row.bbox.west), [maxX, maxY] = project(g.origin, row.bbox.north, row.bbox.east), region = { minX, minY, maxX, maxY };
+  const auditor = rolloutPathAuditor(g, SHAPE_BY_ID.cat, region), existing = auditor.audit(auditor.nodesFor(row.candidate), row.candidate.placement);
+  expect(existing.evaluated.similarity).toBe(71);
+  const began = Date.now(), result = shapeGuidedPortRolloutBeam(g, exactRoadPortGraph(g, region), SHAPE_BY_ID.cat, region, [row.candidate.placement], false);
+  for (const c of result.pool) expect(auditor.audit(c.nodes, c.candidate.placement).raw).toBeCloseTo(c.raw, 8);
+  expect(sha(readFileSync('src/lib/route/shapeGuidedPortRolloutBeam.ts'))).toBe(protocol.sourceHash);
+  writeFileSync(path.join(out, 'results.json'), JSON.stringify({ protocol, elapsedMs: Date.now() - began, originalRaw: existing.raw, ...result }, null, 2));
+  console.log(JSON.stringify({ strict: result.diagnostics.strictRollouts, QCalls: result.diagnostics.rolloutQCalls, expansions: result.diagnostics.expansions }));
+}, 300000);
