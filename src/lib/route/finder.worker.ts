@@ -52,8 +52,6 @@ export type FinderResponse =
       reqId: number;
       result: FindResult;
       graph: { nodes: number; edges: number; dataTimestamp: string | null };
-      /** 탐색에 쓴 길: [lat1, lon1, lat2, lon2, ...] 간선마다 4개 */
-      roads: number[];
     }
   | { type: "error"; reqId: number; code: "bad_data" | "no_roads" | "no_cache" | "internal"; message: string };
 
@@ -162,13 +160,7 @@ ctx.onmessage = (ev: MessageEvent<FinderRequest>) => {
         result = wider;
       }
     }
-    const roads: number[] = [];
-    for (let a = 0; a < graph.n; a++)
-      for (let k = graph.adjStart[a]; k < graph.adjStart[a + 1]; k++) {
-        const b = graph.adjTo[k];
-        if (b > a) roads.push(graph.lat[a], graph.lon[a], graph.lat[b], graph.lon[b]);
-      }
-    post({ type: "result", reqId: req.reqId, result, graph: { nodes: graph.n, edges: graph.edgeCount, dataTimestamp: graph.dataTimestamp }, roads });
+    post({ type: "result", reqId: req.reqId, result, graph: { nodes: graph.n, edges: graph.edgeCount, dataTimestamp: graph.dataTimestamp } });
   } catch (e) {
     post({ type: "error", reqId: req.reqId, code: "internal", message: (e as Error)?.message ?? "탐색 중 오류" });
   }

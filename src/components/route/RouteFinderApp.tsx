@@ -50,9 +50,6 @@ export function RouteFinderApp() {
   const areaRect = useRef<Leaflet.Rectangle | null>(null);
   const [elev, setElev] = useState<Record<string, Exclude<ElevationState, undefined>>>({});
   const [basemap, setBasemapState] = useState<Basemap>("simple");
-  const [showRoads, setShowRoads] = useState(false);
-  const roadsRef = useRef<number[] | null>(null);
-  const roadLayer = useRef<Leaflet.Polyline | null>(null);
   /** 장소 검색으로 고른 곳 표시 (새로 고르면 바뀐다) */
   const placeMarker = useRef<Leaflet.CircleMarker | null>(null);
   /** 지금 결과를 찾을 때 쓴 내 그림 (이미지 겹쳐 보기용, 찾은 뒤 그림을 바꿔도 결과와 맞게 유지) */
@@ -77,7 +74,6 @@ export function RouteFinderApp() {
   const [hover, setHover] = useState<string | null>(null);
   const [areaInfo, setAreaInfo] = useState<{ w: number; h: number } | null>(null);
   const workerRef = useRef<Worker | null>(null);
-  const showRoadsRef = useRef(false);
   const reqId = useRef(0);
   const layers = useRef<Leaflet.LayerGroup | null>(null);
   const searchedBox = useRef<{ bbox: BBox; dataBox: BBox; nearby: boolean; rect: Leaflet.Rectangle | null; fetchedKey: string; area: AreaId } | null>(null);
@@ -179,12 +175,6 @@ export function RouteFinderApp() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lm, basemap]);
 
-  useEffect(() => {
-    showRoadsRef.current = showRoads;
-    drawRoads();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [showRoads, lm]);
-
   // 후보 그리기
   const draw = useCallback(
     (cands: RouteCandidate[], sel: string | null, hover: string | null) => {
@@ -223,19 +213,6 @@ export function RouteFinderApp() {
   useEffect(() => {
     if (phase.kind === "done") draw(visible, selected, hover);
   }, [phase, visible, selected, hover, draw]);
-
-  /** 탐색에 쓴(단순화된) 길을 회색 선으로 겹쳐 보기 */
-  function drawRoads() {
-    if (!lm || !mapAlive(lm.map)) return;
-    roadLayer.current?.remove();
-    roadLayer.current = null;
-    const r = roadsRef.current;
-    if (!showRoadsRef.current || !r) return;
-    const lines: [number, number][][] = [];
-    for (let i = 0; i < r.length; i += 4) lines.push([[r[i], r[i + 1]], [r[i + 2], r[i + 3]]]);
-    roadLayer.current = lm.L.polyline(lines, { color: "#8A919E", weight: 1.5, opacity: 0.45, interactive: false, renderer: lm.L.canvas() }).addTo(lm.map);
-    roadLayer.current.bringToBack();
-  }
 
   /** 코스를 찾을 영역: 지금 화면, 또는 지도 가운데 중심의 정사각형 */
   function searchBounds(id: AreaId = area): Leaflet.LatLngBounds {
@@ -380,8 +357,6 @@ export function RouteFinderApp() {
           void search();
         } else setPhase({ kind: "error", message: m.message });
       } else {
-        roadsRef.current = m.roads;
-        drawRoads();
         const templ = m.result.candidates;
         const finish = (cands: RouteCandidate[], doodleError = false) => {
           if (id !== reqId.current) return;
@@ -578,17 +553,6 @@ export function RouteFinderApp() {
               onClick={() => setBasemapState((b) => (b === "simple" ? "standard" : "simple"))}
             >
               <Icon name="layers" size={22} />
-            </button>
-            <button
-              type="button"
-              className="map-fab"
-              aria-pressed={showRoads}
-              aria-label={showRoads ? "길 숨기기" : "탐색에 쓴 길 보기"}
-              title={showRoads ? "길 숨기기" : "탐색에 쓴 길 보기"}
-              onClick={() => setShowRoads((v) => !v)}
-              disabled={!roadsRef.current}
-            >
-              <Icon name="roads" size={22} />
             </button>
           </div>
           <div className="map-badges">

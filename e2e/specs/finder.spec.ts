@@ -52,9 +52,7 @@ test("동네 추천: 길 데이터 한 번 받아 코스 목록·선·안내 표
   await expect(page.getByText(/지도 데이터 기준 .*통행 가능 여부/)).toBeVisible();
   expect(await page.locator("path.leaflet-interactive").count()).toBeGreaterThanOrEqual(2);
   await expect(page.getByRole("radio", { name: "큰길 위주" })).toHaveAttribute("aria-checked", "true");
-  // 탐색에 쓴 길 겹쳐 보기·바탕 지도 전환
-  await page.getByRole("button", { name: "탐색에 쓴 길 보기" }).click();
-  await expect(page.locator(".leaflet-overlay-pane canvas")).not.toHaveCount(0);
+  // 바탕 지도 전환
   await page.getByRole("button", { name: /기본 지도/ }).click();
   await expect(page.getByRole("button", { name: /단순 지도/ })).toBeVisible();
 });
