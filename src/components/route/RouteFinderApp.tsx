@@ -25,6 +25,8 @@ import { downloadBlob } from "@/lib/render/png";
 import { BrandMark, Icon } from "@/components/Icon";
 
 const ROUTE_COLOR = "#0EA5E9";
+/** 이보다 오차가 큰 현재 위치(대개 IP 기반 추정)로는 지도를 옮기지 않는다 (m) */
+const MAX_LOCATE_ACCURACY = 3000;
 
 type Phase =
   | { kind: "idle" }
@@ -81,6 +83,7 @@ export function RouteFinderApp() {
   const abortRef = useRef<AbortController | null>(null);
   /** 사용자가 지도를 직접 움직였거나 탐색을 시작했으면, 늦게 도착한 첫 위치로 지도를 옮기지 않는다. */
   const userTookOver = useRef(false);
+  const locMarker = useRef<Leaflet.LayerGroup | null>(null);
   const [sheetFull, setSheetFull] = useState(false);
   const settingsRef = useRef<HTMLElement>(null);
   /** 사용자가 마지막 탐색 뒤 지도를 직접 움직였는지 (앱이 코스로 확대한 이동은 제외) */
@@ -137,13 +140,23 @@ export function RouteFinderApp() {
       (p) => {
         // 위치 확인은 늦게 끝날 수 있다. 그사이 화면을 떠나 지도가 제거됐으면 아무것도 하지 않는다.
         if (!mapAlive(lm.map)) return;
-        if (!(auto && userTookOver.current)) lm.map.setView([p.coords.latitude, p.coords.longitude], 15);
-        lm.L.circleMarker([p.coords.latitude, p.coords.longitude], { radius: 8, color: "#fff", weight: 3, fillColor: "#1A73E8", fillOpacity: 1 }).addTo(lm.map);
+        const at: [number, number] = [p.coords.latitude, p.coords.longitude];
+        // GPS·Wi-Fi 없이 IP로 추정한 위치는 수십~수백 km 틀릴 수 있다 (PC에서 흔함). 그런 값으로는 지도를 옮기지 않는다.
+        if (!(p.coords.accuracy <= MAX_LOCATE_ACCURACY)) {
+          if (!auto) setPhase({ kind: "error", message: `현재 위치가 정확하지 않아요 (오차 약 ${Math.round(p.coords.accuracy / 1000)}km). 지도를 직접 움직여 찾을 영역을 맞춰 주세요.` });
+          return;
+        }
+        if (!(auto && userTookOver.current)) lm.map.setView(at, 15);
+        locMarker.current?.remove();
+        locMarker.current = lm.L.layerGroup([
+          lm.L.circle(at, { radius: p.coords.accuracy, color: "#1A73E8", weight: 1, opacity: 0.4, fillOpacity: 0.08, interactive: false }),
+          lm.L.circleMarker(at, { radius: 8, color: "#fff", weight: 3, fillColor: "#1A73E8", fillOpacity: 1 }),
+        ]).addTo(lm.map);
       },
       () => {
         if (!auto) setPhase({ kind: "error", message: "현재 위치를 확인하지 못했어요. 지도를 직접 움직여 찾을 영역을 맞춰 주세요." });
       },
-      { enableHighAccuracy: false, timeout: 8000 },
+      { enableHighAccuracy: true, maximumAge: 0, timeout: 10000 },
     );
   }, [lm]);
 
