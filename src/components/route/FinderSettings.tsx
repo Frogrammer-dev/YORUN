@@ -40,7 +40,7 @@ export const FinderSettings = forwardRef<HTMLElement, FinderSettingsProps>(funct
 ) {
   const area = AREAS.find((a) => a.id === v.area)!;
   const running = v.mode === "running";
-  const toggle = (key: "excludeSteps" | "avoidUnpaved" | "avoidMajor" | "preferLit" | "preferCarFree" | "avoidTunnels" | "branches" | "nearby", label: string) => (
+  const toggle = (key: "excludeSteps" | "avoidUnpaved" | "avoidMajor" | "preferLit" | "preferCarFree" | "avoidTunnels" | "branches" | "nearby" | "aiOutline", label: string) => (
     <label className="toggle-row">
       {label}
       <input type="checkbox" role="switch" className="switch" checked={v[key]} onChange={(e) => onChange({ [key]: e.target.checked })} />
@@ -186,6 +186,8 @@ export const FinderSettings = forwardRef<HTMLElement, FinderSettingsProps>(funct
       )}
       {!running && v.shape === "auto" && toggle("branches", "실험: 꼬리·다리 붙인 코스도 찾기")}
       {!running && v.shape === "auto" && v.branches && <p className="hint">고리에 갔다가 같은 길로 돌아오는 가지를 붙여 봐요. 인식 결과가 엉뚱할 수 있어요.</p>}
+      {!running && v.shape === "auto" && toggle("aiOutline", "관리자: AI 선 그림 해석 (OpenAI)")}
+      {!running && v.shape === "auto" && !v.aiOutline && <p className="hint">외부 AI를 부르지 않고 앱 서버의 CLIP 해석만 써요.</p>}
 
       <div className="sheet-cta">
         {progress ? (

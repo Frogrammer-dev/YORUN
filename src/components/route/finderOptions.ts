@@ -65,6 +65,8 @@ export interface FinderSettingsValue {
   maxAscent: number | null;
   /** (실험) 동네 추천에 왕복 가지(꼬리·다리)를 붙인 코스도 넣기 */
   branches: boolean;
+  /** (관리자) 자동 그림 발견 때 OpenAI 선 그림 해석 사용. 끄면 CLIP 해석만 쓴다 */
+  aiOutline: boolean;
   /** Opt-in comparison with nearby roads while preserving the original area results. */
   nearby: boolean;
   /** 결과 목록에 보일 최소 유사도 (도형 닮음 점수, 다시 찾지 않고 바로 적용) */
@@ -87,6 +89,7 @@ export const DEFAULT_SETTINGS: FinderSettingsValue = {
   maxAscent: null,
   branches: false,
   nearby: false,
+  aiOutline: true,
   minSimilarity: SIMILARITY_MIN,
 };
 

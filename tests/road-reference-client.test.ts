@@ -60,6 +60,15 @@ describe("road-first reference client", () => {
     expect(recognize).not.toHaveBeenCalled();
   });
 
+  it("skips the external provider entirely when the admin toggle is off", async () => {
+    const road = rawLoop(), templ = makeCandidate(), fetcher = provider([road]);
+    const recognize = vi.fn(async () => [{ name: "phone", label: "전화기", model: "clip" as const, accepted: true, prob: .35 }]);
+    const result = await nameRoadDiscoveries([templ], [road], recognize, { ...bounds, fetcher, server: false });
+    expect(fetcher).not.toHaveBeenCalled();
+    expect(recognize).toHaveBeenCalledOnce();
+    expect(result).toMatchObject({ interpretationMode: "clip", referenceError: false });
+  });
+
   it("falls back to existing local recognition when the external provider is unconfigured or fails", async () => {
     const road = rawLoop(), templ = makeCandidate();
     for (const configured of [false, true]) {

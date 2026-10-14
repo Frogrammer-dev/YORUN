@@ -41,7 +41,7 @@ export function RouteFinderApp() {
   const mapEl = useRef<HTMLDivElement>(null);
   const { lm, basemapOk, setBasemapOk } = useLeafletMap(mapEl);
   const [settings, setSettings] = useState<FinderSettingsValue>(DEFAULT_SETTINGS);
-  const { mode, shape, custom, area, range, detail, excludeSteps, avoidUnpaved, avoidMajor, preferLit, preferCarFree, avoidTunnels, branches, nearby, minSimilarity, maxAscent } = settings;
+  const { mode, shape, custom, area, range, detail, excludeSteps, avoidUnpaved, avoidMajor, preferLit, preferCarFree, avoidTunnels, branches, nearby, aiOutline, minSimilarity, maxAscent } = settings;
   const running = mode === "running";
   /** 러닝 코스 출발점 [위도, 경도] (null: 찾을 때의 지도 가운데) */
   const [start, setStart] = useState<[number, number] | null>(null);
@@ -395,7 +395,7 @@ export function RouteFinderApp() {
         setPhase(p => p.kind === "done" ? { ...p, naming:true } : p);
         const interpretationAbort = new AbortController();
         referenceAbortRef.current = interpretationAbort;
-        void nameRoadDiscoveries(templ, [...m.result.candidates, ...(m.result.pool ?? [])], recognizeCourses, { minMeters: r.min, maxMeters: r.max, signal: interpretationAbort.signal }).then((r) => {
+        void nameRoadDiscoveries(templ, [...m.result.candidates, ...(m.result.pool ?? [])], recognizeCourses, { minMeters: r.min, maxMeters: r.max, signal: interpretationAbort.signal, server: aiOutline }).then((r) => {
           if(id !== reqId.current) return;
           const chosen=templ.find(c=>c.id===selectedRef.current);
           const candidates=chosen && !r.candidates.some(c=>c.id===chosen.id) ? [...r.candidates,chosen] : r.candidates;

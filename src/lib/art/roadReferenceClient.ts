@@ -26,6 +26,8 @@ export interface RoadReferenceDiscoveryOptions {
   signal?: AbortSignal;
   fetcher?: typeof fetch;
   timeoutMs?: number;
+  /** false면 서버 AI 해석을 건너뛰고 CLIP으로 바로 해석한다 (관리자 토글) */
+  server?: boolean;
 }
 
 export interface RoadReferenceDiscoveryResult {
@@ -137,6 +139,8 @@ export async function nameRoadDiscoveries(
   let configured = false;
   try {
     checkAbort(options.signal);
+    // 관리자가 끈 경우: 서버 AI를 부르지 않고 아래 CLIP 해석으로 넘어간다 (referenceError는 false 그대로)
+    if (options.server === false) throw new Error("Reference generation disabled");
     const statusResponse = await fetcher(ENDPOINT, { signal: controller.signal, cache: "no-store" });
     if (!statusResponse.ok) throw new Error("Reference configuration unavailable");
     const status: unknown = await statusResponse.json();
