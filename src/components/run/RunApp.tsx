@@ -13,7 +13,8 @@ import type { GpxTrack } from "@/lib/gpx/parser";
 import { setPendingArtwork } from "@/lib/client/pending";
 import { downloadBlob } from "@/lib/render/png";
 import { Icon, PathThumb, latlngToXY, type IconName } from "@/components/Icon";
-import { awardRun, loadActiveRun, loadPlannedRoute, loadWallet, plannedRouteBadge, saveActiveRun, type PlannedRoute } from "@/lib/run/storage";
+import { awardRun, loadActiveRun, loadPlannedRoute, loadWallet, plannedRouteBadge, recoverRecord, saveActiveRun, type PlannedRoute } from "@/lib/run/storage";
+import { loadVoicePref, primeVoice, saveVoicePref, speak, voiceSupported } from "@/lib/run/voice";
 import { DAILY_POINT_CAP, POINTS_PER_CHECKPOINT, cappedPoints, collectedCount, emptyRewards, isMissed, placeCheckpoints, stepRewards, type RewardState } from "@/lib/run/rewards";
 import {
   RouteTracker,
@@ -22,6 +23,7 @@ import {
   elapsedMs,
   emptyRecord,
   formatDuration,
+  spokenDuration,
   formatPace,
   pause,
   startOrResume,
@@ -68,6 +70,12 @@ export function RunApp() {
   const [todayPoints, setTodayPoints] = useState(0);
   const [award, setAward] = useState<{ points: number; collected: number } | null>(null);
   const [toast, setToast] = useState<{ text: string; key: number } | null>(null);
+  // 종료는 두 번 눌러야 한다 (주머니·손바닥에 닿아 끝나지 않게)
+  const [endArmed, setEndArmed] = useState(false);
+  // 앱이 꺼졌다 켜져 되살린 결과 화면의 그림 이름 (그사이 다른 코스를 골랐을 수 있다)
+  const [finishedShape, setFinishedShape] = useState<string | null | undefined>(undefined);
+  const [voiceOn, setVoiceOn] = useState(loadVoicePref);
+  const voiceRef = useRef(voiceOn);
 
   const setRec = useCallback((r: RunRecord) => {
     recordRef.current = r;
@@ -87,13 +95,29 @@ export function RunApp() {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- 브라우저 전용 값(저장소·위치·로그인 세션)은 서버 렌더와 어긋나지 않게 첫 화면 뒤 효과에서 읽는다
     setRoute(r);
     const active = loadActiveRun();
-    if (active && active.record.segments.length && (active.routeId === (r?.id ?? null))) {
-      setResumeOffer({ ...active.record, resumedAt: null });
+    if (active?.finished && active.record.segments.length) {
+      // 종료 뒤 작품방에 걸기 전에 앱이 꺼졌다: 결과 화면을 그대로 되살린다
+      setRec(active.record);
+      if (active.rewards) setRew(active.rewards);
+      setAward({ points: active.finished.points, collected: active.finished.collected });
+      setFinishedShape(active.finished.shapeName);
+      setStatus("finished");
+    } else if (active && active.record.segments.length && (active.routeId === (r?.id ?? null))) {
+      setResumeOffer(recoverRecord(active));
       resumeRewards.current = active.rewards ?? null;
     }
     setTodayPoints(loadWallet(Date.now()).dayPoints);
     setLoaded(true);
-  }, []);
+  }, [setRec, setRew]);
+
+  useEffect(() => {
+    voiceRef.current = voiceOn;
+  }, [voiceOn]);
+  useEffect(() => {
+    if (!endArmed) return;
+    const t = setTimeout(() => setEndArmed(false), 3000);
+    return () => clearTimeout(t);
+  }, [endArmed]);
 
   // 지도에 코스 그리기
   useEffect(() => {
@@ -249,6 +273,7 @@ export function RunApp() {
   }, [status]);
 
   function start() {
+    primeVoice();
     if (status === "ready") {
       setTrackerKey((k) => k + 1);
       setGuide(null);
@@ -275,7 +300,9 @@ export function RunApp() {
     const { points, wallet } = awardRun(r.startedAt ?? Date.now(), collected, Date.now());
     setAward({ points, collected });
     setTodayPoints(wallet.dayPoints);
-    saveActiveRun(null);
+    // 작품방에 걸거나 버릴 때까지 기기에 남긴다 (결과 화면에서 앱이 꺼져도 기록을 잃지 않게)
+    saveActiveRun({ routeId: route?.id ?? null, record: r, rewards: rewardsRef.current, savedAt: Date.now(), finished: { points, collected, shapeName: route?.shapeName ?? null } });
+    setFinishedShape(undefined);
     setStatus("finished");
   }
   function discard() {
@@ -286,7 +313,19 @@ export function RunApp() {
     setAward(null);
     setResumeOffer(null);
     setGuide(null);
+    setFinishedShape(undefined);
     setStatus("ready");
+  }
+
+  const shapeName = finishedShape !== undefined ? finishedShape : (route?.shapeName ?? null);
+  function toggleVoice() {
+    const on = !voiceOn;
+    setVoiceOn(on);
+    saveVoicePref(on);
+    if (on) {
+      primeVoice();
+      speak("음성 안내를 켰어요");
+    } else window.speechSynthesis?.cancel();
   }
 
   function toArtworkRoom() {
@@ -295,10 +334,11 @@ export function RunApp() {
     try {
       const d = new Date(record.startedAt ?? Date.now());
       const date = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-      const { view } = buildArtwork(track, { title: route ? `${route.shapeName} 러닝` : "나의 러닝 그림", recordedDate: date });
+      const { view } = buildArtwork(track, { title: shapeName ? `${shapeName} 러닝` : "나의 러닝 그림", recordedDate: date });
       // 작품 아래 흐린 도로망: 뒤에서 받아 이 기기에만 보관한다. 못 받으면 지도 없이 그대로.
       attachRoadMap(view.id, track.segments);
       setPendingArtwork(view);
+      saveActiveRun(null);
       router.push("/room");
     } catch (e) {
       setMessage(describeImportError(e).title);
@@ -306,7 +346,7 @@ export function RunApp() {
   }
 
   function exportRecord() {
-    const gpx = toGpx(route ? `Yorun ${route.shapeName} 러닝 기록` : "Yorun 러닝 기록", record.segments);
+    const gpx = toGpx(shapeName ? `Yorun ${shapeName} 러닝 기록` : "Yorun 러닝 기록", record.segments);
     downloadBlob(new Blob([gpx], { type: "application/gpx+xml" }), "yorun-run.gpx");
   }
 
@@ -326,14 +366,16 @@ export function RunApp() {
   const lastStatus = useRef<Status>(status);
   const lastGps = useRef(gpsState);
   // 같은 문장을 다시 넣어도 낭독되도록 한 번 비웠다가 넣는다
-  const announce = useCallback((set: (v: string) => void, text: string) => {
+  // say: 음성으로도 말할지 (urgent는 앞선 말을 끊고 바로)
+  const announce = useCallback((set: (v: string) => void, text: string, say?: "polite" | "urgent") => {
     set("");
     requestAnimationFrame(() => set(text));
+    if (say && voiceRef.current) speak(text, say === "urgent");
   }, []);
 
   useEffect(() => {
     const km = Math.floor(record.distanceMeters / 1000);
-    if (status === "running" && km > lastKm.current) announce(setSayPolite, `${km}킬로미터, ${formatDuration(elapsed)}`);
+    if (status === "running" && km > lastKm.current) announce(setSayPolite, `${km}킬로미터, ${spokenDuration(elapsed)}`, "polite");
     lastKm.current = km;
   }, [record.distanceMeters, status, elapsed, announce]);
 
@@ -350,7 +392,7 @@ export function RunApp() {
     navigator.vibrate?.(80);
     const text = gained > 0 ? `+${gained}P` : "오늘 적립 완료";
     setToast({ text, key: collected });
-    announce(setSayPolite, gained > 0 ? `${gained}포인트 획득, 이번 달리기 ${livePoints}포인트` : `오늘 적립 한도 ${DAILY_POINT_CAP}포인트를 채웠어요`);
+    announce(setSayPolite, gained > 0 ? `${gained}포인트 획득, 이번 달리기 ${livePoints}포인트` : `오늘 적립 한도 ${DAILY_POINT_CAP}포인트를 채웠어요`, "polite");
     clearTimeout(toastTimer.current);
     toastTimer.current = setTimeout(() => setToast(null), 1600);
   }, [collected, livePoints, todayPoints, status, announce]);
@@ -360,9 +402,10 @@ export function RunApp() {
     const prev = lastStatus.current;
     lastStatus.current = status;
     if (prev === status) return;
-    if (status === "paused") announce(setSayPolite, "일시정지했어요");
-    else if (status === "running" && prev === "paused") announce(setSayPolite, "다시 시작했어요");
-    else if (status === "running") announce(setSayPolite, "달리기를 시작했어요");
+    if (status === "paused") announce(setSayPolite, "일시정지했어요", "polite");
+    else if (status === "running" && prev === "paused") announce(setSayPolite, "다시 시작했어요", "polite");
+    else if (status === "running") announce(setSayPolite, "달리기를 시작했어요", "polite");
+    else if (status === "finished" && prev !== "ready") announce(setSayPolite, "달리기를 마쳤어요", "polite");
   }, [status, announce]);
 
   useEffect(() => {
@@ -372,14 +415,14 @@ export function RunApp() {
     const stage = t.inMeters <= 50 ? 2 : t.inMeters <= 200 ? 1 : 0;
     const prev = lastTurn.current;
     if (!prev || prev.key !== key || stage > prev.stage) {
-      announce(setSayAlert, `${Math.max(0, Math.round(t.inMeters / 10) * 10)}미터 앞 ${TURN_LABEL[t.dir]}`);
+      announce(setSayAlert, `${Math.max(0, Math.round(t.inMeters / 10) * 10)}미터 앞 ${TURN_LABEL[t.dir]}`, "urgent");
       lastTurn.current = { key, stage };
     }
   }, [guide, status, offRoute, announce]);
 
   useEffect(() => {
-    if (offRoute && !wasOff.current) announce(setSayAlert, `코스에서 ${Math.round(guide?.offRouteMeters ?? 0)}미터 벗어났어요. 코스 쪽으로 돌아가 주세요.`);
-    else if (!offRoute && wasOff.current && status === "running") announce(setSayAlert, "코스로 돌아왔어요");
+    if (offRoute && !wasOff.current) announce(setSayAlert, `코스에서 ${Math.round(guide?.offRouteMeters ?? 0)}미터 벗어났어요. 코스 쪽으로 돌아가 주세요.`, "urgent");
+    else if (!offRoute && wasOff.current && status === "running") announce(setSayAlert, "코스로 돌아왔어요", "urgent");
     wasOff.current = offRoute;
   }, [offRoute, guide, status, announce]);
 
@@ -461,6 +504,11 @@ export function RunApp() {
               <Link href="/routes" className="map-fab" aria-label="코스 찾기" title="코스 찾기">
                 <Icon name="back" size={22} />
               </Link>
+            )}
+            {voiceSupported() && (
+              <button type="button" className="map-fab" aria-pressed={voiceOn} aria-label={voiceOn ? "음성 안내 끄기" : "음성 안내 켜기"} title={voiceOn ? "음성 안내 끄기" : "음성 안내 켜기"} onClick={toggleVoice}>
+                <Icon name={voiceOn ? "volume" : "volumeOff"} size={22} />
+              </button>
             )}
             {!(active && gpsState === "ok") && (
               <span className={`badge gps-badge ${gpsTone}`}>
@@ -544,9 +592,17 @@ export function RunApp() {
                   다시 시작
                 </button>
               )}
-              <button type="button" className="btn btn-run end" onClick={finish}>
+              <button
+                type="button"
+                className={`btn btn-run end ${endArmed ? "armed" : ""}`}
+                onClick={() => {
+                  if (!endArmed) return setEndArmed(true);
+                  setEndArmed(false);
+                  finish();
+                }}
+              >
                 <Icon name="stop" size={22} />
-                종료
+                {endArmed ? "한 번 더 눌러 종료" : "종료"}
               </button>
             </div>
           </>

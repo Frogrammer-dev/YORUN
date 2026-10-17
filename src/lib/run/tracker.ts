@@ -183,6 +183,13 @@ export function formatDuration(ms: number) {
   return h ? `${h}:${String(m).padStart(2, "0")}:${String(sec).padStart(2, "0")}` : `${m}:${String(sec).padStart(2, "0")}`;
 }
 
+/** 음성 안내용 시간 ("1시간 2분 5초") */
+export function spokenDuration(ms: number) {
+  const s = Math.floor(ms / 1000);
+  const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
+  return [h && `${h}시간`, m && `${m}분`, (sec || !(h || m)) && `${sec}초`].filter(Boolean).join(" ");
+}
+
 /** 페이스 (분:초 /km) */
 export function formatPace(ms: number, meters: number) {
   if (meters < 50) return "-'--\"";

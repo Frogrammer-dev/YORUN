@@ -1,5 +1,6 @@
 // S-01 시작·가져오기
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { LandingStart } from "@/components/LandingStart";
 import { SceneSvg } from "@/components/SceneSvg";
 import { BrandMark, Icon } from "@/components/Icon";
@@ -43,7 +44,11 @@ function HeroArt() {
   );
 }
 
-export default function Home() {
+export default async function Home({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
+  // Supabase가 허용 목록에 없는 복귀 주소 대신 사이트 첫 화면(?code=)으로 돌려보낸 로그인도 마저 처리한다
+  const { code } = await searchParams;
+  if (typeof code === "string") redirect(`/auth/callback?code=${encodeURIComponent(code)}&next=%2Froom`);
+
   return (
     <main className="landing">
       <div className="hero-dark">

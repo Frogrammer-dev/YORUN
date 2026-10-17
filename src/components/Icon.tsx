@@ -9,6 +9,18 @@ const PATHS = {
       <rect x="14" y="4.5" width="4" height="15" rx="1.2" fill="currentColor" stroke="none" />
     </>
   ),
+  volume: (
+    <>
+      <path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor" stroke="none" />
+      <path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" />
+    </>
+  ),
+  volumeOff: (
+    <>
+      <path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor" stroke="none" />
+      <path d="M16 9.5l5 5M21 9.5l-5 5" />
+    </>
+  ),
   stop: <rect x="5.5" y="5.5" width="13" height="13" rx="2.5" fill="currentColor" stroke="none" />,
   locate: (
     <>

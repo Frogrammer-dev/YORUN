@@ -2,7 +2,7 @@
 // 선택한 코스·진행 중인 달리기를 이 기기에만 보관한다 (서버 전송 없음).
 // 저장소를 쓸 수 없는 환경(사생활 보호 모드 등)에서는 조용히 실패하고 화면 상태만 유지한다.
 
-import type { RunRecord } from "./tracker";
+import { pause, type RunRecord } from "./tracker";
 import { cappedPoints, kstDay, type RewardState } from "./rewards";
 import type { ShapeKey } from "@/lib/route/shapes";
 
@@ -61,9 +61,14 @@ export interface ActiveRun {
   /** 이번 달리기에서 주운 포인트 객체 (앱이 꺼져도 이어 달리기에서 이어진다) */
   rewards?: RewardState;
   savedAt: number;
+  /** 종료했지만 아직 작품방에 걸거나 버리지 않은 달리기. 앱이 꺼져도 결과 화면을 되살린다. */
+  finished?: { points: number; collected: number; shapeName: string | null };
 }
 export const saveActiveRun = (r: ActiveRun | null) => write(RUN_KEY, r);
 export const loadActiveRun = () => read<ActiveRun>(RUN_KEY);
+
+/** 앱이 꺼졌다 다시 열린 뒤: 마지막 저장 시각까지 달린 시간을 쌓고 일시정지 상태로 되돌린다 */
+export const recoverRecord = (a: ActiveRun): RunRecord => pause(a.record, a.savedAt);
 
 // ───────────────────────── 포인트 (지금은 이 기기에만 보관) ─────────────────────────
 

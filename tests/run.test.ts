@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { RouteTracker, addFix, elapsedMs, emptyRecord, formatPace, pause, startOrResume, toGpx } from "@/lib/run/tracker";
+import { RouteTracker, addFix, elapsedMs, emptyRecord, formatPace, pause, spokenDuration, startOrResume, toGpx } from "@/lib/run/tracker";
+import { recoverRecord } from "@/lib/run/storage";
 import { parse } from "./helpers";
 
 const LAT0 = 35.15, LON0 = 129.1;
@@ -59,6 +60,21 @@ describe("기록", () => {
     expect(r.segments).toHaveLength(2);
     expect(r.distanceMeters).toBeCloseTo(10, 0);
     expect(elapsedMs(r, 70_000)).toBe(20_000);
+  });
+
+  it("앱이 꺼졌다 켜져도 마지막 저장까지 달린 시간을 잃지 않음", () => {
+    // 일시정지 없이 30분 달리다 앱이 꺼짐 (마지막 저장 30분 시점)
+    let r = startOrResume(emptyRecord(), 0);
+    r = addFix(r, fix(0, 0, 1000)).record;
+    const restored = recoverRecord({ routeId: null, record: r, savedAt: 30 * 60_000 });
+    expect(restored.resumedAt).toBeNull();
+    expect(elapsedMs(restored, 99 * 60_000)).toBe(30 * 60_000);
+  });
+
+  it("음성용 시간", () => {
+    expect(spokenDuration(0)).toBe("0초");
+    expect(spokenDuration(125_000)).toBe("2분 5초");
+    expect(spokenDuration(3_600_000)).toBe("1시간");
   });
 
   it("페이스 표시", () => {
