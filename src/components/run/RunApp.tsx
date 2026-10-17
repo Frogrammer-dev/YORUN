@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import type * as Leaflet from "leaflet";
 import { useLeafletMap } from "@/components/map/useLeafletMap";
 import { buildArtwork } from "@/lib/art/artwork";
+import { attachRoadMap } from "@/lib/art/roadMap";
 import { describeImportError } from "@/lib/gpx/errors";
 import type { GpxTrack } from "@/lib/gpx/parser";
 import { setPendingArtwork } from "@/lib/client/pending";
@@ -295,6 +296,8 @@ export function RunApp() {
       const d = new Date(record.startedAt ?? Date.now());
       const date = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
       const { view } = buildArtwork(track, { title: route ? `${route.shapeName} 러닝` : "나의 러닝 그림", recordedDate: date });
+      // 작품 아래 흐린 도로망: 뒤에서 받아 이 기기에만 보관한다. 못 받으면 지도 없이 그대로.
+      attachRoadMap(view.id, track.segments);
       setPendingArtwork(view);
       router.push("/room");
     } catch (e) {

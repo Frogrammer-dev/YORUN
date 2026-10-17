@@ -46,9 +46,6 @@ export const SHARE = {
   maxSnapshotBytes: 2 * 1024 * 1024,
 } as const;
 
-export const DRAFT = {
-  ttlMs: 24 * 60 * 60 * 1000,
-} as const;
 
 export const FRAMES = ["plain", "paper", "neon"] as const;
 export type Frame = (typeof FRAMES)[number];

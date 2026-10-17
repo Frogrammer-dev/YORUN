@@ -2,7 +2,7 @@
 import { memo, type KeyboardEvent as ReactKeyboardEvent, type PointerEvent as ReactPointerEvent, type Ref } from "react";
 import { ROOM } from "@/lib/contracts/limits";
 import { formatDistance } from "@/lib/gpx/metrics";
-import { FLOOR_Y, THEME_COLORS, layoutScene, type LaidOutItem, type LaidOutLine, type Scene } from "@/lib/render/scene";
+import { backdropMarkup, frameMarkup, layoutScene, type LaidOutItem, type LaidOutLine, type Scene } from "@/lib/render/scene";
 
 interface Props {
   scene: Scene;
@@ -27,7 +27,6 @@ export function SceneSvg({
   showLabels,
   ariaLabel,
 }: Props) {
-  const t = THEME_COLORS[scene.theme] ?? THEME_COLORS.light;
   const interactive = !!onItemPointerDown;
   return (
     <svg
@@ -38,9 +37,8 @@ export function SceneSvg({
       className="scene"
       style={{ touchAction: interactive ? "none" : undefined }}
     >
-      <rect x={0} y={0} width={ROOM.width} height={ROOM.height} fill={t.wall} onPointerDown={onBackgroundPointerDown} />
-      <rect x={0} y={FLOOR_Y} width={ROOM.width} height={ROOM.height - FLOOR_Y} fill={t.floor} onPointerDown={onBackgroundPointerDown} />
-      <line x1={0} y1={FLOOR_Y} x2={ROOM.width} y2={FLOOR_Y} stroke={t.floorLine} strokeWidth={3} pointerEvents="none" />
+      {/* 배경·액자 조각은 상수와 검증된 enum으로만 만든 문자열이라 그대로 넣는다 (PNG와 같은 출력) */}
+      <g onPointerDown={onBackgroundPointerDown} dangerouslySetInnerHTML={{ __html: backdropMarkup(scene.theme) }} />
       {layoutScene(scene).map((it) => (
         <ItemG
           key={it.key}
@@ -48,7 +46,9 @@ export function SceneSvg({
           transform={it.transform}
           side={it.side}
           half={it.half}
-          frame={it.frame}
+          frameHtml={frameMarkup(it.side, it.frameKind, scene.theme)}
+          labelColor={it.frame.label}
+          mapHtml={it.mapMarkup}
           strokeColor={it.strokeColor}
           strokeWidthPx={it.strokeWidthPx}
           dotRadius={it.dotRadius}
@@ -76,7 +76,9 @@ interface ItemProps {
   transform: string;
   side: number;
   half: number;
-  frame: LaidOutItem["frame"];
+  frameHtml: string;
+  labelColor: string;
+  mapHtml: string;
   strokeColor: string;
   strokeWidthPx: number;
   dotRadius: number;
@@ -91,7 +93,6 @@ interface ItemProps {
 
 const ItemG = memo(function ItemG(p: ItemProps) {
   const interactive = !!p.onPointerDown;
-  const fr = p.frame;
   return (
     <g
       transform={p.transform}
@@ -104,8 +105,8 @@ const ItemG = memo(function ItemG(p: ItemProps) {
       aria-pressed={interactive ? p.selected : undefined}
       className={interactive ? "scene-item" : undefined}
     >
-      {fr.glow && <rect x={-p.half} y={-p.half} width={p.side} height={p.side} fill="none" stroke={fr.glow} strokeOpacity={0.3} strokeWidth={9} />}
-      <rect x={-p.half} y={-p.half} width={p.side} height={p.side} fill={fr.fill} stroke={fr.stroke} strokeWidth={fr.strokeWidth} />
+      <g dangerouslySetInnerHTML={{ __html: p.frameHtml }} />
+      {p.mapHtml && <g pointerEvents="none" dangerouslySetInnerHTML={{ __html: p.mapHtml }} />}
       {p.lines.map((l, i) =>
         l.kind === "dot" ? (
           <circle key={i} cx={l.cx} cy={l.cy} r={p.dotRadius} fill={p.strokeColor} />
@@ -122,7 +123,7 @@ const ItemG = memo(function ItemG(p: ItemProps) {
         ),
       )}
       {p.label && (
-        <text x={0} y={p.half - p.side * 0.035} textAnchor="middle" fontSize={Math.max(10, p.side * 0.055)} fill={fr.glow ? "#F5D0F0" : "#4A4540"}>
+        <text x={0} y={p.half - p.side * 0.035} textAnchor="middle" fontSize={Math.max(10, p.side * 0.055)} fill={p.labelColor}>
           {p.label}
         </text>
       )}

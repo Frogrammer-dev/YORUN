@@ -107,13 +107,13 @@ export function Icon({ name, size = 20, ...rest }: { name: IconName; size?: numb
   );
 }
 
-/** 브랜드 마크: 둥근 사각 위 붓선 하트 */
+/** 브랜드 마크: 둥근 사각 위 붓선 고양이 */
 export function BrandMark({ size = 22 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true" focusable="false">
       <rect width="32" height="32" rx="9" fill="var(--brand)" />
-      <path d="M16 24.5 8.6 17.3c-2.3-2.3-1.6-6.6 2-7.1 2.4-.3 4.1 1.3 5.4 3.1 1.3-1.8 3-3.4 5.4-3.1 3.6.5 4.3 4.8 2 7.1z" fill="none" stroke="#fff" strokeWidth="2.6" strokeLinejoin="round" strokeLinecap="round" />
-      <circle cx="16" cy="24.5" r="1.9" fill="#fff" />
+      <path d="M16 23.7 20.3 22.6 22.8 19.2 23.3 15.2 22.3 12.1 23.3 8 19.6 10.4 16 9.9 12.4 10.4 8.7 8 9.7 12.1 8.7 15.2 9.2 19.2 11.7 22.6z" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinejoin="round" strokeLinecap="round" />
+      <circle cx="16" cy="23.7" r="1.9" fill="#fff" />
     </svg>
   );
 }

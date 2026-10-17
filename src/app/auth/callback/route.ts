@@ -1,4 +1,4 @@
-// 이메일 링크 로그인 복귀. 복귀 주소는 같은 출처의 상대 경로만 허용한다(열린 리다이렉트 방지).
+// 로그인 복귀 (이메일 링크·Google). 복귀 주소는 같은 출처의 상대 경로만 허용한다(열린 리다이렉트 방지).
 import { NextResponse } from "next/server";
 import { createUserClient } from "@/lib/server/supabase";
 

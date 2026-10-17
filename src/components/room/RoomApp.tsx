@@ -5,7 +5,8 @@ import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent a
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ROOM } from "@/lib/contracts/limits";
-import type { ArtworkView } from "@/lib/contracts/types";
+import type { ArtworkView, Pt } from "@/lib/contracts/types";
+import { ROAD_MAP_EVENT, RoadMapStore } from "@/lib/art/roadMap";
 import { DraftRepository } from "@/lib/draft/DraftRepository";
 import type { Scene } from "@/lib/render/scene";
 import { takePendingArtwork } from "@/lib/client/pending";
@@ -16,6 +17,8 @@ import { ItemPanel } from "./ItemPanel";
 import { ArchivePanel, ExportPanel, LoginPanel, SharePanel } from "./Panels";
 import { useRoom, type SaveStatus, type Session } from "./useRoom";
 import { BrandMark, Icon } from "@/components/Icon";
+
+const MAP_PREF = "yorun.roomRoadMap";
 
 type Tab = "edit" | "archive" | "export" | "share" | "login";
 
@@ -35,6 +38,15 @@ export function RoomApp() {
   const [tab, setTab] = useState<Tab>("edit");
   const [guestRestore, setGuestRestore] = useState<"none" | "ask" | "failed">("none");
   const [accountDraftAsk, setAccountDraftAsk] = useState(false);
+  // 작품 뒤 흐린 도로망: 이 기기에 보관된 것만 쓰고, 켜기/끄기도 이 기기에만 기억한다.
+  const [showMap, setShowMap] = useState(() => {
+    try {
+      return localStorage.getItem(MAP_PREF) !== "off";
+    } catch {
+      return true;
+    }
+  });
+  const [maps, setMaps] = useState<Record<string, Pt[][] | null>>({});
   const svgRef = useRef<SVGSVGElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const drag = useRef<{ id: string; pointerId: number; sx: number; sy: number; ox: number; oy: number } | null>(null);
@@ -79,6 +91,38 @@ export function RoomApp() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [room.ready]);
 
+  const toggleMap = () => {
+    setShowMap((v) => {
+      try {
+        localStorage.setItem(MAP_PREF, v ? "off" : "on");
+      } catch {}
+      return !v;
+    });
+  };
+  const displayedIds = [...new Set(room.model.items.map((it) => it.artworkId))].join(",");
+  useEffect(() => {
+    const missing = displayedIds.split(",").filter((id) => id && !(id in maps));
+    if (!missing.length) return;
+    let alive = true;
+    void Promise.all(missing.map(async (id) => [id, (await RoadMapStore.load(id)) ?? null] as const)).then((r) => {
+      if (alive) setMaps((m) => ({ ...m, ...Object.fromEntries(r) }));
+    });
+    return () => {
+      alive = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [displayedIds]);
+  // 작품을 만든 뒤 늦게 도착한 도로망
+  useEffect(() => {
+    const onMap = (e: Event) => {
+      const id = (e as CustomEvent<string>).detail;
+      void RoadMapStore.load(id).then((l) => setMaps((m) => ({ ...m, [id]: l ?? null })));
+    };
+    window.addEventListener(ROAD_MAP_EVENT, onMap);
+    return () => window.removeEventListener(ROAD_MAP_EVENT, onMap);
+  }, []);
+  const hasMaps = Object.values(maps).some(Boolean);
+
   const scene: Scene = useMemo(
     () => ({
       theme: room.model.theme,
@@ -95,13 +139,14 @@ export function RoomApp() {
             zIndex: it.zIndex,
             style: it.style,
             lines: a.renderLines,
+            mapLines: showMap ? (maps[it.artworkId] ?? undefined) : undefined,
             title: a.title,
             distanceEstimateMeters: a.stats.distanceEstimateMeters,
             recordedDate: a.stats.recordedDate,
           };
         }),
     }),
-    [room.model],
+    [room.model, showMap, maps],
   );
 
   const selItem = room.model.items.find((i) => i.id === selected) ?? null;
@@ -182,6 +227,7 @@ export function RoomApp() {
     const sb = browserSupabase();
     // 계정 전환 시 다른 계정에 조용히 합치지 않도록 기기 초안을 모두 지운다.
     await DraftRepository.clearAll().catch(() => undefined);
+    await RoadMapStore.clearAll();
     await sb?.auth.signOut();
     router.replace("/");
   }
@@ -220,6 +266,19 @@ export function RoomApp() {
           >
             <Icon name={room.model.theme === "light" ? "sun" : "moon"} size={22} />
           </button>
+          {hasMaps && (
+            <button
+              type="button"
+              className="icon-btn"
+              aria-pressed={showMap}
+              aria-label={showMap ? "작품 뒤 도로망 끄기" : "작품 뒤 도로망 켜기"}
+              title={showMap ? "작품 뒤 도로망 끄기" : "작품 뒤 도로망 켜기"}
+              onClick={toggleMap}
+              style={{ opacity: showMap ? 1 : 0.45 }}
+            >
+              <Icon name="map" size={22} />
+            </button>
+          )}
           {!guest && (
             <button type="button" className="btn btn-link btn-sm" onClick={() => void logout()}>
               로그아웃
@@ -278,7 +337,7 @@ export function RoomApp() {
       )}
       {guestRestore === "failed" && (
         <p className="banner banner-warn" role="alert">
-          임시 작품을 복원하지 못했어요 (만료·기기 보관 실패·다른 브라우저에서 메일을 연 경우). 파일을 다시 선택해 주세요.
+          임시 작품을 복원하지 못했어요 (기기 보관 실패·브라우저 데이터 삭제·다른 브라우저에서 메일을 연 경우). 파일을 다시 선택해 주세요.
           <button type="button" className="btn btn-link" onClick={() => setGuestRestore("none")}>
             닫기
           </button>
@@ -315,7 +374,7 @@ export function RoomApp() {
           <div className="status stage-badge" aria-live="polite">
             {guest ? (
               <span className="badge badge-temp map-glass">
-                임시 작품방 · {room.deviceKeep === "tab_only" ? "현재 탭에만 있어요" : room.deviceKeep === "kept" ? "이 기기에 24시간 보관" : "미저장"}
+                임시 작품방 · {room.deviceKeep === "tab_only" ? "현재 탭에만 있어요" : room.deviceKeep === "kept" ? "이 기기에 보관 중" : "미저장"}
               </span>
             ) : (
               <span className={`badge badge-${room.status} map-glass`}>{STATUS_LABEL[room.status]}</span>

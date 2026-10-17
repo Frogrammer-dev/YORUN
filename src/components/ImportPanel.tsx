@@ -4,6 +4,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { buildArtwork } from "@/lib/art/artwork";
+import { attachRoadMap } from "@/lib/art/roadMap";
 import { DEFAULT_TITLE } from "@/lib/contracts/limits";
 import type { ArtworkView } from "@/lib/contracts/types";
 import { ImportError, describeImportError } from "@/lib/gpx/errors";
@@ -73,6 +74,8 @@ export function ImportPanel({ onCreated, compact, disabledReason }: Props) {
       const t = parsed.tracks[trackIndex];
       const { view } = buildArtwork(t, { title, recordedDate: date || null });
       track({ name: "preview_ready", durationBucket: durationBucket(performance.now() - startedAt.current) });
+      // 작품 아래 흐린 도로망: 뒤에서 받아 이 기기에만 보관한다. 못 받으면 지도 없이 그대로.
+      attachRoadMap(view.id, t.segments);
       setStep({ kind: "idle" });
       onCreated(view);
     } catch (e) {
@@ -220,7 +223,7 @@ function DetailsForm(p: {
         </label>
       )}
       <p className="hint">
-        GPS 좌표 기반 추정 거리 {formatDistance(trackDistanceMeters(t))} · 파일명·기기 정보·원래 위치는 저장하지 않아요.
+        GPS 좌표 기반 추정 거리 {formatDistance(trackDistanceMeters(t))} · 파일명·기기 정보·원래 위치는 서버에 저장하지 않아요. 작품 뒤 도로망은 기록 주변 범위로 도로 자료를 받아 이 기기에만 보관해요.
       </p>
       <div className="row import-actions">
         <button type="submit" className="btn btn-primary">

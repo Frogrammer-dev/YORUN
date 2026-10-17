@@ -305,8 +305,10 @@ export function RouteFinderApp() {
         if (id !== reqId.current) return;
         setPhase({
           kind: "error",
-          message: String((e as Error)?.message) === "road_data_unavailable"
-            ? "저장된 한국 길 데이터를 열지 못했어요. 서버의 데이터 설치 상태를 확인해 주세요."
+          message: String((e as Error)?.message) === "road_data_busy"
+            ? "길 데이터 서버가 붐벼요. 잠시 뒤 다시 시도해 주세요."
+            : String((e as Error)?.message) === "road_data_unavailable"
+            ? "길 데이터를 받지 못했어요. 잠시 뒤 다시 시도해 주세요."
             : String((e as Error)?.message) === "road_area_too_large"
               ? "길이 많은 지역이에요. 검색 범위를 줄여 주세요."
               : "지도 길 데이터를 받지 못했어요. 연결을 확인하고 다시 시도해 주세요.",

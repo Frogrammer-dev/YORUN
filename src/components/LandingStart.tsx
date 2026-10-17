@@ -1,7 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { ImportPanel } from "./ImportPanel";
-import { buildDemoArtwork } from "@/lib/art/artwork";
+import { buildDemoArtwork, demoMapLines } from "@/lib/art/artwork";
+import { RoadMapStore } from "@/lib/art/roadMap";
 import { setPendingArtwork } from "@/lib/client/pending";
 import type { ArtworkView } from "@/lib/contracts/types";
 
@@ -15,7 +16,11 @@ export function LandingStart() {
   return (
     <div className="start">
       <ImportPanel onCreated={go} />
-      <button type="button" className="btn btn-link" onClick={() => go(buildDemoArtwork().view)}>
+      <button type="button" className="btn btn-link" onClick={async () => {
+          const { view } = buildDemoArtwork();
+          await RoadMapStore.save(view.id, demoMapLines("dog"));
+          go(view);
+        }}>
         GPX가 없나요? 예시 기록으로 둘러보기
       </button>
     </div>

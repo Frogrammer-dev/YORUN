@@ -47,7 +47,7 @@ export async function renderScenePng(scene: Scene, opts: PngOptions): Promise<Bl
       ctx.font = `${Math.max(10, it.side * 0.055)}px ${fontFamily}`;
       ctx.textAlign = "center";
       ctx.textBaseline = "alphabetic";
-      ctx.fillStyle = it.frame.glow ? "#F5D0F0" : "#4A4540";
+      ctx.fillStyle = it.frame.label;
       ctx.fillText(parts.join(" · "), 0, it.half - it.side * 0.035, it.side * 0.92);
       ctx.restore();
     }

@@ -6,6 +6,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { toCreateRequest } from "@/lib/art/artwork";
+import { RoadMapStore } from "@/lib/art/roadMap";
 import { ROOM, type Theme } from "@/lib/contracts/limits";
 import type { ArtworkView, MyRoomDto, RoomItem, ShareStatusDto } from "@/lib/contracts/types";
 import { DraftRepository } from "@/lib/draft/DraftRepository";
@@ -202,7 +203,8 @@ export function useRoom(session: Session) {
       setBusy("작품을 저장하는 중");
       try {
         const before = modelRef.current.artworkCount;
-        await api(`/api/artworks`, { method: "POST", body: toCreateRequest(view) });
+        const r = await api<{ artworkId: string }>(`/api/artworks`, { method: "POST", body: toCreateRequest(view) });
+        await RoadMapStore.rename(view.id, r.artworkId);
         await loadServer();
         track({ name: before === 0 ? "first_art_saved" : "second_art_saved" });
         setNotice({ tone: "info", text: "작품을 저장하고 방에 전시했어요." });
@@ -329,11 +331,13 @@ export function useRoom(session: Session) {
       };
       if (session.kind !== "account") {
         markDirty(strip(m));
+        void RoadMapStore.remove(artworkId);
         return true;
       }
       try {
         const r = await api<{ roomRevision: number }>(`/api/artworks/${artworkId}`, { method: "DELETE" });
         rebase(r.roomRevision, strip);
+        void RoadMapStore.remove(artworkId);
         // 공유에 이 작품이 있었다면 서버가 폐기했다. 상태를 다시 확인한다.
         if (m.share) {
           const dto = await api<MyRoomDto>("/api/me/room").catch(() => null);
@@ -413,7 +417,7 @@ export function useRoom(session: Session) {
     if (session.kind !== "account") return;
     const d = await DraftRepository.loadGuest().catch(() => null);
     if (!d) {
-      setNotice({ tone: "warn", text: "임시 작품을 복원하지 못했어요(만료·기기 보관 실패·다른 브라우저). 파일을 다시 선택해 주세요." });
+      setNotice({ tone: "warn", text: "임시 작품을 복원하지 못했어요(기기 보관 실패·브라우저 데이터 삭제·다른 브라우저). 파일을 다시 선택해 주세요." });
       return;
     }
     setBusy("임시 작품을 계정에 저장하는 중");
@@ -426,6 +430,7 @@ export function useRoom(session: Session) {
         if (!a.geometry || !a.clientRequestId) continue;
         const r = await api<{ artworkId: string }>("/api/artworks", { method: "POST", body: toCreateRequest(a) });
         idMap.set(a.id, r.artworkId);
+        await RoadMapStore.rename(a.id, r.artworkId);
       }
       const dto = await loadServer();
       // 원래 빈 방이었다면 임시 방에서 꾸민 배치·스타일을 그대로 옮긴다.

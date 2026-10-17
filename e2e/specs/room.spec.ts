@@ -92,7 +92,7 @@ test("새로고침하면 임시 초안이 복원되고, 원 위경도·시각은
   await page.waitForTimeout(600); // 초안 저장 지연
   await page.reload();
   await expect(page.locator(".scene-item")).toHaveCount(2);
-  await expect(page.getByText("이 기기에 24시간 보관")).toBeVisible();
+  await expect(page.getByText("이 기기에 보관 중")).toBeVisible();
   const stored = await page.evaluate(
     () =>
       new Promise<string>((res) => {

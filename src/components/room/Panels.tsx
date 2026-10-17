@@ -247,7 +247,7 @@ export function SharePanel({ room, session, onNeedLogin }: { room: RoomApi; sess
 
 export function LoginPanel({ guest, onClose, prepareDraft }: { guest: boolean; onClose: () => void; prepareDraft: () => Promise<string | null> }) {
   const [email, setEmail] = useState("");
-  const [state, setState] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [state, setState] = useState<"idle" | "sending" | "sent" | "error" | "oauthError">("idle");
   const [kept, setKept] = useState<boolean | null>(null);
   const supabase = browserSupabase();
 
@@ -263,18 +263,26 @@ export function LoginPanel({ guest, onClose, prepareDraft }: { guest: boolean; o
     );
   }
 
+  /** 로그인 후 돌아올 주소. 복귀 주소에는 예측 불가능한 draftId만 넣는다. 작품 내용은 이 기기의 IndexedDB에만 있다. */
+  async function callbackUrl() {
+    const draftId = guest ? await prepareDraft() : null;
+    setKept(guest ? draftId !== null : null);
+    const next = draftId ? `/room?draft=${encodeURIComponent(draftId)}` : "/room";
+    return `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`;
+  }
+
   async function send(e: React.FormEvent) {
     e.preventDefault();
     setState("sending");
-    const draftId = guest ? await prepareDraft() : null;
-    setKept(guest ? draftId !== null : null);
-    // 복귀 주소에는 예측 불가능한 draftId만 넣는다. 작품 내용은 이 기기의 IndexedDB에만 있다.
-    const next = draftId ? `/room?draft=${encodeURIComponent(draftId)}` : "/room";
-    const { error } = await supabase!.auth.signInWithOtp({
-      email: email.trim(),
-      options: { emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}` },
-    });
+    const { error } = await supabase!.auth.signInWithOtp({ email: email.trim(), options: { emailRedirectTo: await callbackUrl() } });
     setState(error ? "error" : "sent");
+  }
+
+  // 성공하면 구글 화면으로 이동했다가 /auth/callback으로 돌아온다
+  async function google() {
+    setState("sending");
+    const { error } = await supabase!.auth.signInWithOAuth({ provider: "google", options: { redirectTo: await callbackUrl() } });
+    if (error) setState("oauthError");
   }
 
   return (
@@ -292,11 +300,20 @@ export function LoginPanel({ guest, onClose, prepareDraft }: { guest: boolean; o
         </>
       ) : (
         <form onSubmit={send}>
+          <button type="button" className="btn btn-secondary" style={{ width: "100%" }} onClick={() => void google()} disabled={state === "sending"}>
+            Google로 계속하기
+          </button>
+          {state === "oauthError" && (
+            <p className="card card-error" role="alert">
+              Google 로그인을 시작하지 못했어요. 임시 작품은 그대로예요. 이메일 링크로 로그인해 주세요.
+            </p>
+          )}
+          <p className="hint center">또는 이메일로 로그인 링크 받기</p>
           <label className="field">
             <span>이메일</span>
             <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" />
           </label>
-          <p className="hint">임시 작품은 이 기기에 24시간 보관돼요. 다른 기기·브라우저에서 메일을 열면 이어받지 못할 수 있어요.</p>
+          <p className="hint">임시 작품은 이 기기(브라우저)에 계속 보관돼요. 다른 기기·브라우저에서 메일을 열면 이어받지 못할 수 있어요.</p>
           <button type="submit" className="btn btn-primary" disabled={state === "sending"}>
             {state === "sending" ? "보내는 중…" : "로그인 링크 받기"}
           </button>

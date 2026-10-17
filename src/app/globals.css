@@ -259,7 +259,7 @@ legend { font-weight: 700; font-size: var(--fs-callout); padding-right: var(--sp
 /* ───────── 작품방 ───────── */
 .room-page { min-height: 100vh; }
 .room-layout { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: var(--sp-5); padding: var(--sp-5) var(--gutter); align-items: start; max-width: 1400px; margin: 0 auto; }
-.stage-canvas { width: 100%; border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--sh-2); background: #ddd; }
+.stage-canvas { width: 100%; border-radius: 18px; overflow: hidden; box-shadow: 0 1px 0 rgba(255,255,255,.7) inset, 0 24px 48px -24px rgba(10,20,40,.35); background: #ddd; }
 .scene { display: block; width: 100%; height: auto; user-select: none; -webkit-user-select: none; }
 .stage-tools { margin-top: var(--sp-3); }
 .side { position: sticky; top: var(--sp-3); }

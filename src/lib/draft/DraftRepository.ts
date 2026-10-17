@@ -1,8 +1,8 @@
-// DraftRepository (5.1, 8.3): 기기 내 임시 보관·복원·기한 삭제.
+// DraftRepository (5.1, 8.3): 기기 내 보관·복원. 기한 없이 사용자가 지우거나 로그아웃할 때까지 남는다.
 // 원 위치를 제외한 정규화 작품과 배치만 저장한다. 원본 XML·위경도·점별 시간·파일명은 저장하지 않는다.
 // IndexedDB를 쓸 수 없으면 실패를 그대로 알리며, 저장된 것처럼 표시하지 않는다.
 
-import { DRAFT, type Theme } from "@/lib/contracts/limits";
+import type { Theme } from "@/lib/contracts/limits";
 import type { ArtworkView, RoomItem } from "@/lib/contracts/types";
 
 const DB_NAME = "runcanvas";
@@ -12,7 +12,6 @@ const GUEST_KEY = "guest";
 export interface GuestDraft {
   draftId: string;
   createdAt: number;
-  expiresAt: number;
   theme: Theme;
   items: RoomItem[];
   /** geometry·clientRequestId를 포함한 로컬 작품 (기준 위치 없는 상대 형상). */
@@ -71,12 +70,11 @@ function sanitizeArtwork(a: ArtworkView): ArtworkView {
 }
 
 export const DraftRepository = {
-  async saveGuest(d: Omit<GuestDraft, "expiresAt" | "createdAt"> & { createdAt?: number }): Promise<void> {
+  async saveGuest(d: Omit<GuestDraft, "createdAt"> & { createdAt?: number }): Promise<void> {
     const createdAt = d.createdAt ?? Date.now();
     const value: GuestDraft = {
       draftId: d.draftId,
       createdAt,
-      expiresAt: createdAt + DRAFT.ttlMs,
       theme: d.theme,
       items: d.items,
       artworks: d.artworks.map(sanitizeArtwork),
@@ -84,14 +82,8 @@ export const DraftRepository = {
     await tx("readwrite", (s) => s.put(value, GUEST_KEY));
   },
 
-  /** 24시간이 지난 초안은 읽는 즉시 폐기한다. */
   async loadGuest(): Promise<GuestDraft | null> {
-    const d = (await tx<GuestDraft>("readonly", (s) => s.get(GUEST_KEY))) ?? null;
-    if (d && d.expiresAt < Date.now()) {
-      await this.clearGuest();
-      return null;
-    }
-    return d;
+    return (await tx<GuestDraft>("readonly", (s) => s.get(GUEST_KEY))) ?? null;
   },
 
   async clearGuest(): Promise<void> {
