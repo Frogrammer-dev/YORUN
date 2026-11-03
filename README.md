@@ -18,7 +18,7 @@ npm run dev            # http://localhost:3000  → /routes 에서 코스 찾기
 ```
 
 - 위치(GPS)는 **보안 연결(HTTPS) 또는 localhost**에서만 동작합니다. 휴대폰에서 시험하려면 HTTPS로 배포하거나 `npx next dev --experimental-https`를 쓰세요.
-- 홈 화면에 추가하면 앱처럼 열립니다 (`/manifest.webmanifest`, 시작 주소 `/routes`).
+- 홈 화면에 추가하면 앱처럼 열립니다 (`/manifest.webmanifest`, 시작 주소 `/routes`). 배포 절차: [docs/deployment.md](docs/deployment.md).
 - Supabase 환경변수가 없어도 코스 찾기·달리기·임시 작품방·PNG는 동작합니다. 로그인 저장·공유는 아래 설정이 필요합니다.
 
 ### Supabase 연결 (작품방 저장·로그인·공유)

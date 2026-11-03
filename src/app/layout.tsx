@@ -7,6 +7,12 @@ const numFont = Barlow_Condensed({ weight: ["600", "700"], subsets: ["latin"], v
 export const metadata: Metadata = {
   title: "요런 — 달린 그림으로 꾸미는 나의 작품방",
   description: "러닝 GPX 기록의 선을 내 작품으로 만들어 작품방에 전시하고 공유해요.",
+  applicationName: "요런",
+  appleWebApp: { capable: true, title: "요런", statusBarStyle: "default" },
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
 };
 
 export const viewport: Viewport = {

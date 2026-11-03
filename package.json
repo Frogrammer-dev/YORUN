@@ -2,6 +2,7 @@
   "name": "yorun",
   "version": "0.1.0",
   "private": true,
+  "engines": { "node": ">=22.13" },
   "description": "요런 — 달린 그림으로 꾸미는 나의 작품방 (P0 시제품)",
   "scripts": {
     "lab": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/recognition-lab.mjs",
