@@ -133,6 +133,7 @@ progress { width: 100%; accent-color: var(--brand); }
   font-size: var(--fs-callout); font-weight: 500; cursor: pointer; white-space: nowrap; padding: 0 var(--sp-1);
   transition: background-color 120ms, color 120ms;
 }
+.seg-btn:disabled { opacity: .55; cursor: not-allowed; }
 .seg-on { background: var(--surface); color: var(--text); font-weight: 700; box-shadow: var(--sh-1); }
 
 /* 탭 (작품방) */
@@ -732,6 +733,24 @@ a.hub-tile:active { transform: scale(.98); }
 .auth-head { display: flex; flex-direction: column; gap: var(--sp-2); padding: var(--sp-2) 0 var(--sp-2); }
 .auth-head h1 { margin: var(--sp-1) 0 0; font-size: var(--fs-title1); font-weight: 800; }
 .auth-head p { margin: 0; font-size: var(--fs-callout); color: var(--text-2); }
+.google-btn { display: flex; align-items: center; justify-content: center; gap: var(--sp-3); width: 100%; min-height: var(--btn-h); padding: 0 var(--sp-3); border: 1px solid var(--google-stroke); border-radius: var(--r-md); background: var(--google-fill); color: var(--google-text); font-size: var(--fs-callout); font-weight: 600; cursor: pointer; }
+.google-btn:active { background: var(--google-hover); }
+.google-btn:disabled { opacity: .55; cursor: not-allowed; }
+@media (hover: hover) { .google-btn:hover:not(:disabled) { background: var(--google-hover); } }
+.google-logo { flex: none; }
+.consent-box { margin: var(--sp-3) 0; }
+.consent-box .seg-field { margin-top: 0; }
+.consent-terms { display: flex; flex-direction: column; gap: var(--sp-2); margin: var(--sp-3) 0; padding: var(--sp-3); border-radius: var(--r-md); background: var(--surface-2); font-size: var(--fs-caption); line-height: 1.45; }
+.consent-terms dt { font-weight: 700; color: var(--text); }
+.consent-terms dd { margin: 0; color: var(--text-2); }
+.policy-page { max-width: 720px; }
+.policy-page section h2 { margin: var(--sp-5) 0 var(--sp-2); font-size: var(--fs-title3); font-weight: 800; }
+.policy-page section p { font-size: var(--fs-callout); color: var(--text-2); }
+.fill { padding: 0 var(--sp-1); border: 1px dashed var(--text-3); border-radius: var(--r-xs); color: var(--text-3); }
+.table-scroll { overflow-x: auto; margin-bottom: var(--sp-3); }
+.policy-table { width: 100%; min-width: 480px; border-collapse: collapse; font-size: var(--fs-caption); line-height: 1.45; }
+.policy-table th, .policy-table td { padding: var(--sp-2); border-top: 1px solid var(--line); text-align: left; vertical-align: top; }
+.policy-table thead th { border-top: 0; color: var(--text-3); font-weight: 600; }
 .auth-divider { display: flex; align-items: center; gap: var(--sp-3); margin: var(--sp-4) 0; font-size: var(--fs-caption); color: var(--text-3); }
 .auth-divider::before, .auth-divider::after { content: ""; flex: 1; height: 1px; background: var(--line); }
 .field > label { font-size: var(--fs-caption); color: var(--text-3); font-weight: 600; }

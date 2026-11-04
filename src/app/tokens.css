@@ -76,6 +76,12 @@
   --line: #E3E5EA; --line-strong: #C9CDD4; --text-disabled: #A3A9B3; --ink: #111318; --on-ink: #FFFFFF;
 }
 
+/* Google 로그인 버튼: 공식 지침의 값이라 테마와 무관하게 고정 */
+:root {
+  --google-fill: #FFFFFF; --google-stroke: #747775; --google-text: #1F1F1F; --google-hover: #F2F2F2;
+  --google-red: #EA4335; --google-blue: #4285F4; --google-yellow: #FBBC05; --google-green: #34A853;
+}
+
 /* Hallmark 공용 이름: 프로젝트 토큰을 그대로 가리킨다 */
 :root {
   --color-paper: var(--bg); --color-paper-2: var(--surface); --color-paper-3: var(--surface-2);

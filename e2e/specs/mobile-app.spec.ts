@@ -86,6 +86,16 @@ test.describe("앱 셸", () => {
     await page.waitForURL((url) => url.pathname === "/");
   });
 
+  test("@mobile 개인정보 처리방침: 콘텐츠 탭에서 열리고 미입력 항목을 숨기지 않는다", async ({ page }) => {
+    await page.goto("/hub");
+    await page.getByRole("link", { name: "개인정보 처리방침" }).click();
+    await page.waitForURL("**/privacy");
+    await expect(page.getByRole("heading", { name: "개인정보 처리방침", level: 1 })).toBeVisible();
+    await expect(page.getByText("아직 초안이에요")).toBeVisible();
+    await expect(page.getByText("입력 필요").first()).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(360);
+  });
+
   test("@mobile 탭 없는 화면: /run, /contents, /share", async ({ page, allowedErrors }) => {
     allowedErrors.push(/404/);
     for (const path of ["/run", "/contents", "/share/abc"]) {

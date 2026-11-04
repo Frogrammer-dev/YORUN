@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Barlow_Condensed } from "next/font/google";
+import { ConsentGate } from "@/components/ConsentGate";
 import "./globals.css";
 
 const numFont = Barlow_Condensed({ weight: ["600", "700"], subsets: ["latin"], variable: "--font-num-loaded", display: "swap" });
@@ -32,7 +33,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
       </head>
-      <body>{children}</body>
+      <body>
+        <ConsentGate />
+        {children}
+      </body>
     </html>
   );
 }

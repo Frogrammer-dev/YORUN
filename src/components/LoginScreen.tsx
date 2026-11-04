@@ -61,6 +61,7 @@ export function LoginScreen({ next }: { next: string }) {
             <Link href="/settings" className="btn btn-link wide">데이터와 계정</Link>
           </section>
         )}
+        <p className="hub-credits"><Link href="/privacy">개인정보 처리방침</Link></p>
       </div>
     </main>
   );

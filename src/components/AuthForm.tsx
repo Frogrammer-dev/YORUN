@@ -3,7 +3,9 @@
 
 import { useState } from "react";
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { ConsentFields, UNDER14_NOTICE } from "./ConsentFields";
 import { MIN_PASSWORD_LENGTH, authErrorMessage } from "@/lib/client/authMessages";
+import { consentRecord, type AgeGroup } from "@/lib/legal/policy";
 
 type Mode = "signin" | "signup" | "reset" | "link";
 
@@ -13,6 +15,18 @@ const SENT: Record<Exclude<Mode, "signin">, string> = {
   reset: "가입한 이메일이라면 재설정 메일이 도착해요. 메일의 링크를 눌러 새 비밀번호를 정해 주세요.",
   link: "메일로 로그인 링크를 보냈어요. 같은 브라우저에서 링크를 열어 주세요.",
 };
+
+/** 공식 지침의 표준 색 G 로고. 크기와 색을 바꾸지 않는다 */
+function GoogleLogo() {
+  return (
+    <svg className="google-logo" width="20" height="20" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+      <path fill="var(--google-red)" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+      <path fill="var(--google-blue)" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+      <path fill="var(--google-yellow)" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+      <path fill="var(--google-green)" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+    </svg>
+  );
+}
 
 export function AuthForm({ supabase, prepareNext, onNavigate, keepNotice, draftLost }: {
   supabase: SupabaseClient;
@@ -32,6 +46,8 @@ export function AuthForm({ supabase, prepareNext, onNavigate, keepNotice, draftL
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [sent, setSent] = useState<Exclude<Mode, "signin"> | null>(null);
+  const [age, setAge] = useState<AgeGroup | null>(null);
+  const [agreed, setAgreed] = useState(false);
 
   const needsPassword = mode === "signin" || mode === "signup";
   const tooShort = mode === "signup" && password.length > 0 && password.length < MIN_PASSWORD_LENGTH;
@@ -59,6 +75,14 @@ export function AuthForm({ supabase, prepareNext, onNavigate, keepNotice, draftL
   async function submit(event: React.FormEvent) {
     event.preventDefault();
     if (busy) return;
+    if (mode === "signup" && age === "under14") {
+      setError(UNDER14_NOTICE);
+      return;
+    }
+    if (mode === "signup" && (age !== "14+" || !agreed)) {
+      setError("나이를 고르고 필수 항목에 동의해 주세요.");
+      return;
+    }
     if (mode === "signup" && password.length < MIN_PASSWORD_LENGTH) {
       setError(`비밀번호는 ${MIN_PASSWORD_LENGTH}자 이상이어야 해요.`);
       return;
@@ -75,7 +99,7 @@ export function AuthForm({ supabase, prepareNext, onNavigate, keepNotice, draftL
         return;
       }
       if (mode === "signup") {
-        const { data, error: failure } = await supabase.auth.signUp({ email: address, password, options: { emailRedirectTo: callback(next) } });
+        const { data, error: failure } = await supabase.auth.signUp({ email: address, password, options: { emailRedirectTo: callback(next), data: { consent: consentRecord("14+") } } });
         if (failure) throw failure;
         // 메일 인증을 끈 프로젝트에서는 가입과 동시에 로그인된다
         if (data.session) {
@@ -109,8 +133,9 @@ export function AuthForm({ supabase, prepareNext, onNavigate, keepNotice, draftL
 
   return (
     <div className="auth-form">
-      <button type="button" className="btn btn-secondary wide" onClick={() => void google()} disabled={busy}>
-        Google로 계속하기
+      <button type="button" className="google-btn" onClick={() => void google()} disabled={busy}>
+        <GoogleLogo />
+        <span>Google로 계속하기</span>
       </button>
       <p className="auth-divider"><span>또는 이메일로</span></p>
 
@@ -153,6 +178,7 @@ export function AuthForm({ supabase, prepareNext, onNavigate, keepNotice, draftL
             </div>
           </div>
         )}
+        {mode === "signup" && <ConsentFields age={age} onAge={(value) => { setAge(value); setError(null); }} agreed={agreed} onAgreed={setAgreed} />}
         {keepNotice && <p className="hint">{keepNotice}</p>}
         {error && <p id="auth-error" className="auth-error" role="alert">{error}</p>}
         <button type="submit" className="btn btn-primary wide" disabled={busy} aria-busy={busy}>

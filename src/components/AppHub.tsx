@@ -118,6 +118,9 @@ export function HubScreen() {
             © OpenStreetMap contributors
           </a>
         </p>
+        <p className="hub-credits">
+          <Link href="/privacy">개인정보 처리방침</Link>
+        </p>
       </div>
     </main>
   );
