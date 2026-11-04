@@ -130,9 +130,8 @@ export function Icon({ name, size = 20, ...rest }: { name: IconName; size?: numb
 export function BrandMark({ size = 22 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-      <rect width="32" height="32" rx="9" fill="var(--brand)" />
-      <path d="M16 23.7 20.3 22.6 22.8 19.2 23.3 15.2 22.3 12.1 23.3 8 19.6 10.4 16 9.9 12.4 10.4 8.7 8 9.7 12.1 8.7 15.2 9.2 19.2 11.7 22.6z" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinejoin="round" strokeLinecap="round" />
-      <circle cx="16" cy="23.7" r="1.9" fill="#fff" />
+      <rect width="32" height="32" rx="9" fill="var(--hud-bg)" />
+      <path d="M16 11.25 10.25 7.42 5.96 11.58 6.02 14.18 16.03 24.58 26.04 13.92 25.91 11.9 22.01 7.68z" fill="none" stroke="var(--accent-volt)" strokeWidth="2.4" strokeLinejoin="round" />
     </svg>
   );
 }
