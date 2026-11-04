@@ -63,21 +63,29 @@ export function HubScreen() {
         <section className="hub-band">
           <h2>원하는 콘텐츠를 선택하세요</h2>
           <div className="hub-tiles">
-            <Link href="/room" className="hub-tile">
+            <Link href="/room" className="hub-tile hub-tile-wide">
               <span className="hub-tile-icon">
                 <Icon name="frame" size={24} />
               </span>
-              <strong>작품방</strong>
-              <span>달린 선으로 만든 작품을 모아요.</span>
+              <span className="hub-tile-text">
+                <strong>작품방</strong>
+                <span>달린 선으로 만든 작품을 모아요.</span>
+              </span>
+              <Icon name="chevronRight" size={20} />
             </Link>
-            <Link href="/duel" className="hub-tile"><span className="hub-tile-icon"><Icon name="run" size={24} /></span><strong>1대1 플레이어 대결</strong><span>상대 선수를 골라 비동기 대결에 도전해요.</span></Link>
+            <Link href="/duel" className="hub-tile">
+              <span className="hub-tile-icon">
+                <Icon name="duo" size={24} />
+              </span>
+              <strong>1대1 대결</strong>
+              <span>상대 선수를 골라 비동기 대결에 도전해요.</span>
+            </Link>
             <Link href="/derby" className="hub-tile">
               <span className="hub-tile-icon">
-                <Icon name="run" size={24} />
+                <Icon name="flag" size={24} />
               </span>
-              <strong>8인 드로잉 더비</strong>
+              <strong>8인 더비</strong>
               <span>여덟 명의 코스 기록으로 경주해요.</span>
-              <span className="hub-tile-tag">경주장 열기</span>
             </Link>
           </div>
         </section>
@@ -91,6 +99,12 @@ export function HubScreen() {
             기록 가져오기
           </Link>
         </section>
+        <p className="hub-credits">
+          지도와 앱 아이콘의 도로 자료{" "}
+          <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">
+            © OpenStreetMap contributors
+          </a>
+        </p>
       </div>
     </main>
   );

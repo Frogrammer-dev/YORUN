@@ -109,6 +109,13 @@ const PATHS = {
       <rect x="13" y="13" width="7" height="7" rx="1.5" />
     </>
   ),
+  duo: (
+    <>
+      <circle cx="8.5" cy="8" r="3" />
+      <circle cx="16.5" cy="8" r="3" />
+      <path d="M3 19.5c0-3 2.5-5 5.5-5s5.5 2 5.5 5M15 14.6c3.2-.4 6 1.6 6 4.9" />
+    </>
+  ),
   route: (
     <>
       <circle cx="6" cy="6" r="2.5" />

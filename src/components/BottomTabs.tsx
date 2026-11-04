@@ -8,7 +8,7 @@ import { BrandMark, Icon, type IconName } from "./Icon";
 const TABS: Array<{ href: string; label: string; icon: IconName; also: string[] }> = [
   { href: "/", label: "메인", icon: "home", also: [] },
   { href: "/routes", label: "러닝", icon: "route", also: ["/running"] },
-  { href: "/hub", label: "콘텐츠", icon: "grid", also: ["/room"] },
+  { href: "/hub", label: "콘텐츠", icon: "grid", also: ["/room", "/duel", "/derby"] },
 ];
 
 export function BottomTabs() {

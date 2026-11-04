@@ -30,6 +30,23 @@ test.describe("앱 셸", () => {
     await expect(page.getByRole("heading", { name: "콘텐츠 허브", level: 1 })).toBeVisible();
   });
 
+  test("@mobile 콘텐츠 탭: 세 입구, 대결 화면의 탭 유지, 지도 자료 출처", async ({ page }) => {
+    await page.goto("/hub");
+    const nav = page.getByRole("navigation", { name: "주요 메뉴" });
+    for (const href of ["/room", "/duel", "/derby"]) await expect(page.locator(`.hub-tile[href="${href}"]`)).toBeVisible();
+    await expect(page.getByRole("link", { name: "© OpenStreetMap contributors" })).toHaveAttribute("href", "https://www.openstreetmap.org/copyright");
+    for (const [href, heading] of [["/duel", "1대1 플레이어 대결"], ["/derby", "8인 드로잉 더비"]]) {
+      await page.goto("/hub");
+      await page.locator(`.hub-tile[href="${href}"]`).click();
+      await page.waitForURL("**" + href);
+      await expect(page.getByRole("heading", { name: heading, level: 1 })).toBeVisible();
+      await expect(nav.locator('[aria-current="page"]')).toHaveText("콘텐츠");
+      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(360);
+    }
+    await page.getByRole("link", { name: "콘텐츠로 돌아가기" }).click();
+    await page.waitForURL("**/hub");
+  });
+
   test("@mobile 탭 없는 화면: /run, /contents, /share", async ({ page, allowedErrors }) => {
     allowedErrors.push(/404/);
     for (const path of ["/run", "/contents", "/share/abc"]) {
