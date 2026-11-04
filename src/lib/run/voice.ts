@@ -51,6 +51,8 @@ export function speak(text: string, urgent = false, voice = selectedVoice()) {
   const id = (phrases as Record<string,number>)[text];
   if (urgent) stopVoice();
   if (id !== undefined) {
+    // 포인트처럼 자주 나오는 안내가 재생 중인 회전 안내를 끊지 않게 한다
+    if (!urgent && clip && !clip.paused) return;
     clip?.pause();
     window.speechSynthesis?.cancel();
     const audio = new Audio(`/run-voices/${voice}-${id}.mp3`);

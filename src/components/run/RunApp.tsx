@@ -16,6 +16,7 @@ import { setPendingArtwork } from "@/lib/client/pending";
 import { downloadBlob } from "@/lib/render/png";
 import { Icon, PathThumb, latlngToXY, type IconName } from "@/components/Icon";
 import { awardRun, removeRunLog, saveRunLog, loadActiveRun, loadPlannedRoute, loadWallet, plannedRouteBadge, recoverRecord, saveActiveRun, type PlannedRoute } from "@/lib/run/storage";
+import { CAP_PHRASE, OFF_ROUTE_PHRASE, kmPhrase, pointsPhrase } from "@/lib/run/spoken";
 import { selectVoice, selectedVoice, stopVoice, type RunVoice, loadVoicePref, primeVoice, saveVoicePref, speak, voiceSupported } from "@/lib/run/voice";
 import { DAILY_POINT_CAP, POINTS_PER_CHECKPOINT, cappedPoints, collectedCount, emptyRewards, isMissed, placeCheckpoints, stepRewards, type RewardState } from "@/lib/run/rewards";
 import {
@@ -484,15 +485,16 @@ export function RunApp() {
   const lastGps = useRef(gpsState);
   // 같은 문장을 다시 넣어도 낭독되도록 한 번 비웠다가 넣는다
   // say: 음성으로도 말할지 (urgent는 앞선 말을 끊고 바로)
-  const announce = useCallback((set: (v: string) => void, text: string, say?: "polite" | "urgent") => {
+  // spoken: 소리로는 더 짧게 말할 때. 화면 낭독에는 text 전체가 전달된다
+  const announce = useCallback((set: (v: string) => void, text: string, say?: "polite" | "urgent", spoken: string = text) => {
     set("");
     requestAnimationFrame(() => set(text));
-    if (say && voiceRef.current) speak(text, say === "urgent");
+    if (say && voiceRef.current) speak(spoken, say === "urgent");
   }, []);
 
   useEffect(() => {
     const km = Math.floor(record.distanceMeters / 1000);
-    if (status === "running" && km > lastKm.current) announce(setSayPolite, `${km}킬로미터, ${spokenDuration(elapsed)}`, "polite");
+    if (status === "running" && km > lastKm.current) announce(setSayPolite, `${km}킬로미터, ${spokenDuration(elapsed)}`, "polite", kmPhrase(km));
     lastKm.current = km;
   }, [record.distanceMeters, status, elapsed, announce]);
 
@@ -509,7 +511,7 @@ export function RunApp() {
     navigator.vibrate?.(80);
     const text = gained > 0 ? `+${gained}P` : "오늘 적립 완료";
     setToast({ text, key: collected });
-    announce(setSayPolite, gained > 0 ? `${gained}포인트 획득, 이번 달리기 ${livePoints}포인트` : `오늘 적립 한도 ${DAILY_POINT_CAP}포인트를 채웠어요`, "polite");
+    announce(setSayPolite, gained > 0 ? `${gained}포인트 획득, 이번 달리기 ${livePoints}포인트` : `오늘 적립 한도 ${DAILY_POINT_CAP}포인트를 채웠어요`, "polite", gained > 0 ? pointsPhrase(gained) : CAP_PHRASE);
     clearTimeout(toastTimer.current);
     toastTimer.current = setTimeout(() => setToast(null), 1600);
   }, [collected, livePoints, todayPoints, status, announce]);
@@ -541,7 +543,7 @@ export function RunApp() {
   }, [guide, status, offRoute, announce]);
 
   useEffect(() => {
-    if (offRoute && !wasOff.current) announce(setSayAlert, `코스에서 ${Math.round(guide?.offRouteMeters ?? 0)}미터 벗어났어요. 코스 쪽으로 돌아가 주세요.`, "urgent");
+    if (offRoute && !wasOff.current) announce(setSayAlert, `코스에서 ${Math.round(guide?.offRouteMeters ?? 0)}미터 벗어났어요. 코스 쪽으로 돌아가 주세요.`, "urgent", OFF_ROUTE_PHRASE);
     else if (!offRoute && wasOff.current && status === "running") announce(setSayAlert, "코스로 돌아왔어요", "urgent");
     wasOff.current = offRoute;
   }, [offRoute, guide, status, announce]);
