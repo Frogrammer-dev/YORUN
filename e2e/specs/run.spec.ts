@@ -84,9 +84,11 @@ test("코스를 따라 달리고, 이탈 경고·이어 달리기·종료 후 �
   await expect(page.getByText(/끝내지 않은 달리기/)).toBeVisible();
   await page.getByRole("button", { name: "이어 달리기" }).click();
   for (const p of pts.slice(-4).reverse()) await moveTo(context, page, p);
+  // 종료는 두 번 눌러야 한다
+  await page.getByRole("button", { name: /종료/ }).click();
+  await expect(page.getByRole("heading", { name: "달리기 완료" })).toHaveCount(0);
   await page.getByRole("button", { name: /종료/ }).click();
   await expect(page.getByRole("heading", { name: "달리기 완료" })).toBeVisible();
-  expect(await page.evaluate(() => localStorage.getItem("runcanvas.activeRun"))).toBeNull();
   // 새로고침 전에 주운 객체도 이어져 적립된다
   const award = parseInt((await page.locator("[data-stat=award]").innerText()).replace(/[^\d]/g, ""));
   expect(award).toBeGreaterThanOrEqual(livePoints);
@@ -97,6 +99,8 @@ test("코스를 따라 달리고, 이탈 경고·이어 달리기·종료 후 �
   await page.getByRole("button", { name: /작품방에 걸기/ }).click();
   await page.waitForURL("**/room");
   await expect(page.locator(".scene-item").first()).toBeVisible();
+  // 결과 화면의 기록은 작품방에 건 뒤에야 지운다
+  expect(await page.evaluate(() => localStorage.getItem("runcanvas.activeRun"))).toBeNull();
   await page.locator(".scene-item").first().focus();
   await page.keyboard.press("Enter");
   await expect(page.getByRole("heading", { name: "네모 러닝" })).toBeVisible();

@@ -1,7 +1,7 @@
 "use client";
 // 코스 찾기 조건 (그림·영역·거리·길 조건)과 찾기 버튼·진행 표시 (표시 전용: 상태는 부모가 가진다)
 
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 import { SHAPES, groupLines, type ShapeId } from "@/lib/route/shapes";
 import { CustomShapeInput } from "@/components/route/CustomShapeInput";
 import { Icon, PathThumb } from "@/components/Icon";
@@ -40,6 +40,8 @@ export const FinderSettings = forwardRef<HTMLElement, FinderSettingsProps>(funct
 ) {
   const area = AREAS.find((a) => a.id === v.area)!;
   const running = v.mode === "running";
+  // 값과 동작은 그대로이고 보이는 자리만 접는다. 접어도 상태는 부모에 남는다.
+  const [more, setMore] = useState(false);
   const toggle = (key: "excludeSteps" | "avoidUnpaved" | "avoidMajor" | "preferLit" | "preferCarFree" | "avoidTunnels" | "branches" | "nearby" | "aiOutline", label: string) => (
     <label className="toggle-row">
       {label}
@@ -48,7 +50,7 @@ export const FinderSettings = forwardRef<HTMLElement, FinderSettingsProps>(funct
   );
   return (
     <section className="sheet-section" ref={ref} aria-labelledby="settings-title">
-      <div className="seg" role="radiogroup" aria-label="찾을 코스 종류" style={{ marginBottom: 16 }}>
+      <div className="seg" role="radiogroup" aria-label="찾을 코스 종류">
         {(
           [
             ["drawing", "드로잉 런"],
@@ -101,9 +103,33 @@ export const FinderSettings = forwardRef<HTMLElement, FinderSettingsProps>(funct
           </button>
         ))}
       </div>
-      {v.shape === "auto" && <p className="hint">동네 길로 자연스럽게 이어지는 고리 코스를 먼저 찾고, 도형·동물·사물 {SHAPES.length}가지 중 어떤 그림과 닮았는지 알려 줘요. 같은 길을 되밟지 않아요.</p>}
       {v.shape === "custom" && <CustomShapeInput value={v.custom} onChange={(custom) => onChange({ custom })} />}
+        </>
+      )}
 
+      <div className="more-anchor">
+      <button type="button" className="more-link" aria-expanded={more} aria-controls="finder-more" onClick={() => setMore((m) => !m)}>
+        조건 더 보기
+        <Icon name="chevronDown" size={16} className={more ? "flip" : undefined} />
+      </button>
+      <fieldset className="seg-field">
+        <legend>코스 거리 (km)</legend>
+        <div className="seg" role="radiogroup" aria-label="코스 거리">
+          {RANGES.map((r, i) => (
+            <button key={r.label} type="button" role="radio" aria-checked={v.range === i} aria-label={r.label} className={`seg-btn ${v.range === i ? "seg-on" : ""}`} onClick={() => onChange({ range: i })}>
+              {r.label.replace("~", "–").replace("km", "")}
+            </button>
+          ))}
+        </div>
+      </fieldset>
+      </div>
+
+      <div id="finder-more" hidden={!more}>
+      {more && (
+        <>
+      {!running && v.shape === "auto" && <p className="hint">동네 길로 자연스럽게 이어지는 고리 코스를 먼저 찾고, 도형·동물·사물 {SHAPES.length}가지 중 어떤 그림과 닮았는지 알려 줘요. 같은 길을 되밟지 않아요.</p>}
+      {!running && (
+        <>
       <fieldset className="seg-field">
         <legend>찾을 영역</legend>
         <div className="seg" role="radiogroup" aria-label="찾을 영역">
@@ -125,17 +151,6 @@ export const FinderSettings = forwardRef<HTMLElement, FinderSettingsProps>(funct
       {v.nearby && v.shape === "custom" && v.custom && v.custom.parts.length > 1 && <p className="hint">여러 획으로 된 그림은 선택한 영역에서 찾아요.</p>}
         </>
       )}
-
-      <fieldset className="seg-field">
-        <legend>코스 거리 (km)</legend>
-        <div className="seg" role="radiogroup" aria-label="코스 거리">
-          {RANGES.map((r, i) => (
-            <button key={r.label} type="button" role="radio" aria-checked={v.range === i} aria-label={r.label} className={`seg-btn ${v.range === i ? "seg-on" : ""}`} onClick={() => onChange({ range: i })}>
-              {r.label.replace("~", "–").replace("km", "")}
-            </button>
-          ))}
-        </div>
-      </fieldset>
 
       {!running && (
       <fieldset className="seg-field">
@@ -188,6 +203,13 @@ export const FinderSettings = forwardRef<HTMLElement, FinderSettingsProps>(funct
       {!running && v.shape === "auto" && v.branches && <p className="hint">고리에 갔다가 같은 길로 돌아오는 가지를 붙여 봐요. 인식 결과가 엉뚱할 수 있어요.</p>}
       {!running && v.shape === "auto" && toggle("aiOutline", "관리자: AI 선 그림 해석 (OpenAI)")}
       {!running && v.shape === "auto" && !v.aiOutline && <p className="hint">외부 AI를 부르지 않고 앱 서버의 CLIP 해석만 써요.</p>}
+        </>
+      )}
+      </div>
+
+      {/* 전송 고지는 접지 않는다. 찾기 버튼이 항상 마지막에 오도록 버튼 위에 둔다 */}
+      {!running && v.shape === "auto" && v.aiOutline && <p className="hint">동네 추천은 그림을 해석하려고 코스 선 그림(위치 정보 제외)을 외부 AI(OpenAI)로 보낼 수 있어요. 조건 더 보기에서 끌 수 있어요.</p>}
+      <p className="hint">지도 영역(좌표 범위)이 길 데이터를 받기 위해 OpenStreetMap 데이터 서버로 전송돼요. 내 정확한 위치는 보내지 않아요. 지도 위 장소 검색을 쓰면 검색어가 카카오로 전송돼요.</p>
 
       <div className="sheet-cta">
         {progress ? (
@@ -210,7 +232,6 @@ export const FinderSettings = forwardRef<HTMLElement, FinderSettingsProps>(funct
           </p>
         )}
       </div>
-      <p className="hint sheet-foot">지도 영역(좌표 범위)이 길 데이터를 받기 위해 OpenStreetMap 데이터 서버로 전송돼요. 내 정확한 위치는 보내지 않아요. 지도 위 장소 검색을 쓰면 검색어가 카카오로 전송돼요.</p>
     </section>
   );
 });

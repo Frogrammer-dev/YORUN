@@ -90,6 +90,7 @@ async function run(label, viewport, isMobile) {
   await page.getByRole("button", { name: /일시정지/ }).click().catch(() => {});
   await shot("07-run-paused");
   await page.getByRole("button", { name: /종료/ }).click().catch(() => {});
+  await page.getByRole("button", { name: /종료/ }).click().catch(() => {}); // 두 번 눌러야 종료
   await page.getByRole("heading", { name: "달리기 완료" }).waitFor({ timeout: 8000 }).catch(() => {});
   await shot("08-run-done");
   await shot("08b-run-done-full", true);
@@ -99,7 +100,7 @@ async function run(label, viewport, isMobile) {
   await shot("09-room");
   await shot("09b-room-full", true);
   // 실제 길이의 기록(샘플 하트 GPX)을 가져와 작품방에 건 모습
-  await page.goto(B + "/");
+  await page.goto(B + "/contents");
   await page.locator('input[type="file"]').first().setInputFiles("samples/01-heart-single-segment.gpx");
   await page.getByRole("button", { name: "작품 만들기" }).waitFor({ timeout: 10000 }).catch(() => {});
   await page.getByRole("button", { name: "작품 만들기" }).scrollIntoViewIfNeeded().catch(() => {});

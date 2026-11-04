@@ -129,8 +129,9 @@ export function RunApp() {
     // 출발점은 내 위치 점보다 위에 그린다 (출발 전 내 위치가 출발점을 덮지 않게)
     const startPane = map.getPane("start") ? "start" : (map.createPane("start").style.zIndex = "460", "start");
     if (route) {
-      L.polyline(route.latlngs, { ...round, color: "#fff", weight: 12, opacity: 0.6, interactive: false }).addTo(g);
-      L.polyline(route.latlngs, { ...round, color: "#0EA5E9", weight: 8, opacity: 0.45, interactive: false }).addTo(g);
+      // 그림을 알아보는 것이 핵심이라 계획 코스를 또렷하게 그린다 (달린 선은 검정 계열로 구분)
+      L.polyline(route.latlngs, { ...round, color: "#fff", weight: 10, opacity: 1, interactive: false }).addTo(g);
+      L.polyline(route.latlngs, { ...round, color: "#0866C2", weight: 6, opacity: 1, interactive: false }).addTo(g);
       // 여러 획 그림의 이동 구간: 그림이 아니라 다음 획으로 가는 길이라 회색 점선
       for (const [a, b] of route.moves ?? []) {
         const mv = route.latlngs.slice(a, b + 1);
@@ -140,10 +141,10 @@ export function RunApp() {
       guideLine = L.polyline(route.outlines ?? route.outline, { ...round, color: "#2B2F38", weight: 2.5, dashArray: "1 8", opacity: 0, interactive: false }).addTo(g);
       L.circleMarker(route.latlngs[0], { radius: 12, color: "#fff", weight: 3, fillColor: "#12B76A", fillOpacity: 1, pane: startPane }).bindTooltip("출발·도착").addTo(g);
       map.invalidateSize({ pan: false });
-      map.fitBounds(L.latLngBounds(route.latlngs), { paddingTopLeft: [24, 80], paddingBottomRight: [24, 48], animate: false });
+      map.fitBounds(L.latLngBounds(route.latlngs), { paddingTopLeft: [24, 80], paddingBottomRight: [68, 48], animate: false });
     }
     const casing = L.polyline([], { ...round, color: "#fff", weight: 9, opacity: 0.9, interactive: false }).addTo(g);
-    const track = L.polyline([], { ...round, color: "#075985", weight: 5, opacity: 1, interactive: false }).addTo(g);
+    const track = L.polyline([], { ...round, color: "#111318", weight: 5, opacity: 1, interactive: false }).addTo(g);
     layers.current = { track, casing, guide: guideLine };
     map.on("dragstart", () => setFollow(false));
     return () => {
@@ -158,7 +159,7 @@ export function RunApp() {
     if (!lm) return;
     const g = lm.L.layerGroup().addTo(lm.map);
     cpMarkers.current = checkpoints.map((c, i) =>
-      lm.L.circleMarker([c.lat, c.lon], { radius: 7, color: "#fff", weight: 2, fillColor: "#F59E0B", fillOpacity: 1 }).bindTooltip(`${(i + 1) * POINTS_PER_CHECKPOINT}m 지점 · ${POINTS_PER_CHECKPOINT}P`).addTo(g),
+      lm.L.circleMarker([c.lat, c.lon], { radius: 4, color: "#fff", weight: 1.5, fillColor: "#F59E0B", fillOpacity: 1 }).bindTooltip(`${(i + 1) * POINTS_PER_CHECKPOINT}m 지점 · ${POINTS_PER_CHECKPOINT}P`).addTo(g),
     );
     return () => {
       g.remove();
@@ -170,7 +171,7 @@ export function RunApp() {
     cpMarkers.current.forEach((m, i) => {
       const got = rewards.got[i];
       const grey = !got && (isMissed(rewards, i) || capReached);
-      m.setStyle({ radius: got ? 4 : 7, fillColor: got ? "#12B76A" : grey ? "#9CA3AF" : "#F59E0B", fillOpacity: got ? 0.8 : 1 });
+      m.setStyle({ radius: got ? 2.5 : 4, fillColor: got ? "#12B76A" : grey ? "#9CA3AF" : "#F59E0B", fillOpacity: got ? 0.8 : 1 });
     });
   }, [rewards, capReached, checkpoints]);
 
@@ -255,6 +256,15 @@ export function RunApp() {
     }, 1000);
     return () => clearInterval(t);
   }, [status, route]);
+
+  // 달리는 중 화면을 떠나면(뒤로가기 등) 5초 주기를 기다리지 않고 바로 저장한다
+  const saveOnLeave = useRef<() => void>(() => undefined);
+  useEffect(() => {
+    saveOnLeave.current = () => {
+      if (status === "running") saveActiveRun({ routeId: route?.id ?? null, record: recordRef.current, rewards: rewardsRef.current, savedAt: Date.now() });
+    };
+  }, [status, route]);
+  useEffect(() => () => saveOnLeave.current(), []);
 
   // 화면 꺼짐 방지
   useEffect(() => {
@@ -461,7 +471,7 @@ export function RunApp() {
         <span className="turn-icon"><Icon name="warn" size={36} /></span>
         <span className="turn-text">
           <span>코스에서 {Math.round(guide!.offRouteMeters)}m 벗어났어요</span>
-          <small>분홍 코스 쪽으로 돌아가 주세요</small>
+          <small>파란 코스 쪽으로 돌아가 주세요</small>
         </span>
       </div>
     );
@@ -489,7 +499,7 @@ export function RunApp() {
   }
 
   return (
-    <main className={`run-page ${status === "paused" ? "hud-paused" : ""}`}>
+    <main className={`run-page ${status === "paused" ? "hud-paused" : ""} ${status === "running" ? "hud-running" : ""}`}>
       <p className="visually-hidden" aria-live="polite">
         {sayPolite}
       </p>
@@ -501,7 +511,7 @@ export function RunApp() {
         <div className="run-top">
           <div className="run-top-row">
             {!active && (
-              <Link href="/routes" className="map-fab" aria-label="코스 찾기" title="코스 찾기">
+              <Link href={route ? "/routes" : "/running"} className="map-fab" aria-label={route ? "코스 찾기로 돌아가기" : "달리기 화면으로 돌아가기"} title={route ? "코스 찾기로 돌아가기" : "달리기 화면으로 돌아가기"}>
                 <Icon name="back" size={22} />
               </Link>
             )}
@@ -595,6 +605,7 @@ export function RunApp() {
               <button
                 type="button"
                 className={`btn btn-run end ${endArmed ? "armed" : ""}`}
+                aria-label={endArmed ? "한 번 더 눌러 종료" : "종료"}
                 onClick={() => {
                   if (!endArmed) return setEndArmed(true);
                   setEndArmed(false);
@@ -602,7 +613,7 @@ export function RunApp() {
                 }}
               >
                 <Icon name="stop" size={22} />
-                {endArmed ? "한 번 더 눌러 종료" : "종료"}
+                {endArmed ? "한 번 더" : "종료"}
               </button>
             </div>
           </>
@@ -739,10 +750,6 @@ export function RunApp() {
                   기록된 선이 너무 짧아 작품을 만들 수 없어요. GPS가 잡힌 상태로 조금 더 달려 주세요.
                 </p>
               )}
-              <button type="button" className="btn btn-primary btn-lg" onClick={toArtworkRoom} disabled={tooShort}>
-                <Icon name="frame" size={20} />
-                달린 그림을 작품방에 걸기
-              </button>
               <div className="row">
                 <button type="button" className="btn btn-dark2" onClick={exportRecord} disabled={record.segments.every((s) => s.length === 0)}>
                   <Icon name="download" size={18} />
@@ -753,6 +760,12 @@ export function RunApp() {
                 </button>
               </div>
               <p className="done-note">작품은 실제로 달린 GPS 선 그대로 만들어요. 계획 코스로 빈 곳을 메우지 않아요.</p>
+            </div>
+            <div className="done-cta">
+              <button type="button" className="btn btn-primary btn-lg wide" onClick={toArtworkRoom} disabled={tooShort}>
+                <Icon name="frame" size={20} />
+                달린 그림을 작품방에 걸기
+              </button>
             </div>
           </div>
         </div>

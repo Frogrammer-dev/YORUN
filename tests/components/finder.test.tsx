@@ -64,6 +64,7 @@ describe("찾기 조건 · 최소 유사도", () => {
   it("슬라이더를 움직이면 최소 유사도 값만 알린다", () => {
     const onChange = vi.fn();
     render(<FinderSettings value={DEFAULT_SETTINGS} onChange={onChange} onChooseArea={() => {}} progress={null} ready tooBig={false} hasResults={false} onSearch={() => {}} />);
+    fireEvent.click(screen.getByRole("button", { name: /조건 더 보기/ }));
     fireEvent.change(screen.getByLabelText("최소 유사도"), { target: { value: "70" } });
     expect(onChange).toHaveBeenCalledWith({ minSimilarity: 70 });
   });
@@ -96,6 +97,7 @@ describe("찾기 조건", () => {
   it("조건을 바꾸면 바뀐 값만 알린다", async () => {
     const onChange = vi.fn(), onChooseArea = vi.fn();
     render(<FinderSettings {...base} onChange={onChange} onChooseArea={onChooseArea} value={DEFAULT_SETTINGS} />);
+    await userEvent.click(screen.getByRole("button", { name: /조건 더 보기/ }));
     await userEvent.click(screen.getByRole("radio", { name: "하트" }));
     await userEvent.click(screen.getByRole("radio", { name: "5~12km" }));
     await userEvent.click(screen.getByRole("switch", { name: "큰 차도 피하기" }));

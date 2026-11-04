@@ -2,6 +2,13 @@
 import type { SVGProps } from "react";
 
 const PATHS = {
+  home: (
+    <>
+      <path d="M4 11.5 12 4.5l8 7" />
+      <path d="M6.5 10v9.5h11V10" />
+      <path d="M10 19.5V14h4v5.5" />
+    </>
+  ),
   play: <path d="M7 4.5v15l12.5-7.5z" fill="currentColor" stroke="none" />,
   pause: (
     <>

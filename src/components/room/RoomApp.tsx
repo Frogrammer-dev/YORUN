@@ -16,7 +16,7 @@ import { SceneSvg } from "@/components/SceneSvg";
 import { ItemPanel } from "./ItemPanel";
 import { ArchivePanel, ExportPanel, LoginPanel, SharePanel } from "./Panels";
 import { useRoom, type SaveStatus, type Session } from "./useRoom";
-import { BrandMark, Icon } from "@/components/Icon";
+import { Icon } from "@/components/Icon";
 
 const MAP_PREF = "yorun.roomRoadMap";
 
@@ -35,7 +35,7 @@ export function RoomApp() {
   const [session, setSession] = useState<Session>({ kind: "loading" });
   const room = useRoom(session);
   const [selected, setSelected] = useState<string | null>(null);
-  const [tab, setTab] = useState<Tab>("edit");
+  const [tab, setTab] = useState<Tab>("archive");
   const [guestRestore, setGuestRestore] = useState<"none" | "ask" | "failed">("none");
   const [accountDraftAsk, setAccountDraftAsk] = useState(false);
   // 작품 뒤 흐린 도로망: 이 기기에 보관된 것만 쓰고, 켜기/끄기도 이 기기에만 기억한다.
@@ -241,30 +241,32 @@ export function RoomApp() {
   }
 
   const guest = session.kind === "guest";
+  // "편집" 탭은 작품을 골랐을 때만 있다. 고른 작품이 없어지면 보관 목록을 보여 준다.
+  const activeTab: Tab = tab === "edit" && !selItem ? "archive" : tab;
+  const empty = scene.items.length === 0;
   const displayFull = room.model.items.length >= ROOM.maxDisplayed;
 
   return (
-    <main className={`room-page ${selItem && tab === "edit" ? "editing" : ""}`}>
-      <header className="topbar">
-        <Link href="/" className="brand">
-          <BrandMark size={24} />
-          <span className="brand-text">요런</span>
-        </Link>
-        <nav className="actions">
-          <Link href="/routes" className="btn btn-link hide-sm">
-            코스 찾기
-          </Link>
-          <button type="button" className="btn btn-primary btn-sm" onClick={() => void onSave()} disabled={room.status === "saving" || (!guest && room.status === "saved")}>
-            {guest ? "로그인하고 저장" : "저장"}
-          </button>
+    <main className={`room-page ${selItem && activeTab === "edit" ? "editing" : ""}`}>
+      <header className="appbar">
+        <span className="appbar-title">
+          <h1>작품방</h1>
+        </span>
+        <div className="actions">
+          {!guest && (
+            <button type="button" className="btn btn-primary btn-sm" onClick={() => void onSave()} disabled={room.status === "saving" || room.status === "saved"}>
+              저장
+            </button>
+          )}
           <button
             type="button"
-            className="icon-btn"
+            className="icon-btn icon-btn-label"
             aria-label={room.model.theme === "light" ? "배경을 어둡게 바꾸기" : "배경을 밝게 바꾸기"}
             title={room.model.theme === "light" ? "배경을 어둡게 바꾸기" : "배경을 밝게 바꾸기"}
             onClick={() => room.setTheme(room.model.theme === "light" ? "dark" : "light")}
           >
             <Icon name={room.model.theme === "light" ? "sun" : "moon"} size={22} />
+            <span aria-hidden="true">배경</span>
           </button>
           {hasMaps && (
             <button
@@ -284,7 +286,7 @@ export function RoomApp() {
               로그아웃
             </button>
           )}
-        </nav>
+        </div>
       </header>
 
       {room.busy && (
@@ -379,6 +381,11 @@ export function RoomApp() {
             ) : (
               <span className={`badge badge-${room.status} map-glass`}>{STATUS_LABEL[room.status]}</span>
             )}
+            {guest && (
+              <button type="button" className="btn btn-link btn-sm" onClick={() => void onSave()} disabled={room.status === "saving"}>
+                로그인하고 저장
+              </button>
+            )}
           </div>
           <div ref={wrapRef} className="stage-canvas" onPointerMove={onPointerMove} onPointerUp={endDrag} onPointerCancel={endDrag}>
             <SceneSvg
@@ -391,50 +398,58 @@ export function RoomApp() {
               onBackgroundPointerDown={() => setSelected(null)}
               ariaLabel={`내 작품방, 전시 작품 ${scene.items.length}개. 작품을 선택해 끌거나 방향키로 옮길 수 있어요.`}
             />
+            {empty && (
+              <div className="stage-empty">
+                <p>전시 중인 작품이 없어요. 달린 선으로 첫 작품을 걸어 보세요.</p>
+                <Link href="/routes" className="btn btn-primary btn-sm">
+                  코스 찾아 달리기
+                </Link>
+                <Link href="/contents#import" className="btn btn-sm">
+                  기록 가져오기
+                </Link>
+              </div>
+            )}
           </div>
-          {scene.items.length === 0 && <p className="hint center">전시 중인 작품이 없어요. GPX를 가져오거나 보관 목록에서 전시해 보세요.</p>}
-          <div className="stage-tools">
-            <ImportPanel
-              compact
-              onCreated={(v) => void room.addArtwork(v)}
-              disabledReason={room.model.artworkCount >= ROOM.maxArtworksPerAccount ? "보관 작품 한도(50개)에 도달했어요." : null}
-            />
-            {displayFull && <p className="hint">전시 한도(20개)에 도달했어요. 새 작품은 보관 목록에만 추가돼요.</p>}
-          </div>
+          {!empty && <p className="hint center">작품을 누르면 크기·회전·색·액자를 바꿀 수 있어요.</p>}
+          {!empty && (
+            <div className="stage-tools">
+              <ImportPanel
+                compact
+                onCreated={(v) => void room.addArtwork(v)}
+                disabledReason={room.model.artworkCount >= ROOM.maxArtworksPerAccount ? "보관 작품 한도(50개)에 도달했어요." : null}
+              />
+              <Link href="/contents#import" className="btn btn-link btn-sm">
+                기록 가져오기
+              </Link>
+              {displayFull && <p className="hint">전시 한도(20개)에 도달했어요. 새 작품은 보관 목록에만 추가돼요.</p>}
+            </div>
+          )}
         </div>
 
-        <aside className="side">
+        <aside className="side" hidden={empty && room.model.artworkCount === 0 && activeTab === "archive"}>
           <div className="tabs" role="tablist">
             {(
               [
-                ["edit", "편집"],
+                ...(selItem ? ([["edit", "편집"]] as const) : []),
                 ["archive", "보관 목록"],
                 ["export", "이미지"],
                 ["share", "공유"],
               ] as const
             ).map(([k, label]) => (
-              <button key={k} type="button" role="tab" aria-selected={tab === k} className={`tab ${tab === k ? "tab-on" : ""}`} onClick={() => setTab(k)}>
+              <button key={k} type="button" role="tab" aria-selected={activeTab === k} className={`tab ${activeTab === k ? "tab-on" : ""}`} onClick={() => setTab(k)}>
                 {label}
               </button>
             ))}
           </div>
-          {tab === "edit" &&
-            (selItem && selArt ? (
-              <ItemPanel key={selItem.id} room={room} item={selItem} artwork={selArt} onClose={() => setSelected(null)} />
-            ) : (
-              <div className="empty-state">
-                <Icon name="frame" size={28} />
-                <p>작품을 누르면 이동·크기·회전·앞뒤·색·굵기·액자를 바꿀 수 있어요. 꾸미지 않아도 그대로 저장할 수 있어요.</p>
-              </div>
-            ))}
-          {tab === "archive" && <ArchivePanel room={room} session={session} />}
-          {tab === "export" && <ExportPanel scene={scene} />}
-          {tab === "share" && <SharePanel room={room} session={session} onNeedLogin={() => setTab("login")} />}
-          {tab === "login" && (
+          {activeTab === "edit" && selItem && selArt && <ItemPanel key={selItem.id} room={room} item={selItem} artwork={selArt} onClose={() => setSelected(null)} />}
+          {activeTab === "archive" && <ArchivePanel room={room} session={session} />}
+          {activeTab === "export" && <ExportPanel scene={scene} />}
+          {activeTab === "share" && <SharePanel room={room} session={session} onNeedLogin={() => setTab("login")} />}
+          {activeTab === "login" && (
             <LoginPanel
               guest={guest}
               prepareDraft={async () => ((await room.persistNow()) ? room.draftId.current : null)}
-              onClose={() => setTab("edit")}
+              onClose={() => setTab("archive")}
             />
           )}
         </aside>

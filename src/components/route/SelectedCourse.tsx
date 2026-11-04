@@ -9,6 +9,21 @@ import { ShapeExplanation } from "./ShapeExplanation";
 
 export type ElevationState = ElevationProfile | "loading" | "error" | undefined;
 
+/** 달리기·GPX 버튼: 결과와 상세 화면에서 같은 자리에 하나만 둔다 */
+export function CourseActions({ onRun, onExport }: { onRun: () => void; onExport: () => void }) {
+  return (
+    <div className="sheet-cta sheet-cta-split">
+      <button type="button" className="btn btn-primary btn-lg" onClick={onRun}>
+        <Icon name="play" size={18} />
+        이 코스로 달리기
+      </button>
+      <button type="button" className="btn btn-secondary btn-lg btn-square" onClick={onExport} aria-label="GPX 내보내기 (시계용)" title="GPX 내보내기 (시계용)">
+        <Icon name="download" size={24} />
+      </button>
+    </div>
+  );
+}
+
 export function SelectedCourse({ c, elev, onRun, onExport }: { c: RouteCandidate; elev: ElevationState; onRun: () => void; onExport: () => void }) {
   return (
     <>
@@ -30,7 +45,6 @@ export function SelectedCourse({ c, elev, onRun, onExport }: { c: RouteCandidate
           ? `낙서 인식 모델(Quick, Draw! 345가지)이 이 코스 모양을 '${c.shapeName}'(으)로 봤어요 (${courseGrade(c)} · 모델 점수 ${c.similarity}). 사람 눈에는 다르게 보일 수 있어요.`
           : `원래 그림에서 평균 ${c.meanDeviationMeters}m, 최대 ${c.maxDeviationMeters}m 벗어나요.`}
       </p>
-      <ShapeExplanation key={c.id} c={c} />
       <RoadInfo c={c} elev={elev} />
       <div className="sel-legend" aria-hidden="true">
         <span>
@@ -50,15 +64,9 @@ export function SelectedCourse({ c, elev, onRun, onExport }: { c: RouteCandidate
           </span>
         ) : null}
       </div>
-      <div className="sheet-cta sheet-cta-split">
-        <button type="button" className="btn btn-primary btn-lg" onClick={onRun}>
-          <Icon name="play" size={18} />
-          이 코스로 달리기
-        </button>
-        <button type="button" className="btn btn-secondary btn-lg btn-square" onClick={onExport} aria-label="GPX 내보내기 (시계용)" title="GPX 내보내기 (시계용)">
-          <Icon name="download" size={24} />
-        </button>
-      </div>
+      {/* 해석 그림은 실제 길 정보 뒤에 둔다 (이름·참고 그림·꾸밈선의 비중을 높이지 않는다) */}
+      <ShapeExplanation key={c.id} c={c} />
+      <CourseActions onRun={onRun} onExport={onExport} />
     </>
   );
 }
