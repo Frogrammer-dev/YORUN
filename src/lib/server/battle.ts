@@ -9,6 +9,7 @@ export function battleDatabase(){
   if(!env||!key) throw new HttpError(503,"unavailable","대결 서버 설정이 필요해요.");
   return createClient(env.url,key,{auth:{persistSession:false,autoRefreshToken:false}});
 }
-export function playerName(owner:string){
+export function playerName(owner:string|null){
+  if(!owner) return "탈퇴한 러너";
   return "러너 "+createHash("sha256").update("yorun-player:"+owner).digest("hex").slice(0,8).toUpperCase();
 }

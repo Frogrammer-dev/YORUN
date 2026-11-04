@@ -99,6 +99,16 @@ export function HubScreen() {
             기록 가져오기
           </Link>
         </section>
+        <Link href="/settings" className="hub-row">
+          <span className="hub-row-icon">
+            <Icon name="layers" size={24} />
+          </span>
+          <span className="hub-row-body">
+            <strong>데이터와 계정</strong>
+            <span>이 기기 데이터와 계정을 삭제해요</span>
+          </span>
+          <Icon name="chevronRight" size={20} />
+        </Link>
         <p className="hub-credits">
           지도와 앱 아이콘의 도로 자료{" "}
           <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">

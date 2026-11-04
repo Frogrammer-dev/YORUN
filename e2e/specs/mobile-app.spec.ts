@@ -47,6 +47,36 @@ test.describe("앱 셸", () => {
     await page.waitForURL("**/hub");
   });
 
+  test("@mobile 데이터와 계정: 확인 뒤 기기 데이터만 지우고, 달리는 중에는 막는다", async ({ page }) => {
+    await page.goto("/hub");
+    await page.getByRole("link", { name: /데이터와 계정/ }).click();
+    await page.waitForURL("**/settings");
+    await page.evaluate(() => {
+      localStorage.setItem("runcanvas.route", "{}");
+      localStorage.setItem("runcanvas.runLog", "[]");
+      localStorage.setItem("yorun.battle.draft.a", "{}");
+      localStorage.setItem("yorun.voice", "on");
+    });
+    const open = page.getByRole("button", { name: "이 기기 데이터 지우기" });
+    await open.click();
+    await page.getByRole("button", { name: "취소" }).click();
+    expect(await page.evaluate(() => localStorage.getItem("runcanvas.route"))).toBe("{}");
+
+    await page.evaluate(() => localStorage.setItem("runcanvas.activeRun", JSON.stringify({ record: { resumedAt: 5 } })));
+    await open.click();
+    await page.getByRole("button", { name: "이 기기 데이터 지우기" }).click();
+    await expect(page.getByRole("status")).toContainText("끝내지 않은 달리기");
+    expect(await page.evaluate(() => localStorage.getItem("runcanvas.route"))).toBe("{}");
+
+    await page.evaluate(() => localStorage.removeItem("runcanvas.activeRun"));
+    await open.click();
+    await page.getByRole("button", { name: "이 기기 데이터 지우기" }).click();
+    await expect(page.getByRole("status")).toContainText("이 기기의 데이터를 지웠어요");
+    expect(await page.evaluate(() => Object.keys(localStorage).sort())).toEqual(["yorun.voice"]);
+    await expect(page.getByRole("button", { name: "계정 영구 삭제" })).toHaveCount(0);
+    await expect(page.getByRole("link", { name: "로그인하러 가기" })).toBeVisible();
+  });
+
   test("@mobile 탭 없는 화면: /run, /contents, /share", async ({ page, allowedErrors }) => {
     allowedErrors.push(/404/);
     for (const path of ["/run", "/contents", "/share/abc"]) {

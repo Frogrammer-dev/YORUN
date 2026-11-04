@@ -725,6 +725,9 @@ a.hub-tile:active { transform: scale(.98); }
 .race-lanes li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--sp-1) var(--sp-2); font-size: var(--fs-callout); }
 .race-lanes span { font-size: var(--fs-caption); color: var(--text-2); }
 .race-lanes progress { grid-column: 1 / -1; height: 8px; }
+.danger-confirm { display: flex; flex-direction: column; gap: var(--sp-2); margin-top: var(--sp-2); }
+.danger-confirm p { margin: 0; font-size: var(--fs-callout); font-weight: 600; color: var(--danger); }
+.hub-card .btn.wide, .hub-card .field { margin-top: var(--sp-3); }
 .hub-feature-card { display: flex; flex-direction: column; gap: var(--sp-2); padding: var(--sp-4); border-radius: var(--r-card); background: var(--surface); box-shadow: var(--sh-1); }
 .hub-feature-card h3 { margin: 0; font-size: var(--fs-title3); font-weight: 800; }
 .hub-feature-card p { margin: 0 0 var(--sp-2); font-size: var(--fs-caption); line-height: 1.45; color: var(--text-2); }
