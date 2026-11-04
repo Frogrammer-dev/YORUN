@@ -1,0 +1,86 @@
+/* ───────── 요런 디자인 토큰 — "동네가 캔버스, 러너가 붓" ───────── */
+:root {
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+  --font-num: var(--font-num-loaded, "Barlow Condensed"), var(--font-sans);
+
+  /* 뉴트럴 */
+  --bg: #F5F6F8; --surface: #FFFFFF; --surface-2: #F0F1F4; --surface-3: #E6E8EC;
+  --text: #111318; --text-2: #4A505C; --text-3: #646B78; --text-disabled: #A3A9B3;
+  --line: #E3E5EA; --line-strong: #C9CDD4;
+  /* 브랜드 */
+  --brand: #0A72D6; --brand-press: #085DB0; --brand-soft: #E5F2FF; --brand-text: #0866C2; --on-brand: #FFFFFF;
+  --panel: #0F2A47; --on-panel: #FFFFFF; --on-panel-2: #A9BDD3; --panel-line: #2A4664; --panel-accent: #7CC4FF;
+  --ink: #111318; --ink-press: #2A2E36; --on-ink: #FFFFFF;
+  --accent-volt: #C6F432;
+  /* 상태 */
+  --ok: #0F9D58; --ok-soft: #E7F7EE;
+  --warn: #B54708; --warn-fill: #FFB020; --warn-soft: #FFF4E0;
+  --danger: #D92D20; --danger-soft: #FEECEB;
+  --info: #2E6BFF; --info-soft: #EAF0FF;
+  --focus: #2E6BFF;
+  --disabled-bg: #E4E6EB;
+  /* HUD (항상 다크) */
+  --hud-bg: #0B0C0F; --hud-surface: #17191E; --hud-surface-2: #22252C; --hud-text: #FFFFFF; --hud-label: #9AA1AD;
+  --hud-track: #2A2E36; --hud-accent: #38BDF8; --hud-danger: #FF6B5E;
+  /* 간격 */
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px; --sp-12: 48px;
+  --gutter: 16px;
+  /* 반경 */
+  --r-xs: 6px; --r-sm: 10px; --r-md: 14px; --r-lg: 20px; --r-xl: 28px; --r-pill: 999px;
+  /* 그림자 */
+  --sh-1: 0 1px 2px rgba(16, 18, 24, .06), 0 0 0 1px rgba(16, 18, 24, .04);
+  --sh-2: 0 4px 16px rgba(16, 18, 24, .10), 0 0 0 1px rgba(16, 18, 24, .04);
+  --sh-map: 0 2px 8px rgba(0, 0, 0, .18), 0 0 0 1px rgba(0, 0, 0, .05);
+  --sh-sheet: 0 -6px 24px rgba(16, 18, 24, .14);
+  /* 크기 */
+  --tap: 48px; --btn-h: 52px; --btn-h-lg: 56px; --btn-h-sm: 40px; --run-btn-h: 72px;
+  --appbar-h: 52px; --tabbar-h: 60px;
+  --safe-b: env(safe-area-inset-bottom, 0px); --safe-t: env(safe-area-inset-top, 0px); --safe-l: env(safe-area-inset-left, 0px); --safe-r: env(safe-area-inset-right, 0px);
+  /* 앱 화면 공통: 카드·시트 반경 */
+  --r-card: 16px; --r-sheet: 24px;
+  /* 달리기 코스 선 */
+  --route: #0866C2;
+  /* 타이포 */
+  --fs-display: 34px; --fs-title1: 26px; --fs-title2: 20px; --fs-title3: 17px; --fs-body: 16px; --fs-callout: 15px; --fs-caption: 13px; --fs-label: 13px;
+
+  color-scheme: light;
+  font-family: var(--font-sans);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B0C0F; --surface: #16181D; --surface-2: #1F2229; --surface-3: #2A2E36;
+    --text: #F4F5F7; --text-2: #B4BAC5; --text-3: #8A919E; --text-disabled: #5A606B;
+    --line: #2A2E36; --line-strong: #3A3F49; --disabled-bg: #2A2E36;
+    --brand-soft: #0C2540; --brand-text: #5CB4FF; --ink: #F4F5F7; --on-ink: #0B0C0F; --ink-press: #D9DCE1;
+    --ok-soft: #0E2A1C; --warn-soft: #2E2210; --danger-soft: #331512; --info-soft: #14203D;
+    --ok: #3DD68C; --warn: #FFB547; --danger: #FF6B5E; --info: #7CA2FF;
+    --sh-1: 0 0 0 1px rgba(255, 255, 255, .10); --sh-2: 0 6px 20px rgba(0, 0, 0, .5), 0 0 0 1px rgba(255, 255, 255, .06);
+    --sh-sheet: 0 -6px 24px rgba(0, 0, 0, .5);
+    color-scheme: dark;
+  }
+}
+
+/* 항상 다크인 화면(달리기·완료·시작 히어로)은 테마와 무관하게 다크 토큰 */
+.run-page, .done-page, .hero-dark {
+  --bg: #0B0C0F; --surface: #16181D; --surface-2: #1F2229; --surface-3: #2A2E36;
+  --text: #F4F5F7; --text-2: #B4BAC5; --text-3: #8A919E; --text-disabled: #5A606B;
+  --line: #2A2E36; --line-strong: #3A3F49; --disabled-bg: #22252C;
+  --brand-soft: #0C2540; --brand-text: #5CB4FF; --ink: #F4F5F7; --on-ink: #0B0C0F; --ink-press: #D9DCE1;
+  --ok-soft: #0E2A1C; --warn-soft: #2E2210; --danger-soft: #331512; --info-soft: #14203D;
+  --ok: #3DD68C; --warn: #FFB547; --danger: #FF6B5E; --info: #7CA2FF;
+  color-scheme: dark;
+}
+/* 단, 지도 위 떠 있는 컨트롤은 밝은 지도 위에 있으므로 밝게 */
+.finder-map, .run-map, .stage-canvas {
+  --surface: #FFFFFF; --surface-2: #F0F1F4; --text: #111318; --text-2: #4A505C; --text-3: #646B78;
+  --line: #E3E5EA; --line-strong: #C9CDD4; --text-disabled: #A3A9B3; --ink: #111318; --on-ink: #FFFFFF;
+}
+
+/* Hallmark 공용 이름: 프로젝트 토큰을 그대로 가리킨다 */
+:root {
+  --color-paper: var(--bg); --color-paper-2: var(--surface); --color-paper-3: var(--surface-2);
+  --color-ink: var(--text); --color-ink-2: var(--text-2); --color-muted: var(--text-3);
+  --color-rule: var(--line); --color-accent: var(--brand); --color-accent-ink: var(--on-brand); --color-focus: var(--focus);
+  --font-display: var(--font-sans); --font-body: var(--font-sans);
+  --dur-micro: 120ms; --dur-short: 220ms; --dur-long: 420ms;
+}

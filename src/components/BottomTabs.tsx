@@ -5,10 +5,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BrandMark, Icon, type IconName } from "./Icon";
 
-const TABS: Array<{ href: string; label: string; icon: IconName }> = [
-  { href: "/", label: "홈", icon: "home" },
-  { href: "/running", label: "달리기", icon: "run" },
-  { href: "/room", label: "작품방", icon: "frame" },
+const TABS: Array<{ href: string; label: string; icon: IconName; also: string[] }> = [
+  { href: "/", label: "메인", icon: "home", also: [] },
+  { href: "/routes", label: "러닝", icon: "route", also: ["/running"] },
+  { href: "/hub", label: "콘텐츠", icon: "grid", also: ["/room"] },
 ];
 
 export function BottomTabs() {
@@ -20,10 +20,12 @@ export function BottomTabs() {
         요런
       </span>
       {TABS.map((t) => {
-        const on = t.href === "/" ? pathname === "/" : pathname.startsWith(t.href);
+        const on = t.href === "/" ? pathname === "/" : [t.href, ...t.also].some((p) => pathname.startsWith(p));
         return (
           <Link key={t.href} href={t.href} className="tabbar-item" aria-current={on ? "page" : undefined}>
-            <Icon name={t.icon} size={24} />
+            <span className="tabbar-pill">
+              <Icon name={t.icon} size={22} />
+            </span>
             <span>{t.label}</span>
           </Link>
         );

@@ -27,7 +27,7 @@ export function ResumeBanner() {
       </span>
       <span className="hub-row-body">
         <strong>{active.finished ? "달리기 결과 보기" : "이어 달리기"}</strong>
-        <span>{active.finished ? `${km}km · 아직 작품방에 걸지 않았어요` : `끝내지 않은 달리기 ${km}km`}</span>
+        <span>{active.finished ? `${km}km, 아직 작품방에 걸지 않았어요` : `끝내지 않은 달리기 ${km}km`}</span>
       </span>
       <Icon name="chevronRight" size={20} />
     </Link>
@@ -48,7 +48,7 @@ export function RunEntry() {
       </span>
       <span className="hub-row-body">
         <strong>{route ? "고른 코스로 달리기" : "코스 없이 달리기"}</strong>
-        <span>{route ? `${route.shapeName} · ${(route.lengthMeters / 1000).toFixed(2)}km` : "달린 선이 그대로 그림이 돼요"}</span>
+        <span>{route ? `${route.shapeName} ${(route.lengthMeters / 1000).toFixed(2)}km` : "달린 선이 그대로 그림이 돼요"}</span>
       </span>
       <Icon name="chevronRight" size={20} />
     </Link>

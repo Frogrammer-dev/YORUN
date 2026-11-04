@@ -1,6 +1,8 @@
 "use client";
 // 달리기 (/run): 선택한 그림 코스를 GPS로 안내하고 기록한다. 기록은 이 기기 안에만 남는다.
 
+import { checkpointBattleRun, beginBattleRun, finishBattleRun, discardBattleRun } from "@/lib/battle/battleDraft";
+import { relativeTrace } from "@/lib/battle/derbyTrace";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -13,8 +15,8 @@ import type { GpxTrack } from "@/lib/gpx/parser";
 import { setPendingArtwork } from "@/lib/client/pending";
 import { downloadBlob } from "@/lib/render/png";
 import { Icon, PathThumb, latlngToXY, type IconName } from "@/components/Icon";
-import { awardRun, loadActiveRun, loadPlannedRoute, loadWallet, plannedRouteBadge, recoverRecord, saveActiveRun, type PlannedRoute } from "@/lib/run/storage";
-import { loadVoicePref, primeVoice, saveVoicePref, speak, voiceSupported } from "@/lib/run/voice";
+import { awardRun, removeRunLog, saveRunLog, loadActiveRun, loadPlannedRoute, loadWallet, plannedRouteBadge, recoverRecord, saveActiveRun, type PlannedRoute } from "@/lib/run/storage";
+import { selectVoice, selectedVoice, stopVoice, type RunVoice, loadVoicePref, primeVoice, saveVoicePref, speak, voiceSupported } from "@/lib/run/voice";
 import { DAILY_POINT_CAP, POINTS_PER_CHECKPOINT, cappedPoints, collectedCount, emptyRewards, isMissed, placeCheckpoints, stepRewards, type RewardState } from "@/lib/run/rewards";
 import {
   RouteTracker,
@@ -30,6 +32,9 @@ import {
   toGpx,
   type RunRecord,
 } from "@/lib/run/tracker";
+
+import { nativeRecorder, nativeRequest } from "@/lib/run/nativeRecorder";
+import type { Fix } from "@/lib/run/tracker";
 
 type Status = "ready" | "running" | "paused" | "finished";
 
@@ -75,7 +80,9 @@ export function RunApp() {
   // 앱이 꺼졌다 켜져 되살린 결과 화면의 그림 이름 (그사이 다른 코스를 골랐을 수 있다)
   const [finishedShape, setFinishedShape] = useState<string | null | undefined>(undefined);
   const [voiceOn, setVoiceOn] = useState(loadVoicePref);
+  const [runVoice, setRunVoice] = useState<RunVoice>(selectedVoice);
   const voiceRef = useRef(voiceOn);
+  const nativeCursor = useRef(0);
 
   const setRec = useCallback((r: RunRecord) => {
     recordRef.current = r;
@@ -103,7 +110,12 @@ export function RunApp() {
       setFinishedShape(active.finished.shapeName);
       setStatus("finished");
     } else if (active && active.record.segments.length && (active.routeId === (r?.id ?? null))) {
-      setResumeOffer(recoverRecord(active));
+      if (nativeRecorder() && active.record.resumedAt !== null) {
+        setRec(active.record);
+        if (active.rewards) setRew(active.rewards);
+        nativeCursor.current = active.record.segments.at(-1)?.at(-1)?.time ?? active.record.resumedAt - 1;
+        setStatus("running");
+      } else setResumeOffer(recoverRecord(active));
       resumeRewards.current = active.rewards ?? null;
     }
     setTodayPoints(loadWallet(Date.now()).dayPoints);
@@ -180,6 +192,54 @@ export function RunApp() {
     layers.current?.guide?.setStyle({ opacity: status === "ready" ? 0.5 : 0 });
   }, [status, lm, route]);
 
+  const [nativeHealth, setNativeHealth] = useState("");
+  const nativeBusy = useRef(false);
+  const receiveFix = useCallback((fix: Fix) => {
+        setPos(fix);
+        setGpsState(fix.accuracy <= 35 ? "ok" : "weak");
+        const before = recordRef.current;
+        const res = addFix(before, fix);
+        if (!res.accepted) {
+          if (res.record !== before) setRec(res.record);
+          return;
+        }
+        setRec(res.record);
+        const seg = res.record.segments[res.record.segments.length - 1];
+        if (seg.length === 1 && before.segments.length < res.record.segments.length) {
+          setRew({ ...rewardsRef.current, last: fix, sinceMeters: 0, sinceTime: fix.time });
+          return;
+        }
+        setRew(stepRewards(rewardsRef.current, checkpointsRef.current, fix, res.record.distanceMeters - before.distanceMeters, seg.length === 1).state);
+  }, [setRec, setRew]);
+
+  const syncNative = useCallback(async (id: number) => {
+    const result = await nativeRequest("read", id, { after: nativeCursor.current });
+    if (recordRef.current.startedAt !== id || recordRef.current.resumedAt === null) return;
+    for (const point of result.points ?? []) {
+      if (point.time <= nativeCursor.current) continue;
+      receiveFix(point);
+      nativeCursor.current = point.time;
+    }
+    const h = result.health;
+    const state = result.error || (!result.service ? "위치 수집 중단" : h?.state !== "정상" ? h?.state : Date.now() - (h?.received ?? 0) > 60000 ? "GPS 수신 지연" : "GPS 정상");
+    setNativeHealth([state, (h?.count ?? 0) + "점 저장", "마지막 수신 " + (h?.received ? new Date(h.received).toLocaleTimeString() : "대기"), "마지막 저장 " + (h?.saved ? new Date(h.saved).toLocaleTimeString() : "대기")].join(" · "));
+  }, [receiveFix]);
+  useEffect(() => {
+    const id = recordRef.current.startedAt;
+    if (!nativeRecorder() || status !== "running" || id === null) return;
+    let pending = false;
+    const refresh = async () => {
+      if (pending || nativeBusy.current) return;
+      pending = true;
+      try { await syncNative(id); } catch (error) { setNativeHealth(String(error)); }
+      finally { pending = false; }
+    };
+    void refresh();
+    const timer = setInterval(refresh, 4000);
+    document.addEventListener("visibilitychange", refresh);
+    return () => { clearInterval(timer); document.removeEventListener("visibilitychange", refresh); };
+  }, [status, syncNative]);
+
   // 위치 추적 (화면이 켜져 있는 동안. 웹 앱은 백그라운드 위치 기록이 제한된다)
   useEffect(() => {
     if (!("geolocation" in navigator)) {
@@ -190,20 +250,13 @@ export function RunApp() {
     const id = navigator.geolocation.watchPosition(
       (p) => {
         const fix = { lat: p.coords.latitude, lon: p.coords.longitude, accuracy: p.coords.accuracy, time: p.timestamp || Date.now() };
-        setPos(fix);
-        setGpsState(fix.accuracy <= 35 ? "ok" : "weak");
-        const before = recordRef.current;
-        const res = addFix(before, fix);
-        if (!res.accepted) return;
-        setRec(res.record);
-        const seg = res.record.segments[res.record.segments.length - 1];
-        setRew(stepRewards(rewardsRef.current, checkpointsRef.current, fix, res.record.distanceMeters - before.distanceMeters, seg.length === 1).state);
+        if (!nativeRecorder() || recordRef.current.resumedAt === null) receiveFix(fix);
       },
       (e) => setGpsState(e.code === e.PERMISSION_DENIED ? "denied" : "weak"),
       { enableHighAccuracy: true, maximumAge: 1000, timeout: 20000 },
     );
     return () => navigator.geolocation.clearWatch(id);
-  }, [setRec, setRew]);
+  }, [receiveFix]);
 
   // 안내 갱신
   useEffect(() => {
@@ -247,14 +300,25 @@ export function RunApp() {
   // 시계 + 기기 보관 (5초마다)
   useEffect(() => {
     if (status !== "running") return;
+    const save = () => {
+      if (recordRef.current.resumedAt === null) return;
+      lastSave.current = Date.now();
+      saveActiveRun({ routeId: route?.id ?? null, record: recordRef.current, rewards: rewardsRef.current, savedAt: lastSave.current });
+    };
+    const saveWhenHidden = () => { if (document.visibilityState === "hidden") save(); };
+    document.addEventListener("visibilitychange", saveWhenHidden);
+    window.addEventListener("pagehide", save);
     const t = setInterval(() => {
       setNow(Date.now());
       if (Date.now() - lastSave.current > 5000) {
-        lastSave.current = Date.now();
-        saveActiveRun({ routeId: route?.id ?? null, record: recordRef.current, rewards: rewardsRef.current, savedAt: Date.now() });
+        save();
       }
     }, 1000);
-    return () => clearInterval(t);
+    return () => {
+      clearInterval(t);
+      document.removeEventListener("visibilitychange", saveWhenHidden);
+      window.removeEventListener("pagehide", save);
+    };
   }, [status, route]);
 
   // 달리는 중 화면을 떠나면(뒤로가기 등) 5초 주기를 기다리지 않고 바로 저장한다
@@ -282,7 +346,30 @@ export function RunApp() {
     return () => document.removeEventListener("visibilitychange", onVis);
   }, [status]);
 
-  function start() {
+  useEffect(() => {
+    if(status!=="running" || !route)return;
+    const checkpoint=()=>{
+      const record=recordRef.current;
+      if(record.startedAt!==null)void checkpointBattleRun(record.startedAt,()=>relativeTrace(record,{...route,ascentM:null})).catch(()=>{});
+    };
+    const timer=setInterval(checkpoint,15000);
+    document.addEventListener("visibilitychange",checkpoint);
+    return ()=>{clearInterval(timer);document.removeEventListener("visibilitychange",checkpoint);};
+  },[route,status]);
+
+  async function start() {
+    if (nativeBusy.current) return;
+    const now = Date.now();
+    const next = startOrResume(resumeOffer ?? recordRef.current, now);
+    if (nativeRecorder()) {
+      nativeBusy.current = true;
+      try {
+        await nativeRequest("begin", next.startedAt!, { since: now, turns: voiceRef.current ? tracker?.voiceWaypoints().map(turn => ({ ...turn, voice: runVoice })) ?? [] : [] });
+        nativeCursor.current = now - 1;
+        setMessage(null);
+      } catch (error) { setMessage(String(error)); return; }
+      finally { nativeBusy.current = false; }
+    }
     primeVoice();
     if (status === "ready") {
       setTrackerKey((k) => k + 1);
@@ -291,24 +378,41 @@ export function RunApp() {
       setRew(saved && saved.got.length === checkpoints.length ? saved : emptyRewards(checkpoints.length));
       resumeRewards.current = null;
     }
-    setRec(startOrResume(resumeOffer ?? recordRef.current, Date.now()));
+    if (route?.latlngs.length && next.startedAt===now) beginBattleRun(now,relativeTrace(next,{...route,ascentM:null}));
+    setRec(next);
+    saveActiveRun({routeId: route?.id ?? null, record: next, rewards: rewardsRef.current, savedAt: now});
     setResumeOffer(null);
     setStatus("running");
     setFollow(true);
     setNow(Date.now());
   }
-  function doPause() {
+  async function stopNative() {
+    const id = recordRef.current.startedAt;
+    if (!nativeRecorder() || id === null) return true;
+    if (nativeBusy.current) return false;
+    nativeBusy.current = true;
+    try { await nativeRequest("stop", id); await syncNative(id); return true; }
+    catch (error) { setMessage(String(error)); return false; }
+    finally { nativeBusy.current = false; }
+  }
+  async function doPause() {
+    if (!await stopNative()) return;
     const r = pause(recordRef.current, Date.now());
     setRec(r);
     saveActiveRun({ routeId: route?.id ?? null, record: r, rewards: rewardsRef.current, savedAt: Date.now() });
     setStatus("paused");
   }
-  function finish() {
+  async function finish() {
+    if (!await stopNative()) return;
     const r = pause(recordRef.current, Date.now());
     setRec(r);
+    if (route && route.latlngs.length && r.distanceMeters >= 1000) {
+      if (r.startedAt !== null) void finishBattleRun(r.startedAt,relativeTrace(r,{...route,ascentM:null})).catch(() => setMessage("러닝 기록은 저장됐지만 대결용 인증을 완료하지 못했어요."));
+    }
     const collected = collectedCount(rewardsRef.current);
     const { points, wallet } = awardRun(r.startedAt ?? Date.now(), collected, Date.now());
     setAward({ points, collected });
+    if (r.startedAt !== null && r.distanceMeters > 0) saveRunLog({ id: r.startedAt, finishedAt: Date.now(), meters: r.distanceMeters, activeMs: r.activeMs, onCourse: !!route });
     setTodayPoints(wallet.dayPoints);
     // 작품방에 걸거나 버릴 때까지 기기에 남긴다 (결과 화면에서 앱이 꺼져도 기록을 잃지 않게)
     saveActiveRun({ routeId: route?.id ?? null, record: r, rewards: rewardsRef.current, savedAt: Date.now(), finished: { points, collected, shapeName: route?.shapeName ?? null } });
@@ -316,6 +420,9 @@ export function RunApp() {
     setStatus("finished");
   }
   function discard() {
+    // 결과를 버리면 통계와 대결 후보에서도 뺀다
+    if (recordRef.current.startedAt !== null) removeRunLog(recordRef.current.startedAt);
+    discardBattleRun(recordRef.current.startedAt);
     saveActiveRun(null);
     setRec(emptyRecord());
     setRew(emptyRewards(checkpoints.length));
@@ -335,7 +442,7 @@ export function RunApp() {
     if (on) {
       primeVoice();
       speak("음성 안내를 켰어요");
-    } else window.speechSynthesis?.cancel();
+    } else stopVoice();
   }
 
   function toArtworkRoom() {
@@ -422,10 +529,13 @@ export function RunApp() {
     if (status !== "running" || !guide?.nextTurn || offRoute) return;
     const t = guide.nextTurn;
     const key = `${t.dir}@${Math.round(t.atMeters)}`; // 코스 위 회전 지점의 절대 위치: GPS 흔들림에 바뀌지 않는다
-    const stage = t.inMeters <= 50 ? 2 : t.inMeters <= 200 ? 1 : 0;
+    const stage = t.inMeters <= 20 ? 2 : t.inMeters <= 105 ? 1 : 0;
+    if (!stage) return;
     const prev = lastTurn.current;
     if (!prev || prev.key !== key || stage > prev.stage) {
-      announce(setSayAlert, `${Math.max(0, Math.round(t.inMeters / 10) * 10)}미터 앞 ${TURN_LABEL[t.dir]}`, "urgent");
+      const direction = t.dir === "uturn" ? "돌아서 주세요" : TURN_LABEL[t.dir] + "이에요";
+      const distance = Math.max(10, Math.round(t.inMeters / 10) * 10);
+      announce(setSayAlert, stage === 2 ? `잠시 후 ${direction}.` : `약 ${distance}미터 후 ${direction}.`, nativeRecorder() ? undefined : "urgent");
       lastTurn.current = { key, stage };
     }
   }, [guide, status, offRoute, announce]);
@@ -515,11 +625,17 @@ export function RunApp() {
                 <Icon name="back" size={22} />
               </Link>
             )}
+            {loaded && status === "ready" && <label>안내 목소리 <select aria-label="안내 목소리" value={runVoice} onChange={event => {
+              const choice = event.target.value === "male" ? "male" : "female";
+              setRunVoice(choice);
+              selectVoice(choice);
+            }}><option value="female">여성</option><option value="male">남성</option></select></label>}
             {voiceSupported() && (
               <button type="button" className="map-fab" aria-pressed={voiceOn} aria-label={voiceOn ? "음성 안내 끄기" : "음성 안내 켜기"} title={voiceOn ? "음성 안내 끄기" : "음성 안내 켜기"} onClick={toggleVoice}>
                 <Icon name={voiceOn ? "volume" : "volumeOff"} size={22} />
               </button>
             )}
+            {active && nativeHealth && <span role="status">{nativeHealth}</span>}
             {!(active && gpsState === "ok") && (
               <span className={`badge gps-badge ${gpsTone}`}>
                 {gpsLabel}
@@ -673,7 +789,7 @@ export function RunApp() {
               </div>
             ) : (
               <div className="run-btns single">
-                <button type="button" className="btn btn-run go" onClick={start} disabled={gpsState === "denied" || gpsState === "unsupported"}>
+                <button type="button" className="btn btn-run go" onClick={start} disabled={!nativeRecorder() && (gpsState === "denied" || gpsState === "unsupported")}>
                   <Icon name="play" size={24} />
                   시작
                 </button>
@@ -685,7 +801,7 @@ export function RunApp() {
                 달리는 동안 화면을 켜 두세요
                 <Icon name="chevronDown" size={14} />
               </summary>
-              <p>웹 앱은 화면이 꺼지거나 다른 앱으로 전환하면 위치 기록이 멈출 수 있어요. 달리는 동안 화면 꺼짐을 막아 두지만, 잠금 버튼을 누르면 기록이 멈춰요. 기록은 이 기기에만 저장돼요.</p>
+              <p>{nativeRecorder() ? "위치 권한을 허용하면 화면 잠금 중에도 이 기기에 기록해요. 복귀하면 저장된 지점을 경로에 반영해요." : "웹에서는 화면을 잠그면 위치 기록이 멈출 수 있어요. 60초 넘게 위치를 받지 못한 구간은 연결하지 않아요."}</p>
             </details>
           </>
         )}

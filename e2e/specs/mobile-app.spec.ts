@@ -17,7 +17,7 @@ async function heartInRoom(page: Page) {
 
 test.describe("앱 셸", () => {
   test("@mobile 탭 3개: 표시, aria-current, 48px 이상, 탭으로 이동", async ({ page }) => {
-    for (const [path, label] of [["/", "홈"], ["/running", "달리기"], ["/room", "작품방"]] as const) {
+    for (const [path, label] of [["/", "메인"], ["/routes", "러닝"], ["/hub", "콘텐츠"]] as const) {
       await page.goto(path);
       const nav = page.getByRole("navigation", { name: "주요 메뉴" });
       await expect(nav.getByRole("link")).toHaveCount(3);
@@ -25,14 +25,14 @@ test.describe("앱 셸", () => {
       await expect(nav.locator('[aria-current="page"]')).toHaveText(label);
       for (const link of await nav.getByRole("link").all()) expect((await link.boundingBox())!.height).toBeGreaterThanOrEqual(48);
     }
-    await page.getByRole("navigation", { name: "주요 메뉴" }).getByRole("link", { name: "달리기" }).click();
-    await page.waitForURL("**/running");
-    await expect(page.getByRole("heading", { name: "달리기", level: 1 })).toBeVisible();
+    await page.getByRole("navigation", { name: "주요 메뉴" }).getByRole("link", { name: "콘텐츠" }).click();
+    await page.waitForURL("**/hub");
+    await expect(page.getByRole("heading", { name: "콘텐츠 허브", level: 1 })).toBeVisible();
   });
 
-  test("@mobile 탭 없는 화면: /routes, /run, /contents, /share", async ({ page, allowedErrors }) => {
+  test("@mobile 탭 없는 화면: /run, /contents, /share", async ({ page, allowedErrors }) => {
     allowedErrors.push(/404/);
-    for (const path of ["/routes", "/run", "/contents", "/share/abc"]) {
+    for (const path of ["/run", "/contents", "/share/abc"]) {
       await page.goto(path);
       await page.waitForLoadState("domcontentloaded");
       await expect(page.locator(".tabbar"), path).toHaveCount(0);
@@ -249,7 +249,6 @@ test.describe("달리기", () => {
     await page.waitForURL("**/run");
     await page.getByRole("button", { name: /시작/ }).click();
     await expect(page.getByRole("button", { name: /일시정지/ })).toBeVisible();
-    expect(await page.evaluate(() => localStorage.getItem("runcanvas.activeRun"))).toBeNull();
     await page.goBack();
     await page.waitForURL("**/running");
     const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("runcanvas.activeRun") ?? "null"));

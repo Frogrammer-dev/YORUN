@@ -12,7 +12,7 @@ test.beforeEach(async ({page})=>{
 
 async function openFinder(page: Page) {
   await page.goto("/");
-  await page.getByRole("link", { name: /코스 찾기/ }).first().click();
+  await page.getByRole("link", { name: "오늘의 드로잉 런 시작" }).click();
   await page.waitForURL("**/routes");
   await waitForMap(page);
 }

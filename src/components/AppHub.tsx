@@ -1,19 +1,8 @@
 import Link from "next/link";
 import { BrandMark, Icon } from "./Icon";
+import { MonthPanel, PointsRow, WeekChart } from "./HomeStats";
 import { LandingStart } from "./LandingStart";
 import { ResumeBanner, RunEntry } from "./RunEntry";
-
-/** 홈 시작 카드의 배경: 동네 길을 떠올리게 하는 장식 (실제 경로가 아니다) */
-function StreetArt() {
-  return (
-    <svg className="hub-start-art" viewBox="0 0 360 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-      <g fill="none" stroke="currentColor" strokeWidth="2" opacity=".16">
-        <path d="M-10 44 370 16M-10 104 370 78M-10 168 370 138M52 -10 88 210M150 -10 176 210M250 -10 262 210M332 -10 318 210" />
-      </g>
-      <path d="M236 40 318 30 326 104 276 126 262 170 196 144 204 84z" fill="none" stroke="currentColor" strokeWidth="5" strokeLinejoin="round" strokeLinecap="round" opacity=".22" />
-    </svg>
-  );
-}
 
 const CourseRow = () => (
   <Link href="/routes" className="hub-row">
@@ -39,38 +28,69 @@ export function HomeScreen() {
       </header>
       <div className="hub-body">
         <ResumeBanner />
-        <section className="hub-start">
-          <StreetArt />
-          <h2>오늘은 어떤 그림을 달릴까요?</h2>
-          <p>내 주변 실제 길에서 그림 모양 코스를 찾아요.</p>
+        <h2 className="hub-greeting">오늘도 그려볼까요?</h2>
+        <MonthPanel />
+        <div className="hub-head">
+          <h2>이번 주 한 걸음씩</h2>
+        </div>
+        <WeekChart />
+        <div className="hub-head">
+          <h2>오늘의 코스</h2>
+          <Link href="/room">작품방</Link>
+        </div>
+        <RunEntry />
+        <section className="hub-start" aria-label="코스 찾기">
           <Link href="/routes" className="btn btn-primary btn-lg wide">
-            코스 찾기
+            오늘의 드로잉 런 시작
           </Link>
         </section>
-        <RunEntry />
-        <h2 className="hub-section">내 작품</h2>
-        <div className="hub-list">
-          <Link href="/room" className="hub-row">
-            <span className="hub-row-icon">
-              <Icon name="frame" size={24} />
-            </span>
-            <span className="hub-row-body">
+      </div>
+    </main>
+  );
+}
+
+/** 콘텐츠 탭. 저장 기록으로 참가하는 더비를 연다. */
+export function HubScreen() {
+  return (
+    <main className="hub-page">
+      <header className="appbar">
+        <span className="appbar-title">
+          <h1>콘텐츠 허브</h1>
+        </span>
+      </header>
+      <div className="hub-body">
+        <PointsRow />
+        <section className="hub-band">
+          <h2>원하는 콘텐츠를 선택하세요</h2>
+          <div className="hub-tiles">
+            <Link href="/room" className="hub-tile">
+              <span className="hub-tile-icon">
+                <Icon name="frame" size={24} />
+              </span>
               <strong>작품방</strong>
-              <span>달린 선으로 만든 작품을 모아요</span>
-            </span>
-            <Icon name="chevronRight" size={20} />
-          </Link>
-          <Link href="/contents#import" className="hub-row">
-            <span className="hub-row-icon">
-              <Icon name="upload" size={24} />
-            </span>
-            <span className="hub-row-body">
-              <strong>기록 가져오기</strong>
-              <span>GPX 기록으로 작품을 만들어요</span>
-            </span>
-            <Icon name="chevronRight" size={20} />
-          </Link>
+              <span>달린 선으로 만든 작품을 모아요.</span>
+            </Link>
+            <Link href="/duel" className="hub-tile"><span className="hub-tile-icon"><Icon name="run" size={24} /></span><strong>1대1 플레이어 대결</strong><span>상대 선수를 골라 비동기 대결에 도전해요.</span></Link>
+            <Link href="/derby" className="hub-tile">
+              <span className="hub-tile-icon">
+                <Icon name="run" size={24} />
+              </span>
+              <strong>8인 드로잉 더비</strong>
+              <span>여덟 명의 코스 기록으로 경주해요.</span>
+              <span className="hub-tile-tag">경주장 열기</span>
+            </Link>
+          </div>
+        </section>
+        <div className="hub-head">
+          <h2>추천 콘텐츠</h2>
         </div>
+        <section className="hub-feature-card">
+          <h3>기록으로 작품 만들기</h3>
+          <p>다른 러닝 앱이나 시계에서 내보낸 GPX 기록으로 작품을 만들어요.</p>
+          <Link href="/contents#import" className="btn btn-primary btn-lg wide">
+            기록 가져오기
+          </Link>
+        </section>
       </div>
     </main>
   );
