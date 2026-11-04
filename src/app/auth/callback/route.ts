@@ -1,13 +1,9 @@
 // 로그인 복귀 (이메일 링크·Google). 복귀 주소는 같은 출처의 상대 경로만 허용한다(열린 리다이렉트 방지).
 import { NextResponse } from "next/server";
 import { createUserClient } from "@/lib/server/supabase";
+import { safeNext } from "@/lib/safeNext";
 
 export const dynamic = "force-dynamic";
-
-function safeNext(next: string | null): string {
-  if (!next || !next.startsWith("/") || next.startsWith("//") || next.startsWith("/\\")) return "/room";
-  return next;
-}
 
 export async function GET(req: Request) {
   const url = new URL(req.url);

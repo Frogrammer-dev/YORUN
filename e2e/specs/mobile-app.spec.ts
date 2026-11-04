@@ -77,6 +77,15 @@ test.describe("앱 셸", () => {
     await expect(page.getByRole("link", { name: "로그인하러 가기" })).toBeVisible();
   });
 
+  test("@mobile 로그인 화면: 저장 서비스가 없으면 안내하고 탭 없이 메인으로 돌아간다", async ({ page }) => {
+    await page.goto("/login?next=//evil.example");
+    await expect(page.getByRole("heading", { name: "요런 계정으로 계속하기", level: 1 })).toBeVisible();
+    await expect(page.getByText("저장 서비스(Supabase)가 설정되어 있지 않아요")).toBeVisible();
+    await expect(page.locator(".tabbar")).toHaveCount(0);
+    await page.getByRole("link", { name: "메인으로 돌아가기" }).click();
+    await page.waitForURL((url) => url.pathname === "/");
+  });
+
   test("@mobile 탭 없는 화면: /run, /contents, /share", async ({ page, allowedErrors }) => {
     allowedErrors.push(/404/);
     for (const path of ["/run", "/contents", "/share/abc"]) {

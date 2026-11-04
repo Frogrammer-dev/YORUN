@@ -71,7 +71,7 @@ export default function DerbyPage(){
       <p>{trace?"최근 완료한 코스 기록을 사용할 수 있어요.":"로그인한 상태에서 온라인으로 코스 달리기를 시작하고 1km 이상 완료한 인증 기록이 필요해요."} <Link href="/routes">러닝으로 이동</Link></p>
       <label className="consent"><input type="checkbox" checked={consent} onChange={e=>agree(e.target.checked)}/> <span>참가 검증을 위해 출발 위치를 제거한 코스·달린 선과 상대 시간을 전송하는 데 동의해요. 서버에는 경기 능력치와 참가 이력을 저장해요.</span></label>
       <button type="button" className="btn btn-primary wide" disabled={!trace||!consent||busy} onClick={enter}>{busy?"기록 확인 중":"기록 제출하기"}</button></section>}
-    {message&&<p className="battle-msg" role="status">{message} {message.includes("로그인") && <Link href="/room">로그인하러 가기</Link>} <button type="button" className="btn btn-ghost btn-sm" onClick={()=>void refresh().catch(e=>notice(e.message))}>다시 확인</button></p>}
+    {message&&<p className="battle-msg" role="status">{message} {message.includes("로그인") && <Link href="/login?next=/derby">로그인하러 가기</Link>} <button type="button" className="btn btn-ghost btn-sm" onClick={()=>void refresh().catch(e=>notice(e.message))}>다시 확인</button></p>}
     {room.result && !demo && <Replay key={room.race} result={room.result} mine={room.lane} players={room.players}/>}
     <button type="button" className="btn btn-secondary wide" onClick={()=>showDemo(!demo)}>{demo?"예시 닫기":"예시 경기 체험"}</button>
     {demo&&<><p className="hint">합성 기록 8개로 구성한 연습 경기예요.</p><Replay result={sample}/></>}

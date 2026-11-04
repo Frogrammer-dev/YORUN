@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AccountButton } from "./AccountButton";
 import { BrandMark, Icon } from "./Icon";
 import { MonthPanel, PointsRow, WeekChart } from "./HomeStats";
 import { LandingStart } from "./LandingStart";
@@ -25,6 +26,7 @@ export function HomeScreen() {
           <BrandMark size={28} />
           <h1>요런</h1>
         </span>
+        <AccountButton />
       </header>
       <div className="hub-body">
         <ResumeBanner />
@@ -57,6 +59,7 @@ export function HubScreen() {
         <span className="appbar-title">
           <h1>콘텐츠 허브</h1>
         </span>
+        <AccountButton />
       </header>
       <div className="hub-body">
         <PointsRow />

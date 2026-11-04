@@ -98,7 +98,7 @@ export default function SettingsPage() {
           {email === null && (
             <>
               <p>로그인하지 않았어요. 서버에 저장한 작품이 있다면 로그인한 뒤 삭제할 수 있어요.</p>
-              <Link href="/room" className="btn btn-secondary wide">로그인하러 가기</Link>
+              <Link href="/login?next=/settings" className="btn btn-secondary wide">로그인하러 가기</Link>
             </>
           )}
           {email && (

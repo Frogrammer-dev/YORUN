@@ -728,6 +728,24 @@ a.hub-tile:active { transform: scale(.98); }
 .danger-confirm { display: flex; flex-direction: column; gap: var(--sp-2); margin-top: var(--sp-2); }
 .danger-confirm p { margin: 0; font-size: var(--fs-callout); font-weight: 600; color: var(--danger); }
 .hub-card .btn.wide, .hub-card .field { margin-top: var(--sp-3); }
+.auth-page { max-width: 460px; }
+.auth-head { display: flex; flex-direction: column; gap: var(--sp-2); padding: var(--sp-2) 0 var(--sp-2); }
+.auth-head h1 { margin: var(--sp-1) 0 0; font-size: var(--fs-title1); font-weight: 800; }
+.auth-head p { margin: 0; font-size: var(--fs-callout); color: var(--text-2); }
+.auth-divider { display: flex; align-items: center; gap: var(--sp-3); margin: var(--sp-4) 0; font-size: var(--fs-caption); color: var(--text-3); }
+.auth-divider::before, .auth-divider::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.field > label { font-size: var(--fs-caption); color: var(--text-3); font-weight: 600; }
+.auth-mode-title { margin: 0; font-size: var(--fs-title3); font-weight: 800; }
+.auth-password { position: relative; display: block; }
+.auth-password input { width: 100%; padding-right: 72px; }
+.auth-password .btn { position: absolute; top: 50%; right: var(--sp-1); min-width: 56px; padding: 0 var(--sp-2); transform: translateY(-50%); }
+.auth-error { margin: var(--sp-3) 0; padding: var(--sp-3); border-radius: var(--r-md); background: var(--danger-soft); color: var(--text); font-size: var(--fs-caption); line-height: 1.45; }
+.auth-form form .btn-primary { margin-top: var(--sp-1); }
+.auth-links { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--sp-2); margin-top: var(--sp-2); }
+.auth-links .btn { min-height: 44px; padding: 0; font-size: var(--fs-caption); }
+.auth-links:empty { display: none; }
+.auth-sent p { margin: 0 0 var(--sp-3); }
+.appbar .btn-sm { flex: none; min-height: 44px; }
 .hub-feature-card { display: flex; flex-direction: column; gap: var(--sp-2); padding: var(--sp-4); border-radius: var(--r-card); background: var(--surface); box-shadow: var(--sh-1); }
 .hub-feature-card h3 { margin: 0; font-size: var(--fs-title3); font-weight: 800; }
 .hub-feature-card p { margin: 0 0 var(--sp-2); font-size: var(--fs-caption); line-height: 1.45; color: var(--text-2); }

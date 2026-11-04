@@ -109,6 +109,12 @@ const PATHS = {
       <rect x="13" y="13" width="7" height="7" rx="1.5" />
     </>
   ),
+  person: (
+    <>
+      <circle cx="12" cy="8" r="3.5" />
+      <path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6" />
+    </>
+  ),
   duo: (
     <>
       <circle cx="8.5" cy="8" r="3" />

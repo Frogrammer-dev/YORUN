@@ -51,7 +51,7 @@ export default function DuelPage(){
       <label className="consent"><input type="checkbox" checked={consent} onChange={e=>agree(e.target.checked)}/> <span>위치를 제거한 기록을 검증하고 내 선수를 상대 목록에 표시하는 데 동의해요.</span></label>
       <button className="btn btn-primary wide" disabled={!trace||!consent||busy} onClick={()=>act()}>{lobby?.plan?"기록과 전략 갱신":"선수 등록"}</button>
       {!trace&&<p className="hint">로그인한 상태에서 온라인으로 코스 달리기를 시작하고 완료하면 인증 기록이 생겨요. <Link href="/routes">러닝으로 이동</Link></p>}</section>
-    {msg&&<p className="battle-msg" role="status">{msg} {msg.includes("로그인")&&<Link href="/room">로그인하기</Link>}</p>}
+    {msg&&<p className="battle-msg" role="status">{msg} {msg.includes("로그인")&&<Link href="/login?next=/duel">로그인하기</Link>}</p>}
     <section className="hub-card"><div className="battle-head"><h2>대결할 플레이어</h2><button type="button" className="btn btn-ghost btn-sm" disabled={busy} onClick={()=>refresh().then(()=>notice("")).catch(e=>notice(e.message))}>새로고침</button></div>
       <p className="hint">나를 제외한 참가자 중 최근 등록한 최대 10명을 표시해요.</p>
       {lobby?.players.length===0&&<p className="empty">아직 등록된 상대가 없어요.</p>}
