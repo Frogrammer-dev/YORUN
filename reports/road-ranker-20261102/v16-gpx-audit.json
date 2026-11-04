@@ -1,0 +1,16 @@
+{
+  "1": {
+    "sourceRowsExactlyPreserved": 1003,
+    "gpxChecked": 73,
+    "missingAlternative": 2,
+    "requests": 75,
+    "fingerprint": "a56106bbbc55cf989308cb585a7451c89f44bb216604d7764b00f9ef958659b5"
+  },
+  "2": {
+    "sourceRowsExactlyPreserved": 1003,
+    "gpxChecked": 67,
+    "missingAlternative": 8,
+    "requests": 75,
+    "fingerprint": "1bf0afd74a6cae68f6a8f114ab9fc2f8e3fc32518b2104f2267061367af914c1"
+  }
+}

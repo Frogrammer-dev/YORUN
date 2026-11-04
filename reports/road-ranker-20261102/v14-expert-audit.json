@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 1,
+  "title": "v14 expert read-only artifact audit",
+  "date": "2026-11-02",
+  "status": "completed_no_discrepancy_detected_within_checked_scope",
+  "recordBasis": "Retrospective transcription of actual successful tool stdout and assertions in this chat. No audit checks rerun for this persistence request. Provenance hash values copied from existing v14-generation.json, not newly calculated.",
+  "scope": {
+    "imagesSeen": false,
+    "meaningReviewsSeen": false,
+    "aiResponsesSeen": false,
+    "humanRecognitionMeasured": false,
+    "generatorRerun": false,
+    "coreFilesEdited": false,
+    "independentHoldout": false,
+    "original12BenchmarkRead": false,
+    "holdoutV2Read": false
+  },
+  "artifacts": {
+    "plain": "eval/recognition/road-ranker-20261102/boundary-v14-plain.json",
+    "independent": "eval/recognition/road-ranker-20261102/boundary-v14-independent.json",
+    "generationReport": "reports/road-ranker-20261102/v14-generation.json"
+  },
+  "recordedGenerationProvenance": {
+    "protocolFile": "reports/road-ranker-20261102/protocol-v14.md",
+    "protocolSHA256": "eeb053857ce654a0387871628130dc26969ba6f0255f40d7017e6b71f01cbc9d",
+    "bankFile": "eval/recognition/road-ranker-20261102/boundary-bank-v14.json",
+    "bankSHA256": "53dd01e046b340d0cc4d9a47806def2da1845afef6782ed6a0761541cb1a4059",
+    "casesSHA256": "f52571acff265ebad9332c06442f7e5393ea8b6ed9416d35a05e2f1e43099fd3",
+    "sourceSnapshots": [
+      {
+        "area": "cheonan-buldang",
+        "bbox": {
+          "south": 36.79,
+          "west": 127.1,
+          "north": 36.83,
+          "east": 127.15
+        },
+        "sourceFile": "data/fresh-v8-roads/cheonan-buldang-roads.json",
+        "roadHash": "11369fb8120c7d5cc081276bc48a07d4af32b90ba62589af77778577ade04405",
+        "bytes": 1830674,
+        "timestamp": "2026-10-09T20:21:04Z"
+      },
+      {
+        "area": "jeonju-hyoja",
+        "bbox": {
+          "south": 35.8,
+          "west": 127.1,
+          "north": 35.84,
+          "east": 127.15
+        },
+        "sourceFile": "data/fresh-v8-roads/jeonju-hyoja-roads.json",
+        "roadHash": "6f734e4a1383e95ba2f22ce07f2f751546096c54a87cdbbb220a6a74ff5b67c4",
+        "bytes": 2469614,
+        "timestamp": "2026-10-09T20:21:04Z"
+      },
+      {
+        "area": "ulsan-samsan",
+        "bbox": {
+          "south": 35.52,
+          "west": 129.32,
+          "north": 35.56,
+          "east": 129.37
+        },
+        "sourceFile": "data/fresh-v8-roads/ulsan-samsan-roads.json",
+        "roadHash": "e35efeaa083d14a4c01513e6bc36eeb6e30a7ba49a6794bfb8d38aa2f053be13",
+        "bytes": 1042262,
+        "timestamp": "2026-10-09T20:21:04Z"
+      }
+    ],
+    "codeSHA256": "eeda8239ffe7ca0a40159fe3cfb9a6a28174119516ffbb254f06db4b7b4510a3",
+    "coreSHA256": {
+      "boundaryRouting.ts": "435931e39a65726b972864d116d3ed76322cc778d005fae83b0614805158484b",
+      "boundaryCompletion.ts": "7489aadb7e08cbf22c508f634568dcd586811512d5db270315ffd491c9eb3c21",
+      "distinctiveFeatures.ts": "038f85cc61fbb4b3942d60b1f845a7928a570abc1f5836b4c9630af0ed012abd",
+      "fit.ts": "c8f749824266ebc06452cce5cbfacd13a2859fbe5494f25a022328f2d95defb4",
+      "objectProposals.ts": "507720f67baf3f4576cc0294dfeab5fb28ef477ca2a622417d88480b1c95d68b",
+      "osm.ts": "25ec9786a5241bf3be51214acbee182b17456538944cfe9f48fa28a077d88c96",
+      "graph.ts": "8eb5bcfe38fe0105d0c6a4d5940b85e8b5d419700767902e315b7957bdf483e5"
+    },
+    "requests": 75,
+    "maxAttempts": 60,
+    "routeMaxExpanded": 12000,
+    "requestMaxExpanded": 2000000,
+    "requestMs": 15000,
+    "sharedPreprocessingMs": 60000,
+    "humanRecognitionMeasured": false,
+    "independentHoldout": false,
+    "holdoutV2Read": false,
+    "original12BenchmarkRead": false,
+    "learnedModelUsed": false,
+    "canonicalDisplay": true,
+    "originalScoringUnchanged": true
+  },
+  "outputSHA256": {
+    "plain": "91c9aa2ed171e2daa9fd9c4722ad34c01af3221e9b7e1beaa7a697b7bc0200ca",
+    "independent": "edf588db4520af618b2cbed18b589c187df551f1e159919fe2504bb570273e27"
+  },
+  "executedChecks": [
+    {
+      "tool": "functions.exec -> tools.exec_command (PowerShell), then tools.write_stdin where needed",
+      "commandInvocation": "node -e $code",
+      "commandDescription": "Inline CommonJS script, loaded installed typescript.transpileModule through a temporary in-memory require.extensions .ts handler and @/ alias resolver. No script file was created. Reconstructed three graphs from frozen snapshots using graphFromOverpass(detail:simple, excludeSteps:true), then read and checked final JSON artifacts. Did not call completeBoundaryOutline or any generator.",
+      "exitCode": 0,
+      "toolChunkId": "0f2dda",
+      "stdoutVerbatim": "{\n  \"checkedRows\": 747,\n  \"rowsA\": 419,\n  \"rowsB\": 328,\n  \"BsupportedFeatureReaudit\": 189,\n  \"fallbackRequests\": 21,\n  \"fallbackRowsExact\": 139,\n  \"selectedSame\": 23,\n  \"selectedDifferent\": 33,\n  \"onlyA\": 6,\n  \"onlyB\": 0,\n  \"bothAbstain\": 13,\n  \"validA\": 62,\n  \"validB\": 56,\n  \"animalFeatureA\": 5,\n  \"animalFeatureB\": 17,\n  \"budgetExhausted\": 0,\n  \"preprocessingMs\": 278.0197\n}"
+    },
+    {
+      "tool": "functions.exec -> tools.exec_command (PowerShell)",
+      "commandInvocation": "eval/recognition/model-env/Scripts/python.exe -B -c $code",
+      "commandDescription": "Inline Python JSON assertions comparing report summary/counts to output files, checking attempt/expansion/partial/overrun fields and summing recorded elapsedMs. No files written.",
+      "exitCode": 0,
+      "toolChunkId": "7bae7b",
+      "stdoutVerbatim": "plain totalElapsedMs 15560.591 maxRequestMs 372.275\nindependent totalElapsedMs 10633.287 maxRequestMs 602.265\ntechnical_valid_loss 6 feature_gain 12"
+    }
+  ],
+  "independentRecomputation": {
+    "meaning": "Separate audit calculation on saved artifacts, reusing repository geometry/audit/scoring helpers. Not an independently implemented validator or independent semantic evaluation.",
+    "roadRows": 747,
+    "roadMethod": "For every retained row, reconstructed frozen CSR graph; reran auditObjectPath and compared all four native/projected distance/repeat metrics, geometryKey, roadHash, path-to-xy and path-to-latlon exactly. Recomputed evaluatePath.similarity and matched generatorSimilarity.",
+    "featureRows": 189,
+    "featureMethod": "For supported B rows, recomputed original placed vertex pins, extracted feature chains from saved cyclic path, verified original arc vertices occur in order, then reran checkDistinctiveConstraints including node/undirected-edge independence in the fixed frame; required featureSatisfied=true.",
+    "selectedGeometry": "Compared selected A/B geometryKey by the 75 ordered request slots; counts are in node stdout.",
+    "technicalCriteria": {
+      "validRequestLoss": 6,
+      "maximumAllowedLoss": 3,
+      "validRetentionPassed": false,
+      "animalFeatureGain": 12,
+      "minimumAnimalFeatureGain": 6,
+      "animalFeatureGainPassed": true,
+      "technicalPassed": false
+    }
+  },
+  "equalityAndHashChecks": {
+    "verified": [
+      "All three source snapshot SHA256 values against recorded roadHash",
+      "Output file SHA256 against generation report",
+      "Bank and protocol SHA256 against output provenance",
+      "Current runner and seven core source SHA256 against provenance",
+      "Archived executed runner plus boundaryRouting/boundaryCompletion/distinctiveFeatures snapshot SHA256 against provenance",
+      "Original bank.input file SHA256 against bank.inputSHA256",
+      "75 slots and 75 count rows per method; exact slot area/key order equals frozen bank cases; bank pose total4398",
+      "Unique output IDs, <=8 retained rows/request, unique geometryKey/request, contiguous pool ranks, nonincreasing original similarity, selected ID is first retained row",
+      "Each saved placement equals corresponding bank case pose at attempt-1",
+      "Unsupported B requests21: all139 retained fallback rows exactly equal corresponding A retained rows after excluding id/fallbackOf; fallbackOf references exact A ID; featureInterventionApplied=false",
+      "Report count arrays and valid-request/animal-feature summaries equal saved outputs",
+      "All recorded attempted<=60 and expanded<=2000000; partial=false and overrunMs=0"
+    ],
+    "copiedButNotSeparatelyRecomputed": [
+      "casesSHA256: preserved from generation provenance; this sidecar checked pose total and slot order but did not independently hash serialized bank.cases"
+    ]
+  },
+  "limitations": [
+    "Did not regenerate candidates or verify completeness of the pre-top8 candidate pool; ranking audit covers retained order, not proof no omitted candidate was better",
+    "Did not independently reconstruct A feature chains to revalidate every A featureSatisfied flag; animalFeatureA=5 is recomputed from saved slot flags and checked against report",
+    "Measured performance figures are sums of recorded runtime fields, not newly timed generator runs; A/B actual computation differs and B includes cheap fallback",
+    "Canonical rendering and pixel equality were not inspected; no images or semantic reviews were opened",
+    "Inline audit command bodies were executed in chat tool context only; no persistent command/log file existed. This artifact preserves actual stdout and command/method descriptions, not an invented transcript file",
+    "An initial npx tsx -e attempt produced no audit result and was interrupted because no local tsx executable existed; successful validation used installed Node/typescript as described above"
+  ],
+  "conclusion": "No concrete artifact discrepancy detected within the documented scope. Technical criterion failed: valid-request loss6 exceeds3 despite animal-feature gain12 exceeding6. No semantic or human-recognition conclusion."
+}

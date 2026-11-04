@@ -1,0 +1,61 @@
+{
+  "phase": "AI review scored; I not adopted; human answers pending",
+  "generation": {
+    "requests": 75,
+    "emptyRequests": 0,
+    "candidates": 448,
+    "interruptedAfterRequests": 42,
+    "interruptionCause": "unknown",
+    "resumeProtocol": "protocol-v19-resume-amendment.md",
+    "continuityCheckExactlyEqual": true,
+    "input": "eval/recognition/road-ranker-20261102/v19/generation-complete.json"
+  },
+  "audit": {
+    "file": "v19-road-audit.json",
+    "pathsAudited": 448,
+    "snapshotsByteEqualOnRequery": 3,
+    "sqliteSHA256UnchangedAtResumeAndAfterAudit": true
+  },
+  "selection": {
+    "methods": [
+      "geometry",
+      "hand",
+      "image"
+    ],
+    "primary": "image",
+    "missingSlots": 0,
+    "handRocketFallbacks": 3,
+    "output": "eval/recognition/road-ranker-20261102/v19/retrieval"
+  },
+  "review": {
+    "codeSHA256Source": "scripts/recognition-lab/geography-review.py",
+    "summary": "eval/recognition/road-ranker-20261102/v19/review-summary.json",
+    "methodPages": {
+      "geometry": "public/eval/route-study-20261103-l",
+      "hand": "public/eval/route-study-20261103-m",
+      "image": "public/eval/route-study-20261103-n"
+    },
+    "aiBatch": {
+      "pictures": 163,
+      "pages": 11,
+      "fingerprint": "04c781020828e0fb7caf68db2f4d74efa8378be068b0a39f8183fc359e8a3d27",
+      "folder": "eval/recognition/road-ranker-20261102/v19/review-ai/pages"
+    },
+    "human": {
+      "requests": 12,
+      "pictures": 25,
+      "fingerprint": "062866f051fe780044bf6f9b65d11a85bbc8decb3908c7d469e5cc1c8eede4c8",
+      "screen": "public/eval/route-study-20261103-v19-human/blind.html",
+      "browserChecked": [
+        "1280px",
+        "390px"
+      ]
+    }
+  },
+  "aiRecognitionMeasured": true,
+  "humanRecognitionMeasured": false,
+  "goalAchieved": false,
+  "nextAction": "Collect human answers for the fixed 25 pictures; no further same-method tuning",
+  "results": "v19-results.md",
+  "primaryDifferenceImageMinusGeometry": -1
+}

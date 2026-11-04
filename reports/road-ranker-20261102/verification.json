@@ -1,0 +1,22 @@
+{
+  "npm": {
+    "passed": 319,
+    "skipped": 112,
+    "command": "TMP/TEMP=workspace eval/recognition/tmp; npm test -- --maxWorkers=4"
+  },
+  "python": {
+    "passed": 14,
+    "command": "model-env Python -m unittest discover -s tests/python -p test_road*.py"
+  },
+  "typecheck": "passed",
+  "newTypeScriptLint": "passed",
+  "humanUI": {
+    "reviewerIsolation": true,
+    "noAutoDisclosure": true,
+    "jsonDownload": true,
+    "blockedStorageDownload": true
+  },
+  "roadSourceFieldsPreserved": 550,
+  "humanRecognitionMeasured": false,
+  "appDefaultChanged": false
+}

@@ -1,0 +1,50 @@
+{
+  "examples": [
+    {
+      "token": "R043",
+      "id": "cheonan-buldang-diversity-v11-fish-1",
+      "nameForDisplay": "물고기",
+      "meters": 6074.746302127838,
+      "postEvaluationExample": true
+    },
+    {
+      "token": "R031",
+      "id": "jeonju-hyoja-diversity-v11-duck-1",
+      "nameForDisplay": "오리",
+      "meters": 5684.441729664803,
+      "postEvaluationExample": true
+    },
+    {
+      "token": "R029",
+      "id": "cheonan-buldang-diversity-v11-pants-1",
+      "nameForDisplay": "바지",
+      "meters": 4855.829282402992,
+      "postEvaluationExample": true
+    },
+    {
+      "token": "R061",
+      "id": "ulsan-samsan-diversity-v11-tshirt-1",
+      "nameForDisplay": "티셔츠",
+      "meters": 3573.648106813431,
+      "postEvaluationExample": true
+    },
+    {
+      "token": "R069",
+      "id": "cheonan-buldang-diversity-v11-chair-1",
+      "nameForDisplay": "의자",
+      "meters": 4031.7164192199707,
+      "postEvaluationExample": true
+    },
+    {
+      "token": "R044",
+      "id": "ulsan-samsan-diversity-v11-hammer-1",
+      "nameForDisplay": "망치",
+      "meters": 3638.842005252838,
+      "postEvaluationExample": true
+    }
+  ],
+  "postEvaluationSelection": true,
+  "representativeSuccessRate": false,
+  "humanRecognitionMeasured": false,
+  "imageSHA256": "29f9758933b3b31737d6df138eb7336bb178159523227835e67e1af08d98996e"
+}

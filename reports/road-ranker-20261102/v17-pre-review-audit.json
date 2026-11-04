@@ -1,0 +1,16 @@
+{
+  "mean4SelectionsExactlyReproduceV13": true,
+  "mean4All1003PredictionsCheckedIdentical": true,
+  "mean4Recommended": 17,
+  "canonicalRecommended": 32,
+  "requests": 75,
+  "canonicalHeadTestMacro": 0.8950855057932263,
+  "mean4HeadTestMacro": 0.8840737183568066,
+  "canonicalGenericFAR": 0.07142857142857142,
+  "mean4GenericFAR": 0.047619047619047616,
+  "auxiliaryStabilityCriterionMet": false,
+  "humanClearDevelopmentCaseCorrected": false,
+  "humanCasePredictedClassBoth": "chair",
+  "humanRecognitionNewlyMeasured": false,
+  "goalAchieved": false
+}

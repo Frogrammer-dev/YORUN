@@ -1,0 +1,138 @@
+{
+  "observed_at": "2026-10-21",
+  "n": 30,
+  "ids": [
+    "A01",
+    "A02",
+    "A03",
+    "A04",
+    "A05",
+    "A06",
+    "A07",
+    "A08",
+    "A09",
+    "A10",
+    "B01",
+    "B02",
+    "B03",
+    "B04",
+    "B05",
+    "B06",
+    "B07",
+    "B08",
+    "B09",
+    "B10",
+    "C01",
+    "C02",
+    "C03",
+    "C04",
+    "C06",
+    "C07",
+    "C08",
+    "C09",
+    "C10",
+    "AR01"
+  ],
+  "selection": "A01–A10+B01–B10+C01–C10 except C05+AR01",
+  "morphology": {
+    "internal_strokes": {
+      "yes": 17,
+      "no": 11,
+      "uncertain": 2
+    },
+    "branch_or_open_strokes": {
+      "yes": 24,
+      "no": 4,
+      "uncertain": 2
+    },
+    "parts_relation": {
+      "yes": 24,
+      "no": 5,
+      "uncertain": 1
+    },
+    "angular_road_noise": {
+      "yes": 21,
+      "no": 4,
+      "uncertain": 5
+    },
+    "simple_single_outline": {
+      "yes": 4,
+      "no": 24,
+      "uncertain": 2
+    }
+  },
+  "creator_groups": {
+    "AndersPonny": 1,
+    "Lenny Maughan": 3,
+    "Gustavo Lyra": 2,
+    "Yann Cressent": 1,
+    "Nathan Rae": 1,
+    "Peter GPS Artist / Big Bird GPS Art": 1,
+    "Howard Calvert": 2,
+    "Sweater / セーター (sweater840)": 3,
+    "Yukio YANAGIMOTO / yukioyanagimoto": 5,
+    "キタクブ | 東京都北区 (코스 제작 게스트: やまさん)": 1,
+    "직장인 K씨 / yunupa": 1,
+    "Belinda Smith": 3,
+    "Peter Mitchell / Mornington Misfits": 1,
+    "Tom Veilleux": 5
+  },
+  "run_evidence": {
+    "R1": 19,
+    "R2": 11
+  },
+  "distance": {
+    "known": 27,
+    "unknown": 3,
+    "explicit_composite_ids": [
+      "A08"
+    ],
+    "noncomposite_known": 26,
+    "within_3_8": [
+      "A04",
+      "A10",
+      "B01",
+      "B06",
+      "B07",
+      "B10",
+      "C09"
+    ],
+    "below_3": [],
+    "above_8": [
+      "A01",
+      "A02",
+      "A03",
+      "A05",
+      "A06",
+      "A07",
+      "A09",
+      "B02",
+      "B03",
+      "B04",
+      "B05",
+      "B08",
+      "B09",
+      "C04",
+      "C06",
+      "C07",
+      "C08",
+      "C10",
+      "AR01"
+    ]
+  },
+  "qa": {
+    "unique_ids": true,
+    "unique_nonnull_activity_ids": true,
+    "unique_image_urls": true,
+    "previous_six_excluded": true,
+    "required_fields_present": true,
+    "manual_image_identity_check": "연구자가 원이미지·활동 ID·작품 내용을 확인. 이미지 URL은 모두 다르며, 원격 이미지 다운로드·바이트 동일성 검사는 수행하지 않음."
+  },
+  "creator_labels_raw": 14,
+  "creator_groups_note": "원표기 기준14개 작가·계정군. 일부 별칭의 동일인 여부 미확인;14명의 독립 창작자라는 뜻이 아님.",
+  "cross_audit": {
+    "works": 10,
+    "flags": 50,
+    "note": "최초9개 계획에B10추가. 같은AI계열,제목·코딩공개,목적선정. A04/A08재관찰정정,B10각짐보수미합의."
+  }
+}

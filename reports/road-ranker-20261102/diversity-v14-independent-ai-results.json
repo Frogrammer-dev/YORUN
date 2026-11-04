@@ -1,0 +1,3111 @@
+{
+  "fingerprint": "0733ba8dea3e756c21227dab9ab352900a59fd2bd8ca90473bd8dbd74221e61f",
+  "evaluationType": "AI surrogate, not human evaluation",
+  "raters": [
+    "01a19aed-73d8-7662-81ef-5d6ec2287589",
+    "01a19b0b-12bd-7592-9a5f-809818cebc3a",
+    "01a19b0b-13a1-7340-89c7-095b3dc85ed2"
+  ],
+  "majorityThreshold": 2,
+  "requests": 75,
+  "displayedImages": 56,
+  "groups": {
+    "animal": {
+      "requests": 33,
+      "validRoadRequests": 23,
+      "clearAny": 0,
+      "clearTarget": 0,
+      "weak": 9,
+      "none": 14,
+      "speciesClearInTwoAreas": []
+    },
+    "object": {
+      "requests": 42,
+      "validRoadRequests": 33,
+      "clearAny": 2,
+      "clearTarget": 2,
+      "weak": 13,
+      "none": 18,
+      "speciesClearInTwoAreas": []
+    }
+  },
+  "species": [
+    {
+      "key": "cat",
+      "name": "고양이",
+      "kind": "animal",
+      "requests": 3,
+      "validRoadRequests": 2,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 0,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "fish",
+      "name": "물고기",
+      "kind": "animal",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 3,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "dog",
+      "name": "강아지",
+      "kind": "animal",
+      "requests": 3,
+      "validRoadRequests": 2,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 2,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "rabbit",
+      "name": "토끼",
+      "kind": "animal",
+      "requests": 3,
+      "validRoadRequests": 1,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 0,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "bird",
+      "name": "새",
+      "kind": "animal",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 0,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "whale",
+      "name": "고래",
+      "kind": "animal",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 2,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "turtle",
+      "name": "거북이",
+      "kind": "animal",
+      "requests": 3,
+      "validRoadRequests": 2,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 0,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "elephant",
+      "name": "코끼리",
+      "kind": "animal",
+      "requests": 3,
+      "validRoadRequests": 2,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 1,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "giraffe",
+      "name": "기린",
+      "kind": "animal",
+      "requests": 3,
+      "validRoadRequests": 1,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 1,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "butterfly",
+      "name": "나비",
+      "kind": "animal",
+      "requests": 3,
+      "validRoadRequests": 2,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 0,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "duck",
+      "name": "오리",
+      "kind": "animal",
+      "requests": 3,
+      "validRoadRequests": 2,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 0,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "house",
+      "name": "집",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 1,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "tree",
+      "name": "나무",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 2,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 2,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "car",
+      "name": "자동차",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 2,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 2,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "rocket",
+      "name": "로켓",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 2,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 0,
+      "targetClearAreas": [],
+      "headSupported": false,
+      "clipSupported": false
+    },
+    {
+      "key": "apple",
+      "name": "사과",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 2,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 0,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "crown",
+      "name": "왕관",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 1,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 0,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "airplane",
+      "name": "비행기",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 2,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 0,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "mug",
+      "name": "컵",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 0,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "tshirt",
+      "name": "티셔츠",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 2,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 2,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "pants",
+      "name": "바지",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 1,
+      "clearTargetRequests": 1,
+      "weakRequests": 2,
+      "targetClearAreas": [
+        "ulsan-samsan"
+      ],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "hammer",
+      "name": "망치",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 1,
+      "clearTargetRequests": 1,
+      "weakRequests": 2,
+      "targetClearAreas": [
+        "ulsan-samsan"
+      ],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "bottle",
+      "name": "병",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 1,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "key",
+      "name": "열쇠",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 0,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "chair",
+      "name": "의자",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 2,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 1,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    }
+  ],
+  "cases": [
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "cat",
+      "category": "animal",
+      "id": "cheonan-buldang-v14-independent-cat-01",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": "R015",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R015",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R015",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R015",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "fish",
+      "category": "animal",
+      "id": "cheonan-buldang-v14-fallback-fish-02",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false,
+      "kind": "animal",
+      "token": "R034",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "물고기": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R034",
+          "name": "물고기",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R034",
+          "name": "물고기",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R034",
+          "name": "물고기",
+          "clarity": "weak",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "dog",
+      "category": "animal",
+      "id": "cheonan-buldang-v14-independent-dog-37",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": "R052",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "개": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R052",
+          "name": "개",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R052",
+          "name": "개",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R052",
+          "name": "개",
+          "clarity": "weak",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "rabbit",
+      "category": "animal",
+      "id": "cheonan-buldang-v14-independent-rabbit-52",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": "R006",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 2,
+        "토끼": 1
+      },
+      "clarityVotes": {
+        "none": 2,
+        "weak": 1
+      },
+      "ratings": [
+        {
+          "token": "R006",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R006",
+          "name": "토끼",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R006",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "bird",
+      "category": "animal",
+      "id": "cheonan-buldang-v14-independent-bird-25",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": "R002",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R002",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R002",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R002",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "whale",
+      "category": "animal",
+      "id": "cheonan-buldang-v14-fallback-whale-20",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false,
+      "kind": "animal",
+      "token": "R053",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "물고기": 2,
+        "고슴도치": 1
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R053",
+          "name": "물고기",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R053",
+          "name": "물고기",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R053",
+          "name": "고슴도치",
+          "clarity": "weak",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "turtle",
+      "category": "animal",
+      "id": "cheonan-buldang-v14-independent-turtle-56",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": "R042",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R042",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R042",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R042",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "elephant",
+      "category": "animal",
+      "id": "cheonan-buldang-v14-independent-elephant-05",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": "R011",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R011",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R011",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R011",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "giraffe",
+      "category": "animal",
+      "id": "cheonan-buldang-v14-independent-giraffe-19",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": "R007",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "기린": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R007",
+          "name": "기린",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R007",
+          "name": "기린",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R007",
+          "name": "기린",
+          "clarity": "weak",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "butterfly",
+      "category": "animal",
+      "id": "cheonan-buldang-v14-independent-butterfly-28",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": "R019",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R019",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R019",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R019",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "duck",
+      "category": "animal",
+      "id": "cheonan-buldang-v14-independent-duck-41",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": "R025",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 2,
+        "오리": 1
+      },
+      "clarityVotes": {
+        "none": 2,
+        "weak": 1
+      },
+      "ratings": [
+        {
+          "token": "R025",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R025",
+          "name": "오리",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R025",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "house",
+      "category": "object",
+      "id": "cheonan-buldang-v14-fallback-house-34",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false,
+      "kind": "object",
+      "token": "R027",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "냄비": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R027",
+          "name": "냄비",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R027",
+          "name": "냄비",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R027",
+          "name": "냄비",
+          "clarity": "weak",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "tree",
+      "category": "object",
+      "id": "cheonan-buldang-v14-independent-tree-55",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": "R031",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "나무": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R031",
+          "name": "나무",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R031",
+          "name": "나무",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R031",
+          "name": "나무",
+          "clarity": "weak",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "car",
+      "category": "object",
+      "id": "cheonan-buldang-v14-independent-car-49",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": "R001",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "자동차": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R001",
+          "name": "자동차",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R001",
+          "name": "자동차",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R001",
+          "name": "자동차",
+          "clarity": "weak",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "rocket",
+      "category": "object",
+      "id": "cheonan-buldang-v14-independent-rocket-28",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": "R013",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R013",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R013",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R013",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "apple",
+      "category": "object",
+      "id": "cheonan-buldang-v14-fallback-apple-24",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false,
+      "kind": "object",
+      "token": "R029",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 2,
+        "잎": 1
+      },
+      "clarityVotes": {
+        "none": 2,
+        "weak": 1
+      },
+      "ratings": [
+        {
+          "token": "R029",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R029",
+          "name": "잎",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R029",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "crown",
+      "category": "object",
+      "id": "cheonan-buldang-v14-independent-crown-07",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": "R004",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R004",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R004",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R004",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "airplane",
+      "category": "object",
+      "id": "cheonan-buldang-v14-independent-airplane-37",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": "R043",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R043",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R043",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R043",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "mug",
+      "category": "object",
+      "id": "cheonan-buldang-v14-fallback-mug-19",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false,
+      "kind": "object",
+      "token": "R010",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R010",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R010",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R010",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "tshirt",
+      "category": "object",
+      "id": "cheonan-buldang-v14-independent-tshirt-04",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": "R033",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "티셔츠": 2,
+        "반소매 티셔츠": 1
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R033",
+          "name": "티셔츠",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R033",
+          "name": "반소매 티셔츠",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R033",
+          "name": "티셔츠",
+          "clarity": "weak",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "pants",
+      "category": "object",
+      "id": "cheonan-buldang-v14-fallback-pants-22",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false,
+      "kind": "object",
+      "token": "R022",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 1,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "바지": 3
+      },
+      "clarityVotes": {
+        "weak": 2,
+        "clear": 1
+      },
+      "ratings": [
+        {
+          "token": "R022",
+          "name": "바지",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R022",
+          "name": "바지",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R022",
+          "name": "바지",
+          "clarity": "clear",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "hammer",
+      "category": "object",
+      "id": "cheonan-buldang-v14-fallback-hammer-01",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false,
+      "kind": "object",
+      "token": "R018",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "망치": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R018",
+          "name": "망치",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R018",
+          "name": "망치",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R018",
+          "name": "망치",
+          "clarity": "weak",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "bottle",
+      "category": "object",
+      "id": "cheonan-buldang-v14-independent-bottle-19",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": "R028",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 2,
+        "병": 1
+      },
+      "clarityVotes": {
+        "none": 2,
+        "weak": 1
+      },
+      "ratings": [
+        {
+          "token": "R028",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R028",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R028",
+          "name": "병",
+          "clarity": "weak",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "key",
+      "category": "object",
+      "id": "cheonan-buldang-v14-independent-key-07",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": "R003",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 2,
+        "열쇠": 1
+      },
+      "clarityVotes": {
+        "none": 2,
+        "weak": 1
+      },
+      "ratings": [
+        {
+          "token": "R003",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R003",
+          "name": "열쇠",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R003",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "chair",
+      "category": "object",
+      "id": "cheonan-buldang-v14-independent-chair-52",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": "R051",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 2,
+        "의자": 1
+      },
+      "clarityVotes": {
+        "none": 2,
+        "weak": 1
+      },
+      "ratings": [
+        {
+          "token": "R051",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R051",
+          "name": "의자",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R051",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "cat",
+      "category": "animal",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": null,
+      "clarity": "not_measured_no_route",
+      "clearAny": false,
+      "targetClear": false,
+      "ratings": [],
+      "missingRoute": true
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "fish",
+      "category": "animal",
+      "id": "jeonju-hyoja-v14-fallback-fish-19",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false,
+      "kind": "animal",
+      "token": "R041",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "물고기": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R041",
+          "name": "물고기",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R041",
+          "name": "물고기",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R041",
+          "name": "물고기",
+          "clarity": "weak",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "dog",
+      "category": "animal",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": null,
+      "clarity": "not_measured_no_route",
+      "clearAny": false,
+      "targetClear": false,
+      "ratings": [],
+      "missingRoute": true
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "rabbit",
+      "category": "animal",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": null,
+      "clarity": "not_measured_no_route",
+      "clearAny": false,
+      "targetClear": false,
+      "ratings": [],
+      "missingRoute": true
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "bird",
+      "category": "animal",
+      "id": "jeonju-hyoja-v14-independent-bird-55",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": "R038",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R038",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R038",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R038",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "whale",
+      "category": "animal",
+      "id": "jeonju-hyoja-v14-fallback-whale-55",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false,
+      "kind": "animal",
+      "token": "R039",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "물고기": 2,
+        "고슴도치": 1
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R039",
+          "name": "물고기",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R039",
+          "name": "물고기",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R039",
+          "name": "고슴도치",
+          "clarity": "weak",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "turtle",
+      "category": "animal",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": null,
+      "clarity": "not_measured_no_route",
+      "clearAny": false,
+      "targetClear": false,
+      "ratings": [],
+      "missingRoute": true
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "elephant",
+      "category": "animal",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": null,
+      "clarity": "not_measured_no_route",
+      "clearAny": false,
+      "targetClear": false,
+      "ratings": [],
+      "missingRoute": true
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "giraffe",
+      "category": "animal",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": null,
+      "clarity": "not_measured_no_route",
+      "clearAny": false,
+      "targetClear": false,
+      "ratings": [],
+      "missingRoute": true
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "butterfly",
+      "category": "animal",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": null,
+      "clarity": "not_measured_no_route",
+      "clearAny": false,
+      "targetClear": false,
+      "ratings": [],
+      "missingRoute": true
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "duck",
+      "category": "animal",
+      "id": "jeonju-hyoja-v14-independent-duck-03",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": "R023",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R023",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R023",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R023",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "house",
+      "category": "object",
+      "id": "jeonju-hyoja-v14-fallback-house-44",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false,
+      "kind": "object",
+      "token": "R045",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R045",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R045",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R045",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "tree",
+      "category": "object",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": null,
+      "clarity": "not_measured_no_route",
+      "clearAny": false,
+      "targetClear": false,
+      "ratings": [],
+      "missingRoute": true
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "car",
+      "category": "object",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": null,
+      "clarity": "not_measured_no_route",
+      "clearAny": false,
+      "targetClear": false,
+      "ratings": [],
+      "missingRoute": true
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "rocket",
+      "category": "object",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": null,
+      "clarity": "not_measured_no_route",
+      "clearAny": false,
+      "targetClear": false,
+      "ratings": [],
+      "missingRoute": true
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "apple",
+      "category": "object",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false,
+      "kind": "object",
+      "token": null,
+      "clarity": "not_measured_no_route",
+      "clearAny": false,
+      "targetClear": false,
+      "ratings": [],
+      "missingRoute": true
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "crown",
+      "category": "object",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": null,
+      "clarity": "not_measured_no_route",
+      "clearAny": false,
+      "targetClear": false,
+      "ratings": [],
+      "missingRoute": true
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "airplane",
+      "category": "object",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": null,
+      "clarity": "not_measured_no_route",
+      "clearAny": false,
+      "targetClear": false,
+      "ratings": [],
+      "missingRoute": true
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "mug",
+      "category": "object",
+      "id": "jeonju-hyoja-v14-fallback-mug-09",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false,
+      "kind": "object",
+      "token": "R030",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R030",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R030",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R030",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "tshirt",
+      "category": "object",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": null,
+      "clarity": "not_measured_no_route",
+      "clearAny": false,
+      "targetClear": false,
+      "ratings": [],
+      "missingRoute": true
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "pants",
+      "category": "object",
+      "id": "jeonju-hyoja-v14-fallback-pants-10",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false,
+      "kind": "object",
+      "token": "R017",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "바지": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R017",
+          "name": "바지",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R017",
+          "name": "바지",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R017",
+          "name": "바지",
+          "clarity": "weak",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "hammer",
+      "category": "object",
+      "id": "jeonju-hyoja-v14-fallback-hammer-25",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false,
+      "kind": "object",
+      "token": "R047",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "망치": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R047",
+          "name": "망치",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R047",
+          "name": "망치",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R047",
+          "name": "망치",
+          "clarity": "weak",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "bottle",
+      "category": "object",
+      "id": "jeonju-hyoja-v14-independent-bottle-31",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": "R016",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R016",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R016",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R016",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "key",
+      "category": "object",
+      "id": "jeonju-hyoja-v14-independent-key-18",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": "R012",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R012",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R012",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R012",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "chair",
+      "category": "object",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": null,
+      "clarity": "not_measured_no_route",
+      "clearAny": false,
+      "targetClear": false,
+      "ratings": [],
+      "missingRoute": true
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "cat",
+      "category": "animal",
+      "id": "ulsan-samsan-v14-independent-cat-23",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": "R026",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R026",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R026",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R026",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "fish",
+      "category": "animal",
+      "id": "ulsan-samsan-v14-fallback-fish-12",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false,
+      "kind": "animal",
+      "token": "R037",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "물고기": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R037",
+          "name": "물고기",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R037",
+          "name": "물고기",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R037",
+          "name": "물고기",
+          "clarity": "weak",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "dog",
+      "category": "animal",
+      "id": "ulsan-samsan-v14-independent-dog-07",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": "R054",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "개": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R054",
+          "name": "개",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R054",
+          "name": "개",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R054",
+          "name": "개",
+          "clarity": "weak",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "rabbit",
+      "category": "animal",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": null,
+      "clarity": "not_measured_no_route",
+      "clearAny": false,
+      "targetClear": false,
+      "ratings": [],
+      "missingRoute": true
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "bird",
+      "category": "animal",
+      "id": "ulsan-samsan-v14-independent-bird-10",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": "R009",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R009",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R009",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R009",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "whale",
+      "category": "animal",
+      "id": "ulsan-samsan-v14-fallback-whale-28",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false,
+      "kind": "animal",
+      "token": "R056",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R056",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R056",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R056",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "turtle",
+      "category": "animal",
+      "id": "ulsan-samsan-v14-independent-turtle-52",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": "R044",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R044",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R044",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R044",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "elephant",
+      "category": "animal",
+      "id": "ulsan-samsan-v14-independent-elephant-45",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": "R021",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 1,
+        "코끼리": 2
+      },
+      "clarityVotes": {
+        "none": 1,
+        "weak": 2
+      },
+      "ratings": [
+        {
+          "token": "R021",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R021",
+          "name": "코끼리",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R021",
+          "name": "코끼리",
+          "clarity": "weak",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "giraffe",
+      "category": "animal",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": null,
+      "clarity": "not_measured_no_route",
+      "clearAny": false,
+      "targetClear": false,
+      "ratings": [],
+      "missingRoute": true
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "butterfly",
+      "category": "animal",
+      "id": "ulsan-samsan-v14-independent-butterfly-13",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": "R005",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R005",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R005",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R005",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "duck",
+      "category": "animal",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": true,
+      "kind": "animal",
+      "token": null,
+      "clarity": "not_measured_no_route",
+      "clearAny": false,
+      "targetClear": false,
+      "ratings": [],
+      "missingRoute": true
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "house",
+      "category": "object",
+      "id": "ulsan-samsan-v14-fallback-house-60",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false,
+      "kind": "object",
+      "token": "R050",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R050",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R050",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R050",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "tree",
+      "category": "object",
+      "id": "ulsan-samsan-v14-independent-tree-37",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": "R014",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "나무": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R014",
+          "name": "나무",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R014",
+          "name": "나무",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R014",
+          "name": "나무",
+          "clarity": "weak",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "car",
+      "category": "object",
+      "id": "ulsan-samsan-v14-independent-car-47",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": "R049",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "자동차": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R049",
+          "name": "자동차",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R049",
+          "name": "자동차",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R049",
+          "name": "자동차",
+          "clarity": "weak",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "rocket",
+      "category": "object",
+      "id": "ulsan-samsan-v14-independent-rocket-21",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": "R020",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R020",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R020",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R020",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "apple",
+      "category": "object",
+      "id": "ulsan-samsan-v14-fallback-apple-39",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false,
+      "kind": "object",
+      "token": "R036",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R036",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R036",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R036",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "crown",
+      "category": "object",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": null,
+      "clarity": "not_measured_no_route",
+      "clearAny": false,
+      "targetClear": false,
+      "ratings": [],
+      "missingRoute": true
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "airplane",
+      "category": "object",
+      "id": "ulsan-samsan-v14-independent-airplane-45",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": "R040",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R040",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R040",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R040",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "mug",
+      "category": "object",
+      "id": "ulsan-samsan-v14-fallback-mug-01",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false,
+      "kind": "object",
+      "token": "R032",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R032",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R032",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R032",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "tshirt",
+      "category": "object",
+      "id": "ulsan-samsan-v14-independent-tshirt-31",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": "R046",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 1,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "티셔츠": 2,
+        "반소매 티셔츠": 1
+      },
+      "clarityVotes": {
+        "weak": 2,
+        "clear": 1
+      },
+      "ratings": [
+        {
+          "token": "R046",
+          "name": "티셔츠",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R046",
+          "name": "반소매 티셔츠",
+          "clarity": "clear",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R046",
+          "name": "티셔츠",
+          "clarity": "weak",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "pants",
+      "category": "object",
+      "id": "ulsan-samsan-v14-fallback-pants-28",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false,
+      "kind": "object",
+      "token": "R008",
+      "clarity": "clear",
+      "clearAny": true,
+      "targetClear": true,
+      "clearTargetVotes": 2,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "바지": 3
+      },
+      "clarityVotes": {
+        "weak": 1,
+        "clear": 2
+      },
+      "ratings": [
+        {
+          "token": "R008",
+          "name": "바지",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R008",
+          "name": "바지",
+          "clarity": "clear",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R008",
+          "name": "바지",
+          "clarity": "clear",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "hammer",
+      "category": "object",
+      "id": "ulsan-samsan-v14-fallback-hammer-01",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false,
+      "kind": "object",
+      "token": "R035",
+      "clarity": "clear",
+      "clearAny": true,
+      "targetClear": true,
+      "clearTargetVotes": 2,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "망치": 3
+      },
+      "clarityVotes": {
+        "weak": 1,
+        "clear": 2
+      },
+      "ratings": [
+        {
+          "token": "R035",
+          "name": "망치",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R035",
+          "name": "망치",
+          "clarity": "clear",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R035",
+          "name": "망치",
+          "clarity": "clear",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "bottle",
+      "category": "object",
+      "id": "ulsan-samsan-v14-independent-bottle-01",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": "R048",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 1,
+        "도마": 1,
+        "병": 1
+      },
+      "clarityVotes": {
+        "none": 1,
+        "weak": 2
+      },
+      "ratings": [
+        {
+          "token": "R048",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R048",
+          "name": "도마",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R048",
+          "name": "병",
+          "clarity": "weak",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "key",
+      "category": "object",
+      "id": "ulsan-samsan-v14-independent-key-54",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": "R055",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 2,
+        "네발동물": 1
+      },
+      "clarityVotes": {
+        "none": 2,
+        "weak": 1
+      },
+      "ratings": [
+        {
+          "token": "R055",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R055",
+          "name": "네발동물",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R055",
+          "name": "없음",
+          "clarity": "none",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "chair",
+      "category": "object",
+      "id": "ulsan-samsan-v14-independent-chair-28",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": true,
+      "kind": "object",
+      "token": "R024",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "의자": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R024",
+          "name": "의자",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R024",
+          "name": "의자",
+          "clarity": "weak",
+          "source": "new blind rating"
+        },
+        {
+          "token": "R024",
+          "name": "의자",
+          "clarity": "weak",
+          "source": "new blind rating"
+        }
+      ],
+      "missingRoute": false
+    }
+  ],
+  "diversityCriterionMet": false,
+  "humanRecognitionMeasured": false,
+  "raterIdentityVerified": false,
+  "sampledGeneratorCandidatesOnly": true,
+  "completePoolOracle": false,
+  "aliasPolicy": "Frozen catalog; NFKC/casefold and punctuation/whitespace removal only; no post-hoc synonyms",
+  "limitations": "Model-neutral first generated candidate per request; shared regions and related shapes; no independence or pool-wide upper bound implied."
+}

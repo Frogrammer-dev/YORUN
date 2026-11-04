@@ -1,0 +1,33 @@
+{
+  "total": 24,
+  "validSegmentationHeuristic": 21,
+  "allProcessed": 24,
+  "counts": [
+    32,
+    50,
+    24,
+    38,
+    34,
+    33,
+    42,
+    39,
+    53,
+    41,
+    37,
+    40,
+    43,
+    39,
+    40,
+    41,
+    62,
+    32,
+    25,
+    123,
+    47
+  ],
+  "adaptiveMean": 0.00239451748298281,
+  "matchedUniformMean": 0.0051192095701805395,
+  "maxOrderedError": 0.009963233100675562,
+  "humanRecognitionMeasured": false,
+  "trained": false
+}

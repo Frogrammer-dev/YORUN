@@ -1,0 +1,63 @@
+{
+  "evaluationType": "AI surrogate, not human evaluation",
+  "evaluatorAgent": "01a19b0b-13a1-7340-89c7-095b3dc85ed2",
+  "fingerprint": "206fa7fe7b2ac4e134842ecc9ee4572efacf208c88e2bd27d2a1617b3042fb5c",
+  "results": [
+    {
+      "token": "R01",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "R02",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "R03",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "R04",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "R05",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "R06",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "R07",
+      "name": "비행기",
+      "clarity": "weak"
+    },
+    {
+      "token": "R08",
+      "name": "망치",
+      "clarity": "clear"
+    },
+    {
+      "token": "R09",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "R10",
+      "name": "망치",
+      "clarity": "clear"
+    }
+  ],
+  "humanRecognitionMeasured": false,
+  "sourceFingerprint": "feb6c11bd212879d26a68f3048f5d54a1a6ed1371817b999dcb25f13ab525d0b",
+  "reusedEvaluation": true,
+  "sourceReviewSHA256": "59102d7fa43e478a012c4dcf247975466b4a860ac471ef7e9b33ae09f03ae42e",
+  "identicalImageSHA256": "870557fa1f4c850547a64ebcec106ea88c0731648c3a7a634b9e764c53158c12",
+  "notes": "Exact same image bytes and token geometry/pose. Not a new evaluation or independent success."
+}

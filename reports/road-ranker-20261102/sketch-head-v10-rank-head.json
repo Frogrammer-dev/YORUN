@@ -1,0 +1,186 @@
+{
+  "method": "sketch-head-v10",
+  "mode": "head",
+  "classLabels": [
+    {
+      "name": "house",
+      "word": "house",
+      "object": true,
+      "key": "house"
+    },
+    {
+      "name": "tree",
+      "word": "tree",
+      "object": true,
+      "key": "tree"
+    },
+    {
+      "name": "car",
+      "word": "car",
+      "object": true,
+      "key": "car"
+    },
+    {
+      "name": "coffee_cup",
+      "word": "coffee cup",
+      "object": true,
+      "key": "coffee_cup"
+    },
+    {
+      "name": "airplane",
+      "word": "airplane",
+      "object": true,
+      "key": "airplane"
+    },
+    {
+      "name": "t-shirt",
+      "word": "t-shirt",
+      "object": true,
+      "key": "t-shirt"
+    },
+    {
+      "name": "pants",
+      "word": "pants",
+      "object": true,
+      "key": "pants"
+    },
+    {
+      "name": "hammer",
+      "word": "hammer",
+      "object": true,
+      "key": "hammer"
+    },
+    {
+      "name": "wine_bottle",
+      "word": "wine bottle",
+      "object": true,
+      "key": "wine_bottle"
+    },
+    {
+      "name": "key",
+      "word": "key",
+      "object": true,
+      "key": "key"
+    },
+    {
+      "name": "chair",
+      "word": "chair",
+      "object": true,
+      "key": "chair"
+    },
+    {
+      "name": "square",
+      "word": "square",
+      "object": false,
+      "key": "square"
+    },
+    {
+      "name": "circle",
+      "word": "circle",
+      "object": false,
+      "key": "circle"
+    },
+    {
+      "name": "triangle",
+      "word": "triangle",
+      "object": false,
+      "key": "triangle"
+    },
+    {
+      "name": "hexagon",
+      "word": "hexagon",
+      "object": false,
+      "key": "hexagon"
+    },
+    {
+      "name": "octagon",
+      "word": "octagon",
+      "object": false,
+      "key": "octagon"
+    },
+    {
+      "name": "line",
+      "word": "line",
+      "object": false,
+      "key": "line"
+    },
+    {
+      "name": "zigzag",
+      "word": "zigzag",
+      "object": false,
+      "key": "zigzag"
+    },
+    {
+      "name": "map",
+      "word": "map",
+      "object": false,
+      "key": "map"
+    }
+  ],
+  "inputSHA256": "4943a6bf2140951860fe713bfc9cdb258a8101027bda25745c2febc32b678fb0",
+  "featuresSHA256": "d9384203f578d2415f9047b1b367cb76369b2512ced8d26505d3a2ae2911f894",
+  "checkpointSHA256": "ee53bef892765a0eb16f1c0fcd4b8feac1ce279e7bc592377613c68820e29cdd",
+  "protocolSHA256": "f131b8dec05a1dda1dcb41bc268e796206cd22ddf4f4c6fed5d949880c784ee3",
+  "trainingDatasetSHA256": "b3539f068236fa936888c6f7d218dbedf3ac3a18fc31aefd4e9a1a05c50c4d2b",
+  "codeSHA256": "ea41e791d25aa4f7e4ddae2de942e8b663ff52a9df3f08e097271c5b39854daa",
+  "gate": {
+    "rejectAll": false,
+    "marginThreshold": 0.01,
+    "validationMacroAcceptedCorrectRecall": 0.9407254361799815,
+    "validationGenericFalseAccept": 0.0,
+    "genericMeaning": "exclusion classes, not real-road object absence",
+    "humanProbabilityCalibrated": false,
+    "realRoadRejectCalibrated": false
+  },
+  "candidateCount": 550,
+  "acceptedCount": 457,
+  "acceptedByArea": {
+    "cheonan-buldang": 161,
+    "jeonju-hyoja": 150,
+    "ulsan-samsan": 146
+  },
+  "idsVerifiedInFeatures": false,
+  "featureProvenance": {
+    "sidecarVerified": true,
+    "metadataSHA256": "9a09f7630723fd4f2e2ce10a96a24f8b1eeffa847638fb5aaeecd6d840475b4d",
+    "extractorMetadata": {
+      "checkpoint": "openai/clip-vit-base-patch32",
+      "revision": null,
+      "rendererCodeSHA256": "b954c219ea05c7360f9efaa51af791afc1ad9c91d25ae981897bb2f47a25ea78",
+      "rotations": 4,
+      "torch": "2.14.1+cpu",
+      "roadJudgmentsUsed": false,
+      "roadsSHA256": "4943a6bf2140951860fe713bfc9cdb258a8101027bda25745c2febc32b678fb0",
+      "featuresSHA256": "d9384203f578d2415f9047b1b367cb76369b2512ced8d26505d3a2ae2911f894",
+      "elapsedSeconds": 529.4100046000003
+    }
+  },
+  "featureCompatibility": {
+    "verified": true,
+    "comparedFields": [
+      "checkpoint",
+      "revision",
+      "rendererCodeSHA256",
+      "rotations"
+    ],
+    "extractorIdentity": {
+      "checkpoint": "openai/clip-vit-base-patch32",
+      "revision": null,
+      "rendererCodeSHA256": "b954c219ea05c7360f9efaa51af791afc1ad9c91d25ae981897bb2f47a25ea78",
+      "rotations": 4
+    },
+    "revisionPinned": false,
+    "weightFileHashesVerified": false,
+    "limitation": "Matching explicit null revisions do not independently prove encoder weight-file identity"
+  },
+  "scoreMeaning": "raw top1-minus-top2 margin; NOT a probability; not comparable across model types",
+  "classificationInput": "normalized pooled mean",
+  "displayRule": "per-view predicted-class score maximum; lowest index tie; rotation=(90*index-generatorPlacement.rotDeg)%360",
+  "intentGateApplied": false,
+  "geometryDeduplicatedByThisScript": false,
+  "humanRecognitionMeasured": false,
+  "roadValidityCheckedByThisScript": false,
+  "genericMeaning": "recommendation exclusion classes, not real-road absence ground truth",
+  "elapsedSeconds": 0.44608599999992293,
+  "outputSHA256": "ddca276e514f0f1d46c59d7502b9ca29514d283c04be4d9b9650a596b69dc7ef"
+}

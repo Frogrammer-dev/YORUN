@@ -1,0 +1,928 @@
+{
+  "fingerprint": "206fa7fe7b2ac4e134842ecc9ee4572efacf208c88e2bd27d2a1617b3042fb5c",
+  "raters": [
+    "01a19aed-73d8-7662-81ef-5d6ec2287589",
+    "01a19b0b-12bd-7592-9a5f-809818cebc3a",
+    "01a19b0b-13a1-7340-89c7-095b3dc85ed2"
+  ],
+  "individual": [
+    {
+      "fingerprint": "206fa7fe7b2ac4e134842ecc9ee4572efacf208c88e2bd27d2a1617b3042fb5c",
+      "evaluationType": "AI surrogate, not human evaluation",
+      "methods": {
+        "baseline": {
+          "denominator": 6,
+          "clear": 0,
+          "weak": 0,
+          "none": 6,
+          "abstentions": 0,
+          "areas": {
+            "cheonan-buldang": {
+              "denominator": 2,
+              "clear": 0
+            },
+            "jeonju-hyoja": {
+              "denominator": 2,
+              "clear": 0
+            },
+            "ulsan-samsan": {
+              "denominator": 2,
+              "clear": 0
+            }
+          },
+          "clearRate": 0.0
+        },
+        "model": {
+          "denominator": 6,
+          "clear": 0,
+          "weak": 2,
+          "none": 4,
+          "abstentions": 2,
+          "areas": {
+            "cheonan-buldang": {
+              "denominator": 2,
+              "clear": 0
+            },
+            "jeonju-hyoja": {
+              "denominator": 2,
+              "clear": 0
+            },
+            "ulsan-samsan": {
+              "denominator": 2,
+              "clear": 0
+            }
+          },
+          "clearRate": 0.0
+        }
+      },
+      "clearCountDelta": 0,
+      "aiSurrogateCriterionMet": false,
+      "slots": [
+        {
+          "area": "cheonan-buldang",
+          "method": "baseline",
+          "slot": 1,
+          "id": "cheonan-buldang-natural-v8-1",
+          "viewKey": "cheonan-buldang-natural-v8-1@0",
+          "viewRotation": 0,
+          "token": "R04",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "cheonan-buldang",
+          "method": "baseline",
+          "slot": 2,
+          "id": "cheonan-buldang-natural-v8-2",
+          "viewKey": "cheonan-buldang-natural-v8-2@0",
+          "viewRotation": 0,
+          "token": "R09",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "cheonan-buldang",
+          "method": "model",
+          "slot": 1,
+          "id": "cheonan-buldang-proposal-v9-hammer-1",
+          "viewKey": "cheonan-buldang-proposal-v9-hammer-1@101.973147883",
+          "viewRotation": 101.97314788346348,
+          "token": "R01",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "cheonan-buldang",
+          "method": "model",
+          "slot": 2,
+          "id": null,
+          "viewKey": null,
+          "viewRotation": 0,
+          "token": null,
+          "name": null,
+          "clarity": "none",
+          "abstained": true
+        },
+        {
+          "area": "jeonju-hyoja",
+          "method": "baseline",
+          "slot": 1,
+          "id": "jeonju-hyoja-natural-v8-1",
+          "viewKey": "jeonju-hyoja-natural-v8-1@0",
+          "viewRotation": 0,
+          "token": "R02",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "jeonju-hyoja",
+          "method": "baseline",
+          "slot": 2,
+          "id": "jeonju-hyoja-natural-v8-2",
+          "viewKey": "jeonju-hyoja-natural-v8-2@0",
+          "viewRotation": 0,
+          "token": "R03",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "jeonju-hyoja",
+          "method": "model",
+          "slot": 1,
+          "id": "jeonju-hyoja-proposal-v9-airplane-8",
+          "viewKey": "jeonju-hyoja-proposal-v9-airplane-8@87.7166249778",
+          "viewRotation": 87.71662497776049,
+          "token": "R07",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "jeonju-hyoja",
+          "method": "model",
+          "slot": 2,
+          "id": "jeonju-hyoja-proposal-v9-hammer-6",
+          "viewKey": "jeonju-hyoja-proposal-v9-hammer-6@168.405430712",
+          "viewRotation": 168.40543071155463,
+          "token": "R08",
+          "name": "망치",
+          "clarity": "weak",
+          "abstained": false
+        },
+        {
+          "area": "ulsan-samsan",
+          "method": "baseline",
+          "slot": 1,
+          "id": "ulsan-samsan-natural-v8-1",
+          "viewKey": "ulsan-samsan-natural-v8-1@0",
+          "viewRotation": 0,
+          "token": "R06",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "ulsan-samsan",
+          "method": "baseline",
+          "slot": 2,
+          "id": "ulsan-samsan-natural-v8-2",
+          "viewKey": "ulsan-samsan-natural-v8-2@0",
+          "viewRotation": 0,
+          "token": "R05",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "ulsan-samsan",
+          "method": "model",
+          "slot": 1,
+          "id": "ulsan-samsan-proposal-v9-hammer-1",
+          "viewKey": "ulsan-samsan-proposal-v9-hammer-1@2.85080038774",
+          "viewRotation": 2.850800387741757,
+          "token": "R10",
+          "name": "망치",
+          "clarity": "weak",
+          "abstained": false
+        },
+        {
+          "area": "ulsan-samsan",
+          "method": "model",
+          "slot": 2,
+          "id": null,
+          "viewKey": null,
+          "viewRotation": 0,
+          "token": null,
+          "name": null,
+          "clarity": "none",
+          "abstained": true
+        }
+      ],
+      "humanMajorityRecognitionMeasured": false,
+      "targetNameAgreementAssessed": false
+    },
+    {
+      "fingerprint": "206fa7fe7b2ac4e134842ecc9ee4572efacf208c88e2bd27d2a1617b3042fb5c",
+      "evaluationType": "AI surrogate, not human evaluation",
+      "methods": {
+        "baseline": {
+          "denominator": 6,
+          "clear": 0,
+          "weak": 0,
+          "none": 6,
+          "abstentions": 0,
+          "areas": {
+            "cheonan-buldang": {
+              "denominator": 2,
+              "clear": 0
+            },
+            "jeonju-hyoja": {
+              "denominator": 2,
+              "clear": 0
+            },
+            "ulsan-samsan": {
+              "denominator": 2,
+              "clear": 0
+            }
+          },
+          "clearRate": 0.0
+        },
+        "model": {
+          "denominator": 6,
+          "clear": 1,
+          "weak": 2,
+          "none": 3,
+          "abstentions": 2,
+          "areas": {
+            "cheonan-buldang": {
+              "denominator": 2,
+              "clear": 0
+            },
+            "jeonju-hyoja": {
+              "denominator": 2,
+              "clear": 0
+            },
+            "ulsan-samsan": {
+              "denominator": 2,
+              "clear": 1
+            }
+          },
+          "clearRate": 0.16666666666666666
+        }
+      },
+      "clearCountDelta": 1,
+      "aiSurrogateCriterionMet": false,
+      "slots": [
+        {
+          "area": "cheonan-buldang",
+          "method": "baseline",
+          "slot": 1,
+          "id": "cheonan-buldang-natural-v8-1",
+          "viewKey": "cheonan-buldang-natural-v8-1@0",
+          "viewRotation": 0,
+          "token": "R04",
+          "name": "불규칙 다각형",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "cheonan-buldang",
+          "method": "baseline",
+          "slot": 2,
+          "id": "cheonan-buldang-natural-v8-2",
+          "viewKey": "cheonan-buldang-natural-v8-2@0",
+          "viewRotation": 0,
+          "token": "R09",
+          "name": "불규칙 다각형",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "cheonan-buldang",
+          "method": "model",
+          "slot": 1,
+          "id": "cheonan-buldang-proposal-v9-hammer-1",
+          "viewKey": "cheonan-buldang-proposal-v9-hammer-1@101.973147883",
+          "viewRotation": 101.97314788346348,
+          "token": "R01",
+          "name": "부츠",
+          "clarity": "weak",
+          "abstained": false
+        },
+        {
+          "area": "cheonan-buldang",
+          "method": "model",
+          "slot": 2,
+          "id": null,
+          "viewKey": null,
+          "viewRotation": 0,
+          "token": null,
+          "name": null,
+          "clarity": "none",
+          "abstained": true
+        },
+        {
+          "area": "jeonju-hyoja",
+          "method": "baseline",
+          "slot": 1,
+          "id": "jeonju-hyoja-natural-v8-1",
+          "viewKey": "jeonju-hyoja-natural-v8-1@0",
+          "viewRotation": 0,
+          "token": "R02",
+          "name": "불규칙 다각형",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "jeonju-hyoja",
+          "method": "baseline",
+          "slot": 2,
+          "id": "jeonju-hyoja-natural-v8-2",
+          "viewKey": "jeonju-hyoja-natural-v8-2@0",
+          "viewRotation": 0,
+          "token": "R03",
+          "name": "불규칙 다각형",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "jeonju-hyoja",
+          "method": "model",
+          "slot": 1,
+          "id": "jeonju-hyoja-proposal-v9-airplane-8",
+          "viewKey": "jeonju-hyoja-proposal-v9-airplane-8@87.7166249778",
+          "viewRotation": 87.71662497776049,
+          "token": "R07",
+          "name": "불규칙한 가지형 윤곽",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "jeonju-hyoja",
+          "method": "model",
+          "slot": 2,
+          "id": "jeonju-hyoja-proposal-v9-hammer-6",
+          "viewKey": "jeonju-hyoja-proposal-v9-hammer-6@168.405430712",
+          "viewRotation": 168.40543071155463,
+          "token": "R08",
+          "name": "망치",
+          "clarity": "weak",
+          "abstained": false
+        },
+        {
+          "area": "ulsan-samsan",
+          "method": "baseline",
+          "slot": 1,
+          "id": "ulsan-samsan-natural-v8-1",
+          "viewKey": "ulsan-samsan-natural-v8-1@0",
+          "viewRotation": 0,
+          "token": "R06",
+          "name": "불규칙한 경계",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "ulsan-samsan",
+          "method": "baseline",
+          "slot": 2,
+          "id": "ulsan-samsan-natural-v8-2",
+          "viewKey": "ulsan-samsan-natural-v8-2@0",
+          "viewRotation": 0,
+          "token": "R05",
+          "name": "불규칙한 경계",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "ulsan-samsan",
+          "method": "model",
+          "slot": 1,
+          "id": "ulsan-samsan-proposal-v9-hammer-1",
+          "viewKey": "ulsan-samsan-proposal-v9-hammer-1@2.85080038774",
+          "viewRotation": 2.850800387741757,
+          "token": "R10",
+          "name": "망치",
+          "clarity": "clear",
+          "abstained": false
+        },
+        {
+          "area": "ulsan-samsan",
+          "method": "model",
+          "slot": 2,
+          "id": null,
+          "viewKey": null,
+          "viewRotation": 0,
+          "token": null,
+          "name": null,
+          "clarity": "none",
+          "abstained": true
+        }
+      ],
+      "humanMajorityRecognitionMeasured": false,
+      "targetNameAgreementAssessed": false
+    },
+    {
+      "fingerprint": "206fa7fe7b2ac4e134842ecc9ee4572efacf208c88e2bd27d2a1617b3042fb5c",
+      "evaluationType": "AI surrogate, not human evaluation",
+      "methods": {
+        "baseline": {
+          "denominator": 6,
+          "clear": 0,
+          "weak": 0,
+          "none": 6,
+          "abstentions": 0,
+          "areas": {
+            "cheonan-buldang": {
+              "denominator": 2,
+              "clear": 0
+            },
+            "jeonju-hyoja": {
+              "denominator": 2,
+              "clear": 0
+            },
+            "ulsan-samsan": {
+              "denominator": 2,
+              "clear": 0
+            }
+          },
+          "clearRate": 0.0
+        },
+        "model": {
+          "denominator": 6,
+          "clear": 2,
+          "weak": 1,
+          "none": 3,
+          "abstentions": 2,
+          "areas": {
+            "cheonan-buldang": {
+              "denominator": 2,
+              "clear": 0
+            },
+            "jeonju-hyoja": {
+              "denominator": 2,
+              "clear": 1
+            },
+            "ulsan-samsan": {
+              "denominator": 2,
+              "clear": 1
+            }
+          },
+          "clearRate": 0.3333333333333333
+        }
+      },
+      "clearCountDelta": 2,
+      "aiSurrogateCriterionMet": true,
+      "slots": [
+        {
+          "area": "cheonan-buldang",
+          "method": "baseline",
+          "slot": 1,
+          "id": "cheonan-buldang-natural-v8-1",
+          "viewKey": "cheonan-buldang-natural-v8-1@0",
+          "viewRotation": 0,
+          "token": "R04",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "cheonan-buldang",
+          "method": "baseline",
+          "slot": 2,
+          "id": "cheonan-buldang-natural-v8-2",
+          "viewKey": "cheonan-buldang-natural-v8-2@0",
+          "viewRotation": 0,
+          "token": "R09",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "cheonan-buldang",
+          "method": "model",
+          "slot": 1,
+          "id": "cheonan-buldang-proposal-v9-hammer-1",
+          "viewKey": "cheonan-buldang-proposal-v9-hammer-1@101.973147883",
+          "viewRotation": 101.97314788346348,
+          "token": "R01",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "cheonan-buldang",
+          "method": "model",
+          "slot": 2,
+          "id": null,
+          "viewKey": null,
+          "viewRotation": 0,
+          "token": null,
+          "name": null,
+          "clarity": "none",
+          "abstained": true
+        },
+        {
+          "area": "jeonju-hyoja",
+          "method": "baseline",
+          "slot": 1,
+          "id": "jeonju-hyoja-natural-v8-1",
+          "viewKey": "jeonju-hyoja-natural-v8-1@0",
+          "viewRotation": 0,
+          "token": "R02",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "jeonju-hyoja",
+          "method": "baseline",
+          "slot": 2,
+          "id": "jeonju-hyoja-natural-v8-2",
+          "viewKey": "jeonju-hyoja-natural-v8-2@0",
+          "viewRotation": 0,
+          "token": "R03",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "jeonju-hyoja",
+          "method": "model",
+          "slot": 1,
+          "id": "jeonju-hyoja-proposal-v9-airplane-8",
+          "viewKey": "jeonju-hyoja-proposal-v9-airplane-8@87.7166249778",
+          "viewRotation": 87.71662497776049,
+          "token": "R07",
+          "name": "비행기",
+          "clarity": "weak",
+          "abstained": false
+        },
+        {
+          "area": "jeonju-hyoja",
+          "method": "model",
+          "slot": 2,
+          "id": "jeonju-hyoja-proposal-v9-hammer-6",
+          "viewKey": "jeonju-hyoja-proposal-v9-hammer-6@168.405430712",
+          "viewRotation": 168.40543071155463,
+          "token": "R08",
+          "name": "망치",
+          "clarity": "clear",
+          "abstained": false
+        },
+        {
+          "area": "ulsan-samsan",
+          "method": "baseline",
+          "slot": 1,
+          "id": "ulsan-samsan-natural-v8-1",
+          "viewKey": "ulsan-samsan-natural-v8-1@0",
+          "viewRotation": 0,
+          "token": "R06",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "ulsan-samsan",
+          "method": "baseline",
+          "slot": 2,
+          "id": "ulsan-samsan-natural-v8-2",
+          "viewKey": "ulsan-samsan-natural-v8-2@0",
+          "viewRotation": 0,
+          "token": "R05",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "ulsan-samsan",
+          "method": "model",
+          "slot": 1,
+          "id": "ulsan-samsan-proposal-v9-hammer-1",
+          "viewKey": "ulsan-samsan-proposal-v9-hammer-1@2.85080038774",
+          "viewRotation": 2.850800387741757,
+          "token": "R10",
+          "name": "망치",
+          "clarity": "clear",
+          "abstained": false
+        },
+        {
+          "area": "ulsan-samsan",
+          "method": "model",
+          "slot": 2,
+          "id": null,
+          "viewKey": null,
+          "viewRotation": 0,
+          "token": null,
+          "name": null,
+          "clarity": "none",
+          "abstained": true
+        }
+      ],
+      "humanMajorityRecognitionMeasured": false,
+      "targetNameAgreementAssessed": false
+    }
+  ],
+  "majority": {
+    "fingerprint": "206fa7fe7b2ac4e134842ecc9ee4572efacf208c88e2bd27d2a1617b3042fb5c",
+    "evaluationType": "AI surrogate majority, not human evaluation",
+    "methods": {
+      "baseline": {
+        "denominator": 6,
+        "clear": 0,
+        "weak": 0,
+        "none": 6,
+        "abstentions": 0,
+        "areas": {
+          "cheonan-buldang": {
+            "denominator": 2,
+            "clear": 0
+          },
+          "jeonju-hyoja": {
+            "denominator": 2,
+            "clear": 0
+          },
+          "ulsan-samsan": {
+            "denominator": 2,
+            "clear": 0
+          }
+        },
+        "clearRate": 0.0
+      },
+      "model": {
+        "denominator": 6,
+        "clear": 1,
+        "weak": 1,
+        "none": 4,
+        "abstentions": 2,
+        "areas": {
+          "cheonan-buldang": {
+            "denominator": 2,
+            "clear": 0
+          },
+          "jeonju-hyoja": {
+            "denominator": 2,
+            "clear": 0
+          },
+          "ulsan-samsan": {
+            "denominator": 2,
+            "clear": 1
+          }
+        },
+        "clearRate": 0.16666666666666666
+      }
+    },
+    "clearCountDelta": 1,
+    "aiSurrogateCriterionMet": false,
+    "slots": [
+      {
+        "area": "cheonan-buldang",
+        "method": "baseline",
+        "slot": 1,
+        "id": "cheonan-buldang-natural-v8-1",
+        "viewKey": "cheonan-buldang-natural-v8-1@0",
+        "viewRotation": 0,
+        "token": "R04",
+        "name": "없음",
+        "clarity": "none",
+        "abstained": false
+      },
+      {
+        "area": "cheonan-buldang",
+        "method": "baseline",
+        "slot": 2,
+        "id": "cheonan-buldang-natural-v8-2",
+        "viewKey": "cheonan-buldang-natural-v8-2@0",
+        "viewRotation": 0,
+        "token": "R09",
+        "name": "없음",
+        "clarity": "none",
+        "abstained": false
+      },
+      {
+        "area": "cheonan-buldang",
+        "method": "model",
+        "slot": 1,
+        "id": "cheonan-buldang-proposal-v9-hammer-1",
+        "viewKey": "cheonan-buldang-proposal-v9-hammer-1@101.973147883",
+        "viewRotation": 101.97314788346348,
+        "token": "R01",
+        "name": "없음",
+        "clarity": "none",
+        "abstained": false
+      },
+      {
+        "area": "cheonan-buldang",
+        "method": "model",
+        "slot": 2,
+        "id": null,
+        "viewKey": null,
+        "viewRotation": 0,
+        "token": null,
+        "name": null,
+        "clarity": "none",
+        "abstained": true
+      },
+      {
+        "area": "jeonju-hyoja",
+        "method": "baseline",
+        "slot": 1,
+        "id": "jeonju-hyoja-natural-v8-1",
+        "viewKey": "jeonju-hyoja-natural-v8-1@0",
+        "viewRotation": 0,
+        "token": "R02",
+        "name": "없음",
+        "clarity": "none",
+        "abstained": false
+      },
+      {
+        "area": "jeonju-hyoja",
+        "method": "baseline",
+        "slot": 2,
+        "id": "jeonju-hyoja-natural-v8-2",
+        "viewKey": "jeonju-hyoja-natural-v8-2@0",
+        "viewRotation": 0,
+        "token": "R03",
+        "name": "없음",
+        "clarity": "none",
+        "abstained": false
+      },
+      {
+        "area": "jeonju-hyoja",
+        "method": "model",
+        "slot": 1,
+        "id": "jeonju-hyoja-proposal-v9-airplane-8",
+        "viewKey": "jeonju-hyoja-proposal-v9-airplane-8@87.7166249778",
+        "viewRotation": 87.71662497776049,
+        "token": "R07",
+        "name": "없음",
+        "clarity": "none",
+        "abstained": false
+      },
+      {
+        "area": "jeonju-hyoja",
+        "method": "model",
+        "slot": 2,
+        "id": "jeonju-hyoja-proposal-v9-hammer-6",
+        "viewKey": "jeonju-hyoja-proposal-v9-hammer-6@168.405430712",
+        "viewRotation": 168.40543071155463,
+        "token": "R08",
+        "name": "망치",
+        "clarity": "weak",
+        "abstained": false
+      },
+      {
+        "area": "ulsan-samsan",
+        "method": "baseline",
+        "slot": 1,
+        "id": "ulsan-samsan-natural-v8-1",
+        "viewKey": "ulsan-samsan-natural-v8-1@0",
+        "viewRotation": 0,
+        "token": "R06",
+        "name": "없음",
+        "clarity": "none",
+        "abstained": false
+      },
+      {
+        "area": "ulsan-samsan",
+        "method": "baseline",
+        "slot": 2,
+        "id": "ulsan-samsan-natural-v8-2",
+        "viewKey": "ulsan-samsan-natural-v8-2@0",
+        "viewRotation": 0,
+        "token": "R05",
+        "name": "없음",
+        "clarity": "none",
+        "abstained": false
+      },
+      {
+        "area": "ulsan-samsan",
+        "method": "model",
+        "slot": 1,
+        "id": "ulsan-samsan-proposal-v9-hammer-1",
+        "viewKey": "ulsan-samsan-proposal-v9-hammer-1@2.85080038774",
+        "viewRotation": 2.850800387741757,
+        "token": "R10",
+        "name": "망치",
+        "clarity": "clear",
+        "abstained": false
+      },
+      {
+        "area": "ulsan-samsan",
+        "method": "model",
+        "slot": 2,
+        "id": null,
+        "viewKey": null,
+        "viewRotation": 0,
+        "token": null,
+        "name": null,
+        "clarity": "none",
+        "abstained": true
+      }
+    ],
+    "humanMajorityRecognitionMeasured": false,
+    "targetNameAgreementAssessed": false
+  },
+  "votes": [
+    {
+      "token": "R01",
+      "clarityVotes": {
+        "none": 2,
+        "weak": 1
+      },
+      "names": {
+        "없음": 2,
+        "부츠": 1
+      },
+      "exactSameNameClearVotes": 0
+    },
+    {
+      "token": "R02",
+      "clarityVotes": {
+        "none": 3
+      },
+      "names": {
+        "없음": 2,
+        "불규칙 다각형": 1
+      },
+      "exactSameNameClearVotes": 0
+    },
+    {
+      "token": "R03",
+      "clarityVotes": {
+        "none": 3
+      },
+      "names": {
+        "없음": 2,
+        "불규칙 다각형": 1
+      },
+      "exactSameNameClearVotes": 0
+    },
+    {
+      "token": "R04",
+      "clarityVotes": {
+        "none": 3
+      },
+      "names": {
+        "없음": 2,
+        "불규칙 다각형": 1
+      },
+      "exactSameNameClearVotes": 0
+    },
+    {
+      "token": "R05",
+      "clarityVotes": {
+        "none": 3
+      },
+      "names": {
+        "없음": 2,
+        "불규칙한 경계": 1
+      },
+      "exactSameNameClearVotes": 0
+    },
+    {
+      "token": "R06",
+      "clarityVotes": {
+        "none": 3
+      },
+      "names": {
+        "없음": 2,
+        "불규칙한 경계": 1
+      },
+      "exactSameNameClearVotes": 0
+    },
+    {
+      "token": "R07",
+      "clarityVotes": {
+        "none": 2,
+        "weak": 1
+      },
+      "names": {
+        "없음": 1,
+        "불규칙한 가지형 윤곽": 1,
+        "비행기": 1
+      },
+      "exactSameNameClearVotes": 0
+    },
+    {
+      "token": "R08",
+      "clarityVotes": {
+        "weak": 2,
+        "clear": 1
+      },
+      "names": {
+        "망치": 3
+      },
+      "exactSameNameClearVotes": 1
+    },
+    {
+      "token": "R09",
+      "clarityVotes": {
+        "none": 3
+      },
+      "names": {
+        "없음": 2,
+        "불규칙 다각형": 1
+      },
+      "exactSameNameClearVotes": 0
+    },
+    {
+      "token": "R10",
+      "clarityVotes": {
+        "weak": 1,
+        "clear": 2
+      },
+      "names": {
+        "망치": 3
+      },
+      "exactSameNameClearVotes": 2
+    }
+  ],
+  "originalSingleRaterCriterionPreserved": true,
+  "humanRecognitionMeasured": false,
+  "limitations": "Related AI models; correlated errors possible; developer-selected repeated regions."
+}

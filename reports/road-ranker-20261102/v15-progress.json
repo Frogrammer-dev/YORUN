@@ -1,0 +1,29 @@
+{
+  "phase": "Controls and user3-case probe complete;diagnostic criteria not met;goal incomplete",
+  "fingerprint": "ef938c4aa5e11741fb12f1a6c9aa8dc995a5a67ab990785e22b20e9797112e87",
+  "templates": 25,
+  "sketches": 48,
+  "generic": 16,
+  "missingPlannedSketches": 2,
+  "humanRecognitionMeasured": false,
+  "actualRoadRecognitionMeasured": false,
+  "goalAchieved": false,
+  "protocolSHA256": "2660d54652f21982ba854bacaa635f4fe14cbf9da91f76e677857103c3e8ec71",
+  "rendererMatchesCurrentCode": true,
+  "AIReviewsComplete": true,
+  "templateMajorityClearTarget": 16,
+  "sketchMajorityClearTarget": 20,
+  "primaryTemplateClear": 5,
+  "primarySketchClear": 17,
+  "diagnosticCriteriaMet": false,
+  "humanProbe": {
+    "people": 1,
+    "cases": 3,
+    "clear": 0,
+    "weak": 1,
+    "none": 2,
+    "independentNaive": false
+  },
+  "controlResultsNotAddedToRoads": true,
+  "next": "Pre-register next hypothesis using separate validated road evidence;do not retune thresholds to controls"
+}

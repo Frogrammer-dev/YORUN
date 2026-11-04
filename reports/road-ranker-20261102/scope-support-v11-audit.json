@@ -1,0 +1,44 @@
+{
+  "sourceVocabularySHA256": "9cd197e083075f54bb7db6689b9a23e7defb6e3f61b2ea5bfbc99ae4483c5e57",
+  "executedTestSHA256": "0383a96b07e855a147a85600d83aa9c2ea2b85bb30944df8bc26f4d497ae2552",
+  "catalogSHA256": "dd144b39128b9c3911997d0e33387913ce796eb4e3f13221773cccc56ad8e440",
+  "aliasSetsMatchCatalog": true,
+  "speciesStillGenerated": 25,
+  "clipExactDeclaredAliasSupport": {
+    "animals": {
+      "supported": 10,
+      "denominator": 11
+    },
+    "objects": {
+      "supported": 13,
+      "denominator": 14
+    }
+  },
+  "unsupported": [
+    {
+      "key": "turtle",
+      "aliases": [
+        "turtle"
+      ],
+      "roadGenerationStatusIndependent": true
+    },
+    {
+      "key": "rocket",
+      "aliases": [
+        "rocket"
+      ],
+      "roadGenerationStatusIndependent": true
+    }
+  ],
+  "currentHeadSupport": {
+    "animalSpecies": 0,
+    "objectSpecies": 11
+  },
+  "relatedButNotAdoptedVocabularyEntries": [
+    "sea_turtle"
+  ],
+  "decision": "turtle and rocket remain unsupported under frozen aliases; sea_turtle is not automatically substituted; all25 generation hypotheses are retained",
+  "runtimeCodeChanged": false,
+  "modelAliasChanged": false,
+  "recognitionMeasured": false
+}

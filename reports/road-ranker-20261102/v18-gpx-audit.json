@@ -1,0 +1,20 @@
+{
+  "geometry": {
+    "originalRowsPreserved": 1003,
+    "requests": 75,
+    "gpxCoordinatesChecked": 75,
+    "fingerprint": "62dd19e1f581e8f76a068b5ee3c504fad5854b9502480e8fc4a943d1979d1e36"
+  },
+  "hand": {
+    "originalRowsPreserved": 1003,
+    "requests": 75,
+    "gpxCoordinatesChecked": 75,
+    "fingerprint": "f8f4c5fb83ba62c4ebb3412ffeaad3223a39dde6ffdf6f5de80081647a31f3e2"
+  },
+  "image": {
+    "originalRowsPreserved": 1003,
+    "requests": 75,
+    "gpxCoordinatesChecked": 75,
+    "fingerprint": "08284c434d3f350d49175df190d2ca67d11c1429c60f66fb0b084db0d621b7ea"
+  }
+}

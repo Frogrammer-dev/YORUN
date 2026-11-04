@@ -1,0 +1,12 @@
+{
+  "originalRows": 1003,
+  "intentRows": 643,
+  "methods": [
+    "geometry",
+    "hand",
+    "image"
+  ],
+  "choicesScoresRotationsExactlyEqual": true,
+  "adapterSHA256": "fb95d1508af1c1d04707bfab929f2e201399003bb09ee3c86a5d7bed752e2957",
+  "frozenWrapperSHA256": "74b9c12be612e5c0b5718ad88a666f0048a506bae857e961c384337a23c0c89a"
+}

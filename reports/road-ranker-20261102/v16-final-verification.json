@@ -1,0 +1,20 @@
+{
+  "pythonTestsPassed": 62,
+  "fixedSourceRowsPreserved": 1003,
+  "plannedRequests": 75,
+  "alternativeImagesChecked": 140,
+  "GPXOriginalCoordinatesChecked": 140,
+  "anonymousUIBothMethods": "passed",
+  "frozenInputsAndReviewLinkage": "bound source/selection/catalog/manifests/ID/missing/token/pageSHA/lock",
+  "primaryUnchanged": true,
+  "rawImageVotesBeforeUnion": true,
+  "expertRawVoteRecheck": "passed",
+  "humanResponseOriginalImageHashMatches": true,
+  "humanClearCasesObserved": 1,
+  "humanPeople": 1,
+  "postselectedDevelopmentCase": true,
+  "modelImprovementVerified": false,
+  "diagnosticCriterionMet": false,
+  "goalAchieved": false,
+  "finalScorerSHA256": "64a06de9955c8a67719f3bf905f7994c647795e23a29ce5c1dfd43594cd60f5f"
+}

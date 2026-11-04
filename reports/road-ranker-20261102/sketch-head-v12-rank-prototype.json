@@ -1,0 +1,264 @@
+{
+  "method": "sketch-prototype-v10",
+  "mode": "prototype",
+  "classLabels": [
+    {
+      "name": "house",
+      "word": "house",
+      "object": true,
+      "key": "house"
+    },
+    {
+      "name": "tree",
+      "word": "tree",
+      "object": true,
+      "key": "tree"
+    },
+    {
+      "name": "car",
+      "word": "car",
+      "object": true,
+      "key": "car"
+    },
+    {
+      "name": "coffee_cup",
+      "word": "coffee cup",
+      "object": true,
+      "key": "coffee_cup"
+    },
+    {
+      "name": "airplane",
+      "word": "airplane",
+      "object": true,
+      "key": "airplane"
+    },
+    {
+      "name": "t-shirt",
+      "word": "t-shirt",
+      "object": true,
+      "key": "t-shirt"
+    },
+    {
+      "name": "pants",
+      "word": "pants",
+      "object": true,
+      "key": "pants"
+    },
+    {
+      "name": "hammer",
+      "word": "hammer",
+      "object": true,
+      "key": "hammer"
+    },
+    {
+      "name": "wine_bottle",
+      "word": "wine bottle",
+      "object": true,
+      "key": "wine_bottle"
+    },
+    {
+      "name": "key",
+      "word": "key",
+      "object": true,
+      "key": "key"
+    },
+    {
+      "name": "chair",
+      "word": "chair",
+      "object": true,
+      "key": "chair"
+    },
+    {
+      "name": "square",
+      "word": "square",
+      "object": false,
+      "key": "square"
+    },
+    {
+      "name": "circle",
+      "word": "circle",
+      "object": false,
+      "key": "circle"
+    },
+    {
+      "name": "triangle",
+      "word": "triangle",
+      "object": false,
+      "key": "triangle"
+    },
+    {
+      "name": "hexagon",
+      "word": "hexagon",
+      "object": false,
+      "key": "hexagon"
+    },
+    {
+      "name": "octagon",
+      "word": "octagon",
+      "object": false,
+      "key": "octagon"
+    },
+    {
+      "name": "line",
+      "word": "line",
+      "object": false,
+      "key": "line"
+    },
+    {
+      "name": "zigzag",
+      "word": "zigzag",
+      "object": false,
+      "key": "zigzag"
+    },
+    {
+      "name": "map",
+      "word": "map",
+      "object": false,
+      "key": "map"
+    },
+    {
+      "name": "cat",
+      "word": "cat",
+      "object": true,
+      "key": "cat"
+    },
+    {
+      "name": "fish",
+      "word": "fish",
+      "object": true,
+      "key": "fish"
+    },
+    {
+      "name": "dog",
+      "word": "dog",
+      "object": true,
+      "key": "dog"
+    },
+    {
+      "name": "rabbit",
+      "word": "rabbit",
+      "object": true,
+      "key": "rabbit"
+    },
+    {
+      "name": "bird",
+      "word": "bird",
+      "object": true,
+      "key": "bird"
+    },
+    {
+      "name": "whale",
+      "word": "whale",
+      "object": true,
+      "key": "whale"
+    },
+    {
+      "name": "sea_turtle",
+      "word": "sea turtle",
+      "object": true,
+      "key": "sea_turtle"
+    },
+    {
+      "name": "elephant",
+      "word": "elephant",
+      "object": true,
+      "key": "elephant"
+    },
+    {
+      "name": "giraffe",
+      "word": "giraffe",
+      "object": true,
+      "key": "giraffe"
+    },
+    {
+      "name": "butterfly",
+      "word": "butterfly",
+      "object": true,
+      "key": "butterfly"
+    },
+    {
+      "name": "duck",
+      "word": "duck",
+      "object": true,
+      "key": "duck"
+    },
+    {
+      "name": "apple",
+      "word": "apple",
+      "object": true,
+      "key": "apple"
+    },
+    {
+      "name": "crown",
+      "word": "crown",
+      "object": true,
+      "key": "crown"
+    }
+  ],
+  "inputSHA256": "d86bd5a68f297c28e7dc0db15f800e2a1ddc12129eed8b39df7ee0bca9006ff1",
+  "featuresSHA256": "c42a699dc41d2ea002aa0d73ddadc36ca004a91132b635b6bdc7d33e19b559fd",
+  "checkpointSHA256": "540254cb1fb48fc78a8a3649867fc641548075a0b9a14a790c8eca6c4630740b",
+  "protocolSHA256": "a6a5541c190184213c2c47061e35040cf6564464f586ee260c2b297dd5fefaca",
+  "trainingDatasetSHA256": "ada8b04a03d19906c3e4c09c752730dfa9a1cf4067be52ea2c480c9fad6effc8",
+  "codeSHA256": "ea41e791d25aa4f7e4ddae2de942e8b663ff52a9df3f08e097271c5b39854daa",
+  "gate": {
+    "rejectAll": false,
+    "marginThreshold": 0.0,
+    "validationMacroAcceptedCorrectRecall": 0.6917477776852777,
+    "validationGenericFalseAccept": 0.05952380952380952,
+    "genericMeaning": "exclusion classes, not real-road object absence",
+    "humanProbabilityCalibrated": false,
+    "realRoadRejectCalibrated": false
+  },
+  "candidateCount": 1003,
+  "acceptedCount": 999,
+  "acceptedByArea": {
+    "cheonan-buldang": 322,
+    "jeonju-hyoja": 349,
+    "ulsan-samsan": 328
+  },
+  "idsVerifiedInFeatures": false,
+  "featureProvenance": {
+    "sidecarVerified": true,
+    "metadataSHA256": "d3247d3752392b23674e8115ee16ddf8c28dd05ccae4e4802e10ea53d7800876",
+    "extractorMetadata": {
+      "checkpoint": "openai/clip-vit-base-patch32",
+      "revision": null,
+      "rendererCodeSHA256": "2b85b48e4104cfd57d3c6bfd31fc07db05dad8b27ec659c606389f16fd4d4f0e",
+      "rotations": 4,
+      "torch": "2.14.1+cpu",
+      "roadJudgmentsUsed": false,
+      "roadsSHA256": "d86bd5a68f297c28e7dc0db15f800e2a1ddc12129eed8b39df7ee0bca9006ff1",
+      "featuresSHA256": "c42a699dc41d2ea002aa0d73ddadc36ca004a91132b635b6bdc7d33e19b559fd",
+      "elapsedSeconds": 1008.8525489000021
+    }
+  },
+  "featureCompatibility": {
+    "verified": true,
+    "comparedFields": [
+      "checkpoint",
+      "revision",
+      "rendererCodeSHA256",
+      "rotations"
+    ],
+    "extractorIdentity": {
+      "checkpoint": "openai/clip-vit-base-patch32",
+      "revision": null,
+      "rendererCodeSHA256": "2b85b48e4104cfd57d3c6bfd31fc07db05dad8b27ec659c606389f16fd4d4f0e",
+      "rotations": 4
+    },
+    "revisionPinned": false,
+    "weightFileHashesVerified": false,
+    "limitation": "Matching explicit null revisions do not independently prove encoder weight-file identity"
+  },
+  "scoreMeaning": "raw top1-minus-top2 margin; NOT a probability; not comparable across model types",
+  "classificationInput": "normalized pooled mean",
+  "displayRule": "per-view predicted-class score maximum; lowest index tie; rotation=(90*index-generatorPlacement.rotDeg)%360",
+  "intentGateApplied": false,
+  "geometryDeduplicatedByThisScript": false,
+  "humanRecognitionMeasured": false,
+  "roadValidityCheckedByThisScript": false,
+  "genericMeaning": "recommendation exclusion classes, not real-road absence ground truth",
+  "elapsedSeconds": 0.7991905000017141,
+  "outputSHA256": "0f2aa5a644716dc9720cd98eadd191e0d1e31a613b549424d104e12ffebc66cd"
+}

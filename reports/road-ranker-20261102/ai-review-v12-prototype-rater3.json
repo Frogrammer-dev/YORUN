@@ -1,0 +1,52 @@
+{
+  "fingerprint": "1beb46fef6d3923b2422d21b3efe15836c6fa0c02a24159497e03c68bc5e3984",
+  "evaluatorAgent": "01a19b0b-13a1-7340-89c7-095b3dc85ed2",
+  "evaluationType": "AI surrogate, not human evaluation",
+  "results": [
+    {
+      "token": "R001",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R002",
+      "name": "바지",
+      "clarity": "clear",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R003",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R004",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R005",
+      "name": "반팔 티셔츠",
+      "clarity": "clear",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R006",
+      "name": "망치",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R007",
+      "name": "티셔츠",
+      "clarity": "weak",
+      "source": "new blind rating"
+    }
+  ],
+  "exactPixelRatingsReused": 2,
+  "bridgeFingerprint": "98af8e05e84853b8338cd5846784a7e80216318e93d0ef7b16c1ddbe1334178f",
+  "humanRecognitionMeasured": false
+}

@@ -1,0 +1,59 @@
+{
+  "stage": "Final implementation; earlier run hashes remain historical",
+  "files": [
+    {
+      "source": "src/lib/route/objectProposals.ts",
+      "snapshot": "reports/road-ranker-20261102/code-snapshots/objectProposals.ts.final.txt",
+      "sha256": "507720f67baf3f4576cc0294dfeab5fb28ef477ca2a622417d88480b1c95d68b",
+      "bytes": 6859
+    },
+    {
+      "source": "src/lib/route/objectTemplates.ts",
+      "snapshot": "reports/road-ranker-20261102/code-snapshots/objectTemplates.ts.final.txt",
+      "sha256": "54e14d97d521cdbfbf216e2031b632faaac47a1658662de0873cdb2d56bde49e",
+      "bytes": 1836
+    },
+    {
+      "source": "scripts/recognition-lab/road_ranker.py",
+      "snapshot": "reports/road-ranker-20261102/code-snapshots/road_ranker.py.final.txt",
+      "sha256": "0b76a932d3bd97c5860a8f15d474e5467fd3cf59f427a811bb92437f41fafea8",
+      "bytes": 20265
+    },
+    {
+      "source": "scripts/recognition-lab/road-object-model.py",
+      "snapshot": "reports/road-ranker-20261102/code-snapshots/road-object-model.py.final.txt",
+      "sha256": "3d56aee17536a4fcc0f0a184a29fc3c18120a301c8596c7bf2ab76ca1814ebcb",
+      "bytes": 3324
+    },
+    {
+      "source": "scripts/recognition-lab/road-clip-ranker.py",
+      "snapshot": "reports/road-ranker-20261102/code-snapshots/road-clip-ranker.py.final.txt",
+      "sha256": "2b49c1792839ad839cc727dcb03d23166330da8d57e7b4947a50c54589d2acdd",
+      "bytes": 6801
+    },
+    {
+      "source": "scripts/recognition-lab/road-semantic-gate.py",
+      "snapshot": "reports/road-ranker-20261102/code-snapshots/road-semantic-gate.py.final.txt",
+      "sha256": "5c95335cf2fd52f8b9f14de5eb3e06791d5500a86cdb7fea5b3ee8a8d233bf33",
+      "bytes": 2939
+    },
+    {
+      "source": "scripts/recognition-lab/road-ranker-review.py",
+      "snapshot": "reports/road-ranker-20261102/code-snapshots/road-ranker-review.py.final.txt",
+      "sha256": "d5c263fa081704093cbdda50d4c86a01e59970a2aa84b23238bc1abf7f394381",
+      "bytes": 12082
+    },
+    {
+      "source": "scripts/recognition-lab/road-ranker-score.py",
+      "snapshot": "reports/road-ranker-20261102/code-snapshots/road-ranker-score.py.final.txt",
+      "sha256": "18c2bd80d9aefb505cbaeb5de53500e03f513dac9aa3eb86329b24f1e73f33b7",
+      "bytes": 4538
+    },
+    {
+      "source": "scripts/recognition-lab/road-object-gallery.py",
+      "snapshot": "reports/road-ranker-20261102/code-snapshots/road-object-gallery.py.final.txt",
+      "sha256": "903be6a3107821c8a5d4bca90b3f3e22605b65289a667aa4089e25563ae11172",
+      "bytes": 2902
+    }
+  ]
+}

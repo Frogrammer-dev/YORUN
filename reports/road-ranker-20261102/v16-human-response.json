@@ -1,0 +1,25 @@
+{
+  "evaluationType": "Actual user free-name follow-up;AI-postselected development case",
+  "source": "user reply to request_user_input_async",
+  "questionItemId": "[\"request_user_input_async\",\"call_5a55d911954b4c978d8d5b6882e72c01\",0]",
+  "rawAnswer": "강아지 명확",
+  "answers": [
+    {
+      "name": "강아지",
+      "clarity": "clear"
+    }
+  ],
+  "people": 1,
+  "cases": 1,
+  "imageSHA256": "13f840a3c72513cad1f0794d222515ebacb684bb903061b68e419f2597faec00",
+  "sourceBodyPixelSHA256": "6111d2694a671ca6bcefff2abfb56c92248268ab264a7f22ddab04c62929069d",
+  "probeManifestSHA256": "3a9d06c98e6ca14eadfc71a0637c5b10f15d2a64e0c4df78ff415785fe7ed0b1",
+  "humanResponseObserved": true,
+  "humanClearObservedForThisCase": true,
+  "postselectedAfterAIReview": true,
+  "independentNaiveEvaluation": false,
+  "specificPriorImageExposureKnown": false,
+  "not75RequestHumanAccuracy": true,
+  "modelImprovementVerified": false,
+  "goalAchieved": false
+}

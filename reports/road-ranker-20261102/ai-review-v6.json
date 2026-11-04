@@ -1,0 +1,20 @@
+{
+  "evaluationType":"AI surrogate, not human evaluation",
+  "evaluatorAgent":"01a19aed-73d8-7662-81ef-5d6ec2287589",
+  "fingerprint":"8d21ab4f904a7d36d331efdb72e60b1cb3b60eab7ccb87ac86878aac93fe306a",
+  "namesScoresMethodsHidden":true,
+  "results":[
+    {"token":"R01","name":"없음","clarity":"none"},
+    {"token":"R02","name":"없음","clarity":"none"},
+    {"token":"R03","name":"비행기","clarity":"weak"},
+    {"token":"R04","name":"없음","clarity":"none"},
+    {"token":"R05","name":"없음","clarity":"none"},
+    {"token":"R06","name":"없음","clarity":"none"},
+    {"token":"R07","name":"비행기","clarity":"weak"},
+    {"token":"R08","name":"없음","clarity":"none"},
+    {"token":"R09","name":"없음","clarity":"none"},
+    {"token":"R10","name":"없음","clarity":"none"}
+  ],
+  "humanRecognitionMeasured":false,
+  "notes":"Frozen v5 selection on three newly defined road areas; two model slots abstained."
+}

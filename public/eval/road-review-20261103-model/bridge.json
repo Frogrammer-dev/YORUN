@@ -1,0 +1,700 @@
+{
+  "oldFingerprint": "e934a3ee3fe40716ea306de4dbf15bf49efc5f5463e7cab8bb2e56dc94e7a9c5",
+  "studies": [
+    {
+      "folder": "public\\eval\\route-study-20261103-h",
+      "fingerprint": "5eee0af13d138cc86e498953b0ca538c6f56d6367ffb8b7326ef204d3d0512d8",
+      "rows": [
+        {
+          "token": "R001",
+          "hash": "7761b1271a2754705af9caef26b6067fdf5e210d2687318e153dab21132b758e",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "자동차",
+              "clarity": "weak",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R001",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R001"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "자동차",
+              "clarity": "weak",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R001",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R001"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "자동차",
+              "clarity": "weak",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R001",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R001"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R002",
+          "hash": "e539644d4c650b771a443fa98c0ca8cd82a595d2b4456a3c3d04b71b95020bbc",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "티셔츠",
+              "clarity": "weak",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R002",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R002"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "반소매 티셔츠",
+              "clarity": "weak",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R002",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R002"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "반팔 티셔츠",
+              "clarity": "clear",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R002",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R002"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R003",
+          "hash": "267238fe49b4810e5b5804686b84a017247de0a091c29e4c6d6186c0253adacd",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "나무",
+              "clarity": "weak",
+              "oldTokens": [
+                "1bf0afd74a6cae68f6a8f114ab9fc2f8e3fc32518b2104f2267061367af914c1:R003"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "나무",
+              "clarity": "weak",
+              "oldTokens": [
+                "1bf0afd74a6cae68f6a8f114ab9fc2f8e3fc32518b2104f2267061367af914c1:R003"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "나무",
+              "clarity": "weak",
+              "oldTokens": [
+                "1bf0afd74a6cae68f6a8f114ab9fc2f8e3fc32518b2104f2267061367af914c1:R003"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R004",
+          "hash": "bc4e894c192cacc1bed772785c124aed96ae8ee567062f57dde17e6592bcf042",
+          "reuse": {}
+        },
+        {
+          "token": "R005",
+          "hash": "5dd97fd8d539565ded348e0cd7a168c6a1cb0bb28c05da1578856897a7695c99",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "기린",
+              "clarity": "weak",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R004",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R004",
+                "a56106bbbc55cf989308cb585a7451c89f44bb216604d7764b00f9ef958659b5:R009"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "기린",
+              "clarity": "weak",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R004",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R004",
+                "a56106bbbc55cf989308cb585a7451c89f44bb216604d7764b00f9ef958659b5:R009"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "기린",
+              "clarity": "weak",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R004",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R004",
+                "a56106bbbc55cf989308cb585a7451c89f44bb216604d7764b00f9ef958659b5:R009"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R006",
+          "hash": "ff7036514ea39d5f766676886b3aec087cb54bb912fde8427329cac9e5a28559",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "바지",
+              "clarity": "weak",
+              "oldTokens": [
+                "R010"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "바지",
+              "clarity": "clear",
+              "oldTokens": [
+                "R010"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "바지",
+              "clarity": "clear",
+              "oldTokens": [
+                "R010"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R007",
+          "hash": "4f8785d4cd26a0f74f9d2138afb95a54abef264af90383b0fca1cbd6d33b5e19",
+          "reuse": {}
+        },
+        {
+          "token": "R008",
+          "hash": "77261b75a2a676f2a6d0e40bd9cf20933475bf48bdd6a9ec3bbfef65610036f3",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "나무",
+              "clarity": "weak",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R006",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R006"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "나무",
+              "clarity": "weak",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R006",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R006"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "나무",
+              "clarity": "weak",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R006",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R006"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R009",
+          "hash": "4daa71e6ec2d9f2b4c428ff2492970133c6f9cb2507eef3cb06db1f89eefc05f",
+          "reuse": {}
+        },
+        {
+          "token": "R010",
+          "hash": "47272c932a58a8b4141a9fea85f1ca62cd92e4672e173be38a928d82e6485c0b",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "바지",
+              "clarity": "weak",
+              "oldTokens": [
+                "R019",
+                "1beb46fef6d3923b2422d21b3efe15836c6fa0c02a24159497e03c68bc5e3984:R002",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R007"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "바지",
+              "clarity": "clear",
+              "oldTokens": [
+                "R019",
+                "1beb46fef6d3923b2422d21b3efe15836c6fa0c02a24159497e03c68bc5e3984:R002",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R007"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "바지",
+              "clarity": "clear",
+              "oldTokens": [
+                "R019",
+                "1beb46fef6d3923b2422d21b3efe15836c6fa0c02a24159497e03c68bc5e3984:R002",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R007"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R011",
+          "hash": "35f5839fd94bc05e40280af1011adf154bccbe7d15337efc9fa2cab324370d17",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "망치",
+              "clarity": "weak",
+              "oldTokens": [
+                "R020",
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R008",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R008"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "망치",
+              "clarity": "weak",
+              "oldTokens": [
+                "R020",
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R008",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R008"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "망치",
+              "clarity": "weak",
+              "oldTokens": [
+                "R020",
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R008",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R008"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R012",
+          "hash": "f92c6337187e0d265b2c08f00cffa3e3480f55f3efe80d74449c2ed631564924",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "기린",
+              "clarity": "weak",
+              "oldTokens": [
+                "R022"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "기린",
+              "clarity": "weak",
+              "oldTokens": [
+                "R022"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "기린",
+              "clarity": "weak",
+              "oldTokens": [
+                "R022"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R013",
+          "hash": "65968e5a2cc93a0ed5c83cfc172188150a2572a19d685cfa525e91fb5f36cc18",
+          "reuse": {}
+        },
+        {
+          "token": "R014",
+          "hash": "f4cc1b2a22682587c9297091b4008e6b90c53f25d4c996d23245cda491327aa4",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "의자",
+              "clarity": "weak",
+              "oldTokens": [
+                "1bf0afd74a6cae68f6a8f114ab9fc2f8e3fc32518b2104f2267061367af914c1:R024"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "의자",
+              "clarity": "weak",
+              "oldTokens": [
+                "1bf0afd74a6cae68f6a8f114ab9fc2f8e3fc32518b2104f2267061367af914c1:R024"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "의자",
+              "clarity": "clear",
+              "oldTokens": [
+                "1bf0afd74a6cae68f6a8f114ab9fc2f8e3fc32518b2104f2267061367af914c1:R024"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R015",
+          "hash": "87dc32b196a3ead7fb3ca8a1dff07031f0976f8e3a2de600b63c193e870a5073",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "바지",
+              "clarity": "weak",
+              "oldTokens": [
+                "R029",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R011"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "바지",
+              "clarity": "clear",
+              "oldTokens": [
+                "R029",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R011"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "바지",
+              "clarity": "clear",
+              "oldTokens": [
+                "R029",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R011"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R016",
+          "hash": "42e48efb4648bc37d2a12a76d48e8e1f02dea9e80a3ecf84cf79b368110b94ea",
+          "reuse": {}
+        },
+        {
+          "token": "R017",
+          "hash": "0c487bc5b361184d9035078b4f6ed60e7780e6f2cb586f358fa58214c7572289",
+          "reuse": {}
+        },
+        {
+          "token": "R018",
+          "hash": "dd9b172813f3a12fcedc41b2fcb7ff938dff71cfd2f47706ddaf3477523b4255",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "없음",
+              "clarity": "none",
+              "oldTokens": [
+                "R036"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "도마",
+              "clarity": "weak",
+              "oldTokens": [
+                "R036"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "병",
+              "clarity": "weak",
+              "oldTokens": [
+                "R036"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R019",
+          "hash": "67b9cc20d1fd8e8061101da4fe2c13475a19acb8e55e7cf0bbf5a5e135f1abc9",
+          "reuse": {}
+        },
+        {
+          "token": "R020",
+          "hash": "6947fbf0a0549951c0d1eb47b2a06627cacb737e1ec78c80b6bd492308b8e86c",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "물고기",
+              "clarity": "weak",
+              "oldTokens": [
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R013"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "물고기",
+              "clarity": "clear",
+              "oldTokens": [
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R013"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "물고기",
+              "clarity": "clear",
+              "oldTokens": [
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R013"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R021",
+          "hash": "f33bbd0354929cd586dde1d7cac353431b29b65e47c1a6a87377f0d08b06e39c",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "망치",
+              "clarity": "weak",
+              "oldTokens": [
+                "R044",
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R014",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R014"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "망치",
+              "clarity": "clear",
+              "oldTokens": [
+                "R044",
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R014",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R014"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "망치",
+              "clarity": "clear",
+              "oldTokens": [
+                "R044",
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R014",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R014"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R022",
+          "hash": "7f1cc127ff93820f766d0c4bee91207af33898ca672795ac98959b0ba7594ebb",
+          "reuse": {}
+        },
+        {
+          "token": "R023",
+          "hash": "3f20da3116b23cde91d6220fd3bea7a557dfcaa0cd4246400dc8f2e53412d0b4",
+          "reuse": {}
+        },
+        {
+          "token": "R024",
+          "hash": "8319869666855648c31ee00c1aaf8d45d85bd538e98c9114646f18094c883c44",
+          "reuse": {}
+        },
+        {
+          "token": "R025",
+          "hash": "c2361e41ca476806410f2b1b6ff299122f19b9af3ab8abbe631fb6ae0cf2b8ab",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "냄비",
+              "clarity": "weak",
+              "oldTokens": [
+                "a56106bbbc55cf989308cb585a7451c89f44bb216604d7764b00f9ef958659b5:R058"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "냄비",
+              "clarity": "weak",
+              "oldTokens": [
+                "a56106bbbc55cf989308cb585a7451c89f44bb216604d7764b00f9ef958659b5:R058"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "냄비",
+              "clarity": "weak",
+              "oldTokens": [
+                "a56106bbbc55cf989308cb585a7451c89f44bb216604d7764b00f9ef958659b5:R058"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R026",
+          "hash": "3d868470bb39f36d1a0ad96e362a9a1316f7f70d0b1fdd235d1b69a06d44cb4f",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "티셔츠",
+              "clarity": "weak",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R015",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R015",
+                "a56106bbbc55cf989308cb585a7451c89f44bb216604d7764b00f9ef958659b5:R059"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "반소매 티셔츠",
+              "clarity": "clear",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R015",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R015",
+                "a56106bbbc55cf989308cb585a7451c89f44bb216604d7764b00f9ef958659b5:R059"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "반팔 티셔츠",
+              "clarity": "clear",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R015",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R015",
+                "a56106bbbc55cf989308cb585a7451c89f44bb216604d7764b00f9ef958659b5:R059"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R027",
+          "hash": "747d464bc12a64e167776c75ea41fdefe9075aa7b7543ec6baa0346bcee051b7",
+          "reuse": {}
+        },
+        {
+          "token": "R028",
+          "hash": "c5b9463118faa6b5741473bb4ba758c8ea7aec62d2c9666b702fb7ae2bfcad97",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "없음",
+              "clarity": "none",
+              "oldTokens": [
+                "R065"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "도마",
+              "clarity": "weak",
+              "oldTokens": [
+                "R065"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "병",
+              "clarity": "weak",
+              "oldTokens": [
+                "R065"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R029",
+          "hash": "678f944693aa4d695c48b714062db1f0dda5f3bd12452674e9156043cc8cb6bc",
+          "reuse": {}
+        },
+        {
+          "token": "R030",
+          "hash": "8f94d6ec1328b9f46db33c43a2e021b28f6b4c105c8e00532b38c2644d3a1b43",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "자동차",
+              "clarity": "weak",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R016",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R016",
+                "1bf0afd74a6cae68f6a8f114ab9fc2f8e3fc32518b2104f2267061367af914c1:R061"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "자동차",
+              "clarity": "weak",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R016",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R016",
+                "1bf0afd74a6cae68f6a8f114ab9fc2f8e3fc32518b2104f2267061367af914c1:R061"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "자동차",
+              "clarity": "weak",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R016",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R016",
+                "1bf0afd74a6cae68f6a8f114ab9fc2f8e3fc32518b2104f2267061367af914c1:R061"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R031",
+          "hash": "fe20b7675935f99ada019409df659b633e2fb2d0b1a59adb8f7d99bf9402a49a",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "의자",
+              "clarity": "weak",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R017",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R017"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "의자",
+              "clarity": "clear",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R017",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R017"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "의자",
+              "clarity": "clear",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R017",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R017"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R032",
+          "hash": "4fd4bb578151e6d67d80eed940b6aff0c065f1b74aa7886e06a7bae99f65c8c4",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "네발 동물",
+              "clarity": "weak",
+              "oldTokens": [
+                "R072"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "개",
+              "clarity": "clear",
+              "oldTokens": [
+                "R072"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "개",
+              "clarity": "weak",
+              "oldTokens": [
+                "R072"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "pendingTokens": {
+    "K001": "0c487bc5b361184d9035078b4f6ed60e7780e6f2cb586f358fa58214c7572289",
+    "K002": "bc4e894c192cacc1bed772785c124aed96ae8ee567062f57dde17e6592bcf042",
+    "K003": "42e48efb4648bc37d2a12a76d48e8e1f02dea9e80a3ecf84cf79b368110b94ea",
+    "K004": "7f1cc127ff93820f766d0c4bee91207af33898ca672795ac98959b0ba7594ebb",
+    "K005": "65968e5a2cc93a0ed5c83cfc172188150a2572a19d685cfa525e91fb5f36cc18",
+    "K006": "747d464bc12a64e167776c75ea41fdefe9075aa7b7543ec6baa0346bcee051b7",
+    "K007": "4daa71e6ec2d9f2b4c428ff2492970133c6f9cb2507eef3cb06db1f89eefc05f",
+    "K008": "67b9cc20d1fd8e8061101da4fe2c13475a19acb8e55e7cf0bbf5a5e135f1abc9",
+    "K009": "8319869666855648c31ee00c1aaf8d45d85bd538e98c9114646f18094c883c44",
+    "K010": "3f20da3116b23cde91d6220fd3bea7a557dfcaa0cd4246400dc8f2e53412d0b4",
+    "K011": "4f8785d4cd26a0f74f9d2138afb95a54abef264af90383b0fca1cbd6d33b5e19",
+    "K012": "678f944693aa4d695c48b714062db1f0dda5f3bd12452674e9156043cc8cb6bc"
+  },
+  "pages": [
+    {
+      "file": "page-1.png",
+      "SHA256": "ed29cbe3d757e2cf09d438b049c62aac8916bb28bc58e0a4c5abc565a502f2c6"
+    }
+  ],
+  "raters": [
+    "01a19aed-73d8-7662-81ef-5d6ec2287589",
+    "01a19b0b-12bd-7592-9a5f-809818cebc3a",
+    "01a19b0b-13a1-7340-89c7-095b3dc85ed2"
+  ],
+  "conflictingOldRatings": [],
+  "humanRecognitionMeasured": false,
+  "rule": "Exact RGB road-body pixels only. Conflicting old ratings require fresh judgment; related geometry is not equivalent.",
+  "additionalOldFingerprints": [
+    "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39",
+    "1beb46fef6d3923b2422d21b3efe15836c6fa0c02a24159497e03c68bc5e3984",
+    "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347",
+    "8f70b783a366563d6dd5897527ab6b4b17a5f131f2f88c5ec4ff745ba520d4aa",
+    "0733ba8dea3e756c21227dab9ab352900a59fd2bd8ca90473bd8dbd74221e61f",
+    "a56106bbbc55cf989308cb585a7451c89f44bb216604d7764b00f9ef958659b5",
+    "1bf0afd74a6cae68f6a8f114ab9fc2f8e3fc32518b2104f2267061367af914c1"
+  ],
+  "fingerprint": "af489ab7cb49c6431239fc3f930855182d87ad0eff5df7a5a53d6a9cd521b102"
+}

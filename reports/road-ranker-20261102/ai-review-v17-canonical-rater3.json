@@ -1,0 +1,202 @@
+{
+  "fingerprint": "5eee0af13d138cc86e498953b0ca538c6f56d6367ffb8b7326ef204d3d0512d8",
+  "evaluatorAgent": "01a19b0b-13a1-7340-89c7-095b3dc85ed2",
+  "evaluationType": "AI surrogate, not human evaluation",
+  "results": [
+    {
+      "token": "R001",
+      "name": "자동차",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R002",
+      "name": "반팔 티셔츠",
+      "clarity": "clear",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R003",
+      "name": "나무",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R004",
+      "name": "배",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R005",
+      "name": "기린",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R006",
+      "name": "바지",
+      "clarity": "clear",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R007",
+      "name": "코끼리",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R008",
+      "name": "나무",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R009",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R010",
+      "name": "바지",
+      "clarity": "clear",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R011",
+      "name": "망치",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R012",
+      "name": "기린",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R013",
+      "name": "기린",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R014",
+      "name": "의자",
+      "clarity": "clear",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R015",
+      "name": "바지",
+      "clarity": "clear",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R016",
+      "name": "의자",
+      "clarity": "clear",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R017",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R018",
+      "name": "병",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R019",
+      "name": "반팔 티셔츠",
+      "clarity": "clear",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R020",
+      "name": "물고기",
+      "clarity": "clear",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R021",
+      "name": "망치",
+      "clarity": "clear",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R022",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R023",
+      "name": "물고기",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R024",
+      "name": "성",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R025",
+      "name": "냄비",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R026",
+      "name": "반팔 티셔츠",
+      "clarity": "clear",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R027",
+      "name": "망치",
+      "clarity": "clear",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R028",
+      "name": "병",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R029",
+      "name": "코끼리",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R030",
+      "name": "자동차",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R031",
+      "name": "의자",
+      "clarity": "clear",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R032",
+      "name": "개",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    }
+  ],
+  "exactPixelRatingsReused": 20,
+  "bridgeFingerprint": "af489ab7cb49c6431239fc3f930855182d87ad0eff5df7a5a53d6a9cd521b102",
+  "humanRecognitionMeasured": false
+}

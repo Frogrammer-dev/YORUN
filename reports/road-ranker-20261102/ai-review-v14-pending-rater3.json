@@ -1,0 +1,486 @@
+{
+  "fingerprint": "1af98c7c4d335e05b42ba292a7dbac00e2a901c0e8c756a484b75329db174c7c",
+  "evaluatorAgent": "01a19b0b-13a1-7340-89c7-095b3dc85ed2",
+  "humanRecognitionMeasured": false,
+  "reviewType": "AI 대리 검토이며 사람 평가가 아님",
+  "results": [
+    {
+      "token": "K001",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K002",
+      "name": "자동차",
+      "clarity": "weak"
+    },
+    {
+      "token": "K003",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K004",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K005",
+      "name": "의자",
+      "clarity": "weak"
+    },
+    {
+      "token": "K006",
+      "name": "병",
+      "clarity": "weak"
+    },
+    {
+      "token": "K007",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K008",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K009",
+      "name": "나무",
+      "clarity": "weak"
+    },
+    {
+      "token": "K010",
+      "name": "물고기",
+      "clarity": "weak"
+    },
+    {
+      "token": "K011",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K012",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K013",
+      "name": "망치",
+      "clarity": "weak"
+    },
+    {
+      "token": "K014",
+      "name": "반팔 티셔츠",
+      "clarity": "clear"
+    },
+    {
+      "token": "K015",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K016",
+      "name": "개",
+      "clarity": "weak"
+    },
+    {
+      "token": "K017",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K018",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K019",
+      "name": "의자",
+      "clarity": "weak"
+    },
+    {
+      "token": "K020",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K021",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K022",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K023",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K024",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K025",
+      "name": "말",
+      "clarity": "weak"
+    },
+    {
+      "token": "K026",
+      "name": "나무",
+      "clarity": "weak"
+    },
+    {
+      "token": "K027",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K028",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K029",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K030",
+      "name": "나무",
+      "clarity": "weak"
+    },
+    {
+      "token": "K031",
+      "name": "병",
+      "clarity": "weak"
+    },
+    {
+      "token": "K032",
+      "name": "말",
+      "clarity": "weak"
+    },
+    {
+      "token": "K033",
+      "name": "바지",
+      "clarity": "clear"
+    },
+    {
+      "token": "K034",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K035",
+      "name": "바지",
+      "clarity": "weak"
+    },
+    {
+      "token": "K036",
+      "name": "코끼리",
+      "clarity": "weak"
+    },
+    {
+      "token": "K037",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K038",
+      "name": "자동차",
+      "clarity": "weak"
+    },
+    {
+      "token": "K039",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K040",
+      "name": "망치",
+      "clarity": "clear"
+    },
+    {
+      "token": "K041",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K042",
+      "name": "코끼리",
+      "clarity": "weak"
+    },
+    {
+      "token": "K043",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K044",
+      "name": "고슴도치",
+      "clarity": "weak"
+    },
+    {
+      "token": "K045",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K046",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K047",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K048",
+      "name": "망치",
+      "clarity": "weak"
+    },
+    {
+      "token": "K049",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K050",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K051",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K052",
+      "name": "고슴도치",
+      "clarity": "weak"
+    },
+    {
+      "token": "K053",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K054",
+      "name": "티셔츠",
+      "clarity": "weak"
+    },
+    {
+      "token": "K055",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K056",
+      "name": "코끼리",
+      "clarity": "weak"
+    },
+    {
+      "token": "K057",
+      "name": "기린",
+      "clarity": "weak"
+    },
+    {
+      "token": "K058",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K059",
+      "name": "바지",
+      "clarity": "clear"
+    },
+    {
+      "token": "K060",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K061",
+      "name": "냄비",
+      "clarity": "weak"
+    },
+    {
+      "token": "K062",
+      "name": "개",
+      "clarity": "weak"
+    },
+    {
+      "token": "K063",
+      "name": "병",
+      "clarity": "weak"
+    },
+    {
+      "token": "K064",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K065",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K066",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K067",
+      "name": "나무",
+      "clarity": "weak"
+    },
+    {
+      "token": "K068",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K069",
+      "name": "의자",
+      "clarity": "weak"
+    },
+    {
+      "token": "K070",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K071",
+      "name": "반팔 티셔츠",
+      "clarity": "clear"
+    },
+    {
+      "token": "K072",
+      "name": "병",
+      "clarity": "weak"
+    },
+    {
+      "token": "K073",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K074",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K075",
+      "name": "기린",
+      "clarity": "weak"
+    },
+    {
+      "token": "K076",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K077",
+      "name": "물고기",
+      "clarity": "weak"
+    },
+    {
+      "token": "K078",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K079",
+      "name": "물고기",
+      "clarity": "weak"
+    },
+    {
+      "token": "K080",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K081",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K082",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K083",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K084",
+      "name": "자동차",
+      "clarity": "weak"
+    },
+    {
+      "token": "K085",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K086",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K087",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K088",
+      "name": "기린",
+      "clarity": "weak"
+    },
+    {
+      "token": "K089",
+      "name": "티셔츠",
+      "clarity": "weak"
+    },
+    {
+      "token": "K090",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K091",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K092",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K093",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K094",
+      "name": "개",
+      "clarity": "weak"
+    },
+    {
+      "token": "K095",
+      "name": "개",
+      "clarity": "weak"
+    }
+  ],
+  "reportedEvaluatorAgent": "Codex",
+  "agentIdentitySource": "Completed agent tool envelope",
+  "raterIdentityVerified": false
+}

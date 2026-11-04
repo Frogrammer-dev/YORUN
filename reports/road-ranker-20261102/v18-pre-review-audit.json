@@ -1,0 +1,17 @@
+{
+  "geometry": {
+    "selected": 75,
+    "humanConfirmedCaseSelected": false,
+    "humanDevRequestSelectedId": "ulsan-samsan-diversity-v11-dog-1"
+  },
+  "hand": {
+    "selected": 75,
+    "humanConfirmedCaseSelected": true,
+    "humanDevRequestSelectedId": "ulsan-samsan-diversity-v11-dog-4"
+  },
+  "image": {
+    "selected": 75,
+    "humanConfirmedCaseSelected": true,
+    "humanDevRequestSelectedId": "ulsan-samsan-diversity-v11-dog-4"
+  }
+}

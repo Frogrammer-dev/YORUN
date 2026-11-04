@@ -1,0 +1,200 @@
+{
+  "fingerprint": "8d21ab4f904a7d36d331efdb72e60b1cb3b60eab7ccb87ac86878aac93fe306a",
+  "evaluationType": "AI surrogate, not human evaluation",
+  "methods": {
+    "baseline": {
+      "denominator": 6,
+      "clear": 0,
+      "weak": 0,
+      "none": 6,
+      "abstentions": 0,
+      "areas": {
+        "suwon-yeongtong": {
+          "denominator": 2,
+          "clear": 0
+        },
+        "cheongju-bokdae": {
+          "denominator": 2,
+          "clear": 0
+        },
+        "gwangju-sangmu": {
+          "denominator": 2,
+          "clear": 0
+        }
+      },
+      "clearRate": 0.0
+    },
+    "model": {
+      "denominator": 6,
+      "clear": 0,
+      "weak": 2,
+      "none": 4,
+      "abstentions": 2,
+      "areas": {
+        "suwon-yeongtong": {
+          "denominator": 2,
+          "clear": 0
+        },
+        "cheongju-bokdae": {
+          "denominator": 2,
+          "clear": 0
+        },
+        "gwangju-sangmu": {
+          "denominator": 2,
+          "clear": 0
+        }
+      },
+      "clearRate": 0.0
+    }
+  },
+  "clearCountDelta": 0,
+  "aiSurrogateCriterionMet": false,
+  "slots": [
+    {
+      "area": "suwon-yeongtong",
+      "method": "baseline",
+      "slot": 1,
+      "id": "suwon-yeongtong-natural-v6-1",
+      "viewKey": "suwon-yeongtong-natural-v6-1@0",
+      "viewRotation": 0,
+      "token": "R04",
+      "name": "없음",
+      "clarity": "none",
+      "abstained": false
+    },
+    {
+      "area": "suwon-yeongtong",
+      "method": "baseline",
+      "slot": 2,
+      "id": "suwon-yeongtong-natural-v6-2",
+      "viewKey": "suwon-yeongtong-natural-v6-2@0",
+      "viewRotation": 0,
+      "token": "R09",
+      "name": "없음",
+      "clarity": "none",
+      "abstained": false
+    },
+    {
+      "area": "suwon-yeongtong",
+      "method": "model",
+      "slot": 1,
+      "id": null,
+      "viewKey": null,
+      "viewRotation": 0,
+      "token": null,
+      "name": null,
+      "clarity": "none",
+      "abstained": true
+    },
+    {
+      "area": "suwon-yeongtong",
+      "method": "model",
+      "slot": 2,
+      "id": null,
+      "viewKey": null,
+      "viewRotation": 0,
+      "token": null,
+      "name": null,
+      "clarity": "none",
+      "abstained": true
+    },
+    {
+      "area": "cheongju-bokdae",
+      "method": "baseline",
+      "slot": 1,
+      "id": "cheongju-bokdae-natural-v6-1",
+      "viewKey": "cheongju-bokdae-natural-v6-1@0",
+      "viewRotation": 0,
+      "token": "R01",
+      "name": "없음",
+      "clarity": "none",
+      "abstained": false
+    },
+    {
+      "area": "cheongju-bokdae",
+      "method": "baseline",
+      "slot": 2,
+      "id": "cheongju-bokdae-natural-v6-2",
+      "viewKey": "cheongju-bokdae-natural-v6-2@0",
+      "viewRotation": 0,
+      "token": "R02",
+      "name": "없음",
+      "clarity": "none",
+      "abstained": false
+    },
+    {
+      "area": "cheongju-bokdae",
+      "method": "model",
+      "slot": 1,
+      "id": "cheongju-bokdae-proposal-v6-airplane-1",
+      "viewKey": "cheongju-bokdae-proposal-v6-airplane-1@261.360788692",
+      "viewRotation": 261.3607886920677,
+      "token": "R03",
+      "name": "비행기",
+      "clarity": "weak",
+      "abstained": false
+    },
+    {
+      "area": "cheongju-bokdae",
+      "method": "model",
+      "slot": 2,
+      "id": "cheongju-bokdae-proposal-v6-airplane-3",
+      "viewKey": "cheongju-bokdae-proposal-v6-airplane-3@77.6868056995",
+      "viewRotation": 77.68680569946726,
+      "token": "R07",
+      "name": "비행기",
+      "clarity": "weak",
+      "abstained": false
+    },
+    {
+      "area": "gwangju-sangmu",
+      "method": "baseline",
+      "slot": 1,
+      "id": "gwangju-sangmu-natural-v6-1",
+      "viewKey": "gwangju-sangmu-natural-v6-1@0",
+      "viewRotation": 0,
+      "token": "R08",
+      "name": "없음",
+      "clarity": "none",
+      "abstained": false
+    },
+    {
+      "area": "gwangju-sangmu",
+      "method": "baseline",
+      "slot": 2,
+      "id": "gwangju-sangmu-natural-v6-2",
+      "viewKey": "gwangju-sangmu-natural-v6-2@0",
+      "viewRotation": 0,
+      "token": "R06",
+      "name": "없음",
+      "clarity": "none",
+      "abstained": false
+    },
+    {
+      "area": "gwangju-sangmu",
+      "method": "model",
+      "slot": 1,
+      "id": "gwangju-sangmu-proposal-v6-airplane-1",
+      "viewKey": "gwangju-sangmu-proposal-v6-airplane-1@184.191017375",
+      "viewRotation": 184.1910173753284,
+      "token": "R05",
+      "name": "없음",
+      "clarity": "none",
+      "abstained": false
+    },
+    {
+      "area": "gwangju-sangmu",
+      "method": "model",
+      "slot": 2,
+      "id": "gwangju-sangmu-proposal-v6-airplane-8",
+      "viewKey": "gwangju-sangmu-proposal-v6-airplane-8@184.896919204",
+      "viewRotation": 184.89691920441018,
+      "token": "R10",
+      "name": "없음",
+      "clarity": "none",
+      "abstained": false
+    }
+  ],
+  "humanMajorityRecognitionMeasured": false,
+  "targetNameAgreementAssessed": false
+}

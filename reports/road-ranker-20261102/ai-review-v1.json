@@ -1,0 +1,26 @@
+{
+  "evaluationType": "AI surrogate, not human evaluation",
+  "evaluatorAgent": "01a19aed-73d8-7662-81ef-5d6ec2287589",
+  "fingerprint": "70df15177280bd7e49d0975d506500952c02d53019feef356ec1479c484a080f",
+  "input": "public/eval/road-ranker-20261102/blind.png",
+  "namesScoresMethodsHidden": true,
+  "results": [
+    {"token":"R01","name":"없음","clarity":"none"},
+    {"token":"R02","name":"없음","clarity":"none"},
+    {"token":"R03","name":"없음","clarity":"none"},
+    {"token":"R04","name":"없음","clarity":"none"},
+    {"token":"R05","name":"없음","clarity":"none"},
+    {"token":"R06","name":"장화","clarity":"weak"},
+    {"token":"R07","name":"없음","clarity":"none"},
+    {"token":"R08","name":"없음","clarity":"none"},
+    {"token":"R09","name":"없음","clarity":"none"},
+    {"token":"R10","name":"없음","clarity":"none"},
+    {"token":"R11","name":"장화","clarity":"weak"},
+    {"token":"R12","name":"없음","clarity":"none"}
+  ],
+  "baselineClear": 0,
+  "modelClear": 0,
+  "denominatorEach": 6,
+  "hypothesisSupported": false,
+  "humanRecognitionMeasured": false
+}

@@ -1,0 +1,25 @@
+{
+  "allSavedPathsAudited": 448,
+  "requests": 75,
+  "areas": [
+    {
+      "area": "chuncheon-center",
+      "nodes": 3554,
+      "candidates": 146,
+      "exactExplicitDBSnapshot": true
+    },
+    {
+      "area": "changwon-center",
+      "nodes": 4135,
+      "candidates": 169,
+      "exactExplicitDBSnapshot": true
+    },
+    {
+      "area": "busan-yeongdo",
+      "nodes": 2979,
+      "candidates": 133,
+      "exactExplicitDBSnapshot": true
+    }
+  ],
+  "provenanceLimitation": "DB SHA supplement captured during run, not pre-run; exact snapshot requery verified afterwards"
+}

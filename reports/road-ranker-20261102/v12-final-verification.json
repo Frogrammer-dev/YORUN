@@ -1,0 +1,16 @@
+{
+  "aRendererMatchesFrozenExport": true,
+  "bRendererMatchesFrozenExport": true,
+  "featuresMatches": true,
+  "road-featuresMatches": true,
+  "pythonSuitePassed": 54,
+  "bridgeIntegrityRegressionAfterHardening": "passed",
+  "comparisonUIBothMethods": "passed",
+  "GPXOriginalCoordinates": "24 checked",
+  "primaryAIClear": 0,
+  "headClearTargetRequests": 4,
+  "baselineClearTargetRequests": 8,
+  "requests": 75,
+  "humanRecognitionMeasured": false,
+  "goalAchieved": false
+}

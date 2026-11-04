@@ -1,0 +1,24 @@
+{
+  "examples": [
+    {
+      "study": "84cde0f4ca5191cb94d2b27cd707f59b8a24e7bd22f8ea60b9846e614fbdf1cc",
+      "selectedToken": "R07",
+      "selectedId": "daejeon-dunsan-proposal-v7-hammer-1",
+      "baselineId": "daejeon-dunsan-pool-1",
+      "displayRotation": 268.18175283822796,
+      "meters": 5556.462634801865
+    },
+    {
+      "study": "feb6c11bd212879d26a68f3048f5d54a1a6ed1371817b999dcb25f13ab525d0b",
+      "selectedToken": "R10",
+      "selectedId": "ulsan-samsan-proposal-v8-hammer-1",
+      "baselineId": "ulsan-samsan-natural-v8-1",
+      "displayRotation": 2.850800387741757,
+      "meters": 3638.842005252838
+    }
+  ],
+  "postEvaluationSelection": true,
+  "representativeRate": false,
+  "humanRecognitionMeasured": false,
+  "imageSHA256": "f92e99c4ec10d845a572836afbe039b29ca520b27363c61c4291ee239ad11af6"
+}

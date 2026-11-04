@@ -1,0 +1,266 @@
+{
+  "oldFingerprint": "e934a3ee3fe40716ea306de4dbf15bf49efc5f5463e7cab8bb2e56dc94e7a9c5",
+  "studies": [
+    {
+      "folder": "public\\eval\\route-study-20261102-a",
+      "fingerprint": "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39",
+      "rows": [
+        {
+          "token": "R001",
+          "hash": "7761b1271a2754705af9caef26b6067fdf5e210d2687318e153dab21132b758e",
+          "reuse": {}
+        },
+        {
+          "token": "R002",
+          "hash": "e539644d4c650b771a443fa98c0ca8cd82a595d2b4456a3c3d04b71b95020bbc",
+          "reuse": {}
+        },
+        {
+          "token": "R003",
+          "hash": "9d6d1c9852691909dd1375db0c27cbd9a3247d0086d13a52cca1e216b9ef8cc4",
+          "reuse": {}
+        },
+        {
+          "token": "R004",
+          "hash": "5dd97fd8d539565ded348e0cd7a168c6a1cb0bb28c05da1578856897a7695c99",
+          "reuse": {}
+        },
+        {
+          "token": "R005",
+          "hash": "5b6f976c94f51b1bd52630a0541d7ee4a2788b4d4c4e1bf5fcb47d429d2e74ac",
+          "reuse": {}
+        },
+        {
+          "token": "R006",
+          "hash": "77261b75a2a676f2a6d0e40bd9cf20933475bf48bdd6a9ec3bbfef65610036f3",
+          "reuse": {}
+        },
+        {
+          "token": "R007",
+          "hash": "42e75f14606c5b748fbce9ac8f16159c3247e9f10bdecb228a417164e8c0c07a",
+          "reuse": {}
+        },
+        {
+          "token": "R008",
+          "hash": "35f5839fd94bc05e40280af1011adf154bccbe7d15337efc9fa2cab324370d17",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "망치",
+              "clarity": "weak",
+              "oldTokens": [
+                "R020"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "망치",
+              "clarity": "weak",
+              "oldTokens": [
+                "R020"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "망치",
+              "clarity": "weak",
+              "oldTokens": [
+                "R020"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R009",
+          "hash": "cd60906316b2fc4c340aeb4c646e1fc92e87cc3484955f3a86a02d29886e5da0",
+          "reuse": {}
+        },
+        {
+          "token": "R010",
+          "hash": "2de4fe56794712b4f0b48c5e90d7b6e914b2f8e4ab41a53d3ef1e6d285faef7f",
+          "reuse": {}
+        },
+        {
+          "token": "R011",
+          "hash": "ca232e86d13dc6dd30124272ec51ab2e73e5feef7aac736306505bec0f2db3a8",
+          "reuse": {}
+        },
+        {
+          "token": "R012",
+          "hash": "95dd5f677592e8431a88abc147ace0bb199fa69600f52470c0f6ebc90394babc",
+          "reuse": {}
+        },
+        {
+          "token": "R013",
+          "hash": "52ab36ed92a2a5837e85bbb7717a26d8a60232ee8675bd49daffa9649992a8cb",
+          "reuse": {}
+        },
+        {
+          "token": "R014",
+          "hash": "f33bbd0354929cd586dde1d7cac353431b29b65e47c1a6a87377f0d08b06e39c",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "망치",
+              "clarity": "weak",
+              "oldTokens": [
+                "R044"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "망치",
+              "clarity": "clear",
+              "oldTokens": [
+                "R044"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "망치",
+              "clarity": "clear",
+              "oldTokens": [
+                "R044"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R015",
+          "hash": "3d868470bb39f36d1a0ad96e362a9a1316f7f70d0b1fdd235d1b69a06d44cb4f",
+          "reuse": {}
+        },
+        {
+          "token": "R016",
+          "hash": "8f94d6ec1328b9f46db33c43a2e021b28f6b4c105c8e00532b38c2644d3a1b43",
+          "reuse": {}
+        },
+        {
+          "token": "R017",
+          "hash": "fe20b7675935f99ada019409df659b633e2fb2d0b1a59adb8f7d99bf9402a49a",
+          "reuse": {}
+        }
+      ]
+    },
+    {
+      "folder": "public\\eval\\route-study-20261102-b",
+      "fingerprint": "1beb46fef6d3923b2422d21b3efe15836c6fa0c02a24159497e03c68bc5e3984",
+      "rows": [
+        {
+          "token": "R001",
+          "hash": "9228fc0b4ef4be037c7246b826d003ca8bc9e22c4aba9c071b1e0f731b8b1ef0",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "티셔츠",
+              "clarity": "weak",
+              "oldTokens": [
+                "R002"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "불규칙한 경계",
+              "clarity": "none",
+              "oldTokens": [
+                "R002"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "없음",
+              "clarity": "none",
+              "oldTokens": [
+                "R002"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R002",
+          "hash": "47272c932a58a8b4141a9fea85f1ca62cd92e4672e173be38a928d82e6485c0b",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "바지",
+              "clarity": "weak",
+              "oldTokens": [
+                "R019"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "바지",
+              "clarity": "clear",
+              "oldTokens": [
+                "R019"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "바지",
+              "clarity": "clear",
+              "oldTokens": [
+                "R019"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R003",
+          "hash": "1bfd9881c26a000fb7ba2e5c08e187045af514825434220928a8aa358d9e4249",
+          "reuse": {}
+        },
+        {
+          "token": "R004",
+          "hash": "4afd2c2550218aa3b19ca6cd21ad465dfb9188a5c28cbe29bb32f6a368a17029",
+          "reuse": {}
+        },
+        {
+          "token": "R005",
+          "hash": "ae1bbbd271a6fa93116249107eff49615d9a516d2d55126b1177c949c7390aa0",
+          "reuse": {}
+        },
+        {
+          "token": "R006",
+          "hash": "a02c9df007af5cc9f1a00c003ba65f047038c657c3933073cd2f94ffedccd585",
+          "reuse": {}
+        },
+        {
+          "token": "R007",
+          "hash": "f1aeadce1ec64267c7101fae5a32f1ad67c547525d8a574e64afbb3cb9c88dee",
+          "reuse": {}
+        }
+      ]
+    }
+  ],
+  "pendingTokens": {
+    "K001": "42e75f14606c5b748fbce9ac8f16159c3247e9f10bdecb228a417164e8c0c07a",
+    "K002": "e539644d4c650b771a443fa98c0ca8cd82a595d2b4456a3c3d04b71b95020bbc",
+    "K003": "5dd97fd8d539565ded348e0cd7a168c6a1cb0bb28c05da1578856897a7695c99",
+    "K004": "1bfd9881c26a000fb7ba2e5c08e187045af514825434220928a8aa358d9e4249",
+    "K005": "a02c9df007af5cc9f1a00c003ba65f047038c657c3933073cd2f94ffedccd585",
+    "K006": "fe20b7675935f99ada019409df659b633e2fb2d0b1a59adb8f7d99bf9402a49a",
+    "K007": "77261b75a2a676f2a6d0e40bd9cf20933475bf48bdd6a9ec3bbfef65610036f3",
+    "K008": "95dd5f677592e8431a88abc147ace0bb199fa69600f52470c0f6ebc90394babc",
+    "K009": "52ab36ed92a2a5837e85bbb7717a26d8a60232ee8675bd49daffa9649992a8cb",
+    "K010": "3d868470bb39f36d1a0ad96e362a9a1316f7f70d0b1fdd235d1b69a06d44cb4f",
+    "K011": "7761b1271a2754705af9caef26b6067fdf5e210d2687318e153dab21132b758e",
+    "K012": "5b6f976c94f51b1bd52630a0541d7ee4a2788b4d4c4e1bf5fcb47d429d2e74ac",
+    "K013": "2de4fe56794712b4f0b48c5e90d7b6e914b2f8e4ab41a53d3ef1e6d285faef7f",
+    "K014": "cd60906316b2fc4c340aeb4c646e1fc92e87cc3484955f3a86a02d29886e5da0",
+    "K015": "f1aeadce1ec64267c7101fae5a32f1ad67c547525d8a574e64afbb3cb9c88dee",
+    "K016": "ca232e86d13dc6dd30124272ec51ab2e73e5feef7aac736306505bec0f2db3a8",
+    "K017": "8f94d6ec1328b9f46db33c43a2e021b28f6b4c105c8e00532b38c2644d3a1b43",
+    "K018": "4afd2c2550218aa3b19ca6cd21ad465dfb9188a5c28cbe29bb32f6a368a17029",
+    "K019": "ae1bbbd271a6fa93116249107eff49615d9a516d2d55126b1177c949c7390aa0",
+    "K020": "9d6d1c9852691909dd1375db0c27cbd9a3247d0086d13a52cca1e216b9ef8cc4"
+  },
+  "pages": [
+    {
+      "file": "page-1.png",
+      "SHA256": "6682d192e391581a3d156952c933226207be7e5cbbae69753cb7e6432a2cc179"
+    },
+    {
+      "file": "page-2.png",
+      "SHA256": "c8ff9dd66d2e7f9879f2c156ab0596ddd16c064f0e44269f5232f6cd1f2d6d03"
+    }
+  ],
+  "raters": [
+    "01a19aed-73d8-7662-81ef-5d6ec2287589",
+    "01a19b0b-12bd-7592-9a5f-809818cebc3a",
+    "01a19b0b-13a1-7340-89c7-095b3dc85ed2"
+  ],
+  "conflictingOldRatings": [],
+  "humanRecognitionMeasured": false,
+  "rule": "Exact RGB road-body pixels only. Conflicting old ratings require fresh judgment; related geometry is not equivalent.",
+  "fingerprint": "98af8e05e84853b8338cd5846784a7e80216318e93d0ef7b16c1ddbe1334178f"
+}

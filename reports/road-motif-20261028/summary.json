@@ -1,0 +1,345 @@
+{
+  "summary": {
+    "control": {
+      "requests": 6,
+      "validOutputs": 5,
+      "candidates": 162,
+      "calls": 2970
+    },
+    "roadMotif": {
+      "requests": 6,
+      "validOutputs": 6,
+      "candidates": 144,
+      "calls": 2394
+    },
+    "roadPoseOnly": {
+      "requests": 6,
+      "validOutputs": 6,
+      "candidates": 144,
+      "calls": 2682
+    }
+  },
+  "cases": [
+    {
+      "id": "daejeon-dunsan-animal",
+      "shapeId": "bird",
+      "method": "control",
+      "candidates": 27,
+      "pool": 153,
+      "calls": 432,
+      "validCandidates": 7,
+      "failures": {
+        "outside": 19,
+        "distance": 4
+      },
+      "preprocessingMs": 64.28340000000003,
+      "searchMs": 32.15379999999993,
+      "valid": true,
+      "objective": 0.018233478019988265,
+      "meters": 5621.326310276985
+    },
+    {
+      "id": "daejeon-dunsan-animal",
+      "shapeId": "bird",
+      "method": "roadMotif",
+      "candidates": 27,
+      "pool": 153,
+      "calls": 378,
+      "validCandidates": 24,
+      "failures": {
+        "repeat": 3
+      },
+      "preprocessingMs": 64.28340000000003,
+      "searchMs": 32.6739,
+      "valid": true,
+      "objective": 0.0254278171879387,
+      "meters": 4955.511885166168
+    },
+    {
+      "id": "daejeon-dunsan-animal",
+      "shapeId": "bird",
+      "method": "roadPoseOnly",
+      "candidates": 27,
+      "pool": 153,
+      "calls": 432,
+      "validCandidates": 22,
+      "failures": {
+        "repeat": 5
+      },
+      "preprocessingMs": 64.28340000000003,
+      "searchMs": 30.649900000000002,
+      "valid": true,
+      "objective": 0.02476487625730704,
+      "meters": 5070.831958055496
+    },
+    {
+      "id": "daejeon-dunsan-object",
+      "shapeId": "apple",
+      "method": "control",
+      "candidates": 27,
+      "pool": 292,
+      "calls": 486,
+      "validCandidates": 6,
+      "failures": {
+        "outside": 14,
+        "distance": 10,
+        "repeat": 1
+      },
+      "preprocessingMs": 42.4144,
+      "searchMs": 32.044700000000034,
+      "valid": true,
+      "objective": 0.024781768328818888,
+      "meters": 7401.97381067276
+    },
+    {
+      "id": "daejeon-dunsan-object",
+      "shapeId": "apple",
+      "method": "roadMotif",
+      "candidates": 27,
+      "pool": 292,
+      "calls": 432,
+      "validCandidates": 22,
+      "failures": {
+        "outside": 1,
+        "distance": 4,
+        "repeat": 1
+      },
+      "preprocessingMs": 42.4144,
+      "searchMs": 37.83339999999998,
+      "valid": true,
+      "objective": 0.021754191760005932,
+      "meters": 4644.786537885666
+    },
+    {
+      "id": "daejeon-dunsan-object",
+      "shapeId": "apple",
+      "method": "roadPoseOnly",
+      "candidates": 27,
+      "pool": 292,
+      "calls": 486,
+      "validCandidates": 22,
+      "failures": {
+        "outside": 1,
+        "distance": 4,
+        "repeat": 1
+      },
+      "preprocessingMs": 42.4144,
+      "searchMs": 39.86829999999998,
+      "valid": true,
+      "objective": 0.021754191760005932,
+      "meters": 4644.786537885666
+    },
+    {
+      "id": "daegu-center-animal",
+      "shapeId": "turtle",
+      "method": "control",
+      "candidates": 27,
+      "pool": 309,
+      "calls": 756,
+      "validCandidates": 0,
+      "failures": {
+        "outside": 10,
+        "distance": 27
+      },
+      "preprocessingMs": 40.71479999999997,
+      "searchMs": 53.65359999999998,
+      "valid": false
+    },
+    {
+      "id": "daegu-center-animal",
+      "shapeId": "turtle",
+      "method": "roadMotif",
+      "candidates": 27,
+      "pool": 309,
+      "calls": 702,
+      "validCandidates": 21,
+      "failures": {
+        "distance": 6
+      },
+      "preprocessingMs": 40.71479999999997,
+      "searchMs": 73.91399999999999,
+      "valid": true,
+      "objective": 0.017192791313505016,
+      "meters": 7661.880915880203
+    },
+    {
+      "id": "daegu-center-animal",
+      "shapeId": "turtle",
+      "method": "roadPoseOnly",
+      "candidates": 27,
+      "pool": 309,
+      "calls": 756,
+      "validCandidates": 21,
+      "failures": {
+        "distance": 6
+      },
+      "preprocessingMs": 40.71479999999997,
+      "searchMs": 72.12040000000002,
+      "valid": true,
+      "objective": 0.017192791313505016,
+      "meters": 7661.880915880203
+    },
+    {
+      "id": "daegu-center-object",
+      "shapeId": "car",
+      "method": "control",
+      "candidates": 27,
+      "pool": 21,
+      "calls": 432,
+      "validCandidates": 27,
+      "failures": {},
+      "preprocessingMs": 32.538099999999986,
+      "searchMs": 52.72090000000003,
+      "valid": true,
+      "objective": 0.015734037205225378,
+      "meters": 5420.531663894653
+    },
+    {
+      "id": "daegu-center-object",
+      "shapeId": "car",
+      "method": "roadMotif",
+      "candidates": 9,
+      "pool": 21,
+      "calls": 126,
+      "validCandidates": 4,
+      "failures": {
+        "outside": 5,
+        "repeat": 1
+      },
+      "preprocessingMs": 32.538099999999986,
+      "searchMs": 10.809300000000121,
+      "valid": true,
+      "objective": 0.026689379748187712,
+      "meters": 3449.8604974746704
+    },
+    {
+      "id": "daegu-center-object",
+      "shapeId": "car",
+      "method": "roadPoseOnly",
+      "candidates": 9,
+      "pool": 21,
+      "calls": 144,
+      "validCandidates": 4,
+      "failures": {
+        "outside": 5,
+        "repeat": 1
+      },
+      "preprocessingMs": 32.538099999999986,
+      "searchMs": 12.340599999999995,
+      "valid": true,
+      "objective": 0.025808774640985518,
+      "meters": 4178.39226937294
+    },
+    {
+      "id": "seoul-songpa-animal",
+      "shapeId": "bird",
+      "method": "control",
+      "candidates": 27,
+      "pool": 173,
+      "calls": 432,
+      "validCandidates": 15,
+      "failures": {
+        "outside": 12
+      },
+      "preprocessingMs": 43.38580000000002,
+      "searchMs": 31.324699999999893,
+      "valid": true,
+      "objective": 0.013226912367697956,
+      "meters": 6333.973746776581
+    },
+    {
+      "id": "seoul-songpa-animal",
+      "shapeId": "bird",
+      "method": "roadMotif",
+      "candidates": 27,
+      "pool": 173,
+      "calls": 378,
+      "validCandidates": 17,
+      "failures": {
+        "outside": 4,
+        "repeat": 5,
+        "distance": 2
+      },
+      "preprocessingMs": 43.38580000000002,
+      "searchMs": 36.66720000000009,
+      "valid": true,
+      "objective": 0.019617844557652853,
+      "meters": 4023.1093719005585
+    },
+    {
+      "id": "seoul-songpa-animal",
+      "shapeId": "bird",
+      "method": "roadPoseOnly",
+      "candidates": 27,
+      "pool": 173,
+      "calls": 432,
+      "validCandidates": 16,
+      "failures": {
+        "outside": 4,
+        "repeat": 5,
+        "distance": 3
+      },
+      "preprocessingMs": 43.38580000000002,
+      "searchMs": 34.7657999999999,
+      "valid": true,
+      "objective": 0.01848627830361308,
+      "meters": 4187.188740491867
+    },
+    {
+      "id": "seoul-songpa-object",
+      "shapeId": "car",
+      "method": "control",
+      "candidates": 27,
+      "pool": 183,
+      "calls": 432,
+      "validCandidates": 20,
+      "failures": {
+        "repeat": 3,
+        "outside": 4
+      },
+      "preprocessingMs": 42.55439999999999,
+      "searchMs": 40.81420000000003,
+      "valid": true,
+      "objective": 0.022513453505158907,
+      "meters": 3704.6688957214355
+    },
+    {
+      "id": "seoul-songpa-object",
+      "shapeId": "car",
+      "method": "roadMotif",
+      "candidates": 27,
+      "pool": 183,
+      "calls": 378,
+      "validCandidates": 12,
+      "failures": {
+        "distance": 4,
+        "repeat": 7,
+        "outside": 4
+      },
+      "preprocessingMs": 42.55439999999999,
+      "searchMs": 29.877099999999928,
+      "valid": true,
+      "objective": 0.024496858347963505,
+      "meters": 3884.9210300445557
+    },
+    {
+      "id": "seoul-songpa-object",
+      "shapeId": "car",
+      "method": "roadPoseOnly",
+      "candidates": 27,
+      "pool": 183,
+      "calls": 432,
+      "validCandidates": 12,
+      "failures": {
+        "distance": 4,
+        "repeat": 7,
+        "outside": 4
+      },
+      "preprocessingMs": 42.55439999999999,
+      "searchMs": 29.709800000000087,
+      "valid": true,
+      "objective": 0.022423954818640415,
+      "meters": 4085.5391430854797
+    }
+  ]
+}

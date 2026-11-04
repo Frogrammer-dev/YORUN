@@ -1,0 +1,404 @@
+{
+  "classes": [
+    {
+      "name": "house",
+      "word": "house",
+      "object": true
+    },
+    {
+      "name": "tree",
+      "word": "tree",
+      "object": true
+    },
+    {
+      "name": "car",
+      "word": "car",
+      "object": true
+    },
+    {
+      "name": "coffee_cup",
+      "word": "coffee cup",
+      "object": true
+    },
+    {
+      "name": "airplane",
+      "word": "airplane",
+      "object": true
+    },
+    {
+      "name": "t-shirt",
+      "word": "t-shirt",
+      "object": true
+    },
+    {
+      "name": "pants",
+      "word": "pants",
+      "object": true
+    },
+    {
+      "name": "hammer",
+      "word": "hammer",
+      "object": true
+    },
+    {
+      "name": "wine_bottle",
+      "word": "wine bottle",
+      "object": true
+    },
+    {
+      "name": "key",
+      "word": "key",
+      "object": true
+    },
+    {
+      "name": "chair",
+      "word": "chair",
+      "object": true
+    },
+    {
+      "name": "square",
+      "word": "square",
+      "object": false
+    },
+    {
+      "name": "circle",
+      "word": "circle",
+      "object": false
+    },
+    {
+      "name": "triangle",
+      "word": "triangle",
+      "object": false
+    },
+    {
+      "name": "hexagon",
+      "word": "hexagon",
+      "object": false
+    },
+    {
+      "name": "octagon",
+      "word": "octagon",
+      "object": false
+    },
+    {
+      "name": "line",
+      "word": "line",
+      "object": false
+    },
+    {
+      "name": "zigzag",
+      "word": "zigzag",
+      "object": false
+    },
+    {
+      "name": "map",
+      "word": "map",
+      "object": false
+    }
+  ],
+  "sources": [
+    {
+      "name": "house",
+      "word": "house",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/house.ndjson",
+      "cacheSHA256": "32593c4a013641ca6c87a8ee94a015e8eaab296a900753802643a3889f10db97",
+      "counts": {
+        "train": 48,
+        "val": 12,
+        "test": 12
+      },
+      "scanned": 74,
+      "rejected": {
+        "game_not_recognized": 2
+      }
+    },
+    {
+      "name": "tree",
+      "word": "tree",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/tree.ndjson",
+      "cacheSHA256": "980f6844f9b93ddd720f0a4961dbfd0c1665ea307598d0408ef6607e008f9cac",
+      "counts": {
+        "train": 47,
+        "val": 12,
+        "test": 13
+      },
+      "scanned": 76,
+      "rejected": {
+        "game_not_recognized": 4
+      }
+    },
+    {
+      "name": "car",
+      "word": "car",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/car.ndjson",
+      "cacheSHA256": "86b85f991da5536eca0f68f83dd432c96c4478fda33dbaf942e2eadb637c55bc",
+      "counts": {
+        "train": 52,
+        "val": 8,
+        "test": 12
+      },
+      "scanned": 79,
+      "rejected": {
+        "game_not_recognized": 7
+      }
+    },
+    {
+      "name": "coffee_cup",
+      "word": "coffee cup",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/coffee%20cup.ndjson",
+      "cacheSHA256": "b2c89255b3638fa46dceb09a4e0de0c9df6d68e606705e3f3b230cf82d0904ee",
+      "counts": {
+        "train": 52,
+        "val": 9,
+        "test": 11
+      },
+      "scanned": 77,
+      "rejected": {
+        "game_not_recognized": 5
+      }
+    },
+    {
+      "name": "airplane",
+      "word": "airplane",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/airplane.ndjson",
+      "cacheSHA256": "0c5097aa5e3efd3d75011612790c928c6fc822f4cbae9d85496c8222a05ac65e",
+      "counts": {
+        "train": 56,
+        "val": 6,
+        "test": 10
+      },
+      "scanned": 79,
+      "rejected": {
+        "game_not_recognized": 7
+      }
+    },
+    {
+      "name": "t-shirt",
+      "word": "t-shirt",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/t-shirt.ndjson",
+      "cacheSHA256": "27a26a0c3713f8e16da65e28ddc835394822a2e9cf4a7fbc02d0711c077113a2",
+      "counts": {
+        "train": 46,
+        "val": 14,
+        "test": 12
+      },
+      "scanned": 72,
+      "rejected": {}
+    },
+    {
+      "name": "pants",
+      "word": "pants",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/pants.ndjson",
+      "cacheSHA256": "2bde94a78402ceee06109d39dc1edb359f4062ca47dabafe2dcdf01562c0d9bb",
+      "counts": {
+        "train": 52,
+        "val": 10,
+        "test": 10
+      },
+      "scanned": 77,
+      "rejected": {
+        "game_not_recognized": 5
+      }
+    },
+    {
+      "name": "hammer",
+      "word": "hammer",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/hammer.ndjson",
+      "cacheSHA256": "a7a14463b3f4bb15322cee4b4bf907f49691f195434e02d7633bfff96f38959d",
+      "counts": {
+        "train": 53,
+        "val": 9,
+        "test": 10
+      },
+      "scanned": 80,
+      "rejected": {
+        "game_not_recognized": 8
+      }
+    },
+    {
+      "name": "wine_bottle",
+      "word": "wine bottle",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/wine%20bottle.ndjson",
+      "cacheSHA256": "9138299f1e125fe4efe78bfefc5017be27672cbb45af59904ac6d59d145f5c62",
+      "counts": {
+        "train": 48,
+        "val": 12,
+        "test": 12
+      },
+      "scanned": 73,
+      "rejected": {
+        "game_not_recognized": 1
+      }
+    },
+    {
+      "name": "key",
+      "word": "key",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/key.ndjson",
+      "cacheSHA256": "26f201f1d65de96d0640f885a4cfd3c9e169e0d6b563dd0942351251e2c55651",
+      "counts": {
+        "train": 52,
+        "val": 11,
+        "test": 9
+      },
+      "scanned": 86,
+      "rejected": {
+        "game_not_recognized": 14
+      }
+    },
+    {
+      "name": "chair",
+      "word": "chair",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/chair.ndjson",
+      "cacheSHA256": "6e428528d6bfa93e3a4903b037808f7049b82d1c634ef1117750591af04f691c",
+      "counts": {
+        "train": 46,
+        "val": 13,
+        "test": 13
+      },
+      "scanned": 79,
+      "rejected": {
+        "game_not_recognized": 7
+      }
+    },
+    {
+      "name": "square",
+      "word": "square",
+      "object": false,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/square.ndjson",
+      "cacheSHA256": "2025c0c14a954b3b47df496da815e2e46fa2f261b11047859beeed1eee036539",
+      "counts": {
+        "train": 49,
+        "val": 11,
+        "test": 12
+      },
+      "scanned": 73,
+      "rejected": {
+        "game_not_recognized": 1
+      }
+    },
+    {
+      "name": "circle",
+      "word": "circle",
+      "object": false,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/circle.ndjson",
+      "cacheSHA256": "77b7b67c177cf41817730bf359c3d0e78f97542a666ca583b36fb5db595ca86d",
+      "counts": {
+        "train": 51,
+        "val": 10,
+        "test": 11
+      },
+      "scanned": 74,
+      "rejected": {
+        "game_not_recognized": 2
+      }
+    },
+    {
+      "name": "triangle",
+      "word": "triangle",
+      "object": false,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/triangle.ndjson",
+      "cacheSHA256": "b80d3724858d3d0e1a3ed601a2caa4f2613f8f5abe94860dceae476939eaae5c",
+      "counts": {
+        "train": 56,
+        "val": 9,
+        "test": 7
+      },
+      "scanned": 72,
+      "rejected": {}
+    },
+    {
+      "name": "hexagon",
+      "word": "hexagon",
+      "object": false,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/hexagon.ndjson",
+      "cacheSHA256": "0da9c9d68a2d140c01c96711ccc17868bf7b0e9c37a9f1cd07ce08cf21538b5a",
+      "counts": {
+        "train": 56,
+        "val": 6,
+        "test": 10
+      },
+      "scanned": 77,
+      "rejected": {
+        "game_not_recognized": 5
+      }
+    },
+    {
+      "name": "octagon",
+      "word": "octagon",
+      "object": false,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/octagon.ndjson",
+      "cacheSHA256": "d2325db00e266f3ae5e539f83026cbdb22f28b022b6eceed512179bed6ef0707",
+      "counts": {
+        "train": 43,
+        "val": 15,
+        "test": 14
+      },
+      "scanned": 81,
+      "rejected": {
+        "game_not_recognized": 9
+      }
+    },
+    {
+      "name": "line",
+      "word": "line",
+      "object": false,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/line.ndjson",
+      "cacheSHA256": "06418137d2af1c5a19ee1dd3e268d9d40308a93edbdfdc881790c97b4d146f32",
+      "counts": {
+        "train": 48,
+        "val": 13,
+        "test": 11
+      },
+      "scanned": 73,
+      "rejected": {
+        "game_not_recognized": 1
+      }
+    },
+    {
+      "name": "zigzag",
+      "word": "zigzag",
+      "object": false,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/zigzag.ndjson",
+      "cacheSHA256": "8143a8d715cbc1df6f5d2e9c1bc37fa50c3dda4c4477a3e43f2246bcacdcb694",
+      "counts": {
+        "train": 50,
+        "val": 11,
+        "test": 11
+      },
+      "scanned": 73,
+      "rejected": {
+        "game_not_recognized": 1
+      }
+    },
+    {
+      "name": "map",
+      "word": "map",
+      "object": false,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/map.ndjson",
+      "cacheSHA256": "f8c853f8d90fee979de47f9c6da88f1b2cefdd253434f401e04ccf80b0ea578f",
+      "counts": {
+        "train": 55,
+        "val": 9,
+        "test": 8
+      },
+      "scanned": 84,
+      "rejected": {
+        "game_not_recognized": 12
+      }
+    }
+  ],
+  "records": 1368,
+  "datasetSHA256": "b3539f068236fa936888c6f7d218dbedf3ac3a18fc31aefd4e9a1a05c50c4d2b",
+  "roadJudgmentsUsed": false
+}

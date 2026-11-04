@@ -1,0 +1,26 @@
+[
+  {
+    "id": "BR01", "title": "キリン / 기린", "creator": "Yukio YANAGIMOTO / yukioyanagimoto", "activity_id": "9287180296",
+    "source_url": "https://note.com/yukioyanagimoto/n/n795b2c3c5822",
+    "image_url": "https://assets.st-note.com/img/1688042253593-HAwRE1m6cI.png?width=1200",
+    "run_evidence": "2023-06-29 게시, 세계기린의날을 맞아 달린 기록 설명과 Yukio Y.의8.0km run 활동 링크.",
+    "visual_method": "본문 실행 설명·활동 링크 확인 후 원본 붉은 경로 이미지 픽셀 직접 관찰", "visual_scope": "full",
+    "internal_strokes": "yes", "branch_or_open_strokes": "yes", "parts_relation": "yes", "parts_evidence": "머리 위 두 뿔·옆 귀, 주둥이, 긴 목 안의 격자형 얼룩·구분선이 배치됨.",
+    "angular_road_noise": "uncertain", "simple_single_outline": "no", "distance_km": 8, "distance_original": "8.0 km run", "distance_source": "본문 Strava 활동 링크 카드",
+    "retracing_known": "unknown", "pause_known": "unknown", "composite_or_multi_session": "unknown",
+    "interpretation": "8km의 내부 패턴이 많은 기린 머리·목 작품. 목 격자가 의도된 얼룩인지 도로 잡음인지 분리하기 어려워 작은꺾임은uncertain.",
+    "limitations": "본30에 자동 추가하지 않는 예비. GPX 미검증·이름 먼저 본 관찰."
+  },
+  {
+    "id": "BR02", "title": "カタツムリ / 달팽이", "creator": "Yukio YANAGIMOTO / yukioyanagimoto", "activity_id": "7325601457",
+    "source_url": "https://note.com/yukioyanagimoto/n/n567e28563610",
+    "image_url": "https://assets.st-note.com/img/1671277671836-XCMIi5TMrA.png?width=1200",
+    "run_evidence": "원작자 페이지의 Yukio Y.의11.0km run 활동 링크와 실제 GPS 지도.",
+    "visual_method": "본문 실행 링크 확인 후 사진 합성이 없는 두 번째 붉은 경로 원본 이미지 픽셀 직접 관찰", "visual_scope": "full",
+    "internal_strokes": "yes", "branch_or_open_strokes": "yes", "parts_relation": "yes", "parts_evidence": "왼쪽 머리와 두 더듬이, 오른쪽 큰 껍데기와 안쪽 나선, 아래 긴 발의 상대 배치.",
+    "angular_road_noise": "yes", "simple_single_outline": "no", "distance_km": 11, "distance_original": "11.0 km run", "distance_source": "본문 Strava 활동 링크 카드",
+    "retracing_known": "unknown", "pause_known": "unknown", "composite_or_multi_session": "unknown",
+    "interpretation": "나선과 더듬이 등 내부·가지가 있는 복합 예비 작품.",
+    "limitations": "본30에 자동 추가하지 않는 예비. 원문에는 사진 합성 이미지도 있으나 코딩은 배경 사진이 없는 실제 경로 지도만으로 했음. GPX 미검증."
+  }
+]

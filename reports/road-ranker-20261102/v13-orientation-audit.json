@@ -1,0 +1,25 @@
+{
+  "requests": 75,
+  "selectedIds": 17,
+  "abstentions": 58,
+  "sourceRows": 1003,
+  "selectedIdsScoresSlotsUnchanged": true,
+  "all17GPXByteIdentical": true,
+  "rotationMetadataChanged": [
+    "R005",
+    "R007",
+    "R010",
+    "R011",
+    "R013"
+  ],
+  "newUniquePixelImages": 3,
+  "reusedExactPixelRatingsPerRater": 14,
+  "oldClearTarget": 4,
+  "canonicalClearTarget": 7,
+  "gain": 3,
+  "orientationDiagnosticCriterionMet": true,
+  "baselineFirstCandidateClearTarget": 8,
+  "originalDiversityCriterionMet": false,
+  "primaryClearTarget": 0,
+  "humanRecognitionMeasured": false
+}

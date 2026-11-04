@@ -1,0 +1,18 @@
+{
+  "lockedInputHashesUnchanged": {
+    "C:\\Users\\ekdus\\OneDrive\\바탕 화면\\running\\reports\\road-ranker-20261102\\protocol-v18-image-query.md": true,
+    "C:\\Users\\ekdus\\OneDrive\\바탕 화면\\running\\reports\\road-ranker-20261102\\v12-local-model-files.json": true,
+    "C:\\Users\\ekdus\\OneDrive\\바탕 화면\\running\\eval\\recognition\\road-ranker-20261102\\diversity-v11.json": true,
+    "C:\\Users\\ekdus\\OneDrive\\바탕 화면\\running\\eval\\recognition\\road-ranker-20261102\\diversity-catalog-v12.json": true,
+    "C:\\Users\\ekdus\\OneDrive\\바탕 화면\\running\\eval\\recognition\\road-ranker-20261102\\v12-dataset\\road-features.npz": true,
+    "C:\\Users\\ekdus\\OneDrive\\바탕 화면\\running\\eval\\recognition\\road-ranker-20261102\\v12-dataset\\road-features-metadata.json": true,
+    "C:\\Users\\ekdus\\OneDrive\\바탕 화면\\running\\eval\\recognition\\road-ranker-20261102\\v17-canonical-models.npz": true,
+    "C:\\Users\\ekdus\\OneDrive\\바탕 화면\\running\\scripts\\recognition-lab\\sketch-features.py": true,
+    "C:\\Users\\ekdus\\OneDrive\\바탕 화면\\running\\scripts\\recognition-lab\\image-query-retrieval.py": true
+  },
+  "pythonSuitePassed": 68,
+  "gpxChecked": 225,
+  "newUniqueAIImages": 43,
+  "goalAchieved": false,
+  "adopted": false
+}

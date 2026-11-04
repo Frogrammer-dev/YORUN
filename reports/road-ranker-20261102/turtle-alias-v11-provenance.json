@@ -1,0 +1,21 @@
+{
+  "recordedAtUtc": "2026-11-02T10:55:45.876308+00:00",
+  "originalExecutionProtocolSHA256": "0566f7f25dcf6acda488bed888c05789ba22d41d445deb5c8a2801b9b93297bb",
+  "originalProtocolByteSnapshot": "reports/road-ranker-20261102/code-snapshots/protocol-v11-at-execution.md.txt",
+  "originalProtocolRecoveredFromExactHashMatchingPrefix": true,
+  "currentAppendedProtocolSHA256": "03687fe379be66f38f69c07ba2bfcb767623cbb1fa8bf70f3d2c217e892f9bed",
+  "currentCatalogSHA256": "5e257892a7ab2313e46d4a9f0f1c5950ccb1e8bf6bc1553796c75b8b6e035a4f",
+  "executedGeneratorCodeSHA256": "0383a96b07e855a147a85600d83aa9c2ea2b85bb30944df8bc26f4d497ae2552",
+  "executedScopeTurtleAliases": [
+    "turtle"
+  ],
+  "executedScopeExactVocabularySupported": false,
+  "subsequentExplicitCatalogTurtleAlias": [
+    "sea_turtle"
+  ],
+  "supportScope": "sea_turtle category only; not evidence of general turtle recognition",
+  "generationConditionsChanged": false,
+  "runningGeneratorEdited": false,
+  "freeNamingGroundTruthChanged": false,
+  "dataInterpretation": "Original executed scope and raw-key support audit remain historical. Catalog appendix adds a separately disclosed sea_turtle semantic scope; no source data or verdict is rewritten."
+}

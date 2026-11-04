@@ -1,0 +1,21 @@
+{
+  "phase": "during live v19 generation; supplemental provenance, not pre-run hash",
+  "ROAD_DATA_DIR": null,
+  "actualDefaultDirectory": "C:\\Users\\ekdus\\OneDrive\\바탕 화면\\running\\data\\roads",
+  "manifest": {
+    "file": "roads-261009-b480965b.sqlite",
+    "schema": "1",
+    "timestamp": "2026-10-09T20:21:04Z",
+    "source": "https://download.geofabrik.de/asia/south-korea-261009.osm.pbf",
+    "checksum": "b480965b3fbc84411961aa76d5454366",
+    "ways": "1734403",
+    "region": "South Korea"
+  },
+  "manifestSHA256": "f7f0277207b91631e0cb12a75397e710acdaec1c95a51f275717521157bee5b8",
+  "sqlitePath": "C:\\Users\\ekdus\\OneDrive\\바탕 화면\\running\\data\\roads\\roads-261009-b480965b.sqlite",
+  "sqliteBytes": 1041162240,
+  "sqliteSHA256": "5d7d2d7abdd3fc04e729b1bc22e657fde4bb5c1446519e60c02cc494b0775ced",
+  "runSession": 96002,
+  "remedy": "Independently requery exact snapshots from explicit directory after run; preserve original lock and no restart",
+  "expertFinding": "Runner omitted explicit directory and SQLite hash; no environment override present"
+}

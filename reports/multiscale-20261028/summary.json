@@ -1,0 +1,59 @@
+{
+  "sourceSha256": "33f7bfd09173b0d50c16cf897040eaccc56a800f2e359a2414bfec379f00ca8c",
+  "conditions": 6,
+  "methodOutputs": 18,
+  "validOutputs": 17,
+  "sigmas": [
+    0,
+    2,
+    5,
+    10
+  ],
+  "meanScoresBySigma": [
+    0.17720575972566516,
+    0.3848156523727125,
+    0.6893354139251219,
+    0.8888640554933036
+  ],
+  "humanRecognitionMeasured": false,
+  "newRoutesGenerated": false,
+  "appIntegrated": false,
+  "rankingDiagnostic": [
+    {
+      "id": "daejeon-dunsan-animal",
+      "originalWinner": "control",
+      "multiscaleWinner": "control",
+      "strongBlurWinner": "roadPoseOnly"
+    },
+    {
+      "id": "daegu-center-object",
+      "originalWinner": "control",
+      "multiscaleWinner": "control",
+      "strongBlurWinner": "control"
+    },
+    {
+      "id": "daejeon-dunsan-object",
+      "originalWinner": "roadMotif",
+      "multiscaleWinner": "roadMotif",
+      "strongBlurWinner": "control"
+    },
+    {
+      "id": "seoul-songpa-animal",
+      "originalWinner": "control",
+      "multiscaleWinner": "control",
+      "strongBlurWinner": "control"
+    },
+    {
+      "id": "daegu-center-animal",
+      "originalWinner": "roadMotif",
+      "multiscaleWinner": "roadMotif",
+      "strongBlurWinner": "roadMotif"
+    },
+    {
+      "id": "seoul-songpa-object",
+      "originalWinner": "control",
+      "multiscaleWinner": "control",
+      "strongBlurWinner": "control"
+    }
+  ]
+}

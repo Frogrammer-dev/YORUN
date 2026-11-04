@@ -1,0 +1,21 @@
+{
+  "evaluationType":"AI surrogate, not human evaluation",
+  "evaluatorAgent":"01a19b0b-12bd-7592-9a5f-809818cebc3a",
+  "fingerprint":"84cde0f4ca5191cb94d2b27cd707f59b8a24e7bd22f8ea60b9846e614fbdf1cc",
+  "namesScoresMethodsHidden":true,
+  "results":[
+    {"token":"R01","name":"불규칙 다각형","clarity":"none"},
+    {"token":"R02","name":"불규칙 다각형","clarity":"none"},
+    {"token":"R03","name":"불규칙한 톱니형 판","clarity":"none"},
+    {"token":"R04","name":"반소매 티셔츠","clarity":"weak"},
+    {"token":"R05","name":"불규칙 다각형","clarity":"none"},
+    {"token":"R06","name":"장화","clarity":"weak"},
+    {"token":"R07","name":"망치","clarity":"clear"},
+    {"token":"R08","name":"반소매 티셔츠","clarity":"weak"},
+    {"token":"R09","name":"망치","clarity":"clear"},
+    {"token":"R10","name":"권총","clarity":"weak"},
+    {"token":"R11","name":"장화","clarity":"weak"},
+    {"token":"R12","name":"불규칙한 톱니형 판","clarity":"none"}
+  ],
+  "humanRecognitionMeasured":false
+}

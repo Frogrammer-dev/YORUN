@@ -1,0 +1,19 @@
+{
+  "samples": 2304,
+  "classes": 32,
+  "recommendationClasses": 24,
+  "animalClasses": 11,
+  "plannedKinds": 25,
+  "unsupported": [
+    "rocket"
+  ],
+  "originalV10RecordsExactlyPreserved": 1368,
+  "splits": {
+    "train": 1646,
+    "val": 316,
+    "test": 342
+  },
+  "roadJudgmentsUsed": false,
+  "humanRecognitionMeasured": false,
+  "datasetSHA256": "ada8b04a03d19906c3e4c09c752730dfa9a1cf4067be52ea2c480c9fad6effc8"
+}

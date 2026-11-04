@@ -1,0 +1,207 @@
+{
+  "evaluationType": "AI surrogate, not human evaluation",
+  "humanRecognitionMeasured": false,
+  "pictures": 163,
+  "primaryRater": "v19-rater1",
+  "raterClear": [
+    15,
+    15,
+    11
+  ],
+  "methods": {
+    "geometry": {
+      "requests": 75,
+      "clearTarget": 5,
+      "clearAny": 7,
+      "animalClearTarget": 2,
+      "objectClearTarget": 3,
+      "primaryClearTarget": 6,
+      "primaryCases": [
+        [
+          "chuncheon-center",
+          "car"
+        ],
+        [
+          "changwon-center",
+          "tshirt"
+        ],
+        [
+          "chuncheon-center",
+          "giraffe"
+        ],
+        [
+          "changwon-center",
+          "car"
+        ],
+        [
+          "chuncheon-center",
+          "fish"
+        ],
+        [
+          "chuncheon-center",
+          "airplane"
+        ]
+      ],
+      "primaryAnimal": 2,
+      "targetClearCases": [
+        [
+          "chuncheon-center",
+          "fish"
+        ],
+        [
+          "chuncheon-center",
+          "giraffe"
+        ],
+        [
+          "chuncheon-center",
+          "car"
+        ],
+        [
+          "changwon-center",
+          "car"
+        ],
+        [
+          "changwon-center",
+          "tshirt"
+        ]
+      ],
+      "strictDiversityPassed": false,
+      "speciesClearInTwoAreas": {
+        "animal": [],
+        "object": [
+          "car"
+        ]
+      }
+    },
+    "hand": {
+      "requests": 75,
+      "clearTarget": 5,
+      "clearAny": 6,
+      "animalClearTarget": 1,
+      "objectClearTarget": 4,
+      "primaryClearTarget": 5,
+      "primaryCases": [
+        [
+          "chuncheon-center",
+          "car"
+        ],
+        [
+          "changwon-center",
+          "tshirt"
+        ],
+        [
+          "changwon-center",
+          "car"
+        ],
+        [
+          "chuncheon-center",
+          "fish"
+        ],
+        [
+          "chuncheon-center",
+          "airplane"
+        ]
+      ],
+      "primaryAnimal": 1,
+      "targetClearCases": [
+        [
+          "chuncheon-center",
+          "fish"
+        ],
+        [
+          "chuncheon-center",
+          "car"
+        ],
+        [
+          "chuncheon-center",
+          "airplane"
+        ],
+        [
+          "changwon-center",
+          "car"
+        ],
+        [
+          "changwon-center",
+          "tshirt"
+        ]
+      ],
+      "strictDiversityPassed": false,
+      "speciesClearInTwoAreas": {
+        "animal": [],
+        "object": [
+          "car"
+        ]
+      }
+    },
+    "image": {
+      "requests": 75,
+      "clearTarget": 5,
+      "clearAny": 6,
+      "animalClearTarget": 1,
+      "objectClearTarget": 4,
+      "primaryClearTarget": 5,
+      "primaryCases": [
+        [
+          "chuncheon-center",
+          "car"
+        ],
+        [
+          "changwon-center",
+          "tshirt"
+        ],
+        [
+          "changwon-center",
+          "car"
+        ],
+        [
+          "chuncheon-center",
+          "fish"
+        ],
+        [
+          "chuncheon-center",
+          "airplane"
+        ]
+      ],
+      "primaryAnimal": 1,
+      "targetClearCases": [
+        [
+          "chuncheon-center",
+          "fish"
+        ],
+        [
+          "chuncheon-center",
+          "car"
+        ],
+        [
+          "chuncheon-center",
+          "airplane"
+        ],
+        [
+          "changwon-center",
+          "car"
+        ],
+        [
+          "changwon-center",
+          "tshirt"
+        ]
+      ],
+      "strictDiversityPassed": false,
+      "speciesClearInTwoAreas": {
+        "animal": [],
+        "object": [
+          "car"
+        ]
+      }
+    }
+  },
+  "frozenCriteria": {
+    "primaryDifferenceImageMinusGeometry": -1,
+    "primaryAtLeast5": false,
+    "animalGainRequests": 0,
+    "animalGainKinds": 0,
+    "animalAtLeast3Requests2Kinds": false,
+    "majorityImageAtLeast13": false,
+    "strictDiversityImage": false,
+    "imageMinusHandMajority": 0
+  }
+}

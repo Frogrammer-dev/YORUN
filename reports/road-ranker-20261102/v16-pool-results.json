@@ -1,0 +1,3231 @@
+{
+  "evaluationType": "Sampled attainability lower bound;NOT automatic top1 model performance",
+  "requests": 75,
+  "cases": [
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "cat",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "cheonan-buldang-diversity-v11-cat-1",
+        "cheonan-buldang-diversity-v11-cat-6",
+        "cheonan-buldang-diversity-v11-cat-3"
+      ],
+      "tokens": [
+        "R017",
+        "R016",
+        "R015"
+      ]
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "fish",
+      "kind": "animal",
+      "majorityByCandidate": [
+        true,
+        false,
+        true
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          true,
+          false,
+          true
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          true,
+          false,
+          true
+        ]
+      },
+      "ids": [
+        "cheonan-buldang-diversity-v11-fish-1",
+        "cheonan-buldang-diversity-v11-fish-5",
+        "cheonan-buldang-diversity-v11-fish-6"
+      ],
+      "tokens": [
+        "R043",
+        "R041",
+        "R039"
+      ]
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "dog",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "cheonan-buldang-diversity-v11-dog-1",
+        "cheonan-buldang-diversity-v11-dog-2",
+        "cheonan-buldang-diversity-v11-dog-8"
+      ],
+      "tokens": [
+        "R070",
+        "R068",
+        "R063"
+      ]
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "rabbit",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "cheonan-buldang-diversity-v11-rabbit-1",
+        "cheonan-buldang-diversity-v11-rabbit-2",
+        "cheonan-buldang-diversity-v11-rabbit-7"
+      ],
+      "tokens": [
+        "R008",
+        "R008",
+        "R008"
+      ]
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "bird",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "cheonan-buldang-diversity-v11-bird-1",
+        "cheonan-buldang-diversity-v11-bird-6",
+        "cheonan-buldang-diversity-v11-bird-4"
+      ],
+      "tokens": [
+        "R004",
+        "R004",
+        "R004"
+      ]
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "whale",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "cheonan-buldang-diversity-v11-whale-1",
+        "cheonan-buldang-diversity-v11-whale-3",
+        "cheonan-buldang-diversity-v11-whale-5"
+      ],
+      "tokens": [
+        "R071",
+        "R069",
+        "R064"
+      ]
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "turtle",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "cheonan-buldang-diversity-v11-turtle-1",
+        "cheonan-buldang-diversity-v11-turtle-7",
+        "cheonan-buldang-diversity-v11-turtle-8"
+      ],
+      "tokens": [
+        "R053",
+        "R051",
+        "R048"
+      ]
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "elephant",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "cheonan-buldang-diversity-v11-elephant-1",
+        "cheonan-buldang-diversity-v11-elephant-3",
+        "cheonan-buldang-diversity-v11-elephant-6"
+      ],
+      "tokens": [
+        "R013",
+        "R013",
+        "R012"
+      ]
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "giraffe",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "cheonan-buldang-diversity-v11-giraffe-1",
+        "cheonan-buldang-diversity-v11-giraffe-7",
+        "cheonan-buldang-diversity-v11-giraffe-3"
+      ],
+      "tokens": [
+        "R009",
+        "R009",
+        "R009"
+      ]
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "butterfly",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "cheonan-buldang-diversity-v11-butterfly-1",
+        "cheonan-buldang-diversity-v11-butterfly-3",
+        "cheonan-buldang-diversity-v11-butterfly-4"
+      ],
+      "tokens": [
+        "R023",
+        "R021",
+        "R019"
+      ]
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "duck",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "cheonan-buldang-diversity-v11-duck-1",
+        "cheonan-buldang-diversity-v11-duck-5",
+        "cheonan-buldang-diversity-v11-duck-6"
+      ],
+      "tokens": [
+        "R033",
+        "R031",
+        "R029"
+      ]
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "house",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "cheonan-buldang-diversity-v11-house-1",
+        "cheonan-buldang-diversity-v11-house-7",
+        "cheonan-buldang-diversity-v11-house-2"
+      ],
+      "tokens": [
+        "R035",
+        "R033",
+        "R031"
+      ]
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "tree",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "cheonan-buldang-diversity-v11-tree-1",
+        "cheonan-buldang-diversity-v11-tree-2",
+        "cheonan-buldang-diversity-v11-tree-4"
+      ],
+      "tokens": [
+        "R040",
+        "R038",
+        "R036"
+      ]
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "car",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "cheonan-buldang-diversity-v11-car-1",
+        "cheonan-buldang-diversity-v11-car-6",
+        "cheonan-buldang-diversity-v11-car-7"
+      ],
+      "tokens": [
+        "R001",
+        "R001",
+        "R001"
+      ]
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "rocket",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "cheonan-buldang-diversity-v11-rocket-1",
+        "cheonan-buldang-diversity-v11-rocket-2",
+        "cheonan-buldang-diversity-v11-rocket-4"
+      ],
+      "tokens": [
+        "R015",
+        "R014",
+        "R013"
+      ]
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "apple",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "cheonan-buldang-diversity-v11-apple-1",
+        "cheonan-buldang-diversity-v11-apple-7",
+        "cheonan-buldang-diversity-v11-apple-5"
+      ],
+      "tokens": [
+        "R038",
+        "R036",
+        "R034"
+      ]
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "crown",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "cheonan-buldang-diversity-v11-crown-1",
+        "cheonan-buldang-diversity-v11-crown-7",
+        "cheonan-buldang-diversity-v11-crown-2"
+      ],
+      "tokens": [
+        "R006",
+        "R006",
+        "R006"
+      ]
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "airplane",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "cheonan-buldang-diversity-v11-airplane-1",
+        "cheonan-buldang-diversity-v11-airplane-2",
+        "cheonan-buldang-diversity-v11-airplane-4"
+      ],
+      "tokens": [
+        "R055",
+        "R053",
+        "R050"
+      ]
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "mug",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "cheonan-buldang-diversity-v11-mug-1",
+        "cheonan-buldang-diversity-v11-mug-5",
+        null
+      ],
+      "tokens": [
+        "R012",
+        "R012",
+        null
+      ]
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "tshirt",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          true,
+          true
+        ]
+      },
+      "ids": [
+        "cheonan-buldang-diversity-v11-tshirt-1",
+        "cheonan-buldang-diversity-v11-tshirt-5",
+        "cheonan-buldang-diversity-v11-tshirt-8"
+      ],
+      "tokens": [
+        "R042",
+        "R040",
+        "R038"
+      ]
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "pants",
+      "kind": "object",
+      "majorityByCandidate": [
+        true,
+        true,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          true,
+          true,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          true,
+          true,
+          false
+        ]
+      },
+      "ids": [
+        "cheonan-buldang-diversity-v11-pants-1",
+        "cheonan-buldang-diversity-v11-pants-8",
+        "cheonan-buldang-diversity-v11-pants-7"
+      ],
+      "tokens": [
+        "R029",
+        "R027",
+        "R025"
+      ]
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "hammer",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "cheonan-buldang-diversity-v11-hammer-1",
+        "cheonan-buldang-diversity-v11-hammer-2",
+        null
+      ],
+      "tokens": [
+        "R020",
+        "R018",
+        null
+      ]
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "bottle",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          true
+        ]
+      },
+      "ids": [
+        "cheonan-buldang-diversity-v11-bottle-1",
+        "cheonan-buldang-diversity-v11-bottle-5",
+        "cheonan-buldang-diversity-v11-bottle-2"
+      ],
+      "tokens": [
+        "R036",
+        "R034",
+        "R032"
+      ]
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "key",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "cheonan-buldang-diversity-v11-key-1",
+        "cheonan-buldang-diversity-v11-key-8",
+        "cheonan-buldang-diversity-v11-key-2"
+      ],
+      "tokens": [
+        "R005",
+        "R005",
+        "R005"
+      ]
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "chair",
+      "kind": "object",
+      "majorityByCandidate": [
+        true,
+        true,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          true,
+          true,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          true,
+          true,
+          false
+        ]
+      },
+      "ids": [
+        "cheonan-buldang-diversity-v11-chair-1",
+        "cheonan-buldang-diversity-v11-chair-7",
+        null
+      ],
+      "tokens": [
+        "R069",
+        "R067",
+        null
+      ]
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "cat",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "jeonju-hyoja-diversity-v11-cat-1",
+        "jeonju-hyoja-diversity-v11-cat-8",
+        "jeonju-hyoja-diversity-v11-cat-5"
+      ],
+      "tokens": [
+        "R058",
+        "R056",
+        "R053"
+      ]
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "fish",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "jeonju-hyoja-diversity-v11-fish-1",
+        "jeonju-hyoja-diversity-v11-fish-4",
+        "jeonju-hyoja-diversity-v11-fish-8"
+      ],
+      "tokens": [
+        "R052",
+        "R050",
+        "R047"
+      ]
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "dog",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "jeonju-hyoja-diversity-v11-dog-1",
+        "jeonju-hyoja-diversity-v11-dog-5",
+        "jeonju-hyoja-diversity-v11-dog-7"
+      ],
+      "tokens": [
+        "R037",
+        "R035",
+        "R033"
+      ]
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "rabbit",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "jeonju-hyoja-diversity-v11-rabbit-1",
+        "jeonju-hyoja-diversity-v11-rabbit-2",
+        "jeonju-hyoja-diversity-v11-rabbit-5"
+      ],
+      "tokens": [
+        "R048",
+        "R046",
+        "R043"
+      ]
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "bird",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "jeonju-hyoja-diversity-v11-bird-1",
+        "jeonju-hyoja-diversity-v11-bird-4",
+        "jeonju-hyoja-diversity-v11-bird-3"
+      ],
+      "tokens": [
+        "R049",
+        "R047",
+        "R044"
+      ]
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "whale",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "jeonju-hyoja-diversity-v11-whale-1",
+        "jeonju-hyoja-diversity-v11-whale-7",
+        "jeonju-hyoja-diversity-v11-whale-3"
+      ],
+      "tokens": [
+        "R050",
+        "R048",
+        "R045"
+      ]
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "turtle",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "jeonju-hyoja-diversity-v11-turtle-1",
+        "jeonju-hyoja-diversity-v11-turtle-7",
+        "jeonju-hyoja-diversity-v11-turtle-3"
+      ],
+      "tokens": [
+        "R027",
+        "R025",
+        "R023"
+      ]
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "elephant",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          true,
+          true,
+          true
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "jeonju-hyoja-diversity-v11-elephant-1",
+        "jeonju-hyoja-diversity-v11-elephant-4",
+        "jeonju-hyoja-diversity-v11-elephant-2"
+      ],
+      "tokens": [
+        "R066",
+        "R064",
+        "R060"
+      ]
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "giraffe",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "jeonju-hyoja-diversity-v11-giraffe-1",
+        "jeonju-hyoja-diversity-v11-giraffe-5",
+        "jeonju-hyoja-diversity-v11-giraffe-3"
+      ],
+      "tokens": [
+        "R022",
+        "R020",
+        "R018"
+      ]
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "butterfly",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "jeonju-hyoja-diversity-v11-butterfly-1",
+        "jeonju-hyoja-diversity-v11-butterfly-3",
+        "jeonju-hyoja-diversity-v11-butterfly-5"
+      ],
+      "tokens": [
+        "R057",
+        "R055",
+        "R052"
+      ]
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "duck",
+      "kind": "animal",
+      "majorityByCandidate": [
+        true,
+        false,
+        true
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          true,
+          false,
+          true
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          true,
+          true,
+          true
+        ]
+      },
+      "ids": [
+        "jeonju-hyoja-diversity-v11-duck-1",
+        "jeonju-hyoja-diversity-v11-duck-8",
+        "jeonju-hyoja-diversity-v11-duck-5"
+      ],
+      "tokens": [
+        "R031",
+        "R029",
+        "R027"
+      ]
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "house",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "jeonju-hyoja-diversity-v11-house-1",
+        "jeonju-hyoja-diversity-v11-house-4",
+        "jeonju-hyoja-diversity-v11-house-8"
+      ],
+      "tokens": [
+        "R060",
+        "R058",
+        "R055"
+      ]
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "tree",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "jeonju-hyoja-diversity-v11-tree-1",
+        "jeonju-hyoja-diversity-v11-tree-6",
+        "jeonju-hyoja-diversity-v11-tree-3"
+      ],
+      "tokens": [
+        "R003",
+        "R003",
+        "R003"
+      ]
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "car",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "jeonju-hyoja-diversity-v11-car-1",
+        "jeonju-hyoja-diversity-v11-car-8",
+        "jeonju-hyoja-diversity-v11-car-3"
+      ],
+      "tokens": [
+        "R030",
+        "R028",
+        "R026"
+      ]
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "rocket",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "jeonju-hyoja-diversity-v11-rocket-1",
+        "jeonju-hyoja-diversity-v11-rocket-2",
+        "jeonju-hyoja-diversity-v11-rocket-5"
+      ],
+      "tokens": [
+        "R063",
+        "R061",
+        "R057"
+      ]
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "apple",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "jeonju-hyoja-diversity-v11-apple-1",
+        "jeonju-hyoja-diversity-v11-apple-2",
+        "jeonju-hyoja-diversity-v11-apple-4"
+      ],
+      "tokens": [
+        "R075",
+        "R073",
+        "R067"
+      ]
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "crown",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "jeonju-hyoja-diversity-v11-crown-1",
+        "jeonju-hyoja-diversity-v11-crown-2",
+        "jeonju-hyoja-diversity-v11-crown-3"
+      ],
+      "tokens": [
+        "R059",
+        "R057",
+        "R054"
+      ]
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "airplane",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "jeonju-hyoja-diversity-v11-airplane-1",
+        "jeonju-hyoja-diversity-v11-airplane-8",
+        "jeonju-hyoja-diversity-v11-airplane-3"
+      ],
+      "tokens": [
+        "R054",
+        "R052",
+        "R049"
+      ]
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "mug",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "jeonju-hyoja-diversity-v11-mug-1",
+        "jeonju-hyoja-diversity-v11-mug-6",
+        "jeonju-hyoja-diversity-v11-mug-2"
+      ],
+      "tokens": [
+        "R039",
+        "R037",
+        "R035"
+      ]
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "tshirt",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "jeonju-hyoja-diversity-v11-tshirt-1",
+        "jeonju-hyoja-diversity-v11-tshirt-2",
+        "jeonju-hyoja-diversity-v11-tshirt-8"
+      ],
+      "tokens": [
+        "R002",
+        "R002",
+        "R002"
+      ]
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "pants",
+      "kind": "object",
+      "majorityByCandidate": [
+        true,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          true,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          true,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "jeonju-hyoja-diversity-v11-pants-1",
+        null,
+        null
+      ],
+      "tokens": [
+        "R019",
+        null,
+        null
+      ]
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "hammer",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          true,
+          true,
+          true
+        ]
+      },
+      "ids": [
+        "jeonju-hyoja-diversity-v11-hammer-1",
+        "jeonju-hyoja-diversity-v11-hammer-4",
+        "jeonju-hyoja-diversity-v11-hammer-6"
+      ],
+      "tokens": [
+        "R064",
+        "R062",
+        "R058"
+      ]
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "bottle",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "jeonju-hyoja-diversity-v11-bottle-1",
+        "jeonju-hyoja-diversity-v11-bottle-2",
+        "jeonju-hyoja-diversity-v11-bottle-7"
+      ],
+      "tokens": [
+        "R018",
+        "R017",
+        "R016"
+      ]
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "key",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "jeonju-hyoja-diversity-v11-key-1",
+        null,
+        null
+      ],
+      "tokens": [
+        "R014",
+        null,
+        null
+      ]
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "chair",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          true,
+          true,
+          true
+        ]
+      },
+      "ids": [
+        "jeonju-hyoja-diversity-v11-chair-1",
+        "jeonju-hyoja-diversity-v11-chair-6",
+        "jeonju-hyoja-diversity-v11-chair-2"
+      ],
+      "tokens": [
+        "R028",
+        "R026",
+        "R024"
+      ]
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "cat",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "ulsan-samsan-diversity-v11-cat-1",
+        "ulsan-samsan-diversity-v11-cat-2",
+        "ulsan-samsan-diversity-v11-cat-7"
+      ],
+      "tokens": [
+        "R034",
+        "R032",
+        "R030"
+      ]
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "fish",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "ulsan-samsan-diversity-v11-fish-1",
+        "ulsan-samsan-diversity-v11-fish-6",
+        "ulsan-samsan-diversity-v11-fish-7"
+      ],
+      "tokens": [
+        "R047",
+        "R045",
+        "R042"
+      ]
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "dog",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        true
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          true,
+          false,
+          true
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          true
+        ]
+      },
+      "ids": [
+        "ulsan-samsan-diversity-v11-dog-1",
+        "ulsan-samsan-diversity-v11-dog-2",
+        "ulsan-samsan-diversity-v11-dog-4"
+      ],
+      "tokens": [
+        "R072",
+        "R070",
+        "R065"
+      ]
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "rabbit",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "ulsan-samsan-diversity-v11-rabbit-1",
+        "ulsan-samsan-diversity-v11-rabbit-6",
+        "ulsan-samsan-diversity-v11-rabbit-8"
+      ],
+      "tokens": [
+        "R021",
+        "R019",
+        "R017"
+      ]
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "bird",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "ulsan-samsan-diversity-v11-bird-1",
+        "ulsan-samsan-diversity-v11-bird-6",
+        "ulsan-samsan-diversity-v11-bird-8"
+      ],
+      "tokens": [
+        "R011",
+        "R011",
+        "R011"
+      ]
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "whale",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "ulsan-samsan-diversity-v11-whale-1",
+        "ulsan-samsan-diversity-v11-whale-5",
+        "ulsan-samsan-diversity-v11-whale-8"
+      ],
+      "tokens": [
+        "R074",
+        "R072",
+        "R066"
+      ]
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "turtle",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "ulsan-samsan-diversity-v11-turtle-1",
+        "ulsan-samsan-diversity-v11-turtle-4",
+        "ulsan-samsan-diversity-v11-turtle-5"
+      ],
+      "tokens": [
+        "R056",
+        "R054",
+        "R051"
+      ]
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "elephant",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "ulsan-samsan-diversity-v11-elephant-1",
+        "ulsan-samsan-diversity-v11-elephant-6",
+        "ulsan-samsan-diversity-v11-elephant-3"
+      ],
+      "tokens": [
+        "R025",
+        "R023",
+        "R021"
+      ]
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "giraffe",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "ulsan-samsan-diversity-v11-giraffe-1",
+        "ulsan-samsan-diversity-v11-giraffe-8",
+        "ulsan-samsan-diversity-v11-giraffe-3"
+      ],
+      "tokens": [
+        "R026",
+        "R024",
+        "R022"
+      ]
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "butterfly",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "ulsan-samsan-diversity-v11-butterfly-1",
+        "ulsan-samsan-diversity-v11-butterfly-7",
+        "ulsan-samsan-diversity-v11-butterfly-4"
+      ],
+      "tokens": [
+        "R007",
+        "R007",
+        "R007"
+      ]
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "duck",
+      "kind": "animal",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "ulsan-samsan-diversity-v11-duck-1",
+        "ulsan-samsan-diversity-v11-duck-6",
+        "ulsan-samsan-diversity-v11-duck-2"
+      ],
+      "tokens": [
+        "R062",
+        "R060",
+        "R056"
+      ]
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "house",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "ulsan-samsan-diversity-v11-house-1",
+        "ulsan-samsan-diversity-v11-house-7",
+        "ulsan-samsan-diversity-v11-house-2"
+      ],
+      "tokens": [
+        "R068",
+        "R066",
+        "R062"
+      ]
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "tree",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "ulsan-samsan-diversity-v11-tree-1",
+        "ulsan-samsan-diversity-v11-tree-8",
+        "ulsan-samsan-diversity-v11-tree-3"
+      ],
+      "tokens": [
+        "R016",
+        "R015",
+        "R014"
+      ]
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "car",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "ulsan-samsan-diversity-v11-car-1",
+        "ulsan-samsan-diversity-v11-car-2",
+        "ulsan-samsan-diversity-v11-car-7"
+      ],
+      "tokens": [
+        "R067",
+        "R065",
+        "R061"
+      ]
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "rocket",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "ulsan-samsan-diversity-v11-rocket-1",
+        "ulsan-samsan-diversity-v11-rocket-8",
+        "ulsan-samsan-diversity-v11-rocket-4"
+      ],
+      "tokens": [
+        "R024",
+        "R022",
+        "R020"
+      ]
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "apple",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "ulsan-samsan-diversity-v11-apple-1",
+        "ulsan-samsan-diversity-v11-apple-7",
+        "ulsan-samsan-diversity-v11-apple-4"
+      ],
+      "tokens": [
+        "R045",
+        "R043",
+        "R040"
+      ]
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "crown",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "ulsan-samsan-diversity-v11-crown-1",
+        "ulsan-samsan-diversity-v11-crown-3",
+        "ulsan-samsan-diversity-v11-crown-7"
+      ],
+      "tokens": [
+        "R046",
+        "R044",
+        "R041"
+      ]
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "airplane",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "ulsan-samsan-diversity-v11-airplane-1",
+        "ulsan-samsan-diversity-v11-airplane-5",
+        "ulsan-samsan-diversity-v11-airplane-2"
+      ],
+      "tokens": [
+        "R051",
+        "R049",
+        "R046"
+      ]
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "mug",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "ulsan-samsan-diversity-v11-mug-1",
+        "ulsan-samsan-diversity-v11-mug-2",
+        "ulsan-samsan-diversity-v11-mug-8"
+      ],
+      "tokens": [
+        "R041",
+        "R039",
+        "R037"
+      ]
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "tshirt",
+      "kind": "object",
+      "majorityByCandidate": [
+        true,
+        true,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          true,
+          true,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          true,
+          true,
+          false
+        ]
+      },
+      "ids": [
+        "ulsan-samsan-diversity-v11-tshirt-1",
+        "ulsan-samsan-diversity-v11-tshirt-6",
+        null
+      ],
+      "tokens": [
+        "R061",
+        "R059",
+        null
+      ]
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "pants",
+      "kind": "object",
+      "majorityByCandidate": [
+        true,
+        true,
+        true
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          true,
+          true,
+          true
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          true,
+          true,
+          true
+        ]
+      },
+      "ids": [
+        "ulsan-samsan-diversity-v11-pants-1",
+        "ulsan-samsan-diversity-v11-pants-3",
+        "ulsan-samsan-diversity-v11-pants-5"
+      ],
+      "tokens": [
+        "R010",
+        "R010",
+        "R010"
+      ]
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "hammer",
+      "kind": "object",
+      "majorityByCandidate": [
+        true,
+        true,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          true,
+          true,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          true,
+          true,
+          false
+        ]
+      },
+      "ids": [
+        "ulsan-samsan-diversity-v11-hammer-1",
+        "ulsan-samsan-diversity-v11-hammer-4",
+        null
+      ],
+      "tokens": [
+        "R044",
+        "R042",
+        null
+      ]
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "bottle",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "ulsan-samsan-diversity-v11-bottle-1",
+        "ulsan-samsan-diversity-v11-bottle-4",
+        "ulsan-samsan-diversity-v11-bottle-2"
+      ],
+      "tokens": [
+        "R065",
+        "R063",
+        "R059"
+      ]
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "key",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          false,
+          false
+        ]
+      },
+      "ids": [
+        "ulsan-samsan-diversity-v11-key-1",
+        "ulsan-samsan-diversity-v11-key-4",
+        null
+      ],
+      "tokens": [
+        "R073",
+        "R071",
+        null
+      ]
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "chair",
+      "kind": "object",
+      "majorityByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "primaryByCandidate": [
+        false,
+        false,
+        false
+      ],
+      "raterByCandidate": {
+        "01a19aed-73d8-7662-81ef-5d6ec2287589": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-12bd-7592-9a5f-809818cebc3a": [
+          false,
+          false,
+          false
+        ],
+        "01a19b0b-13a1-7340-89c7-095b3dc85ed2": [
+          false,
+          true,
+          true
+        ]
+      },
+      "ids": [
+        "ulsan-samsan-diversity-v11-chair-1",
+        "ulsan-samsan-diversity-v11-chair-8",
+        "ulsan-samsan-diversity-v11-chair-3"
+      ],
+      "tokens": [
+        "R032",
+        "R030",
+        "R028"
+      ]
+    }
+  ],
+  "summary": {
+    "majority": {
+      "baselineClearRequests": 8,
+      "sampledAtLeastOneClearRequests": 9,
+      "additionalMissedRequests": 1,
+      "additionalByAlternative": [
+        0,
+        1
+      ],
+      "additionalAnimalRequests": 1,
+      "additionalAnimalSpecies": [
+        "dog"
+      ],
+      "diagnosticCriterionMet": false,
+      "sampledUnionSpeciesClearInTwoAreas": {
+        "animal": [],
+        "object": [
+          "pants"
+        ]
+      },
+      "sampledUnionDiversityGateMet": false
+    },
+    "primary": {
+      "baselineClearRequests": 0,
+      "sampledAtLeastOneClearRequests": 0,
+      "additionalMissedRequests": 0,
+      "additionalByAlternative": [
+        0,
+        0
+      ],
+      "additionalAnimalRequests": 0,
+      "additionalAnimalSpecies": [],
+      "diagnosticCriterionMet": false,
+      "sampledUnionSpeciesClearInTwoAreas": {
+        "animal": [],
+        "object": []
+      },
+      "sampledUnionDiversityGateMet": false
+    }
+  },
+  "perRater": {
+    "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+      "baselineClearRequests": 0,
+      "sampledAtLeastOneClearRequests": 0,
+      "additionalMissedRequests": 0
+    },
+    "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+      "baselineClearRequests": 10,
+      "sampledAtLeastOneClearRequests": 10,
+      "additionalMissedRequests": 0
+    },
+    "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+      "baselineClearRequests": 10,
+      "sampledAtLeastOneClearRequests": 14,
+      "additionalMissedRequests": 4
+    }
+  },
+  "completePoolOracle": false,
+  "modelImprovementVerified": false,
+  "humanRecognitionMeasured": false,
+  "priorBenchmarkChanged": false,
+  "limitations": "At most two alternate geometries;related requests and reused pixels;development regions/AI;no absence claim outside sample",
+  "inputSHA256": {
+    "reports\\road-ranker-20261102\\diversity-v11-ai-results.json": "79399f890832e1bb5ebd772e3c7b76706933951028b6919ffb390a5f1ee73081",
+    "reports\\road-ranker-20261102\\v16-alternative1-ai-results.json": "f9282a2e9554896a3d317a9b2d3b930125dde751aaed2453509d5ed56463841d",
+    "reports\\road-ranker-20261102\\v16-alternative2-ai-results.json": "5e08e3513b4357d9a7afa30d0652a527129ce5735f7bc347a81f0a52eaa9ebb9",
+    "eval\\recognition\\road-ranker-20261102\\diversity-catalog-v11-review.json": "49da8a8eb4cd0e5705e781c2237390243489ef26ad29c624283bbceabd457de8",
+    "eval\\recognition\\road-ranker-20261102\\diversity-v11.json": "d86bd5a68f297c28e7dc0db15f800e2a1ddc12129eed8b39df7ee0bca9006ff1",
+    "eval\\recognition\\road-ranker-20261102\\v16-alternative1.json": "86122f4f7c951691ae2570b7a4d3c70c6ffef3c5a834558bf546be86d569e58e",
+    "eval\\recognition\\road-ranker-20261102\\v16-alternative2.json": "40019ad005b84bc6c1302efbab9a867c08e2753ef2aa5c5a6cf735bfc3b5064a",
+    "public\\eval\\road-diversity-20261102\\mapping.json": "804f966f88cd7b68cb70d85714985124d5f21f3000c149ee9c5c58e2fb98200b",
+    "public\\eval\\route-study-20261103-f\\mapping.json": "c8c00b6e74dfc42c4271d63ab7600266dfb1ae8ab6724c1d825542b248bae586",
+    "public\\eval\\route-study-20261103-g\\mapping.json": "501e21368cef4bc4e974f9d63c00bff112c928bd01796020bf893de23d42f822"
+  },
+  "studyLockSHA256": "8ee17408b6a4a9b392d9405163c712a8361d4a1de3507f71d4d175f6ad4af8ac"
+}

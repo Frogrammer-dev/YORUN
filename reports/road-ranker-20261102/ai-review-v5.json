@@ -1,0 +1,21 @@
+{
+  "evaluationType":"AI surrogate, not human evaluation",
+  "evaluatorAgent":"01a19aed-73d8-7662-81ef-5d6ec2287589",
+  "fingerprint":"f0178da307d41114706588539825ccd9febf31e504c5fe13d85b7f4dcf41c6dd",
+  "namesScoresMethodsHidden":true,
+  "results":[
+    {"token":"R01","name":"없음","clarity":"none"},
+    {"token":"R02","name":"없음","clarity":"none"},
+    {"token":"R03","name":"집","clarity":"weak"},
+    {"token":"R04","name":"집","clarity":"weak"},
+    {"token":"R05","name":"없음","clarity":"none"},
+    {"token":"R06","name":"없음","clarity":"none"},
+    {"token":"R07","name":"장화","clarity":"weak"},
+    {"token":"R08","name":"비행기","clarity":"weak"},
+    {"token":"R09","name":"집","clarity":"weak"},
+    {"token":"R10","name":"장화","clarity":"weak"},
+    {"token":"R11","name":"집","clarity":"weak"}
+  ],
+  "humanRecognitionMeasured":false,
+  "notes":"Development evaluation. Model slots include one abstention and denominator stays six."
+}

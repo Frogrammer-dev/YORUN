@@ -1,0 +1,19 @@
+{
+  "coreTestsPassed": 21,
+  "preparationTestPassed": 1,
+  "typecheck": "passed",
+  "lint": "passed",
+  "canonicalReviewUI": "passed with storage blocked and identity reset",
+  "sharedBankDefinitionsMatchCurrentCode": true,
+  "preparedBankSHA256": "53dd01e046b340d0cc4d9a47806def2da1845afef6782ed6a0761541cb1a4059",
+  "sources": {
+    "src/lib/route/boundaryRouting.ts": "435931e39a65726b972864d116d3ed76322cc778d005fae83b0614805158484b",
+    "src/lib/route/boundaryCompletion.ts": "7489aadb7e08cbf22c508f634568dcd586811512d5db270315ffd491c9eb3c21",
+    "src/lib/route/distinctiveFeatures.ts": "038f85cc61fbb4b3942d60b1f845a7928a570abc1f5836b4c9630af0ed012abd",
+    "scripts/recognition-lab/diversity-bridge.py": "faf41532f57e714e5156818e9ade55d2bbc160dc10639b81b2d1845106c0f972"
+  },
+  "orientationDiagnosticComplete": true,
+  "newGenerationExecuted": false,
+  "humanRecognitionMeasured": false,
+  "goalAchieved": false
+}

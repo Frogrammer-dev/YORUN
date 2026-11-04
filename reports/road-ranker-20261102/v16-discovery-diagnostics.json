@@ -1,0 +1,40 @@
+{
+  "cases": [
+    {
+      "slot": 0,
+      "sourceId": "ulsan-samsan-diversity-v11-dog-1",
+      "meters": 5410.979548454285,
+      "generatorSimilarity": 80,
+      "nativeRepeatRatio": 0,
+      "graphNodes": 103,
+      "modelScoreUsedForAuditSelection": false,
+      "majorityTargetClear": false,
+      "primaryTargetClear": false
+    },
+    {
+      "slot": 1,
+      "sourceId": "ulsan-samsan-diversity-v11-dog-2",
+      "meters": 7746.382245898247,
+      "generatorSimilarity": 80,
+      "nativeRepeatRatio": 0,
+      "graphNodes": 167,
+      "modelScoreUsedForAuditSelection": false,
+      "majorityTargetClear": false,
+      "primaryTargetClear": false
+    },
+    {
+      "slot": 2,
+      "sourceId": "ulsan-samsan-diversity-v11-dog-4",
+      "meters": 5584.023646354675,
+      "generatorSimilarity": 79,
+      "nativeRepeatRatio": 0,
+      "graphNodes": 110,
+      "modelScoreUsedForAuditSelection": false,
+      "majorityTargetClear": true,
+      "primaryTargetClear": false
+    }
+  ],
+  "postOutcomeDescriptiveOnly": true,
+  "newThresholdOrModelFitted": false,
+  "notEvidenceOfGeneralScoreCorrelation": true
+}

@@ -1,0 +1,35 @@
+{
+  "evaluationType": "Actual user free-name exploratory response;not an independent human trial",
+  "source": "user reply to request_user_input_async",
+  "questionItemId": "[\"request_user_input_async\",\"call_7c9ef55b36fe489d9fd252a3dffb593a\",0]",
+  "rawAnswer": "1: 렌치(약함), 2:없음, 3:없음",
+  "imageSHA256": "2fd3622019a909647a6746dfa5229334da30477c005e34c609a7b9bc104ca790",
+  "probeManifestSHA256": "7fb02d1743febc115d941202aa7e2d0529709021f6466eec44af5535cbcb8409",
+  "answers": [
+    {
+      "number": 1,
+      "name": "렌치",
+      "clarity": "weak"
+    },
+    {
+      "number": 2,
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "number": 3,
+      "name": "없음",
+      "clarity": "none"
+    }
+  ],
+  "people": 1,
+  "cases": 3,
+  "clear": 0,
+  "weak": 1,
+  "none": 2,
+  "humanResponseObserved": true,
+  "independentNaiveEvaluation": false,
+  "specificPriorImageExposureKnown": false,
+  "doesNotEstimate75RequestHumanAccuracy": true,
+  "goalAchieved": false
+}

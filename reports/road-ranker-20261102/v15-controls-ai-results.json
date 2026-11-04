@@ -1,0 +1,2858 @@
+{
+  "fingerprint": "ef938c4aa5e11741fb12f1a6c9aa8dc995a5a67ab990785e22b20e9797112e87",
+  "evaluationType": "AI diagnostic;not actual-road or human achievement",
+  "raters": [
+    "01a19aed-73d8-7662-81ef-5d6ec2287589",
+    "01a19b0b-12bd-7592-9a5f-809818cebc3a",
+    "01a19b0b-13a1-7340-89c7-095b3dc85ed2"
+  ],
+  "groups": {
+    "template": {
+      "observations": 25,
+      "targetClear": 16,
+      "clearAny": 17
+    },
+    "sketch": {
+      "observations": 48,
+      "targetClear": 20,
+      "clearAny": 20
+    },
+    "generic": {
+      "observations": 16,
+      "targetClear": 0,
+      "clearAny": 0
+    }
+  },
+  "cases": [
+    {
+      "group": "sketch",
+      "target": "fish",
+      "kind": "animal",
+      "sourceId": "4907461666406400",
+      "className": "fish",
+      "sourceGroup": "3d58cffd0f8f101e392aaa794296dcd2d6eeedb4fd81d4f2e8682c9410faee28",
+      "sourceRecognized": true,
+      "token": "Q001",
+      "imageSHA256": "67eb1ed09d4ea60c0881f10bea0f4cd127520239004966d6dbf739e6ae81f4d9",
+      "strokeCount": 3,
+      "targetClear": false,
+      "clearVotes": 1,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q001",
+          "name": "물고기",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q001",
+          "name": "물고기",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q001",
+          "name": "물고기",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "dog",
+      "kind": "animal",
+      "sourceId": "5926894367145984",
+      "className": "dog",
+      "sourceGroup": "33a94d5c28bc427670343c98cbaeaf9e65963cf0ee72653f44f09fb8c0b4a60a",
+      "sourceRecognized": true,
+      "token": "Q002",
+      "imageSHA256": "b6c25a73c642ab63f76e4e36a31df7df62a1a7c01d03cb95b294419d561f845b",
+      "strokeCount": 8,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q002",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q002",
+          "name": "물고기",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q002",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "hammer",
+      "kind": "object",
+      "sourceId": "5079568543121408",
+      "className": "hammer",
+      "sourceGroup": "024dfae58be16fdcf532c7a76a2f03594e3dc51083bb59d8d9ef60a6e9dc933f",
+      "sourceRecognized": true,
+      "token": "Q003",
+      "imageSHA256": "5c7c50d7e2716a5ef042e7eafed0bc9bbe211e85c70a04ce9ee24494e370afa1",
+      "strokeCount": 3,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q003",
+          "name": "도끼",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q003",
+          "name": "도끼",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q003",
+          "name": "도끼",
+          "clarity": "weak"
+        }
+      ]
+    },
+    {
+      "group": "template",
+      "target": "rocket",
+      "kind": "object",
+      "sourceId": null,
+      "token": "Q004",
+      "imageSHA256": "7c6690f4bca0d7245adebe26e74a1deafb615c09a8d142a3502a5980075450fa",
+      "strokeCount": 1,
+      "targetClear": true,
+      "clearVotes": 3,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q004",
+          "name": "로켓",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q004",
+          "name": "로켓",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q004",
+          "name": "로켓",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "template",
+      "target": "rabbit",
+      "kind": "animal",
+      "sourceId": null,
+      "token": "Q005",
+      "imageSHA256": "df645435ddb3fb12f89dfb05436dbedd3a241fda8f1bda85f1d925a52d6e6f48",
+      "strokeCount": 1,
+      "targetClear": true,
+      "clearVotes": 3,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q005",
+          "name": "토끼",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q005",
+          "name": "토끼",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q005",
+          "name": "토끼",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "template",
+      "target": "cat",
+      "kind": "animal",
+      "sourceId": null,
+      "token": "Q006",
+      "imageSHA256": "d98653796b51d8ef29af880734270cbf3aeab8a834e749f85636ad2c32baac0f",
+      "strokeCount": 1,
+      "targetClear": true,
+      "clearVotes": 2,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q006",
+          "name": "고양이 얼굴",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q006",
+          "name": "고양이 얼굴",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q006",
+          "name": "고양이 얼굴",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "rabbit",
+      "kind": "animal",
+      "sourceId": "4787000202756096",
+      "className": "rabbit",
+      "sourceGroup": "4f8d2b53e697f16ebdfb6a6694dc2f80ebc900abe23c2bf7c4a5e79dde8c699e",
+      "sourceRecognized": true,
+      "token": "Q007",
+      "imageSHA256": "74887b72e3fd5acc920a1cf189c3d0664ba8bad25f90518f2303d76f520f4982",
+      "strokeCount": 5,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q007",
+          "name": "토끼",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q007",
+          "name": "토끼",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q007",
+          "name": "토끼",
+          "clarity": "weak"
+        }
+      ]
+    },
+    {
+      "group": "template",
+      "target": "dog",
+      "kind": "animal",
+      "sourceId": null,
+      "token": "Q008",
+      "imageSHA256": "387909d97fba0bb2476917db823dcfd2403ae1195a5b8682b5bfdf11402754b5",
+      "strokeCount": 1,
+      "targetClear": true,
+      "clearVotes": 2,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q008",
+          "name": "개",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q008",
+          "name": "개",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q008",
+          "name": "개",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "hammer",
+      "kind": "object",
+      "sourceId": "6265254273089536",
+      "className": "hammer",
+      "sourceGroup": "8014b01e8f304de52c34c6ecbcc6d7e51223d92a9ceaeccd97f54283e9968959",
+      "sourceRecognized": true,
+      "token": "Q009",
+      "imageSHA256": "3ab7cf154199bcb97172d6c46ab2f09df7100eb899900ec3f7d0f91bd236ef41",
+      "strokeCount": 3,
+      "targetClear": true,
+      "clearVotes": 3,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q009",
+          "name": "망치",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q009",
+          "name": "망치",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q009",
+          "name": "망치",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "generic",
+      "target": null,
+      "kind": "competition",
+      "sourceId": "5541981025468416",
+      "className": "line",
+      "sourceGroup": "524dd784a4cdc2371400271687e042513dc27808da029d2566e3969bdcd47a72",
+      "sourceRecognized": true,
+      "token": "Q010",
+      "imageSHA256": "c8ec4f40405ccb37b0e3b2dc02e18315f02c957c688bcac4b22ade772b8679fc",
+      "strokeCount": 1,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q010",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q010",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q010",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "whale",
+      "kind": "animal",
+      "sourceId": "4893930225139712",
+      "className": "whale",
+      "sourceGroup": "3d70d19cff86cc923cf88cde445f3b486d3f3a810ac094127a31d543f395dad7",
+      "sourceRecognized": true,
+      "token": "Q011",
+      "imageSHA256": "f4d77a192a8412c88b751917b41b09e8439c88e7b8ce17b0722cea88cf81bceb",
+      "strokeCount": 6,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q011",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q011",
+          "name": "물고기",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q011",
+          "name": "물고기",
+          "clarity": "weak"
+        }
+      ]
+    },
+    {
+      "group": "generic",
+      "target": null,
+      "kind": "competition",
+      "sourceId": "6563385871171584",
+      "className": "map",
+      "sourceGroup": "6127326c65b65dc80750f10bd23fe6aea1394d9b20c45947e51011f571f272c6",
+      "sourceRecognized": true,
+      "token": "Q012",
+      "imageSHA256": "d73197b9568e81bb76e6f1f286435f65ceed635daa291d5154ae74bf950877e0",
+      "strokeCount": 5,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q012",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q012",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q012",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ]
+    },
+    {
+      "group": "template",
+      "target": "airplane",
+      "kind": "object",
+      "sourceId": null,
+      "token": "Q013",
+      "imageSHA256": "5b2c0bc6458f6d8a1ca9902226311d69a3cb705811aa91aca4ba4ca254915cd0",
+      "strokeCount": 1,
+      "targetClear": true,
+      "clearVotes": 3,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q013",
+          "name": "비행기",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q013",
+          "name": "비행기",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q013",
+          "name": "비행기",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "turtle",
+      "kind": "animal",
+      "sourceId": "5586708714225664",
+      "className": "sea_turtle",
+      "sourceGroup": "2d75a56a32173e0187aac6806d4af0f2de1a1ff8c2658e9bc389186fdc2d47ee",
+      "sourceRecognized": true,
+      "token": "Q014",
+      "imageSHA256": "48d1bc408a36326cf14947ca8426dc73acf8f162df837c3c5e16780ee4be92d9",
+      "strokeCount": 3,
+      "targetClear": false,
+      "clearVotes": 1,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q014",
+          "name": "거북이",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q014",
+          "name": "거북",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q014",
+          "name": "거북이",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "generic",
+      "target": null,
+      "kind": "competition",
+      "sourceId": "6555967590236160",
+      "className": "zigzag",
+      "sourceGroup": "5c8bc7844c2d53815a096f3ad7129c758a65b7fa21de2a8f008b1b65b637f6e2",
+      "sourceRecognized": true,
+      "token": "Q015",
+      "imageSHA256": "11b2859b19702cfde1789e4289d7a07ff1b89977cb72e4c2b9808efa5671c812",
+      "strokeCount": 1,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q015",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q015",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q015",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "elephant",
+      "kind": "animal",
+      "sourceId": "5758994532532224",
+      "className": "elephant",
+      "sourceGroup": "104834ad3aa74a4d2960a95fca92273acbfc76bfc14a313183779a5e1cd2262d",
+      "sourceRecognized": true,
+      "token": "Q016",
+      "imageSHA256": "cd6e698d4f12a08ca98aecde4532827b0f5fa6894316a194cb9499425498d4cf",
+      "strokeCount": 5,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q016",
+          "name": "코끼리",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q016",
+          "name": "코끼리",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q016",
+          "name": "코끼리",
+          "clarity": "weak"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "chair",
+      "kind": "object",
+      "sourceId": "6474704648929280",
+      "className": "chair",
+      "sourceGroup": "25a06bb37457d3b70dcc0a5b3fde8016c976f0928945f80c1865d5e5393d7be1",
+      "sourceRecognized": true,
+      "token": "Q017",
+      "imageSHA256": "81cf5efe011ba249050ff5178c8f8e08c851e48497d15f9c182733f0a7a5d4ff",
+      "strokeCount": 9,
+      "targetClear": true,
+      "clearVotes": 3,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q017",
+          "name": "의자",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q017",
+          "name": "의자",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q017",
+          "name": "의자",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "template",
+      "target": "whale",
+      "kind": "animal",
+      "sourceId": null,
+      "token": "Q018",
+      "imageSHA256": "5bb1eabbad90668bdd29bc91bc74fccb762831101c5b80e20d43951f27c49590",
+      "strokeCount": 1,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q018",
+          "name": "물고기",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q018",
+          "name": "물고기",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q018",
+          "name": "물고기",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "duck",
+      "kind": "animal",
+      "sourceId": "6007838818172928",
+      "className": "duck",
+      "sourceGroup": "17b98f6ce7c953d462d059b366bb367b52a06d79419ff89134be7f1efc8a14db",
+      "sourceRecognized": true,
+      "token": "Q019",
+      "imageSHA256": "1159467a134fd30ab686d33c1d98fd741f109fa39079ccb2151082fff3c9a507",
+      "strokeCount": 6,
+      "targetClear": true,
+      "clearVotes": 3,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q019",
+          "name": "오리",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q019",
+          "name": "오리",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q019",
+          "name": "오리",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "template",
+      "target": "car",
+      "kind": "object",
+      "sourceId": null,
+      "token": "Q020",
+      "imageSHA256": "d145e825ad81bab31834f8779b16b444895d96f936b3b7c7e23bbe01e0d0eb94",
+      "strokeCount": 1,
+      "targetClear": true,
+      "clearVotes": 2,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q020",
+          "name": "자동차",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q020",
+          "name": "자동차",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q020",
+          "name": "자동차",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "template",
+      "target": "hammer",
+      "kind": "object",
+      "sourceId": null,
+      "token": "Q021",
+      "imageSHA256": "fd0129dc2b9ecc53c1214de164f5c15a174fee48372fb7c98e3045c94e4312f4",
+      "strokeCount": 1,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q021",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q021",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q021",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ]
+    },
+    {
+      "group": "template",
+      "target": "fish",
+      "kind": "animal",
+      "sourceId": null,
+      "token": "Q022",
+      "imageSHA256": "9acdb5223da5b8f89cd2d1d7497ef814dea192220af90d43ec93718265775fb4",
+      "strokeCount": 1,
+      "targetClear": true,
+      "clearVotes": 2,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q022",
+          "name": "물고기",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q022",
+          "name": "물고기",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q022",
+          "name": "물고기",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "template",
+      "target": "bottle",
+      "kind": "object",
+      "sourceId": null,
+      "token": "Q023",
+      "imageSHA256": "4e0b0f6ac2b3b7fd5a25f20e3e30e746f87e6621c56d156a13e0329dbfece1d5",
+      "strokeCount": 1,
+      "targetClear": true,
+      "clearVotes": 2,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q023",
+          "name": "병",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q023",
+          "name": "병",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q023",
+          "name": "병",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "bird",
+      "kind": "animal",
+      "sourceId": "5247693897072640",
+      "className": "bird",
+      "sourceGroup": "808111a516cc9d72bce0d434ee57cd24c6662ce0a61cfcc7c8554ed7231dc9a9",
+      "sourceRecognized": true,
+      "token": "Q024",
+      "imageSHA256": "39a6852d4d94756f6f06c01d356298df49452166cf73b32f4f82f0979d86115a",
+      "strokeCount": 4,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q024",
+          "name": "사람",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q024",
+          "name": "사람",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q024",
+          "name": "사람",
+          "clarity": "weak"
+        }
+      ]
+    },
+    {
+      "group": "template",
+      "target": "apple",
+      "kind": "object",
+      "sourceId": null,
+      "token": "Q025",
+      "imageSHA256": "d6a2c3e728908058261911f7d5b865c7a3d1722a90bae0e459783ad627ff7e9c",
+      "strokeCount": 1,
+      "targetClear": true,
+      "clearVotes": 2,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q025",
+          "name": "사과",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q025",
+          "name": "사과",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q025",
+          "name": "사과",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "template",
+      "target": "duck",
+      "kind": "animal",
+      "sourceId": null,
+      "token": "Q026",
+      "imageSHA256": "7f825654d3cf1a80dfd4aa64eb8d4cc7f0953f414154423e2708fa0656746948",
+      "strokeCount": 1,
+      "targetClear": true,
+      "clearVotes": 2,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q026",
+          "name": "오리",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q026",
+          "name": "오리",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q026",
+          "name": "오리",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "crown",
+      "kind": "object",
+      "sourceId": "6293843106332672",
+      "className": "crown",
+      "sourceGroup": "20f12492c257cad595df8690c6b7933420866fc7cd2c574e08588d88e7273b96",
+      "sourceRecognized": true,
+      "token": "Q027",
+      "imageSHA256": "6be91d1e196231e5e70be433ab63a0b6739481156793ea7067adc2001d607da9",
+      "strokeCount": 1,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q027",
+          "name": "왕관",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q027",
+          "name": "왕관",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q027",
+          "name": "왕관",
+          "clarity": "weak"
+        }
+      ]
+    },
+    {
+      "group": "template",
+      "target": "bird",
+      "kind": "animal",
+      "sourceId": null,
+      "token": "Q028",
+      "imageSHA256": "595044ca394f6938a4c7444928b298a213286abd11b1c91378ece25069926a6d",
+      "strokeCount": 1,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q028",
+          "name": "새",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q028",
+          "name": "새",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q028",
+          "name": "새",
+          "clarity": "weak"
+        }
+      ]
+    },
+    {
+      "group": "generic",
+      "target": null,
+      "kind": "competition",
+      "sourceId": "5548323891052544",
+      "className": "triangle",
+      "sourceGroup": "6815c373961c8e8e3c694d3bb603f6cfac3484e9cd729e5d7d348d4647d4a103",
+      "sourceRecognized": true,
+      "token": "Q029",
+      "imageSHA256": "20bbad6ff788acd44c82609ebb26efdfc139a5dce98d0737a608529f2847de4f",
+      "strokeCount": 3,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q029",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q029",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q029",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ]
+    },
+    {
+      "group": "generic",
+      "target": null,
+      "kind": "competition",
+      "sourceId": "6047022740144128",
+      "className": "square",
+      "sourceGroup": "780c43e5afaefa2cb166391922819655c362dad803cf5185ab88f926b5ec2af0",
+      "sourceRecognized": true,
+      "token": "Q030",
+      "imageSHA256": "dad56a088bc7459b7c408e814a6b6df729cd7ef765c9666045ba3e3841f90103",
+      "strokeCount": 1,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q030",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q030",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q030",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ]
+    },
+    {
+      "group": "template",
+      "target": "turtle",
+      "kind": "animal",
+      "sourceId": null,
+      "token": "Q031",
+      "imageSHA256": "043660e0a3c9d89f08a374722ac6c207ff38bb2688299e28be1c13912500f25a",
+      "strokeCount": 1,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q031",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q031",
+          "name": "거북",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q031",
+          "name": "톱니바퀴",
+          "clarity": "weak"
+        }
+      ]
+    },
+    {
+      "group": "template",
+      "target": "key",
+      "kind": "object",
+      "sourceId": null,
+      "token": "Q032",
+      "imageSHA256": "98b1ce88c3a2f1f777e50824e6bf7ac085c21dbea963ffbf7d7e492bd08287d9",
+      "strokeCount": 1,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q032",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q032",
+          "name": "열쇠",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q032",
+          "name": "열쇠",
+          "clarity": "weak"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "bottle",
+      "kind": "object",
+      "sourceId": "4683409899126784",
+      "className": "wine_bottle",
+      "sourceGroup": "181dd08568a4f41f0b617489b53cff9267dd78832ef6be2aef38ae030774a991",
+      "sourceRecognized": true,
+      "token": "Q033",
+      "imageSHA256": "a1e3e173464e861c87541e32cbd8ef1e46a137bfd9809a6bbcb254030b1b6f89",
+      "strokeCount": 2,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q033",
+          "name": "병",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q033",
+          "name": "병",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q033",
+          "name": "병",
+          "clarity": "weak"
+        }
+      ]
+    },
+    {
+      "group": "generic",
+      "target": null,
+      "kind": "competition",
+      "sourceId": "5298638597128192",
+      "className": "map",
+      "sourceGroup": "22e280780c3ead2a3f71d624b07b445a132377ec462c29f47248e770f85613ee",
+      "sourceRecognized": true,
+      "token": "Q034",
+      "imageSHA256": "71c99971668992ea998e3bf392f69952183ed0b0d222f8d50313e21001de0095",
+      "strokeCount": 4,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q034",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q034",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q034",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ]
+    },
+    {
+      "group": "generic",
+      "target": null,
+      "kind": "competition",
+      "sourceId": "6251014258688000",
+      "className": "square",
+      "sourceGroup": "0c0343f726a3efc410705bf1f4ef5e637b821b42e29090bfa64ce9c1932c4d6f",
+      "sourceRecognized": true,
+      "token": "Q035",
+      "imageSHA256": "4130c49236ee2778fcd33b44b30c95e81d33b25c0a2d180608c3f9581688a209",
+      "strokeCount": 1,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q035",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q035",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q035",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ]
+    },
+    {
+      "group": "template",
+      "target": "butterfly",
+      "kind": "animal",
+      "sourceId": null,
+      "token": "Q036",
+      "imageSHA256": "1c26f589f9ae1ca13b014dfd940817fe33e393809f40aabe09deace0acef2002",
+      "strokeCount": 1,
+      "targetClear": true,
+      "clearVotes": 2,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q036",
+          "name": "나비",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q036",
+          "name": "나비",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q036",
+          "name": "나비",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "car",
+      "kind": "object",
+      "sourceId": "6255234181496832",
+      "className": "car",
+      "sourceGroup": "7342b7f37316eb3e7eb1139dc1a92d4ae27b8f9ac8159b697cafb422e522bf70",
+      "sourceRecognized": true,
+      "token": "Q037",
+      "imageSHA256": "b66e912ade10fce22c226e6354d844d94ef3063be0deb057ca42c20e702bd532",
+      "strokeCount": 2,
+      "targetClear": true,
+      "clearVotes": 3,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q037",
+          "name": "자동차",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q037",
+          "name": "자동차",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q037",
+          "name": "자동차",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "generic",
+      "target": null,
+      "kind": "competition",
+      "sourceId": "5040862427873280",
+      "className": "octagon",
+      "sourceGroup": "069085acc334d7c4bb0c64ca28da9ea74beaa3c30ee185cb3fda94c4f4c4de1e",
+      "sourceRecognized": true,
+      "token": "Q038",
+      "imageSHA256": "421689bce7783cf1318a8dba40fa28a4885666ec42511724cbc8b37cc3117761",
+      "strokeCount": 1,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q038",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q038",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q038",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ]
+    },
+    {
+      "group": "generic",
+      "target": null,
+      "kind": "competition",
+      "sourceId": "6136427937005568",
+      "className": "octagon",
+      "sourceGroup": "07fcf0e4476f17e876621edbd3ccc1250911c08cf029fa01d82e13002767e21a",
+      "sourceRecognized": true,
+      "token": "Q039",
+      "imageSHA256": "280e0d1d1874ac383cce625fe174c1a8f7d8e3242836b6fe572cb2db20c69513",
+      "strokeCount": 1,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q039",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q039",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q039",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "butterfly",
+      "kind": "animal",
+      "sourceId": "4706000605020160",
+      "className": "butterfly",
+      "sourceGroup": "055a1badb43bad17cc7903d2f0d2d2c9fe7f03ec014a34b74a282b8996dd31eb",
+      "sourceRecognized": true,
+      "token": "Q040",
+      "imageSHA256": "7902824b1881192250e80907e80ff63ab4c43c546251cdc559f7f8951af7b602",
+      "strokeCount": 2,
+      "targetClear": true,
+      "clearVotes": 3,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q040",
+          "name": "나비",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q040",
+          "name": "나비",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q040",
+          "name": "나비",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "cat",
+      "kind": "animal",
+      "sourceId": "4742828355747840",
+      "className": "cat",
+      "sourceGroup": "1f8b9f7d9d7e318a175c233bf6a6321f91bdab6e4bd53f9f4754a4189e8279c2",
+      "sourceRecognized": true,
+      "token": "Q041",
+      "imageSHA256": "d4dd7e535b4dfbb5182ce809b0d21185ef915d2280cfbef812a9e59f8febc917",
+      "strokeCount": 6,
+      "targetClear": true,
+      "clearVotes": 2,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q041",
+          "name": "고양이 얼굴",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q041",
+          "name": "고양이 얼굴",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q041",
+          "name": "고양이 얼굴",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "tree",
+      "kind": "object",
+      "sourceId": "6282217464528896",
+      "className": "tree",
+      "sourceGroup": "57b85ca0eba212ec522c82dd3feda0543661952a0b7afdf6a628ee889b0e2e27",
+      "sourceRecognized": true,
+      "token": "Q042",
+      "imageSHA256": "5bc7fa363fdced3e07f50a261775ffa84fb49a60b74b954aa1890c0256e19049",
+      "strokeCount": 2,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q042",
+          "name": "꽃",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q042",
+          "name": "사람",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q042",
+          "name": "쥐",
+          "clarity": "weak"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "whale",
+      "kind": "animal",
+      "sourceId": "5469099440209920",
+      "className": "whale",
+      "sourceGroup": "18794699cc9d84451b56f217f93ecda1604d49c3be011bd36cbef5208790447f",
+      "sourceRecognized": true,
+      "token": "Q043",
+      "imageSHA256": "dc54e50de426f75a3cfbd64c57e01feae16852f237a6bfd37dbfce9a4357b751",
+      "strokeCount": 9,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q043",
+          "name": "고래",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q043",
+          "name": "물고기",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q043",
+          "name": "고래",
+          "clarity": "weak"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "tshirt",
+      "kind": "object",
+      "sourceId": "6675833471107072",
+      "className": "t-shirt",
+      "sourceGroup": "259dc39f324eaef0b83680a8dca7df7c9c0d2e48b80b628b8998669986a641b9",
+      "sourceRecognized": true,
+      "token": "Q044",
+      "imageSHA256": "60387213571862afb6ce75bdb61b4c70481927dcdb48deacf1575653642b2c62",
+      "strokeCount": 1,
+      "targetClear": true,
+      "clearVotes": 3,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q044",
+          "name": "티셔츠",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q044",
+          "name": "반소매 티셔츠",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q044",
+          "name": "반팔 티셔츠",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "template",
+      "target": "house",
+      "kind": "object",
+      "sourceId": null,
+      "token": "Q045",
+      "imageSHA256": "29adc222e06df01d8292ee499cf1bed03ba3aab5b57ffb3478990f09b3bc94f5",
+      "strokeCount": 1,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q045",
+          "name": "집",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q045",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q045",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "cat",
+      "kind": "animal",
+      "sourceId": "4732270302724096",
+      "className": "cat",
+      "sourceGroup": "16a18df44caa63ffbedbc6c4ffb762e28152ee3784defaf60e7d544126ceab3e",
+      "sourceRecognized": true,
+      "token": "Q046",
+      "imageSHA256": "dc49bbece9982bf6d1af03a2a057a7fecd87d5767012940bcd169bceefd9c714",
+      "strokeCount": 12,
+      "targetClear": false,
+      "clearVotes": 1,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q046",
+          "name": "고양이 얼굴",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q046",
+          "name": "고양이 얼굴",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q046",
+          "name": "고양이 얼굴",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "fish",
+      "kind": "animal",
+      "sourceId": "4874241189085184",
+      "className": "fish",
+      "sourceGroup": "37e49d5b467dd61020a3338457f36f522d5677052bbb1f083f0fe20c75e099a9",
+      "sourceRecognized": true,
+      "token": "Q047",
+      "imageSHA256": "567592a3bb11aa3ac73463bd56750e9508dba927c96d5c275c7e730bfbc2f1d2",
+      "strokeCount": 3,
+      "targetClear": true,
+      "clearVotes": 3,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q047",
+          "name": "물고기",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q047",
+          "name": "물고기",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q047",
+          "name": "물고기",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "turtle",
+      "kind": "animal",
+      "sourceId": "5749818469122048",
+      "className": "sea_turtle",
+      "sourceGroup": "0075a42d9da6218fcd5b9920a9bd5ab27bfb715a745dc48764b2c6ffcdd13bc3",
+      "sourceRecognized": true,
+      "token": "Q048",
+      "imageSHA256": "268e05ce61d211279e5292b78474c5dd9ff3e4d6a10a5d5c8e84f2c6e35f2083",
+      "strokeCount": 6,
+      "targetClear": true,
+      "clearVotes": 3,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q048",
+          "name": "거북이",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q048",
+          "name": "거북",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q048",
+          "name": "거북이",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "crown",
+      "kind": "object",
+      "sourceId": "5969457946034176",
+      "className": "crown",
+      "sourceGroup": "077779f53383feaa38837986675ab374bfabfb0b79852f4b385c319781e2f59c",
+      "sourceRecognized": true,
+      "token": "Q049",
+      "imageSHA256": "adbd8e59975753bc64a88e0a7e7e3c0fac122b1a0fcff9ac8b216c2be1124787",
+      "strokeCount": 1,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q049",
+          "name": "왕관",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q049",
+          "name": "왕관",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q049",
+          "name": "왕관",
+          "clarity": "weak"
+        }
+      ]
+    },
+    {
+      "group": "template",
+      "target": "tshirt",
+      "kind": "object",
+      "sourceId": null,
+      "token": "Q050",
+      "imageSHA256": "4b786dadeed117385500384a3147678c33afcc7cf3c44dfa3c7bb5b29b7c0bab",
+      "strokeCount": 1,
+      "targetClear": true,
+      "clearVotes": 3,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q050",
+          "name": "티셔츠",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q050",
+          "name": "반소매 티셔츠",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q050",
+          "name": "반팔 티셔츠",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "rabbit",
+      "kind": "animal",
+      "sourceId": "4642612927528960",
+      "className": "rabbit",
+      "sourceGroup": "37ab9a5c8f74cef4ace09a3c8cbb261afa38528692e553f1fcec720817b3d4ac",
+      "sourceRecognized": true,
+      "token": "Q051",
+      "imageSHA256": "3597dd885022d73f684b57c7d33a8428053efb173dc26ac250753392aae456f5",
+      "strokeCount": 4,
+      "targetClear": true,
+      "clearVotes": 3,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q051",
+          "name": "토끼",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q051",
+          "name": "토끼",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q051",
+          "name": "토끼",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "giraffe",
+      "kind": "animal",
+      "sourceId": "6406693237817344",
+      "className": "giraffe",
+      "sourceGroup": "1309387abed9f4bf9df434e25b4c0969cdf0495c4876ed2897192e27648dad86",
+      "sourceRecognized": true,
+      "token": "Q052",
+      "imageSHA256": "0e332d5d7004abd9b4ea27483bb3aec55488fa0cdc1eff2e6535769ea9068304",
+      "strokeCount": 1,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q052",
+          "name": "기린",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q052",
+          "name": "기린",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q052",
+          "name": "의자",
+          "clarity": "weak"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "key",
+      "kind": "object",
+      "sourceId": "6253981930094592",
+      "className": "key",
+      "sourceGroup": "67e19d28a73036a3d97a9f12621eb89f570876fc8bd75484035496f108956684",
+      "sourceRecognized": true,
+      "token": "Q053",
+      "imageSHA256": "d773add7147f560f28d79b3b90e34d52803c3e04b4451721d3ebc8ea0031eab9",
+      "strokeCount": 3,
+      "targetClear": true,
+      "clearVotes": 3,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q053",
+          "name": "열쇠",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q053",
+          "name": "열쇠",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q053",
+          "name": "열쇠",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "mug",
+      "kind": "object",
+      "sourceId": "4843464070004736",
+      "className": "coffee_cup",
+      "sourceGroup": "6134323e01188401ab1bb71adf807a2349ac6790ad1d0599743fc312acb49e48",
+      "sourceRecognized": true,
+      "token": "Q054",
+      "imageSHA256": "5c6f9fc8549406c66745b89d4def43848f6d4dee10746ca8a133c28a31cd8f9e",
+      "strokeCount": 5,
+      "targetClear": true,
+      "clearVotes": 3,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q054",
+          "name": "컵",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q054",
+          "name": "컵",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q054",
+          "name": "컵",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "house",
+      "kind": "object",
+      "sourceId": "6382488123342848",
+      "className": "house",
+      "sourceGroup": "4a8fe7f597b767196ee808df79d04d049854a65db33cb3778d0fc79b98e0a554",
+      "sourceRecognized": true,
+      "token": "Q055",
+      "imageSHA256": "1799f26895b81e4a66a77ffa8cb9032fa4cf3aa6125efeb860d76d9e007d95a1",
+      "strokeCount": 1,
+      "targetClear": true,
+      "clearVotes": 3,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q055",
+          "name": "집",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q055",
+          "name": "집",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q055",
+          "name": "집",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "apple",
+      "kind": "object",
+      "sourceId": "4992290558836736",
+      "className": "apple",
+      "sourceGroup": "2e5239bd41180bcd55889ca7dbf6fa825f978dc5e483c872f8d6ea05024ec331",
+      "sourceRecognized": true,
+      "token": "Q056",
+      "imageSHA256": "7b18ab19399ddd403c3a55001ea987d44d2c2fd00c03ec6f5e5eae3815ab8633",
+      "strokeCount": 5,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q056",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q056",
+          "name": "폭탄",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q056",
+          "name": "프라이팬",
+          "clarity": "weak"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "tshirt",
+      "kind": "object",
+      "sourceId": "4513789883973632",
+      "className": "t-shirt",
+      "sourceGroup": "ad2a6c32f00391ae29ca7d5c35d1da1ee484cfe7167494ea026ec2c6f8346867",
+      "sourceRecognized": true,
+      "token": "Q057",
+      "imageSHA256": "2dfd726541b6a3833fe65c0cba18b551731f595e88e614f32bb03277ba770897",
+      "strokeCount": 3,
+      "targetClear": true,
+      "clearVotes": 2,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q057",
+          "name": "티셔츠",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q057",
+          "name": "반소매 티셔츠",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q057",
+          "name": "반팔 티셔츠",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "bird",
+      "kind": "animal",
+      "sourceId": "5049490350276608",
+      "className": "bird",
+      "sourceGroup": "0760777d1c69864523d1a445cae01e2f3a6dc78b551263a31a87e4045860b273",
+      "sourceRecognized": true,
+      "token": "Q058",
+      "imageSHA256": "19d31776d6b2c27918ef891c9cf64fe1781949e9e90c69944ab7ba5e70d84c72",
+      "strokeCount": 5,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q058",
+          "name": "새",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q058",
+          "name": "새",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q058",
+          "name": "오리",
+          "clarity": "weak"
+        }
+      ]
+    },
+    {
+      "group": "template",
+      "target": "mug",
+      "kind": "object",
+      "sourceId": null,
+      "token": "Q059",
+      "imageSHA256": "432242a1766053c6450bdda750a7cc5d1c6b0858183143e7851cb3ce68117d90",
+      "strokeCount": 1,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q059",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q059",
+          "name": "컵",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q059",
+          "name": "컵",
+          "clarity": "weak"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "tree",
+      "kind": "object",
+      "sourceId": "5829155864182784",
+      "className": "tree",
+      "sourceGroup": "0df415562d91786e4a422afd61e02d4ed8b7525b5d387fa0b8370b2c70eb5b17",
+      "sourceRecognized": true,
+      "token": "Q060",
+      "imageSHA256": "05d44ca9437e8eb9090a3606a1a072e8d3b45bf067571260c67907a18405cd53",
+      "strokeCount": 8,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q060",
+          "name": "나무",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q060",
+          "name": "나무",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q060",
+          "name": "나무",
+          "clarity": "weak"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "butterfly",
+      "kind": "animal",
+      "sourceId": "5584651592663040",
+      "className": "butterfly",
+      "sourceGroup": "2d786627e6c9aefe8712153278661a21e5c42799fbbeac5fd5ede55b336094c0",
+      "sourceRecognized": true,
+      "token": "Q061",
+      "imageSHA256": "9dfa48e9a212616e3216a532bbaa23396065487cc7dd17818bb849cc496316e7",
+      "strokeCount": 6,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q061",
+          "name": "나비",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q061",
+          "name": "나비",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q061",
+          "name": "나비",
+          "clarity": "weak"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "airplane",
+      "kind": "object",
+      "sourceId": "4885112569200640",
+      "className": "airplane",
+      "sourceGroup": "2b7f1d4f8d152f5e30caf3f8c65bd1da6251d9598ebf9d06ea1aa8e4b64e368f",
+      "sourceRecognized": true,
+      "token": "Q062",
+      "imageSHA256": "d44abbaefb5dd13f208f284ace35c2751ed6f052d71a1952b0403df6b0c28f14",
+      "strokeCount": 2,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q062",
+          "name": "비행기",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q062",
+          "name": "비행기",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q062",
+          "name": "비행기",
+          "clarity": "weak"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "airplane",
+      "kind": "object",
+      "sourceId": "6532561280958464",
+      "className": "airplane",
+      "sourceGroup": "128365994635fa9a6eb336f9934dbf6c80edfeffc28f01295ba4ab7fcede2404",
+      "sourceRecognized": true,
+      "token": "Q063",
+      "imageSHA256": "e6edf56fe980b48d836f7c8660684f4e3a08b177e70acb19a3c8cdbd7bc27a34",
+      "strokeCount": 5,
+      "targetClear": false,
+      "clearVotes": 1,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q063",
+          "name": "비행기",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q063",
+          "name": "비행기",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q063",
+          "name": "비행기",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "generic",
+      "target": null,
+      "kind": "competition",
+      "sourceId": "5240730157056000",
+      "className": "circle",
+      "sourceGroup": "26bc1c3338791bd6148d3ef3cdd720ce12daf4c4519f6edb0f90f5fd362f855f",
+      "sourceRecognized": true,
+      "token": "Q064",
+      "imageSHA256": "3b24f0631eb9464289da8032200124954b917f2c6c53812509087651806581eb",
+      "strokeCount": 1,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q064",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q064",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q064",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ]
+    },
+    {
+      "group": "template",
+      "target": "giraffe",
+      "kind": "animal",
+      "sourceId": null,
+      "token": "Q065",
+      "imageSHA256": "9987bb5beb36fa115b87f9ca28d6cd195af7311599d006e957cdaf0376a39a47",
+      "strokeCount": 1,
+      "targetClear": true,
+      "clearVotes": 3,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q065",
+          "name": "기린",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q065",
+          "name": "기린",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q065",
+          "name": "기린",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "template",
+      "target": "chair",
+      "kind": "object",
+      "sourceId": null,
+      "token": "Q066",
+      "imageSHA256": "5060a85e8d4642088bf498ed2d704c2edb7153774d8761499f240abf4f9beea7",
+      "strokeCount": 1,
+      "targetClear": true,
+      "clearVotes": 2,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q066",
+          "name": "의자",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q066",
+          "name": "의자",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q066",
+          "name": "의자",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "duck",
+      "kind": "animal",
+      "sourceId": "4626167699079168",
+      "className": "duck",
+      "sourceGroup": "0dc769db54dafcb4a135915215356d2dd89e41977db69a2625bfa76910c33759",
+      "sourceRecognized": true,
+      "token": "Q067",
+      "imageSHA256": "44fb5d1671e609948a52956cd50c71b4a421c523ddbfe30f36a7eb11ae8ec2a3",
+      "strokeCount": 5,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q067",
+          "name": "말",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q067",
+          "name": "기린",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q067",
+          "name": "말",
+          "clarity": "weak"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "dog",
+      "kind": "animal",
+      "sourceId": "5361283312386048",
+      "className": "dog",
+      "sourceGroup": "27070d2bde40a98760cced8a84a9906559982f03030faf555db7f133390e00b3",
+      "sourceRecognized": true,
+      "token": "Q068",
+      "imageSHA256": "6260eee0713767e096069b7f1cd5132b93e24e877adc2a21885e7dd3b471db6f",
+      "strokeCount": 6,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q068",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q068",
+          "name": "개",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q068",
+          "name": "개",
+          "clarity": "weak"
+        }
+      ]
+    },
+    {
+      "group": "template",
+      "target": "tree",
+      "kind": "object",
+      "sourceId": null,
+      "token": "Q069",
+      "imageSHA256": "0d5a45815ebcbaa83491066edf6512edd34b9e0227f7da87d49cc79ecbe5d3e6",
+      "strokeCount": 1,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q069",
+          "name": "나무",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q069",
+          "name": "나무",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q069",
+          "name": "나무",
+          "clarity": "weak"
+        }
+      ]
+    },
+    {
+      "group": "generic",
+      "target": null,
+      "kind": "competition",
+      "sourceId": "6474660990418944",
+      "className": "triangle",
+      "sourceGroup": "28805193d2234e67935223cbe9f6a3fb5369e7c9edbab4d329fd4062d68d8e7d",
+      "sourceRecognized": true,
+      "token": "Q070",
+      "imageSHA256": "4d577f2da74759c45e831f4b9499d5958be1bb96576fecd62b3d21acf924a478",
+      "strokeCount": 3,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q070",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q070",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q070",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "pants",
+      "kind": "object",
+      "sourceId": "4574515218612224",
+      "className": "pants",
+      "sourceGroup": "9228dd62405c205d7b0e420e38135a663e49d6f193e3cd2267e372c2266b31e1",
+      "sourceRecognized": true,
+      "token": "Q071",
+      "imageSHA256": "c175b2a5c1f4c1e560b994cb1583a1db44a45a48e568f6c111469fb97303eb87",
+      "strokeCount": 1,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q071",
+          "name": "바지",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q071",
+          "name": "바지",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q071",
+          "name": "바지",
+          "clarity": "weak"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "house",
+      "kind": "object",
+      "sourceId": "6688636747644928",
+      "className": "house",
+      "sourceGroup": "5390ab29a31c5250cbbd375081ac8de9b319bc8d0b92e06ad5a2017da9b92e61",
+      "sourceRecognized": true,
+      "token": "Q072",
+      "imageSHA256": "508a4257e4c2e8ecb06b93b1f8907e80599b6ad193f68e56eda0c1863b00fb74",
+      "strokeCount": 5,
+      "targetClear": true,
+      "clearVotes": 3,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q072",
+          "name": "집",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q072",
+          "name": "집",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q072",
+          "name": "집",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "elephant",
+      "kind": "animal",
+      "sourceId": "6753276055781376",
+      "className": "elephant",
+      "sourceGroup": "4ca1ed07be5f49f52d605deebe4c55946b78a735172ede9d6f555939b42da68e",
+      "sourceRecognized": true,
+      "token": "Q073",
+      "imageSHA256": "87ec01ac8fb43f2ea0ca0d51aba323a9d2f4f6b7bb34123ab3c06af62ab5aa23",
+      "strokeCount": 2,
+      "targetClear": true,
+      "clearVotes": 3,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q073",
+          "name": "코끼리",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q073",
+          "name": "코끼리",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q073",
+          "name": "코끼리",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "mug",
+      "kind": "object",
+      "sourceId": "5283151398043648",
+      "className": "coffee_cup",
+      "sourceGroup": "79b951fbbec154ae9ec98e2b778a44c5ff7a9960bbcacda72e09e666d1e911f9",
+      "sourceRecognized": true,
+      "token": "Q074",
+      "imageSHA256": "5c03d459ce4ff5657708d74a8387920e9080be96d2f9b8a30146e8f3d4c6763d",
+      "strokeCount": 3,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q074",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q074",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q074",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ]
+    },
+    {
+      "group": "template",
+      "target": "pants",
+      "kind": "object",
+      "sourceId": null,
+      "token": "Q075",
+      "imageSHA256": "9407a1540b993b2d54a73dfb5be465e8865b8bc86e2a2f6d3298a77fdc91cda8",
+      "strokeCount": 1,
+      "targetClear": false,
+      "clearVotes": 1,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q075",
+          "name": "바지",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q075",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q075",
+          "name": "바지",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "generic",
+      "target": null,
+      "kind": "competition",
+      "sourceId": "5662595388276736",
+      "className": "circle",
+      "sourceGroup": "33c3ef296bbaa5daa3f6e7b09acc7a8f22e043e969965e0e5bdd10cd497efed7",
+      "sourceRecognized": true,
+      "token": "Q076",
+      "imageSHA256": "dff1474e0b95f0e7612b66217e18d68b064e4d00280234c9428da81bd0d47e8a",
+      "strokeCount": 1,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q076",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q076",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q076",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "chair",
+      "kind": "object",
+      "sourceId": "5347794346835968",
+      "className": "chair",
+      "sourceGroup": "348ceeae76f7d8202cfa2b817113a94127ffd61182f20aeef637b897915d9707",
+      "sourceRecognized": true,
+      "token": "Q077",
+      "imageSHA256": "eb57c96d6a47184d6592aad4e0552cac503a5a79c2a6aebb44cd9d995404b5b2",
+      "strokeCount": 6,
+      "targetClear": true,
+      "clearVotes": 3,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q077",
+          "name": "의자",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q077",
+          "name": "의자",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q077",
+          "name": "의자",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "generic",
+      "target": null,
+      "kind": "competition",
+      "sourceId": "4701464586878976",
+      "className": "line",
+      "sourceGroup": "45e80a7bf45eb0ae3aa6d58f51fc1aa6fa259be744511b2804b2ddcbc9920a46",
+      "sourceRecognized": true,
+      "token": "Q078",
+      "imageSHA256": "6009ad53de213d6a1ade49145cdd5921fbc042b963a4e108f078d5dcce08d4ad",
+      "strokeCount": 2,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q078",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q078",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q078",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ]
+    },
+    {
+      "group": "generic",
+      "target": null,
+      "kind": "competition",
+      "sourceId": "6160196906778624",
+      "className": "hexagon",
+      "sourceGroup": "170b4b77b64660bab54d5f8a75d9b550eea3957676abbda9b9766fea6298d4e5",
+      "sourceRecognized": true,
+      "token": "Q079",
+      "imageSHA256": "b82e97354b4886b71a9a9ceabd32d5f698c84c4ce410aea80a96712fa1c62860",
+      "strokeCount": 1,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q079",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q079",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q079",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "bottle",
+      "kind": "object",
+      "sourceId": "6581391179382784",
+      "className": "wine_bottle",
+      "sourceGroup": "103435558caf52c28c84be5841108b4c27980d676789ecfbe776994f912d7df1",
+      "sourceRecognized": true,
+      "token": "Q080",
+      "imageSHA256": "b981fe78b488f0e39760cee41b1f22731e5face3fc34e5ae2badd46b51620ff0",
+      "strokeCount": 2,
+      "targetClear": true,
+      "clearVotes": 2,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q080",
+          "name": "병",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q080",
+          "name": "병",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q080",
+          "name": "병",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "giraffe",
+      "kind": "animal",
+      "sourceId": "5988833332035584",
+      "className": "giraffe",
+      "sourceGroup": "3bf211afe6323169d23d92f453739e865a47c18d6ba6a944cb5d80458b2dce45",
+      "sourceRecognized": true,
+      "token": "Q081",
+      "imageSHA256": "3442a4b6a218587fca78c8d6f142fc68f0daa1d7c4d54dbdab1321ded38c67cf",
+      "strokeCount": 7,
+      "targetClear": false,
+      "clearVotes": 1,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q081",
+          "name": "기린",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q081",
+          "name": "기린",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q081",
+          "name": "기린",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "key",
+      "kind": "object",
+      "sourceId": "6292604155068416",
+      "className": "key",
+      "sourceGroup": "3478a185f585774cbee8fd1b0e791da5c7c2609c63b088807ecce5e5b398e1a0",
+      "sourceRecognized": true,
+      "token": "Q082",
+      "imageSHA256": "10ec0ddef9445166ff92007f24e493218ab282d5f1598257ea7767f1afdbd4a2",
+      "strokeCount": 2,
+      "targetClear": true,
+      "clearVotes": 3,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q082",
+          "name": "열쇠",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q082",
+          "name": "열쇠",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q082",
+          "name": "열쇠",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "pants",
+      "kind": "object",
+      "sourceId": "5664682205511680",
+      "className": "pants",
+      "sourceGroup": "73db5614f2b251fe550f9d874e5372799ef03f705c813609316ea5f5d34381c7",
+      "sourceRecognized": true,
+      "token": "Q083",
+      "imageSHA256": "7c0fd99064a384f0fdf68c64933c9a27657603b46900f8c6d58e7975ffc130c3",
+      "strokeCount": 1,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q083",
+          "name": "바지",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q083",
+          "name": "바지",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q083",
+          "name": "바지",
+          "clarity": "weak"
+        }
+      ]
+    },
+    {
+      "group": "template",
+      "target": "elephant",
+      "kind": "animal",
+      "sourceId": null,
+      "token": "Q084",
+      "imageSHA256": "07985c2c06ab7a58cae0a2ff86e0e082258a2f87b26f0d9af131e6adfe50a658",
+      "strokeCount": 1,
+      "targetClear": true,
+      "clearVotes": 2,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q084",
+          "name": "코끼리",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q084",
+          "name": "코끼리",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q084",
+          "name": "코끼리",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "generic",
+      "target": null,
+      "kind": "competition",
+      "sourceId": "5680656006774784",
+      "className": "hexagon",
+      "sourceGroup": "1e30913bf0e35fecdad1e22ea8a28435721ad6af72844101f8647f85310093c3",
+      "sourceRecognized": true,
+      "token": "Q085",
+      "imageSHA256": "4d1f983e202ef3e5090fe616c18c85061a3edf4b0d214a99259648aab5301097",
+      "strokeCount": 1,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q085",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q085",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q085",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ]
+    },
+    {
+      "group": "template",
+      "target": "crown",
+      "kind": "object",
+      "sourceId": null,
+      "token": "Q086",
+      "imageSHA256": "6f50d3c7721a47744b935a33738ae2aa5f7a6f9110b3a59065936e09bd29cf9a",
+      "strokeCount": 1,
+      "targetClear": true,
+      "clearVotes": 2,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q086",
+          "name": "왕관",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q086",
+          "name": "왕관",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q086",
+          "name": "왕관",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "apple",
+      "kind": "object",
+      "sourceId": "4828791035658240",
+      "className": "apple",
+      "sourceGroup": "5d112bf55768cd32117630778ccf96c5c74f58b3264ddf1e293633d2afc38be0",
+      "sourceRecognized": true,
+      "token": "Q087",
+      "imageSHA256": "4352c6f267e012eb6aacd80438f15799bd1bc520350c507fec598af198b81118",
+      "strokeCount": 4,
+      "targetClear": true,
+      "clearVotes": 3,
+      "clearAny": true,
+      "ratings": [
+        {
+          "token": "Q087",
+          "name": "사과",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q087",
+          "name": "사과",
+          "clarity": "clear"
+        },
+        {
+          "token": "Q087",
+          "name": "사과",
+          "clarity": "clear"
+        }
+      ]
+    },
+    {
+      "group": "sketch",
+      "target": "car",
+      "kind": "object",
+      "sourceId": "5455576387551232",
+      "className": "car",
+      "sourceGroup": "4debf390fa9c859d623c40912206a4de521ebac50b31c1c0be4b7baf18c85fab",
+      "sourceRecognized": true,
+      "token": "Q088",
+      "imageSHA256": "1720a5ae10b69bb9dbbf3359b229af5d2c172894142258bf85946f5652f0d649",
+      "strokeCount": 18,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q088",
+          "name": "자동차",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q088",
+          "name": "자동차",
+          "clarity": "weak"
+        },
+        {
+          "token": "Q088",
+          "name": "자동차",
+          "clarity": "weak"
+        }
+      ]
+    },
+    {
+      "group": "generic",
+      "target": null,
+      "kind": "competition",
+      "sourceId": "6709422367703040",
+      "className": "zigzag",
+      "sourceGroup": "1f2642aff8392eaf33cb69c346e63ab133b086ecbb896664bebb07a80cb2e433",
+      "sourceRecognized": true,
+      "token": "Q089",
+      "imageSHA256": "7f15fe0c0346caad3d6b432e7c0ffb1b4058d9dc4ad4c570d4afa9d4db82f089",
+      "strokeCount": 1,
+      "targetClear": false,
+      "clearVotes": 0,
+      "clearAny": false,
+      "ratings": [
+        {
+          "token": "Q089",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q089",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "Q089",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ]
+    }
+  ],
+  "perRater": [
+    {
+      "evaluatorAgent": "01a19aed-73d8-7662-81ef-5d6ec2287589",
+      "templateTargetClear": 5,
+      "sketchTargetClear": 17,
+      "animalTemplateTargetClear": 2,
+      "animalSketchTargetClear": 6,
+      "genericClearAny": 0,
+      "templateDiagnosticMet": false,
+      "sketchDiagnosticMet": false
+    },
+    {
+      "evaluatorAgent": "01a19b0b-12bd-7592-9a5f-809818cebc3a",
+      "templateTargetClear": 16,
+      "sketchTargetClear": 20,
+      "animalTemplateTargetClear": 8,
+      "animalSketchTargetClear": 7,
+      "genericClearAny": 0
+    },
+    {
+      "evaluatorAgent": "01a19b0b-13a1-7340-89c7-095b3dc85ed2",
+      "templateTargetClear": 17,
+      "sketchTargetClear": 25,
+      "animalTemplateTargetClear": 8,
+      "animalSketchTargetClear": 11,
+      "genericClearAny": 0
+    }
+  ],
+  "primary": {
+    "evaluatorAgent": "01a19aed-73d8-7662-81ef-5d6ec2287589",
+    "templateTargetClear": 5,
+    "sketchTargetClear": 17,
+    "animalTemplateTargetClear": 2,
+    "animalSketchTargetClear": 6,
+    "genericClearAny": 0,
+    "templateDiagnosticMet": false,
+    "sketchDiagnosticMet": false
+  },
+  "matchedTargetKinds": 24,
+  "matchedKindMacroTargetClear": {
+    "template": 0.625,
+    "sketch": 0.4166666666666667
+  },
+  "missingSketchSources": [
+    {
+      "target": "rocket",
+      "group": "sketch",
+      "planned": 2,
+      "reason": "unsupported source class"
+    }
+  ],
+  "plannedSketches": 50,
+  "observedSketches": 48,
+  "diagnosticBranch": "insufficient diagnostic evidence; inspect ambiguity and rater variation",
+  "humanRecognitionMeasured": false,
+  "actualRoadRecognitionMeasured": false,
+  "priorRoadNumeratorChanged": false
+}

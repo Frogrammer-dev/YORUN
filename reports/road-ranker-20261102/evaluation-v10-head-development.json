@@ -1,0 +1,964 @@
+{
+  "fingerprint": "6e0bc0c0edf44cea193ec6ec552f74be6d06c1231069d55a2381ee19e35a15ee",
+  "raters": [
+    "01a19aed-73d8-7662-81ef-5d6ec2287589",
+    "01a19b0b-12bd-7592-9a5f-809818cebc3a",
+    "01a19b0b-13a1-7340-89c7-095b3dc85ed2"
+  ],
+  "individual": [
+    {
+      "fingerprint": "6e0bc0c0edf44cea193ec6ec552f74be6d06c1231069d55a2381ee19e35a15ee",
+      "evaluationType": "AI surrogate, not human evaluation",
+      "methods": {
+        "baseline": {
+          "denominator": 6,
+          "clear": 0,
+          "weak": 0,
+          "none": 6,
+          "abstentions": 0,
+          "areas": {
+            "cheonan-buldang": {
+              "denominator": 2,
+              "clear": 0
+            },
+            "jeonju-hyoja": {
+              "denominator": 2,
+              "clear": 0
+            },
+            "ulsan-samsan": {
+              "denominator": 2,
+              "clear": 0
+            }
+          },
+          "clearRate": 0.0
+        },
+        "model": {
+          "denominator": 6,
+          "clear": 0,
+          "weak": 3,
+          "none": 3,
+          "abstentions": 0,
+          "areas": {
+            "cheonan-buldang": {
+              "denominator": 2,
+              "clear": 0
+            },
+            "jeonju-hyoja": {
+              "denominator": 2,
+              "clear": 0
+            },
+            "ulsan-samsan": {
+              "denominator": 2,
+              "clear": 0
+            }
+          },
+          "clearRate": 0.0
+        }
+      },
+      "clearCountDelta": 0,
+      "aiSurrogateCriterionMet": false,
+      "slots": [
+        {
+          "area": "cheonan-buldang",
+          "method": "baseline",
+          "slot": 1,
+          "id": "cheonan-buldang-natural-v8-1",
+          "viewKey": "cheonan-buldang-natural-v8-1@0",
+          "viewRotation": 0,
+          "token": "R06",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "cheonan-buldang",
+          "method": "baseline",
+          "slot": 2,
+          "id": "cheonan-buldang-natural-v8-2",
+          "viewKey": "cheonan-buldang-natural-v8-2@0",
+          "viewRotation": 0,
+          "token": "R11",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "cheonan-buldang",
+          "method": "model",
+          "slot": 1,
+          "id": "cheonan-buldang-proposal-v9-tshirt-1",
+          "viewKey": "cheonan-buldang-proposal-v9-tshirt-1@283.324195501",
+          "viewRotation": 283.3241955005056,
+          "token": "R09",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "cheonan-buldang",
+          "method": "model",
+          "slot": 2,
+          "id": "cheonan-buldang-proposal-v9-tshirt-2",
+          "viewKey": "cheonan-buldang-proposal-v9-tshirt-2@14.1380322665",
+          "viewRotation": 14.138032266451882,
+          "token": "R07",
+          "name": "티셔츠",
+          "clarity": "weak",
+          "abstained": false
+        },
+        {
+          "area": "jeonju-hyoja",
+          "method": "baseline",
+          "slot": 1,
+          "id": "jeonju-hyoja-natural-v8-1",
+          "viewKey": "jeonju-hyoja-natural-v8-1@0",
+          "viewRotation": 0,
+          "token": "R02",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "jeonju-hyoja",
+          "method": "baseline",
+          "slot": 2,
+          "id": "jeonju-hyoja-natural-v8-2",
+          "viewKey": "jeonju-hyoja-natural-v8-2@0",
+          "viewRotation": 0,
+          "token": "R01",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "jeonju-hyoja",
+          "method": "model",
+          "slot": 1,
+          "id": "jeonju-hyoja-natural-v8-118",
+          "viewKey": "jeonju-hyoja-natural-v8-118@270",
+          "viewRotation": 270.0,
+          "token": "R10",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "jeonju-hyoja",
+          "method": "model",
+          "slot": 2,
+          "id": "jeonju-hyoja-natural-v8-75",
+          "viewKey": "jeonju-hyoja-natural-v8-75@270",
+          "viewRotation": 270.0,
+          "token": "R05",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "ulsan-samsan",
+          "method": "baseline",
+          "slot": 1,
+          "id": "ulsan-samsan-natural-v8-1",
+          "viewKey": "ulsan-samsan-natural-v8-1@0",
+          "viewRotation": 0,
+          "token": "R03",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "ulsan-samsan",
+          "method": "baseline",
+          "slot": 2,
+          "id": "ulsan-samsan-natural-v8-2",
+          "viewKey": "ulsan-samsan-natural-v8-2@0",
+          "viewRotation": 0,
+          "token": "R12",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "ulsan-samsan",
+          "method": "model",
+          "slot": 1,
+          "id": "ulsan-samsan-proposal-v9-tshirt-6",
+          "viewKey": "ulsan-samsan-proposal-v9-tshirt-6@62.628953775",
+          "viewRotation": 62.62895377497518,
+          "token": "R08",
+          "name": "티셔츠",
+          "clarity": "weak",
+          "abstained": false
+        },
+        {
+          "area": "ulsan-samsan",
+          "method": "model",
+          "slot": 2,
+          "id": "ulsan-samsan-proposal-v9-tshirt-1",
+          "viewKey": "ulsan-samsan-proposal-v9-tshirt-1@62.9592921157",
+          "viewRotation": 62.959292115712586,
+          "token": "R04",
+          "name": "티셔츠",
+          "clarity": "weak",
+          "abstained": false
+        }
+      ],
+      "humanMajorityRecognitionMeasured": false,
+      "targetNameAgreementAssessed": false
+    },
+    {
+      "fingerprint": "6e0bc0c0edf44cea193ec6ec552f74be6d06c1231069d55a2381ee19e35a15ee",
+      "evaluationType": "AI surrogate, not human evaluation",
+      "methods": {
+        "baseline": {
+          "denominator": 6,
+          "clear": 0,
+          "weak": 0,
+          "none": 6,
+          "abstentions": 0,
+          "areas": {
+            "cheonan-buldang": {
+              "denominator": 2,
+              "clear": 0
+            },
+            "jeonju-hyoja": {
+              "denominator": 2,
+              "clear": 0
+            },
+            "ulsan-samsan": {
+              "denominator": 2,
+              "clear": 0
+            }
+          },
+          "clearRate": 0.0
+        },
+        "model": {
+          "denominator": 6,
+          "clear": 2,
+          "weak": 2,
+          "none": 2,
+          "abstentions": 0,
+          "areas": {
+            "cheonan-buldang": {
+              "denominator": 2,
+              "clear": 0
+            },
+            "jeonju-hyoja": {
+              "denominator": 2,
+              "clear": 0
+            },
+            "ulsan-samsan": {
+              "denominator": 2,
+              "clear": 2
+            }
+          },
+          "clearRate": 0.3333333333333333
+        }
+      },
+      "clearCountDelta": 2,
+      "aiSurrogateCriterionMet": true,
+      "slots": [
+        {
+          "area": "cheonan-buldang",
+          "method": "baseline",
+          "slot": 1,
+          "id": "cheonan-buldang-natural-v8-1",
+          "viewKey": "cheonan-buldang-natural-v8-1@0",
+          "viewRotation": 0,
+          "token": "R06",
+          "name": "불규칙 다각형",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "cheonan-buldang",
+          "method": "baseline",
+          "slot": 2,
+          "id": "cheonan-buldang-natural-v8-2",
+          "viewKey": "cheonan-buldang-natural-v8-2@0",
+          "viewRotation": 0,
+          "token": "R11",
+          "name": "불규칙 다각형",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "cheonan-buldang",
+          "method": "model",
+          "slot": 1,
+          "id": "cheonan-buldang-proposal-v9-tshirt-1",
+          "viewKey": "cheonan-buldang-proposal-v9-tshirt-1@283.324195501",
+          "viewRotation": 283.3241955005056,
+          "token": "R09",
+          "name": "장화",
+          "clarity": "weak",
+          "abstained": false
+        },
+        {
+          "area": "cheonan-buldang",
+          "method": "model",
+          "slot": 2,
+          "id": "cheonan-buldang-proposal-v9-tshirt-2",
+          "viewKey": "cheonan-buldang-proposal-v9-tshirt-2@14.1380322665",
+          "viewRotation": 14.138032266451882,
+          "token": "R07",
+          "name": "반소매 티셔츠",
+          "clarity": "weak",
+          "abstained": false
+        },
+        {
+          "area": "jeonju-hyoja",
+          "method": "baseline",
+          "slot": 1,
+          "id": "jeonju-hyoja-natural-v8-1",
+          "viewKey": "jeonju-hyoja-natural-v8-1@0",
+          "viewRotation": 0,
+          "token": "R02",
+          "name": "불규칙 다각형",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "jeonju-hyoja",
+          "method": "baseline",
+          "slot": 2,
+          "id": "jeonju-hyoja-natural-v8-2",
+          "viewKey": "jeonju-hyoja-natural-v8-2@0",
+          "viewRotation": 0,
+          "token": "R01",
+          "name": "불규칙 다각형",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "jeonju-hyoja",
+          "method": "model",
+          "slot": 1,
+          "id": "jeonju-hyoja-natural-v8-118",
+          "viewKey": "jeonju-hyoja-natural-v8-118@270",
+          "viewRotation": 270.0,
+          "token": "R10",
+          "name": "불규칙한 십자형 윤곽",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "jeonju-hyoja",
+          "method": "model",
+          "slot": 2,
+          "id": "jeonju-hyoja-natural-v8-75",
+          "viewKey": "jeonju-hyoja-natural-v8-75@270",
+          "viewRotation": 270.0,
+          "token": "R05",
+          "name": "불규칙한 십자형 윤곽",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "ulsan-samsan",
+          "method": "baseline",
+          "slot": 1,
+          "id": "ulsan-samsan-natural-v8-1",
+          "viewKey": "ulsan-samsan-natural-v8-1@0",
+          "viewRotation": 0,
+          "token": "R03",
+          "name": "불규칙한 경계",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "ulsan-samsan",
+          "method": "baseline",
+          "slot": 2,
+          "id": "ulsan-samsan-natural-v8-2",
+          "viewKey": "ulsan-samsan-natural-v8-2@0",
+          "viewRotation": 0,
+          "token": "R12",
+          "name": "불규칙한 경계",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "ulsan-samsan",
+          "method": "model",
+          "slot": 1,
+          "id": "ulsan-samsan-proposal-v9-tshirt-6",
+          "viewKey": "ulsan-samsan-proposal-v9-tshirt-6@62.628953775",
+          "viewRotation": 62.62895377497518,
+          "token": "R08",
+          "name": "반소매 티셔츠",
+          "clarity": "clear",
+          "abstained": false
+        },
+        {
+          "area": "ulsan-samsan",
+          "method": "model",
+          "slot": 2,
+          "id": "ulsan-samsan-proposal-v9-tshirt-1",
+          "viewKey": "ulsan-samsan-proposal-v9-tshirt-1@62.9592921157",
+          "viewRotation": 62.959292115712586,
+          "token": "R04",
+          "name": "반소매 티셔츠",
+          "clarity": "clear",
+          "abstained": false
+        }
+      ],
+      "humanMajorityRecognitionMeasured": false,
+      "targetNameAgreementAssessed": false
+    },
+    {
+      "fingerprint": "6e0bc0c0edf44cea193ec6ec552f74be6d06c1231069d55a2381ee19e35a15ee",
+      "evaluationType": "AI surrogate, not human evaluation",
+      "methods": {
+        "baseline": {
+          "denominator": 6,
+          "clear": 0,
+          "weak": 0,
+          "none": 6,
+          "abstentions": 0,
+          "areas": {
+            "cheonan-buldang": {
+              "denominator": 2,
+              "clear": 0
+            },
+            "jeonju-hyoja": {
+              "denominator": 2,
+              "clear": 0
+            },
+            "ulsan-samsan": {
+              "denominator": 2,
+              "clear": 0
+            }
+          },
+          "clearRate": 0.0
+        },
+        "model": {
+          "denominator": 6,
+          "clear": 3,
+          "weak": 0,
+          "none": 3,
+          "abstentions": 0,
+          "areas": {
+            "cheonan-buldang": {
+              "denominator": 2,
+              "clear": 1
+            },
+            "jeonju-hyoja": {
+              "denominator": 2,
+              "clear": 0
+            },
+            "ulsan-samsan": {
+              "denominator": 2,
+              "clear": 2
+            }
+          },
+          "clearRate": 0.5
+        }
+      },
+      "clearCountDelta": 3,
+      "aiSurrogateCriterionMet": true,
+      "slots": [
+        {
+          "area": "cheonan-buldang",
+          "method": "baseline",
+          "slot": 1,
+          "id": "cheonan-buldang-natural-v8-1",
+          "viewKey": "cheonan-buldang-natural-v8-1@0",
+          "viewRotation": 0,
+          "token": "R06",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "cheonan-buldang",
+          "method": "baseline",
+          "slot": 2,
+          "id": "cheonan-buldang-natural-v8-2",
+          "viewKey": "cheonan-buldang-natural-v8-2@0",
+          "viewRotation": 0,
+          "token": "R11",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "cheonan-buldang",
+          "method": "model",
+          "slot": 1,
+          "id": "cheonan-buldang-proposal-v9-tshirt-1",
+          "viewKey": "cheonan-buldang-proposal-v9-tshirt-1@283.324195501",
+          "viewRotation": 283.3241955005056,
+          "token": "R09",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "cheonan-buldang",
+          "method": "model",
+          "slot": 2,
+          "id": "cheonan-buldang-proposal-v9-tshirt-2",
+          "viewKey": "cheonan-buldang-proposal-v9-tshirt-2@14.1380322665",
+          "viewRotation": 14.138032266451882,
+          "token": "R07",
+          "name": "반팔 티셔츠",
+          "clarity": "clear",
+          "abstained": false
+        },
+        {
+          "area": "jeonju-hyoja",
+          "method": "baseline",
+          "slot": 1,
+          "id": "jeonju-hyoja-natural-v8-1",
+          "viewKey": "jeonju-hyoja-natural-v8-1@0",
+          "viewRotation": 0,
+          "token": "R02",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "jeonju-hyoja",
+          "method": "baseline",
+          "slot": 2,
+          "id": "jeonju-hyoja-natural-v8-2",
+          "viewKey": "jeonju-hyoja-natural-v8-2@0",
+          "viewRotation": 0,
+          "token": "R01",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "jeonju-hyoja",
+          "method": "model",
+          "slot": 1,
+          "id": "jeonju-hyoja-natural-v8-118",
+          "viewKey": "jeonju-hyoja-natural-v8-118@270",
+          "viewRotation": 270.0,
+          "token": "R10",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "jeonju-hyoja",
+          "method": "model",
+          "slot": 2,
+          "id": "jeonju-hyoja-natural-v8-75",
+          "viewKey": "jeonju-hyoja-natural-v8-75@270",
+          "viewRotation": 270.0,
+          "token": "R05",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "ulsan-samsan",
+          "method": "baseline",
+          "slot": 1,
+          "id": "ulsan-samsan-natural-v8-1",
+          "viewKey": "ulsan-samsan-natural-v8-1@0",
+          "viewRotation": 0,
+          "token": "R03",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "ulsan-samsan",
+          "method": "baseline",
+          "slot": 2,
+          "id": "ulsan-samsan-natural-v8-2",
+          "viewKey": "ulsan-samsan-natural-v8-2@0",
+          "viewRotation": 0,
+          "token": "R12",
+          "name": "없음",
+          "clarity": "none",
+          "abstained": false
+        },
+        {
+          "area": "ulsan-samsan",
+          "method": "model",
+          "slot": 1,
+          "id": "ulsan-samsan-proposal-v9-tshirt-6",
+          "viewKey": "ulsan-samsan-proposal-v9-tshirt-6@62.628953775",
+          "viewRotation": 62.62895377497518,
+          "token": "R08",
+          "name": "반팔 티셔츠",
+          "clarity": "clear",
+          "abstained": false
+        },
+        {
+          "area": "ulsan-samsan",
+          "method": "model",
+          "slot": 2,
+          "id": "ulsan-samsan-proposal-v9-tshirt-1",
+          "viewKey": "ulsan-samsan-proposal-v9-tshirt-1@62.9592921157",
+          "viewRotation": 62.959292115712586,
+          "token": "R04",
+          "name": "반팔 티셔츠",
+          "clarity": "clear",
+          "abstained": false
+        }
+      ],
+      "humanMajorityRecognitionMeasured": false,
+      "targetNameAgreementAssessed": false
+    }
+  ],
+  "majority": {
+    "fingerprint": "6e0bc0c0edf44cea193ec6ec552f74be6d06c1231069d55a2381ee19e35a15ee",
+    "evaluationType": "AI surrogate majority, not human evaluation",
+    "methods": {
+      "baseline": {
+        "denominator": 6,
+        "clear": 0,
+        "weak": 0,
+        "none": 6,
+        "abstentions": 0,
+        "areas": {
+          "cheonan-buldang": {
+            "denominator": 2,
+            "clear": 0
+          },
+          "jeonju-hyoja": {
+            "denominator": 2,
+            "clear": 0
+          },
+          "ulsan-samsan": {
+            "denominator": 2,
+            "clear": 0
+          }
+        },
+        "clearRate": 0.0
+      },
+      "model": {
+        "denominator": 6,
+        "clear": 2,
+        "weak": 1,
+        "none": 3,
+        "abstentions": 0,
+        "areas": {
+          "cheonan-buldang": {
+            "denominator": 2,
+            "clear": 0
+          },
+          "jeonju-hyoja": {
+            "denominator": 2,
+            "clear": 0
+          },
+          "ulsan-samsan": {
+            "denominator": 2,
+            "clear": 2
+          }
+        },
+        "clearRate": 0.3333333333333333
+      }
+    },
+    "clearCountDelta": 2,
+    "aiSurrogateCriterionMet": true,
+    "slots": [
+      {
+        "area": "cheonan-buldang",
+        "method": "baseline",
+        "slot": 1,
+        "id": "cheonan-buldang-natural-v8-1",
+        "viewKey": "cheonan-buldang-natural-v8-1@0",
+        "viewRotation": 0,
+        "token": "R06",
+        "name": "없음",
+        "clarity": "none",
+        "abstained": false
+      },
+      {
+        "area": "cheonan-buldang",
+        "method": "baseline",
+        "slot": 2,
+        "id": "cheonan-buldang-natural-v8-2",
+        "viewKey": "cheonan-buldang-natural-v8-2@0",
+        "viewRotation": 0,
+        "token": "R11",
+        "name": "없음",
+        "clarity": "none",
+        "abstained": false
+      },
+      {
+        "area": "cheonan-buldang",
+        "method": "model",
+        "slot": 1,
+        "id": "cheonan-buldang-proposal-v9-tshirt-1",
+        "viewKey": "cheonan-buldang-proposal-v9-tshirt-1@283.324195501",
+        "viewRotation": 283.3241955005056,
+        "token": "R09",
+        "name": "없음",
+        "clarity": "none",
+        "abstained": false
+      },
+      {
+        "area": "cheonan-buldang",
+        "method": "model",
+        "slot": 2,
+        "id": "cheonan-buldang-proposal-v9-tshirt-2",
+        "viewKey": "cheonan-buldang-proposal-v9-tshirt-2@14.1380322665",
+        "viewRotation": 14.138032266451882,
+        "token": "R07",
+        "name": "티셔츠",
+        "clarity": "weak",
+        "abstained": false
+      },
+      {
+        "area": "jeonju-hyoja",
+        "method": "baseline",
+        "slot": 1,
+        "id": "jeonju-hyoja-natural-v8-1",
+        "viewKey": "jeonju-hyoja-natural-v8-1@0",
+        "viewRotation": 0,
+        "token": "R02",
+        "name": "없음",
+        "clarity": "none",
+        "abstained": false
+      },
+      {
+        "area": "jeonju-hyoja",
+        "method": "baseline",
+        "slot": 2,
+        "id": "jeonju-hyoja-natural-v8-2",
+        "viewKey": "jeonju-hyoja-natural-v8-2@0",
+        "viewRotation": 0,
+        "token": "R01",
+        "name": "없음",
+        "clarity": "none",
+        "abstained": false
+      },
+      {
+        "area": "jeonju-hyoja",
+        "method": "model",
+        "slot": 1,
+        "id": "jeonju-hyoja-natural-v8-118",
+        "viewKey": "jeonju-hyoja-natural-v8-118@270",
+        "viewRotation": 270.0,
+        "token": "R10",
+        "name": "없음",
+        "clarity": "none",
+        "abstained": false
+      },
+      {
+        "area": "jeonju-hyoja",
+        "method": "model",
+        "slot": 2,
+        "id": "jeonju-hyoja-natural-v8-75",
+        "viewKey": "jeonju-hyoja-natural-v8-75@270",
+        "viewRotation": 270.0,
+        "token": "R05",
+        "name": "없음",
+        "clarity": "none",
+        "abstained": false
+      },
+      {
+        "area": "ulsan-samsan",
+        "method": "baseline",
+        "slot": 1,
+        "id": "ulsan-samsan-natural-v8-1",
+        "viewKey": "ulsan-samsan-natural-v8-1@0",
+        "viewRotation": 0,
+        "token": "R03",
+        "name": "없음",
+        "clarity": "none",
+        "abstained": false
+      },
+      {
+        "area": "ulsan-samsan",
+        "method": "baseline",
+        "slot": 2,
+        "id": "ulsan-samsan-natural-v8-2",
+        "viewKey": "ulsan-samsan-natural-v8-2@0",
+        "viewRotation": 0,
+        "token": "R12",
+        "name": "없음",
+        "clarity": "none",
+        "abstained": false
+      },
+      {
+        "area": "ulsan-samsan",
+        "method": "model",
+        "slot": 1,
+        "id": "ulsan-samsan-proposal-v9-tshirt-6",
+        "viewKey": "ulsan-samsan-proposal-v9-tshirt-6@62.628953775",
+        "viewRotation": 62.62895377497518,
+        "token": "R08",
+        "name": "티셔츠",
+        "clarity": "clear",
+        "abstained": false
+      },
+      {
+        "area": "ulsan-samsan",
+        "method": "model",
+        "slot": 2,
+        "id": "ulsan-samsan-proposal-v9-tshirt-1",
+        "viewKey": "ulsan-samsan-proposal-v9-tshirt-1@62.9592921157",
+        "viewRotation": 62.959292115712586,
+        "token": "R04",
+        "name": "티셔츠",
+        "clarity": "clear",
+        "abstained": false
+      }
+    ],
+    "humanMajorityRecognitionMeasured": false,
+    "targetNameAgreementAssessed": false
+  },
+  "votes": [
+    {
+      "token": "R01",
+      "clarityVotes": {
+        "none": 3
+      },
+      "names": {
+        "없음": 2,
+        "불규칙 다각형": 1
+      },
+      "exactSameNameClearVotes": 0
+    },
+    {
+      "token": "R02",
+      "clarityVotes": {
+        "none": 3
+      },
+      "names": {
+        "없음": 2,
+        "불규칙 다각형": 1
+      },
+      "exactSameNameClearVotes": 0
+    },
+    {
+      "token": "R03",
+      "clarityVotes": {
+        "none": 3
+      },
+      "names": {
+        "없음": 2,
+        "불규칙한 경계": 1
+      },
+      "exactSameNameClearVotes": 0
+    },
+    {
+      "token": "R04",
+      "clarityVotes": {
+        "weak": 1,
+        "clear": 2
+      },
+      "names": {
+        "티셔츠": 1,
+        "반소매 티셔츠": 1,
+        "반팔 티셔츠": 1
+      },
+      "exactSameNameClearVotes": 1
+    },
+    {
+      "token": "R05",
+      "clarityVotes": {
+        "none": 3
+      },
+      "names": {
+        "없음": 2,
+        "불규칙한 십자형 윤곽": 1
+      },
+      "exactSameNameClearVotes": 0
+    },
+    {
+      "token": "R06",
+      "clarityVotes": {
+        "none": 3
+      },
+      "names": {
+        "없음": 2,
+        "불규칙 다각형": 1
+      },
+      "exactSameNameClearVotes": 0
+    },
+    {
+      "token": "R07",
+      "clarityVotes": {
+        "weak": 2,
+        "clear": 1
+      },
+      "names": {
+        "티셔츠": 1,
+        "반소매 티셔츠": 1,
+        "반팔 티셔츠": 1
+      },
+      "exactSameNameClearVotes": 1
+    },
+    {
+      "token": "R08",
+      "clarityVotes": {
+        "weak": 1,
+        "clear": 2
+      },
+      "names": {
+        "티셔츠": 1,
+        "반소매 티셔츠": 1,
+        "반팔 티셔츠": 1
+      },
+      "exactSameNameClearVotes": 1
+    },
+    {
+      "token": "R09",
+      "clarityVotes": {
+        "none": 2,
+        "weak": 1
+      },
+      "names": {
+        "없음": 2,
+        "장화": 1
+      },
+      "exactSameNameClearVotes": 0
+    },
+    {
+      "token": "R10",
+      "clarityVotes": {
+        "none": 3
+      },
+      "names": {
+        "없음": 2,
+        "불규칙한 십자형 윤곽": 1
+      },
+      "exactSameNameClearVotes": 0
+    },
+    {
+      "token": "R11",
+      "clarityVotes": {
+        "none": 3
+      },
+      "names": {
+        "없음": 2,
+        "불규칙 다각형": 1
+      },
+      "exactSameNameClearVotes": 0
+    },
+    {
+      "token": "R12",
+      "clarityVotes": {
+        "none": 3
+      },
+      "names": {
+        "없음": 2,
+        "불규칙한 경계": 1
+      },
+      "exactSameNameClearVotes": 0
+    }
+  ],
+  "originalSingleRaterCriterionPreserved": true,
+  "humanRecognitionMeasured": false,
+  "limitations": "Related AI models; correlated errors possible; developer-selected repeated regions.",
+  "methodBlindingComplete": false,
+  "evidenceUse": "development-only",
+  "protocolV10Criterion": {
+    "reference": "v9 model, same development roads",
+    "referenceClear": 1,
+    "observedClear": 2,
+    "requiredGain": 2,
+    "observedGain": 1,
+    "passed": false
+  }
+}

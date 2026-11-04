@@ -1,0 +1,21 @@
+{
+  "evaluationType":"AI surrogate, not human evaluation",
+  "evaluatorAgent":"01a19b0b-13a1-7340-89c7-095b3dc85ed2",
+  "fingerprint":"84cde0f4ca5191cb94d2b27cd707f59b8a24e7bd22f8ea60b9846e614fbdf1cc",
+  "namesScoresMethodsHidden":true,
+  "results":[
+    {"token":"R01","name":"없음","clarity":"none"},
+    {"token":"R02","name":"없음","clarity":"none"},
+    {"token":"R03","name":"없음","clarity":"none"},
+    {"token":"R04","name":"집","clarity":"clear"},
+    {"token":"R05","name":"집","clarity":"weak"},
+    {"token":"R06","name":"장화","clarity":"weak"},
+    {"token":"R07","name":"망치","clarity":"clear"},
+    {"token":"R08","name":"집","clarity":"clear"},
+    {"token":"R09","name":"망치","clarity":"clear"},
+    {"token":"R10","name":"망치","clarity":"clear"},
+    {"token":"R11","name":"장화","clarity":"weak"},
+    {"token":"R12","name":"없음","clarity":"none"}
+  ],
+  "humanRecognitionMeasured":false
+}

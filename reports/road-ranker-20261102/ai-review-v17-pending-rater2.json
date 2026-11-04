@@ -1,0 +1,71 @@
+{
+  "fingerprint": "af489ab7cb49c6431239fc3f930855182d87ad0eff5df7a5a53d6a9cd521b102",
+  "evaluatorAgent": "01a19b0b-12bd-7592-9a5f-809818cebc3a",
+  "humanRecognitionMeasured": false,
+  "evaluationType": "AI 대리평가이며 사람평가가 아님",
+  "results": [
+    {
+      "token": "K001",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K002",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K003",
+      "name": "의자",
+      "clarity": "weak"
+    },
+    {
+      "token": "K004",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K005",
+      "name": "기린",
+      "clarity": "weak"
+    },
+    {
+      "token": "K006",
+      "name": "망치",
+      "clarity": "weak"
+    },
+    {
+      "token": "K007",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K008",
+      "name": "반소매 티셔츠",
+      "clarity": "weak"
+    },
+    {
+      "token": "K009",
+      "name": "성",
+      "clarity": "weak"
+    },
+    {
+      "token": "K010",
+      "name": "물고기",
+      "clarity": "weak"
+    },
+    {
+      "token": "K011",
+      "name": "네발동물",
+      "clarity": "weak"
+    },
+    {
+      "token": "K012",
+      "name": "코끼리",
+      "clarity": "clear"
+    }
+  ],
+  "reportedEvaluatorAgent": "Codex",
+  "agentIdentitySource": "Completed agent tool envelope",
+  "raterIdentityVerified": false
+}

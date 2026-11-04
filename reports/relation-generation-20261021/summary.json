@@ -1,0 +1,370 @@
+{
+  "denominator": 6,
+  "baselineMean": 64.90246112379374,
+  "fixedPose": [
+    {
+      "run": "trial-v1",
+      "key": "uniform:8",
+      "mean": 65.8590521898076,
+      "max": 72.97851007638592,
+      "valid": 6,
+      "totalSearchWallMs": 190.83020000000488
+    },
+    {
+      "run": "trial-v1",
+      "key": "relation:8",
+      "mean": 68.29452447524848,
+      "max": 76.23218248366135,
+      "valid": 6,
+      "totalSearchWallMs": 198.04469999999583
+    },
+    {
+      "run": "trial-v1",
+      "key": "uniform:32",
+      "mean": 70.0822179840702,
+      "max": 74.8782202811812,
+      "valid": 6,
+      "totalSearchWallMs": 665.7390000000005
+    },
+    {
+      "run": "trial-v1",
+      "key": "relation:32",
+      "mean": 70.36868428956917,
+      "max": 77.68630523204894,
+      "valid": 6,
+      "totalSearchWallMs": 577.5650000000032
+    },
+    {
+      "run": "trial-v1",
+      "key": "uniform:96",
+      "mean": 71.90087732775193,
+      "max": 75.36883394500931,
+      "valid": 6,
+      "totalSearchWallMs": 1799.5507999999963
+    },
+    {
+      "run": "trial-v1",
+      "key": "relation:96",
+      "mean": 71.43288975895341,
+      "max": 77.68630523204894,
+      "valid": 6,
+      "totalSearchWallMs": 1876.3737000000037
+    },
+    {
+      "run": "extended-fixed-v1",
+      "key": "uniform:192",
+      "mean": 73.05328954517735,
+      "max": 78.22529096487574,
+      "valid": 6,
+      "totalSearchWallMs": 3355.423700000008
+    },
+    {
+      "run": "extended-fixed-v1",
+      "key": "relation:192",
+      "mean": 71.79587511807567,
+      "max": 77.68630523204894,
+      "valid": 6,
+      "totalSearchWallMs": 3330.8800999999985
+    },
+    {
+      "run": "extended-fixed-v1",
+      "key": "uniform:384",
+      "mean": 73.47395567396248,
+      "max": 78.35572620333367,
+      "valid": 6,
+      "totalSearchWallMs": 5931.464599999999
+    },
+    {
+      "run": "extended-fixed-v1",
+      "key": "relation:384",
+      "mean": 73.38106447192088,
+      "max": 77.68630523204894,
+      "valid": 6,
+      "totalSearchWallMs": 7107.8548000000055
+    },
+    {
+      "run": "extended-v1",
+      "key": "uniform:192",
+      "mean": 73.05328954517735,
+      "max": 78.22529096487574,
+      "valid": 6,
+      "totalSearchWallMs": 3235.858899999997
+    },
+    {
+      "run": "extended-v1",
+      "key": "relation:192",
+      "mean": 71.79587511807567,
+      "max": 77.68630523204894,
+      "valid": 6,
+      "totalSearchWallMs": 3419.488399999992
+    },
+    {
+      "run": "extended-v1",
+      "key": "uniform:384",
+      "mean": 73.47395567396248,
+      "max": 78.35572620333367,
+      "valid": 6,
+      "totalSearchWallMs": 5754.4861000000055
+    },
+    {
+      "run": "extended-v1",
+      "key": "relation:384",
+      "mean": 73.38106447192088,
+      "max": 77.68630523204894,
+      "valid": 6,
+      "totalSearchWallMs": 6699.051100000005
+    },
+    {
+      "run": "stress-v1",
+      "key": "uniform:1536",
+      "mean": 73.53518065246111,
+      "max": 78.5579135810933,
+      "valid": 6,
+      "totalSearchWallMs": 17257.5766
+    },
+    {
+      "run": "stress-v1",
+      "key": "relation:1536",
+      "mean": 73.38106447192088,
+      "max": 77.68630523204894,
+      "valid": 6,
+      "totalSearchWallMs": 17007.664400000005
+    },
+    {
+      "run": "hybrid-v1",
+      "key": "uniform-relation:32",
+      "mean": 70.39966498214389,
+      "max": 75.09848879094935,
+      "valid": 6,
+      "totalSearchWallMs": 914.3982000000004
+    },
+    {
+      "run": "hybrid-v1",
+      "key": "relation-uniform:32",
+      "mean": 70.53395258089586,
+      "max": 76.34921818917935,
+      "valid": 6,
+      "totalSearchWallMs": 946.7822000000056
+    },
+    {
+      "run": "hybrid-v1",
+      "key": "uniform-relation:96",
+      "mean": 71.61908234917189,
+      "max": 77.83839142752181,
+      "valid": 6,
+      "totalSearchWallMs": 2814.904300000003
+    },
+    {
+      "run": "hybrid-v1",
+      "key": "relation-uniform:96",
+      "mean": 71.6334505111076,
+      "max": 78.17037507279959,
+      "valid": 6,
+      "totalSearchWallMs": 2703.7081000000026
+    },
+    {
+      "run": "hybrid-v1",
+      "key": "uniform-relation:192",
+      "mean": 73.35336568798641,
+      "max": 78.12499278979062,
+      "valid": 6,
+      "totalSearchWallMs": 5453.262700000001
+    },
+    {
+      "run": "hybrid-v1",
+      "key": "relation-uniform:192",
+      "mean": 72.94142561626298,
+      "max": 78.17037507279959,
+      "valid": 6,
+      "totalSearchWallMs": 4777.3688999999995
+    },
+    {
+      "run": "hybrid-v1",
+      "key": "uniform-relation:384",
+      "mean": 73.50765357025575,
+      "max": 78.5579135810933,
+      "valid": 6,
+      "totalSearchWallMs": 10840.414599999995
+    },
+    {
+      "run": "hybrid-v1",
+      "key": "relation-uniform:384",
+      "mean": 73.18930349412166,
+      "max": 78.17037507279959,
+      "valid": 6,
+      "totalSearchWallMs": 10893.319799999997
+    }
+  ],
+  "cascade": [
+    {
+      "mode": "uniform",
+      "round": 3,
+      "roadProposalCap": 192,
+      "poseEvaluationCap": 240,
+      "denominator": 6,
+      "meanRawSimilarity": 74.61676025867332,
+      "auxiliaryPoseOnlyMean": 65.13277478513272,
+      "baselineMean": 64.90246112379374,
+      "maxRawSimilarity": 79.7864993027417,
+      "invalid": 0,
+      "edgeChanged": 6,
+      "poseOnly": 0,
+      "edgeBetterAtFinalPose": 6,
+      "actualAttempts": 1152,
+      "expanded": 869347,
+      "evaluatedCandidates": 676,
+      "poseEvaluations": 843,
+      "totalWallMs": 9368.110599999967
+    },
+    {
+      "mode": "relation",
+      "round": 3,
+      "roadProposalCap": 192,
+      "poseEvaluationCap": 240,
+      "denominator": 6,
+      "meanRawSimilarity": 73.85009334857774,
+      "auxiliaryPoseOnlyMean": 65.13277478513272,
+      "baselineMean": 64.90246112379374,
+      "maxRawSimilarity": 78.51824343465516,
+      "invalid": 0,
+      "edgeChanged": 6,
+      "poseOnly": 0,
+      "edgeBetterAtFinalPose": 6,
+      "actualAttempts": 1152,
+      "expanded": 749075,
+      "evaluatedCandidates": 768,
+      "poseEvaluations": 763,
+      "totalWallMs": 9293.259
+    },
+    {
+      "mode": "uniform",
+      "round": 6,
+      "roadProposalCap": 384,
+      "poseEvaluationCap": 480,
+      "denominator": 6,
+      "meanRawSimilarity": 74.63541165659763,
+      "auxiliaryPoseOnlyMean": 65.13277478513272,
+      "baselineMean": 64.90246112379374,
+      "maxRawSimilarity": 79.7864993027417,
+      "invalid": 0,
+      "edgeChanged": 6,
+      "poseOnly": 0,
+      "edgeBetterAtFinalPose": 6,
+      "actualAttempts": 2304,
+      "expanded": 1751699,
+      "evaluatedCandidates": 1232,
+      "poseEvaluations": 1394,
+      "totalWallMs": 16005.55539999996
+    },
+    {
+      "mode": "relation",
+      "round": 6,
+      "roadProposalCap": 384,
+      "poseEvaluationCap": 480,
+      "denominator": 6,
+      "meanRawSimilarity": 74.44317113971279,
+      "auxiliaryPoseOnlyMean": 65.13277478513272,
+      "baselineMean": 64.90246112379374,
+      "maxRawSimilarity": 78.51824343465516,
+      "invalid": 0,
+      "edgeChanged": 6,
+      "poseOnly": 0,
+      "edgeBetterAtFinalPose": 6,
+      "actualAttempts": 2304,
+      "expanded": 1612213,
+      "evaluatedCandidates": 1496,
+      "poseEvaluations": 1376,
+      "totalWallMs": 17564.36840000003
+    }
+  ],
+  "semantic": [
+    {
+      "mode": "baseline",
+      "count": 6,
+      "recognizable": 0,
+      "recognizableObjectAnimal": 0,
+      "weak": 4,
+      "none": 2,
+      "meanSubjectiveScore": 31.5
+    },
+    {
+      "mode": "uniform",
+      "count": 6,
+      "recognizable": 0,
+      "recognizableObjectAnimal": 0,
+      "weak": 4,
+      "none": 2,
+      "meanSubjectiveScore": 32.166666666666664
+    },
+    {
+      "mode": "relation",
+      "count": 6,
+      "recognizable": 0,
+      "recognizableObjectAnimal": 0,
+      "weak": 4,
+      "none": 2,
+      "meanSubjectiveScore": 33.166666666666664
+    }
+  ],
+  "semanticJudge": {
+    "sameModelFamily": true,
+    "human": false,
+    "methodAndTargetHidden": true,
+    "independentHumanEvaluation": false,
+    "description": "원본 윤곽만 본 별도 AI 호출이다. 같은 모델 계열이며 인간 독립 평가가 아니다.",
+    "inputsViewed": [
+      "sheet-1.png",
+      "sheet-2.png",
+      "sheet-3.png"
+    ],
+    "method": "세 장에 표시된 Q01~Q18의 실제 검정 윤곽을 육안 관찰했다. 가설명, 생성 방법, 점수, 대조군 소속, 매핑은 읽지 않았다. 점수는 대상 인식의 주관적 강도이며 확률이 아니다. 일반적인 불규칙 다각형이라는 기술은 정확한 기본도형 인식으로 세지 않았다."
+  },
+  "orientation": [
+    {
+      "mode": "baseline",
+      "count": 6,
+      "recognizable": 0,
+      "weak": 6,
+      "none": 0,
+      "meanSubjectiveScore": 44.5
+    },
+    {
+      "mode": "uniform",
+      "count": 6,
+      "recognizable": 0,
+      "weak": 6,
+      "none": 0,
+      "meanSubjectiveScore": 43.166666666666664
+    },
+    {
+      "mode": "relation",
+      "count": 6,
+      "recognizable": 0,
+      "weak": 6,
+      "none": 0,
+      "meanSubjectiveScore": 43.5
+    },
+    {
+      "mode": "ideal-posed",
+      "count": 6,
+      "recognizable": 4,
+      "weak": 2,
+      "none": 0,
+      "meanSubjectiveScore": 74.66666666666667
+    }
+  ],
+  "orientationJudge": {
+    "sameModelFamily": true,
+    "human": false,
+    "methodAndTargetHidden": true
+  },
+  "controls": {
+    "denominator": 4,
+    "recognizable": 4,
+    "includedInRoadPerformance": false
+  },
+  "originalTwelveChanged": false,
+  "humanRecognitionMeasured": false,
+  "globalOptimumBoundProven": false,
+  "appDefaultChanged": false
+}

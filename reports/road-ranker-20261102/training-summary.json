@@ -1,0 +1,645 @@
+{
+  "runs": [
+    {
+      "seed": 17,
+      "treatment": "clean",
+      "bestEpoch": 16,
+      "policy": {
+        "threshold": 0.55,
+        "margin": 0.1,
+        "validationSyntheticFalseAccept": 0.09195402298850575,
+        "validationMacroAcceptedCorrectRecall": 0.5941358024691358,
+        "calibration": "validation only; synthetic negative FAR <= 0.10",
+        "realRoadRejectCalibrated": false
+      },
+      "metrics": {
+        "clean": {
+          "objectAccuracy": 0.7752808988764045,
+          "perClassAccuracy": {
+            "apple": 0.8611111111111112,
+            "fish": 0.9166666666666666,
+            "bird": 0.29411764705882354
+          },
+          "objectCount": 89,
+          "syntheticNegativeCount": 29,
+          "objectCoverage": 0.5842696629213483,
+          "objectAcceptedCorrectRecall": 0.550561797752809,
+          "syntheticNegativeFalseAccept": 0.3448275862068966,
+          "syntheticNegativeAccuracy": 0.3448275862068966,
+          "humanRecognitionMeasured": false,
+          "realRoadAccuracyMeasured": false
+        },
+        "grid": {
+          "objectAccuracy": 0.7640449438202247,
+          "perClassAccuracy": {
+            "apple": 0.8333333333333334,
+            "fish": 0.8888888888888888,
+            "bird": 0.35294117647058826
+          },
+          "objectCount": 89,
+          "syntheticNegativeCount": 29,
+          "objectCoverage": 0.6292134831460674,
+          "objectAcceptedCorrectRecall": 0.5842696629213483,
+          "syntheticNegativeFalseAccept": 0.3103448275862069,
+          "syntheticNegativeAccuracy": 0.3448275862068966,
+          "humanRecognitionMeasured": false,
+          "realRoadAccuracyMeasured": false
+        },
+        "axis_step": {
+          "objectAccuracy": 0.797752808988764,
+          "perClassAccuracy": {
+            "apple": 0.8611111111111112,
+            "fish": 0.9444444444444444,
+            "bird": 0.35294117647058826
+          },
+          "objectCount": 89,
+          "syntheticNegativeCount": 29,
+          "objectCoverage": 0.6179775280898876,
+          "objectAcceptedCorrectRecall": 0.5842696629213483,
+          "syntheticNegativeFalseAccept": 0.20689655172413793,
+          "syntheticNegativeAccuracy": 0.41379310344827586,
+          "humanRecognitionMeasured": false,
+          "realRoadAccuracyMeasured": false
+        }
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "trainLoss": 1.3822595278422039,
+          "validationLoss": 1.3576403856277466
+        },
+        {
+          "epoch": 2,
+          "trainLoss": 1.3444055981106229,
+          "validationLoss": 1.331689476966858
+        },
+        {
+          "epoch": 3,
+          "trainLoss": 1.3368157545725505,
+          "validationLoss": 1.320207118988037
+        },
+        {
+          "epoch": 4,
+          "trainLoss": 1.3223645554648504,
+          "validationLoss": 1.3049222230911255
+        },
+        {
+          "epoch": 5,
+          "trainLoss": 1.311148590511746,
+          "validationLoss": 1.2734180688858032
+        },
+        {
+          "epoch": 6,
+          "trainLoss": 1.2776792181862726,
+          "validationLoss": 1.224489688873291
+        },
+        {
+          "epoch": 7,
+          "trainLoss": 1.2068177858988445,
+          "validationLoss": 1.1282356977462769
+        },
+        {
+          "epoch": 8,
+          "trainLoss": 1.0935022764735751,
+          "validationLoss": 1.0760679244995117
+        },
+        {
+          "epoch": 9,
+          "trainLoss": 1.055266300837199,
+          "validationLoss": 1.025509238243103
+        },
+        {
+          "epoch": 10,
+          "trainLoss": 1.0089768105083041,
+          "validationLoss": 1.0245918035507202
+        },
+        {
+          "epoch": 11,
+          "trainLoss": 0.9957765605714586,
+          "validationLoss": 0.9456824660301208
+        },
+        {
+          "epoch": 12,
+          "trainLoss": 0.9447552164395651,
+          "validationLoss": 0.9391508102416992
+        },
+        {
+          "epoch": 13,
+          "trainLoss": 0.9135214752621121,
+          "validationLoss": 0.9186771512031555
+        },
+        {
+          "epoch": 14,
+          "trainLoss": 0.9134095576074388,
+          "validationLoss": 0.8614464402198792
+        },
+        {
+          "epoch": 15,
+          "trainLoss": 0.8739310171869066,
+          "validationLoss": 0.8467089533805847
+        },
+        {
+          "epoch": 16,
+          "trainLoss": 0.8446355859438578,
+          "validationLoss": 0.8360916972160339
+        }
+      ],
+      "checkpointSHA256": "0a30affb7f2c067edaae28371647c0f6f998116de4a15437adb8d15904694201"
+    },
+    {
+      "seed": 17,
+      "treatment": "road",
+      "bestEpoch": 15,
+      "policy": {
+        "threshold": 0.65,
+        "margin": 0.2,
+        "validationSyntheticFalseAccept": 0.022988505747126436,
+        "validationMacroAcceptedCorrectRecall": 0.39814814814814814,
+        "calibration": "validation only; synthetic negative FAR <= 0.10",
+        "realRoadRejectCalibrated": false
+      },
+      "metrics": {
+        "clean": {
+          "objectAccuracy": 0.7640449438202247,
+          "perClassAccuracy": {
+            "apple": 0.8888888888888888,
+            "fish": 0.9444444444444444,
+            "bird": 0.11764705882352941
+          },
+          "objectCount": 89,
+          "syntheticNegativeCount": 29,
+          "objectCoverage": 0.4157303370786517,
+          "objectAcceptedCorrectRecall": 0.4157303370786517,
+          "syntheticNegativeFalseAccept": 0.2413793103448276,
+          "syntheticNegativeAccuracy": 0.3103448275862069,
+          "humanRecognitionMeasured": false,
+          "realRoadAccuracyMeasured": false
+        },
+        "grid": {
+          "objectAccuracy": 0.7640449438202247,
+          "perClassAccuracy": {
+            "apple": 0.8888888888888888,
+            "fish": 0.9166666666666666,
+            "bird": 0.17647058823529413
+          },
+          "objectCount": 89,
+          "syntheticNegativeCount": 29,
+          "objectCoverage": 0.4943820224719101,
+          "objectAcceptedCorrectRecall": 0.4943820224719101,
+          "syntheticNegativeFalseAccept": 0.20689655172413793,
+          "syntheticNegativeAccuracy": 0.3103448275862069,
+          "humanRecognitionMeasured": false,
+          "realRoadAccuracyMeasured": false
+        },
+        "axis_step": {
+          "objectAccuracy": 0.7528089887640449,
+          "perClassAccuracy": {
+            "apple": 0.8888888888888888,
+            "fish": 0.9444444444444444,
+            "bird": 0.058823529411764705
+          },
+          "objectCount": 89,
+          "syntheticNegativeCount": 29,
+          "objectCoverage": 0.5280898876404494,
+          "objectAcceptedCorrectRecall": 0.5168539325842697,
+          "syntheticNegativeFalseAccept": 0.0,
+          "syntheticNegativeAccuracy": 0.4482758620689655,
+          "humanRecognitionMeasured": false,
+          "realRoadAccuracyMeasured": false
+        }
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "trainLoss": 1.3817570077048407,
+          "validationLoss": 1.356817603111267
+        },
+        {
+          "epoch": 2,
+          "trainLoss": 1.3413927687538996,
+          "validationLoss": 1.3302538394927979
+        },
+        {
+          "epoch": 3,
+          "trainLoss": 1.3337831497192383,
+          "validationLoss": 1.317102074623108
+        },
+        {
+          "epoch": 4,
+          "trainLoss": 1.3142278061972723,
+          "validationLoss": 1.2950025796890259
+        },
+        {
+          "epoch": 5,
+          "trainLoss": 1.2915747430589464,
+          "validationLoss": 1.2495534420013428
+        },
+        {
+          "epoch": 6,
+          "trainLoss": 1.2338858975304499,
+          "validationLoss": 1.1769756078720093
+        },
+        {
+          "epoch": 7,
+          "trainLoss": 1.1420312854978774,
+          "validationLoss": 1.0928510427474976
+        },
+        {
+          "epoch": 8,
+          "trainLoss": 1.045094198650784,
+          "validationLoss": 1.0852303504943848
+        },
+        {
+          "epoch": 9,
+          "trainLoss": 1.0289356840981378,
+          "validationLoss": 1.0219203233718872
+        },
+        {
+          "epoch": 10,
+          "trainLoss": 0.98114941517512,
+          "validationLoss": 1.0121229887008667
+        },
+        {
+          "epoch": 11,
+          "trainLoss": 0.9567851622899374,
+          "validationLoss": 0.9626742005348206
+        },
+        {
+          "epoch": 12,
+          "trainLoss": 0.9221997261047363,
+          "validationLoss": 0.9448413848876953
+        },
+        {
+          "epoch": 13,
+          "trainLoss": 0.8876331581009759,
+          "validationLoss": 0.896970272064209
+        },
+        {
+          "epoch": 14,
+          "trainLoss": 0.865714795059628,
+          "validationLoss": 0.8689917922019958
+        },
+        {
+          "epoch": 15,
+          "trainLoss": 0.8404942022429572,
+          "validationLoss": 0.8160638213157654
+        },
+        {
+          "epoch": 16,
+          "trainLoss": 0.793668164147271,
+          "validationLoss": 0.8193285465240479
+        }
+      ],
+      "checkpointSHA256": "b9357ea43721087c72438009cca140eff9f673535d5f512b83600853411ef32a"
+    },
+    {
+      "seed": 29,
+      "treatment": "clean",
+      "bestEpoch": 16,
+      "policy": {
+        "threshold": 0.55,
+        "margin": 0.1,
+        "validationSyntheticFalseAccept": 0.06896551724137931,
+        "validationMacroAcceptedCorrectRecall": 0.654320987654321,
+        "calibration": "validation only; synthetic negative FAR <= 0.10",
+        "realRoadRejectCalibrated": false
+      },
+      "metrics": {
+        "clean": {
+          "objectAccuracy": 0.797752808988764,
+          "perClassAccuracy": {
+            "apple": 0.8888888888888888,
+            "fish": 0.9722222222222222,
+            "bird": 0.23529411764705882
+          },
+          "objectCount": 89,
+          "syntheticNegativeCount": 29,
+          "objectCoverage": 0.8089887640449438,
+          "objectAcceptedCorrectRecall": 0.7415730337078652,
+          "syntheticNegativeFalseAccept": 0.13793103448275862,
+          "syntheticNegativeAccuracy": 0.7586206896551724,
+          "humanRecognitionMeasured": false,
+          "realRoadAccuracyMeasured": false
+        },
+        "grid": {
+          "objectAccuracy": 0.8089887640449438,
+          "perClassAccuracy": {
+            "apple": 0.9722222222222222,
+            "fish": 0.9166666666666666,
+            "bird": 0.23529411764705882
+          },
+          "objectCount": 89,
+          "syntheticNegativeCount": 29,
+          "objectCoverage": 0.8764044943820225,
+          "objectAcceptedCorrectRecall": 0.7528089887640449,
+          "syntheticNegativeFalseAccept": 0.13793103448275862,
+          "syntheticNegativeAccuracy": 0.7586206896551724,
+          "humanRecognitionMeasured": false,
+          "realRoadAccuracyMeasured": false
+        },
+        "axis_step": {
+          "objectAccuracy": 0.797752808988764,
+          "perClassAccuracy": {
+            "apple": 0.9722222222222222,
+            "fish": 0.8888888888888888,
+            "bird": 0.23529411764705882
+          },
+          "objectCount": 89,
+          "syntheticNegativeCount": 29,
+          "objectCoverage": 0.9101123595505618,
+          "objectAcceptedCorrectRecall": 0.7528089887640449,
+          "syntheticNegativeFalseAccept": 0.27586206896551724,
+          "syntheticNegativeAccuracy": 0.6206896551724138,
+          "humanRecognitionMeasured": false,
+          "realRoadAccuracyMeasured": false
+        }
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "trainLoss": 1.3683942688835993,
+          "validationLoss": 1.3437687158584595
+        },
+        {
+          "epoch": 2,
+          "trainLoss": 1.346763637330797,
+          "validationLoss": 1.3234211206436157
+        },
+        {
+          "epoch": 3,
+          "trainLoss": 1.3255336284637451,
+          "validationLoss": 1.3027600049972534
+        },
+        {
+          "epoch": 4,
+          "trainLoss": 1.3013461298412747,
+          "validationLoss": 1.2536958456039429
+        },
+        {
+          "epoch": 5,
+          "trainLoss": 1.2471480899386935,
+          "validationLoss": 1.1802715063095093
+        },
+        {
+          "epoch": 6,
+          "trainLoss": 1.167442176077101,
+          "validationLoss": 1.098423957824707
+        },
+        {
+          "epoch": 7,
+          "trainLoss": 1.0762585269080267,
+          "validationLoss": 1.0149149894714355
+        },
+        {
+          "epoch": 8,
+          "trainLoss": 0.9869233767191569,
+          "validationLoss": 0.9380745887756348
+        },
+        {
+          "epoch": 9,
+          "trainLoss": 0.9269603225919936,
+          "validationLoss": 0.8463624119758606
+        },
+        {
+          "epoch": 10,
+          "trainLoss": 0.8303137752744887,
+          "validationLoss": 0.8234736323356628
+        },
+        {
+          "epoch": 11,
+          "trainLoss": 0.7766864895820618,
+          "validationLoss": 0.755092203617096
+        },
+        {
+          "epoch": 12,
+          "trainLoss": 0.7313842905892266,
+          "validationLoss": 0.6789478659629822
+        },
+        {
+          "epoch": 13,
+          "trainLoss": 0.6859135097927518,
+          "validationLoss": 0.6471412181854248
+        },
+        {
+          "epoch": 14,
+          "trainLoss": 0.6195104486412473,
+          "validationLoss": 0.6487547755241394
+        },
+        {
+          "epoch": 15,
+          "trainLoss": 0.6063979864120483,
+          "validationLoss": 0.6146735548973083
+        },
+        {
+          "epoch": 16,
+          "trainLoss": 0.5855172210269504,
+          "validationLoss": 0.5624734163284302
+        }
+      ],
+      "checkpointSHA256": "1e378e02306e283fade07c112e7bc2ad8ae0ab75ffa45e2cf4de7c263bd2462e"
+    },
+    {
+      "seed": 29,
+      "treatment": "road",
+      "bestEpoch": 16,
+      "policy": {
+        "threshold": 0.45,
+        "margin": 0.0,
+        "validationSyntheticFalseAccept": 0.06896551724137931,
+        "validationMacroAcceptedCorrectRecall": 0.6628086419753086,
+        "calibration": "validation only; synthetic negative FAR <= 0.10",
+        "realRoadRejectCalibrated": false
+      },
+      "metrics": {
+        "clean": {
+          "objectAccuracy": 0.7415730337078652,
+          "perClassAccuracy": {
+            "apple": 0.8888888888888888,
+            "fish": 0.8611111111111112,
+            "bird": 0.17647058823529413
+          },
+          "objectCount": 89,
+          "syntheticNegativeCount": 29,
+          "objectCoverage": 0.9101123595505618,
+          "objectAcceptedCorrectRecall": 0.7191011235955056,
+          "syntheticNegativeFalseAccept": 0.2413793103448276,
+          "syntheticNegativeAccuracy": 0.6896551724137931,
+          "humanRecognitionMeasured": false,
+          "realRoadAccuracyMeasured": false
+        },
+        "grid": {
+          "objectAccuracy": 0.7640449438202247,
+          "perClassAccuracy": {
+            "apple": 0.9166666666666666,
+            "fish": 0.8611111111111112,
+            "bird": 0.23529411764705882
+          },
+          "objectCount": 89,
+          "syntheticNegativeCount": 29,
+          "objectCoverage": 0.9550561797752809,
+          "objectAcceptedCorrectRecall": 0.7528089887640449,
+          "syntheticNegativeFalseAccept": 0.2413793103448276,
+          "syntheticNegativeAccuracy": 0.6896551724137931,
+          "humanRecognitionMeasured": false,
+          "realRoadAccuracyMeasured": false
+        },
+        "axis_step": {
+          "objectAccuracy": 0.7528089887640449,
+          "perClassAccuracy": {
+            "apple": 0.9166666666666666,
+            "fish": 0.8611111111111112,
+            "bird": 0.17647058823529413
+          },
+          "objectCount": 89,
+          "syntheticNegativeCount": 29,
+          "objectCoverage": 1.0,
+          "objectAcceptedCorrectRecall": 0.7528089887640449,
+          "syntheticNegativeFalseAccept": 0.2413793103448276,
+          "syntheticNegativeAccuracy": 0.6896551724137931,
+          "humanRecognitionMeasured": false,
+          "realRoadAccuracyMeasured": false
+        }
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "trainLoss": 1.3671781222025554,
+          "validationLoss": 1.342384934425354
+        },
+        {
+          "epoch": 2,
+          "trainLoss": 1.341652168167962,
+          "validationLoss": 1.3195606470108032
+        },
+        {
+          "epoch": 3,
+          "trainLoss": 1.3116382625367906,
+          "validationLoss": 1.2875165939331055
+        },
+        {
+          "epoch": 4,
+          "trainLoss": 1.2704116768307157,
+          "validationLoss": 1.2198500633239746
+        },
+        {
+          "epoch": 5,
+          "trainLoss": 1.187010301484002,
+          "validationLoss": 1.1257672309875488
+        },
+        {
+          "epoch": 6,
+          "trainLoss": 1.0742539366086323,
+          "validationLoss": 1.0219327211380005
+        },
+        {
+          "epoch": 7,
+          "trainLoss": 0.9469427665074667,
+          "validationLoss": 0.9302312731742859
+        },
+        {
+          "epoch": 8,
+          "trainLoss": 0.8597053289413452,
+          "validationLoss": 0.8747611045837402
+        },
+        {
+          "epoch": 9,
+          "trainLoss": 0.793407678604126,
+          "validationLoss": 0.763734757900238
+        },
+        {
+          "epoch": 10,
+          "trainLoss": 0.7014231748051114,
+          "validationLoss": 0.708644688129425
+        },
+        {
+          "epoch": 11,
+          "trainLoss": 0.6945220364464654,
+          "validationLoss": 0.69449782371521
+        },
+        {
+          "epoch": 12,
+          "trainLoss": 0.7078291243977017,
+          "validationLoss": 0.6898704171180725
+        },
+        {
+          "epoch": 13,
+          "trainLoss": 0.6685353914896647,
+          "validationLoss": 0.6283928751945496
+        },
+        {
+          "epoch": 14,
+          "trainLoss": 0.6214182012610965,
+          "validationLoss": 0.6234151124954224
+        },
+        {
+          "epoch": 15,
+          "trainLoss": 0.6348697543144226,
+          "validationLoss": 0.6179601550102234
+        },
+        {
+          "epoch": 16,
+          "trainLoss": 0.6103039615684085,
+          "validationLoss": 0.617602527141571
+        }
+      ],
+      "checkpointSHA256": "1dc2a724ecd5f123bdd2f6ac5808769698ec9a70ab398024c2049ec95774bd96"
+    }
+  ],
+  "decisions": [
+    {
+      "seed": 17,
+      "gridAccuracyDelta": 0.0,
+      "cleanAccuracyDelta": -0.011235955056179803,
+      "transformedSyntheticFalseAcceptClean": 0.25862068965517243,
+      "transformedSyntheticFalseAcceptRoad": 0.10344827586206896,
+      "syntheticFalseAcceptRelativeReduction": 0.6000000000000001,
+      "auxiliaryPassed": true
+    },
+    {
+      "seed": 29,
+      "gridAccuracyDelta": -0.0449438202247191,
+      "cleanAccuracyDelta": -0.05617977528089879,
+      "transformedSyntheticFalseAcceptClean": 0.20689655172413793,
+      "transformedSyntheticFalseAcceptRoad": 0.2413793103448276,
+      "syntheticFalseAcceptRelativeReduction": -0.16666666666666674,
+      "auxiliaryPassed": false
+    }
+  ],
+  "auxiliaryPassed": false,
+  "decisionDefinition": "grid object accuracy; negative FAR mean(grid,axis_step); clean object accuracy",
+  "sourceManifestSHA256": "f2006b6ebc8c86aa424902b67ac44fc382cf213fe03421137c9511cf582e5057",
+  "trainingManifestSHA256": "a720b0b5d36e4b77c2ed62b8446d79c985b6c23deaf379f27458834fb1dfed30",
+  "protocolSHA256": "fb8becfda51aed783a24339c4cd515b15a68678d3c33f03450fc7f19395b2abf",
+  "codeSHA256": "0b76a932d3bd97c5860a8f15d474e5467fd3cf59f427a811bb92437f41fafea8",
+  "splitCounts": {
+    "train": {
+      "quickdraw": 413,
+      "synthetic": 137
+    },
+    "val": {
+      "quickdraw": 88,
+      "synthetic": 29
+    },
+    "test": {
+      "quickdraw": 89,
+      "synthetic": 29
+    }
+  },
+  "epochs": 16,
+  "seeds": [
+    17,
+    29
+  ],
+  "torch": "2.14.1+cpu",
+  "elapsedSeconds": 35.93339139999989,
+  "humanRecognitionMeasured": false,
+  "realRoadGeneralizationMeasured": false,
+  "appDefaultChanged": false,
+  "limitations": [
+    "3 known objects only; other real objects can be rejected or misnamed",
+    "Synthetic none is NOT real-road negative truth",
+    "Test IDs were used in prior research; no new independent holdout",
+    "No road-network-constrained augmentation; grid/axis-step are proxies",
+    "No human probability calibration; synthetic test success is not product success"
+  ]
+}

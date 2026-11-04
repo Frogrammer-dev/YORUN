@@ -1,0 +1,18 @@
+{
+  "files": {
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\eval\\recognition\\road-ranker-20261102\\v12-dataset\\dataset.json": "ada8b04a03d19906c3e4c09c752730dfa9a1cf4067be52ea2c480c9fad6effc8",
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\eval\\recognition\\road-ranker-20261102\\v12-dataset\\features.npz": "6210293bfa73cd352cc2930c288949ab98a336095bc71790e97cc11b0c21312a",
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\eval\\recognition\\road-ranker-20261102\\v12-dataset\\features-metadata.json": "697e63149a6e76368c72db8173d6d9af0f7f271c4bd575df3ea37212a88ecba4",
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\eval\\recognition\\road-ranker-20261102\\v12-dataset\\road-features.npz": "c42a699dc41d2ea002aa0d73ddadc36ca004a91132b635b6bdc7d33e19b559fd",
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\eval\\recognition\\road-ranker-20261102\\v12-dataset\\road-features-metadata.json": "d3247d3752392b23674e8115ee16ddf8c28dd05ccae4e4802e10ea53d7800876",
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\eval\\recognition\\road-ranker-20261102\\v12-dataset\\roads.json": "d86bd5a68f297c28e7dc0db15f800e2a1ddc12129eed8b39df7ee0bca9006ff1",
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\eval\\recognition\\road-ranker-20261102\\v12-dataset\\sketch-models.npz": "540254cb1fb48fc78a8a3649867fc641548075a0b9a14a790c8eca6c4630740b",
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\reports\\road-ranker-20261102\\protocol-v17-canonical.md": "dad2a999eb1e947d4a0a84dd59b40b01dcbf59aca93e96a002723dfd48d1f44b",
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\scripts\\recognition-lab\\sketch-head.py": "ea41e791d25aa4f7e4ddae2de942e8b663ff52a9df3f08e097271c5b39854daa",
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\scripts\\recognition-lab\\canonical-head.py": "44c645bdf097cd7069284d20f781810fc8d8d3cf5af1d89376bccc48cffd6e99"
+  },
+  "roadHumanLabelsUsedForTraining": false,
+  "datasetRecords": 2304,
+  "roadCandidates": 1003,
+  "phase": "before canonical training"
+}

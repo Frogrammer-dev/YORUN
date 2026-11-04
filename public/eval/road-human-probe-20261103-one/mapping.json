@@ -1,0 +1,15 @@
+{
+  "selection": "The sole newly missed request discovered by completed v16 AI-majority diagnostic;postselected development follow-up,not random sample",
+  "sourceStudyFingerprint": "1bf0afd74a6cae68f6a8f114ab9fc2f8e3fc32518b2104f2267061367af914c1",
+  "sourceToken": "R065",
+  "sourceId": "ulsan-samsan-diversity-v11-dog-4",
+  "target": "dog",
+  "sourceBodyPixelSHA256": "6111d2694a671ca6bcefff2abfb56c92248268ab264a7f22ddab04c62929069d",
+  "imageSHA256": "13f840a3c72513cad1f0794d222515ebacb684bb903061b68e419f2597faec00",
+  "sourcePoolResultSHA256": "c0034876c29ed57bd741c59a04a5aa17c88dad80a6c8fa444b017e073291f71a",
+  "humanAnswersReceived": false,
+  "plannedPeople": 1,
+  "plannedCases": 1,
+  "priorExposure": "General project/AI-route exposure;not naive independent human trial",
+  "humanRecognitionSuccessClaimed": false
+}

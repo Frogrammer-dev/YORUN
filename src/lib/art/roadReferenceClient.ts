@@ -2,6 +2,9 @@ import type { RouteCandidate } from "@/lib/route/fit";
 import { overlap } from "@/lib/route/discover";
 import { nameDiscoveries } from "@/lib/route/present";
 import type { Recognized } from "./recognize";
+import { describeRouteStructure, routeStructureDistance, type RouteStructure } from "./routeStructure";
+import { describeRouteParts } from "./routeParts";
+import { describeRouteHypotheses, type RouteHypotheses } from "./routeHypotheses";
 import {
   normalizeRoadReferenceInput,
   normalizeRoadReferenceRenderLine,
@@ -66,8 +69,9 @@ export function selectRoadReferenceInputs(
   pool: RouteCandidate[],
   options: Pick<RoadReferenceDiscoveryOptions, "minMeters" | "maxMeters">,
   limit = MAX_CANDIDATES,
+  strategy: "hypothesis" | "parts" | "structure" | "baseline" = "baseline",
 ): PreparedRoadReference[] {
-  const unique = new Map<string, PreparedRoadReference & { descriptor: number[] }>();
+  const unique = new Map<string, PreparedRoadReference & { descriptor: number[]; structure?: RouteStructure; hypotheses?: RouteHypotheses }>();
   for (const candidate of pool) {
     if (candidate.shapeId !== "doodle" || candidate.outline.length || candidate.outlines.length
       || candidate.latlngs.length > 10_000
@@ -79,7 +83,7 @@ export function selectRoadReferenceInputs(
       const source = { id: "road-input", latlngs: candidate.latlngs };
       const packet = normalizeRoadReferenceInput(source), renderLine = normalizeRoadReferenceRenderLine(source);
       const key = JSON.stringify(renderLine);
-      if (!unique.has(key)) unique.set(key, { candidate, packet, renderLine, descriptor: shapeDescriptor(renderLine) });
+      if (!unique.has(key)) unique.set(key, { candidate, packet, renderLine, descriptor: shapeDescriptor(renderLine), structure: strategy === "parts" ? describeRouteParts(renderLine) : strategy === "structure" ? describeRouteStructure(renderLine) : undefined, hypotheses: strategy === "hypothesis" ? describeRouteHypotheses(renderLine) : undefined });
     } catch { /* An invalid/open line is never repaired or sent. */ }
   }
   const remaining = [...unique.values()].sort((a, b) => a.packet.fingerprint.localeCompare(b.packet.fingerprint));
@@ -89,7 +93,17 @@ export function selectRoadReferenceInputs(
     for (let i = 0; i < remaining.length; i++) {
       const entry = remaining[i];
       if (chosen.some(other => overlap(entry.candidate, other.candidate))) continue;
-      const distance = chosen.length ? Math.min(...chosen.map(other => entry.descriptor.reduce((sum, value, k) => sum + (value - other.descriptor[k]) ** 2, 0))) : 0;
+      // Keep the original first slot, including simple contours. Reserve the next
+      // slot for macro structure, then compare relative part arrangements.
+      // This geometric evidence is not semantic confidence.
+      const family = (["basic", "animal", "object"] as const)[chosen.length];
+      const hypothesis = entry.hypotheses?.[family];
+      if (strategy === "hypothesis" && !hypothesis) continue;
+      const distance = strategy === "hypothesis" ? -hypothesis!.score : strategy === "baseline"
+        ? (chosen.length ? Math.min(...chosen.map(other => entry.descriptor.reduce((sum, value, k) => sum + (value - other.descriptor[k]) ** 2, 0))) : 0)
+        : chosen.length === 0 ? 0 : chosen.length === 1
+        ? entry.structure!.salience
+        : Math.min(...chosen.map(other => routeStructureDistance(entry.structure!, other.structure!)));
       if (distance > best) { best = distance; index = i; }
     }
     if (best === -Infinity) break;

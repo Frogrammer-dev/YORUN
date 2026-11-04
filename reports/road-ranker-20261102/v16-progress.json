@@ -1,0 +1,29 @@
+{
+  "phase": "Pool diagnostic and single postselected human follow-up complete",
+  "plannedRequests": 75,
+  "plannedAlternativeSlots": 150,
+  "displayedAlternativeSlots": 140,
+  "newUniqueImages": 135,
+  "pendingFingerprint": "dd75dbbd1daef82043bb848f83fdc0ae701304b10ebc3d04dfcefad34b7e6913",
+  "newGenerationExecuted": false,
+  "humanRecognitionMeasured": false,
+  "modelImprovementVerified": false,
+  "goalAchieved": false,
+  "studyLockSHA256": "8ee17408b6a4a9b392d9405163c712a8361d4a1de3507f71d4d175f6ad4af8ac",
+  "AIReviewsComplete": true,
+  "majorityBaseline": 8,
+  "majoritySampledUnion": 9,
+  "additionalMissedRequests": 1,
+  "additionalAnimalRequests": 1,
+  "primarySampledUnion": 0,
+  "diagnosticCriterionMet": false,
+  "humanFollowup": {
+    "people": 1,
+    "cases": 1,
+    "name": "강아지",
+    "clarity": "clear",
+    "postselected": true,
+    "independentNaive": false
+  },
+  "next": "Road-readability model preregistration;current human-confirmed case isdevelopment data,not finaltest"
+}

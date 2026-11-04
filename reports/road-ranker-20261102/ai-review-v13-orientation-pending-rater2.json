@@ -1,0 +1,26 @@
+{
+  "evaluatorAgent": "01a19b0b-12bd-7592-9a5f-809818cebc3a",
+  "fingerprint": "f2213c6a2962ae5304d0474193b1a04e35248a5753115cc2e563985f7e7e8bbf",
+  "humanRecognitionMeasured": false,
+  "evaluationType": "AI 대리평가이며 사람평가가 아님",
+  "results": [
+    {
+      "token": "K001",
+      "name": "의자",
+      "clarity": "weak"
+    },
+    {
+      "token": "K002",
+      "name": "바지",
+      "clarity": "clear"
+    },
+    {
+      "token": "K003",
+      "name": "물고기",
+      "clarity": "clear"
+    }
+  ],
+  "reportedEvaluatorAgent": "Codex",
+  "agentIdentitySource": "completed agent tool envelope",
+  "raterIdentityVerified": false
+}

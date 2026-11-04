@@ -1,0 +1,27 @@
+{
+  "counts": [
+    {
+      "area": "daejeon-dunsan",
+      "roadHash": "35af005145e19cd95545c4a5bba4381d52d342d96d2be7aa05e631a5ba2c6963",
+      "naturalLoops": 1948,
+      "checked": 121,
+      "exported": 120
+    },
+    {
+      "area": "daegu-center",
+      "roadHash": "775e15f2547d0053f463182f3c3ef1ccad1c7b62b61a9ed8937fc25e58ca3f47",
+      "naturalLoops": 3509,
+      "checked": 123,
+      "exported": 120
+    },
+    {
+      "area": "seoul-songpa",
+      "roadHash": "10da16a626d85d5e09302f195058281e42c33b210a9fe093fe6758f16314ca3e",
+      "naturalLoops": 4102,
+      "checked": 123,
+      "exported": 120
+    }
+  ],
+  "total": 360,
+  "roadsSHA256": "fc4c1089af9607682d142f28a1d9e6a58ac92628b6f6a921399aa566c561828d"
+}

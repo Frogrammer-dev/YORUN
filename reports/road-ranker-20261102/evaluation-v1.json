@@ -1,0 +1,176 @@
+{
+  "fingerprint": "70df15177280bd7e49d0975d506500952c02d53019feef356ec1479c484a080f",
+  "evaluationType": "AI surrogate, not human evaluation",
+  "methods": {
+    "baseline": {
+      "denominator": 6,
+      "clear": 0,
+      "weak": 2,
+      "none": 4,
+      "abstentions": 0,
+      "areas": {
+        "daejeon-dunsan": {
+          "denominator": 2,
+          "clear": 0
+        },
+        "daegu-center": {
+          "denominator": 2,
+          "clear": 0
+        },
+        "seoul-songpa": {
+          "denominator": 2,
+          "clear": 0
+        }
+      },
+      "clearRate": 0.0
+    },
+    "model": {
+      "denominator": 6,
+      "clear": 0,
+      "weak": 0,
+      "none": 6,
+      "abstentions": 0,
+      "areas": {
+        "daejeon-dunsan": {
+          "denominator": 2,
+          "clear": 0
+        },
+        "daegu-center": {
+          "denominator": 2,
+          "clear": 0
+        },
+        "seoul-songpa": {
+          "denominator": 2,
+          "clear": 0
+        }
+      },
+      "clearRate": 0.0
+    }
+  },
+  "clearCountDelta": 0,
+  "aiSurrogateCriterionMet": false,
+  "slots": [
+    {
+      "area": "daejeon-dunsan",
+      "method": "baseline",
+      "slot": 1,
+      "id": "daejeon-dunsan-pool-1",
+      "token": "R06",
+      "name": "장화",
+      "clarity": "weak",
+      "abstained": false
+    },
+    {
+      "area": "daejeon-dunsan",
+      "method": "baseline",
+      "slot": 2,
+      "id": "daejeon-dunsan-pool-2",
+      "token": "R11",
+      "name": "장화",
+      "clarity": "weak",
+      "abstained": false
+    },
+    {
+      "area": "daejeon-dunsan",
+      "method": "model",
+      "slot": 1,
+      "id": "daejeon-dunsan-pool-50",
+      "token": "R09",
+      "name": "없음",
+      "clarity": "none",
+      "abstained": false
+    },
+    {
+      "area": "daejeon-dunsan",
+      "method": "model",
+      "slot": 2,
+      "id": "daejeon-dunsan-pool-107",
+      "token": "R07",
+      "name": "없음",
+      "clarity": "none",
+      "abstained": false
+    },
+    {
+      "area": "daegu-center",
+      "method": "baseline",
+      "slot": 1,
+      "id": "daegu-center-pool-1",
+      "token": "R02",
+      "name": "없음",
+      "clarity": "none",
+      "abstained": false
+    },
+    {
+      "area": "daegu-center",
+      "method": "baseline",
+      "slot": 2,
+      "id": "daegu-center-pool-2",
+      "token": "R01",
+      "name": "없음",
+      "clarity": "none",
+      "abstained": false
+    },
+    {
+      "area": "daegu-center",
+      "method": "model",
+      "slot": 1,
+      "id": "daegu-center-pool-39",
+      "token": "R10",
+      "name": "없음",
+      "clarity": "none",
+      "abstained": false
+    },
+    {
+      "area": "daegu-center",
+      "method": "model",
+      "slot": 2,
+      "id": "daegu-center-pool-90",
+      "token": "R05",
+      "name": "없음",
+      "clarity": "none",
+      "abstained": false
+    },
+    {
+      "area": "seoul-songpa",
+      "method": "baseline",
+      "slot": 1,
+      "id": "seoul-songpa-pool-1",
+      "token": "R03",
+      "name": "없음",
+      "clarity": "none",
+      "abstained": false
+    },
+    {
+      "area": "seoul-songpa",
+      "method": "baseline",
+      "slot": 2,
+      "id": "seoul-songpa-pool-2",
+      "token": "R12",
+      "name": "없음",
+      "clarity": "none",
+      "abstained": false
+    },
+    {
+      "area": "seoul-songpa",
+      "method": "model",
+      "slot": 1,
+      "id": "seoul-songpa-pool-109",
+      "token": "R08",
+      "name": "없음",
+      "clarity": "none",
+      "abstained": false
+    },
+    {
+      "area": "seoul-songpa",
+      "method": "model",
+      "slot": 2,
+      "id": "seoul-songpa-pool-84",
+      "token": "R04",
+      "name": "없음",
+      "clarity": "none",
+      "abstained": false
+    }
+  ],
+  "humanMajorityRecognitionMeasured": false,
+  "targetNameAgreementAssessed": false
+}

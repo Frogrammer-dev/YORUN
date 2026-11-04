@@ -1,0 +1,112 @@
+"""Reuse exact road-body pixels, keeping conflicting prior answers unresolved."""
+import argparse
+from collections import defaultdict
+import hashlib
+import json
+from pathlib import Path
+import random
+from PIL import Image,ImageDraw
+
+
+def digest(raw):return hashlib.sha256(raw).hexdigest()
+
+
+def read(path):return json.loads(path.read_text(encoding='utf-8'))
+
+
+def write(path,value):
+    path.parent.mkdir(parents=True,exist_ok=True)
+    if path.exists():raise ValueError('Frozen output exists: '+str(path))
+    path.write_text(json.dumps(value,ensure_ascii=False,indent=2),encoding='utf-8')
+
+
+def bodies(folder):
+    manifest=read(folder/'mapping.json');result={};pages={}
+    for index,entry in enumerate(manifest['mapping']):
+        page=index//15
+        definition=manifest['pages'][page];path=folder/definition['file']
+        if page not in pages:
+            if digest(path.read_bytes())!=definition['SHA256']:raise ValueError('Review image changed')
+            pages[page]=Image.open(path).convert('RGB')
+        local=index%15;left=(local%3)*300;top=(local//3)*330
+        # The token is in the first30px; road pixels start below45px.
+        body=pages[page].crop((left,top+30,left+300,top+330))
+        result[entry['token']]={'hash':digest(body.tobytes()),'image':body}
+    return manifest,result
+
+
+def prepare(old_folder,old_reviews,study_folders,out):
+    if (out/'bridge.json').exists():raise ValueError('Frozen bridge exists')
+    old,old_bodies=bodies(old_folder)
+    by_hash=defaultdict(list)
+    for token,body in old_bodies.items():by_hash[body['hash']].append(token)
+    raters={}
+    for path in old_reviews:
+        data=read(path);agent=data.get('evaluatorAgent')
+        if not agent or agent in raters or data['fingerprint']!=old['fingerprint']:raise ValueError('Invalid or duplicate prior AI rater')
+        rows={r['token']:r for r in data['results']}
+        if len(rows)!=len(data['results']) or set(rows)!=set(old_bodies):raise ValueError('Incomplete prior answers')
+        raters[agent]=rows
+    if len(raters)!=3:raise ValueError('Exactly three prior AI raters required')
+    studies=[];pending={};images={};conflicts=[]
+    for folder in study_folders:
+        manifest,new=bodies(folder);rows=[]
+        for token,body in new.items():
+            same=by_hash[body['hash']];reuse={}
+            for agent,answers in raters.items():
+                ratings={(answers[t]['name'],answers[t]['clarity']) for t in same}
+                if len(ratings)==1:
+                    name,clarity=next(iter(ratings));reuse[agent]={'name':name,'clarity':clarity,'oldTokens':same}
+                elif len(ratings)>1:conflicts.append({'agent':agent,'hash':body['hash'],'oldTokens':same})
+            if len(reuse)<3:
+                pending[body['hash']]=True;images[body['hash']]=body['image']
+            rows.append({'token':token,'hash':body['hash'],'reuse':reuse})
+        studies.append({'folder':str(folder),'fingerprint':manifest['fingerprint'],'rows':rows})
+    hashes=list(pending);random.Random(2026110212).shuffle(hashes)
+    tokens={h:f'K{i+1:03d}' for i,h in enumerate(hashes)};out.mkdir(parents=True,exist_ok=True)
+    pages=[]
+    for start in range(0,len(hashes),15):
+        part=hashes[start:start+15];im=Image.new('RGB',(900,((len(part)+2)//3)*330),'white');draw=ImageDraw.Draw(im)
+        for local,h in enumerate(part):
+            x=(local%3)*300;y=(local//3)*330
+            im.paste(images[h],(x,y+30));draw.text((x+12,y+8),tokens[h],fill='#172f45')
+        path=out/f'page-{start//15+1}.png';im.save(path);pages.append({'file':path.name,'SHA256':digest(path.read_bytes())})
+    provenance={'oldFingerprint':old['fingerprint'],'studies':studies,'pendingTokens':{tokens[h]:h for h in hashes},
+                'pages':pages,'raters':list(raters),'conflictingOldRatings':conflicts,'humanRecognitionMeasured':False,
+                'rule':'Exact RGB road-body pixels only. Conflicting old ratings require fresh judgment; related geometry is not equivalent.'}
+    provenance['fingerprint']=digest(json.dumps(provenance,sort_keys=True).encode())
+    write(out/'bridge.json',provenance)
+    return provenance
+
+
+def merge(bridge,review):
+    agent=review.get('evaluatorAgent')
+    if agent not in bridge['raters'] or review['fingerprint']!=bridge['fingerprint']:raise ValueError('Wrong bridge or AI identity')
+    raw=review['results'];answers={r['token']:r for r in raw}
+    if len(answers)!=len(raw) or set(answers)!=set(bridge['pendingTokens']):raise ValueError('Every pending image requires one answer')
+    if any(r['clarity'] not in ('clear','weak','none') or not str(r['name']).strip() for r in raw):raise ValueError('Invalid new answer')
+    by_hash={h:answers[t] for t,h in bridge['pendingTokens'].items()};result=[]
+    for study in bridge['studies']:
+        rows=[];reused=0
+        for row in study['rows']:
+            prior=row['reuse'].get(agent)
+            answer=prior or by_hash[row['hash']]
+            reused+=bool(prior)
+            rows.append({'token':row['token'],'name':answer['name'],'clarity':answer['clarity'],
+                         'source':'prior exact-pixel rating' if prior else 'new blind rating'})
+        result.append({'folder':study['folder'],'review':{'fingerprint':study['fingerprint'],'evaluatorAgent':agent,
+                       'evaluationType':'AI surrogate, not human evaluation','results':rows,'exactPixelRatingsReused':reused,
+                       'bridgeFingerprint':bridge['fingerprint'],'humanRecognitionMeasured':False}})
+    return result
+
+
+if __name__=='__main__':
+    p=argparse.ArgumentParser(description=__doc__);sub=p.add_subparsers(dest='command',required=True)
+    a=sub.add_parser('prepare');a.add_argument('--old-folder',type=Path,required=True);a.add_argument('--old-review',type=Path,action='append',required=True)
+    a.add_argument('--study',type=Path,action='append',required=True);a.add_argument('--out',type=Path,required=True)
+    a=sub.add_parser('merge');a.add_argument('--bridge',type=Path,required=True);a.add_argument('--review',type=Path,required=True);a.add_argument('--out',type=Path,required=True)
+    args=p.parse_args()
+    if args.command=='prepare':
+        value=prepare(args.old_folder,args.old_review,args.study,args.out)
+        print(json.dumps({'pending':len(value['pendingTokens']),'fingerprint':value['fingerprint']}))
+    else:write(args.out,merge(read(args.bridge),read(args.review)))

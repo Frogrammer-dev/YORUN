@@ -1,0 +1,537 @@
+{
+  "inputSHA256": "4943a6bf2140951860fe713bfc9cdb258a8101027bda25745c2febc32b678fb0",
+  "sampledOnly": true,
+  "completePoolOracle": false,
+  "humanRecognitionMeasured": false,
+  "selection": "one minimum proposalPoolRank per fixed area/intent, plus original baseline two per area; no CLIP/head/AI scores",
+  "slots": [
+    {
+      "area": "cheonan-buldang",
+      "intent": "house",
+      "id": "cheonan-buldang-proposal-v9-house-1"
+    },
+    {
+      "area": "cheonan-buldang",
+      "intent": "tree",
+      "id": "cheonan-buldang-proposal-v9-tree-1"
+    },
+    {
+      "area": "cheonan-buldang",
+      "intent": "car",
+      "id": "cheonan-buldang-proposal-v9-car-1"
+    },
+    {
+      "area": "cheonan-buldang",
+      "intent": "rocket",
+      "id": "cheonan-buldang-proposal-v9-rocket-1"
+    },
+    {
+      "area": "cheonan-buldang",
+      "intent": "mug",
+      "id": "cheonan-buldang-proposal-v9-mug-1"
+    },
+    {
+      "area": "cheonan-buldang",
+      "intent": "airplane",
+      "id": "cheonan-buldang-proposal-v9-airplane-1"
+    },
+    {
+      "area": "cheonan-buldang",
+      "intent": "tshirt",
+      "id": "cheonan-buldang-proposal-v9-tshirt-1"
+    },
+    {
+      "area": "cheonan-buldang",
+      "intent": "pants",
+      "id": "cheonan-buldang-proposal-v9-pants-1"
+    },
+    {
+      "area": "cheonan-buldang",
+      "intent": "hammer",
+      "id": "cheonan-buldang-proposal-v9-hammer-1"
+    },
+    {
+      "area": "cheonan-buldang",
+      "intent": "bottle",
+      "id": "cheonan-buldang-proposal-v9-bottle-1"
+    },
+    {
+      "area": "cheonan-buldang",
+      "intent": "key",
+      "id": "cheonan-buldang-proposal-v9-key-1"
+    },
+    {
+      "area": "cheonan-buldang",
+      "intent": "chair",
+      "id": "cheonan-buldang-proposal-v9-chair-1"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "intent": "house",
+      "id": "jeonju-hyoja-proposal-v9-house-1"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "intent": "tree",
+      "id": "jeonju-hyoja-proposal-v9-tree-1"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "intent": "car",
+      "id": "jeonju-hyoja-proposal-v9-car-1"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "intent": "rocket",
+      "id": "jeonju-hyoja-proposal-v9-rocket-1"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "intent": "mug",
+      "id": "jeonju-hyoja-proposal-v9-mug-1"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "intent": "airplane",
+      "id": "jeonju-hyoja-proposal-v9-airplane-1"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "intent": "tshirt",
+      "id": "jeonju-hyoja-proposal-v9-tshirt-1"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "intent": "pants",
+      "id": "jeonju-hyoja-proposal-v9-pants-1"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "intent": "hammer",
+      "id": "jeonju-hyoja-proposal-v9-hammer-1"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "intent": "bottle",
+      "id": "jeonju-hyoja-proposal-v9-bottle-1"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "intent": "key",
+      "id": "jeonju-hyoja-proposal-v9-key-1"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "intent": "chair",
+      "id": "jeonju-hyoja-proposal-v9-chair-1"
+    },
+    {
+      "area": "ulsan-samsan",
+      "intent": "house",
+      "id": "ulsan-samsan-proposal-v9-house-1"
+    },
+    {
+      "area": "ulsan-samsan",
+      "intent": "tree",
+      "id": "ulsan-samsan-proposal-v9-tree-1"
+    },
+    {
+      "area": "ulsan-samsan",
+      "intent": "car",
+      "id": "ulsan-samsan-proposal-v9-car-1"
+    },
+    {
+      "area": "ulsan-samsan",
+      "intent": "rocket",
+      "id": "ulsan-samsan-proposal-v9-rocket-1"
+    },
+    {
+      "area": "ulsan-samsan",
+      "intent": "mug",
+      "id": "ulsan-samsan-proposal-v9-mug-1"
+    },
+    {
+      "area": "ulsan-samsan",
+      "intent": "airplane",
+      "id": "ulsan-samsan-proposal-v9-airplane-1"
+    },
+    {
+      "area": "ulsan-samsan",
+      "intent": "tshirt",
+      "id": "ulsan-samsan-proposal-v9-tshirt-1"
+    },
+    {
+      "area": "ulsan-samsan",
+      "intent": "pants",
+      "id": "ulsan-samsan-proposal-v9-pants-1"
+    },
+    {
+      "area": "ulsan-samsan",
+      "intent": "hammer",
+      "id": "ulsan-samsan-proposal-v9-hammer-1"
+    },
+    {
+      "area": "ulsan-samsan",
+      "intent": "bottle",
+      "id": "ulsan-samsan-proposal-v9-bottle-1"
+    },
+    {
+      "area": "ulsan-samsan",
+      "intent": "key",
+      "id": "ulsan-samsan-proposal-v9-key-1"
+    },
+    {
+      "area": "ulsan-samsan",
+      "intent": "chair",
+      "id": "ulsan-samsan-proposal-v9-chair-1"
+    }
+  ],
+  "mapping": [
+    {
+      "token": "R001",
+      "id": "jeonju-hyoja-proposal-v9-mug-1",
+      "area": "jeonju-hyoja",
+      "kind": "generator",
+      "intent": "mug",
+      "rotation": 90.4302223489714
+    },
+    {
+      "token": "R002",
+      "id": "cheonan-buldang-natural-v8-1",
+      "area": "cheonan-buldang",
+      "kind": "baseline",
+      "intent": null,
+      "rotation": 0
+    },
+    {
+      "token": "R003",
+      "id": "cheonan-buldang-proposal-v9-car-1",
+      "area": "cheonan-buldang",
+      "kind": "generator",
+      "intent": "car",
+      "rotation": -74.26950636265586
+    },
+    {
+      "token": "R004",
+      "id": "cheonan-buldang-proposal-v9-chair-1",
+      "area": "cheonan-buldang",
+      "kind": "generator",
+      "intent": "chair",
+      "rotation": -86.65299223402376
+    },
+    {
+      "token": "R005",
+      "id": "jeonju-hyoja-proposal-v9-bottle-1",
+      "area": "jeonju-hyoja",
+      "kind": "generator",
+      "intent": "bottle",
+      "rotation": 165.52290270521777
+    },
+    {
+      "token": "R006",
+      "id": "cheonan-buldang-proposal-v9-house-1",
+      "area": "cheonan-buldang",
+      "kind": "generator",
+      "intent": "house",
+      "rotation": -75.50060417199315
+    },
+    {
+      "token": "R007",
+      "id": "cheonan-buldang-proposal-v9-tree-1",
+      "area": "cheonan-buldang",
+      "kind": "generator",
+      "intent": "tree",
+      "rotation": 9.339434500871528
+    },
+    {
+      "token": "R008",
+      "id": "cheonan-buldang-proposal-v9-rocket-1",
+      "area": "cheonan-buldang",
+      "kind": "generator",
+      "intent": "rocket",
+      "rotation": -162.4065853867196
+    },
+    {
+      "token": "R009",
+      "id": "cheonan-buldang-proposal-v9-key-1",
+      "area": "cheonan-buldang",
+      "kind": "generator",
+      "intent": "key",
+      "rotation": -86.52168096851221
+    },
+    {
+      "token": "R010",
+      "id": "jeonju-hyoja-proposal-v9-pants-1",
+      "area": "jeonju-hyoja",
+      "kind": "generator",
+      "intent": "pants",
+      "rotation": 1.012748478513212
+    },
+    {
+      "token": "R011",
+      "id": "ulsan-samsan-proposal-v9-key-1",
+      "area": "ulsan-samsan",
+      "kind": "generator",
+      "intent": "key",
+      "rotation": -17.06142801069023
+    },
+    {
+      "token": "R012",
+      "id": "cheonan-buldang-proposal-v9-bottle-1",
+      "area": "cheonan-buldang",
+      "kind": "generator",
+      "intent": "bottle",
+      "rotation": 12.969929723937561
+    },
+    {
+      "token": "R013",
+      "id": "ulsan-samsan-proposal-v9-tree-1",
+      "area": "ulsan-samsan",
+      "kind": "generator",
+      "intent": "tree",
+      "rotation": -85.93131855755378
+    },
+    {
+      "token": "R014",
+      "id": "cheonan-buldang-proposal-v9-pants-1",
+      "area": "cheonan-buldang",
+      "kind": "generator",
+      "intent": "pants",
+      "rotation": -171.7973459588017
+    },
+    {
+      "token": "R015",
+      "id": "jeonju-hyoja-proposal-v9-tshirt-1",
+      "area": "jeonju-hyoja",
+      "kind": "generator",
+      "intent": "tshirt",
+      "rotation": -13.540746455249733
+    },
+    {
+      "token": "R016",
+      "id": "ulsan-samsan-natural-v8-2",
+      "area": "ulsan-samsan",
+      "kind": "baseline",
+      "intent": null,
+      "rotation": 0
+    },
+    {
+      "token": "R017",
+      "id": "ulsan-samsan-proposal-v9-bottle-1",
+      "area": "ulsan-samsan",
+      "kind": "generator",
+      "intent": "bottle",
+      "rotation": -17.02541322902828
+    },
+    {
+      "token": "R018",
+      "id": "jeonju-hyoja-proposal-v9-chair-1",
+      "area": "jeonju-hyoja",
+      "kind": "generator",
+      "intent": "chair",
+      "rotation": -0.07953543174587188
+    },
+    {
+      "token": "R019",
+      "id": "cheonan-buldang-natural-v8-2",
+      "area": "cheonan-buldang",
+      "kind": "baseline",
+      "intent": null,
+      "rotation": 0
+    },
+    {
+      "token": "R020",
+      "id": "jeonju-hyoja-natural-v8-1",
+      "area": "jeonju-hyoja",
+      "kind": "baseline",
+      "intent": null,
+      "rotation": 0
+    },
+    {
+      "token": "R021",
+      "id": "ulsan-samsan-proposal-v9-hammer-1",
+      "area": "ulsan-samsan",
+      "kind": "generator",
+      "intent": "hammer",
+      "rotation": 2.850800387741757
+    },
+    {
+      "token": "R022",
+      "id": "jeonju-hyoja-natural-v8-2",
+      "area": "jeonju-hyoja",
+      "kind": "baseline",
+      "intent": null,
+      "rotation": 0
+    },
+    {
+      "token": "R023",
+      "id": "ulsan-samsan-proposal-v9-airplane-1",
+      "area": "ulsan-samsan",
+      "kind": "generator",
+      "intent": "airplane",
+      "rotation": 76.75458364184378
+    },
+    {
+      "token": "R024",
+      "id": "jeonju-hyoja-proposal-v9-rocket-1",
+      "area": "jeonju-hyoja",
+      "kind": "generator",
+      "intent": "rocket",
+      "rotation": 1.3456776877836187
+    },
+    {
+      "token": "R025",
+      "id": "jeonju-hyoja-proposal-v9-tree-1",
+      "area": "jeonju-hyoja",
+      "kind": "generator",
+      "intent": "tree",
+      "rotation": -3.1081262222577086
+    },
+    {
+      "token": "R026",
+      "id": "ulsan-samsan-natural-v8-1",
+      "area": "ulsan-samsan",
+      "kind": "baseline",
+      "intent": null,
+      "rotation": 0
+    },
+    {
+      "token": "R027",
+      "id": "ulsan-samsan-proposal-v9-pants-1",
+      "area": "ulsan-samsan",
+      "kind": "generator",
+      "intent": "pants",
+      "rotation": -94.47028049510769
+    },
+    {
+      "token": "R028",
+      "id": "ulsan-samsan-proposal-v9-tshirt-1",
+      "area": "ulsan-samsan",
+      "kind": "generator",
+      "intent": "tshirt",
+      "rotation": 62.959292115712586
+    },
+    {
+      "token": "R029",
+      "id": "cheonan-buldang-proposal-v9-tshirt-1",
+      "area": "cheonan-buldang",
+      "kind": "generator",
+      "intent": "tshirt",
+      "rotation": 103.3241955005056
+    },
+    {
+      "token": "R030",
+      "id": "cheonan-buldang-proposal-v9-airplane-1",
+      "area": "cheonan-buldang",
+      "kind": "generator",
+      "intent": "airplane",
+      "rotation": -167.29666179964522
+    },
+    {
+      "token": "R031",
+      "id": "cheonan-buldang-proposal-v9-mug-1",
+      "area": "cheonan-buldang",
+      "kind": "generator",
+      "intent": "mug",
+      "rotation": 102.33262584221352
+    },
+    {
+      "token": "R032",
+      "id": "ulsan-samsan-proposal-v9-rocket-1",
+      "area": "ulsan-samsan",
+      "kind": "generator",
+      "intent": "rocket",
+      "rotation": 100.6723011752628
+    },
+    {
+      "token": "R033",
+      "id": "ulsan-samsan-proposal-v9-chair-1",
+      "area": "ulsan-samsan",
+      "kind": "generator",
+      "intent": "chair",
+      "rotation": -89.44474775340737
+    },
+    {
+      "token": "R034",
+      "id": "jeonju-hyoja-proposal-v9-car-1",
+      "area": "jeonju-hyoja",
+      "kind": "generator",
+      "intent": "car",
+      "rotation": -88.34145905153719
+    },
+    {
+      "token": "R035",
+      "id": "jeonju-hyoja-proposal-v9-airplane-1",
+      "area": "jeonju-hyoja",
+      "kind": "generator",
+      "intent": "airplane",
+      "rotation": -179.16714697777653
+    },
+    {
+      "token": "R036",
+      "id": "jeonju-hyoja-proposal-v9-key-1",
+      "area": "jeonju-hyoja",
+      "kind": "generator",
+      "intent": "key",
+      "rotation": -89.62922153945645
+    },
+    {
+      "token": "R037",
+      "id": "jeonju-hyoja-proposal-v9-house-1",
+      "area": "jeonju-hyoja",
+      "kind": "generator",
+      "intent": "house",
+      "rotation": 89.58414962455255
+    },
+    {
+      "token": "R038",
+      "id": "ulsan-samsan-proposal-v9-mug-1",
+      "area": "ulsan-samsan",
+      "kind": "generator",
+      "intent": "mug",
+      "rotation": -105.81459753114767
+    },
+    {
+      "token": "R039",
+      "id": "ulsan-samsan-proposal-v9-house-1",
+      "area": "ulsan-samsan",
+      "kind": "generator",
+      "intent": "house",
+      "rotation": -176.0947522100148
+    },
+    {
+      "token": "R040",
+      "id": "cheonan-buldang-proposal-v9-hammer-1",
+      "area": "cheonan-buldang",
+      "kind": "generator",
+      "intent": "hammer",
+      "rotation": -78.02685211653652
+    },
+    {
+      "token": "R041",
+      "id": "jeonju-hyoja-proposal-v9-hammer-1",
+      "area": "jeonju-hyoja",
+      "kind": "generator",
+      "intent": "hammer",
+      "rotation": 168.5332880955206
+    },
+    {
+      "token": "R042",
+      "id": "ulsan-samsan-proposal-v9-car-1",
+      "area": "ulsan-samsan",
+      "kind": "generator",
+      "intent": "car",
+      "rotation": -7.740767345897071
+    }
+  ],
+  "pages": [
+    {
+      "file": "blind-1.png",
+      "SHA256": "22e4b871c8221fd448243d82ca76e056b62a6244b38d0224892c360afb2400b7"
+    },
+    {
+      "file": "blind-2.png",
+      "SHA256": "c98be5e4a4a3442363b73377512460a579d8413809533e29db7c80d8a50009ea"
+    }
+  ]
+}

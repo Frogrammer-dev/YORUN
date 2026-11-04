@@ -1,0 +1,32 @@
+{
+  "sourceSHA256": "edf588db4520af618b2cbed18b589c187df551f1e159919fe2504bb570273e27",
+  "imageSHA256": "2fd3622019a909647a6746dfa5229334da30477c005e34c609a7b9bc104ca790",
+  "selection": "one supported nonfallback perregion;saltted source-ID hash,distinct target;not AIclear-selected",
+  "mapping": [
+    {
+      "number": 1,
+      "id": "jeonju-hyoja-v14-independent-bird-55",
+      "target": "bird",
+      "area": "jeonju-hyoja",
+      "rotation": -148.70840970957173
+    },
+    {
+      "number": 2,
+      "id": "ulsan-samsan-v14-independent-cat-23",
+      "target": "cat",
+      "area": "ulsan-samsan",
+      "rotation": -75.75721839399442
+    },
+    {
+      "number": 3,
+      "id": "cheonan-buldang-v14-independent-bottle-19",
+      "target": "bottle",
+      "area": "cheonan-buldang",
+      "rotation": 12.969929723937561
+    }
+  ],
+  "humanAnswersReceived": false,
+  "priorExposure": "User previously saw labeled project examples; exploratory first impressions, not a naive independent human trial",
+  "plannedQuestions": 3,
+  "humanRecognitionSuccessClaimed": false
+}

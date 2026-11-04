@@ -1,0 +1,22 @@
+[
+  {
+    "file": "tests/eval/boundary-generation-20261102.test.ts",
+    "SHA256": "eeda8239ffe7ca0a40159fe3cfb9a6a28174119516ffbb254f06db4b7b4510a3",
+    "snapshot": "reports\\road-ranker-20261102\\code-snapshots\\v14-boundary-generation-20261102.test.ts.txt"
+  },
+  {
+    "file": "src/lib/route/boundaryCompletion.ts",
+    "SHA256": "7489aadb7e08cbf22c508f634568dcd586811512d5db270315ffd491c9eb3c21",
+    "snapshot": "reports\\road-ranker-20261102\\code-snapshots\\v14-boundaryCompletion.ts.txt"
+  },
+  {
+    "file": "src/lib/route/boundaryRouting.ts",
+    "SHA256": "435931e39a65726b972864d116d3ed76322cc778d005fae83b0614805158484b",
+    "snapshot": "reports\\road-ranker-20261102\\code-snapshots\\v14-boundaryRouting.ts.txt"
+  },
+  {
+    "file": "src/lib/route/distinctiveFeatures.ts",
+    "SHA256": "038f85cc61fbb4b3942d60b1f845a7928a570abc1f5836b4c9630af0ed012abd",
+    "snapshot": "reports\\road-ranker-20261102\\code-snapshots\\v14-distinctiveFeatures.ts.txt"
+  }
+]

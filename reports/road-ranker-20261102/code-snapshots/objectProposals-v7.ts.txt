@@ -1,0 +1,83 @@
+import { globalSearch } from './globalSearch';
+import { hasEdge, type RoadGraph } from './graph';
+import type { Region } from './fit';
+import type { ShapeDef } from './shapes';
+import type { Budget } from './budget';
+
+type XY=[number,number];
+export interface ObjectProposal {
+  id:string; area:string; baselineId:null; proposalShape:string; proposalPoolRank:number;
+  roadHash:string; path:number[]; xy:XY[]; latlon:XY[];
+  meters:number; projectedMeters:number; repeatRatio:number; projectedRepeatRatio:number;
+  generatorSimilarity:number; generatorPlacement:{cx:number;cy:number;scale:number;rotDeg:number};
+}
+
+/** Exact node/edge recovery: coincident nodes are never merged or nearest-snapped. */
+export function recoverObjectPath(g:RoadGraph, latlon:XY[], index:Map<string,number[]>):number[]|null {
+  const choices=latlon.map(([lat,lon])=>index.get(`${lat},${lon}`)??[]);
+  if(choices.length<4||choices.some(c=>!c.length))return null;
+  for(const first of choices[0]){
+    let frontier=new Map<number,number[]>([[first,[first]]]);
+    for(let i=1;i<choices.length&&frontier.size;i++){
+      const next=new Map<number,number[]>();
+      for(const v of choices[i]){
+        if(i===choices.length-1&&v!==first)continue;
+        for(const [u,path] of frontier)if(hasEdge(g,u,v)){next.set(v,[...path,v]);break;}
+      }
+      frontier=next;
+    }
+    const result=frontier.get(first);if(result?.length===latlon.length)return result;
+  }
+  return null;
+}
+
+export function auditObjectPath(g:RoadGraph,region:Region,path:number[]){
+  if(path.length<4||path[0]!==path.at(-1))return {valid:false as const,reason:'not_closed'};
+  if(!path.every(v=>Number.isInteger(v)&&v>=0&&v<g.n))return {valid:false as const,reason:'invalid_node'};
+  if(!path.every(v=>g.x[v]>=region.minX&&g.x[v]<=region.maxX&&g.y[v]>=region.minY&&g.y[v]<=region.maxY))return {valid:false as const,reason:'outside'};
+  let meters=0,projectedMeters=0,repeated=0,projectedRepeated=0;
+  const used=new Set<string>();
+  for(let i=1;i<path.length;i++){
+    const a=path[i-1],b=path[i];let length=NaN;
+    for(let e=g.adjStart[a];e<g.adjStart[a+1];e++)if(g.adjTo[e]===b){length=g.adjLen[e];break;}
+    const d=Math.hypot(g.x[a]-g.x[b],g.y[a]-g.y[b]);
+    if(!Number.isFinite(length)||length<=0||!Number.isFinite(d))return {valid:false as const,reason:'invalid_edge'};
+    const key=a<b?`${a}:${b}`:`${b}:${a}`;
+    meters+=length;projectedMeters+=d;
+    if(used.has(key)){repeated+=length;projectedRepeated+=d;}used.add(key);
+  }
+  if(meters<3000||meters>8000||projectedMeters<3000||projectedMeters>8000)return {valid:false as const,reason:'distance'};
+  const repeatRatio=repeated/meters,projectedRepeatRatio=projectedRepeated/projectedMeters;
+  if(repeatRatio>.2||projectedRepeatRatio>.2)return {valid:false as const,reason:'repeat'};
+  return {valid:true as const,meters,projectedMeters,repeatRatio,projectedRepeatRatio,edgeKey:[...used].sort().join('|')};
+}
+
+/** Reusable candidate generator. Every output is an audited original graph path. */
+export function generateObjectProposals(g:RoadGraph,region:Region,templates:readonly {key:string;shape:ShapeDef}[],options:{area:string;roadHash:string;idPrefix:string;attempts?:number;budget?:Budget;onProgress?:(count:Record<string,unknown>)=>void}){
+  const index=new Map<string,number[]>();
+  for(let v=0;v<g.n;v++){
+    const key=`${g.lat[v]},${g.lon[v]}`,list=index.get(key)??[];list.push(v);index.set(key,list);
+  }
+  const results:ObjectProposal[]=[],counts:Record<string,unknown>[]=[],seen=new Set<string>();
+  for(const template of templates){
+    const began=performance.now();let evaluated=0,coarseSeeds=0,returned=0,duplicates=0,error:string|null=null;
+    const failures:Record<string,number>={};let added=0;
+    try{
+      const found=globalSearch(g,template.shape,region,options.attempts??60,true,true,{budget:options.budget});
+      evaluated=found.evaluated;coarseSeeds=found.coarseSeeds;returned=found.pool.length;
+      for(const [i,c] of found.pool.entries()){
+        const path=recoverObjectPath(g,c.latlngs,index);
+        if(!path){failures.exact_path_recovery=(failures.exact_path_recovery??0)+1;continue;}
+        const audit=auditObjectPath(g,region,path);
+        if(!audit.valid){failures[audit.reason]=(failures[audit.reason]??0)+1;continue;}
+        if(seen.has(audit.edgeKey)){duplicates++;continue;}seen.add(audit.edgeKey);
+        results.push({id:`${options.area}-${options.idPrefix}-${template.key}-${i+1}`,area:options.area,baselineId:null,proposalShape:template.key,proposalPoolRank:i+1,roadHash:options.roadHash,
+          path,xy:path.map(v=>[g.x[v],g.y[v]]),latlon:path.map(v=>[g.lat[v],g.lon[v]]),meters:audit.meters,projectedMeters:audit.projectedMeters,repeatRatio:audit.repeatRatio,projectedRepeatRatio:audit.projectedRepeatRatio,
+          generatorSimilarity:c.similarity,generatorPlacement:c.placement});added++;
+      }
+    }catch(e){error=e instanceof Error?`${e.name}: ${e.message}`:String(e);}
+    const count={area:options.area,proposalShape:template.key,attempts:options.attempts??60,evaluated,coarseSeeds,returned,duplicates,added,failures,error,elapsedSeconds:(performance.now()-began)/1000};
+    counts.push(count);options.onProgress?.(count);
+  }
+  return {results,counts};
+}

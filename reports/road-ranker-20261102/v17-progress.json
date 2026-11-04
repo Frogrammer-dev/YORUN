@@ -1,0 +1,16 @@
+{
+  "phase": "Canonical training/inference/AI review complete;no adoption",
+  "recommended": 32,
+  "requests": 75,
+  "auxiliaryCriterionMet": false,
+  "humanCaseCorrected": false,
+  "goalAchieved": false,
+  "sourceRowsChanged": false,
+  "AIReviewsComplete": true,
+  "mean4ClearTarget": 7,
+  "canonicalClearTarget": 7,
+  "primaryClearTarget": 0,
+  "roadCriterionMet": false,
+  "modelImprovementVerified": false,
+  "newHumanRecognitionMeasured": false
+}

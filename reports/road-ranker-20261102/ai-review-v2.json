@@ -1,0 +1,22 @@
+{
+  "evaluationType":"AI surrogate, not human evaluation",
+  "evaluatorAgent":"01a19aed-73d8-7662-81ef-5d6ec2287589",
+  "fingerprint":"58d0d713c6778be13e9b2576274306c357ea033c3cbace1c7c666ce821083534",
+  "namesScoresMethodsHidden":true,
+  "results":[
+    {"token":"R01","name":"없음","clarity":"none"},
+    {"token":"R02","name":"없음","clarity":"none"},
+    {"token":"R03","name":"없음","clarity":"none"},
+    {"token":"R04","name":"없음","clarity":"none"},
+    {"token":"R05","name":"없음","clarity":"none"},
+    {"token":"R06","name":"장화","clarity":"weak"},
+    {"token":"R07","name":"깃발","clarity":"weak"},
+    {"token":"R08","name":"없음","clarity":"none"},
+    {"token":"R09","name":"없음","clarity":"none"},
+    {"token":"R10","name":"없음","clarity":"none"},
+    {"token":"R11","name":"장화","clarity":"weak"},
+    {"token":"R12","name":"없음","clarity":"none"}
+  ],
+  "humanRecognitionMeasured":false,
+  "notes":"Same evaluator and overlapping candidates as v1. Development comparison, not independent holdout."
+}

@@ -1,0 +1,3579 @@
+{
+  "fingerprint": "62dd19e1f581e8f76a068b5ee3c504fad5854b9502480e8fc4a943d1979d1e36",
+  "inputSHA256": "ec3bc9580194e61dc4bb772cd49af0128eedaa7e70763c97d0720a470194deb1",
+  "catalogSHA256": "880a2b1f87006cf9f84e23fae68a23d8d554f7127c8f551b10c805f6c62e8fa6",
+  "rendererSHA256": "b1e07a57743e20e322050ff887d62120df2ccba469d1675db61cb23856d16d5d",
+  "slots": [
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "cat",
+      "category": "animal",
+      "id": "cheonan-buldang-diversity-v11-cat-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 67.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "fish",
+      "category": "animal",
+      "id": "cheonan-buldang-diversity-v11-fish-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 74.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "dog",
+      "category": "animal",
+      "id": "cheonan-buldang-diversity-v11-dog-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 74.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "rabbit",
+      "category": "animal",
+      "id": "cheonan-buldang-diversity-v11-rabbit-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 75.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "bird",
+      "category": "animal",
+      "id": "cheonan-buldang-diversity-v11-bird-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 76.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "whale",
+      "category": "animal",
+      "id": "cheonan-buldang-diversity-v11-whale-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 74.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "turtle",
+      "category": "animal",
+      "id": "cheonan-buldang-diversity-v11-turtle-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 79.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "elephant",
+      "category": "animal",
+      "id": "cheonan-buldang-diversity-v11-elephant-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 74.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "giraffe",
+      "category": "animal",
+      "id": "cheonan-buldang-diversity-v11-giraffe-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 70.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "butterfly",
+      "category": "animal",
+      "id": "cheonan-buldang-diversity-v11-butterfly-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 72.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "duck",
+      "category": "animal",
+      "id": "cheonan-buldang-diversity-v11-duck-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 74.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "house",
+      "category": "object",
+      "id": "cheonan-buldang-diversity-v11-house-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 71.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "tree",
+      "category": "object",
+      "id": "cheonan-buldang-diversity-v11-tree-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 77.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "car",
+      "category": "object",
+      "id": "cheonan-buldang-diversity-v11-car-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 79.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "rocket",
+      "category": "object",
+      "id": "cheonan-buldang-diversity-v11-rocket-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 76.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "apple",
+      "category": "object",
+      "id": "cheonan-buldang-diversity-v11-apple-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 75.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "crown",
+      "category": "object",
+      "id": "cheonan-buldang-diversity-v11-crown-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 70.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "airplane",
+      "category": "object",
+      "id": "cheonan-buldang-diversity-v11-airplane-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 73.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "mug",
+      "category": "object",
+      "id": "cheonan-buldang-diversity-v11-mug-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 78.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "tshirt",
+      "category": "object",
+      "id": "cheonan-buldang-diversity-v11-tshirt-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 76.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "pants",
+      "category": "object",
+      "id": "cheonan-buldang-diversity-v11-pants-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 76.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "hammer",
+      "category": "object",
+      "id": "cheonan-buldang-diversity-v11-hammer-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 76.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "bottle",
+      "category": "object",
+      "id": "cheonan-buldang-diversity-v11-bottle-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 83.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "key",
+      "category": "object",
+      "id": "cheonan-buldang-diversity-v11-key-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 84.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "chair",
+      "category": "object",
+      "id": "cheonan-buldang-diversity-v11-chair-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 80.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "cat",
+      "category": "animal",
+      "id": "jeonju-hyoja-diversity-v11-cat-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 72.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "fish",
+      "category": "animal",
+      "id": "jeonju-hyoja-diversity-v11-fish-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 71.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "dog",
+      "category": "animal",
+      "id": "jeonju-hyoja-diversity-v11-dog-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 75.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "rabbit",
+      "category": "animal",
+      "id": "jeonju-hyoja-diversity-v11-rabbit-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 73.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "bird",
+      "category": "animal",
+      "id": "jeonju-hyoja-diversity-v11-bird-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 76.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "whale",
+      "category": "animal",
+      "id": "jeonju-hyoja-diversity-v11-whale-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 76.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "turtle",
+      "category": "animal",
+      "id": "jeonju-hyoja-diversity-v11-turtle-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 74.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "elephant",
+      "category": "animal",
+      "id": "jeonju-hyoja-diversity-v11-elephant-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 75.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "giraffe",
+      "category": "animal",
+      "id": "jeonju-hyoja-diversity-v11-giraffe-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 73.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "butterfly",
+      "category": "animal",
+      "id": "jeonju-hyoja-diversity-v11-butterfly-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 64.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "duck",
+      "category": "animal",
+      "id": "jeonju-hyoja-diversity-v11-duck-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 74.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "house",
+      "category": "object",
+      "id": "jeonju-hyoja-diversity-v11-house-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 75.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "tree",
+      "category": "object",
+      "id": "jeonju-hyoja-diversity-v11-tree-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 77.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "car",
+      "category": "object",
+      "id": "jeonju-hyoja-diversity-v11-car-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 79.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "rocket",
+      "category": "object",
+      "id": "jeonju-hyoja-diversity-v11-rocket-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 76.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "apple",
+      "category": "object",
+      "id": "jeonju-hyoja-diversity-v11-apple-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 72.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "crown",
+      "category": "object",
+      "id": "jeonju-hyoja-diversity-v11-crown-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 65.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "airplane",
+      "category": "object",
+      "id": "jeonju-hyoja-diversity-v11-airplane-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 71.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "mug",
+      "category": "object",
+      "id": "jeonju-hyoja-diversity-v11-mug-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 75.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "tshirt",
+      "category": "object",
+      "id": "jeonju-hyoja-diversity-v11-tshirt-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 73.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "pants",
+      "category": "object",
+      "id": "jeonju-hyoja-diversity-v11-pants-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 76.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "hammer",
+      "category": "object",
+      "id": "jeonju-hyoja-diversity-v11-hammer-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 71.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "bottle",
+      "category": "object",
+      "id": "jeonju-hyoja-diversity-v11-bottle-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 76.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "key",
+      "category": "object",
+      "id": "jeonju-hyoja-diversity-v11-key-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 80.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "chair",
+      "category": "object",
+      "id": "jeonju-hyoja-diversity-v11-chair-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 74.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "cat",
+      "category": "animal",
+      "id": "ulsan-samsan-diversity-v11-cat-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 70.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "fish",
+      "category": "animal",
+      "id": "ulsan-samsan-diversity-v11-fish-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 75.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "dog",
+      "category": "animal",
+      "id": "ulsan-samsan-diversity-v11-dog-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 80.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "rabbit",
+      "category": "animal",
+      "id": "ulsan-samsan-diversity-v11-rabbit-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 77.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "bird",
+      "category": "animal",
+      "id": "ulsan-samsan-diversity-v11-bird-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 77.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "whale",
+      "category": "animal",
+      "id": "ulsan-samsan-diversity-v11-whale-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 74.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "turtle",
+      "category": "animal",
+      "id": "ulsan-samsan-diversity-v11-turtle-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 80.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "elephant",
+      "category": "animal",
+      "id": "ulsan-samsan-diversity-v11-elephant-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 75.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "giraffe",
+      "category": "animal",
+      "id": "ulsan-samsan-diversity-v11-giraffe-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 77.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "butterfly",
+      "category": "animal",
+      "id": "ulsan-samsan-diversity-v11-butterfly-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 74.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "duck",
+      "category": "animal",
+      "id": "ulsan-samsan-diversity-v11-duck-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 77.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "house",
+      "category": "object",
+      "id": "ulsan-samsan-diversity-v11-house-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 72.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "tree",
+      "category": "object",
+      "id": "ulsan-samsan-diversity-v11-tree-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 80.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "car",
+      "category": "object",
+      "id": "ulsan-samsan-diversity-v11-car-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 81.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "rocket",
+      "category": "object",
+      "id": "ulsan-samsan-diversity-v11-rocket-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 78.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "apple",
+      "category": "object",
+      "id": "ulsan-samsan-diversity-v11-apple-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 76.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "crown",
+      "category": "object",
+      "id": "ulsan-samsan-diversity-v11-crown-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 71.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "airplane",
+      "category": "object",
+      "id": "ulsan-samsan-diversity-v11-airplane-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 74.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "mug",
+      "category": "object",
+      "id": "ulsan-samsan-diversity-v11-mug-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 80.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "tshirt",
+      "category": "object",
+      "id": "ulsan-samsan-diversity-v11-tshirt-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 78.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "pants",
+      "category": "object",
+      "id": "ulsan-samsan-diversity-v11-pants-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 76.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "hammer",
+      "category": "object",
+      "id": "ulsan-samsan-diversity-v11-hammer-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 79.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "bottle",
+      "category": "object",
+      "id": "ulsan-samsan-diversity-v11-bottle-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 82.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "key",
+      "category": "object",
+      "id": "ulsan-samsan-diversity-v11-key-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 88.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "chair",
+      "category": "object",
+      "id": "ulsan-samsan-diversity-v11-chair-1",
+      "proposalPoolRank": 1,
+      "selection": "generator pool order only; no model score",
+      "validRoad": true,
+      "retrievalScore": 76.0,
+      "scoreType": "geometry",
+      "handQueryFallback": false,
+      "selectionReason": "geometry conditional top1;fixed minimum-ID geometry representatives;no gate"
+    }
+  ],
+  "mapping": [
+    {
+      "token": "R001",
+      "id": "cheonan-buldang-diversity-v11-car-1",
+      "area": "cheonan-buldang",
+      "proposalShape": "car",
+      "category": "object",
+      "rotation": 285.7304936373441
+    },
+    {
+      "token": "R002",
+      "id": "jeonju-hyoja-diversity-v11-tshirt-1",
+      "area": "jeonju-hyoja",
+      "proposalShape": "tshirt",
+      "category": "object",
+      "rotation": 346.45925354475025
+    },
+    {
+      "token": "R003",
+      "id": "jeonju-hyoja-diversity-v11-tree-1",
+      "area": "jeonju-hyoja",
+      "proposalShape": "tree",
+      "category": "object",
+      "rotation": 356.8918737777423
+    },
+    {
+      "token": "R004",
+      "id": "cheonan-buldang-diversity-v11-bird-1",
+      "area": "cheonan-buldang",
+      "proposalShape": "bird",
+      "category": "animal",
+      "rotation": 302.37513165472984
+    },
+    {
+      "token": "R005",
+      "id": "cheonan-buldang-diversity-v11-key-1",
+      "area": "cheonan-buldang",
+      "proposalShape": "key",
+      "category": "object",
+      "rotation": 273.4783190314878
+    },
+    {
+      "token": "R006",
+      "id": "cheonan-buldang-diversity-v11-crown-1",
+      "area": "cheonan-buldang",
+      "proposalShape": "crown",
+      "category": "object",
+      "rotation": 45.03987910757566
+    },
+    {
+      "token": "R007",
+      "id": "ulsan-samsan-diversity-v11-butterfly-1",
+      "area": "ulsan-samsan",
+      "proposalShape": "butterfly",
+      "category": "animal",
+      "rotation": 31.692794793603312
+    },
+    {
+      "token": "R008",
+      "id": "cheonan-buldang-diversity-v11-rabbit-1",
+      "area": "cheonan-buldang",
+      "proposalShape": "rabbit",
+      "category": "animal",
+      "rotation": 300.0051327387423
+    },
+    {
+      "token": "R009",
+      "id": "cheonan-buldang-diversity-v11-giraffe-1",
+      "area": "cheonan-buldang",
+      "proposalShape": "giraffe",
+      "category": "animal",
+      "rotation": 204.75625565344924
+    },
+    {
+      "token": "R010",
+      "id": "ulsan-samsan-diversity-v11-pants-1",
+      "area": "ulsan-samsan",
+      "proposalShape": "pants",
+      "category": "object",
+      "rotation": 265.52971950489234
+    },
+    {
+      "token": "R011",
+      "id": "ulsan-samsan-diversity-v11-bird-1",
+      "area": "ulsan-samsan",
+      "proposalShape": "bird",
+      "category": "animal",
+      "rotation": 208.28007570786065
+    },
+    {
+      "token": "R012",
+      "id": "cheonan-buldang-diversity-v11-mug-1",
+      "area": "cheonan-buldang",
+      "proposalShape": "mug",
+      "category": "object",
+      "rotation": 102.33262584221352
+    },
+    {
+      "token": "R013",
+      "id": "cheonan-buldang-diversity-v11-elephant-1",
+      "area": "cheonan-buldang",
+      "proposalShape": "elephant",
+      "category": "animal",
+      "rotation": 106.26218888634989
+    },
+    {
+      "token": "R014",
+      "id": "jeonju-hyoja-diversity-v11-key-1",
+      "area": "jeonju-hyoja",
+      "proposalShape": "key",
+      "category": "object",
+      "rotation": 270.37077846054353
+    },
+    {
+      "token": "R015",
+      "id": "cheonan-buldang-diversity-v11-rocket-1",
+      "area": "cheonan-buldang",
+      "proposalShape": "rocket",
+      "category": "object",
+      "rotation": 197.5934146132804
+    },
+    {
+      "token": "R016",
+      "id": "ulsan-samsan-diversity-v11-tree-1",
+      "area": "ulsan-samsan",
+      "proposalShape": "tree",
+      "category": "object",
+      "rotation": 274.06868144244623
+    },
+    {
+      "token": "R017",
+      "id": "cheonan-buldang-diversity-v11-cat-1",
+      "area": "cheonan-buldang",
+      "proposalShape": "cat",
+      "category": "animal",
+      "rotation": 29.100525137660757
+    },
+    {
+      "token": "R018",
+      "id": "jeonju-hyoja-diversity-v11-bottle-1",
+      "area": "jeonju-hyoja",
+      "proposalShape": "bottle",
+      "category": "object",
+      "rotation": 165.52290270521777
+    },
+    {
+      "token": "R019",
+      "id": "jeonju-hyoja-diversity-v11-pants-1",
+      "area": "jeonju-hyoja",
+      "proposalShape": "pants",
+      "category": "object",
+      "rotation": 1.012748478513212
+    },
+    {
+      "token": "R020",
+      "id": "cheonan-buldang-diversity-v11-hammer-1",
+      "area": "cheonan-buldang",
+      "proposalShape": "hammer",
+      "category": "object",
+      "rotation": 281.97314788346347
+    },
+    {
+      "token": "R021",
+      "id": "ulsan-samsan-diversity-v11-rabbit-1",
+      "area": "ulsan-samsan",
+      "proposalShape": "rabbit",
+      "category": "animal",
+      "rotation": 108.04635857602759
+    },
+    {
+      "token": "R022",
+      "id": "jeonju-hyoja-diversity-v11-giraffe-1",
+      "area": "jeonju-hyoja",
+      "proposalShape": "giraffe",
+      "category": "animal",
+      "rotation": 103.73966390280437
+    },
+    {
+      "token": "R023",
+      "id": "cheonan-buldang-diversity-v11-butterfly-1",
+      "area": "cheonan-buldang",
+      "proposalShape": "butterfly",
+      "category": "animal",
+      "rotation": 133.56876816456784
+    },
+    {
+      "token": "R024",
+      "id": "ulsan-samsan-diversity-v11-rocket-1",
+      "area": "ulsan-samsan",
+      "proposalShape": "rocket",
+      "category": "object",
+      "rotation": 100.6723011752628
+    },
+    {
+      "token": "R025",
+      "id": "ulsan-samsan-diversity-v11-elephant-1",
+      "area": "ulsan-samsan",
+      "proposalShape": "elephant",
+      "category": "animal",
+      "rotation": 285
+    },
+    {
+      "token": "R026",
+      "id": "ulsan-samsan-diversity-v11-giraffe-1",
+      "area": "ulsan-samsan",
+      "proposalShape": "giraffe",
+      "category": "animal",
+      "rotation": 280.63955296341385
+    },
+    {
+      "token": "R027",
+      "id": "jeonju-hyoja-diversity-v11-turtle-1",
+      "area": "jeonju-hyoja",
+      "proposalShape": "turtle",
+      "category": "animal",
+      "rotation": 177.47829041033677
+    },
+    {
+      "token": "R028",
+      "id": "jeonju-hyoja-diversity-v11-chair-1",
+      "area": "jeonju-hyoja",
+      "proposalShape": "chair",
+      "category": "object",
+      "rotation": 359.92046456825415
+    },
+    {
+      "token": "R029",
+      "id": "cheonan-buldang-diversity-v11-pants-1",
+      "area": "cheonan-buldang",
+      "proposalShape": "pants",
+      "category": "object",
+      "rotation": 188.2026540411983
+    },
+    {
+      "token": "R030",
+      "id": "jeonju-hyoja-diversity-v11-car-1",
+      "area": "jeonju-hyoja",
+      "proposalShape": "car",
+      "category": "object",
+      "rotation": 271.6585409484628
+    },
+    {
+      "token": "R031",
+      "id": "jeonju-hyoja-diversity-v11-duck-1",
+      "area": "jeonju-hyoja",
+      "proposalShape": "duck",
+      "category": "animal",
+      "rotation": 358.00717668771154
+    },
+    {
+      "token": "R032",
+      "id": "ulsan-samsan-diversity-v11-chair-1",
+      "area": "ulsan-samsan",
+      "proposalShape": "chair",
+      "category": "object",
+      "rotation": 270.55525224659266
+    },
+    {
+      "token": "R033",
+      "id": "cheonan-buldang-diversity-v11-duck-1",
+      "area": "cheonan-buldang",
+      "proposalShape": "duck",
+      "category": "animal",
+      "rotation": 106.56030444853758
+    },
+    {
+      "token": "R034",
+      "id": "ulsan-samsan-diversity-v11-cat-1",
+      "area": "ulsan-samsan",
+      "proposalShape": "cat",
+      "category": "animal",
+      "rotation": 269.24278160600556
+    },
+    {
+      "token": "R035",
+      "id": "cheonan-buldang-diversity-v11-house-1",
+      "area": "cheonan-buldang",
+      "proposalShape": "house",
+      "category": "object",
+      "rotation": 284.49939582800687
+    },
+    {
+      "token": "R036",
+      "id": "cheonan-buldang-diversity-v11-bottle-1",
+      "area": "cheonan-buldang",
+      "proposalShape": "bottle",
+      "category": "object",
+      "rotation": 12.969929723937561
+    },
+    {
+      "token": "R037",
+      "id": "jeonju-hyoja-diversity-v11-dog-1",
+      "area": "jeonju-hyoja",
+      "proposalShape": "dog",
+      "category": "animal",
+      "rotation": 79.07691386376388
+    },
+    {
+      "token": "R038",
+      "id": "cheonan-buldang-diversity-v11-apple-1",
+      "area": "cheonan-buldang",
+      "proposalShape": "apple",
+      "category": "object",
+      "rotation": 341.3953618838035
+    },
+    {
+      "token": "R039",
+      "id": "jeonju-hyoja-diversity-v11-mug-1",
+      "area": "jeonju-hyoja",
+      "proposalShape": "mug",
+      "category": "object",
+      "rotation": 90.4302223489714
+    },
+    {
+      "token": "R040",
+      "id": "cheonan-buldang-diversity-v11-tree-1",
+      "area": "cheonan-buldang",
+      "proposalShape": "tree",
+      "category": "object",
+      "rotation": 9.339434500871528
+    },
+    {
+      "token": "R041",
+      "id": "ulsan-samsan-diversity-v11-mug-1",
+      "area": "ulsan-samsan",
+      "proposalShape": "mug",
+      "category": "object",
+      "rotation": 254.18540246885232
+    },
+    {
+      "token": "R042",
+      "id": "cheonan-buldang-diversity-v11-tshirt-1",
+      "area": "cheonan-buldang",
+      "proposalShape": "tshirt",
+      "category": "object",
+      "rotation": 103.3241955005056
+    },
+    {
+      "token": "R043",
+      "id": "cheonan-buldang-diversity-v11-fish-1",
+      "area": "cheonan-buldang",
+      "proposalShape": "fish",
+      "category": "animal",
+      "rotation": 240.4823685865748
+    },
+    {
+      "token": "R044",
+      "id": "ulsan-samsan-diversity-v11-hammer-1",
+      "area": "ulsan-samsan",
+      "proposalShape": "hammer",
+      "category": "object",
+      "rotation": 2.850800387741757
+    },
+    {
+      "token": "R045",
+      "id": "ulsan-samsan-diversity-v11-apple-1",
+      "area": "ulsan-samsan",
+      "proposalShape": "apple",
+      "category": "object",
+      "rotation": 240.81729342185488
+    },
+    {
+      "token": "R046",
+      "id": "ulsan-samsan-diversity-v11-crown-1",
+      "area": "ulsan-samsan",
+      "proposalShape": "crown",
+      "category": "object",
+      "rotation": 191.87907602538064
+    },
+    {
+      "token": "R047",
+      "id": "ulsan-samsan-diversity-v11-fish-1",
+      "area": "ulsan-samsan",
+      "proposalShape": "fish",
+      "category": "animal",
+      "rotation": 198.97554796691327
+    },
+    {
+      "token": "R048",
+      "id": "jeonju-hyoja-diversity-v11-rabbit-1",
+      "area": "jeonju-hyoja",
+      "proposalShape": "rabbit",
+      "category": "animal",
+      "rotation": 30.742356298550792
+    },
+    {
+      "token": "R049",
+      "id": "jeonju-hyoja-diversity-v11-bird-1",
+      "area": "jeonju-hyoja",
+      "proposalShape": "bird",
+      "category": "animal",
+      "rotation": 87.62707919412256
+    },
+    {
+      "token": "R050",
+      "id": "jeonju-hyoja-diversity-v11-whale-1",
+      "area": "jeonju-hyoja",
+      "proposalShape": "whale",
+      "category": "animal",
+      "rotation": 154.0285622281699
+    },
+    {
+      "token": "R051",
+      "id": "ulsan-samsan-diversity-v11-airplane-1",
+      "area": "ulsan-samsan",
+      "proposalShape": "airplane",
+      "category": "object",
+      "rotation": 76.75458364184378
+    },
+    {
+      "token": "R052",
+      "id": "jeonju-hyoja-diversity-v11-fish-1",
+      "area": "jeonju-hyoja",
+      "proposalShape": "fish",
+      "category": "animal",
+      "rotation": 79.14451729575799
+    },
+    {
+      "token": "R053",
+      "id": "cheonan-buldang-diversity-v11-turtle-1",
+      "area": "cheonan-buldang",
+      "proposalShape": "turtle",
+      "category": "animal",
+      "rotation": 9.113021069051088
+    },
+    {
+      "token": "R054",
+      "id": "jeonju-hyoja-diversity-v11-airplane-1",
+      "area": "jeonju-hyoja",
+      "proposalShape": "airplane",
+      "category": "object",
+      "rotation": 180.83285302222347
+    },
+    {
+      "token": "R055",
+      "id": "cheonan-buldang-diversity-v11-airplane-1",
+      "area": "cheonan-buldang",
+      "proposalShape": "airplane",
+      "category": "object",
+      "rotation": 192.70333820035478
+    },
+    {
+      "token": "R056",
+      "id": "ulsan-samsan-diversity-v11-turtle-1",
+      "area": "ulsan-samsan",
+      "proposalShape": "turtle",
+      "category": "animal",
+      "rotation": 345.73959348610873
+    },
+    {
+      "token": "R057",
+      "id": "jeonju-hyoja-diversity-v11-butterfly-1",
+      "area": "jeonju-hyoja",
+      "proposalShape": "butterfly",
+      "category": "animal",
+      "rotation": 313.7689762518395
+    },
+    {
+      "token": "R058",
+      "id": "jeonju-hyoja-diversity-v11-cat-1",
+      "area": "jeonju-hyoja",
+      "proposalShape": "cat",
+      "category": "animal",
+      "rotation": 338.321260512982
+    },
+    {
+      "token": "R059",
+      "id": "jeonju-hyoja-diversity-v11-crown-1",
+      "area": "jeonju-hyoja",
+      "proposalShape": "crown",
+      "category": "object",
+      "rotation": 151.59936750437686
+    },
+    {
+      "token": "R060",
+      "id": "jeonju-hyoja-diversity-v11-house-1",
+      "area": "jeonju-hyoja",
+      "proposalShape": "house",
+      "category": "object",
+      "rotation": 89.58414962455255
+    },
+    {
+      "token": "R061",
+      "id": "ulsan-samsan-diversity-v11-tshirt-1",
+      "area": "ulsan-samsan",
+      "proposalShape": "tshirt",
+      "category": "object",
+      "rotation": 62.959292115712586
+    },
+    {
+      "token": "R062",
+      "id": "ulsan-samsan-diversity-v11-duck-1",
+      "area": "ulsan-samsan",
+      "proposalShape": "duck",
+      "category": "animal",
+      "rotation": 30.13557707971769
+    },
+    {
+      "token": "R063",
+      "id": "jeonju-hyoja-diversity-v11-rocket-1",
+      "area": "jeonju-hyoja",
+      "proposalShape": "rocket",
+      "category": "object",
+      "rotation": 1.3456776877836187
+    },
+    {
+      "token": "R064",
+      "id": "jeonju-hyoja-diversity-v11-hammer-1",
+      "area": "jeonju-hyoja",
+      "proposalShape": "hammer",
+      "category": "object",
+      "rotation": 168.5332880955206
+    },
+    {
+      "token": "R065",
+      "id": "ulsan-samsan-diversity-v11-bottle-1",
+      "area": "ulsan-samsan",
+      "proposalShape": "bottle",
+      "category": "object",
+      "rotation": 342.9745867709717
+    },
+    {
+      "token": "R066",
+      "id": "jeonju-hyoja-diversity-v11-elephant-1",
+      "area": "jeonju-hyoja",
+      "proposalShape": "elephant",
+      "category": "animal",
+      "rotation": 359.56389528609793
+    },
+    {
+      "token": "R067",
+      "id": "ulsan-samsan-diversity-v11-car-1",
+      "area": "ulsan-samsan",
+      "proposalShape": "car",
+      "category": "object",
+      "rotation": 352.2592326541029
+    },
+    {
+      "token": "R068",
+      "id": "ulsan-samsan-diversity-v11-house-1",
+      "area": "ulsan-samsan",
+      "proposalShape": "house",
+      "category": "object",
+      "rotation": 183.9052477899852
+    },
+    {
+      "token": "R069",
+      "id": "cheonan-buldang-diversity-v11-chair-1",
+      "area": "cheonan-buldang",
+      "proposalShape": "chair",
+      "category": "object",
+      "rotation": 273.34700776597623
+    },
+    {
+      "token": "R070",
+      "id": "cheonan-buldang-diversity-v11-dog-1",
+      "area": "cheonan-buldang",
+      "proposalShape": "dog",
+      "category": "animal",
+      "rotation": 180.53460902750498
+    },
+    {
+      "token": "R071",
+      "id": "cheonan-buldang-diversity-v11-whale-1",
+      "area": "cheonan-buldang",
+      "proposalShape": "whale",
+      "category": "animal",
+      "rotation": 93.71938437299988
+    },
+    {
+      "token": "R072",
+      "id": "ulsan-samsan-diversity-v11-dog-1",
+      "area": "ulsan-samsan",
+      "proposalShape": "dog",
+      "category": "animal",
+      "rotation": 355.66824878467264
+    },
+    {
+      "token": "R073",
+      "id": "ulsan-samsan-diversity-v11-key-1",
+      "area": "ulsan-samsan",
+      "proposalShape": "key",
+      "category": "object",
+      "rotation": 342.93857198930976
+    },
+    {
+      "token": "R074",
+      "id": "ulsan-samsan-diversity-v11-whale-1",
+      "area": "ulsan-samsan",
+      "proposalShape": "whale",
+      "category": "animal",
+      "rotation": 103.10181198153566
+    },
+    {
+      "token": "R075",
+      "id": "jeonju-hyoja-diversity-v11-apple-1",
+      "area": "jeonju-hyoja",
+      "proposalShape": "apple",
+      "category": "object",
+      "rotation": 339.9264734771476
+    }
+  ],
+  "pages": [
+    {
+      "file": "blind-1.png",
+      "SHA256": "8aa222c7cf27cdc1cf4306f3b5c858689e8628be74bc91d6defa6b54c6f0f88f"
+    },
+    {
+      "file": "blind-2.png",
+      "SHA256": "82ba0cfd72b737beda9ec35588ca1e1f94350c4701de6bc3e48d72e5cc238b66"
+    },
+    {
+      "file": "blind-3.png",
+      "SHA256": "de09e8bfb95b5aab2ba4a00b307dd17774463c6bf57d9f8a904c966f2698f2d3"
+    },
+    {
+      "file": "blind-4.png",
+      "SHA256": "739ae1b8bd02a3d2020084e228d702359daac0506c9326646886be5ca4710743"
+    },
+    {
+      "file": "blind-5.png",
+      "SHA256": "924ae97bcad930b7491bdd3bae21766b075b73c9bc6771baf31cbc0de226247d"
+    }
+  ],
+  "species": [
+    {
+      "key": "cat",
+      "name": "고양이",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 21,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "fish",
+      "name": "물고기",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 23,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "dog",
+      "name": "강아지",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 16,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "rabbit",
+      "name": "토끼",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 21,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "bird",
+      "name": "새",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 22,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "whale",
+      "name": "고래",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 17,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "turtle",
+      "name": "거북이",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 20,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "elephant",
+      "name": "코끼리",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 22,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "giraffe",
+      "name": "기린",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 21,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "butterfly",
+      "name": "나비",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 18,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "duck",
+      "name": "오리",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 19,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "house",
+      "name": "집",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 40,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "tree",
+      "name": "나무",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 40,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "car",
+      "name": "자동차",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 44,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "rocket",
+      "name": "로켓",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 46,
+      "headSupported": false,
+      "clipSupported": false,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "apple",
+      "name": "사과",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 19,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "crown",
+      "name": "왕관",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 24,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "airplane",
+      "name": "비행기",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 46,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "mug",
+      "name": "컵",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 22,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "tshirt",
+      "name": "티셔츠",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 30,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "pants",
+      "name": "바지",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 20,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "hammer",
+      "name": "망치",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 18,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "bottle",
+      "name": "병",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 30,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "key",
+      "name": "열쇠",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 12,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "chair",
+      "name": "의자",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 32,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    }
+  ],
+  "requests": 75,
+  "missing": 0,
+  "humanRecognitionMeasured": false,
+  "AIRecognitionMeasured": false,
+  "selection": {
+    "sourceSHA256": "d86bd5a68f297c28e7dc0db15f800e2a1ddc12129eed8b39df7ee0bca9006ff1",
+    "catalogSHA256": "880a2b1f87006cf9f84e23fae68a23d8d554f7127c8f551b10c805f6c62e8fa6",
+    "queriesSHA256": "481382effa2882bb12a44df18cb2afb31d9b034b912617001b5750dc15e1823c",
+    "queryMetadataSHA256": "87410fd01d06ac92c819cc22bdeee8b54502e32e904e5b4d54a7e676f95afbbb",
+    "roadFeaturesSHA256": "c42a699dc41d2ea002aa0d73ddadc36ca004a91132b635b6bdc7d33e19b559fd",
+    "handCheckpointSHA256": "cf5849f668dcdebb381a5ff400931667a66c871d1eefbc191d8d1875ada34e24",
+    "protocolSHA256": "d293a36a5280da29196395917933f92ef0194c9c196695941ac20a791fbd27d6",
+    "codeSHA256": "74b9c12be612e5c0b5718ad88a666f0048a506bae857e961c384337a23c0c89a",
+    "featureCompatibility": {
+      "verified": true,
+      "comparedFields": [
+        "checkpoint",
+        "revision",
+        "rendererCodeSHA256",
+        "rotations"
+      ],
+      "extractorIdentity": {
+        "checkpoint": "openai/clip-vit-base-patch32",
+        "revision": null,
+        "rendererCodeSHA256": "2b85b48e4104cfd57d3c6bfd31fc07db05dad8b27ec659c606389f16fd4d4f0e",
+        "rotations": 4
+      },
+      "revisionPinned": false,
+      "weightFileHashesVerified": false,
+      "limitation": "Matching explicit null revisions do not independently prove encoder weight-file identity"
+    },
+    "featureIDsVerified": false,
+    "noClassGate": true,
+    "noMarginRejection": true,
+    "humanLabelsFitted": false,
+    "newGenerationExecuted": false,
+    "newWeightsTrained": false,
+    "view": "canonical0",
+    "representativeRule": "minimum source ID perrequest/geometry BEFORE scoring",
+    "method": "geometry",
+    "requests": 75,
+    "choices": [
+      {
+        "area": "cheonan-buldang",
+        "key": "cat",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "cheonan-buldang-diversity-v11-cat-1",
+            "score": 67.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "cheonan-buldang-diversity-v11-cat-2",
+            "score": 0.799150844162119,
+            "fallback": false
+          },
+          "image": {
+            "id": "cheonan-buldang-diversity-v11-cat-1",
+            "score": 0.8496097349751439,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "cheonan-buldang",
+        "key": "fish",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "cheonan-buldang-diversity-v11-fish-1",
+            "score": 74.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "cheonan-buldang-diversity-v11-fish-2",
+            "score": 0.9146258305556974,
+            "fallback": false
+          },
+          "image": {
+            "id": "cheonan-buldang-diversity-v11-fish-2",
+            "score": 0.8924395226686823,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "cheonan-buldang",
+        "key": "dog",
+        "representativeCandidates": 6,
+        "choices": {
+          "geometry": {
+            "id": "cheonan-buldang-diversity-v11-dog-1",
+            "score": 74.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "cheonan-buldang-diversity-v11-dog-3",
+            "score": 0.8876636374270641,
+            "fallback": false
+          },
+          "image": {
+            "id": "cheonan-buldang-diversity-v11-dog-3",
+            "score": 0.9441240527674211,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "cheonan-buldang",
+        "key": "rabbit",
+        "representativeCandidates": 6,
+        "choices": {
+          "geometry": {
+            "id": "cheonan-buldang-diversity-v11-rabbit-1",
+            "score": 75.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "cheonan-buldang-diversity-v11-rabbit-7",
+            "score": 0.7807936434716037,
+            "fallback": false
+          },
+          "image": {
+            "id": "cheonan-buldang-diversity-v11-rabbit-7",
+            "score": 0.7927601458464195,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "cheonan-buldang",
+        "key": "bird",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "cheonan-buldang-diversity-v11-bird-1",
+            "score": 76.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "cheonan-buldang-diversity-v11-bird-8",
+            "score": 0.8772223132854614,
+            "fallback": false
+          },
+          "image": {
+            "id": "cheonan-buldang-diversity-v11-bird-8",
+            "score": 0.9165300093912152,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "cheonan-buldang",
+        "key": "whale",
+        "representativeCandidates": 5,
+        "choices": {
+          "geometry": {
+            "id": "cheonan-buldang-diversity-v11-whale-1",
+            "score": 74.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "cheonan-buldang-diversity-v11-whale-3",
+            "score": 0.9004117969972425,
+            "fallback": false
+          },
+          "image": {
+            "id": "cheonan-buldang-diversity-v11-whale-3",
+            "score": 0.8705689103978925,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "cheonan-buldang",
+        "key": "turtle",
+        "representativeCandidates": 5,
+        "choices": {
+          "geometry": {
+            "id": "cheonan-buldang-diversity-v11-turtle-1",
+            "score": 79.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "cheonan-buldang-diversity-v11-turtle-8",
+            "score": 0.8249122140566926,
+            "fallback": false
+          },
+          "image": {
+            "id": "cheonan-buldang-diversity-v11-turtle-7",
+            "score": 0.8682500900440739,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "cheonan-buldang",
+        "key": "elephant",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "cheonan-buldang-diversity-v11-elephant-1",
+            "score": 74.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "cheonan-buldang-diversity-v11-elephant-8",
+            "score": 0.9143799125726666,
+            "fallback": false
+          },
+          "image": {
+            "id": "cheonan-buldang-diversity-v11-elephant-1",
+            "score": 0.9008761201315147,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "cheonan-buldang",
+        "key": "giraffe",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "cheonan-buldang-diversity-v11-giraffe-1",
+            "score": 70.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "cheonan-buldang-diversity-v11-giraffe-8",
+            "score": 0.9167240450321802,
+            "fallback": false
+          },
+          "image": {
+            "id": "cheonan-buldang-diversity-v11-giraffe-8",
+            "score": 0.8709907437076938,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "cheonan-buldang",
+        "key": "butterfly",
+        "representativeCandidates": 5,
+        "choices": {
+          "geometry": {
+            "id": "cheonan-buldang-diversity-v11-butterfly-1",
+            "score": 72.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "cheonan-buldang-diversity-v11-butterfly-5",
+            "score": 0.8494566349266226,
+            "fallback": false
+          },
+          "image": {
+            "id": "cheonan-buldang-diversity-v11-butterfly-5",
+            "score": 0.8985178074275464,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "cheonan-buldang",
+        "key": "duck",
+        "representativeCandidates": 4,
+        "choices": {
+          "geometry": {
+            "id": "cheonan-buldang-diversity-v11-duck-1",
+            "score": 74.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "cheonan-buldang-diversity-v11-duck-5",
+            "score": 0.8760202596814339,
+            "fallback": false
+          },
+          "image": {
+            "id": "cheonan-buldang-diversity-v11-duck-3",
+            "score": 0.9268822529843819,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "cheonan-buldang",
+        "key": "house",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "cheonan-buldang-diversity-v11-house-1",
+            "score": 71.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "cheonan-buldang-diversity-v11-house-8",
+            "score": 0.8888202245358152,
+            "fallback": false
+          },
+          "image": {
+            "id": "cheonan-buldang-diversity-v11-house-3",
+            "score": 0.8540167329706414,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "cheonan-buldang",
+        "key": "tree",
+        "representativeCandidates": 6,
+        "choices": {
+          "geometry": {
+            "id": "cheonan-buldang-diversity-v11-tree-1",
+            "score": 77.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "cheonan-buldang-diversity-v11-tree-5",
+            "score": 0.9025508117711162,
+            "fallback": false
+          },
+          "image": {
+            "id": "cheonan-buldang-diversity-v11-tree-5",
+            "score": 0.8763416671038553,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "cheonan-buldang",
+        "key": "car",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "cheonan-buldang-diversity-v11-car-1",
+            "score": 79.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "cheonan-buldang-diversity-v11-car-5",
+            "score": 0.9263408568083304,
+            "fallback": false
+          },
+          "image": {
+            "id": "cheonan-buldang-diversity-v11-car-5",
+            "score": 0.9394743750135621,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "cheonan-buldang",
+        "key": "rocket",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "cheonan-buldang-diversity-v11-rocket-1",
+            "score": 76.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "cheonan-buldang-diversity-v11-rocket-1",
+            "score": 76.0,
+            "fallback": true
+          },
+          "image": {
+            "id": "cheonan-buldang-diversity-v11-rocket-2",
+            "score": 0.8348138266712006,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "cheonan-buldang",
+        "key": "apple",
+        "representativeCandidates": 4,
+        "choices": {
+          "geometry": {
+            "id": "cheonan-buldang-diversity-v11-apple-1",
+            "score": 75.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "cheonan-buldang-diversity-v11-apple-7",
+            "score": 0.8270571433194588,
+            "fallback": false
+          },
+          "image": {
+            "id": "cheonan-buldang-diversity-v11-apple-1",
+            "score": 0.8015620855837026,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "cheonan-buldang",
+        "key": "crown",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "cheonan-buldang-diversity-v11-crown-1",
+            "score": 70.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "cheonan-buldang-diversity-v11-crown-1",
+            "score": 0.9133336171698171,
+            "fallback": false
+          },
+          "image": {
+            "id": "cheonan-buldang-diversity-v11-crown-3",
+            "score": 0.8843436594553327,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "cheonan-buldang",
+        "key": "airplane",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "cheonan-buldang-diversity-v11-airplane-1",
+            "score": 73.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "cheonan-buldang-diversity-v11-airplane-8",
+            "score": 0.8714508668743003,
+            "fallback": false
+          },
+          "image": {
+            "id": "cheonan-buldang-diversity-v11-airplane-6",
+            "score": 0.8067731459795254,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "cheonan-buldang",
+        "key": "mug",
+        "representativeCandidates": 2,
+        "choices": {
+          "geometry": {
+            "id": "cheonan-buldang-diversity-v11-mug-1",
+            "score": 78.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "cheonan-buldang-diversity-v11-mug-5",
+            "score": 0.8460914464252991,
+            "fallback": false
+          },
+          "image": {
+            "id": "cheonan-buldang-diversity-v11-mug-5",
+            "score": 0.9435105813907382,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "cheonan-buldang",
+        "key": "tshirt",
+        "representativeCandidates": 5,
+        "choices": {
+          "geometry": {
+            "id": "cheonan-buldang-diversity-v11-tshirt-1",
+            "score": 76.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "cheonan-buldang-diversity-v11-tshirt-8",
+            "score": 0.8959619249205012,
+            "fallback": false
+          },
+          "image": {
+            "id": "cheonan-buldang-diversity-v11-tshirt-8",
+            "score": 0.8781786721538303,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "cheonan-buldang",
+        "key": "pants",
+        "representativeCandidates": 6,
+        "choices": {
+          "geometry": {
+            "id": "cheonan-buldang-diversity-v11-pants-1",
+            "score": 76.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "cheonan-buldang-diversity-v11-pants-4",
+            "score": 0.9493347456112113,
+            "fallback": false
+          },
+          "image": {
+            "id": "cheonan-buldang-diversity-v11-pants-1",
+            "score": 0.9329943446247044,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "cheonan-buldang",
+        "key": "hammer",
+        "representativeCandidates": 2,
+        "choices": {
+          "geometry": {
+            "id": "cheonan-buldang-diversity-v11-hammer-1",
+            "score": 76.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "cheonan-buldang-diversity-v11-hammer-1",
+            "score": 0.9351466025872314,
+            "fallback": false
+          },
+          "image": {
+            "id": "cheonan-buldang-diversity-v11-hammer-2",
+            "score": 0.9187047477326854,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "cheonan-buldang",
+        "key": "bottle",
+        "representativeCandidates": 5,
+        "choices": {
+          "geometry": {
+            "id": "cheonan-buldang-diversity-v11-bottle-1",
+            "score": 83.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "cheonan-buldang-diversity-v11-bottle-6",
+            "score": 0.8869880463788491,
+            "fallback": false
+          },
+          "image": {
+            "id": "cheonan-buldang-diversity-v11-bottle-6",
+            "score": 0.8861303857639378,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "cheonan-buldang",
+        "key": "key",
+        "representativeCandidates": 3,
+        "choices": {
+          "geometry": {
+            "id": "cheonan-buldang-diversity-v11-key-1",
+            "score": 84.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "cheonan-buldang-diversity-v11-key-8",
+            "score": 0.8986064003657636,
+            "fallback": false
+          },
+          "image": {
+            "id": "cheonan-buldang-diversity-v11-key-8",
+            "score": 0.9600765809769537,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "cheonan-buldang",
+        "key": "chair",
+        "representativeCandidates": 2,
+        "choices": {
+          "geometry": {
+            "id": "cheonan-buldang-diversity-v11-chair-1",
+            "score": 80.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "cheonan-buldang-diversity-v11-chair-7",
+            "score": 0.917850834698223,
+            "fallback": false
+          },
+          "image": {
+            "id": "cheonan-buldang-diversity-v11-chair-7",
+            "score": 0.9514535710234389,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "jeonju-hyoja",
+        "key": "cat",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "jeonju-hyoja-diversity-v11-cat-1",
+            "score": 72.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "jeonju-hyoja-diversity-v11-cat-3",
+            "score": 0.8415992812480937,
+            "fallback": false
+          },
+          "image": {
+            "id": "jeonju-hyoja-diversity-v11-cat-3",
+            "score": 0.8987304430115837,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "jeonju-hyoja",
+        "key": "fish",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "jeonju-hyoja-diversity-v11-fish-1",
+            "score": 71.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "jeonju-hyoja-diversity-v11-fish-1",
+            "score": 0.9243879759042797,
+            "fallback": false
+          },
+          "image": {
+            "id": "jeonju-hyoja-diversity-v11-fish-1",
+            "score": 0.8726723397616442,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "jeonju-hyoja",
+        "key": "dog",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "jeonju-hyoja-diversity-v11-dog-1",
+            "score": 75.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "jeonju-hyoja-diversity-v11-dog-6",
+            "score": 0.8867209632594082,
+            "fallback": false
+          },
+          "image": {
+            "id": "jeonju-hyoja-diversity-v11-dog-6",
+            "score": 0.9165936416160938,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "jeonju-hyoja",
+        "key": "rabbit",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "jeonju-hyoja-diversity-v11-rabbit-1",
+            "score": 73.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "jeonju-hyoja-diversity-v11-rabbit-2",
+            "score": 0.801027397964418,
+            "fallback": false
+          },
+          "image": {
+            "id": "jeonju-hyoja-diversity-v11-rabbit-1",
+            "score": 0.8125547892017034,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "jeonju-hyoja",
+        "key": "bird",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "jeonju-hyoja-diversity-v11-bird-1",
+            "score": 76.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "jeonju-hyoja-diversity-v11-bird-2",
+            "score": 0.8994795133282047,
+            "fallback": false
+          },
+          "image": {
+            "id": "jeonju-hyoja-diversity-v11-bird-2",
+            "score": 0.9305679757029366,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "jeonju-hyoja",
+        "key": "whale",
+        "representativeCandidates": 5,
+        "choices": {
+          "geometry": {
+            "id": "jeonju-hyoja-diversity-v11-whale-1",
+            "score": 76.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "jeonju-hyoja-diversity-v11-whale-8",
+            "score": 0.9087040203136106,
+            "fallback": false
+          },
+          "image": {
+            "id": "jeonju-hyoja-diversity-v11-whale-8",
+            "score": 0.8453141509024218,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "jeonju-hyoja",
+        "key": "turtle",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "jeonju-hyoja-diversity-v11-turtle-1",
+            "score": 74.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "jeonju-hyoja-diversity-v11-turtle-7",
+            "score": 0.8542244696394358,
+            "fallback": false
+          },
+          "image": {
+            "id": "jeonju-hyoja-diversity-v11-turtle-5",
+            "score": 0.9535359041871909,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "jeonju-hyoja",
+        "key": "elephant",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "jeonju-hyoja-diversity-v11-elephant-1",
+            "score": 75.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "jeonju-hyoja-diversity-v11-elephant-7",
+            "score": 0.9082758043664667,
+            "fallback": false
+          },
+          "image": {
+            "id": "jeonju-hyoja-diversity-v11-elephant-7",
+            "score": 0.892538417316618,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "jeonju-hyoja",
+        "key": "giraffe",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "jeonju-hyoja-diversity-v11-giraffe-1",
+            "score": 73.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "jeonju-hyoja-diversity-v11-giraffe-3",
+            "score": 0.9353095591050694,
+            "fallback": false
+          },
+          "image": {
+            "id": "jeonju-hyoja-diversity-v11-giraffe-1",
+            "score": 0.8989160096356659,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "jeonju-hyoja",
+        "key": "butterfly",
+        "representativeCandidates": 6,
+        "choices": {
+          "geometry": {
+            "id": "jeonju-hyoja-diversity-v11-butterfly-1",
+            "score": 64.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "jeonju-hyoja-diversity-v11-butterfly-5",
+            "score": 0.8471525134243123,
+            "fallback": false
+          },
+          "image": {
+            "id": "jeonju-hyoja-diversity-v11-butterfly-1",
+            "score": 0.8910844579327265,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "jeonju-hyoja",
+        "key": "duck",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "jeonju-hyoja-diversity-v11-duck-1",
+            "score": 74.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "jeonju-hyoja-diversity-v11-duck-6",
+            "score": 0.8464982279573301,
+            "fallback": false
+          },
+          "image": {
+            "id": "jeonju-hyoja-diversity-v11-duck-6",
+            "score": 0.8913183549356485,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "jeonju-hyoja",
+        "key": "house",
+        "representativeCandidates": 5,
+        "choices": {
+          "geometry": {
+            "id": "jeonju-hyoja-diversity-v11-house-1",
+            "score": 75.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "jeonju-hyoja-diversity-v11-house-7",
+            "score": 0.9058335327190009,
+            "fallback": false
+          },
+          "image": {
+            "id": "jeonju-hyoja-diversity-v11-house-1",
+            "score": 0.8779009146929821,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "jeonju-hyoja",
+        "key": "tree",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "jeonju-hyoja-diversity-v11-tree-1",
+            "score": 77.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "jeonju-hyoja-diversity-v11-tree-7",
+            "score": 0.9143020660375163,
+            "fallback": false
+          },
+          "image": {
+            "id": "jeonju-hyoja-diversity-v11-tree-5",
+            "score": 0.8993099688473258,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "jeonju-hyoja",
+        "key": "car",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "jeonju-hyoja-diversity-v11-car-1",
+            "score": 79.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "jeonju-hyoja-diversity-v11-car-3",
+            "score": 0.8592672865897306,
+            "fallback": false
+          },
+          "image": {
+            "id": "jeonju-hyoja-diversity-v11-car-3",
+            "score": 0.8801680183570312,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "jeonju-hyoja",
+        "key": "rocket",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "jeonju-hyoja-diversity-v11-rocket-1",
+            "score": 76.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "jeonju-hyoja-diversity-v11-rocket-1",
+            "score": 76.0,
+            "fallback": true
+          },
+          "image": {
+            "id": "jeonju-hyoja-diversity-v11-rocket-7",
+            "score": 0.8299785553837651,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "jeonju-hyoja",
+        "key": "apple",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "jeonju-hyoja-diversity-v11-apple-1",
+            "score": 72.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "jeonju-hyoja-diversity-v11-apple-3",
+            "score": 0.8428272289445755,
+            "fallback": false
+          },
+          "image": {
+            "id": "jeonju-hyoja-diversity-v11-apple-8",
+            "score": 0.8066902666904685,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "jeonju-hyoja",
+        "key": "crown",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "jeonju-hyoja-diversity-v11-crown-1",
+            "score": 65.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "jeonju-hyoja-diversity-v11-crown-2",
+            "score": 0.8674256543249197,
+            "fallback": false
+          },
+          "image": {
+            "id": "jeonju-hyoja-diversity-v11-crown-5",
+            "score": 0.8387522294134002,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "jeonju-hyoja",
+        "key": "airplane",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "jeonju-hyoja-diversity-v11-airplane-1",
+            "score": 71.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "jeonju-hyoja-diversity-v11-airplane-7",
+            "score": 0.8971302452633081,
+            "fallback": false
+          },
+          "image": {
+            "id": "jeonju-hyoja-diversity-v11-airplane-7",
+            "score": 0.8064309645693671,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "jeonju-hyoja",
+        "key": "mug",
+        "representativeCandidates": 6,
+        "choices": {
+          "geometry": {
+            "id": "jeonju-hyoja-diversity-v11-mug-1",
+            "score": 75.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "jeonju-hyoja-diversity-v11-mug-2",
+            "score": 0.8439511157848423,
+            "fallback": false
+          },
+          "image": {
+            "id": "jeonju-hyoja-diversity-v11-mug-2",
+            "score": 0.9316108020899434,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "jeonju-hyoja",
+        "key": "tshirt",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "jeonju-hyoja-diversity-v11-tshirt-1",
+            "score": 73.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "jeonju-hyoja-diversity-v11-tshirt-8",
+            "score": 0.9122798375698129,
+            "fallback": false
+          },
+          "image": {
+            "id": "jeonju-hyoja-diversity-v11-tshirt-8",
+            "score": 0.8822700453197446,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "jeonju-hyoja",
+        "key": "pants",
+        "representativeCandidates": 1,
+        "choices": {
+          "geometry": {
+            "id": "jeonju-hyoja-diversity-v11-pants-1",
+            "score": 76.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "jeonju-hyoja-diversity-v11-pants-1",
+            "score": 0.9709459932132884,
+            "fallback": false
+          },
+          "image": {
+            "id": "jeonju-hyoja-diversity-v11-pants-1",
+            "score": 0.9058310258230862,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "jeonju-hyoja",
+        "key": "hammer",
+        "representativeCandidates": 5,
+        "choices": {
+          "geometry": {
+            "id": "jeonju-hyoja-diversity-v11-hammer-1",
+            "score": 71.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "jeonju-hyoja-diversity-v11-hammer-6",
+            "score": 0.9218652260301327,
+            "fallback": false
+          },
+          "image": {
+            "id": "jeonju-hyoja-diversity-v11-hammer-8",
+            "score": 0.929240032535154,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "jeonju-hyoja",
+        "key": "bottle",
+        "representativeCandidates": 6,
+        "choices": {
+          "geometry": {
+            "id": "jeonju-hyoja-diversity-v11-bottle-1",
+            "score": 76.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "jeonju-hyoja-diversity-v11-bottle-7",
+            "score": 0.8628116779228212,
+            "fallback": false
+          },
+          "image": {
+            "id": "jeonju-hyoja-diversity-v11-bottle-7",
+            "score": 0.8446283340562801,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "jeonju-hyoja",
+        "key": "key",
+        "representativeCandidates": 1,
+        "choices": {
+          "geometry": {
+            "id": "jeonju-hyoja-diversity-v11-key-1",
+            "score": 80.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "jeonju-hyoja-diversity-v11-key-1",
+            "score": 0.823204171081663,
+            "fallback": false
+          },
+          "image": {
+            "id": "jeonju-hyoja-diversity-v11-key-1",
+            "score": 0.8625673465250597,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "jeonju-hyoja",
+        "key": "chair",
+        "representativeCandidates": 6,
+        "choices": {
+          "geometry": {
+            "id": "jeonju-hyoja-diversity-v11-chair-1",
+            "score": 74.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "jeonju-hyoja-diversity-v11-chair-4",
+            "score": 0.9113304606861715,
+            "fallback": false
+          },
+          "image": {
+            "id": "jeonju-hyoja-diversity-v11-chair-4",
+            "score": 0.9414328153724744,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "ulsan-samsan",
+        "key": "cat",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "ulsan-samsan-diversity-v11-cat-1",
+            "score": 70.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "ulsan-samsan-diversity-v11-cat-5",
+            "score": 0.7925249881773985,
+            "fallback": false
+          },
+          "image": {
+            "id": "ulsan-samsan-diversity-v11-cat-5",
+            "score": 0.8511159817692777,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "ulsan-samsan",
+        "key": "fish",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "ulsan-samsan-diversity-v11-fish-1",
+            "score": 75.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "ulsan-samsan-diversity-v11-fish-7",
+            "score": 0.8492345273491606,
+            "fallback": false
+          },
+          "image": {
+            "id": "ulsan-samsan-diversity-v11-fish-7",
+            "score": 0.831721588971676,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "ulsan-samsan",
+        "key": "dog",
+        "representativeCandidates": 3,
+        "choices": {
+          "geometry": {
+            "id": "ulsan-samsan-diversity-v11-dog-1",
+            "score": 80.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "ulsan-samsan-diversity-v11-dog-4",
+            "score": 0.8827628217872642,
+            "fallback": false
+          },
+          "image": {
+            "id": "ulsan-samsan-diversity-v11-dog-4",
+            "score": 0.9100394972130286,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "ulsan-samsan",
+        "key": "rabbit",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "ulsan-samsan-diversity-v11-rabbit-1",
+            "score": 77.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "ulsan-samsan-diversity-v11-rabbit-7",
+            "score": 0.791586498587449,
+            "fallback": false
+          },
+          "image": {
+            "id": "ulsan-samsan-diversity-v11-rabbit-7",
+            "score": 0.8188089326627577,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "ulsan-samsan",
+        "key": "bird",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "ulsan-samsan-diversity-v11-bird-1",
+            "score": 77.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "ulsan-samsan-diversity-v11-bird-8",
+            "score": 0.8878649774820283,
+            "fallback": false
+          },
+          "image": {
+            "id": "ulsan-samsan-diversity-v11-bird-8",
+            "score": 0.9247070753869981,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "ulsan-samsan",
+        "key": "whale",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "ulsan-samsan-diversity-v11-whale-1",
+            "score": 74.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "ulsan-samsan-diversity-v11-whale-6",
+            "score": 0.8982108118934582,
+            "fallback": false
+          },
+          "image": {
+            "id": "ulsan-samsan-diversity-v11-whale-6",
+            "score": 0.8475271649210337,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "ulsan-samsan",
+        "key": "turtle",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "ulsan-samsan-diversity-v11-turtle-1",
+            "score": 80.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "ulsan-samsan-diversity-v11-turtle-5",
+            "score": 0.8451259058858155,
+            "fallback": false
+          },
+          "image": {
+            "id": "ulsan-samsan-diversity-v11-turtle-7",
+            "score": 0.9467136168816688,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "ulsan-samsan",
+        "key": "elephant",
+        "representativeCandidates": 6,
+        "choices": {
+          "geometry": {
+            "id": "ulsan-samsan-diversity-v11-elephant-1",
+            "score": 75.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "ulsan-samsan-diversity-v11-elephant-6",
+            "score": 0.9103069607661121,
+            "fallback": false
+          },
+          "image": {
+            "id": "ulsan-samsan-diversity-v11-elephant-6",
+            "score": 0.9000616940175785,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "ulsan-samsan",
+        "key": "giraffe",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "ulsan-samsan-diversity-v11-giraffe-1",
+            "score": 77.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "ulsan-samsan-diversity-v11-giraffe-2",
+            "score": 0.9405582474440033,
+            "fallback": false
+          },
+          "image": {
+            "id": "ulsan-samsan-diversity-v11-giraffe-7",
+            "score": 0.9122625264545566,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "ulsan-samsan",
+        "key": "butterfly",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "ulsan-samsan-diversity-v11-butterfly-1",
+            "score": 74.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "ulsan-samsan-diversity-v11-butterfly-7",
+            "score": 0.8844844622794337,
+            "fallback": false
+          },
+          "image": {
+            "id": "ulsan-samsan-diversity-v11-butterfly-8",
+            "score": 0.8905265512838619,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "ulsan-samsan",
+        "key": "duck",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "ulsan-samsan-diversity-v11-duck-1",
+            "score": 77.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "ulsan-samsan-diversity-v11-duck-2",
+            "score": 0.8541180582698641,
+            "fallback": false
+          },
+          "image": {
+            "id": "ulsan-samsan-diversity-v11-duck-7",
+            "score": 0.9058860562470695,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "ulsan-samsan",
+        "key": "house",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "ulsan-samsan-diversity-v11-house-1",
+            "score": 72.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "ulsan-samsan-diversity-v11-house-5",
+            "score": 0.9011053456312617,
+            "fallback": false
+          },
+          "image": {
+            "id": "ulsan-samsan-diversity-v11-house-5",
+            "score": 0.8774169012798492,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "ulsan-samsan",
+        "key": "tree",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "ulsan-samsan-diversity-v11-tree-1",
+            "score": 80.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "ulsan-samsan-diversity-v11-tree-2",
+            "score": 0.9155118610741744,
+            "fallback": false
+          },
+          "image": {
+            "id": "ulsan-samsan-diversity-v11-tree-5",
+            "score": 0.9175646506748412,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "ulsan-samsan",
+        "key": "car",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "ulsan-samsan-diversity-v11-car-1",
+            "score": 81.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "ulsan-samsan-diversity-v11-car-7",
+            "score": 0.8950475309506776,
+            "fallback": false
+          },
+          "image": {
+            "id": "ulsan-samsan-diversity-v11-car-3",
+            "score": 0.9023854425521386,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "ulsan-samsan",
+        "key": "rocket",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "ulsan-samsan-diversity-v11-rocket-1",
+            "score": 78.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "ulsan-samsan-diversity-v11-rocket-1",
+            "score": 78.0,
+            "fallback": true
+          },
+          "image": {
+            "id": "ulsan-samsan-diversity-v11-rocket-7",
+            "score": 0.8407870543058169,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "ulsan-samsan",
+        "key": "apple",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "ulsan-samsan-diversity-v11-apple-1",
+            "score": 76.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "ulsan-samsan-diversity-v11-apple-6",
+            "score": 0.8400835917187384,
+            "fallback": false
+          },
+          "image": {
+            "id": "ulsan-samsan-diversity-v11-apple-6",
+            "score": 0.8198040312447071,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "ulsan-samsan",
+        "key": "crown",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "ulsan-samsan-diversity-v11-crown-1",
+            "score": 71.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "ulsan-samsan-diversity-v11-crown-2",
+            "score": 0.89571948517536,
+            "fallback": false
+          },
+          "image": {
+            "id": "ulsan-samsan-diversity-v11-crown-2",
+            "score": 0.851880285338226,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "ulsan-samsan",
+        "key": "airplane",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "ulsan-samsan-diversity-v11-airplane-1",
+            "score": 74.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "ulsan-samsan-diversity-v11-airplane-2",
+            "score": 0.8813020612714288,
+            "fallback": false
+          },
+          "image": {
+            "id": "ulsan-samsan-diversity-v11-airplane-8",
+            "score": 0.8137111509082424,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "ulsan-samsan",
+        "key": "mug",
+        "representativeCandidates": 3,
+        "choices": {
+          "geometry": {
+            "id": "ulsan-samsan-diversity-v11-mug-1",
+            "score": 80.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "ulsan-samsan-diversity-v11-mug-1",
+            "score": 0.8909499192577767,
+            "fallback": false
+          },
+          "image": {
+            "id": "ulsan-samsan-diversity-v11-mug-2",
+            "score": 0.93446760399019,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "ulsan-samsan",
+        "key": "tshirt",
+        "representativeCandidates": 2,
+        "choices": {
+          "geometry": {
+            "id": "ulsan-samsan-diversity-v11-tshirt-1",
+            "score": 78.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "ulsan-samsan-diversity-v11-tshirt-6",
+            "score": 0.9036252806289663,
+            "fallback": false
+          },
+          "image": {
+            "id": "ulsan-samsan-diversity-v11-tshirt-6",
+            "score": 0.9002449746466531,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "ulsan-samsan",
+        "key": "pants",
+        "representativeCandidates": 3,
+        "choices": {
+          "geometry": {
+            "id": "ulsan-samsan-diversity-v11-pants-1",
+            "score": 76.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "ulsan-samsan-diversity-v11-pants-1",
+            "score": 0.9409830407575551,
+            "fallback": false
+          },
+          "image": {
+            "id": "ulsan-samsan-diversity-v11-pants-3",
+            "score": 0.9215744677606876,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "ulsan-samsan",
+        "key": "hammer",
+        "representativeCandidates": 2,
+        "choices": {
+          "geometry": {
+            "id": "ulsan-samsan-diversity-v11-hammer-1",
+            "score": 79.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "ulsan-samsan-diversity-v11-hammer-1",
+            "score": 0.9210505713460589,
+            "fallback": false
+          },
+          "image": {
+            "id": "ulsan-samsan-diversity-v11-hammer-4",
+            "score": 0.9366591656705496,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "ulsan-samsan",
+        "key": "bottle",
+        "representativeCandidates": 4,
+        "choices": {
+          "geometry": {
+            "id": "ulsan-samsan-diversity-v11-bottle-1",
+            "score": 82.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "ulsan-samsan-diversity-v11-bottle-2",
+            "score": 0.8882810769033083,
+            "fallback": false
+          },
+          "image": {
+            "id": "ulsan-samsan-diversity-v11-bottle-2",
+            "score": 0.889764678310212,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "ulsan-samsan",
+        "key": "key",
+        "representativeCandidates": 2,
+        "choices": {
+          "geometry": {
+            "id": "ulsan-samsan-diversity-v11-key-1",
+            "score": 88.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "ulsan-samsan-diversity-v11-key-1",
+            "score": 0.9072737636650221,
+            "fallback": false
+          },
+          "image": {
+            "id": "ulsan-samsan-diversity-v11-key-4",
+            "score": 0.9521933689803599,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "ulsan-samsan",
+        "key": "chair",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "ulsan-samsan-diversity-v11-chair-1",
+            "score": 76.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "ulsan-samsan-diversity-v11-chair-8",
+            "score": 0.9392146204854629,
+            "fallback": false
+          },
+          "image": {
+            "id": "ulsan-samsan-diversity-v11-chair-7",
+            "score": 0.8984490109740095,
+            "fallback": false
+          }
+        }
+      }
+    ],
+    "humanRecognitionMeasured": false
+  }
+}

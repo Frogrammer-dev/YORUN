@@ -1,0 +1,16 @@
+{
+  "plain": {
+    "checkedGPX": 62,
+    "missing": 13,
+    "requests": 75,
+    "originalCoordinatesPreserved": true,
+    "fingerprint": "8f70b783a366563d6dd5897527ab6b4b17a5f131f2f88c5ec4ff745ba520d4aa"
+  },
+  "independent": {
+    "checkedGPX": 56,
+    "missing": 19,
+    "requests": 75,
+    "originalCoordinatesPreserved": true,
+    "fingerprint": "0733ba8dea3e756c21227dab9ab352900a59fd2bd8ca90473bd8dbd74221e61f"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "title": "v18 completed read-only expert artifact audit",
+  "date": "2026-11-03",
+  "status": "no_discrepancy_detected_within_checked_scope",
+  "persistenceBasis": "Retrospective record of the already completed audit; no checks rerun for this write. Actual tool stdout and command description are preserved below. No separate command or log file existed.",
+  "execution": {
+    "tool": "functions.exec -> tools.exec_command",
+    "shell": "PowerShell",
+    "commandInvocation": "eval/recognition/model-env/Scripts/python.exe -B -c $audit",
+    "commandBodyDescription": "Inline Python read JSON/NPZ files, computed SHA256 values, recomputed train-only prototype vectors and all G/H/I representative selection scores/IDs/angles, and used assertions. No file writes, image rendering, encoder inference, generator calls, label changes or saved weight fitting.",
+    "toolChunkId": "3de53d",
+    "exitCode": 0,
+    "stdoutVerbatim": "{\n  \"lockAndQueryProvenance\": \"pass\",\n  \"snapshotFilesMatched\": 8,\n  \"queryShape\": [\n    25,\n    512\n  ],\n  \"roadFeatureShape\": [\n    1003,\n    4,\n    512\n  ],\n  \"trainOnlyPrototypeRecomputed\": \"all32 columns match <=1e-12\",\n  \"representativesPerMethod\": 453,\n  \"all75SelectionsScoresAnglesIndependentlyMatched\": true,\n  \"source1003RowsUntouched\": true,\n  \"handRocketFallbacks\": 3,\n  \"cosineProbabilityClaim\": false,\n  \"imagePixelsOrAIReviewsRead\": false,\n  \"queryEncoderNotRerun\": true\n}"
+  },
+  "artifacts": {
+    "source": "eval/recognition/road-ranker-20261102/diversity-v11.json",
+    "catalog": "eval/recognition/road-ranker-20261102/diversity-catalog-v12.json",
+    "queryFolder": "eval/recognition/road-ranker-20261102/v18-query-features",
+    "outputFolder": "eval/recognition/road-ranker-20261102/v18-retrieval",
+    "inputLock": "reports/road-ranker-20261102/v18-input-lock.json",
+    "encoderAudit": "reports/road-ranker-20261102/v12-local-model-files.json",
+    "handCheckpoint": "eval/recognition/road-ranker-20261102/v17-canonical-models.npz"
+  },
+  "knownIdentityValuesFromPreviouslyReadMetadata": {
+    "sourceSHA256": "d86bd5a68f297c28e7dc0db15f800e2a1ddc12129eed8b39df7ee0bca9006ff1",
+    "catalogSHA256": "880a2b1f87006cf9f84e23fae68a23d8d554f7127c8f551b10c805f6c62e8fa6",
+    "queryFeaturesSHA256": "481382effa2882bb12a44df18cb2afb31d9b034b912617001b5750dc15e1823c",
+    "queryMetadataSHA256": "87410fd01d06ac92c819cc22bdeee8b54502e32e904e5b4d54a7e676f95afbbb",
+    "encoderAuditSHA256": "5dd3cf15c1400b118364f5165760b3a298b6e71aa08c3b23fcd541df66954590",
+    "roadFeaturesSHA256": "c42a699dc41d2ea002aa0d73ddadc36ca004a91132b635b6bdc7d33e19b559fd",
+    "handCheckpointSHA256": "cf5849f668dcdebb381a5ff400931667a66c871d1eefbc191d8d1875ada34e24",
+    "rendererCodeSHA256": "2b85b48e4104cfd57d3c6bfd31fc07db05dad8b27ec659c606389f16fd4d4f0e",
+    "retrievalCodeSHA256": "74b9c12be612e5c0b5718ad88a666f0048a506bae857e961c384337a23c0c89a",
+    "protocolSHA256": "d293a36a5280da29196395917933f92ef0194c9c196695941ac20a791fbd27d6",
+    "localSnapshot": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268"
+  },
+  "hashAndEqualityChecks": {
+    "inputLock": "Recomputed all file SHA256 values listed in v18-input-lock.json and matched them.",
+    "queryProvenance": "Matched metadata catalog/query-NPZ/encoder-audit/renderer-code/protocol/retrieval-code hashes to actual file bytes; matched selection metadata source/catalog/query/query-metadata/road-feature/checkpoint hashes.",
+    "encoderScope": "Recomputed eight local snapshot file hashes against the prior v12 disk audit: config.json, merges.txt, preprocessor_config.json, pytorch_model.bin, special_tokens_map.json, tokenizer.json, tokenizer_config.json, vocab.json. Snapshot ID matched query metadata.",
+    "viewsAndOrdering": "Query keys matched all25 catalog keys in order; query shape25x512, road features1003x4x512; finite query vectors and per-query L2 norm within3e-4. Metadata referenceViews1/referenceViewIndex0/roadCacheViews4 checked. Road rows aligned by frozen source positional order and hashes, not embedded IDs.",
+    "sourceCopies": "Each geometry/hand/image output retained source.results exactly, all1003 original rows. Each had75 reviewSlots.",
+    "checkpoint": "Canonical0 checkpoint metadata,512x32 prototype shape, and checkpoint training dataset/features hashes matched the frozen v12 dataset/cache."
+  },
+  "independentRecomputation": {
+    "prototype": "Loaded original sketch per-view features as float64. For each of32 class indices, averaged ONLY records with split=train using view0, normalized each class mean, transposed to512x32, and compared all saved prototype columns with np.allclose(atol=1e-12,rtol=0). No train/val/test resplit or weight update was saved.",
+    "commonPool": "For every area/target request, independently grouped source rows by geometryKey, chose minimum source ID per geometry, and sorted representatives by ID BEFORE scoring. Total representative count453, common to all three methods.",
+    "scores": "G: original generatorSimilarity. H: normalized road view0 dot normalized target prototype column selected through frozen class key/alias. I: normalized road view0 dot normalized keyed original-template query. Recomputed each top1 by descending score then lexical sourceID; score equality tolerance1e-12.",
+    "selection": "All75 IDs/request identities, validRoad flags, score types, scores and canonical rotation=(-source.generatorPlacement.rotDeg)%360 matched each output. No class/margin gate was applied.",
+    "fallback": "Exactly three H rocket requests used G scoring/selection; fallback flags and geometry score type checked. No other missing H target permitted."
+  },
+  "findings": {
+    "requestsPerMethod": 75,
+    "commonRepresentativesPerMethod": 453,
+    "sourceRowsPerMethod": 1003,
+    "queryClasses": 25,
+    "handPrototypeClasses": 32,
+    "handRocketFallbackRequests": 3,
+    "sourceCoordinatesChanged": false,
+    "numericDiscrepanciesDetected": 0
+  },
+  "metadataLegacyLimit": "Some slot-level selection text is inherited historical v11 generator-first metadata. The v18 selection object method plus slot.selectionReason, retrievalScore, scoreType and handQueryFallback describe the actual v18 policy. This audit does not rewrite frozen outputs or interpret inherited text as a second active ranking rule.",
+  "limitations": [
+    "No image pixels were viewed and no AI semantic reviews were read. No new model parameters were introduced.",
+    "Query embeddings were not re-extracted and encoder inference was not rerun; correctness of rendering calls was assessed through prior code review plus source hashes, not independent image reproduction.",
+    "Matching local disk files to the v12 audit is disk provenance, not an attestation of past in-memory encoder weights. The original road cache has revision=null.",
+    "NPZ arrays lack embedded source IDs; road feature identity uses frozen JSON order plus byte hashes.",
+    "This audit did not rerun road graph/native/projected validity checks; it checked exact preservation of the previously audited source rows and coordinates.",
+    "H and I selecting the same human-confirmed development case does not establish an IMAGE-specific effect. No semantic or human performance claim follows from this numerical audit.",
+    "No checks rerun while writing this retrospective audit artifact; the recorded execution chunk and stdout are the provenance rather than an invented command-log path."
+  ]
+}

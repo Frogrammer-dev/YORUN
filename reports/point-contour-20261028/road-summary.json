@@ -1,0 +1,116 @@
+{
+  "diagnosticOnly": true,
+  "automaticPointDiscovery": false,
+  "humanRecognitionMeasured": false,
+  "budgetPerArm": 100000,
+  "results": [
+    {
+      "id": "daejeon-dunsan-animal",
+      "mode": "fixed",
+      "valid": true,
+      "meters": 4804.313450932503,
+      "projectedMeters": 4804.313462493814,
+      "projectedRepeatRatio": 0,
+      "repeatRatio": 0,
+      "expanded": 18247,
+      "elapsedMs": 58.59370000000001,
+      "pathNodes": 114
+    },
+    {
+      "id": "daejeon-dunsan-animal",
+      "mode": "model",
+      "valid": false,
+      "meters": 0,
+      "projectedMeters": 0,
+      "projectedRepeatRatio": null,
+      "repeatRatio": null,
+      "expanded": 0,
+      "elapsedMs": 10.353099999999927,
+      "pathNodes": 0
+    },
+    {
+      "id": "daejeon-dunsan-animal",
+      "mode": "retrieval",
+      "valid": false,
+      "meters": 0,
+      "projectedMeters": 0,
+      "projectedRepeatRatio": null,
+      "repeatRatio": null,
+      "expanded": 19744,
+      "elapsedMs": 34.77869999999996,
+      "pathNodes": 0
+    },
+    {
+      "id": "daejeon-dunsan-object",
+      "mode": "fixed",
+      "valid": true,
+      "meters": 5696.098402500153,
+      "projectedMeters": 5696.098411739708,
+      "projectedRepeatRatio": 0.005727543547680695,
+      "repeatRatio": 0.005727543760169083,
+      "expanded": 17819,
+      "elapsedMs": 47.33370000000002,
+      "pathNodes": 137
+    },
+    {
+      "id": "daejeon-dunsan-object",
+      "mode": "model",
+      "valid": true,
+      "meters": 5379.712282896042,
+      "projectedMeters": 5379.712304575593,
+      "projectedRepeatRatio": 0.01286546009916558,
+      "repeatRatio": 0.01286545959499564,
+      "expanded": 20344,
+      "elapsedMs": 55.636499999999955,
+      "pathNodes": 115
+    },
+    {
+      "id": "daejeon-dunsan-object",
+      "mode": "retrieval",
+      "valid": true,
+      "meters": 5683.923250436783,
+      "projectedMeters": 5683.923236662078,
+      "projectedRepeatRatio": 0,
+      "repeatRatio": 0,
+      "expanded": 20390,
+      "elapsedMs": 29.720000000000027,
+      "pathNodes": 142
+    },
+    {
+      "id": "seoul-songpa-animal",
+      "mode": "fixed",
+      "valid": true,
+      "meters": 3839.647634267807,
+      "projectedMeters": 3839.647609720503,
+      "projectedRepeatRatio": 0,
+      "repeatRatio": 0,
+      "expanded": 19674,
+      "elapsedMs": 37.37810000000002,
+      "pathNodes": 80
+    },
+    {
+      "id": "seoul-songpa-animal",
+      "mode": "model",
+      "valid": true,
+      "meters": 3987.546165704727,
+      "projectedMeters": 3987.5461731191176,
+      "projectedRepeatRatio": 0,
+      "repeatRatio": 0,
+      "expanded": 19311,
+      "elapsedMs": 26.239100000000008,
+      "pathNodes": 80
+    },
+    {
+      "id": "seoul-songpa-animal",
+      "mode": "retrieval",
+      "valid": true,
+      "meters": 4329.141585111618,
+      "projectedMeters": 4329.14158200119,
+      "projectedRepeatRatio": 0.03241768222713202,
+      "repeatRatio": 0.03241768050331558,
+      "expanded": 26355,
+      "elapsedMs": 39.665899999999965,
+      "pathNodes": 90
+    }
+  ]
+}

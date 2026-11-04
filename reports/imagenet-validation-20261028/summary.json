@@ -1,0 +1,30 @@
+{
+  "validation-v1": {
+    "total": 24,
+    "autoValid": 8,
+    "visualReviewCompleted": false,
+    "trained": false,
+    "pointMeans": {
+      "uniform": 0.013830335678859093,
+      "feature": 0.014539984607272141
+    },
+    "semanticRecognitionMeasured": false
+  },
+  "validation-u2netp-v1": {
+    "method": "u2netp",
+    "total": 24,
+    "autoValid": 16,
+    "visualReviewCompleted": false,
+    "trained": false,
+    "pointMeans": {
+      "uniform": 0.014191794027905973,
+      "feature": 0.017202519369975806
+    },
+    "semanticRecognitionMeasured": false
+  },
+  "artifactsSHA256": {
+    "eval\\recognition\\imagenet-contour-20261028\\models\\models\\u2netp\\u2netp.onnx": "309c8469258dda742793dce0ebea8e6dd393174f89934733ecc8b14c76f4ddd8",
+    "scripts\\recognition-lab\\imagenet-validate.py": "1b3ce994a02f75b7ff5fc2329fba43bfac67fdbc641c2b183aba6e3826948ecc",
+    "scripts\\recognition-lab\\feature-points.py": "8ca34bb90e4249b81b7d3ec65c030344f1b7593bacafca2b293424840128469d"
+  }
+}

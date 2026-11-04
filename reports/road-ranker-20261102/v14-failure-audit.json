@@ -1,0 +1,208 @@
+{
+  "lostRequests": [
+    {
+      "area": "jeonju-hyoja",
+      "target": "dog",
+      "reasonCounts": {
+        "segment_19:disconnected": 13,
+        "segment_8:disconnected": 1,
+        "road:distance": 20,
+        "segment_0:disconnected": 11,
+        "segment_18:disconnected": 6,
+        "segment_7:disconnected": 6,
+        "segment_6:disconnected": 2,
+        "segment_16:disconnected": 1
+      },
+      "attempted": 60,
+      "expanded": 142481,
+      "elapsedMs": 241.6368999999995,
+      "budgetExhausted": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "target": "butterfly",
+      "reasonCounts": {
+        "segment_22:disconnected": 10,
+        "segment_18:disconnected": 3,
+        "segment_5:disconnected": 5,
+        "segment_4:disconnected": 12,
+        "segment_2:disconnected": 1,
+        "road:distance": 12,
+        "segment_23:disconnected": 6,
+        "segment_6:disconnected": 4,
+        "segment_3:disconnected": 1,
+        "segment_20:disconnected": 1,
+        "segment_1:disconnected": 1,
+        "segment_7:disconnected": 1,
+        "segment_21:disconnected": 3
+      },
+      "attempted": 60,
+      "expanded": 159634,
+      "elapsedMs": 289.34989999999925,
+      "budgetExhausted": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "target": "crown",
+      "reasonCounts": {
+        "road:distance": 36,
+        "segment_3:disconnected": 4,
+        "missing_anchor": 1,
+        "segment_6:disconnected": 4,
+        "segment_2:disconnected": 9,
+        "segment_2:blocked_endpoint": 1,
+        "segment_1:disconnected": 3,
+        "segment_5:disconnected": 2
+      },
+      "attempted": 60,
+      "expanded": 228729,
+      "elapsedMs": 304.21559999999954,
+      "budgetExhausted": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "target": "rabbit",
+      "reasonCounts": {
+        "segment_8:disconnected": 3,
+        "segment_16:disconnected": 10,
+        "segment_13:disconnected": 15,
+        "collapsed_feature_anchors": 7,
+        "missing_anchor": 7,
+        "segment_12:disconnected": 13,
+        "segment_10:disconnected": 2,
+        "segment_11:disconnected": 3
+      },
+      "attempted": 60,
+      "expanded": 66071,
+      "elapsedMs": 136.32170000000042,
+      "budgetExhausted": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "target": "giraffe",
+      "reasonCounts": {
+        "segment_15:disconnected": 2,
+        "segment_10:disconnected": 3,
+        "road:distance": 19,
+        "collapsed_feature_anchors": 8,
+        "segment_5:disconnected": 2,
+        "segment_9:disconnected": 13,
+        "segment_6:disconnected": 1,
+        "segment_3:disconnected": 4,
+        "segment_4:disconnected": 1,
+        "segment_1:disconnected": 1,
+        "segment_8:disconnected": 6
+      },
+      "attempted": 60,
+      "expanded": 44907,
+      "elapsedMs": 93.96340000000055,
+      "budgetExhausted": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "target": "crown",
+      "reasonCounts": {
+        "road:distance": 47,
+        "missing_anchor": 6,
+        "segment_6:disconnected": 3,
+        "segment_2:disconnected": 1,
+        "segment_3:disconnected": 3
+      },
+      "attempted": 60,
+      "expanded": 65661,
+      "elapsedMs": 105.12449999999808,
+      "budgetExhausted": false
+    }
+  ],
+  "methods": {
+    "plain": {
+      "failures": {
+        "road:distance": 2217,
+        "road:repeat": 7,
+        "missing_anchor": 110,
+        "segment_9:blocked_endpoint": 17,
+        "segment_4:blocked_endpoint": 40,
+        "segment_13:blocked_endpoint": 4,
+        "segment_15:blocked_endpoint": 15,
+        "segment_2:blocked_endpoint": 7,
+        "segment_3:blocked_endpoint": 7,
+        "segment_1:blocked_endpoint": 3,
+        "segment_5:blocked_endpoint": 2,
+        "segment_8:blocked_endpoint": 13,
+        "segment_0:blocked_endpoint": 22,
+        "segment_24:blocked_endpoint": 3,
+        "segment_25:blocked_endpoint": 1,
+        "segment_17:blocked_endpoint": 1
+      },
+      "savedCandidates": 419,
+      "validByArea": {
+        "cheonan-buldang": 25,
+        "jeonju-hyoja": 13,
+        "ulsan-samsan": 24
+      },
+      "supportedValidRequests": 0,
+      "fallbackValidRequests": null,
+      "totalOverrunMs": 0
+    },
+    "independent": {
+      "failures": {
+        "segment_5:disconnected": 142,
+        "road:distance": 881,
+        "segment_7:disconnected": 67,
+        "segment_0:disconnected": 127,
+        "feature:depth:1": 8,
+        "segment_18:disconnected": 52,
+        "segment_17:disconnected": 15,
+        "segment_19:disconnected": 27,
+        "collapsed_feature_anchors": 112,
+        "segment_6:disconnected": 77,
+        "segment_12:disconnected": 69,
+        "segment_13:disconnected": 99,
+        "segment_11:disconnected": 82,
+        "segment_14:disconnected": 18,
+        "segment_8:disconnected": 86,
+        "segment_10:disconnected": 81,
+        "segment_16:disconnected": 25,
+        "segment_15:disconnected": 27,
+        "feature:width:0": 4,
+        "segment_3:disconnected": 94,
+        "segment_4:disconnected": 89,
+        "segment_2:disconnected": 75,
+        "segment_27:disconnected": 8,
+        "segment_24:disconnected": 1,
+        "missing_anchor": 90,
+        "segment_9:disconnected": 77,
+        "segment_22:disconnected": 11,
+        "segment_23:disconnected": 12,
+        "segment_1:disconnected": 64,
+        "feature:orientation:0": 4,
+        "feature:depth:0": 19,
+        "segment_9:blocked_endpoint": 28,
+        "segment_4:blocked_endpoint": 40,
+        "segment_13:blocked_endpoint": 10,
+        "segment_15:blocked_endpoint": 3,
+        "segment_20:disconnected": 1,
+        "segment_21:disconnected": 8,
+        "segment_2:blocked_endpoint": 1,
+        "body_anchor_aliases_feature": 2,
+        "segment_8:blocked_endpoint": 1,
+        "segment_25:blocked_endpoint": 1,
+        "segment_24:blocked_endpoint": 1,
+        "segment_17:blocked_endpoint": 1,
+        "segment_0:blocked_endpoint": 3,
+        "feature:separation:0:1": 1
+      },
+      "savedCandidates": 328,
+      "validByArea": {
+        "cheonan-buldang": 25,
+        "jeonju-hyoja": 10,
+        "ulsan-samsan": 21
+      },
+      "supportedValidRequests": 36,
+      "fallbackValidRequests": 20,
+      "totalOverrunMs": 0
+    }
+  },
+  "newModelParametersSelectedFromThisAudit": false,
+  "humanRecognitionMeasured": false
+}

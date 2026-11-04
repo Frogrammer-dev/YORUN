@@ -1,0 +1,32 @@
+{
+  "phase": "v12 experiment complete;road-improvement hypothesis failed;goal incomplete",
+  "processSession": null,
+  "samples": 2304,
+  "train": 1646,
+  "validation": 316,
+  "test": 342,
+  "animalClasses": 11,
+  "supportedTargetClasses": 24,
+  "unsupportedTargetClasses": [
+    "rocket"
+  ],
+  "evaluationRequests": 75,
+  "oldSamplesExactlyPreserved": 1368,
+  "protocolSHA256": "a6a5541c190184213c2c47061e35040cf6564464f586ee260c2b297dd5fefaca",
+  "datasetSHA256": "ada8b04a03d19906c3e4c09c752730dfa9a1cf4067be52ea2c480c9fad6effc8",
+  "humanRecognitionMeasured": false,
+  "completionClaim": false,
+  "checkpoint": "eval/recognition/road-ranker-20261102/v12-dataset/sketch-models.npz",
+  "sketchAuxiliaryCriterionPassed": true,
+  "roadImprovementVerified": false,
+  "featureExtractionExitCode": 0,
+  "selectedHead": 17,
+  "selectedPrototype": 7,
+  "diversityCriterionMet": false,
+  "reason": "Only one animal species has recommendations in two areas; three required",
+  "pendingReviewFingerprint": "98af8e05e84853b8338cd5846784a7e80216318e93d0ef7b16c1ddbe1334178f",
+  "newAIReviewsComplete": true,
+  "headClearTarget": 4,
+  "prototypeClearTarget": 1,
+  "baselineClearTarget": 8
+}

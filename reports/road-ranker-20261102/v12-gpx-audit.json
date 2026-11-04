@@ -1,0 +1,16 @@
+{
+  "a": {
+    "gpxChecked": 17,
+    "missing": 58,
+    "requests": 75,
+    "fingerprint": "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39",
+    "originalCoordinatesPreserved": true
+  },
+  "b": {
+    "gpxChecked": 7,
+    "missing": 68,
+    "requests": 75,
+    "fingerprint": "1beb46fef6d3923b2422d21b3efe15836c6fa0c02a24159497e03c68bc5e3984",
+    "originalCoordinatesPreserved": true
+  }
+}

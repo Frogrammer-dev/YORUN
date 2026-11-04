@@ -1,0 +1,26 @@
+{
+  "orientationDiagnosticComplete": true,
+  "canonicalClearTarget": 7,
+  "v12ClearTarget": 4,
+  "baselineClearTarget": 8,
+  "requests": 75,
+  "orientationCriterionMet": true,
+  "overallGoalAchieved": false,
+  "humanRecognitionMeasured": false,
+  "newGenerationExecuted": false,
+  "coreTestsPassed": 21,
+  "preparedRequests": 75,
+  "preparedPoses": 4398,
+  "supportedFeatureKinds": 18,
+  "unsupportedFeatureKinds": [
+    "fish",
+    "whale",
+    "house",
+    "apple",
+    "mug",
+    "pants",
+    "hammer"
+  ],
+  "next": "Preregister fallback/budget/criteria and implement/execute generation A/B for all75 requests",
+  "coreReviewComplete": true
+}

@@ -1,0 +1,3701 @@
+{
+  "fingerprint": "00ac94f08a8a05931b6c4dfd3435ddd85660b7420b3b7ce0ae3f42b9c84a77a6",
+  "evaluationType": "AI surrogate, not human evaluation",
+  "raters": [
+    "v19-rater1",
+    "v19-rater2",
+    "v19-rater3"
+  ],
+  "majorityThreshold": 2,
+  "requests": 75,
+  "displayedImages": 75,
+  "groups": {
+    "animal": {
+      "requests": 33,
+      "validRoadRequests": 33,
+      "clearAny": 1,
+      "clearTarget": 1,
+      "weak": 16,
+      "none": 16,
+      "speciesClearInTwoAreas": []
+    },
+    "object": {
+      "requests": 42,
+      "validRoadRequests": 42,
+      "clearAny": 5,
+      "clearTarget": 4,
+      "weak": 19,
+      "none": 18,
+      "speciesClearInTwoAreas": [
+        "car"
+      ]
+    }
+  },
+  "species": [
+    {
+      "key": "cat",
+      "name": "고양이",
+      "kind": "animal",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 2,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "fish",
+      "name": "물고기",
+      "kind": "animal",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 1,
+      "clearTargetRequests": 1,
+      "weakRequests": 0,
+      "targetClearAreas": [
+        "chuncheon-center"
+      ],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "dog",
+      "name": "강아지",
+      "kind": "animal",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 2,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "rabbit",
+      "name": "토끼",
+      "kind": "animal",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 1,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "bird",
+      "name": "새",
+      "kind": "animal",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 2,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "whale",
+      "name": "고래",
+      "kind": "animal",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 1,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "turtle",
+      "name": "거북이",
+      "kind": "animal",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 0,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "elephant",
+      "name": "코끼리",
+      "kind": "animal",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 2,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "giraffe",
+      "name": "기린",
+      "kind": "animal",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 3,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "butterfly",
+      "name": "나비",
+      "kind": "animal",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 2,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "duck",
+      "name": "오리",
+      "kind": "animal",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 1,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "house",
+      "name": "집",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 1,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "tree",
+      "name": "나무",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 3,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "car",
+      "name": "자동차",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 2,
+      "clearTargetRequests": 2,
+      "weakRequests": 1,
+      "targetClearAreas": [
+        "chuncheon-center",
+        "changwon-center"
+      ],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "rocket",
+      "name": "로켓",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 1,
+      "clearTargetRequests": 0,
+      "weakRequests": 1,
+      "targetClearAreas": [],
+      "headSupported": false,
+      "clipSupported": false
+    },
+    {
+      "key": "apple",
+      "name": "사과",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 1,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "crown",
+      "name": "왕관",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 1,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "airplane",
+      "name": "비행기",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 1,
+      "clearTargetRequests": 1,
+      "weakRequests": 2,
+      "targetClearAreas": [
+        "chuncheon-center"
+      ],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "mug",
+      "name": "컵",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 0,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "tshirt",
+      "name": "티셔츠",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 1,
+      "clearTargetRequests": 1,
+      "weakRequests": 0,
+      "targetClearAreas": [
+        "changwon-center"
+      ],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "pants",
+      "name": "바지",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 2,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "hammer",
+      "name": "망치",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 3,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "bottle",
+      "name": "병",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 3,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "key",
+      "name": "열쇠",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 0,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    },
+    {
+      "key": "chair",
+      "name": "의자",
+      "kind": "object",
+      "requests": 3,
+      "validRoadRequests": 3,
+      "clearAnyRequests": 0,
+      "clearTargetRequests": 0,
+      "weakRequests": 1,
+      "targetClearAreas": [],
+      "headSupported": true,
+      "clipSupported": true
+    }
+  ],
+  "cases": [
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "cat",
+      "category": "animal",
+      "id": "chuncheon-center-v19-cat-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.8936428147097158,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R017",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "고양이": 2,
+        "고양이 얼굴": 1
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R017",
+          "name": "고양이",
+          "clarity": "weak"
+        },
+        {
+          "token": "R017",
+          "name": "고양이",
+          "clarity": "weak"
+        },
+        {
+          "token": "R017",
+          "name": "고양이 얼굴",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "fish",
+      "category": "animal",
+      "id": "chuncheon-center-v19-fish-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.9550661098372297,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R043",
+      "clarity": "clear",
+      "clearAny": true,
+      "targetClear": true,
+      "clearTargetVotes": 3,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "물고기": 3
+      },
+      "clarityVotes": {
+        "clear": 3
+      },
+      "ratings": [
+        {
+          "token": "R043",
+          "name": "물고기",
+          "clarity": "clear"
+        },
+        {
+          "token": "R043",
+          "name": "물고기",
+          "clarity": "clear"
+        },
+        {
+          "token": "R043",
+          "name": "물고기",
+          "clarity": "clear"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "dog",
+      "category": "animal",
+      "id": "chuncheon-center-v19-dog-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.949690615888104,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R070",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "개": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R070",
+          "name": "개",
+          "clarity": "weak"
+        },
+        {
+          "token": "R070",
+          "name": "개",
+          "clarity": "weak"
+        },
+        {
+          "token": "R070",
+          "name": "개",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "rabbit",
+      "category": "animal",
+      "id": "chuncheon-center-v19-rabbit-6",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 6,
+      "retrievalScore": 0.801694699449897,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R008",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "토끼": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R008",
+          "name": "토끼",
+          "clarity": "weak"
+        },
+        {
+          "token": "R008",
+          "name": "토끼",
+          "clarity": "weak"
+        },
+        {
+          "token": "R008",
+          "name": "토끼",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "bird",
+      "category": "animal",
+      "id": "chuncheon-center-v19-bird-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.9254182561098936,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R004",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "새": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R004",
+          "name": "새",
+          "clarity": "weak"
+        },
+        {
+          "token": "R004",
+          "name": "새",
+          "clarity": "weak"
+        },
+        {
+          "token": "R004",
+          "name": "새",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "whale",
+      "category": "animal",
+      "id": "chuncheon-center-v19-whale-7",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 7,
+      "retrievalScore": 0.8568728616623549,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R071",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "물고기": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R071",
+          "name": "물고기",
+          "clarity": "weak"
+        },
+        {
+          "token": "R071",
+          "name": "물고기",
+          "clarity": "weak"
+        },
+        {
+          "token": "R071",
+          "name": "물고기",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "turtle",
+      "category": "animal",
+      "id": "chuncheon-center-v19-turtle-6",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 6,
+      "retrievalScore": 0.9534971301521723,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R053",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R053",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R053",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R053",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "elephant",
+      "category": "animal",
+      "id": "chuncheon-center-v19-elephant-6",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 6,
+      "retrievalScore": 0.8787895053835468,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R013",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "코끼리": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R013",
+          "name": "코끼리",
+          "clarity": "weak"
+        },
+        {
+          "token": "R013",
+          "name": "코끼리",
+          "clarity": "weak"
+        },
+        {
+          "token": "R013",
+          "name": "코끼리",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "giraffe",
+      "category": "animal",
+      "id": "chuncheon-center-v19-giraffe-3",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 3,
+      "retrievalScore": 0.923997903065017,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R009",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "사슴": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R009",
+          "name": "사슴",
+          "clarity": "weak"
+        },
+        {
+          "token": "R009",
+          "name": "사슴",
+          "clarity": "weak"
+        },
+        {
+          "token": "R009",
+          "name": "사슴",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "butterfly",
+      "category": "animal",
+      "id": "chuncheon-center-v19-butterfly-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.858533718862701,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R023",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "나비": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R023",
+          "name": "나비",
+          "clarity": "weak"
+        },
+        {
+          "token": "R023",
+          "name": "나비",
+          "clarity": "weak"
+        },
+        {
+          "token": "R023",
+          "name": "나비",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "duck",
+      "category": "animal",
+      "id": "chuncheon-center-v19-duck-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.9188197136319685,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R033",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R033",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R033",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R033",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "house",
+      "category": "object",
+      "id": "chuncheon-center-v19-house-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.8332081189853335,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R035",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R035",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R035",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R035",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "tree",
+      "category": "object",
+      "id": "chuncheon-center-v19-tree-7",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 7,
+      "retrievalScore": 0.856687583011817,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R040",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "나무": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R040",
+          "name": "나무",
+          "clarity": "weak"
+        },
+        {
+          "token": "R040",
+          "name": "나무",
+          "clarity": "weak"
+        },
+        {
+          "token": "R040",
+          "name": "나무",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "car",
+      "category": "object",
+      "id": "chuncheon-center-v19-car-8",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 8,
+      "retrievalScore": 0.918156902532846,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R001",
+      "clarity": "clear",
+      "clearAny": true,
+      "targetClear": true,
+      "clearTargetVotes": 3,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "자동차": 3
+      },
+      "clarityVotes": {
+        "clear": 3
+      },
+      "ratings": [
+        {
+          "token": "R001",
+          "name": "자동차",
+          "clarity": "clear"
+        },
+        {
+          "token": "R001",
+          "name": "자동차",
+          "clarity": "clear"
+        },
+        {
+          "token": "R001",
+          "name": "자동차",
+          "clarity": "clear"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "rocket",
+      "category": "object",
+      "id": "chuncheon-center-v19-rocket-3",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 3,
+      "retrievalScore": 0.7590251944764719,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R015",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "장화": 2,
+        "없음": 1
+      },
+      "clarityVotes": {
+        "weak": 2,
+        "none": 1
+      },
+      "ratings": [
+        {
+          "token": "R015",
+          "name": "장화",
+          "clarity": "weak"
+        },
+        {
+          "token": "R015",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R015",
+          "name": "장화",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "apple",
+      "category": "object",
+      "id": "chuncheon-center-v19-apple-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.7913035070477152,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R038",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "사과": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R038",
+          "name": "사과",
+          "clarity": "weak"
+        },
+        {
+          "token": "R038",
+          "name": "사과",
+          "clarity": "weak"
+        },
+        {
+          "token": "R038",
+          "name": "사과",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "crown",
+      "category": "object",
+      "id": "chuncheon-center-v19-crown-7",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 7,
+      "retrievalScore": 0.8392005525059477,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R006",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R006",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R006",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R006",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "airplane",
+      "category": "object",
+      "id": "chuncheon-center-v19-airplane-6",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 6,
+      "retrievalScore": 0.8636459945011057,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R055",
+      "clarity": "clear",
+      "clearAny": true,
+      "targetClear": true,
+      "clearTargetVotes": 3,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "비행기": 3
+      },
+      "clarityVotes": {
+        "clear": 3
+      },
+      "ratings": [
+        {
+          "token": "R055",
+          "name": "비행기",
+          "clarity": "clear"
+        },
+        {
+          "token": "R055",
+          "name": "비행기",
+          "clarity": "clear"
+        },
+        {
+          "token": "R055",
+          "name": "비행기",
+          "clarity": "clear"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "mug",
+      "category": "object",
+      "id": "chuncheon-center-v19-mug-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.8737069973572611,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R012",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R012",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R012",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R012",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "tshirt",
+      "category": "object",
+      "id": "chuncheon-center-v19-tshirt-8",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 8,
+      "retrievalScore": 0.8360824777110337,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R042",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "티셔츠": 1,
+        "없음": 2
+      },
+      "clarityVotes": {
+        "weak": 1,
+        "none": 2
+      },
+      "ratings": [
+        {
+          "token": "R042",
+          "name": "티셔츠",
+          "clarity": "weak"
+        },
+        {
+          "token": "R042",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R042",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "pants",
+      "category": "object",
+      "id": "chuncheon-center-v19-pants-3",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 3,
+      "retrievalScore": 0.8675080735102676,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R029",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "어금니": 2,
+        "치아": 1
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R029",
+          "name": "어금니",
+          "clarity": "weak"
+        },
+        {
+          "token": "R029",
+          "name": "치아",
+          "clarity": "weak"
+        },
+        {
+          "token": "R029",
+          "name": "어금니",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "hammer",
+      "category": "object",
+      "id": "chuncheon-center-v19-hammer-3",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 3,
+      "retrievalScore": 0.8517750288313449,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R020",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "망치": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R020",
+          "name": "망치",
+          "clarity": "weak"
+        },
+        {
+          "token": "R020",
+          "name": "망치",
+          "clarity": "weak"
+        },
+        {
+          "token": "R020",
+          "name": "망치",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "bottle",
+      "category": "object",
+      "id": "chuncheon-center-v19-bottle-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.8995144599188687,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R036",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "병": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R036",
+          "name": "병",
+          "clarity": "weak"
+        },
+        {
+          "token": "R036",
+          "name": "병",
+          "clarity": "weak"
+        },
+        {
+          "token": "R036",
+          "name": "병",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "key",
+      "category": "object",
+      "id": "chuncheon-center-v19-key-2",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 2,
+      "retrievalScore": 0.859378051349975,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R005",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R005",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R005",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R005",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "chair",
+      "category": "object",
+      "id": "chuncheon-center-v19-chair-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.860230520465398,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R069",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "의자": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R069",
+          "name": "의자",
+          "clarity": "weak"
+        },
+        {
+          "token": "R069",
+          "name": "의자",
+          "clarity": "weak"
+        },
+        {
+          "token": "R069",
+          "name": "의자",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "cat",
+      "category": "animal",
+      "id": "changwon-center-v19-cat-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.8221196852879159,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R058",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R058",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R058",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R058",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "fish",
+      "category": "animal",
+      "id": "changwon-center-v19-fish-3",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 3,
+      "retrievalScore": 0.845093186250469,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R052",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R052",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R052",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R052",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "dog",
+      "category": "animal",
+      "id": "changwon-center-v19-dog-5",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 5,
+      "retrievalScore": 0.8720804032658548,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R037",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "개": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R037",
+          "name": "개",
+          "clarity": "weak"
+        },
+        {
+          "token": "R037",
+          "name": "개",
+          "clarity": "weak"
+        },
+        {
+          "token": "R037",
+          "name": "개",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "rabbit",
+      "category": "animal",
+      "id": "changwon-center-v19-rabbit-7",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 7,
+      "retrievalScore": 0.7922994100324898,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R048",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R048",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R048",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R048",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "bird",
+      "category": "animal",
+      "id": "changwon-center-v19-bird-2",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 2,
+      "retrievalScore": 0.9031306306658236,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R049",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R049",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R049",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R049",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "whale",
+      "category": "animal",
+      "id": "changwon-center-v19-whale-7",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 7,
+      "retrievalScore": 0.8256213671304994,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R050",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R050",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R050",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R050",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "turtle",
+      "category": "animal",
+      "id": "changwon-center-v19-turtle-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.906194170614125,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R027",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R027",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R027",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R027",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "elephant",
+      "category": "animal",
+      "id": "changwon-center-v19-elephant-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.9015110624237979,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R066",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "돼지": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R066",
+          "name": "돼지",
+          "clarity": "weak"
+        },
+        {
+          "token": "R066",
+          "name": "돼지",
+          "clarity": "weak"
+        },
+        {
+          "token": "R066",
+          "name": "돼지",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "giraffe",
+      "category": "animal",
+      "id": "changwon-center-v19-giraffe-8",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 8,
+      "retrievalScore": 0.9114741528696523,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R022",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "기린": 2,
+        "사슴": 1
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R022",
+          "name": "기린",
+          "clarity": "weak"
+        },
+        {
+          "token": "R022",
+          "name": "기린",
+          "clarity": "weak"
+        },
+        {
+          "token": "R022",
+          "name": "사슴",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "butterfly",
+      "category": "animal",
+      "id": "changwon-center-v19-butterfly-5",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 5,
+      "retrievalScore": 0.8432127425064351,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R057",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "엑스표": 1,
+        "엑스자": 1,
+        "엑스 표시": 1
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R057",
+          "name": "엑스표",
+          "clarity": "weak"
+        },
+        {
+          "token": "R057",
+          "name": "엑스자",
+          "clarity": "weak"
+        },
+        {
+          "token": "R057",
+          "name": "엑스 표시",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "duck",
+      "category": "animal",
+      "id": "changwon-center-v19-duck-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.911670925089054,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R031",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "오리": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R031",
+          "name": "오리",
+          "clarity": "weak"
+        },
+        {
+          "token": "R031",
+          "name": "오리",
+          "clarity": "weak"
+        },
+        {
+          "token": "R031",
+          "name": "오리",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "house",
+      "category": "object",
+      "id": "changwon-center-v19-house-6",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 6,
+      "retrievalScore": 0.8962870064132694,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R060",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "집": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R060",
+          "name": "집",
+          "clarity": "weak"
+        },
+        {
+          "token": "R060",
+          "name": "집",
+          "clarity": "weak"
+        },
+        {
+          "token": "R060",
+          "name": "집",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "tree",
+      "category": "object",
+      "id": "changwon-center-v19-tree-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.9118686567753684,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R003",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "나무": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R003",
+          "name": "나무",
+          "clarity": "weak"
+        },
+        {
+          "token": "R003",
+          "name": "나무",
+          "clarity": "weak"
+        },
+        {
+          "token": "R003",
+          "name": "나무",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "car",
+      "category": "object",
+      "id": "changwon-center-v19-car-2",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 2,
+      "retrievalScore": 0.9662857034670576,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R030",
+      "clarity": "clear",
+      "clearAny": true,
+      "targetClear": true,
+      "clearTargetVotes": 3,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "자동차": 3
+      },
+      "clarityVotes": {
+        "clear": 3
+      },
+      "ratings": [
+        {
+          "token": "R030",
+          "name": "자동차",
+          "clarity": "clear"
+        },
+        {
+          "token": "R030",
+          "name": "자동차",
+          "clarity": "clear"
+        },
+        {
+          "token": "R030",
+          "name": "자동차",
+          "clarity": "clear"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "rocket",
+      "category": "object",
+      "id": "changwon-center-v19-rocket-8",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 8,
+      "retrievalScore": 0.8489941963571612,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R063",
+      "clarity": "clear",
+      "clearAny": true,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "크리스마스트리": 2,
+        "전나무": 1
+      },
+      "clarityVotes": {
+        "clear": 2,
+        "weak": 1
+      },
+      "ratings": [
+        {
+          "token": "R063",
+          "name": "크리스마스트리",
+          "clarity": "clear"
+        },
+        {
+          "token": "R063",
+          "name": "크리스마스트리",
+          "clarity": "clear"
+        },
+        {
+          "token": "R063",
+          "name": "전나무",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "apple",
+      "category": "object",
+      "id": "changwon-center-v19-apple-2",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 2,
+      "retrievalScore": 0.8126357447527106,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R075",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R075",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R075",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R075",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "crown",
+      "category": "object",
+      "id": "changwon-center-v19-crown-3",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 3,
+      "retrievalScore": 0.887097860397301,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R059",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "왕관": 2,
+        "배": 1
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R059",
+          "name": "왕관",
+          "clarity": "weak"
+        },
+        {
+          "token": "R059",
+          "name": "배",
+          "clarity": "weak"
+        },
+        {
+          "token": "R059",
+          "name": "왕관",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "airplane",
+      "category": "object",
+      "id": "changwon-center-v19-airplane-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.8055066767503685,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R054",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 1,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "비행기": 3
+      },
+      "clarityVotes": {
+        "weak": 2,
+        "clear": 1
+      },
+      "ratings": [
+        {
+          "token": "R054",
+          "name": "비행기",
+          "clarity": "weak"
+        },
+        {
+          "token": "R054",
+          "name": "비행기",
+          "clarity": "clear"
+        },
+        {
+          "token": "R054",
+          "name": "비행기",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "mug",
+      "category": "object",
+      "id": "changwon-center-v19-mug-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.9358871581953114,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R039",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R039",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R039",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R039",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "tshirt",
+      "category": "object",
+      "id": "changwon-center-v19-tshirt-7",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 7,
+      "retrievalScore": 0.8969289018116497,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R002",
+      "clarity": "clear",
+      "clearAny": true,
+      "targetClear": true,
+      "clearTargetVotes": 3,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "티셔츠": 3
+      },
+      "clarityVotes": {
+        "clear": 3
+      },
+      "ratings": [
+        {
+          "token": "R002",
+          "name": "티셔츠",
+          "clarity": "clear"
+        },
+        {
+          "token": "R002",
+          "name": "티셔츠",
+          "clarity": "clear"
+        },
+        {
+          "token": "R002",
+          "name": "티셔츠",
+          "clarity": "clear"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "pants",
+      "category": "object",
+      "id": "changwon-center-v19-pants-3",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 3,
+      "retrievalScore": 0.8554924694421477,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R019",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "바지": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R019",
+          "name": "바지",
+          "clarity": "weak"
+        },
+        {
+          "token": "R019",
+          "name": "바지",
+          "clarity": "weak"
+        },
+        {
+          "token": "R019",
+          "name": "바지",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "hammer",
+      "category": "object",
+      "id": "changwon-center-v19-hammer-7",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 7,
+      "retrievalScore": 0.9152115756946477,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R064",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "망치": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R064",
+          "name": "망치",
+          "clarity": "weak"
+        },
+        {
+          "token": "R064",
+          "name": "망치",
+          "clarity": "weak"
+        },
+        {
+          "token": "R064",
+          "name": "망치",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "bottle",
+      "category": "object",
+      "id": "changwon-center-v19-bottle-6",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 6,
+      "retrievalScore": 0.9049976032879441,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R018",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "병": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R018",
+          "name": "병",
+          "clarity": "weak"
+        },
+        {
+          "token": "R018",
+          "name": "병",
+          "clarity": "weak"
+        },
+        {
+          "token": "R018",
+          "name": "병",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "key",
+      "category": "object",
+      "id": "changwon-center-v19-key-5",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 5,
+      "retrievalScore": 0.9381984871462654,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R014",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R014",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R014",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R014",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "chair",
+      "category": "object",
+      "id": "changwon-center-v19-chair-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.9313701921062602,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R028",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 2,
+        "의자": 1
+      },
+      "clarityVotes": {
+        "none": 2,
+        "weak": 1
+      },
+      "ratings": [
+        {
+          "token": "R028",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R028",
+          "name": "의자",
+          "clarity": "weak"
+        },
+        {
+          "token": "R028",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "cat",
+      "category": "animal",
+      "id": "busan-yeongdo-v19-cat-5",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 5,
+      "retrievalScore": 0.8835881938145634,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R034",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "고양이": 2,
+        "고양이 얼굴": 1
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R034",
+          "name": "고양이",
+          "clarity": "weak"
+        },
+        {
+          "token": "R034",
+          "name": "고양이",
+          "clarity": "weak"
+        },
+        {
+          "token": "R034",
+          "name": "고양이 얼굴",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "fish",
+      "category": "animal",
+      "id": "busan-yeongdo-v19-fish-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.8036966070515961,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R047",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R047",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R047",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R047",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "dog",
+      "category": "animal",
+      "id": "busan-yeongdo-v19-dog-2",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 2,
+      "retrievalScore": 0.8687589151493299,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R072",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R072",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R072",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R072",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "rabbit",
+      "category": "animal",
+      "id": "busan-yeongdo-v19-rabbit-6",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 6,
+      "retrievalScore": 0.8446346830814898,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R021",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R021",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R021",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R021",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "bird",
+      "category": "animal",
+      "id": "busan-yeongdo-v19-bird-6",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 6,
+      "retrievalScore": 0.8632429406778499,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R011",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "물개": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R011",
+          "name": "물개",
+          "clarity": "weak"
+        },
+        {
+          "token": "R011",
+          "name": "물개",
+          "clarity": "weak"
+        },
+        {
+          "token": "R011",
+          "name": "물개",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "whale",
+      "category": "animal",
+      "id": "busan-yeongdo-v19-whale-6",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 6,
+      "retrievalScore": 0.8330322975862297,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R074",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R074",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R074",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R074",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "turtle",
+      "category": "animal",
+      "id": "busan-yeongdo-v19-turtle-5",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 5,
+      "retrievalScore": 0.8704455668948075,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R056",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R056",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R056",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R056",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "elephant",
+      "category": "animal",
+      "id": "busan-yeongdo-v19-elephant-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.8758617234055874,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R025",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R025",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R025",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R025",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "giraffe",
+      "category": "animal",
+      "id": "busan-yeongdo-v19-giraffe-2",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 2,
+      "retrievalScore": 0.9004338259437459,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R026",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "기린": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R026",
+          "name": "기린",
+          "clarity": "weak"
+        },
+        {
+          "token": "R026",
+          "name": "기린",
+          "clarity": "weak"
+        },
+        {
+          "token": "R026",
+          "name": "기린",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "butterfly",
+      "category": "animal",
+      "id": "busan-yeongdo-v19-butterfly-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.7847426040280283,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R007",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R007",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R007",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R007",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "duck",
+      "category": "animal",
+      "id": "busan-yeongdo-v19-duck-5",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 5,
+      "retrievalScore": 0.9087181654013993,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "animal",
+      "token": "R062",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R062",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R062",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R062",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "house",
+      "category": "object",
+      "id": "busan-yeongdo-v19-house-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.8418756800689323,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R068",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R068",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R068",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R068",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "tree",
+      "category": "object",
+      "id": "busan-yeongdo-v19-tree-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.8571762619971602,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R016",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "나무": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R016",
+          "name": "나무",
+          "clarity": "weak"
+        },
+        {
+          "token": "R016",
+          "name": "나무",
+          "clarity": "weak"
+        },
+        {
+          "token": "R016",
+          "name": "나무",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "car",
+      "category": "object",
+      "id": "busan-yeongdo-v19-car-2",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 2,
+      "retrievalScore": 0.8646411260249369,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R067",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "자동차": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R067",
+          "name": "자동차",
+          "clarity": "weak"
+        },
+        {
+          "token": "R067",
+          "name": "자동차",
+          "clarity": "weak"
+        },
+        {
+          "token": "R067",
+          "name": "자동차",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "rocket",
+      "category": "object",
+      "id": "busan-yeongdo-v19-rocket-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.8436637964014226,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R024",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R024",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R024",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R024",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "apple",
+      "category": "object",
+      "id": "busan-yeongdo-v19-apple-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.7979201980460306,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R045",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R045",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R045",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R045",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "crown",
+      "category": "object",
+      "id": "busan-yeongdo-v19-crown-6",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 6,
+      "retrievalScore": 0.8007344196089663,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R046",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R046",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R046",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R046",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "airplane",
+      "category": "object",
+      "id": "busan-yeongdo-v19-airplane-3",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 3,
+      "retrievalScore": 0.7810808291832552,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R051",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "옷걸이": 2,
+        "없음": 1
+      },
+      "clarityVotes": {
+        "weak": 2,
+        "none": 1
+      },
+      "ratings": [
+        {
+          "token": "R051",
+          "name": "옷걸이",
+          "clarity": "weak"
+        },
+        {
+          "token": "R051",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R051",
+          "name": "옷걸이",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "mug",
+      "category": "object",
+      "id": "busan-yeongdo-v19-mug-6",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 6,
+      "retrievalScore": 0.9170123817004352,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R041",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R041",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R041",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R041",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "tshirt",
+      "category": "object",
+      "id": "busan-yeongdo-v19-tshirt-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.8509595393198424,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R061",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R061",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R061",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R061",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "pants",
+      "category": "object",
+      "id": "busan-yeongdo-v19-pants-6",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 6,
+      "retrievalScore": 0.8811357980590683,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R010",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R010",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R010",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R010",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "hammer",
+      "category": "object",
+      "id": "busan-yeongdo-v19-hammer-5",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 5,
+      "retrievalScore": 0.8206063973917417,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R044",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "나무": 2,
+        "없음": 1
+      },
+      "clarityVotes": {
+        "weak": 2,
+        "none": 1
+      },
+      "ratings": [
+        {
+          "token": "R044",
+          "name": "나무",
+          "clarity": "weak"
+        },
+        {
+          "token": "R044",
+          "name": "나무",
+          "clarity": "weak"
+        },
+        {
+          "token": "R044",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "bottle",
+      "category": "object",
+      "id": "busan-yeongdo-v19-bottle-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.8881666572738108,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R065",
+      "clarity": "weak",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "병": 3
+      },
+      "clarityVotes": {
+        "weak": 3
+      },
+      "ratings": [
+        {
+          "token": "R065",
+          "name": "병",
+          "clarity": "weak"
+        },
+        {
+          "token": "R065",
+          "name": "병",
+          "clarity": "weak"
+        },
+        {
+          "token": "R065",
+          "name": "병",
+          "clarity": "weak"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "key",
+      "category": "object",
+      "id": "busan-yeongdo-v19-key-3",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 3,
+      "retrievalScore": 0.8131348647921401,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R073",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 3
+      },
+      "clarityVotes": {
+        "none": 3
+      },
+      "ratings": [
+        {
+          "token": "R073",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R073",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R073",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "chair",
+      "category": "object",
+      "id": "busan-yeongdo-v19-chair-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.9125845458314248,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "image conditional top1;fixed minimum-ID geometry representatives;no gate",
+      "kind": "object",
+      "token": "R032",
+      "clarity": "none",
+      "clearAny": false,
+      "targetClear": false,
+      "clearTargetVotes": 0,
+      "otherKnownClearInterpretations": [],
+      "freeNames": {
+        "없음": 2,
+        "의자": 1
+      },
+      "clarityVotes": {
+        "none": 2,
+        "weak": 1
+      },
+      "ratings": [
+        {
+          "token": "R032",
+          "name": "없음",
+          "clarity": "none"
+        },
+        {
+          "token": "R032",
+          "name": "의자",
+          "clarity": "weak"
+        },
+        {
+          "token": "R032",
+          "name": "없음",
+          "clarity": "none"
+        }
+      ],
+      "missingRoute": false
+    }
+  ],
+  "diversityCriterionMet": false,
+  "humanRecognitionMeasured": false,
+  "raterIdentityVerified": false,
+  "sampledGeneratorCandidatesOnly": true,
+  "completePoolOracle": false,
+  "aliasPolicy": "Frozen catalog; NFKC/casefold and punctuation/whitespace removal only; no post-hoc synonyms",
+  "limitations": "Model-neutral first generated candidate per request; shared regions and related shapes; no independence or pool-wide upper bound implied."
+}

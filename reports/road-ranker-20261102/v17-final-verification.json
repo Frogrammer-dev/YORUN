@@ -1,0 +1,17 @@
+{
+  "pythonTestsPassed": 65,
+  "trainingLockAllFilesUnchanged": true,
+  "mean4All1003PredictionsExactlyReproduced": true,
+  "mean4V13All17IDsAndDisplayRotationsExactlyReproduced": true,
+  "bothSourceRowsAndCoordinatesPreserved": 1003,
+  "canonicalGPXChecked": 32,
+  "canonicalUIBlankIdentityResetAndBlockedStorageExport": "passed",
+  "mean4ClearTarget": 7,
+  "canonicalClearTarget": 7,
+  "primaryClearTarget": 0,
+  "humanPositiveCaseStillClassifiedChair": true,
+  "auxiliaryCriterionMet": false,
+  "roadCriterionMet": false,
+  "newHumanRecognitionMeasured": false,
+  "goalAchieved": false
+}

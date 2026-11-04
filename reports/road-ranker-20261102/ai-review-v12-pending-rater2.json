@@ -1,0 +1,112 @@
+{
+  "evaluatorAgent": "01a19b0b-12bd-7592-9a5f-809818cebc3a",
+  "fingerprint": "98af8e05e84853b8338cd5846784a7e80216318e93d0ef7b16c1ddbe1334178f",
+  "humanRecognitionMeasured": false,
+  "evaluationType": "AI 대리지표이며 사람평가가 아님",
+  "results": [
+    {
+      "token": "K001",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K002",
+      "name": "반소매 티셔츠",
+      "clarity": "weak"
+    },
+    {
+      "token": "K003",
+      "name": "기린",
+      "clarity": "weak"
+    },
+    {
+      "token": "K004",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K005",
+      "name": "망치",
+      "clarity": "weak"
+    },
+    {
+      "token": "K006",
+      "name": "의자",
+      "clarity": "clear"
+    },
+    {
+      "token": "K007",
+      "name": "나무",
+      "clarity": "weak"
+    },
+    {
+      "token": "K008",
+      "name": "반소매 티셔츠",
+      "clarity": "weak"
+    },
+    {
+      "token": "K009",
+      "name": "물고기",
+      "clarity": "clear"
+    },
+    {
+      "token": "K010",
+      "name": "반소매 티셔츠",
+      "clarity": "clear"
+    },
+    {
+      "token": "K011",
+      "name": "자동차",
+      "clarity": "weak"
+    },
+    {
+      "token": "K012",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K013",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K014",
+      "name": "기린",
+      "clarity": "weak"
+    },
+    {
+      "token": "K015",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K016",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K017",
+      "name": "자동차",
+      "clarity": "weak"
+    },
+    {
+      "token": "K018",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "K019",
+      "name": "반소매 티셔츠",
+      "clarity": "weak"
+    },
+    {
+      "token": "K020",
+      "name": "나무",
+      "clarity": "weak"
+    }
+  ],
+  "reportedEvaluatorAgent": "Codex",
+  "agentIdentitySource": "completed agent tool envelope; self-reported generic Codex retained",
+  "namesScoresMethodsReferencesHidden": true,
+  "raterIdentityVerified": false
+}

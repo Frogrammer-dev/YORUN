@@ -1,0 +1,21 @@
+{
+  "evaluationType":"AI surrogate, not human evaluation",
+  "evaluatorAgent":"01a19aed-73d8-7662-81ef-5d6ec2287589",
+  "fingerprint":"25b2c4c44505ac3feb8987887335daf8ba0c0199b348781a08fc04fb52beb330",
+  "namesScoresMethodsHidden":true,
+  "results":[
+    {"token":"R01","name":"없음","clarity":"none"},
+    {"token":"R02","name":"없음","clarity":"none"},
+    {"token":"R03","name":"없음","clarity":"none"},
+    {"token":"R04","name":"없음","clarity":"none"},
+    {"token":"R05","name":"없음","clarity":"none"},
+    {"token":"R06","name":"장화","clarity":"weak"},
+    {"token":"R07","name":"깃발","clarity":"weak"},
+    {"token":"R08","name":"집","clarity":"weak"},
+    {"token":"R09","name":"없음","clarity":"none"},
+    {"token":"R10","name":"없음","clarity":"none"},
+    {"token":"R11","name":"장화","clarity":"weak"},
+    {"token":"R12","name":"없음","clarity":"none"}
+  ],
+  "humanRecognitionMeasured":false
+}

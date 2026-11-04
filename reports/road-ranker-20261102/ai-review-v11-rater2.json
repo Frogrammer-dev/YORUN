@@ -1,0 +1,384 @@
+{
+  "evaluationType": "AI surrogate, not human evaluation",
+  "evaluatorAgent": "01a19b0b-12bd-7592-9a5f-809818cebc3a",
+  "fingerprint": "e934a3ee3fe40716ea306de4dbf15bf49efc5f5463e7cab8bb2e56dc94e7a9c5",
+  "results": [
+    {
+      "token": "R001",
+      "name": "자동차",
+      "clarity": "weak"
+    },
+    {
+      "token": "R002",
+      "name": "불규칙한 경계",
+      "clarity": "none"
+    },
+    {
+      "token": "R003",
+      "name": "나무",
+      "clarity": "weak"
+    },
+    {
+      "token": "R004",
+      "name": "불규칙 다각형",
+      "clarity": "none"
+    },
+    {
+      "token": "R005",
+      "name": "열쇠",
+      "clarity": "weak"
+    },
+    {
+      "token": "R006",
+      "name": "불규칙한 경계",
+      "clarity": "none"
+    },
+    {
+      "token": "R007",
+      "name": "십자형 도형",
+      "clarity": "none"
+    },
+    {
+      "token": "R008",
+      "name": "토끼",
+      "clarity": "weak"
+    },
+    {
+      "token": "R009",
+      "name": "불규칙한 가지형 윤곽",
+      "clarity": "none"
+    },
+    {
+      "token": "R010",
+      "name": "바지",
+      "clarity": "clear"
+    },
+    {
+      "token": "R011",
+      "name": "물고기",
+      "clarity": "weak"
+    },
+    {
+      "token": "R012",
+      "name": "불규칙 다각형",
+      "clarity": "none"
+    },
+    {
+      "token": "R013",
+      "name": "코끼리",
+      "clarity": "weak"
+    },
+    {
+      "token": "R014",
+      "name": "의자",
+      "clarity": "weak"
+    },
+    {
+      "token": "R015",
+      "name": "불규칙 다각형",
+      "clarity": "none"
+    },
+    {
+      "token": "R016",
+      "name": "나무",
+      "clarity": "weak"
+    },
+    {
+      "token": "R017",
+      "name": "불규칙한 경계",
+      "clarity": "none"
+    },
+    {
+      "token": "R018",
+      "name": "불규칙한 경계",
+      "clarity": "none"
+    },
+    {
+      "token": "R019",
+      "name": "바지",
+      "clarity": "clear"
+    },
+    {
+      "token": "R020",
+      "name": "망치",
+      "clarity": "weak"
+    },
+    {
+      "token": "R021",
+      "name": "토끼",
+      "clarity": "weak"
+    },
+    {
+      "token": "R022",
+      "name": "기린",
+      "clarity": "weak"
+    },
+    {
+      "token": "R023",
+      "name": "불규칙한 경계",
+      "clarity": "none"
+    },
+    {
+      "token": "R024",
+      "name": "불규칙 다각형",
+      "clarity": "none"
+    },
+    {
+      "token": "R025",
+      "name": "네발동물",
+      "clarity": "weak"
+    },
+    {
+      "token": "R026",
+      "name": "기린",
+      "clarity": "weak"
+    },
+    {
+      "token": "R027",
+      "name": "불규칙한 경계",
+      "clarity": "none"
+    },
+    {
+      "token": "R028",
+      "name": "의자",
+      "clarity": "weak"
+    },
+    {
+      "token": "R029",
+      "name": "바지",
+      "clarity": "clear"
+    },
+    {
+      "token": "R030",
+      "name": "자동차",
+      "clarity": "weak"
+    },
+    {
+      "token": "R031",
+      "name": "오리",
+      "clarity": "clear"
+    },
+    {
+      "token": "R032",
+      "name": "의자",
+      "clarity": "weak"
+    },
+    {
+      "token": "R033",
+      "name": "오리",
+      "clarity": "weak"
+    },
+    {
+      "token": "R034",
+      "name": "불규칙한 경계",
+      "clarity": "none"
+    },
+    {
+      "token": "R035",
+      "name": "냄비",
+      "clarity": "weak"
+    },
+    {
+      "token": "R036",
+      "name": "도마",
+      "clarity": "weak"
+    },
+    {
+      "token": "R037",
+      "name": "말",
+      "clarity": "weak"
+    },
+    {
+      "token": "R038",
+      "name": "불규칙 다각형",
+      "clarity": "none"
+    },
+    {
+      "token": "R039",
+      "name": "불규칙 다각형",
+      "clarity": "none"
+    },
+    {
+      "token": "R040",
+      "name": "나무",
+      "clarity": "weak"
+    },
+    {
+      "token": "R041",
+      "name": "불규칙한 경계",
+      "clarity": "none"
+    },
+    {
+      "token": "R042",
+      "name": "불규칙한 경계",
+      "clarity": "none"
+    },
+    {
+      "token": "R043",
+      "name": "물고기",
+      "clarity": "clear"
+    },
+    {
+      "token": "R044",
+      "name": "망치",
+      "clarity": "clear"
+    },
+    {
+      "token": "R045",
+      "name": "불규칙 다각형",
+      "clarity": "none"
+    },
+    {
+      "token": "R046",
+      "name": "불규칙한 경계",
+      "clarity": "none"
+    },
+    {
+      "token": "R047",
+      "name": "물고기",
+      "clarity": "weak"
+    },
+    {
+      "token": "R048",
+      "name": "토끼",
+      "clarity": "weak"
+    },
+    {
+      "token": "R049",
+      "name": "물고기",
+      "clarity": "weak"
+    },
+    {
+      "token": "R050",
+      "name": "물고기",
+      "clarity": "weak"
+    },
+    {
+      "token": "R051",
+      "name": "불규칙한 가지형 윤곽",
+      "clarity": "none"
+    },
+    {
+      "token": "R052",
+      "name": "물고기",
+      "clarity": "weak"
+    },
+    {
+      "token": "R053",
+      "name": "도마",
+      "clarity": "weak"
+    },
+    {
+      "token": "R054",
+      "name": "불규칙한 가지형 윤곽",
+      "clarity": "none"
+    },
+    {
+      "token": "R055",
+      "name": "불규칙한 십자형 윤곽",
+      "clarity": "none"
+    },
+    {
+      "token": "R056",
+      "name": "불규칙 다각형",
+      "clarity": "none"
+    },
+    {
+      "token": "R057",
+      "name": "십자형 도형",
+      "clarity": "none"
+    },
+    {
+      "token": "R058",
+      "name": "불규칙한 경계",
+      "clarity": "none"
+    },
+    {
+      "token": "R059",
+      "name": "불규칙한 경계",
+      "clarity": "none"
+    },
+    {
+      "token": "R060",
+      "name": "냄비",
+      "clarity": "weak"
+    },
+    {
+      "token": "R061",
+      "name": "반소매 티셔츠",
+      "clarity": "clear"
+    },
+    {
+      "token": "R062",
+      "name": "불규칙한 경계",
+      "clarity": "none"
+    },
+    {
+      "token": "R063",
+      "name": "불규칙 다각형",
+      "clarity": "none"
+    },
+    {
+      "token": "R064",
+      "name": "망치",
+      "clarity": "weak"
+    },
+    {
+      "token": "R065",
+      "name": "도마",
+      "clarity": "weak"
+    },
+    {
+      "token": "R066",
+      "name": "코끼리",
+      "clarity": "clear"
+    },
+    {
+      "token": "R067",
+      "name": "자동차",
+      "clarity": "weak"
+    },
+    {
+      "token": "R068",
+      "name": "불규칙 다각형",
+      "clarity": "none"
+    },
+    {
+      "token": "R069",
+      "name": "의자",
+      "clarity": "clear"
+    },
+    {
+      "token": "R070",
+      "name": "개",
+      "clarity": "weak"
+    },
+    {
+      "token": "R071",
+      "name": "물고기",
+      "clarity": "weak"
+    },
+    {
+      "token": "R072",
+      "name": "개",
+      "clarity": "clear"
+    },
+    {
+      "token": "R073",
+      "name": "의자",
+      "clarity": "weak"
+    },
+    {
+      "token": "R074",
+      "name": "물고기",
+      "clarity": "weak"
+    },
+    {
+      "token": "R075",
+      "name": "불규칙한 경계",
+      "clarity": "none"
+    }
+  ],
+  "namesScoresMethodsReferencesHidden": true,
+  "humanRecognitionMeasured": false
+}

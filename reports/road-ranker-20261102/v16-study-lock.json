@@ -1,0 +1,14 @@
+{
+  "files": {
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\eval\\recognition\\road-ranker-20261102\\diversity-v11.json": "d86bd5a68f297c28e7dc0db15f800e2a1ddc12129eed8b39df7ee0bca9006ff1",
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\eval\\recognition\\road-ranker-20261102\\v16-alternative1.json": "86122f4f7c951691ae2570b7a4d3c70c6ffef3c5a834558bf546be86d569e58e",
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\eval\\recognition\\road-ranker-20261102\\v16-alternative2.json": "40019ad005b84bc6c1302efbab9a867c08e2753ef2aa5c5a6cf735bfc3b5064a",
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\eval\\recognition\\road-ranker-20261102\\diversity-catalog-v11-review.json": "49da8a8eb4cd0e5705e781c2237390243489ef26ad29c624283bbceabd457de8",
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\reports\\road-ranker-20261102\\protocol-v16-pool.md": "8ccdcb2c1d0de09421390bc2077f394618e743b56df8d2eb00ccafa2f1b7ea4f",
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\public\\eval\\road-diversity-20261102\\mapping.json": "804f966f88cd7b68cb70d85714985124d5f21f3000c149ee9c5c58e2fb98200b",
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\public\\eval\\route-study-20261103-f\\mapping.json": "c8c00b6e74dfc42c4271d63ab7600266dfb1ae8ab6724c1d825542b248bae586",
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\public\\eval\\route-study-20261103-g\\mapping.json": "501e21368cef4bc4e974f9d63c00bff112c928bd01796020bf893de23d42f822"
+  },
+  "phase": "Frozen source/selection/mapping bytes before reading new AI results",
+  "newAIResultsRead": false
+}

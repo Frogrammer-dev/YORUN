@@ -1,0 +1,252 @@
+{
+  "groups": {
+    "animal": {
+      "classCount": 11,
+      "testCount": 114,
+      "macroAccuracyHead": 0.8133774722010017,
+      "macroAccuracyPrototype": 0.5324442936742403
+    },
+    "object": {
+      "classCount": 13,
+      "testCount": 144,
+      "macroAccuracyHead": 0.9293975255513717,
+      "macroAccuracyPrototype": 0.8253630984400215
+    },
+    "generic": {
+      "classCount": 8,
+      "testCount": 84,
+      "macroAccuracyHead": 0.9076298701298702,
+      "macroAccuracyPrototype": 0.8496347402597403
+    }
+  },
+  "classes": [
+    {
+      "class": "house",
+      "kind": "object",
+      "testCount": 12,
+      "headAccuracy": 0.8333333333333334,
+      "prototypeAccuracy": 0.8333333333333334
+    },
+    {
+      "class": "tree",
+      "kind": "object",
+      "testCount": 13,
+      "headAccuracy": 0.9230769230769231,
+      "prototypeAccuracy": 0.7692307692307693
+    },
+    {
+      "class": "car",
+      "kind": "object",
+      "testCount": 12,
+      "headAccuracy": 0.9166666666666666,
+      "prototypeAccuracy": 0.5833333333333334
+    },
+    {
+      "class": "coffee_cup",
+      "kind": "object",
+      "testCount": 11,
+      "headAccuracy": 1.0,
+      "prototypeAccuracy": 1.0
+    },
+    {
+      "class": "airplane",
+      "kind": "object",
+      "testCount": 10,
+      "headAccuracy": 0.7,
+      "prototypeAccuracy": 0.8
+    },
+    {
+      "class": "t-shirt",
+      "kind": "object",
+      "testCount": 12,
+      "headAccuracy": 1.0,
+      "prototypeAccuracy": 0.9166666666666666
+    },
+    {
+      "class": "pants",
+      "kind": "object",
+      "testCount": 10,
+      "headAccuracy": 0.9,
+      "prototypeAccuracy": 0.8
+    },
+    {
+      "class": "hammer",
+      "kind": "object",
+      "testCount": 10,
+      "headAccuracy": 0.9,
+      "prototypeAccuracy": 0.6
+    },
+    {
+      "class": "wine_bottle",
+      "kind": "object",
+      "testCount": 12,
+      "headAccuracy": 1.0,
+      "prototypeAccuracy": 0.9166666666666666
+    },
+    {
+      "class": "key",
+      "kind": "object",
+      "testCount": 9,
+      "headAccuracy": 1.0,
+      "prototypeAccuracy": 1.0
+    },
+    {
+      "class": "chair",
+      "kind": "object",
+      "testCount": 13,
+      "headAccuracy": 1.0,
+      "prototypeAccuracy": 0.6923076923076923
+    },
+    {
+      "class": "square",
+      "kind": "generic",
+      "testCount": 12,
+      "headAccuracy": 1.0,
+      "prototypeAccuracy": 1.0
+    },
+    {
+      "class": "circle",
+      "kind": "generic",
+      "testCount": 11,
+      "headAccuracy": 1.0,
+      "prototypeAccuracy": 0.8181818181818182
+    },
+    {
+      "class": "triangle",
+      "kind": "generic",
+      "testCount": 7,
+      "headAccuracy": 1.0,
+      "prototypeAccuracy": 1.0
+    },
+    {
+      "class": "hexagon",
+      "kind": "generic",
+      "testCount": 10,
+      "headAccuracy": 0.8,
+      "prototypeAccuracy": 0.5
+    },
+    {
+      "class": "octagon",
+      "kind": "generic",
+      "testCount": 14,
+      "headAccuracy": 0.6428571428571429,
+      "prototypeAccuracy": 0.7857142857142857
+    },
+    {
+      "class": "line",
+      "kind": "generic",
+      "testCount": 11,
+      "headAccuracy": 0.8181818181818182,
+      "prototypeAccuracy": 0.8181818181818182
+    },
+    {
+      "class": "zigzag",
+      "kind": "generic",
+      "testCount": 11,
+      "headAccuracy": 1.0,
+      "prototypeAccuracy": 1.0
+    },
+    {
+      "class": "map",
+      "kind": "generic",
+      "testCount": 8,
+      "headAccuracy": 1.0,
+      "prototypeAccuracy": 0.875
+    },
+    {
+      "class": "cat",
+      "kind": "animal",
+      "testCount": 13,
+      "headAccuracy": 1.0,
+      "prototypeAccuracy": 0.8461538461538461
+    },
+    {
+      "class": "fish",
+      "kind": "animal",
+      "testCount": 12,
+      "headAccuracy": 1.0,
+      "prototypeAccuracy": 0.9166666666666666
+    },
+    {
+      "class": "dog",
+      "kind": "animal",
+      "testCount": 9,
+      "headAccuracy": 0.3333333333333333,
+      "prototypeAccuracy": 0.2222222222222222
+    },
+    {
+      "class": "rabbit",
+      "kind": "animal",
+      "testCount": 5,
+      "headAccuracy": 1.0,
+      "prototypeAccuracy": 0.4
+    },
+    {
+      "class": "bird",
+      "kind": "animal",
+      "testCount": 8,
+      "headAccuracy": 0.5,
+      "prototypeAccuracy": 0.0
+    },
+    {
+      "class": "whale",
+      "kind": "animal",
+      "testCount": 14,
+      "headAccuracy": 0.7857142857142857,
+      "prototypeAccuracy": 0.5714285714285714
+    },
+    {
+      "class": "sea_turtle",
+      "kind": "animal",
+      "testCount": 9,
+      "headAccuracy": 0.8888888888888888,
+      "prototypeAccuracy": 0.7777777777777778
+    },
+    {
+      "class": "elephant",
+      "kind": "animal",
+      "testCount": 6,
+      "headAccuracy": 0.8333333333333334,
+      "prototypeAccuracy": 0.3333333333333333
+    },
+    {
+      "class": "giraffe",
+      "kind": "animal",
+      "testCount": 10,
+      "headAccuracy": 0.9,
+      "prototypeAccuracy": 0.8
+    },
+    {
+      "class": "butterfly",
+      "kind": "animal",
+      "testCount": 11,
+      "headAccuracy": 1.0,
+      "prototypeAccuracy": 0.6363636363636364
+    },
+    {
+      "class": "duck",
+      "kind": "animal",
+      "testCount": 17,
+      "headAccuracy": 0.7058823529411765,
+      "prototypeAccuracy": 0.35294117647058826
+    },
+    {
+      "class": "apple",
+      "kind": "object",
+      "testCount": 9,
+      "headAccuracy": 1.0,
+      "prototypeAccuracy": 1.0
+    },
+    {
+      "class": "crown",
+      "kind": "object",
+      "testCount": 11,
+      "headAccuracy": 0.9090909090909091,
+      "prototypeAccuracy": 0.8181818181818182
+    }
+  ],
+  "humanRecognitionMeasured": false,
+  "roadRecognitionMeasured": false,
+  "smallPerClassTestCounts": true,
+  "oldTestRecordsReused": true
+}

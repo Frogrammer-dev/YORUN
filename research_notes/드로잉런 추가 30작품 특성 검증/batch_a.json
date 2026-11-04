@@ -1,0 +1,114 @@
+[
+  {
+    "id": "A01", "title": "Dove holding an olive branch / I ran for peace & love", "creator": "AndersPonny", "activity_id": "8867144174",
+    "source_url": "https://stories.strava.com/articles/the-best-strava-art-of-2023",
+    "activity_url": "https://www.strava.com/activities/8867144174", "card_url": "https://strava-embeds.com/activity/8867144174",
+    "image_url": "https://dgtzuqphqg23d.cloudfront.net/yya_qrxAYMf-SwF8cjqTkxFW4INb2mhw5TQ85zfD_Ms-728x768.jpg",
+    "run_evidence": "공개 활동 카드의 Run 아이콘, 2023-04-10, 22.5 km를 확인했다. 공식 선집도 달리기로 설명한다.",
+    "visual_method": "cua_repl IAB에서 공개 카드와 카드 img src에 연결된 전체 GPS 지도 이미지를 직접 스크린샷 관찰", "visual_scope": "full route image; route-photo satellite background",
+    "internal_strokes": "no", "branch_or_open_strokes": "yes", "parts_relation": "yes",
+    "parts_evidence": "머리 앞 올리브 가지, 위로 뻗은 날개, 반대쪽 날개와 아래 꼬리의 배치가 보인다. 가지에 잎 고리와 분기점이 있다.",
+    "angular_road_noise": "uncertain", "simple_single_outline": "no",
+    "distance_km": 22.5, "distance_original": "22.5 km", "distance_source": "https://strava-embeds.com/activity/8867144174", "distance_3_to_8": "above_8",
+    "retracing_known": "unknown", "pause_known": "unknown", "composite_or_multi_session": "unknown",
+    "interpretation": "support: 부분 관계와 분기를 관찰했다. 단, 날개 톱니는 깃털 표현일 수 있으므로 도로 잡음으로 확정하지 않는다.",
+    "confidence": "high for visible route structure; uncertain for jaggedness origin",
+    "limitations": "제목을 먼저 본 관찰이다. 숲·산 배경 위 경로로 보이며 도로 그래프에 모든 선이 대응하는지, 왕복·일시정지 여부는 확인하지 않았다."
+  },
+  {
+    "id": "A02", "title": "Bigfoot", "creator": "Lenny Maughan", "activity_id": "9983912329",
+    "source_url": "https://stories.strava.com/articles/the-best-strava-art-of-2023", "activity_url": "https://www.strava.com/activities/9983912329", "card_url": "https://strava-embeds.com/activity/9983912329",
+    "image_url": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/3DXLZCSNKR62WTGU5V2FS7BBG7O32B624JV2QZ567N6H4YKAQGOEQJDS43VBXDX6BELTADT262PXOCAC7NPLW===",
+    "run_evidence": "공개 활동 카드 Run, 2023-10-04, 41.3 mi.", "visual_method": "IAB 공개 카드 확인 후 지도 img src를 직접 열어 전체 스크린샷 관찰", "visual_scope": "full route map, 540x405 intrinsic image",
+    "internal_strokes": "yes", "branch_or_open_strokes": "yes", "parts_relation": "yes",
+    "parts_evidence": "머리 안 얼굴의 작은 선, 몸 양옆의 팔, 아래로 벌어진 두 다리와 큰 발, 팔 안쪽 선이 보인다.",
+    "angular_road_noise": "yes", "simple_single_outline": "no", "distance_km": 66.4659072, "distance_original": "41.3 mi", "distance_source": "https://strava-embeds.com/activity/9983912329", "distance_3_to_8": "above_8",
+    "retracing_known": "unknown", "pause_known": "unknown", "composite_or_multi_session": "unknown",
+    "interpretation": "support: 얼굴·팔·다리의 관계와 내부 선이 함께 있다. 외곽에는 작은 직각 계단도 남아 있다.", "confidence": "high",
+    "limitations": "도로명과 흰 지도선을 작품 획으로 세지 않았다. 픽셀만으로 실제 교차 순서나 되돌아간 길의 비율을 알 수 없다."
+  },
+  {
+    "id": "A03", "title": "Rabbit Run", "creator": "Lenny Maughan", "activity_id": "8650056537",
+    "source_url": "https://stories.strava.com/articles/the-best-strava-art-of-2023", "activity_url": "https://www.strava.com/activities/8650056537", "card_url": "https://strava-embeds.com/activity/8650056537",
+    "image_url": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/7JZEBPI3DU64GALHMTM56OBUKXGVZZ6EDH2XOXTYYSFU33OOVY7SFI37T7Z5JRZWN7QOQ7GBRYMS2FKIAG2HA===",
+    "run_evidence": "공개 활동 카드 Run, 2023-03-01, 44.3 mi.", "visual_method": "IAB 공개 카드와 전체 지도 이미지 직접 스크린샷 관찰", "visual_scope": "full route map; central map labels obscure a small part of the face",
+    "internal_strokes": "yes", "branch_or_open_strokes": "yes", "parts_relation": "yes",
+    "parts_evidence": "긴 두 귀 안의 작은 윤곽, 머리 내부 얼굴과 양옆 수염, 몸통 안 앞발 형태, 아래 두 발의 배치가 보인다.",
+    "angular_road_noise": "yes", "simple_single_outline": "no", "distance_km": 71.2939392, "distance_original": "44.3 mi", "distance_source": "https://strava-embeds.com/activity/8650056537", "distance_3_to_8": "above_8",
+    "retracing_known": "unknown", "pause_known": "unknown", "composite_or_multi_session": "unknown",
+    "interpretation": "support: 내부 획과 부분 배치가 분명한 복합 예시이다.", "confidence": "high for ears, whiskers, body; medium for small face detail",
+    "limitations": "San Francisco/Western Addition 지도 글씨가 얼굴 일부를 가린다. 가려진 눈의 세부나 개별 획 수를 단정하지 않았다."
+  },
+  {
+    "id": "A04", "title": "United States outline / USA emoji run", "creator": "Gustavo Lyra", "activity_id": "1070128185",
+    "source_url": "https://stories.strava.com/articles/around-the-world-in-strava-art", "activity_url": "https://www.strava.com/activities/1070128185", "card_url": "https://strava-embeds.com/activity/1070128185",
+    "image_url": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/YAVF7OJI77BAOL25ME2HRQP2FFORJTAKPHD3KSKL66ZGAAWLGQGL2COOQJMKQ7XFC3AHR2DFSVLJA6PIDMZNG===",
+    "run_evidence": "공개 카드 Run, 2017-07-06, 6.8 km. 공식 선집도 브라질 Extremoz의 달리기로 설명한다.", "visual_method": "IAB 공개 카드와 전체 지도 이미지 직접 스크린샷 관찰", "visual_scope": "full route map",
+    "internal_strokes": "uncertain", "branch_or_open_strokes": "uncertain", "parts_relation": "no", "parts_evidence": "나라의 해안선에 해당하는 윤곽 중심이다. 뚜렷한 내부 사물 또는 두 의미 부분의 배치는 확인하지 않았다. 오대호 쪽 작은 고리·교차처럼 보이는 구간 때문에 정확한 단일 윤곽 여부는 불확실하다.",
+    "angular_road_noise": "no", "simple_single_outline": "uncertain", "distance_km": 6.8, "distance_original": "6.8 km", "distance_source": "https://strava-embeds.com/activity/1070128185", "distance_3_to_8": "within_3_to_8",
+    "retracing_known": "unknown", "pause_known": "unknown", "composite_or_multi_session": "unknown",
+    "interpretation": "qualify: 장거리가 필수라는 일반화의 반례이자 윤곽 중심의 짧은 작품. 미세한 고리 때문에 내부선 없는 단일 폐윤곽의 확정 반례로는 사용하지 않는다.", "confidence": "high for overall outline and short distance; uncertain for small Great Lakes crossing",
+    "limitations": "B 교차 코딩의 작은 고리 지적 후 A가 이미지를 다시 보고 internal/branch/simple을 uncertain으로 정정했다. 원지도는 도로가 거의 표시되지 않는 영역이다. 3~8 km라는 거리 조건은 맞지만 실제 도로만 사용했는지 입증하지 못했다."
+  },
+  {
+    "id": "A05", "title": "Brazil and Christ the Redeemer / Homenagem do dia 7 antecipada", "creator": "Gustavo Lyra", "activity_id": "1169121152",
+    "source_url": "https://stories.strava.com/articles/around-the-world-in-strava-art", "activity_url": "https://www.strava.com/activities/1169121152", "card_url": "https://strava-embeds.com/activity/1169121152",
+    "image_url": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/2COBF43BDHXMCJRQPWJWIGRMS5DGENCAZQ7B7VA7WAXI4KK5BOWUASN2ERR67DJLJI2LVM4CZ4YUQLUAFXDUIAI=",
+    "run_evidence": "공개 카드 Run, 2017-09-05, 27.2 km. 공식 선집은 동일 창작자의 브라질 지도와 예수상으로 소개한다.", "visual_method": "IAB 공개 카드와 전체 지도 이미지 직접 스크린샷 관찰", "visual_scope": "full route map, thin orange route lines",
+    "internal_strokes": "yes", "branch_or_open_strokes": "yes", "parts_relation": "yes", "parts_evidence": "브라질 외곽 안에 예수상의 머리·양팔·긴 몸통과 의복 내부 선이 배치되어 있다.",
+    "angular_road_noise": "no", "simple_single_outline": "no", "distance_km": 27.2, "distance_original": "27.2 km", "distance_source": "https://strava-embeds.com/activity/1169121152", "distance_3_to_8": "above_8",
+    "retracing_known": "unknown", "pause_known": "unknown", "composite_or_multi_session": "unknown", "interpretation": "support: 큰 외곽과 내부 인물 구조가 결합된다. 같은 창작자의 A04와 대비되지만 거리와 표면 등 여러 요인이 달라 복잡도 원인 분석은 아니다.", "confidence": "high for main structures; medium for fine clothing lines",
+    "limitations": "선이 얇아 아주 작은 내부 획은 셀 수 없다. 원지도는 대부분 비도로 영역처럼 보이지만 실제 표면과 모든 도로 대응은 미확인이다."
+  },
+  {
+    "id": "A06", "title": "Tour de France Parisien", "creator": "Yann Cressent", "activity_id": "6644632131",
+    "source_url": "https://stories.strava.com/articles/around-the-world-in-strava-art", "activity_url": "https://www.strava.com/activities/6644632131", "card_url": "https://strava-embeds.com/activity/6644632131",
+    "image_url": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/PVZKX6NL7GYCMHTU6OUFSUANPC6LDVGVKSNFMYZD6U736DGIHUU7GGFUXRDJWCLKRHOEFX7JBD6NAB4I3LZ3W===",
+    "run_evidence": "공개 카드 Run, 2022-02-07, 43.3 km.", "visual_method": "IAB 공개 카드와 전체 지도 이미지 직접 스크린샷 관찰", "visual_scope": "full route map",
+    "internal_strokes": "no", "branch_or_open_strokes": "yes", "parts_relation": "no", "parts_evidence": "프랑스 모양의 주 외곽은 보이나 눈-얼굴 같은 의미 부분의 관계는 없다. 오른쪽 위에 Y자형 열린 접근 획이 추가되어 있다.",
+    "angular_road_noise": "yes", "simple_single_outline": "no", "distance_km": 43.3, "distance_original": "43.3 km", "distance_source": "https://strava-embeds.com/activity/6644632131", "distance_3_to_8": "above_8",
+    "retracing_known": "unknown", "pause_known": "unknown", "composite_or_multi_session": "unknown", "interpretation": "qualify: 내부 획 없이 외곽이 주인 장거리 작품이다. 완벽한 단일 폐고리는 아니므로 단순 폐윤곽 yes로 넣지 않았다.", "confidence": "high",
+    "limitations": "열린 접근 획의 실제 시작/종료·왕복 여부는 지도 이미지에서 확정할 수 없다."
+  },
+  {
+    "id": "A07", "title": "BREXIT! or: Goodbye Friend, I Will Miss EU", "creator": "Nathan Rae", "activity_id": "3053163808",
+    "source_url": "https://stories.strava.com/articles/around-the-world-in-strava-art", "activity_url": "https://www.strava.com/activities/3053163808", "card_url": "https://strava-embeds.com/activity/3053163808",
+    "image_url": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/AG6GETHJ2RNQV7YZGPVIVMPH5BMNA5I5P557SDOF23BWUIH7UKJOUOKDVU67RBZIGMYKCBWGTSSAPAI5TWARS===",
+    "run_evidence": "공개 카드 Run, 2020-01-28, 63.4 km. 창작자 활동 설명도 실행과 도로·공원·수로 제약을 맞추는 설계의 어려움을 직접 서술한다.", "visual_method": "IAB 공개 카드 본문과 전체 지도 이미지 직접 스크린샷 관찰", "visual_scope": "full route map, small central map label overlap",
+    "internal_strokes": "no", "branch_or_open_strokes": "no", "parts_relation": "no", "parts_evidence": "영국 본섬 형태의 하나의 해안 윤곽이 주이며 내부 사물이나 의미 부분 간 배치는 관찰하지 않았다.",
+    "angular_road_noise": "yes", "simple_single_outline": "yes", "distance_km": 63.4, "distance_original": "63.4 km", "distance_source": "https://strava-embeds.com/activity/3053163808", "distance_3_to_8": "above_8",
+    "retracing_known": "unknown", "pause_known": "unknown", "composite_or_multi_session": "unknown", "interpretation": "counter to universal internal-parts claim; support for deliberate road-constrained planning. 장거리와 내부 획은 같은 축이 아니다.", "confidence": "medium-high; outline visible, exact topology not audited",
+    "limitations": "중앙 지도 글씨가 작은 일부를 가린다. GPX가 없어 이미지상 닫힌 윤곽 판정이며 왕복·일시정지 여부는 알 수 없다. 창작자 본문 38 mile와 카드 63.4 km는 다르므로 표시된 카드값을 사용한다."
+  },
+  {
+    "id": "A08", "title": "50th BDay World Map Run", "creator": "Peter GPS Artist / Big Bird GPS Art", "activity_id": "12067605647",
+    "source_url": "https://stories.strava.com/articles/around-the-world-in-strava-art", "activity_url": "https://www.strava.com/activities/12067605647", "card_url": "https://strava-embeds.com/activity/12067605647",
+    "image_url": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/5PDB7NLD4LBYN5GW572MTUPZ3MLAMHIKBPDETOXQRDSC2VMAU7JOOFQ5FX5AAQSO63YQ3F2I3TZUM4MLEX7YW===",
+    "run_evidence": "공개 카드 Run, 2024-08-03, 169.6 km. 본인 설명에 세 아침·세 번의 울트라 달리기라고 명시되어 있다.", "visual_method": "IAB 공개 카드와 전체 지도 이미지 직접 스크린샷 관찰", "visual_scope": "full route map; black GPS line",
+    "internal_strokes": "yes", "branch_or_open_strokes": "yes", "parts_relation": "yes", "parts_evidence": "아메리카가 왼쪽, 아프리카·유라시아가 중앙/오른쪽, 호주·뉴질랜드가 오른쪽 아래인 여러 윤곽이 보인다. 남아메리카·아프리카의 윤곽 안을 가로지르는 검은 연결 선이 있어 internal=yes이다. 의미 세부선이 아니라 연결 획일 수 있다.",
+    "angular_road_noise": "yes", "simple_single_outline": "no", "distance_km": 169.6, "distance_original": "169.6 km total; three mornings / three ultra runs", "distance_source": "https://strava-embeds.com/activity/12067605647", "distance_3_to_8": "above_8_total_multisession",
+    "retracing_known": "unknown", "pause_known": "unknown; creator specifically denies stop/start dot-connecting technique, not all overnight pauses", "composite_or_multi_session": "yes: three mornings, three runs, total card distance",
+    "interpretation": "support for multi-part layout; qualify any claim that detailed GPS pictures necessarily require artificial straight-line pause connections. 일반적인 단일 연속 달리기 거리 통계와 분리한다.", "confidence": "high for map layout, interior connector strokes and multi-session",
+    "limitations": "B 교차 의견 후 A 재관찰에서 검은 연결 선이 대륙 내부를 가로지름을 확인해 internal을 uncertain에서 yes로 정정했다. 본인 no stop/start는 점 연결 기법을 쓰지 않았다는 진술로만 읽는다. 3회 실행 사이 앱 기록 결합 방식·밤사이 정지 여부·원본 GPX는 미확인이다. 카드 총169.6 km와 사진 설명 약173 km(이탈 추가거리 포함)는 구분한다."
+  },
+  {
+    "id": "A09", "title": "Road Runner", "creator": "Lenny Maughan", "activity_id": "12387505517",
+    "source_url": "https://stories.strava.com/articles/spotted-on-strava-pogis-triple-crown-berlin-marathon-and-the-road-runner", "activity_url": "https://www.strava.com/activities/12387505517", "card_url": "https://strava-embeds.com/activity/12387505517",
+    "image_url": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/SJUK5XAYU76TMIYC7MVPLOUH56ORYJX37RDBHKWT5WJEB3K2U4J3NDRPLDLAKJKHPVFTUPF5RWFV7R2DUTQJ6===",
+    "run_evidence": "공개 카드 Run, 2024-09-11, 8.9 mi. 공식 기사도 Golden Gate Park의 달리기와 트랙 반복을 설명한다.", "visual_method": "IAB 공개 카드와 전체 지도 이미지 직접 스크린샷 관찰", "visual_scope": "full route map",
+    "internal_strokes": "yes", "branch_or_open_strokes": "yes", "parts_relation": "yes", "parts_evidence": "오른쪽 머리의 눈·부리, 목-큰 몸통, 왼쪽 꼬리 깃과 아래 다리/트랙 고리의 배치가 보인다. 머리 내부 작은 고리가 있다.",
+    "angular_road_noise": "yes", "simple_single_outline": "no", "distance_km": 14.3231616, "distance_original": "8.9 mi", "distance_source": "https://strava-embeds.com/activity/12387505517", "distance_3_to_8": "above_8",
+    "retracing_known": "yes: official article explicitly describes laps of the track; no numeric repeated-edge ratio", "pause_known": "unknown", "composite_or_multi_session": "unknown", "interpretation": "support: 관계가 있는 여러 부분과 반복된 트랙 고리가 운동 표현을 만든다. 전체 반복률이나 최적성이 입증된 것은 아니다.", "confidence": "high",
+    "limitations": "기사의 반복 트랙 확인을 다른 경로 전체의 왕복 사실로 확장하지 않았다. 지도에서 겹쳐 보이는 획만으로 반복 주행 비율을 계산할 수 없다."
+  },
+  {
+    "id": "A10", "title": "Thumbs up / Art class", "creator": "Howard Calvert", "activity_id": "12426173264",
+    "source_url": "https://stories.strava.com/articles/how-hard-is-it-to-make-strava-art", "activity_url": "https://www.strava.com/activities/12426173264", "card_url": "https://strava-embeds.com/activity/12426173264",
+    "image_url": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/NHYE2CG3MLMZAFR6OE5WHMEFPAHLJLSLMESWMRJWZTJDOXNEKJTUD2VDTMRCEHZHUHKK2JNUHEOKHLLC7ECC2===",
+    "run_evidence": "공개 카드 Run, 2024-09-16, 5.3 km. 본인 기사에서 루트 설계와 실제 달리기를 설명하고 이 활동을 thumbs up으로 연결한다.", "visual_method": "IAB 공개 카드와 전체 지도 이미지 직접 스크린샷 관찰", "visual_scope": "full route map",
+    "internal_strokes": "yes", "branch_or_open_strokes": "yes", "parts_relation": "yes", "parts_evidence": "위로 튀어나온 엄지, 오른쪽 큰 손바닥, 왼쪽 커프 영역을 구분하는 내부 선이 보인다. 커프 경계선이 외곽에 붙으며 분기점을 만든다.",
+    "angular_road_noise": "no", "simple_single_outline": "no", "distance_km": 5.3, "distance_original": "5.3 km", "distance_source": "https://strava-embeds.com/activity/12426173264", "distance_3_to_8": "within_3_to_8",
+    "retracing_known": "unknown", "pause_known": "unknown", "composite_or_multi_session": "unknown", "interpretation": "qualify: 3~8 km에서도 간단한 내부 구분선과 부분 관계를 담을 수 있다. 내부 획=장거리라는 이분법을 지지하지 않는다.", "confidence": "high",
+    "limitations": "제목을 먼저 본 판정이며 사용자에게 실제 엄지로 인식되는지는 시험하지 않았다. 주행 전체의 도로 접근성·왕복률은 미확인이다."
+  }
+]

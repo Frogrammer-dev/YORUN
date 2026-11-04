@@ -1,0 +1,161 @@
+{
+  "geometry": {
+    "clearTarget": 8,
+    "clearAny": 8,
+    "excludingHumanDevRequest": 8,
+    "raters": [
+      {
+        "clearAny": 0,
+        "reused": 75
+      },
+      {
+        "clearAny": 10,
+        "reused": 75
+      },
+      {
+        "clearAny": 11,
+        "reused": 75
+      }
+    ],
+    "targetClearCases": [
+      [
+        "cheonan-buldang",
+        "fish"
+      ],
+      [
+        "cheonan-buldang",
+        "pants"
+      ],
+      [
+        "cheonan-buldang",
+        "chair"
+      ],
+      [
+        "jeonju-hyoja",
+        "duck"
+      ],
+      [
+        "jeonju-hyoja",
+        "pants"
+      ],
+      [
+        "ulsan-samsan",
+        "tshirt"
+      ],
+      [
+        "ulsan-samsan",
+        "pants"
+      ],
+      [
+        "ulsan-samsan",
+        "hammer"
+      ]
+    ]
+  },
+  "hand": {
+    "clearTarget": 8,
+    "clearAny": 9,
+    "excludingHumanDevRequest": 7,
+    "raters": [
+      {
+        "clearAny": 0,
+        "reused": 48
+      },
+      {
+        "clearAny": 10,
+        "reused": 48
+      },
+      {
+        "clearAny": 12,
+        "reused": 48
+      }
+    ],
+    "targetClearCases": [
+      [
+        "cheonan-buldang",
+        "fish"
+      ],
+      [
+        "cheonan-buldang",
+        "pants"
+      ],
+      [
+        "cheonan-buldang",
+        "chair"
+      ],
+      [
+        "jeonju-hyoja",
+        "pants"
+      ],
+      [
+        "ulsan-samsan",
+        "dog"
+      ],
+      [
+        "ulsan-samsan",
+        "tshirt"
+      ],
+      [
+        "ulsan-samsan",
+        "pants"
+      ],
+      [
+        "ulsan-samsan",
+        "hammer"
+      ]
+    ]
+  },
+  "image": {
+    "clearTarget": 8,
+    "clearAny": 9,
+    "excludingHumanDevRequest": 7,
+    "raters": [
+      {
+        "clearAny": 0,
+        "reused": 42
+      },
+      {
+        "clearAny": 10,
+        "reused": 42
+      },
+      {
+        "clearAny": 12,
+        "reused": 42
+      }
+    ],
+    "targetClearCases": [
+      [
+        "cheonan-buldang",
+        "fish"
+      ],
+      [
+        "cheonan-buldang",
+        "pants"
+      ],
+      [
+        "cheonan-buldang",
+        "chair"
+      ],
+      [
+        "jeonju-hyoja",
+        "pants"
+      ],
+      [
+        "ulsan-samsan",
+        "dog"
+      ],
+      [
+        "ulsan-samsan",
+        "tshirt"
+      ],
+      [
+        "ulsan-samsan",
+        "pants"
+      ],
+      [
+        "ulsan-samsan",
+        "hammer"
+      ]
+    ]
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "fingerprint": "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347",
+  "evaluatorAgent": "01a19aed-73d8-7662-81ef-5d6ec2287589",
+  "evaluationType": "AI surrogate, not human evaluation",
+  "results": [
+    {
+      "token": "R001",
+      "name": "자동차",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R002",
+      "name": "티셔츠",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R003",
+      "name": "나무",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R004",
+      "name": "기린",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R005",
+      "name": "바지",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R006",
+      "name": "나무",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R007",
+      "name": "바지",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R008",
+      "name": "망치",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R009",
+      "name": "기린",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R010",
+      "name": "의자",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R011",
+      "name": "바지",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R012",
+      "name": "티셔츠",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R013",
+      "name": "물고기",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R014",
+      "name": "망치",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R015",
+      "name": "티셔츠",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R016",
+      "name": "자동차",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R017",
+      "name": "의자",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    }
+  ],
+  "exactPixelRatingsReused": 14,
+  "bridgeFingerprint": "f2213c6a2962ae5304d0474193b1a04e35248a5753115cc2e563985f7e7e8bbf",
+  "humanRecognitionMeasured": false
+}

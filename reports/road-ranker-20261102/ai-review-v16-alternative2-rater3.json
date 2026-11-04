@@ -1,0 +1,412 @@
+{
+  "fingerprint": "1bf0afd74a6cae68f6a8f114ab9fc2f8e3fc32518b2104f2267061367af914c1",
+  "evaluatorAgent": "01a19b0b-13a1-7340-89c7-095b3dc85ed2",
+  "evaluationType": "AI surrogate, not human evaluation",
+  "results": [
+    {
+      "token": "R001",
+      "name": "자동차",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R002",
+      "name": "티셔츠",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R003",
+      "name": "나무",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R004",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R005",
+      "name": "열쇠",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R006",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R007",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R008",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R009",
+      "name": "기린",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R010",
+      "name": "바지",
+      "clarity": "clear",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R011",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R012",
+      "name": "코끼리",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R013",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R014",
+      "name": "나무",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R015",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R016",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R017",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R018",
+      "name": "기린",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R019",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R020",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R021",
+      "name": "코끼리",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R022",
+      "name": "기린",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R023",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R024",
+      "name": "의자",
+      "clarity": "clear",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R025",
+      "name": "바지",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R026",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R027",
+      "name": "오리",
+      "clarity": "clear",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R028",
+      "name": "의자",
+      "clarity": "clear",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R029",
+      "name": "오리",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R030",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R031",
+      "name": "냄비",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R032",
+      "name": "병",
+      "clarity": "clear",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R033",
+      "name": "말",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R034",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R035",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R036",
+      "name": "나무",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R037",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R038",
+      "name": "반팔 티셔츠",
+      "clarity": "clear",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R039",
+      "name": "물고기",
+      "clarity": "clear",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R040",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R041",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R042",
+      "name": "물고기",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R043",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R044",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R045",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R046",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R047",
+      "name": "물고기",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R048",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R049",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R050",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R051",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R052",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R053",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R054",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R055",
+      "name": "냄비",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R056",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R057",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R058",
+      "name": "망치",
+      "clarity": "clear",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R059",
+      "name": "병",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R060",
+      "name": "코끼리",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R061",
+      "name": "자동차",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R062",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R063",
+      "name": "개",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R064",
+      "name": "고슴도치",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R065",
+      "name": "개",
+      "clarity": "clear",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R066",
+      "name": "물고기",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R067",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    }
+  ],
+  "exactPixelRatingsReused": 3,
+  "bridgeFingerprint": "dd75dbbd1daef82043bb848f83fdc0ae701304b10ebc3d04dfcefad34b7e6913",
+  "humanRecognitionMeasured": false
+}

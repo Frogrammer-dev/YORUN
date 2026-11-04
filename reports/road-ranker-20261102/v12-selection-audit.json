@@ -1,0 +1,93 @@
+{
+  "methods": {
+    "head": {
+      "selected": 17,
+      "abstentions": 58,
+      "byKind": {
+        "cat": 0,
+        "fish": 1,
+        "dog": 0,
+        "rabbit": 0,
+        "bird": 0,
+        "whale": 0,
+        "turtle": 0,
+        "elephant": 0,
+        "giraffe": 2,
+        "butterfly": 0,
+        "duck": 0,
+        "house": 0,
+        "tree": 2,
+        "car": 2,
+        "rocket": 0,
+        "apple": 0,
+        "crown": 0,
+        "airplane": 0,
+        "mug": 0,
+        "tshirt": 3,
+        "pants": 3,
+        "hammer": 2,
+        "bottle": 0,
+        "key": 0,
+        "chair": 2
+      },
+      "speciesWithTwoAvailableRequests": {
+        "animal": [
+          "giraffe"
+        ],
+        "object": [
+          "tree",
+          "car",
+          "tshirt",
+          "pants",
+          "hammer",
+          "chair"
+        ]
+      },
+      "diversityCriterionPossible": false,
+      "sourceRowsAndGenerationCountsExactlyPreserved": true
+    },
+    "prototype": {
+      "selected": 7,
+      "abstentions": 68,
+      "byKind": {
+        "cat": 0,
+        "fish": 0,
+        "dog": 0,
+        "rabbit": 0,
+        "bird": 0,
+        "whale": 0,
+        "turtle": 0,
+        "elephant": 0,
+        "giraffe": 1,
+        "butterfly": 0,
+        "duck": 0,
+        "house": 0,
+        "tree": 0,
+        "car": 0,
+        "rocket": 0,
+        "apple": 0,
+        "crown": 0,
+        "airplane": 0,
+        "mug": 0,
+        "tshirt": 3,
+        "pants": 2,
+        "hammer": 1,
+        "bottle": 0,
+        "key": 0,
+        "chair": 0
+      },
+      "speciesWithTwoAvailableRequests": {
+        "animal": [],
+        "object": [
+          "tshirt",
+          "pants"
+        ]
+      },
+      "diversityCriterionPossible": false,
+      "sourceRowsAndGenerationCountsExactlyPreserved": true
+    }
+  },
+  "requests": 75,
+  "criterionEvaluatedBeforeNewAIJudgments": true,
+  "humanRecognitionMeasured": false
+}

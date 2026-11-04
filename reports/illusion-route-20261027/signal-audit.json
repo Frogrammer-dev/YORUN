@@ -1,0 +1,1020 @@
+{
+  "sourceHash": "48c8f8ddcc405f8bcd144edfab58f07ff0d3f9010061b1044b0fcd8eedabe3f7",
+  "scriptHash": "df9fed0062b215e92086b391ffb4a9773ec8f989abf29a41cabdf85e37ca0810",
+  "diagnostic": true,
+  "learnedModelInference": false,
+  "humanRecognitionMeasured": false,
+  "pathsModified": false,
+  "summary": {
+    "outputs": 18,
+    "cosineIncreasedAtSigma8": 18,
+    "meanInkRetention": 0.984653382197298,
+    "meanEnergyRetention": 0.14505462697548144,
+    "meanPeakContrastSigma8": 0.24008714596949896,
+    "meanDarkPixelsSigma8": 0
+  },
+  "policies": [
+    {
+      "sigma": 0,
+      "meanGeometry": 66.21572808237727,
+      "negativeWins": 0,
+      "selected": [
+        {
+          "caseId": "daejeon-dunsan-animal",
+          "mode": "feature",
+          "geometry": 60.474722023043626,
+          "negativeWins": false
+        },
+        {
+          "caseId": "daejeon-dunsan-object",
+          "mode": "feature",
+          "geometry": 51.675230599985355,
+          "negativeWins": false
+        },
+        {
+          "caseId": "daegu-center-animal",
+          "mode": "original",
+          "geometry": 78.22529096487574,
+          "negativeWins": false
+        },
+        {
+          "caseId": "daegu-center-object",
+          "mode": "uniform",
+          "geometry": 57.552370307325816,
+          "negativeWins": false
+        },
+        {
+          "caseId": "seoul-songpa-animal",
+          "mode": "original",
+          "geometry": 73.82774051723172,
+          "negativeWins": false
+        },
+        {
+          "caseId": "seoul-songpa-object",
+          "mode": "original",
+          "geometry": 75.5390140818014,
+          "negativeWins": false
+        }
+      ]
+    },
+    {
+      "sigma": 2,
+      "meanGeometry": 65.04350206622838,
+      "negativeWins": 0,
+      "selected": [
+        {
+          "caseId": "daejeon-dunsan-animal",
+          "mode": "feature",
+          "geometry": 60.474722023043626,
+          "negativeWins": false
+        },
+        {
+          "caseId": "daejeon-dunsan-object",
+          "mode": "original",
+          "geometry": 71.59388926109273,
+          "negativeWins": false
+        },
+        {
+          "caseId": "daegu-center-animal",
+          "mode": "original",
+          "geometry": 78.22529096487574,
+          "negativeWins": false
+        },
+        {
+          "caseId": "daegu-center-object",
+          "mode": "uniform",
+          "geometry": 57.552370307325816,
+          "negativeWins": false
+        },
+        {
+          "caseId": "seoul-songpa-animal",
+          "mode": "uniform",
+          "geometry": 46.87572575923097,
+          "negativeWins": false
+        },
+        {
+          "caseId": "seoul-songpa-object",
+          "mode": "original",
+          "geometry": 75.5390140818014,
+          "negativeWins": false
+        }
+      ]
+    },
+    {
+      "sigma": 4,
+      "meanGeometry": 65.04350206622838,
+      "negativeWins": 0,
+      "selected": [
+        {
+          "caseId": "daejeon-dunsan-animal",
+          "mode": "feature",
+          "geometry": 60.474722023043626,
+          "negativeWins": false
+        },
+        {
+          "caseId": "daejeon-dunsan-object",
+          "mode": "original",
+          "geometry": 71.59388926109273,
+          "negativeWins": false
+        },
+        {
+          "caseId": "daegu-center-animal",
+          "mode": "original",
+          "geometry": 78.22529096487574,
+          "negativeWins": false
+        },
+        {
+          "caseId": "daegu-center-object",
+          "mode": "uniform",
+          "geometry": 57.552370307325816,
+          "negativeWins": false
+        },
+        {
+          "caseId": "seoul-songpa-animal",
+          "mode": "uniform",
+          "geometry": 46.87572575923097,
+          "negativeWins": false
+        },
+        {
+          "caseId": "seoul-songpa-object",
+          "mode": "original",
+          "geometry": 75.5390140818014,
+          "negativeWins": false
+        }
+      ]
+    },
+    {
+      "sigma": 8,
+      "meanGeometry": 65.04350206622838,
+      "negativeWins": 0,
+      "selected": [
+        {
+          "caseId": "daejeon-dunsan-animal",
+          "mode": "feature",
+          "geometry": 60.474722023043626,
+          "negativeWins": false
+        },
+        {
+          "caseId": "daejeon-dunsan-object",
+          "mode": "original",
+          "geometry": 71.59388926109273,
+          "negativeWins": false
+        },
+        {
+          "caseId": "daegu-center-animal",
+          "mode": "original",
+          "geometry": 78.22529096487574,
+          "negativeWins": false
+        },
+        {
+          "caseId": "daegu-center-object",
+          "mode": "uniform",
+          "geometry": 57.552370307325816,
+          "negativeWins": false
+        },
+        {
+          "caseId": "seoul-songpa-animal",
+          "mode": "uniform",
+          "geometry": 46.87572575923097,
+          "negativeWins": false
+        },
+        {
+          "caseId": "seoul-songpa-object",
+          "mode": "original",
+          "geometry": 75.5390140818014,
+          "negativeWins": false
+        }
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "caseId": "daejeon-dunsan-animal",
+      "mode": "original",
+      "selected": false,
+      "scoreGain": 0.589963126023268,
+      "inkRetention": 0.9856000738603612,
+      "energyRetention": 0.14807008911511635,
+      "levels": [
+        {
+          "sigma": 0,
+          "cosine": 0.1447890821844332,
+          "ink": 2718.4235294117693,
+          "energy": 2450.1209996155308,
+          "peakContrast": 1,
+          "darkPixels": 2735,
+          "pngHash": "8f9f8fe9d74ec016219d3ea752e674854999b0b8da60aea7f24d7e81312df187"
+        },
+        {
+          "sigma": 2,
+          "cosine": 0.29124410144493257,
+          "ink": 2718.0509803920154,
+          "energy": 1234.300915032671,
+          "peakContrast": 0.7647058823529411,
+          "darkPixels": 2444,
+          "pngHash": "57564a3537a5204beacdf9638f62f250b837cb2f895b9f4c83a01124467d0720"
+        },
+        {
+          "sigma": 4,
+          "cosine": 0.5005969436005253,
+          "ink": 2677.6901960782716,
+          "energy": 660.4800153787013,
+          "peakContrast": 0.44313725490196076,
+          "darkPixels": 0,
+          "pngHash": "b3182bf8989c9ef3d586500b2da0458d3819f3ff518d79873f753f488cd9b840"
+        },
+        {
+          "sigma": 8,
+          "cosine": 0.7347522082077012,
+          "ink": 2679.2784313719835,
+          "energy": 362.7896347558896,
+          "peakContrast": 0.2627450980392157,
+          "darkPixels": 0,
+          "pngHash": "6c1fba69ab95d6a981145b89e3679260503928dec345a13bd1445570d77e4073"
+        }
+      ]
+    },
+    {
+      "caseId": "daejeon-dunsan-animal",
+      "mode": "uniform",
+      "selected": false,
+      "scoreGain": 0.5961253164717537,
+      "inkRetention": 0.9856867890049056,
+      "energyRetention": 0.14963354670501938,
+      "levels": [
+        {
+          "sigma": 0,
+          "cosine": 0.15701020824852713,
+          "ink": 2815.7176470588265,
+          "energy": 2535.395924644365,
+          "peakContrast": 1,
+          "darkPixels": 2833,
+          "pngHash": "e73708eea04986219301fefdbebd6f2d545588a0476a1ff235e971a8b88409c9"
+        },
+        {
+          "sigma": 2,
+          "cosine": 0.307421204290791,
+          "ink": 2815.3607843135696,
+          "energy": 1282.1059131103336,
+          "peakContrast": 0.7725490196078432,
+          "darkPixels": 2521,
+          "pngHash": "ae0fa4a54245946a106860e2e8c2fa2184c21910f224ac06aade04d783c082c1"
+        },
+        {
+          "sigma": 4,
+          "cosine": 0.5192402412746044,
+          "ink": 2773.8039215684726,
+          "energy": 689.3138946559022,
+          "peakContrast": 0.4470588235294118,
+          "darkPixels": 0,
+          "pngHash": "393bbd54cd6a4ef5eb67620b5577bd6cab4aad74c2eca381f555a4285e03b180"
+        },
+        {
+          "sigma": 8,
+          "cosine": 0.7531355247202808,
+          "ink": 2775.415686273863,
+          "energy": 379.3802845059884,
+          "peakContrast": 0.2784313725490196,
+          "darkPixels": 0,
+          "pngHash": "ee8a7a1ccbbc5f9be2e1be64f28cb7a3931cdf88f9ce9b4a032937b35f9928bc"
+        }
+      ]
+    },
+    {
+      "caseId": "daejeon-dunsan-animal",
+      "mode": "feature",
+      "selected": true,
+      "scoreGain": 0.6083641202895294,
+      "inkRetention": 0.9858851224230415,
+      "energyRetention": 0.15063411345025446,
+      "levels": [
+        {
+          "sigma": 0,
+          "cosine": 0.15846837915308182,
+          "ink": 2895.2901960784343,
+          "energy": 2607.037031910803,
+          "peakContrast": 1,
+          "darkPixels": 2913,
+          "pngHash": "e198633c2e42ed240bedcb19c23c36abdbad44e655b8ccbd95f4b53619bb7a4a"
+        },
+        {
+          "sigma": 2,
+          "cosine": 0.3124509737216621,
+          "ink": 2894.992156862574,
+          "energy": 1318.2887658592724,
+          "peakContrast": 0.7647058823529411,
+          "darkPixels": 2594,
+          "pngHash": "dc6b98a0dcf8726bb0d558044c33501fcf378247ee40527fabf8d61765522d10"
+        },
+        {
+          "sigma": 4,
+          "cosine": 0.5323430569266774,
+          "ink": 2852.4627450978783,
+          "energy": 708.6034294502101,
+          "peakContrast": 0.44313725490196076,
+          "darkPixels": 0,
+          "pngHash": "ef898a68fc472cbba9b69f6e614f66e2f87a857e47e8a453fec29523e9e937e9"
+        },
+        {
+          "sigma": 8,
+          "cosine": 0.7668324994426111,
+          "ink": 2854.423529411019,
+          "energy": 392.7087120338665,
+          "peakContrast": 0.2627450980392157,
+          "darkPixels": 0,
+          "pngHash": "d69a09bf248c4ce4a933b4c8ed97cc825eac25c1e50de30cb7112a87e931b682"
+        }
+      ]
+    },
+    {
+      "caseId": "daejeon-dunsan-object",
+      "mode": "original",
+      "selected": true,
+      "scoreGain": 0.6098973537269603,
+      "inkRetention": 0.986040903571732,
+      "energyRetention": 0.14934046774139598,
+      "levels": [
+        {
+          "sigma": 0,
+          "cosine": 0.17484697077518513,
+          "ink": 4208.65490196079,
+          "energy": 3748.9980622837365,
+          "peakContrast": 1,
+          "darkPixels": 4202,
+          "pngHash": "f55882598e0170a2a4bfaa997279128ed4f931b093d8c0cadb6110154e2db3e6"
+        },
+        {
+          "sigma": 2,
+          "cosine": 0.3461960259388938,
+          "ink": 4208.11372548994,
+          "energy": 1897.6763860053206,
+          "peakContrast": 0.7686274509803922,
+          "darkPixels": 3705,
+          "pngHash": "7a6a02256c3cce466227b6360c3c7cee876868534dcb0b10d70949915683d658"
+        },
+        {
+          "sigma": 4,
+          "cosine": 0.5571232650400428,
+          "ink": 4146.027450980225,
+          "energy": 1012.886689734734,
+          "peakContrast": 0.43529411764705883,
+          "darkPixels": 0,
+          "pngHash": "7ad4058be576eadaf8b36e13a285342df5e3751dc7509a68673383a396852d43"
+        },
+        {
+          "sigma": 8,
+          "cosine": 0.7847443245021455,
+          "ink": 4149.905882351017,
+          "energy": 559.8771241830403,
+          "peakContrast": 0.27450980392156865,
+          "darkPixels": 0,
+          "pngHash": "b4ddc85749d2d01f513ab3ba3e4ea4f74d7a3cefeb6611684f3f5867f4631683"
+        }
+      ]
+    },
+    {
+      "caseId": "daejeon-dunsan-object",
+      "mode": "uniform",
+      "selected": false,
+      "scoreGain": 0.5545733740138323,
+      "inkRetention": 0.9860433766231446,
+      "energyRetention": 0.14891714947625784,
+      "levels": [
+        {
+          "sigma": 0,
+          "cosine": 0.1610448676571128,
+          "ink": 4299.596078431379,
+          "energy": 3844.6810765090368,
+          "peakContrast": 1,
+          "darkPixels": 4288,
+          "pngHash": "10c95a90d965c1dafad0534eb368e055c72f11aa863925ed2632f87dd8da8f15"
+        },
+        {
+          "sigma": 2,
+          "cosine": 0.31361094103690607,
+          "ink": 4298.952941176215,
+          "energy": 1944.5607227988648,
+          "peakContrast": 0.8549019607843137,
+          "darkPixels": 3815,
+          "pngHash": "fdecf04268e9fa8c92c65238cb4d19244f690924e1012c235671046c4801e55e"
+        },
+        {
+          "sigma": 4,
+          "cosine": 0.5012712654866449,
+          "ink": 4236.160784313435,
+          "energy": 1041.663560169169,
+          "peakContrast": 0.5372549019607843,
+          "darkPixels": 15,
+          "pngHash": "805445e9eda088b0f5d910fbb7d6b65264eed509f5d6352469611be9dc0a4eec"
+        },
+        {
+          "sigma": 8,
+          "cosine": 0.7156182416709451,
+          "ink": 4239.588235292108,
+          "energy": 572.5389465590362,
+          "peakContrast": 0.27450980392156865,
+          "darkPixels": 0,
+          "pngHash": "4134f2b98c4e2df22bab20c32da7cbf5b1461743061d85e3fffd6c0859d588a9"
+        }
+      ]
+    },
+    {
+      "caseId": "daejeon-dunsan-object",
+      "mode": "feature",
+      "selected": false,
+      "scoreGain": 0.5813403944875081,
+      "inkRetention": 0.9856634712838254,
+      "energyRetention": 0.14590221034294806,
+      "levels": [
+        {
+          "sigma": 0,
+          "cosine": 0.18453691248806178,
+          "ink": 3903.9176470588286,
+          "energy": 3467.2468896578143,
+          "peakContrast": 1,
+          "darkPixels": 3892,
+          "pngHash": "b0afd633c3a20225f4f0b73266a7aeef36cc153538e574eb05f529e45b004012"
+        },
+        {
+          "sigma": 2,
+          "cosine": 0.33918634409500353,
+          "ink": 3903.129411764481,
+          "energy": 1756.766043829262,
+          "peakContrast": 0.7647058823529411,
+          "darkPixels": 3391,
+          "pngHash": "12677052e94072e7b8baf4884be7f148d8334b03856c1477000beed25e07e6b2"
+        },
+        {
+          "sigma": 4,
+          "cosine": 0.5328733588936756,
+          "ink": 3844.980392156721,
+          "energy": 934.514725105746,
+          "peakContrast": 0.4470588235294118,
+          "darkPixels": 0,
+          "pngHash": "f83df26143ff5a98ca5cd6d37b05e0ba4eb69f211201e07200c38504820c53ab"
+        },
+        {
+          "sigma": 8,
+          "cosine": 0.7658773069755699,
+          "ink": 3847.949019606189,
+          "energy": 505.8789850057869,
+          "peakContrast": 0.24313725490196078,
+          "darkPixels": 0,
+          "pngHash": "8f2cb494b501ea17a50919e53ba6147b0243ae7f72597aadc6a7d0e137adbe20"
+        }
+      ]
+    },
+    {
+      "caseId": "daegu-center-animal",
+      "mode": "original",
+      "selected": true,
+      "scoreGain": 0.6111219065248941,
+      "inkRetention": 0.9847691125426166,
+      "energyRetention": 0.14524677535130753,
+      "levels": [
+        {
+          "sigma": 0,
+          "cosine": 0.1516870457180086,
+          "ink": 3567.054901960784,
+          "energy": 3172.8702037677704,
+          "peakContrast": 1,
+          "darkPixels": 3565,
+          "pngHash": "46b41229ab16254085fe5f15483af017b9c68b58e86879cb1fe0630155bee87f"
+        },
+        {
+          "sigma": 2,
+          "cosine": 0.29716251381098924,
+          "ink": 3566.5921568625376,
+          "energy": 1606.4909034986226,
+          "peakContrast": 0.8235294117647058,
+          "darkPixels": 3139,
+          "pngHash": "7513adb180384b761e51249fefd4a574e70684fe10a718558de5504403eb093b"
+        },
+        {
+          "sigma": 4,
+          "cosine": 0.49948944042847493,
+          "ink": 3509.941176470408,
+          "energy": 854.2765551710901,
+          "peakContrast": 0.47058823529411764,
+          "darkPixels": 0,
+          "pngHash": "9cbe45f9bbddd282b87ced289b7c093495235083140b14452d9e1c46e9115c47"
+        },
+        {
+          "sigma": 8,
+          "cosine": 0.7628089522429027,
+          "ink": 3512.7254901947113,
+          "energy": 460.8491657055147,
+          "peakContrast": 0.25882352941176473,
+          "darkPixels": 0,
+          "pngHash": "65ec6c32a1b52d2b5d958107f7c733ab58bc0988f42c3c9747319b9d59ff3a1e"
+        }
+      ]
+    },
+    {
+      "caseId": "daegu-center-animal",
+      "mode": "uniform",
+      "selected": false,
+      "scoreGain": 0.5952246050563514,
+      "inkRetention": 0.9849572239304103,
+      "energyRetention": 0.14685661994821728,
+      "levels": [
+        {
+          "sigma": 0,
+          "cosine": 0.1320900606045707,
+          "ink": 3692.737254901965,
+          "energy": 3284.7667512495145,
+          "peakContrast": 1,
+          "darkPixels": 3693,
+          "pngHash": "cd3c47fe878bd07a02a1d0ca9e63c40b4bf8058ab2223a47511770539df409a8"
+        },
+        {
+          "sigma": 2,
+          "cosine": 0.25951691237584673,
+          "ink": 3692.1921568625235,
+          "energy": 1675.1808227604488,
+          "peakContrast": 0.8549019607843137,
+          "darkPixels": 3263,
+          "pngHash": "59a66cad7befb6e5ec78cd0c7b51191e677d375d32557f305ab5fc4ba7b51593"
+        },
+        {
+          "sigma": 4,
+          "cosine": 0.4526129723648364,
+          "ink": 3634.5568627449215,
+          "energy": 895.7704882737492,
+          "peakContrast": 0.47058823529411764,
+          "darkPixels": 0,
+          "pngHash": "9f1386afa91470dc51751f603d1e25f30d4f84c80fb7566565738d7d882c9497"
+        },
+        {
+          "sigma": 8,
+          "cosine": 0.7273146656609222,
+          "ink": 3637.1882352926436,
+          "energy": 482.3897424067903,
+          "peakContrast": 0.23921568627450981,
+          "darkPixels": 0,
+          "pngHash": "c681632356e648d4193c5abcc29290acd6f6a2b887e44e08832d4879417729b8"
+        }
+      ]
+    },
+    {
+      "caseId": "daegu-center-animal",
+      "mode": "feature",
+      "selected": false,
+      "scoreGain": 0.5952246050563514,
+      "inkRetention": 0.9849572239304103,
+      "energyRetention": 0.14685661994821728,
+      "levels": [
+        {
+          "sigma": 0,
+          "cosine": 0.1320900606045707,
+          "ink": 3692.737254901965,
+          "energy": 3284.7667512495145,
+          "peakContrast": 1,
+          "darkPixels": 3693,
+          "pngHash": "cd3c47fe878bd07a02a1d0ca9e63c40b4bf8058ab2223a47511770539df409a8"
+        },
+        {
+          "sigma": 2,
+          "cosine": 0.25951691237584673,
+          "ink": 3692.1921568625235,
+          "energy": 1675.1808227604488,
+          "peakContrast": 0.8549019607843137,
+          "darkPixels": 3263,
+          "pngHash": "59a66cad7befb6e5ec78cd0c7b51191e677d375d32557f305ab5fc4ba7b51593"
+        },
+        {
+          "sigma": 4,
+          "cosine": 0.4526129723648364,
+          "ink": 3634.5568627449215,
+          "energy": 895.7704882737492,
+          "peakContrast": 0.47058823529411764,
+          "darkPixels": 0,
+          "pngHash": "9f1386afa91470dc51751f603d1e25f30d4f84c80fb7566565738d7d882c9497"
+        },
+        {
+          "sigma": 8,
+          "cosine": 0.7273146656609222,
+          "ink": 3637.1882352926436,
+          "energy": 482.3897424067903,
+          "peakContrast": 0.23921568627450981,
+          "darkPixels": 0,
+          "pngHash": "c681632356e648d4193c5abcc29290acd6f6a2b887e44e08832d4879417729b8"
+        }
+      ]
+    },
+    {
+      "caseId": "daegu-center-object",
+      "mode": "original",
+      "selected": false,
+      "scoreGain": 0.5245369760323509,
+      "inkRetention": 0.983231598559186,
+      "energyRetention": 0.1411022195100613,
+      "levels": [
+        {
+          "sigma": 0,
+          "cosine": 0.09035519924286096,
+          "ink": 3352.945098039221,
+          "energy": 2984.120246059208,
+          "peakContrast": 1,
+          "darkPixels": 3354,
+          "pngHash": "4d2701043f467b672139b0149b3abe1a988c683e12e36b4383c44ac11ebad35f"
+        },
+        {
+          "sigma": 2,
+          "cosine": 0.1918098843312211,
+          "ink": 3352.494117646859,
+          "energy": 1505.389896193749,
+          "peakContrast": 0.788235294117647,
+          "darkPixels": 2947,
+          "pngHash": "6be5f3591dc9847cc0f67eeff50f4c7025363d994a68477bfb891948139932f8"
+        },
+        {
+          "sigma": 4,
+          "cosine": 0.36092278700024444,
+          "ink": 3296.0666666664856,
+          "energy": 793.0747097270354,
+          "peakContrast": 0.4588235294117647,
+          "darkPixels": 0,
+          "pngHash": "ebe70e53146bedc2be7b51a4ddc15643b736f4c774806a5aae614df6778e756c"
+        },
+        {
+          "sigma": 8,
+          "cosine": 0.6148921752752119,
+          "ink": 3296.72156862629,
+          "energy": 421.0659900038645,
+          "peakContrast": 0.22745098039215686,
+          "darkPixels": 0,
+          "pngHash": "e4c93f05964526e8b8cab223fc1f693be700e999c59ad928ad059386777fefec"
+        }
+      ]
+    },
+    {
+      "caseId": "daegu-center-object",
+      "mode": "uniform",
+      "selected": true,
+      "scoreGain": 0.5294192637632251,
+      "inkRetention": 0.983014978011318,
+      "energyRetention": 0.14104213330655715,
+      "levels": [
+        {
+          "sigma": 0,
+          "cosine": 0.09823733198594173,
+          "ink": 3444.7882352941224,
+          "energy": 3066.5996309111893,
+          "peakContrast": 1,
+          "darkPixels": 3448,
+          "pngHash": "4ab24da6ef00b7846fdb4fa7fff7dc3fd09a3d2d26ff42bb9242e3aee066bf45"
+        },
+        {
+          "sigma": 2,
+          "cosine": 0.20639484940286906,
+          "ink": 3444.345098039009,
+          "energy": 1547.1419915416855,
+          "peakContrast": 0.788235294117647,
+          "darkPixels": 3032,
+          "pngHash": "1d3c46e05053744e75dffdfc86b2460575599982d747905e13920f810a8ef2dd"
+        },
+        {
+          "sigma": 4,
+          "cosine": 0.37712221252909506,
+          "ink": 3385.4196078429627,
+          "energy": 814.2596539792498,
+          "peakContrast": 0.43137254901960786,
+          "darkPixels": 0,
+          "pngHash": "1da804a15fce3ed2613ef8a02b8c06945d8e153b62842dfbc2f2bb82e59baf85"
+        },
+        {
+          "sigma": 8,
+          "cosine": 0.6276565957491669,
+          "ink": 3386.2784313712987,
+          "energy": 432.51975394081495,
+          "peakContrast": 0.2196078431372549,
+          "darkPixels": 0,
+          "pngHash": "762cc22fe25910a0ed3e91283b5524e3d95fcce8f654624eedb43b15c1babe16"
+        }
+      ]
+    },
+    {
+      "caseId": "daegu-center-object",
+      "mode": "feature",
+      "selected": false,
+      "scoreGain": 0.49421660210854784,
+      "inkRetention": 0.9831348766713933,
+      "energyRetention": 0.14286158855304826,
+      "levels": [
+        {
+          "sigma": 0,
+          "cosine": 0.0956619168155997,
+          "ink": 3539.7333333333354,
+          "energy": 3151.3617839292556,
+          "peakContrast": 1,
+          "darkPixels": 3543,
+          "pngHash": "640c0c35c0c51105c68c27f448f7a539b13691fb4afcffdfde6618b22e0a437c"
+        },
+        {
+          "sigma": 2,
+          "cosine": 0.19314886281892565,
+          "ink": 3539.3333333331148,
+          "energy": 1590.6701730103464,
+          "peakContrast": 0.7803921568627451,
+          "darkPixels": 3120,
+          "pngHash": "f5802df420d22d6c0888c605ccb05f32eba138daf81435cd0600ac7b5b024423"
+        },
+        {
+          "sigma": 4,
+          "cosine": 0.34506254630552424,
+          "ink": 3478.509803921388,
+          "energy": 840.0915955401863,
+          "peakContrast": 0.4549019607843137,
+          "darkPixels": 0,
+          "pngHash": "71393b18560f4101a1f376a7951683313bb22f5e0dfb948d1712ebc407deeb7f"
+        },
+        {
+          "sigma": 8,
+          "cosine": 0.5898785189241476,
+          "ink": 3480.0352941162887,
+          "energy": 450.20855055750144,
+          "peakContrast": 0.23529411764705882,
+          "darkPixels": 0,
+          "pngHash": "6780b1d3bafdafe061e5285eec4ead255d4dfda75649c28b2fa1d9b8cc9916a5"
+        }
+      ]
+    },
+    {
+      "caseId": "seoul-songpa-animal",
+      "mode": "original",
+      "selected": false,
+      "scoreGain": 0.5891310390139954,
+      "inkRetention": 0.984418347997141,
+      "energyRetention": 0.1445868907783374,
+      "levels": [
+        {
+          "sigma": 0,
+          "cosine": 0.22101390578621746,
+          "ink": 2572.6588235294225,
+          "energy": 2289.3039292579765,
+          "peakContrast": 1,
+          "darkPixels": 2566,
+          "pngHash": "4c99d1c68ed025aa8315c1ba4e2cea2306725ff81ccb79b72493619984d0cf97"
+        },
+        {
+          "sigma": 2,
+          "cosine": 0.3869639788842438,
+          "ink": 2572.0196078430054,
+          "energy": 1161.647227989223,
+          "peakContrast": 0.7254901960784313,
+          "darkPixels": 2265,
+          "pngHash": "e7f68342d9eb9676e6ad44d5696696c39f3ffc5ada3e8c999897e27c882cf622"
+        },
+        {
+          "sigma": 4,
+          "cosine": 0.5939249736405742,
+          "ink": 2530.552941176336,
+          "energy": 616.2729565551712,
+          "peakContrast": 0.403921568627451,
+          "darkPixels": 0,
+          "pngHash": "fb7007026c283560aa9299790409d89f8966e605cbbd7b2db3efb667205ef6f7"
+        },
+        {
+          "sigma": 8,
+          "cosine": 0.8101449448002129,
+          "ink": 2532.5725490191026,
+          "energy": 331.0033371780417,
+          "peakContrast": 0.20784313725490197,
+          "darkPixels": 0,
+          "pngHash": "066ee0b5f418ebe31e7a0d85f16291620c9d03c85d44920018b68b5dd6ec74c5"
+        }
+      ]
+    },
+    {
+      "caseId": "seoul-songpa-animal",
+      "mode": "uniform",
+      "selected": true,
+      "scoreGain": 0.6407157212079965,
+      "inkRetention": 0.9849782305074893,
+      "energyRetention": 0.1473622481522873,
+      "levels": [
+        {
+          "sigma": 0,
+          "cosine": 0.19375561095338298,
+          "ink": 2630.952941176483,
+          "energy": 2342.3961399461746,
+          "peakContrast": 1,
+          "darkPixels": 2627,
+          "pngHash": "cd13fd09f7e66bbf7e44439c5066b8c36d91f90d6dea9b1241ab02218999a642"
+        },
+        {
+          "sigma": 2,
+          "cosine": 0.3941477072150021,
+          "ink": 2630.3529411763343,
+          "energy": 1196.6049365628435,
+          "peakContrast": 0.7764705882352941,
+          "darkPixels": 2322,
+          "pngHash": "1e6472a26e992fc31047628d3ae351d336bf4e9f3fda94221671dde1b0b5d23a"
+        },
+        {
+          "sigma": 4,
+          "cosine": 0.6219710716179817,
+          "ink": 2589.0431372547678,
+          "energy": 640.1575701653225,
+          "peakContrast": 0.44313725490196076,
+          "darkPixels": 0,
+          "pngHash": "536d6594e4e711df4287cf678d9cd2052117f8e3f123792df3e29838fdb8b070"
+        },
+        {
+          "sigma": 8,
+          "cosine": 0.8344713321613795,
+          "ink": 2591.4313725484867,
+          "energy": 345.180761245708,
+          "peakContrast": 0.22745098039215686,
+          "darkPixels": 0,
+          "pngHash": "6152f040e8240bebb59b12da9c9db15d930b1d9ab17b26004b0d1e786c1e3c09"
+        }
+      ]
+    },
+    {
+      "caseId": "seoul-songpa-animal",
+      "mode": "feature",
+      "selected": false,
+      "scoreGain": 0.629719095995296,
+      "inkRetention": 0.9848707328834962,
+      "energyRetention": 0.14531987650522094,
+      "levels": [
+        {
+          "sigma": 0,
+          "cosine": 0.1855041817493339,
+          "ink": 2561.196078431382,
+          "energy": 2279.6453825451736,
+          "peakContrast": 1,
+          "darkPixels": 2554,
+          "pngHash": "69618a76eeefde86a060f546e4e0a80b3e7ac6a738e334083dff5531a6b57a0c"
+        },
+        {
+          "sigma": 2,
+          "cosine": 0.3784656244748687,
+          "ink": 2560.556862744969,
+          "energy": 1160.2548865820722,
+          "peakContrast": 0.7333333333333333,
+          "darkPixels": 2258,
+          "pngHash": "aa404acad6c8e280e19f59ed0d817da5a108127a869829e3a967e5e6cd8435ea"
+        },
+        {
+          "sigma": 4,
+          "cosine": 0.601028946102725,
+          "ink": 2519.854901960649,
+          "energy": 617.274109957708,
+          "peakContrast": 0.403921568627451,
+          "darkPixels": 0,
+          "pngHash": "f8eeaccf51b3a2c207804469d83965a96d78d0bc8161b521b6238de2928b2317"
+        },
+        {
+          "sigma": 8,
+          "cosine": 0.8152232777446299,
+          "ink": 2522.4470588230515,
+          "energy": 331.2777854671618,
+          "peakContrast": 0.20784313725490197,
+          "darkPixels": 0,
+          "pngHash": "b0f07b09d470b2d0363320c01d7b477ee67291bdde7b838d3eb4941b9eedbcee"
+        }
+      ]
+    },
+    {
+      "caseId": "seoul-songpa-object",
+      "mode": "original",
+      "selected": true,
+      "scoreGain": 0.5395838883147275,
+      "inkRetention": 0.9833574885157215,
+      "energyRetention": 0.13883760291237182,
+      "levels": [
+        {
+          "sigma": 0,
+          "cosine": 0.12854352084246917,
+          "ink": 3192.862745098041,
+          "energy": 2833.476570549786,
+          "peakContrast": 1,
+          "darkPixels": 3196,
+          "pngHash": "796749d91c6716608dbde9105ad61f2ad5a4645a841de81eeb3f3cad975abdcf"
+        },
+        {
+          "sigma": 2,
+          "cosine": 0.2386587989952167,
+          "ink": 3192.12549019591,
+          "energy": 1424.44127643212,
+          "peakContrast": 0.7058823529411765,
+          "darkPixels": 2759,
+          "pngHash": "29e38e9696c2290577cc045bf55212fb6465154ad7ad00c86dd0318ff7bdf5da"
+        },
+        {
+          "sigma": 4,
+          "cosine": 0.40926886350170194,
+          "ink": 3137.9843137253133,
+          "energy": 744.5330257593204,
+          "peakContrast": 0.3843137254901961,
+          "darkPixels": 0,
+          "pngHash": "6705c2390bf8724eb97f60b12cee5068a89652e43622a1f760b4ea32c85917ef"
+        },
+        {
+          "sigma": 8,
+          "cosine": 0.6681274091571967,
+          "ink": 3139.725490195022,
+          "energy": 393.3930949635003,
+          "peakContrast": 0.21568627450980393,
+          "darkPixels": 0,
+          "pngHash": "e370e4a76d27ea9f18f7d3720fb15993a3aebe1da0f44e918d38f97a0608c859"
+        }
+      ]
+    },
+    {
+      "caseId": "seoul-songpa-object",
+      "mode": "uniform",
+      "selected": false,
+      "scoreGain": 0.5112077191564224,
+      "inkRetention": 0.9835756646175849,
+      "energyRetention": 0.13920656688102354,
+      "levels": [
+        {
+          "sigma": 0,
+          "cosine": 0.11426104912585953,
+          "ink": 3198.505882352942,
+          "energy": 2837.402214532867,
+          "peakContrast": 1,
+          "darkPixels": 3197,
+          "pngHash": "6db207e85b3ed4c197965458b86da798c7442ec6331d52c094996b5cbb6d0859"
+        },
+        {
+          "sigma": 2,
+          "cosine": 0.21483779275347825,
+          "ink": 3197.847058823366,
+          "energy": 1428.7196462898748,
+          "peakContrast": 0.7568627450980392,
+          "darkPixels": 2765,
+          "pngHash": "ad389ef17513de096f6c8efc6fefb3a94bd3fa9d1800ab11850a31f7cd136bee"
+        },
+        {
+          "sigma": 4,
+          "cosine": 0.3733231425474288,
+          "ink": 3143.8156862743335,
+          "energy": 748.4903191080265,
+          "peakContrast": 0.4549019607843137,
+          "darkPixels": 0,
+          "pngHash": "7110e86438b5fdac1e0f25e1964b433bcc2e6b9f695ce49b1f765c31244595b3"
+        },
+        {
+          "sigma": 8,
+          "cosine": 0.6254687682822819,
+          "ink": 3145.97254901855,
+          "energy": 394.98502114573387,
+          "peakContrast": 0.2235294117647059,
+          "darkPixels": 0,
+          "pngHash": "04aef32ac6d50bc7e184d1c0452d695507b7ca9d4cad48e8c1e2af494fb0af80"
+        }
+      ]
+    },
+    {
+      "caseId": "seoul-songpa-object",
+      "mode": "feature",
+      "selected": false,
+      "scoreGain": 0.5112077191564224,
+      "inkRetention": 0.9835756646175849,
+      "energyRetention": 0.13920656688102354,
+      "levels": [
+        {
+          "sigma": 0,
+          "cosine": 0.11426104912585953,
+          "ink": 3198.505882352942,
+          "energy": 2837.402214532867,
+          "peakContrast": 1,
+          "darkPixels": 3197,
+          "pngHash": "6db207e85b3ed4c197965458b86da798c7442ec6331d52c094996b5cbb6d0859"
+        },
+        {
+          "sigma": 2,
+          "cosine": 0.21483779275347825,
+          "ink": 3197.847058823366,
+          "energy": 1428.7196462898748,
+          "peakContrast": 0.7568627450980392,
+          "darkPixels": 2765,
+          "pngHash": "ad389ef17513de096f6c8efc6fefb3a94bd3fa9d1800ab11850a31f7cd136bee"
+        },
+        {
+          "sigma": 4,
+          "cosine": 0.3733231425474288,
+          "ink": 3143.8156862743335,
+          "energy": 748.4903191080265,
+          "peakContrast": 0.4549019607843137,
+          "darkPixels": 0,
+          "pngHash": "7110e86438b5fdac1e0f25e1964b433bcc2e6b9f695ce49b1f765c31244595b3"
+        },
+        {
+          "sigma": 8,
+          "cosine": 0.6254687682822819,
+          "ink": 3145.97254901855,
+          "energy": 394.98502114573387,
+          "peakContrast": 0.2235294117647059,
+          "darkPixels": 0,
+          "pngHash": "04aef32ac6d50bc7e184d1c0452d695507b7ca9d4cad48e8c1e2af494fb0af80"
+        }
+      ]
+    }
+  ]
+}

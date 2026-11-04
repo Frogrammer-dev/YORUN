@@ -1,0 +1,23 @@
+{
+  "pythonTestsPassed": 43,
+  "targetedJSTestsPassed": 12,
+  "targetedJSTestsSkipped": 1,
+  "typecheck": "passed",
+  "lintErrors": 0,
+  "lintWarnings": 1,
+  "lintWarning": "Unused mkdirSync import in frozen executed experiment source; no behavioral impact",
+  "uiChecks": [
+    "25-kind filters",
+    "75 initially blank cards",
+    "reviewer code change clears prior answers",
+    "75-answer JSON export",
+    "storage blocked export",
+    "new reviewer reset"
+  ],
+  "humanReviewFolder": "public/eval/road-diversity-20261102-human",
+  "humanRecognitionMeasured": false,
+  "AIReviewFolderPreserved": "public/eval/road-diversity-20261102",
+  "AIReviewMajorityClear": 8,
+  "requests": 75,
+  "diversityCriterionMet": false
+}

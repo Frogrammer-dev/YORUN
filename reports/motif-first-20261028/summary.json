@@ -1,0 +1,74 @@
+{
+  "summary": {
+    "requests": 6,
+    "validOutputs": 2,
+    "totalAttempts": 162,
+    "astarCalls": 1494,
+    "humanRecognitionMeasured": false,
+    "equalBudgetComparison": false,
+    "appIntegrated": false
+  },
+  "cases": [
+    {
+      "id": "daejeon-dunsan-animal",
+      "attempts": 27,
+      "calls": 54,
+      "validCandidates": 0,
+      "failures": {
+        "motif_retrace": 27
+      },
+      "valid": false
+    },
+    {
+      "id": "daejeon-dunsan-object",
+      "attempts": 27,
+      "calls": 486,
+      "validCandidates": 0,
+      "failures": {
+        "road_validity": 27
+      },
+      "valid": false
+    },
+    {
+      "id": "daegu-center-animal",
+      "attempts": 27,
+      "calls": 288,
+      "validCandidates": 0,
+      "failures": {
+        "motif_retrace": 18,
+        "road_validity": 9
+      },
+      "valid": false
+    },
+    {
+      "id": "daegu-center-object",
+      "attempts": 27,
+      "calls": 432,
+      "validCandidates": 27,
+      "failures": {},
+      "valid": true,
+      "meters": 5420.531663894653
+    },
+    {
+      "id": "seoul-songpa-animal",
+      "attempts": 27,
+      "calls": 54,
+      "validCandidates": 0,
+      "failures": {
+        "motif_retrace": 27
+      },
+      "valid": false
+    },
+    {
+      "id": "seoul-songpa-object",
+      "attempts": 27,
+      "calls": 180,
+      "validCandidates": 9,
+      "failures": {
+        "motif_retrace": 18
+      },
+      "valid": true,
+      "meters": 3534.5759410858154
+    }
+  ]
+}

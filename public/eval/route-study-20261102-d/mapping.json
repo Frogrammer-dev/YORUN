@@ -1,0 +1,1485 @@
+{
+  "fingerprint": "8f70b783a366563d6dd5897527ab6b4b17a5f131f2f88c5ec4ff745ba520d4aa",
+  "inputSHA256": "91c9aa2ed171e2daa9fd9c4722ad34c01af3221e9b7e1beaa7a697b7bc0200ca",
+  "catalogSHA256": "880a2b1f87006cf9f84e23fae68a23d8d554f7127c8f551b10c805f6c62e8fa6",
+  "rendererSHA256": "b1e07a57743e20e322050ff887d62120df2ccba469d1675db61cb23856d16d5d",
+  "slots": [
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "cat",
+      "category": "animal",
+      "id": "cheonan-buldang-v14-plain-cat-52",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "fish",
+      "category": "animal",
+      "id": "cheonan-buldang-v14-plain-fish-02",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "dog",
+      "category": "animal",
+      "id": "cheonan-buldang-v14-plain-dog-07",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "rabbit",
+      "category": "animal",
+      "id": "cheonan-buldang-v14-plain-rabbit-11",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "bird",
+      "category": "animal",
+      "id": "cheonan-buldang-v14-plain-bird-20",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "whale",
+      "category": "animal",
+      "id": "cheonan-buldang-v14-plain-whale-20",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "turtle",
+      "category": "animal",
+      "id": "cheonan-buldang-v14-plain-turtle-01",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "elephant",
+      "category": "animal",
+      "id": "cheonan-buldang-v14-plain-elephant-09",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "giraffe",
+      "category": "animal",
+      "id": "cheonan-buldang-v14-plain-giraffe-19",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "butterfly",
+      "category": "animal",
+      "id": "cheonan-buldang-v14-plain-butterfly-52",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "duck",
+      "category": "animal",
+      "id": "cheonan-buldang-v14-plain-duck-41",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "house",
+      "category": "object",
+      "id": "cheonan-buldang-v14-plain-house-34",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "tree",
+      "category": "object",
+      "id": "cheonan-buldang-v14-plain-tree-31",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "car",
+      "category": "object",
+      "id": "cheonan-buldang-v14-plain-car-32",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "rocket",
+      "category": "object",
+      "id": "cheonan-buldang-v14-plain-rocket-28",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "apple",
+      "category": "object",
+      "id": "cheonan-buldang-v14-plain-apple-24",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "crown",
+      "category": "object",
+      "id": "cheonan-buldang-v14-plain-crown-07",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "airplane",
+      "category": "object",
+      "id": "cheonan-buldang-v14-plain-airplane-37",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "mug",
+      "category": "object",
+      "id": "cheonan-buldang-v14-plain-mug-19",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "tshirt",
+      "category": "object",
+      "id": "cheonan-buldang-v14-plain-tshirt-46",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "pants",
+      "category": "object",
+      "id": "cheonan-buldang-v14-plain-pants-22",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "hammer",
+      "category": "object",
+      "id": "cheonan-buldang-v14-plain-hammer-01",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "bottle",
+      "category": "object",
+      "id": "cheonan-buldang-v14-plain-bottle-07",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "key",
+      "category": "object",
+      "id": "cheonan-buldang-v14-plain-key-07",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "cheonan-buldang",
+      "proposalShape": "chair",
+      "category": "object",
+      "id": "cheonan-buldang-v14-plain-chair-01",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "cat",
+      "category": "animal",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "fish",
+      "category": "animal",
+      "id": "jeonju-hyoja-v14-plain-fish-19",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "dog",
+      "category": "animal",
+      "id": "jeonju-hyoja-v14-plain-dog-59",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "rabbit",
+      "category": "animal",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "bird",
+      "category": "animal",
+      "id": "jeonju-hyoja-v14-plain-bird-55",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "whale",
+      "category": "animal",
+      "id": "jeonju-hyoja-v14-plain-whale-55",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "turtle",
+      "category": "animal",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "elephant",
+      "category": "animal",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "giraffe",
+      "category": "animal",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "butterfly",
+      "category": "animal",
+      "id": "jeonju-hyoja-v14-plain-butterfly-53",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "duck",
+      "category": "animal",
+      "id": "jeonju-hyoja-v14-plain-duck-48",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "house",
+      "category": "object",
+      "id": "jeonju-hyoja-v14-plain-house-44",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "tree",
+      "category": "object",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "car",
+      "category": "object",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "rocket",
+      "category": "object",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "apple",
+      "category": "object",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "crown",
+      "category": "object",
+      "id": "jeonju-hyoja-v14-plain-crown-20",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "airplane",
+      "category": "object",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "mug",
+      "category": "object",
+      "id": "jeonju-hyoja-v14-plain-mug-09",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "tshirt",
+      "category": "object",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "pants",
+      "category": "object",
+      "id": "jeonju-hyoja-v14-plain-pants-10",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "hammer",
+      "category": "object",
+      "id": "jeonju-hyoja-v14-plain-hammer-25",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "bottle",
+      "category": "object",
+      "id": "jeonju-hyoja-v14-plain-bottle-31",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "key",
+      "category": "object",
+      "id": "jeonju-hyoja-v14-plain-key-16",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "jeonju-hyoja",
+      "proposalShape": "chair",
+      "category": "object",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "cat",
+      "category": "animal",
+      "id": "ulsan-samsan-v14-plain-cat-04",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "fish",
+      "category": "animal",
+      "id": "ulsan-samsan-v14-plain-fish-12",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "dog",
+      "category": "animal",
+      "id": "ulsan-samsan-v14-plain-dog-07",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "rabbit",
+      "category": "animal",
+      "id": "ulsan-samsan-v14-plain-rabbit-28",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "bird",
+      "category": "animal",
+      "id": "ulsan-samsan-v14-plain-bird-58",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "whale",
+      "category": "animal",
+      "id": "ulsan-samsan-v14-plain-whale-28",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "turtle",
+      "category": "animal",
+      "id": "ulsan-samsan-v14-plain-turtle-52",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "elephant",
+      "category": "animal",
+      "id": "ulsan-samsan-v14-plain-elephant-28",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "giraffe",
+      "category": "animal",
+      "id": "ulsan-samsan-v14-plain-giraffe-04",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "butterfly",
+      "category": "animal",
+      "id": "ulsan-samsan-v14-plain-butterfly-28",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "duck",
+      "category": "animal",
+      "id": null,
+      "validRoad": false,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "house",
+      "category": "object",
+      "id": "ulsan-samsan-v14-plain-house-60",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "tree",
+      "category": "object",
+      "id": "ulsan-samsan-v14-plain-tree-40",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "car",
+      "category": "object",
+      "id": "ulsan-samsan-v14-plain-car-47",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "rocket",
+      "category": "object",
+      "id": "ulsan-samsan-v14-plain-rocket-21",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "apple",
+      "category": "object",
+      "id": "ulsan-samsan-v14-plain-apple-39",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "crown",
+      "category": "object",
+      "id": "ulsan-samsan-v14-plain-crown-31",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "airplane",
+      "category": "object",
+      "id": "ulsan-samsan-v14-plain-airplane-49",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "mug",
+      "category": "object",
+      "id": "ulsan-samsan-v14-plain-mug-01",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "tshirt",
+      "category": "object",
+      "id": "ulsan-samsan-v14-plain-tshirt-31",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "pants",
+      "category": "object",
+      "id": "ulsan-samsan-v14-plain-pants-28",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "hammer",
+      "category": "object",
+      "id": "ulsan-samsan-v14-plain-hammer-01",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "bottle",
+      "category": "object",
+      "id": "ulsan-samsan-v14-plain-bottle-01",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "key",
+      "category": "object",
+      "id": "ulsan-samsan-v14-plain-key-03",
+      "validRoad": true,
+      "featureSatisfied": true,
+      "featureInterventionApplied": false
+    },
+    {
+      "area": "ulsan-samsan",
+      "proposalShape": "chair",
+      "category": "object",
+      "id": "ulsan-samsan-v14-plain-chair-33",
+      "validRoad": true,
+      "featureSatisfied": false,
+      "featureInterventionApplied": false
+    }
+  ],
+  "mapping": [
+    {
+      "token": "R001",
+      "id": "cheonan-buldang-v14-plain-car-32",
+      "area": "cheonan-buldang",
+      "proposalShape": "car",
+      "category": "object",
+      "rotation": -72.81967800718961
+    },
+    {
+      "token": "R002",
+      "id": "cheonan-buldang-v14-plain-bird-20",
+      "area": "cheonan-buldang",
+      "proposalShape": "bird",
+      "category": "animal",
+      "rotation": -42.62486834527016
+    },
+    {
+      "token": "R003",
+      "id": "cheonan-buldang-v14-plain-key-07",
+      "area": "cheonan-buldang",
+      "proposalShape": "key",
+      "category": "object",
+      "rotation": -86.52168096851221
+    },
+    {
+      "token": "R004",
+      "id": "cheonan-buldang-v14-plain-crown-07",
+      "area": "cheonan-buldang",
+      "proposalShape": "crown",
+      "category": "object",
+      "rotation": 45.03987910757566
+    },
+    {
+      "token": "R005",
+      "id": "ulsan-samsan-v14-plain-butterfly-28",
+      "area": "ulsan-samsan",
+      "proposalShape": "butterfly",
+      "category": "animal",
+      "rotation": -61.73006506047811
+    },
+    {
+      "token": "R006",
+      "id": "cheonan-buldang-v14-plain-rabbit-11",
+      "area": "cheonan-buldang",
+      "proposalShape": "rabbit",
+      "category": "animal",
+      "rotation": -44.99486726125769
+    },
+    {
+      "token": "R007",
+      "id": "cheonan-buldang-v14-plain-giraffe-19",
+      "area": "cheonan-buldang",
+      "proposalShape": "giraffe",
+      "category": "animal",
+      "rotation": -155.24374434655076
+    },
+    {
+      "token": "R008",
+      "id": "ulsan-samsan-v14-plain-pants-28",
+      "area": "ulsan-samsan",
+      "proposalShape": "pants",
+      "category": "object",
+      "rotation": -94.45816336104002
+    },
+    {
+      "token": "R009",
+      "id": "ulsan-samsan-v14-plain-bird-58",
+      "area": "ulsan-samsan",
+      "proposalShape": "bird",
+      "category": "animal",
+      "rotation": -151.38909439796117
+    },
+    {
+      "token": "R010",
+      "id": "cheonan-buldang-v14-plain-mug-19",
+      "area": "cheonan-buldang",
+      "proposalShape": "mug",
+      "category": "object",
+      "rotation": 102.33262584221352
+    },
+    {
+      "token": "R011",
+      "id": "cheonan-buldang-v14-plain-elephant-09",
+      "area": "cheonan-buldang",
+      "proposalShape": "elephant",
+      "category": "animal",
+      "rotation": 91.26218888634989
+    },
+    {
+      "token": "R012",
+      "id": "jeonju-hyoja-v14-plain-key-16",
+      "area": "jeonju-hyoja",
+      "proposalShape": "key",
+      "category": "object",
+      "rotation": -89.62922153945645
+    },
+    {
+      "token": "R013",
+      "id": "cheonan-buldang-v14-plain-rocket-28",
+      "area": "cheonan-buldang",
+      "proposalShape": "rocket",
+      "category": "object",
+      "rotation": -162.75056286582316
+    },
+    {
+      "token": "R014",
+      "id": "ulsan-samsan-v14-plain-tree-40",
+      "area": "ulsan-samsan",
+      "proposalShape": "tree",
+      "category": "object",
+      "rotation": -87.14045662710146
+    },
+    {
+      "token": "R015",
+      "id": "cheonan-buldang-v14-plain-cat-52",
+      "area": "cheonan-buldang",
+      "proposalShape": "cat",
+      "category": "animal",
+      "rotation": 29.100525137660757
+    },
+    {
+      "token": "R016",
+      "id": "jeonju-hyoja-v14-plain-bottle-31",
+      "area": "jeonju-hyoja",
+      "proposalShape": "bottle",
+      "category": "object",
+      "rotation": -37.93121750130503
+    },
+    {
+      "token": "R017",
+      "id": "jeonju-hyoja-v14-plain-pants-10",
+      "area": "jeonju-hyoja",
+      "proposalShape": "pants",
+      "category": "object",
+      "rotation": 1.012748478513212
+    },
+    {
+      "token": "R018",
+      "id": "cheonan-buldang-v14-plain-hammer-01",
+      "area": "cheonan-buldang",
+      "proposalShape": "hammer",
+      "category": "object",
+      "rotation": -78.02685211653652
+    },
+    {
+      "token": "R019",
+      "id": "ulsan-samsan-v14-plain-rabbit-28",
+      "area": "ulsan-samsan",
+      "proposalShape": "rabbit",
+      "category": "animal",
+      "rotation": 107.35035622353809
+    },
+    {
+      "token": "R020",
+      "id": "cheonan-buldang-v14-plain-butterfly-52",
+      "area": "cheonan-buldang",
+      "proposalShape": "butterfly",
+      "category": "animal",
+      "rotation": -38.2592500631197
+    },
+    {
+      "token": "R021",
+      "id": "ulsan-samsan-v14-plain-rocket-21",
+      "area": "ulsan-samsan",
+      "proposalShape": "rocket",
+      "category": "object",
+      "rotation": 85.6723011752628
+    },
+    {
+      "token": "R022",
+      "id": "ulsan-samsan-v14-plain-elephant-28",
+      "area": "ulsan-samsan",
+      "proposalShape": "elephant",
+      "category": "animal",
+      "rotation": 13.694417876784724
+    },
+    {
+      "token": "R023",
+      "id": "ulsan-samsan-v14-plain-giraffe-04",
+      "area": "ulsan-samsan",
+      "proposalShape": "giraffe",
+      "category": "animal",
+      "rotation": -79.36044703658617
+    },
+    {
+      "token": "R024",
+      "id": "cheonan-buldang-v14-plain-pants-22",
+      "area": "cheonan-buldang",
+      "proposalShape": "pants",
+      "category": "object",
+      "rotation": -171.7973459588017
+    },
+    {
+      "token": "R025",
+      "id": "jeonju-hyoja-v14-plain-duck-48",
+      "area": "jeonju-hyoja",
+      "proposalShape": "duck",
+      "category": "animal",
+      "rotation": -15.751134545250936
+    },
+    {
+      "token": "R026",
+      "id": "ulsan-samsan-v14-plain-chair-33",
+      "area": "ulsan-samsan",
+      "proposalShape": "chair",
+      "category": "object",
+      "rotation": -102.74359995519691
+    },
+    {
+      "token": "R027",
+      "id": "cheonan-buldang-v14-plain-duck-41",
+      "area": "cheonan-buldang",
+      "proposalShape": "duck",
+      "category": "animal",
+      "rotation": -105.2071062226765
+    },
+    {
+      "token": "R028",
+      "id": "ulsan-samsan-v14-plain-cat-04",
+      "area": "ulsan-samsan",
+      "proposalShape": "cat",
+      "category": "animal",
+      "rotation": -90.75721839399442
+    },
+    {
+      "token": "R029",
+      "id": "cheonan-buldang-v14-plain-house-34",
+      "area": "cheonan-buldang",
+      "proposalShape": "house",
+      "category": "object",
+      "rotation": -75.3708823607404
+    },
+    {
+      "token": "R030",
+      "id": "cheonan-buldang-v14-plain-bottle-07",
+      "area": "cheonan-buldang",
+      "proposalShape": "bottle",
+      "category": "object",
+      "rotation": 12.969929723937561
+    },
+    {
+      "token": "R031",
+      "id": "jeonju-hyoja-v14-plain-dog-59",
+      "area": "jeonju-hyoja",
+      "proposalShape": "dog",
+      "category": "animal",
+      "rotation": 92.14395526882011
+    },
+    {
+      "token": "R032",
+      "id": "cheonan-buldang-v14-plain-apple-24",
+      "area": "cheonan-buldang",
+      "proposalShape": "apple",
+      "category": "object",
+      "rotation": -33.604638116196526
+    },
+    {
+      "token": "R033",
+      "id": "jeonju-hyoja-v14-plain-mug-09",
+      "area": "jeonju-hyoja",
+      "proposalShape": "mug",
+      "category": "object",
+      "rotation": 75.4302223489714
+    },
+    {
+      "token": "R034",
+      "id": "cheonan-buldang-v14-plain-tree-31",
+      "area": "cheonan-buldang",
+      "proposalShape": "tree",
+      "category": "object",
+      "rotation": 10.974171275524919
+    },
+    {
+      "token": "R035",
+      "id": "ulsan-samsan-v14-plain-mug-01",
+      "area": "ulsan-samsan",
+      "proposalShape": "mug",
+      "category": "object",
+      "rotation": -105.81459753114767
+    },
+    {
+      "token": "R036",
+      "id": "cheonan-buldang-v14-plain-tshirt-46",
+      "area": "cheonan-buldang",
+      "proposalShape": "tshirt",
+      "category": "object",
+      "rotation": 14.138032266451882
+    },
+    {
+      "token": "R037",
+      "id": "cheonan-buldang-v14-plain-fish-02",
+      "area": "cheonan-buldang",
+      "proposalShape": "fish",
+      "category": "animal",
+      "rotation": -104.5176314134252
+    },
+    {
+      "token": "R038",
+      "id": "ulsan-samsan-v14-plain-hammer-01",
+      "area": "ulsan-samsan",
+      "proposalShape": "hammer",
+      "category": "object",
+      "rotation": 2.850800387741757
+    },
+    {
+      "token": "R039",
+      "id": "ulsan-samsan-v14-plain-apple-39",
+      "area": "ulsan-samsan",
+      "proposalShape": "apple",
+      "category": "object",
+      "rotation": -134.49295179917266
+    },
+    {
+      "token": "R040",
+      "id": "ulsan-samsan-v14-plain-crown-31",
+      "area": "ulsan-samsan",
+      "proposalShape": "crown",
+      "category": "object",
+      "rotation": -167.7186339922576
+    },
+    {
+      "token": "R041",
+      "id": "ulsan-samsan-v14-plain-fish-12",
+      "area": "ulsan-samsan",
+      "proposalShape": "fish",
+      "category": "animal",
+      "rotation": -176.02445203308673
+    },
+    {
+      "token": "R042",
+      "id": "jeonju-hyoja-v14-plain-bird-55",
+      "area": "jeonju-hyoja",
+      "proposalShape": "bird",
+      "category": "animal",
+      "rotation": -148.70840970957173
+    },
+    {
+      "token": "R043",
+      "id": "jeonju-hyoja-v14-plain-whale-55",
+      "area": "jeonju-hyoja",
+      "proposalShape": "whale",
+      "category": "animal",
+      "rotation": -139.2604857858072
+    },
+    {
+      "token": "R044",
+      "id": "ulsan-samsan-v14-plain-airplane-49",
+      "area": "ulsan-samsan",
+      "proposalShape": "airplane",
+      "category": "object",
+      "rotation": 76.56790986451276
+    },
+    {
+      "token": "R045",
+      "id": "jeonju-hyoja-v14-plain-fish-19",
+      "area": "jeonju-hyoja",
+      "proposalShape": "fish",
+      "category": "animal",
+      "rotation": 79.14451729575799
+    },
+    {
+      "token": "R046",
+      "id": "cheonan-buldang-v14-plain-turtle-01",
+      "area": "cheonan-buldang",
+      "proposalShape": "turtle",
+      "category": "animal",
+      "rotation": 9.113021069051088
+    },
+    {
+      "token": "R047",
+      "id": "cheonan-buldang-v14-plain-airplane-37",
+      "area": "cheonan-buldang",
+      "proposalShape": "airplane",
+      "category": "object",
+      "rotation": -87.52783576621152
+    },
+    {
+      "token": "R048",
+      "id": "ulsan-samsan-v14-plain-turtle-52",
+      "area": "ulsan-samsan",
+      "proposalShape": "turtle",
+      "category": "animal",
+      "rotation": 177.49779581542467
+    },
+    {
+      "token": "R049",
+      "id": "jeonju-hyoja-v14-plain-butterfly-53",
+      "area": "jeonju-hyoja",
+      "proposalShape": "butterfly",
+      "category": "animal",
+      "rotation": -31.037385685043745
+    },
+    {
+      "token": "R050",
+      "id": "jeonju-hyoja-v14-plain-crown-20",
+      "area": "jeonju-hyoja",
+      "proposalShape": "crown",
+      "category": "object",
+      "rotation": 166.59936750437686
+    },
+    {
+      "token": "R051",
+      "id": "jeonju-hyoja-v14-plain-house-44",
+      "area": "jeonju-hyoja",
+      "proposalShape": "house",
+      "category": "object",
+      "rotation": 105.15521955873028
+    },
+    {
+      "token": "R052",
+      "id": "ulsan-samsan-v14-plain-tshirt-31",
+      "area": "ulsan-samsan",
+      "proposalShape": "tshirt",
+      "category": "object",
+      "rotation": 62.62895377497518
+    },
+    {
+      "token": "R053",
+      "id": "jeonju-hyoja-v14-plain-hammer-25",
+      "area": "jeonju-hyoja",
+      "proposalShape": "hammer",
+      "category": "object",
+      "rotation": 168.5332880955206
+    },
+    {
+      "token": "R054",
+      "id": "ulsan-samsan-v14-plain-bottle-01",
+      "area": "ulsan-samsan",
+      "proposalShape": "bottle",
+      "category": "object",
+      "rotation": -17.02541322902828
+    },
+    {
+      "token": "R055",
+      "id": "ulsan-samsan-v14-plain-car-47",
+      "area": "ulsan-samsan",
+      "proposalShape": "car",
+      "category": "object",
+      "rotation": -7.69691985616592
+    },
+    {
+      "token": "R056",
+      "id": "ulsan-samsan-v14-plain-house-60",
+      "area": "ulsan-samsan",
+      "proposalShape": "house",
+      "category": "object",
+      "rotation": -164.78476616620978
+    },
+    {
+      "token": "R057",
+      "id": "cheonan-buldang-v14-plain-chair-01",
+      "area": "cheonan-buldang",
+      "proposalShape": "chair",
+      "category": "object",
+      "rotation": -86.65299223402376
+    },
+    {
+      "token": "R058",
+      "id": "cheonan-buldang-v14-plain-dog-07",
+      "area": "cheonan-buldang",
+      "proposalShape": "dog",
+      "category": "animal",
+      "rotation": -179.46539097249502
+    },
+    {
+      "token": "R059",
+      "id": "cheonan-buldang-v14-plain-whale-20",
+      "area": "cheonan-buldang",
+      "proposalShape": "whale",
+      "category": "animal",
+      "rotation": 108.71938437299988
+    },
+    {
+      "token": "R060",
+      "id": "ulsan-samsan-v14-plain-dog-07",
+      "area": "ulsan-samsan",
+      "proposalShape": "dog",
+      "category": "animal",
+      "rotation": -4.331751215327372
+    },
+    {
+      "token": "R061",
+      "id": "ulsan-samsan-v14-plain-key-03",
+      "area": "ulsan-samsan",
+      "proposalShape": "key",
+      "category": "object",
+      "rotation": -32.06142801069023
+    },
+    {
+      "token": "R062",
+      "id": "ulsan-samsan-v14-plain-whale-28",
+      "area": "ulsan-samsan",
+      "proposalShape": "whale",
+      "category": "animal",
+      "rotation": 103.67591545404262
+    }
+  ],
+  "pages": [
+    {
+      "file": "blind-1.png",
+      "SHA256": "97dc92a9e47b447d813bcd38a3787c66a89d480e2091b33290961674add18acf"
+    },
+    {
+      "file": "blind-2.png",
+      "SHA256": "34c211afa17322155421d408c9b8cddd8e3a3308a0bc33704bfc16f14e9ab42c"
+    },
+    {
+      "file": "blind-3.png",
+      "SHA256": "f738f869b33e8c7b297826ac1ba76b890fc56890baaa6c23685b5d6c94f6d6b8"
+    },
+    {
+      "file": "blind-4.png",
+      "SHA256": "1246b229f6764312387cab09fda401ce340fe8ea4af1122e04a7d38d327f268e"
+    },
+    {
+      "file": "blind-5.png",
+      "SHA256": "ca888c0c2c77257cbfe18343e8010930ce4c0be461bb6edd1330eceba2e0ef5d"
+    }
+  ],
+  "species": [
+    {
+      "key": "cat",
+      "name": "고양이",
+      "kind": "animal",
+      "validRoadRequests": 2,
+      "requests": 3,
+      "validCandidates": 80,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "fish",
+      "name": "물고기",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 52,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "dog",
+      "name": "강아지",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 82,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "rabbit",
+      "name": "토끼",
+      "kind": "animal",
+      "validRoadRequests": 2,
+      "requests": 3,
+      "validCandidates": 60,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "bird",
+      "name": "새",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 62,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "whale",
+      "name": "고래",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 72,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "turtle",
+      "name": "거북이",
+      "kind": "animal",
+      "validRoadRequests": 2,
+      "requests": 3,
+      "validCandidates": 74,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "elephant",
+      "name": "코끼리",
+      "kind": "animal",
+      "validRoadRequests": 2,
+      "requests": 3,
+      "validCandidates": 65,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "giraffe",
+      "name": "기린",
+      "kind": "animal",
+      "validRoadRequests": 2,
+      "requests": 3,
+      "validCandidates": 24,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "butterfly",
+      "name": "나비",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 33,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "duck",
+      "name": "오리",
+      "kind": "animal",
+      "validRoadRequests": 2,
+      "requests": 3,
+      "validCandidates": 61,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "house",
+      "name": "집",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 120,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "tree",
+      "name": "나무",
+      "kind": "object",
+      "validRoadRequests": 2,
+      "requests": 3,
+      "validCandidates": 112,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "car",
+      "name": "자동차",
+      "kind": "object",
+      "validRoadRequests": 2,
+      "requests": 3,
+      "validCandidates": 32,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "rocket",
+      "name": "로켓",
+      "kind": "object",
+      "validRoadRequests": 2,
+      "requests": 3,
+      "validCandidates": 34,
+      "headSupported": false,
+      "clipSupported": false,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "apple",
+      "name": "사과",
+      "kind": "object",
+      "validRoadRequests": 2,
+      "requests": 3,
+      "validCandidates": 120,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "crown",
+      "name": "왕관",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 86,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "airplane",
+      "name": "비행기",
+      "kind": "object",
+      "validRoadRequests": 2,
+      "requests": 3,
+      "validCandidates": 64,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "mug",
+      "name": "컵",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 163,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "tshirt",
+      "name": "티셔츠",
+      "kind": "object",
+      "validRoadRequests": 2,
+      "requests": 3,
+      "validCandidates": 106,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "pants",
+      "name": "바지",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 87,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "hammer",
+      "name": "망치",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 69,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "bottle",
+      "name": "병",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 106,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "key",
+      "name": "열쇠",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 66,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "chair",
+      "name": "의자",
+      "kind": "object",
+      "validRoadRequests": 2,
+      "requests": 3,
+      "validCandidates": 99,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    }
+  ],
+  "requests": 75,
+  "missing": 13,
+  "humanRecognitionMeasured": false,
+  "AIRecognitionMeasured": false,
+  "selection": "generator pool rank only; no semantic score; canonical generator angle"
+}

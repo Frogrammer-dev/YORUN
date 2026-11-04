@@ -1,0 +1,93 @@
+"""25-kind road comparison and anonymous model-independent review export."""
+import argparse
+import hashlib
+import html
+import importlib.util
+import json
+from pathlib import Path
+import random
+from PIL import Image,ImageDraw
+
+ROOT=Path(__file__).resolve().parents[2]
+spec=importlib.util.spec_from_file_location('road_review',Path(__file__).with_name('road-ranker-review.py'))
+review=importlib.util.module_from_spec(spec);spec.loader.exec_module(review)
+AREAS={'cheonan-buldang':'천안 불당','jeonju-hyoja':'전주 효자','ulsan-samsan':'울산 삼산'}
+
+
+def sha(data):return hashlib.sha256(data).hexdigest()
+
+
+def anonymous_page(cards,fingerprint):
+    script='''<script>
+const fingerprint=FINGERPRINT;const cards=[...document.querySelectorAll('article')];const code=document.querySelector('#reviewer');
+let activeCode='';
+code.addEventListener('input',()=>{const next=code.value.trim();if(next!==activeCode){for(const a of cards)for(const el of a.querySelectorAll('input,select'))el.value='';activeCode=next}});
+const answers=()=>cards.map(a=>({token:a.dataset.token,name:a.querySelector('input').value.trim(),clarity:a.querySelector('select').value}));
+const key=()=>code.value.trim()?'diversity-'+fingerprint+'-'+code.value.trim():null;
+const save=()=>{if(key())try{localStorage.setItem(key(),JSON.stringify(answers()))}catch{document.querySelector('#note').textContent='임시 저장이 차단되어 있습니다. 화면을 닫기 전에 답변 파일을 저장하세요.'}};
+for(const a of cards)for(const el of a.querySelectorAll('input,select'))el.addEventListener('input',save);
+document.querySelector('#fresh').onclick=()=>{code.value='';for(const a of cards)for(const el of a.querySelectorAll('input,select'))el.value='';code.focus()};
+document.querySelector('#download').onclick=()=>{if(!key()||answers().some(r=>!r.name||!r.clarity)){alert('평가자 코드와 모든 경로의 이름·명확도를 입력해 주세요.');return}save();const blob=new Blob([JSON.stringify({fingerprint,reviewerCode:code.value.trim(),createdAt:new Date().toISOString(),answers:answers()},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='diversity-'+code.value.trim().replace(/[^a-zA-Z0-9_-]/g,'_')+'.json';a.click();URL.revokeObjectURL(a.href)};
+</script>'''.replace('FINGERPRINT',json.dumps(fingerprint))
+    return '<!doctype html><html lang="ko"><meta charset="utf-8"><title>실제 경로 자유 명명</title><style>'+review.STYLE+'</style><h1>이 길은 무엇처럼 보이나요?</h1><p class="note">다른 설명이나 참고 그림을 보기 전에 첫인상을 기록하세요. 사물이 떠오르지 않으면 ‘없음’이 정상적인 답입니다. 네모나 다각형만 보이면 ‘없음 / 일반 도형’을 선택하세요. 다른 사람의 답변을 보지 말고 각자 평가해 주세요.</p><label>평가자 코드 (본명 제외)<input id="reviewer" placeholder="P01" autocomplete="off"></label><button id="fresh">새 평가자 시작</button><main>'+''.join(cards)+'</main><button id="download">답변 파일 저장</button><p id="note">답변은 평가자 코드별로 브라우저에만 임시 저장됩니다. 다음 평가자에게 빈 화면을 보여 주세요.</p>'+script+'</html>'
+
+
+def export(source,catalog_file,out):
+    if (out/'mapping.json').exists():raise ValueError('Frozen review exists; use a new output folder')
+    raw=source.read_bytes();data=json.loads(raw)
+    if data.get('status')!='complete':raise ValueError('All generation requests must finish first')
+    catalog_raw=catalog_file.read_bytes();catalog=json.loads(catalog_raw)['catalog']
+    if len(catalog)!=25 or len(data['reviewSlots'])!=75:raise ValueError('Expected25 frozen kinds and75 requests')
+    lookup={r['id']:r for r in data['results']};slots=data['reviewSlots'];case={(s['area'],s['proposalShape']):s for s in slots}
+    shuffled=list(slots);random.Random(2026110211).shuffle(shuffled)
+    valid=[s for s in shuffled if s['id'] is not None];out.mkdir(parents=True,exist_ok=True)
+    pages=[];mapping=[];cards=[]
+    for start in range(0,len(valid),15):
+        part=valid[start:start+15];im=Image.new('RGB',(900,((len(part)+2)//3)*330),'white');draw=ImageDraw.Draw(im)
+        for i,slot in enumerate(part):
+            token=f'R{start+i+1:03d}';row=lookup[slot['id']];rotation=data.get('selectedDisplayRotations',{}).get(row['id'],-row['generatorPlacement']['rotDeg'])
+            points=review.display_points({**row,'_rotation':rotation});xs,ys=zip(*points)
+            extent=max(max(xs)-min(xs),max(ys)-min(ys),1);cx,cy=(max(xs)+min(xs))/2,(max(ys)+min(ys))/2
+            left,top=(i%3)*300,(i//3)*330
+            draw.text((left+12,top+8),token,fill='#172f45')
+            draw.line([(left+150+(x-cx)*260/extent,top+175-(y-cy)*260/extent) for x,y in points],fill='#172f45',width=3)
+            mapping.append({'token':token,'id':row['id'],'area':slot['area'],'proposalShape':slot['proposalShape'],'category':slot['category'],'rotation':rotation})
+            cards.append(f'<article data-token="{token}"><h2>{token}</h2>{review.svg(points)}<label>무엇처럼 보였나요?<input name="name" placeholder="사물 이름 또는 없음" required></label><label>명확도<select name="clarity" required><option value="">선택</option><option value="clear">명확한 사물</option><option value="weak">약한 연상</option><option value="none">없음 / 일반 도형</option></select></label></article>')
+            (out/f'{token}.gpx').write_text(review.gpx(row),encoding='utf-8')
+        filename=f'blind-{start//15+1}.png';im.save(out/filename);pages.append({'file':filename,'SHA256':sha((out/filename).read_bytes())})
+    fingerprint=sha(raw+catalog_raw+json.dumps(mapping,sort_keys=True).encode()+json.dumps(pages,sort_keys=True).encode()+Path(__file__).read_bytes())
+    (out/'blind.html').write_text(anonymous_page(cards,fingerprint),encoding='utf-8')
+    sections=[];table=[];counts=data['counts']
+    for item in catalog:
+        panels=['<section><h3>원본 외곽</h3>'+review.svg(item['shape']['points'])+'<p>참고 외곽 · 실제 도로 아님</p></section>'];success=0;total=0
+        for area,label in AREAS.items():
+            slot=case[(area,item['key'])];count=next(c for c in counts if c['area']==area and c['proposalShape']==item['key'])
+            candidate_count=sum(r.get('area')==area and r.get('proposalShape')==item['key'] for r in data['results']) if 'selectedDisplayRotations' in data else int(count['validCandidates'])
+            total+=candidate_count
+            if slot['id']:
+                success+=1;row=lookup[slot['id']];rotation=data.get('selectedDisplayRotations',{}).get(row['id'],-row['generatorPlacement']['rotDeg']);points=review.display_points({**row,'_rotation':rotation})
+                token=next(r['token'] for r in mapping if r['id']==slot['id'])
+                panels.append(f'<section><h3>{label}</h3>{review.svg(points)}<p>{row["meters"]/1000:.2f}km · 반복 {row["repeatRatio"]*100:.1f}%</p><p>유효후보 {candidate_count}개 · 인식 미측정</p><a href="{token}.gpx">원본 GPX</a></section>')
+            else:
+                message='추천 보류 (도로 생성 실패와 별개)' if 'selectedDisplayRotations' in data else '유효 경로 없음'
+                outcome=html.escape(str(slot.get('selectionReason',slot.get('selectionOutcome',count.get('requestOutcome','no output')))))
+                panels.append(f'<section><h3>{label}</h3><p>{message}</p><p>{outcome}</p></section>')
+        name=html.escape(item['shape']['name']);kind='동물' if item['kind']=='animal' else '사물'
+        sections.append(f'<article class="comparison" data-kind="{item["kind"]}" id="{item["key"]}"><h2>{name} · {kind}</h2><p>식별 특징: {html.escape(item["identifyingFeatures"])}</p><div class="panels">'+''.join(panels)+f'</div><p>도로에서의 위험: {html.escape(item["roadRisk"])}</p><p>혼동 가능성: {html.escape(item["ambiguity"])}</p><p>학습 분류기: {"범주 있음" if item["headSupported"] else "미지원"} · CLIP 이름 사전: {"이름 있음" if item["clipSupported"] else "미지원"} · 지원은 인식 성공을 뜻하지 않습니다.</p></article>')
+        table.append({'key':item['key'],'name':item['shape']['name'],'kind':item['kind'],'validRoadRequests':success,'requests':3,'validCandidates':total,'headSupported':item['headSupported'],'clipSupported':item['clipSupported'],'humanRecognitionMeasured':False})
+    extra='.comparison{margin:20px 0}.panels{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}.panels section{min-width:0}nav a{margin-right:18px}'
+    page='<!doctype html><html lang="ko"><meta charset="utf-8"><title>25종 사물·동물 도로 검토</title><style>'+review.STYLE+extra+'</style><h1>다양한 사물·동물의 실제 도로 경로 검토</h1><p class="note">동물11종·사물14종을 같은 조건으로 검색했습니다. 여기는 이름과 참고 외곽을 보여주는 비교 화면이며, 이 화면을 본 뒤의 납득도를 익명 인식률로 세지 않습니다. 실제 도로 생성 여부와 사물로 알아보는 정도는 다릅니다. 독립 평가자는 먼저 <a href="blind.html">이름 없는 검토 화면</a>을 사용하세요.</p><nav><a href="#" data-filter="all">전체25종</a><a href="#" data-filter="animal">동물11종</a><a href="#" data-filter="object">사물14종</a></nav>'+''.join(sections)+'''<script>for(const a of document.querySelectorAll('[data-filter]'))a.onclick=e=>{e.preventDefault();for(const card of document.querySelectorAll('.comparison'))card.hidden=a.dataset.filter!=='all'&&card.dataset.kind!==a.dataset.filter};</script></html>'''
+    (out/'index.html').write_text(page,encoding='utf-8')
+    manifest={'fingerprint':fingerprint,'inputSHA256':sha(raw),'catalogSHA256':sha(catalog_raw),'rendererSHA256':sha(Path(__file__).read_bytes()),'slots':slots,'mapping':mapping,'pages':pages,'species':table,'requests':75,'missing':75-len(valid),'humanRecognitionMeasured':False,'AIRecognitionMeasured':False,'selection':data.get('selection','generator pool rank only; no semantic score; canonical generator angle')}
+    (out/'mapping.json').write_text(json.dumps(manifest,indent=2,ensure_ascii=False),encoding='utf-8')
+    return manifest
+
+
+if __name__=='__main__':
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--input',type=Path,default=ROOT/'eval/recognition/road-ranker-20261102/diversity-v11.json')
+    p.add_argument('--catalog',type=Path,default=ROOT/'eval/recognition/road-ranker-20261102/diversity-catalog-v11-review.json')
+    p.add_argument('--out',type=Path,default=ROOT/'public/eval/road-diversity-20261102')
+    args=p.parse_args();result=export(args.input,args.catalog,args.out)
+    print(json.dumps({'kinds':len(result['species']),'requests':result['requests'],'missing':result['missing'],'pages':len(result['pages']),'fingerprint':result['fingerprint']}))
+

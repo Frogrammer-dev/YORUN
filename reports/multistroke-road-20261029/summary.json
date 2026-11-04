@@ -1,0 +1,192 @@
+{
+  "summary": {
+    "requests": 9,
+    "validOutputs": 3,
+    "attempts": 243,
+    "humanRecognitionMeasured": false,
+    "appIntegrated": false
+  },
+  "cases": [
+    {
+      "area": "daejeon-dunsan",
+      "class": "apple",
+      "id": "4986110117675008",
+      "attempts": 27,
+      "calls": 1190,
+      "validCandidates": 2,
+      "failures": {
+        "distance": 24,
+        "repeat": 14
+      },
+      "valid": true,
+      "meters": 7390.865736961365,
+      "repeatRatio": 0.10832713745276752,
+      "connectorMeters": 84.95384740829468,
+      "collapsedStrokes": 0,
+      "reasons": []
+    },
+    {
+      "area": "daejeon-dunsan",
+      "class": "fish",
+      "id": "6591076297080832",
+      "attempts": 27,
+      "calls": 1261,
+      "validCandidates": 0,
+      "failures": {
+        "distance": 27,
+        "repeat": 26
+      },
+      "valid": false,
+      "meters": 9455.013179659843,
+      "repeatRatio": 0.19260839744459174,
+      "connectorMeters": 2307.069883584976,
+      "collapsedStrokes": 0,
+      "reasons": [
+        "distance"
+      ]
+    },
+    {
+      "area": "daejeon-dunsan",
+      "class": "bird",
+      "id": "5357674197680128",
+      "attempts": 27,
+      "calls": 2329,
+      "validCandidates": 0,
+      "failures": {
+        "distance": 27,
+        "repeat": 27
+      },
+      "valid": false,
+      "meters": 14583.424460530281,
+      "repeatRatio": 0.30267633102715125,
+      "connectorMeters": 4474.463148832321,
+      "collapsedStrokes": 0,
+      "reasons": [
+        "distance",
+        "repeat"
+      ]
+    },
+    {
+      "area": "daegu-center",
+      "class": "apple",
+      "id": "4986110117675008",
+      "attempts": 27,
+      "calls": 1289,
+      "validCandidates": 2,
+      "failures": {
+        "distance": 25,
+        "repeat": 6
+      },
+      "valid": true,
+      "meters": 6862.298071861267,
+      "repeatRatio": 0.09063892112457361,
+      "connectorMeters": 59.574398040771484,
+      "collapsedStrokes": 0,
+      "reasons": []
+    },
+    {
+      "area": "daegu-center",
+      "class": "fish",
+      "id": "6591076297080832",
+      "attempts": 27,
+      "calls": 1329,
+      "validCandidates": 0,
+      "failures": {
+        "distance": 27,
+        "repeat": 25
+      },
+      "valid": false,
+      "meters": 8429.357961177826,
+      "repeatRatio": 0.21295135267194673,
+      "connectorMeters": 2220.288558959961,
+      "collapsedStrokes": 0,
+      "reasons": [
+        "distance",
+        "repeat"
+      ]
+    },
+    {
+      "area": "daegu-center",
+      "class": "bird",
+      "id": "5357674197680128",
+      "attempts": 27,
+      "calls": 2638,
+      "validCandidates": 0,
+      "failures": {
+        "distance": 27,
+        "repeat": 26
+      },
+      "valid": false,
+      "meters": 16087.924289226532,
+      "repeatRatio": 0.3082593972413329,
+      "connectorMeters": 4582.581530094147,
+      "collapsedStrokes": 1,
+      "reasons": [
+        "distance",
+        "repeat"
+      ]
+    },
+    {
+      "area": "seoul-songpa",
+      "class": "apple",
+      "id": "4986110117675008",
+      "attempts": 27,
+      "calls": 1286,
+      "validCandidates": 1,
+      "failures": {
+        "distance": 26,
+        "repeat": 5,
+        "outside": 2
+      },
+      "valid": true,
+      "meters": 7879.542817950249,
+      "repeatRatio": 0.04354999881581922,
+      "connectorMeters": 38.78619384765625,
+      "collapsedStrokes": 0,
+      "reasons": []
+    },
+    {
+      "area": "seoul-songpa",
+      "class": "fish",
+      "id": "6591076297080832",
+      "attempts": 27,
+      "calls": 1366,
+      "validCandidates": 0,
+      "failures": {
+        "distance": 27,
+        "repeat": 25,
+        "outside": 1
+      },
+      "valid": false,
+      "meters": 10134.457615375519,
+      "repeatRatio": 0.2365180004495483,
+      "connectorMeters": 2233.517230272293,
+      "collapsedStrokes": 0,
+      "reasons": [
+        "distance",
+        "repeat"
+      ]
+    },
+    {
+      "area": "seoul-songpa",
+      "class": "bird",
+      "id": "5357674197680128",
+      "attempts": 27,
+      "calls": 2647,
+      "validCandidates": 0,
+      "failures": {
+        "distance": 27,
+        "repeat": 27
+      },
+      "valid": false,
+      "meters": 16154.193745136261,
+      "repeatRatio": 0.267559905303745,
+      "connectorMeters": 4830.342048406601,
+      "collapsedStrokes": 1,
+      "reasons": [
+        "distance",
+        "repeat"
+      ]
+    }
+  ]
+}

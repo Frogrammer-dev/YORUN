@@ -1,0 +1,22 @@
+[
+  {
+    "source": "scripts\\recognition-lab\\sketch-head.py",
+    "SHA256": "ea41e791d25aa4f7e4ddae2de942e8b663ff52a9df3f08e097271c5b39854daa",
+    "snapshot": "reports\\road-ranker-20261102\\code-snapshots\\v12-sketch-head.py.txt"
+  },
+  {
+    "source": "scripts\\recognition-lab\\diversity-select.py",
+    "SHA256": "fb68cdc7229b8c364c956e2e707ae3e0d5792c04c1592c4ccb5de28b73cf314b",
+    "snapshot": "reports\\road-ranker-20261102\\code-snapshots\\v12-diversity-select.py.txt"
+  },
+  {
+    "source": "scripts\\recognition-lab\\diversity-review.py",
+    "SHA256": "0e4b8fc628e5c3241cf0155d0ee85b196d7aa830b84145d2c40f275937717bd6",
+    "snapshot": "reports\\road-ranker-20261102\\code-snapshots\\v12-diversity-review.py.txt"
+  },
+  {
+    "source": "scripts\\recognition-lab\\diversity-bridge.py",
+    "SHA256": "7fa701b0f8a5bd835328aea020b3f8c5f8fa0a977ec76331ebca31e2d4e82cda",
+    "snapshot": "reports\\road-ranker-20261102\\code-snapshots\\v12-diversity-bridge.py.txt"
+  }
+]

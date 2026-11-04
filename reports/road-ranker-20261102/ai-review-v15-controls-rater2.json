@@ -1,0 +1,456 @@
+{
+  "evaluatorAgent": "01a19b0b-12bd-7592-9a5f-809818cebc3a",
+  "fingerprint": "ef938c4aa5e11741fb12f1a6c9aa8dc995a5a67ab990785e22b20e9797112e87",
+  "humanRecognitionMeasured": false,
+  "evaluationType": "AI 판정이며 사람평가가 아님",
+  "results": [
+    {
+      "token": "Q001",
+      "name": "물고기",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q002",
+      "name": "물고기",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q003",
+      "name": "도끼",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q004",
+      "name": "로켓",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q005",
+      "name": "토끼",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q006",
+      "name": "고양이 얼굴",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q007",
+      "name": "토끼",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q008",
+      "name": "개",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q009",
+      "name": "망치",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q010",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "Q011",
+      "name": "물고기",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q012",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "Q013",
+      "name": "비행기",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q014",
+      "name": "거북",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q015",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "Q016",
+      "name": "코끼리",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q017",
+      "name": "의자",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q018",
+      "name": "물고기",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q019",
+      "name": "오리",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q020",
+      "name": "자동차",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q021",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "Q022",
+      "name": "물고기",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q023",
+      "name": "병",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q024",
+      "name": "사람",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q025",
+      "name": "사과",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q026",
+      "name": "오리",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q027",
+      "name": "왕관",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q028",
+      "name": "새",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q029",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "Q030",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "Q031",
+      "name": "거북",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q032",
+      "name": "열쇠",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q033",
+      "name": "병",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q034",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "Q035",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "Q036",
+      "name": "나비",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q037",
+      "name": "자동차",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q038",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "Q039",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "Q040",
+      "name": "나비",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q041",
+      "name": "고양이 얼굴",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q042",
+      "name": "사람",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q043",
+      "name": "물고기",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q044",
+      "name": "반소매 티셔츠",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q045",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "Q046",
+      "name": "고양이 얼굴",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q047",
+      "name": "물고기",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q048",
+      "name": "거북",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q049",
+      "name": "왕관",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q050",
+      "name": "반소매 티셔츠",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q051",
+      "name": "토끼",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q052",
+      "name": "기린",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q053",
+      "name": "열쇠",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q054",
+      "name": "컵",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q055",
+      "name": "집",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q056",
+      "name": "폭탄",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q057",
+      "name": "반소매 티셔츠",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q058",
+      "name": "새",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q059",
+      "name": "컵",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q060",
+      "name": "나무",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q061",
+      "name": "나비",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q062",
+      "name": "비행기",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q063",
+      "name": "비행기",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q064",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "Q065",
+      "name": "기린",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q066",
+      "name": "의자",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q067",
+      "name": "기린",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q068",
+      "name": "개",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q069",
+      "name": "나무",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q070",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "Q071",
+      "name": "바지",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q072",
+      "name": "집",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q073",
+      "name": "코끼리",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q074",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "Q075",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "Q076",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "Q077",
+      "name": "의자",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q078",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "Q079",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "Q080",
+      "name": "병",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q081",
+      "name": "기린",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q082",
+      "name": "열쇠",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q083",
+      "name": "바지",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q084",
+      "name": "코끼리",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q085",
+      "name": "없음",
+      "clarity": "none"
+    },
+    {
+      "token": "Q086",
+      "name": "왕관",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q087",
+      "name": "사과",
+      "clarity": "clear"
+    },
+    {
+      "token": "Q088",
+      "name": "자동차",
+      "clarity": "weak"
+    },
+    {
+      "token": "Q089",
+      "name": "없음",
+      "clarity": "none"
+    }
+  ],
+  "reportedEvaluatorAgent": "Codex",
+  "agentIdentitySource": "Completed agent tool envelope",
+  "raterIdentityVerified": false
+}

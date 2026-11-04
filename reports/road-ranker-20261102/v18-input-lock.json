@@ -1,0 +1,15 @@
+{
+  "files": {
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\reports\\road-ranker-20261102\\protocol-v18-image-query.md": "d293a36a5280da29196395917933f92ef0194c9c196695941ac20a791fbd27d6",
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\reports\\road-ranker-20261102\\v12-local-model-files.json": "5dd3cf15c1400b118364f5165760b3a298b6e71aa08c3b23fcd541df66954590",
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\eval\\recognition\\road-ranker-20261102\\diversity-v11.json": "d86bd5a68f297c28e7dc0db15f800e2a1ddc12129eed8b39df7ee0bca9006ff1",
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\eval\\recognition\\road-ranker-20261102\\diversity-catalog-v12.json": "880a2b1f87006cf9f84e23fae68a23d8d554f7127c8f551b10c805f6c62e8fa6",
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\eval\\recognition\\road-ranker-20261102\\v12-dataset\\road-features.npz": "c42a699dc41d2ea002aa0d73ddadc36ca004a91132b635b6bdc7d33e19b559fd",
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\eval\\recognition\\road-ranker-20261102\\v12-dataset\\road-features-metadata.json": "d3247d3752392b23674e8115ee16ddf8c28dd05ccae4e4802e10ea53d7800876",
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\eval\\recognition\\road-ranker-20261102\\v17-canonical-models.npz": "cf5849f668dcdebb381a5ff400931667a66c871d1eefbc191d8d1875ada34e24",
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\scripts\\recognition-lab\\sketch-features.py": "2b85b48e4104cfd57d3c6bfd31fc07db05dad8b27ec659c606389f16fd4d4f0e",
+    "C:\\Users\\ekdus\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\running\\scripts\\recognition-lab\\image-query-retrieval.py": "74b9c12be612e5c0b5718ad88a666f0048a506bae857e961c384337a23c0c89a"
+  },
+  "phase": "beforequeryfeature extraction",
+  "humanOrAILabelFitting": false
+}

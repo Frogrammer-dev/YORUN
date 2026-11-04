@@ -1,0 +1,17 @@
+{
+  "pythonTestsPassed": 57,
+  "sourceRendererMatchesFrozenManifest": true,
+  "protocolMatchesBeforeReview": true,
+  "all89IndividualImagesAnd6MontageHashesVerified": true,
+  "catalogHashVerified": true,
+  "UIBlank89IdentityResetAndStorageBlockedExport": "passed",
+  "sourceSamplingGroupDeduplicated": true,
+  "reviewOrderInvariantPrimary": "passed",
+  "userResponseBoundToOriginalImage": true,
+  "userClear": 0,
+  "userWeak": 1,
+  "userNone": 2,
+  "humanPeople": 1,
+  "actualHuman75RequestAccuracyMeasured": false,
+  "goalAchieved": false
+}

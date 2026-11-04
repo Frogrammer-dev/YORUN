@@ -1,0 +1,112 @@
+{
+  "fingerprint": "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39",
+  "evaluatorAgent": "01a19b0b-12bd-7592-9a5f-809818cebc3a",
+  "evaluationType": "AI surrogate, not human evaluation",
+  "results": [
+    {
+      "token": "R001",
+      "name": "자동차",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R002",
+      "name": "반소매 티셔츠",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R003",
+      "name": "나무",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R004",
+      "name": "기린",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R005",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R006",
+      "name": "나무",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R007",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R008",
+      "name": "망치",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R009",
+      "name": "기린",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R010",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R011",
+      "name": "없음",
+      "clarity": "none",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R012",
+      "name": "반소매 티셔츠",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R013",
+      "name": "물고기",
+      "clarity": "clear",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R014",
+      "name": "망치",
+      "clarity": "clear",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R015",
+      "name": "반소매 티셔츠",
+      "clarity": "clear",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R016",
+      "name": "자동차",
+      "clarity": "weak",
+      "source": "new blind rating"
+    },
+    {
+      "token": "R017",
+      "name": "의자",
+      "clarity": "clear",
+      "source": "new blind rating"
+    }
+  ],
+  "exactPixelRatingsReused": 2,
+  "bridgeFingerprint": "98af8e05e84853b8338cd5846784a7e80216318e93d0ef7b16c1ddbe1334178f",
+  "humanRecognitionMeasured": false
+}

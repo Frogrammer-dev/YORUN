@@ -1,0 +1,16 @@
+{
+  "generationComplete": true,
+  "independentExpertAuditComplete": true,
+  "AIReviewsComplete": true,
+  "plainValid": 62,
+  "independentValid": 56,
+  "plainClearTarget": 3,
+  "independentClearTarget": 2,
+  "primaryClear": 0,
+  "technicalCriterionMet": false,
+  "semanticCriterionMet": false,
+  "humanRecognitionMeasured": false,
+  "goalAchieved": false,
+  "next": "Frozen template/handdrawn diagnostic before further generator tuning",
+  "expertPlanningHandle": "usage-limit terminal; retry only after reset"
+}

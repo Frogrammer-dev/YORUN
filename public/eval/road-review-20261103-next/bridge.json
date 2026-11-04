@@ -1,0 +1,1030 @@
+{
+  "oldFingerprint": "e934a3ee3fe40716ea306de4dbf15bf49efc5f5463e7cab8bb2e56dc94e7a9c5",
+  "studies": [
+    {
+      "folder": "public\\eval\\route-study-20261103-f",
+      "fingerprint": "a56106bbbc55cf989308cb585a7451c89f44bb216604d7764b00f9ef958659b5",
+      "rows": [
+        {
+          "token": "R001",
+          "hash": "76d189af0e85e7f7a8ab4110c1787519c4d5140bbb9c8edd263dc6aa8e951893",
+          "reuse": {}
+        },
+        {
+          "token": "R002",
+          "hash": "956efb1095cb2c9a53c477212c6e5a5ef02223160790cc5d4ac06760b36beb96",
+          "reuse": {}
+        },
+        {
+          "token": "R003",
+          "hash": "3e7ee111aa963a7afcb4489c1ebe1933a496e57b4c65c1784bdab7c0ab98f989",
+          "reuse": {}
+        },
+        {
+          "token": "R004",
+          "hash": "aef2edfc9d3b59514a95c3a81e81f47fa0f9083ad264881f42c6a9d20a682f38",
+          "reuse": {}
+        },
+        {
+          "token": "R005",
+          "hash": "644c1c7a1adc1e569d53b4545e07c61ff56fc84cee0f4f15c4d4de0a3f25b46a",
+          "reuse": {}
+        },
+        {
+          "token": "R006",
+          "hash": "ef7202a7edd35fb115f0d608b3fc91e92db631a4d2606e02d004e143e38ed50e",
+          "reuse": {}
+        },
+        {
+          "token": "R007",
+          "hash": "1fbae3bf4d2a2e02063f49a9dca266070bc54262c7d04b117cd2fcf4774ff62d",
+          "reuse": {}
+        },
+        {
+          "token": "R008",
+          "hash": "279e1de8a19b0587bd7f2cc674c4b64005a3df0d9fad8b87257be3d46ab3a60f",
+          "reuse": {}
+        },
+        {
+          "token": "R009",
+          "hash": "5dd97fd8d539565ded348e0cd7a168c6a1cb0bb28c05da1578856897a7695c99",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "기린",
+              "clarity": "weak",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R004",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R004"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "기린",
+              "clarity": "weak",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R004",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R004"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "기린",
+              "clarity": "weak",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R004",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R004"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R010",
+          "hash": "274c7698ce6c7c3f61d8dfa8d9ca60eb609ba227e4dfa18757b80264c72234f2",
+          "reuse": {}
+        },
+        {
+          "token": "R011",
+          "hash": "d8e39059be954389ea9f8693f32d7c2da6cf94e8cc53e0db95977b1436700ad8",
+          "reuse": {}
+        },
+        {
+          "token": "R012",
+          "hash": "e8c2b928b68e2544b65134bdda190fe83d8c76d8653e9da2d4cbbb52dcdb6272",
+          "reuse": {}
+        },
+        {
+          "token": "R013",
+          "hash": "8476d610571b471149f929738b5cc4be9a73a29031fbdb3b61796574f0d81a9d",
+          "reuse": {}
+        },
+        {
+          "token": "R014",
+          "hash": "0a6465eee77dd845f64cb8e82c600eadb0ac9545333f844894a3fa4c9a751824",
+          "reuse": {}
+        },
+        {
+          "token": "R015",
+          "hash": "d94bb7f1f0a4394b932f8facfc1f47e333276fd5cc5d1aea5c1bbac79c413fec",
+          "reuse": {}
+        },
+        {
+          "token": "R016",
+          "hash": "801dc115c23e34f11a7f0c2282b2fe7a7c63a3cdf2e01f6a9f0c790e7f45d735",
+          "reuse": {}
+        },
+        {
+          "token": "R017",
+          "hash": "14381e24c9f9b19c440c8d7d97ce592586e55f64c93cd3ed932833d47f066fe7",
+          "reuse": {}
+        },
+        {
+          "token": "R018",
+          "hash": "3b2898c2a60bf758b437997c4c14318d43125c7080025e5a590eed9dfc7030b5",
+          "reuse": {}
+        },
+        {
+          "token": "R019",
+          "hash": "0880ee986a209bb8650a7c4ce037c9a0639b24d9fe305f7b6aea482d2e71c3a5",
+          "reuse": {}
+        },
+        {
+          "token": "R020",
+          "hash": "119ffa50227fc19686454a98da7bcbfbeaf921058081d82616eff0108a17e961",
+          "reuse": {}
+        },
+        {
+          "token": "R021",
+          "hash": "a02dcefa4a52a37f040118b00d39d4eb22f17384ec3811ffd617dcd96bed9464",
+          "reuse": {}
+        },
+        {
+          "token": "R022",
+          "hash": "a6ab0a5ea1f499b94a45fd3ec5ee10f5a208d346c8555c90a2083f04fdc5de4b",
+          "reuse": {}
+        },
+        {
+          "token": "R023",
+          "hash": "c8f2b566b2ba8e0687183069b9e373d51367fe116647b2f733a2cf8446efb1cf",
+          "reuse": {}
+        },
+        {
+          "token": "R024",
+          "hash": "075766c60cf85accfc5abc44ff533a53f4268675ad2f63c034e47df86c01549c",
+          "reuse": {}
+        },
+        {
+          "token": "R025",
+          "hash": "406da263b3d286f125147c59887761655802af052a7a704d587e94dc6f351caa",
+          "reuse": {}
+        },
+        {
+          "token": "R026",
+          "hash": "749fcedc08fb9751d1d573c2bcf3defdbccf464bb0d1ced88bc68053f6ab298c",
+          "reuse": {}
+        },
+        {
+          "token": "R027",
+          "hash": "006bef8968f8d0437e33807ed7cc39ca53f73cb11be5bdccfc1328ec12f8975f",
+          "reuse": {}
+        },
+        {
+          "token": "R028",
+          "hash": "8f13b261d249720253ceae627ed09252207d085dd5cc76ab7564bf84a7ed2fc5",
+          "reuse": {}
+        },
+        {
+          "token": "R029",
+          "hash": "721d8526d21e1be14344f39504fd0952cebc6447cd57c8ec9c6c04d387316cd8",
+          "reuse": {}
+        },
+        {
+          "token": "R030",
+          "hash": "5a0b2c75fc1694dee43403404c573c948e92b6bb957526ca1c7e040f9a527fe5",
+          "reuse": {}
+        },
+        {
+          "token": "R031",
+          "hash": "4b6a48639520d8b76840593134f6ed51ce0623613eb709dfc846c09d424f8f17",
+          "reuse": {}
+        },
+        {
+          "token": "R032",
+          "hash": "c91dd8ba516cb4a02f4975b5d815a03271455dff61de28403119163dd9203ac9",
+          "reuse": {}
+        },
+        {
+          "token": "R033",
+          "hash": "1d2034f15a0c4e65bc8cc714e7a737ecb0bd99e994724a8474dfd05c4a831aac",
+          "reuse": {}
+        },
+        {
+          "token": "R034",
+          "hash": "782ebb0dad2da0fd85928c741bd7916e1ad1a1b5b66922b252628fa040977aa3",
+          "reuse": {}
+        },
+        {
+          "token": "R035",
+          "hash": "6cff601fd70e4fbfb8ca440d8ec3c22d703680c7de2b231bf72d2e26c68fe14d",
+          "reuse": {}
+        },
+        {
+          "token": "R036",
+          "hash": "15fe0949ae90bcd991f8712d260a808cafb32d402d098e4738d67d2c1c992202",
+          "reuse": {}
+        },
+        {
+          "token": "R037",
+          "hash": "23369ef3c42bdf84f729e278127498bce6462c5eed4bb6b192a8a3182ccd80f3",
+          "reuse": {}
+        },
+        {
+          "token": "R038",
+          "hash": "62944e2183fc955ff6a73f718d705315e2c0c9869842c46c1f6dded81c2ccbb3",
+          "reuse": {}
+        },
+        {
+          "token": "R039",
+          "hash": "c2de6161554caa8be707d217ea9a6ef685eaaa64f50f17f68d71c30bc8c63b45",
+          "reuse": {}
+        },
+        {
+          "token": "R040",
+          "hash": "22ba6009378766491e2116d416fb326d1b68e9dc3dff3e2c5540121587e6978a",
+          "reuse": {}
+        },
+        {
+          "token": "R041",
+          "hash": "06ab760de2d92182da48d8f721d10433636c93e5d2fbcd69bb6604244c12c565",
+          "reuse": {}
+        },
+        {
+          "token": "R042",
+          "hash": "df643dd1291b070685a82ed933ad378e4083981dbac885e6e7dd4b075d5bfb63",
+          "reuse": {}
+        },
+        {
+          "token": "R043",
+          "hash": "bb3ea970e2d3ca88724e7afd3b2d1b40188af3880424f820c14f67d6a170c8be",
+          "reuse": {}
+        },
+        {
+          "token": "R044",
+          "hash": "1501bde35b6b0a6eba79ee5b9e8721a1f4afa595438b63d60e6f57eb1676be48",
+          "reuse": {}
+        },
+        {
+          "token": "R045",
+          "hash": "0899f20233ddb8d37c0458a2c1c81ec6a55ddfeea27385717e85df57c7025e08",
+          "reuse": {}
+        },
+        {
+          "token": "R046",
+          "hash": "0e5be4ff6e4a7d3acf5a76ac0f912b73d9bf20bb98ab6720942ffa163bb90f2c",
+          "reuse": {}
+        },
+        {
+          "token": "R047",
+          "hash": "c6198b0ac7cef5b05b8a69060c66df756c9bda61ab20083d6b783c9fe574134d",
+          "reuse": {}
+        },
+        {
+          "token": "R048",
+          "hash": "52970794450e6e42a5f5a5ce9ef80f9351ae90068c35afeb151abcdcaa61278e",
+          "reuse": {}
+        },
+        {
+          "token": "R049",
+          "hash": "655e9648d3503d7492b9fb222fb48ed840923dc151a04d0964b9be9ffc2de3fe",
+          "reuse": {}
+        },
+        {
+          "token": "R050",
+          "hash": "271c2f9b266534a2b02787e058fe3ecea4a27ac758f4683dcb66a5f581ce6392",
+          "reuse": {}
+        },
+        {
+          "token": "R051",
+          "hash": "b1b9c15aa5d4e7004433b195b3342bcafc68753435cb8d1f40be49a027cc408e",
+          "reuse": {}
+        },
+        {
+          "token": "R052",
+          "hash": "e36637aaf93eafe07539832c6d26b41628601d36c16d4077103ab90d7610dffd",
+          "reuse": {}
+        },
+        {
+          "token": "R053",
+          "hash": "c507792cfa1a2907b47159807a16afef3060227afa0e07b0e10759ca40a7154c",
+          "reuse": {}
+        },
+        {
+          "token": "R054",
+          "hash": "02c8bc2e3e6c0debbf1c314478c7a6a649f3230f4e248e155f531a7c7cc86aed",
+          "reuse": {}
+        },
+        {
+          "token": "R055",
+          "hash": "079263e597b2dd6038c2981302b11c20f12aed6d0952f1d5592d7e6a535dc8cf",
+          "reuse": {}
+        },
+        {
+          "token": "R056",
+          "hash": "93a5f7dea0636cc680ecea62d97457c35a86ce9eb7d279b8be9153dbae8c71d3",
+          "reuse": {}
+        },
+        {
+          "token": "R057",
+          "hash": "874105d189d00ca264b96ed0dda0cb99797fe47401e92395e8173617489ca44f",
+          "reuse": {}
+        },
+        {
+          "token": "R058",
+          "hash": "c2361e41ca476806410f2b1b6ff299122f19b9af3ab8abbe631fb6ae0cf2b8ab",
+          "reuse": {}
+        },
+        {
+          "token": "R059",
+          "hash": "3d868470bb39f36d1a0ad96e362a9a1316f7f70d0b1fdd235d1b69a06d44cb4f",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "티셔츠",
+              "clarity": "weak",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R015",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R015"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "반소매 티셔츠",
+              "clarity": "clear",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R015",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R015"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "반팔 티셔츠",
+              "clarity": "clear",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R015",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R015"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R060",
+          "hash": "c05eeae199432366c7a800fc4de48110508ddc92494857e9f272060d5e97ef1a",
+          "reuse": {}
+        },
+        {
+          "token": "R061",
+          "hash": "da15ed6dcfc56c850a52567e62d021ce374bdbe5a1d518ae19e0ff83131d7a6b",
+          "reuse": {}
+        },
+        {
+          "token": "R062",
+          "hash": "326e661a6f5c3b859335ba7a90d09d958310942e97a720e077ebccd6db05c8dd",
+          "reuse": {}
+        },
+        {
+          "token": "R063",
+          "hash": "037fa11e5dd1f0dd11805697bb248334239ccc93ce36012170a8c4c22756ccc9",
+          "reuse": {}
+        },
+        {
+          "token": "R064",
+          "hash": "6fd5110b5310cb9fc308fdd97f494a68e1923706472ff2ee271fa6cf5ec377e2",
+          "reuse": {}
+        },
+        {
+          "token": "R065",
+          "hash": "06015b695f6c7ad13838e007ee6694a1017003b621af851b9e97a2ae7c25ab7c",
+          "reuse": {}
+        },
+        {
+          "token": "R066",
+          "hash": "e89fddd11d11bc4eefaf8ec48b73e569a2bb81a66a50bbe4b67c407de89e505e",
+          "reuse": {}
+        },
+        {
+          "token": "R067",
+          "hash": "15152208839d95a8af7d194f4398e961623d0bc986f2dfd304317580ad2bb2ce",
+          "reuse": {}
+        },
+        {
+          "token": "R068",
+          "hash": "58291199d99ac755bdfd59e20591cadb57c13a6589c6b8617a20f07961119b7a",
+          "reuse": {}
+        },
+        {
+          "token": "R069",
+          "hash": "644133482d97fbc15dc76268c020351f6a735a94c236df874359348f512e4956",
+          "reuse": {}
+        },
+        {
+          "token": "R070",
+          "hash": "b1b3fda638a2ce4e82c5e224feedb58affb38e23e620e9bb95bfdcaf3bc7388b",
+          "reuse": {}
+        },
+        {
+          "token": "R071",
+          "hash": "1be79a0f6cf5392b6316d5fde6852cec52079f36d021e2b31ca5331e679d0a6b",
+          "reuse": {}
+        },
+        {
+          "token": "R072",
+          "hash": "77c2c26738a44a5c57b116b030e4a8a1bda059058369469e9ee2f222257747cc",
+          "reuse": {}
+        },
+        {
+          "token": "R073",
+          "hash": "3be6d85b00285f8193b9c4e17e2e91c584528c3c3139815aee50925bdc040a6c",
+          "reuse": {}
+        }
+      ]
+    },
+    {
+      "folder": "public\\eval\\route-study-20261103-g",
+      "fingerprint": "1bf0afd74a6cae68f6a8f114ab9fc2f8e3fc32518b2104f2267061367af914c1",
+      "rows": [
+        {
+          "token": "R001",
+          "hash": "46ea87137ca29a09711069d28cc36f95236eda8bb54f2d869b36f9695e13fe88",
+          "reuse": {}
+        },
+        {
+          "token": "R002",
+          "hash": "a69269c7b8843b1bfead5919d33ebbc54145c61cbca217129e5be2ea0ab303c4",
+          "reuse": {}
+        },
+        {
+          "token": "R003",
+          "hash": "267238fe49b4810e5b5804686b84a017247de0a091c29e4c6d6186c0253adacd",
+          "reuse": {}
+        },
+        {
+          "token": "R004",
+          "hash": "676b78a2973c564844d93d68a4af2fd1207ba2057943e03f8b7596290899f538",
+          "reuse": {}
+        },
+        {
+          "token": "R005",
+          "hash": "0147e63e31b6c34854fc08c2493919b8e74bc0904f9e6dbc53a5116d003e79f8",
+          "reuse": {}
+        },
+        {
+          "token": "R006",
+          "hash": "951e7233f2258c859c5f374c8cb491b7068b70a94331e4e7b8a58e44e65dcbb2",
+          "reuse": {}
+        },
+        {
+          "token": "R007",
+          "hash": "9754f55667d6e055423595268788a8666dea0dc5b52e42e090b67ab611811b33",
+          "reuse": {}
+        },
+        {
+          "token": "R008",
+          "hash": "934ea7c046920dceb43f749338b3fd95efd00acef7a8fe08a9f9d5f9864e6447",
+          "reuse": {}
+        },
+        {
+          "token": "R009",
+          "hash": "e0d9da21bb6d069cf61b58de5c8f1ba3fbaea34231f560a24f002ae02643e2a0",
+          "reuse": {}
+        },
+        {
+          "token": "R010",
+          "hash": "1bc056c34d4737a21e948aa982f267ffb09050030a4cc0d70451f42d367d5f50",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "바지",
+              "clarity": "weak",
+              "oldTokens": [
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R005"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "바지",
+              "clarity": "clear",
+              "oldTokens": [
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R005"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "바지",
+              "clarity": "clear",
+              "oldTokens": [
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R005"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R011",
+          "hash": "0dee0b4d180d5ded031e2b31032aefe28004b33672de444601ce49b7aa9e8bdd",
+          "reuse": {}
+        },
+        {
+          "token": "R012",
+          "hash": "cc7086b37ada7db1af3f36887e57e078bcec0a3f3bc35668fd0da3ffdeeef05d",
+          "reuse": {}
+        },
+        {
+          "token": "R013",
+          "hash": "43250065d2cd44b20358a15f18e03574338a4d951292f48fb675167eead7ab60",
+          "reuse": {}
+        },
+        {
+          "token": "R014",
+          "hash": "746bc05e0c9588a0710d1d5c5a3d615561853000ff33b95b9d6f756253a14177",
+          "reuse": {}
+        },
+        {
+          "token": "R015",
+          "hash": "1daacc46e9938c3bac8b8c058a65b14885894fd65b544362e95164d0be3d4cd6",
+          "reuse": {}
+        },
+        {
+          "token": "R016",
+          "hash": "23f8ccf9e638f70727eb4573d8dab9bfd78c94112e8861bc2a65e8fd7f41b830",
+          "reuse": {}
+        },
+        {
+          "token": "R017",
+          "hash": "19f27a465efd49ff36e5f69b8bcfe45fce3db74703eaba9aed7743fa23c46021",
+          "reuse": {}
+        },
+        {
+          "token": "R018",
+          "hash": "911837c39b54ce7c1cb3aaf0083b63d25f89cc7ddb26e71a04a212398ae53b84",
+          "reuse": {}
+        },
+        {
+          "token": "R019",
+          "hash": "032ba52fbd6870252e6e34afb9fdb67f9bf425fff63464fe63cdd06ca23712e0",
+          "reuse": {}
+        },
+        {
+          "token": "R020",
+          "hash": "52095a939a99dec32e7b354781edce045a89e0ed3db461582e89beeda33382d1",
+          "reuse": {}
+        },
+        {
+          "token": "R021",
+          "hash": "38c16cb5cfa4255e334cffc481832515033cbe13f1ef7d126e0d99f32340a7c5",
+          "reuse": {}
+        },
+        {
+          "token": "R022",
+          "hash": "b4a6b949f10171214c923ef84c24a659237cbd1148413051152bdc415724fc64",
+          "reuse": {}
+        },
+        {
+          "token": "R023",
+          "hash": "52ea292415302a2bf68627c35aab4ac5411b51156795be9066552292c9dcac91",
+          "reuse": {}
+        },
+        {
+          "token": "R024",
+          "hash": "f4cc1b2a22682587c9297091b4008e6b90c53f25d4c996d23245cda491327aa4",
+          "reuse": {}
+        },
+        {
+          "token": "R025",
+          "hash": "9f509d423adf61a79d2c5e9515835835cc0cd41ac99301c9f9fdd4d928593c04",
+          "reuse": {}
+        },
+        {
+          "token": "R026",
+          "hash": "eb4211c3c6b8cbadf6dd343985e320089ac1a708a256259f0c8b93b5fd501a8d",
+          "reuse": {}
+        },
+        {
+          "token": "R027",
+          "hash": "e0f5cfcf79a1b34b14568917ee60a6491310759feb5e02f78208ac86e18b3659",
+          "reuse": {}
+        },
+        {
+          "token": "R028",
+          "hash": "1a23ed2852e89d58e04fba0c41ac5f6f0831e30f1bc66e69a0baca50e4004b2b",
+          "reuse": {}
+        },
+        {
+          "token": "R029",
+          "hash": "e7129bde6b4c863a40525fed54f385fb9fee45f9d621e0ff479521d26c43ba08",
+          "reuse": {}
+        },
+        {
+          "token": "R030",
+          "hash": "0a93dfe464fb68b59e800e1fc3b0d62d0ca4a38fdacf0a46dcc7eba7e2cd36fc",
+          "reuse": {}
+        },
+        {
+          "token": "R031",
+          "hash": "a8f435cb21e4536bd2a8f2e4a6b16410c50660a92d7b213181b9491aabec342f",
+          "reuse": {}
+        },
+        {
+          "token": "R032",
+          "hash": "2543e64ef50094c4b1749c32acd6ef6062fd810907ae0094eb7efd53df31682b",
+          "reuse": {}
+        },
+        {
+          "token": "R033",
+          "hash": "b34aa5341aa8e43cb90afdb932ab61413c3138e373f2b2a4588054816f842492",
+          "reuse": {}
+        },
+        {
+          "token": "R034",
+          "hash": "6f7d0ee2cb089d3b4b8d5a7fab683ec13fffaba9e711db362534a0e9911b62d6",
+          "reuse": {}
+        },
+        {
+          "token": "R035",
+          "hash": "6a2fce20681b5a68cb7d2df537cbb69c3553acc43e0eb402a6c5395ab16b32ac",
+          "reuse": {}
+        },
+        {
+          "token": "R036",
+          "hash": "f97e82261bee2c76f1dc5211838f1c522ee714464c29b3957fce7150e9739ba6",
+          "reuse": {}
+        },
+        {
+          "token": "R037",
+          "hash": "b6b1b692592da9565bbe8a2fbf7a993efe46d9500f1e5384ca7c11f76a56014a",
+          "reuse": {}
+        },
+        {
+          "token": "R038",
+          "hash": "95dd5f677592e8431a88abc147ace0bb199fa69600f52470c0f6ebc90394babc",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "티셔츠",
+              "clarity": "weak",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R012",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R012"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "반소매 티셔츠",
+              "clarity": "weak",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R012",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R012"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "반팔 티셔츠",
+              "clarity": "clear",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R012",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R012"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R039",
+          "hash": "08d40cb477333d6f31bcf457b406970e1dd9ee0bf536bf8dfeca49c6dfb9fc17",
+          "reuse": {}
+        },
+        {
+          "token": "R040",
+          "hash": "3368bc67ef24af35f791f64e079ab396ec873383223f38a0a5590661eccb5459",
+          "reuse": {}
+        },
+        {
+          "token": "R041",
+          "hash": "112bc961aafceac900b022a1cd4982cedc55b937325997e227f46a1aaa9936ae",
+          "reuse": {}
+        },
+        {
+          "token": "R042",
+          "hash": "920e3c4b459fb7e3c489325ed63f4e2f93d2d991f46d02f1a6b9a5039ce97f53",
+          "reuse": {}
+        },
+        {
+          "token": "R043",
+          "hash": "204d9a5a3eb4bd4fe868f53d3b8ae142afb63b88d759080c7bcf78da1aad4e73",
+          "reuse": {}
+        },
+        {
+          "token": "R044",
+          "hash": "e026f06bcad62b011bdd4d3ebecbd844d23bd8127a24aa5bf695d4f054b4442a",
+          "reuse": {}
+        },
+        {
+          "token": "R045",
+          "hash": "ba352226f436078d1b3df6995bd3a8126d366b2faa87d55ee02a475f659e4bb5",
+          "reuse": {}
+        },
+        {
+          "token": "R046",
+          "hash": "6e8cfb3a92b8e2d564afe4ecdbd3b2ff0825e1849c4aa7350fe9e554e262ec12",
+          "reuse": {}
+        },
+        {
+          "token": "R047",
+          "hash": "44076cb257e29560984ad95e951cd1b399e8faa867260c603562dcdf05dae4f4",
+          "reuse": {}
+        },
+        {
+          "token": "R048",
+          "hash": "337c6cd5d5a767f1a9a4abc0347a1ecf929e850cfa66be80701cd212ca807e6e",
+          "reuse": {}
+        },
+        {
+          "token": "R049",
+          "hash": "305a30c8371102dc453d8500d3801ebca23b438cd3a8bf175a9122600e8a7b13",
+          "reuse": {}
+        },
+        {
+          "token": "R050",
+          "hash": "a88cb5b11ca80a41f1487b76f107549c3f08654cd7923e03bc7eda31b7a006ff",
+          "reuse": {}
+        },
+        {
+          "token": "R051",
+          "hash": "4521cfdd1f5226247dcdcb7cf7899c746673b1d62f62259e862cba7c58af9f6e",
+          "reuse": {}
+        },
+        {
+          "token": "R052",
+          "hash": "95c4172baaa2293b57a21fabcd3aede93338e32629a8034c51445d37e9b15d5e",
+          "reuse": {}
+        },
+        {
+          "token": "R053",
+          "hash": "22d09298f8edf4a82fdda69e11cdf817eb7e402490de14cc65099a357a00f49b",
+          "reuse": {}
+        },
+        {
+          "token": "R054",
+          "hash": "49608f0578576cfb8e03d240ddd1f9640a4599f7d18e1e4e50ba3ab9f8b51a0f",
+          "reuse": {}
+        },
+        {
+          "token": "R055",
+          "hash": "b408463a9ecd48417f842d0e06d6d5b1094e60a020fbc93cce5ac29afd05076d",
+          "reuse": {}
+        },
+        {
+          "token": "R056",
+          "hash": "0955bc715c2f4a5f1f0706a404d24131e72815e9400d0b72c090f0423cf07c7f",
+          "reuse": {}
+        },
+        {
+          "token": "R057",
+          "hash": "cd261630604e791e81d1922f61ebfb31c36bfa81eddbb1f527b428bba4fe73b5",
+          "reuse": {}
+        },
+        {
+          "token": "R058",
+          "hash": "2d6776b7588285e44ae72913232b8189c04016d6e85210cf9ebb40c5d0a3a356",
+          "reuse": {}
+        },
+        {
+          "token": "R059",
+          "hash": "f59d2b2311a797aa69eb987a6529b08ccd6df6169e8d6b95b925e53635b45577",
+          "reuse": {}
+        },
+        {
+          "token": "R060",
+          "hash": "0c9b746b02b860f9d84fdc6528e6d9fac584b64be876619eaf3c22501eac4df3",
+          "reuse": {}
+        },
+        {
+          "token": "R061",
+          "hash": "8f94d6ec1328b9f46db33c43a2e021b28f6b4c105c8e00532b38c2644d3a1b43",
+          "reuse": {
+            "01a19aed-73d8-7662-81ef-5d6ec2287589": {
+              "name": "자동차",
+              "clarity": "weak",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R016",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R016"
+              ]
+            },
+            "01a19b0b-12bd-7592-9a5f-809818cebc3a": {
+              "name": "자동차",
+              "clarity": "weak",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R016",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R016"
+              ]
+            },
+            "01a19b0b-13a1-7340-89c7-095b3dc85ed2": {
+              "name": "자동차",
+              "clarity": "weak",
+              "oldTokens": [
+                "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39:R016",
+                "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347:R016"
+              ]
+            }
+          }
+        },
+        {
+          "token": "R062",
+          "hash": "fcf1d70ae794813b9a93f311696ab156d49b2717fab2ad8e9a718facd8530e61",
+          "reuse": {}
+        },
+        {
+          "token": "R063",
+          "hash": "ff03bc0936906bb0bd3f8b4264549828bb292b9c76df7eca76253b4218330897",
+          "reuse": {}
+        },
+        {
+          "token": "R064",
+          "hash": "566d58e189530564a8c1fa8a52d6320bde2bd329078aa84ea29f7832e7d9bcd3",
+          "reuse": {}
+        },
+        {
+          "token": "R065",
+          "hash": "6111d2694a671ca6bcefff2abfb56c92248268ab264a7f22ddab04c62929069d",
+          "reuse": {}
+        },
+        {
+          "token": "R066",
+          "hash": "44e6dc89f92dca2c4f9ae1d10d5214c92af4944af2c2700b298142d8c92a1a7c",
+          "reuse": {}
+        },
+        {
+          "token": "R067",
+          "hash": "ce522d781ed81b40f6574fb8f44cac8b7cfbd2a0158dbf8e4f44443fdc131e15",
+          "reuse": {}
+        }
+      ]
+    }
+  ],
+  "pendingTokens": {
+    "K001": "911837c39b54ce7c1cb3aaf0083b63d25f89cc7ddb26e71a04a212398ae53b84",
+    "K002": "326e661a6f5c3b859335ba7a90d09d958310942e97a720e077ebccd6db05c8dd",
+    "K003": "22d09298f8edf4a82fdda69e11cdf817eb7e402490de14cc65099a357a00f49b",
+    "K004": "52095a939a99dec32e7b354781edce045a89e0ed3db461582e89beeda33382d1",
+    "K005": "22ba6009378766491e2116d416fb326d1b68e9dc3dff3e2c5540121587e6978a",
+    "K006": "271c2f9b266534a2b02787e058fe3ecea4a27ac758f4683dcb66a5f581ce6392",
+    "K007": "ba352226f436078d1b3df6995bd3a8126d366b2faa87d55ee02a475f659e4bb5",
+    "K008": "075766c60cf85accfc5abc44ff533a53f4268675ad2f63c034e47df86c01549c",
+    "K009": "15152208839d95a8af7d194f4398e961623d0bc986f2dfd304317580ad2bb2ce",
+    "K010": "9f509d423adf61a79d2c5e9515835835cc0cd41ac99301c9f9fdd4d928593c04",
+    "K011": "2d6776b7588285e44ae72913232b8189c04016d6e85210cf9ebb40c5d0a3a356",
+    "K012": "76d189af0e85e7f7a8ab4110c1787519c4d5140bbb9c8edd263dc6aa8e951893",
+    "K013": "644133482d97fbc15dc76268c020351f6a735a94c236df874359348f512e4956",
+    "K014": "0955bc715c2f4a5f1f0706a404d24131e72815e9400d0b72c090f0423cf07c7f",
+    "K015": "e0f5cfcf79a1b34b14568917ee60a6491310759feb5e02f78208ac86e18b3659",
+    "K016": "bb3ea970e2d3ca88724e7afd3b2d1b40188af3880424f820c14f67d6a170c8be",
+    "K017": "eb4211c3c6b8cbadf6dd343985e320089ac1a708a256259f0c8b93b5fd501a8d",
+    "K018": "037fa11e5dd1f0dd11805697bb248334239ccc93ce36012170a8c4c22756ccc9",
+    "K019": "15fe0949ae90bcd991f8712d260a808cafb32d402d098e4738d67d2c1c992202",
+    "K020": "da15ed6dcfc56c850a52567e62d021ce374bdbe5a1d518ae19e0ff83131d7a6b",
+    "K021": "95c4172baaa2293b57a21fabcd3aede93338e32629a8034c51445d37e9b15d5e",
+    "K022": "f59d2b2311a797aa69eb987a6529b08ccd6df6169e8d6b95b925e53635b45577",
+    "K023": "032ba52fbd6870252e6e34afb9fdb67f9bf425fff63464fe63cdd06ca23712e0",
+    "K024": "b1b9c15aa5d4e7004433b195b3342bcafc68753435cb8d1f40be49a027cc408e",
+    "K025": "d94bb7f1f0a4394b932f8facfc1f47e333276fd5cc5d1aea5c1bbac79c413fec",
+    "K026": "0880ee986a209bb8650a7c4ce037c9a0639b24d9fe305f7b6aea482d2e71c3a5",
+    "K027": "8476d610571b471149f929738b5cc4be9a73a29031fbdb3b61796574f0d81a9d",
+    "K028": "406da263b3d286f125147c59887761655802af052a7a704d587e94dc6f351caa",
+    "K029": "c2361e41ca476806410f2b1b6ff299122f19b9af3ab8abbe631fb6ae0cf2b8ab",
+    "K030": "655e9648d3503d7492b9fb222fb48ed840923dc151a04d0964b9be9ffc2de3fe",
+    "K031": "0a93dfe464fb68b59e800e1fc3b0d62d0ca4a38fdacf0a46dcc7eba7e2cd36fc",
+    "K032": "43250065d2cd44b20358a15f18e03574338a4d951292f48fb675167eead7ab60",
+    "K033": "b4a6b949f10171214c923ef84c24a659237cbd1148413051152bdc415724fc64",
+    "K034": "58291199d99ac755bdfd59e20591cadb57c13a6589c6b8617a20f07961119b7a",
+    "K035": "b408463a9ecd48417f842d0e06d6d5b1094e60a020fbc93cce5ac29afd05076d",
+    "K036": "e026f06bcad62b011bdd4d3ebecbd844d23bd8127a24aa5bf695d4f054b4442a",
+    "K037": "721d8526d21e1be14344f39504fd0952cebc6447cd57c8ec9c6c04d387316cd8",
+    "K038": "d8e39059be954389ea9f8693f32d7c2da6cf94e8cc53e0db95977b1436700ad8",
+    "K039": "749fcedc08fb9751d1d573c2bcf3defdbccf464bb0d1ced88bc68053f6ab298c",
+    "K040": "112bc961aafceac900b022a1cd4982cedc55b937325997e227f46a1aaa9936ae",
+    "K041": "6111d2694a671ca6bcefff2abfb56c92248268ab264a7f22ddab04c62929069d",
+    "K042": "676b78a2973c564844d93d68a4af2fd1207ba2057943e03f8b7596290899f538",
+    "K043": "77c2c26738a44a5c57b116b030e4a8a1bda059058369469e9ee2f222257747cc",
+    "K044": "44e6dc89f92dca2c4f9ae1d10d5214c92af4944af2c2700b298142d8c92a1a7c",
+    "K045": "0c9b746b02b860f9d84fdc6528e6d9fac584b64be876619eaf3c22501eac4df3",
+    "K046": "f97e82261bee2c76f1dc5211838f1c522ee714464c29b3957fce7150e9739ba6",
+    "K047": "f4cc1b2a22682587c9297091b4008e6b90c53f25d4c996d23245cda491327aa4",
+    "K048": "a69269c7b8843b1bfead5919d33ebbc54145c61cbca217129e5be2ea0ab303c4",
+    "K049": "e0d9da21bb6d069cf61b58de5c8f1ba3fbaea34231f560a24f002ae02643e2a0",
+    "K050": "44076cb257e29560984ad95e951cd1b399e8faa867260c603562dcdf05dae4f4",
+    "K051": "a88cb5b11ca80a41f1487b76f107549c3f08654cd7923e03bc7eda31b7a006ff",
+    "K052": "e89fddd11d11bc4eefaf8ec48b73e569a2bb81a66a50bbe4b67c407de89e505e",
+    "K053": "6f7d0ee2cb089d3b4b8d5a7fab683ec13fffaba9e711db362534a0e9911b62d6",
+    "K054": "06015b695f6c7ad13838e007ee6694a1017003b621af851b9e97a2ae7c25ab7c",
+    "K055": "2543e64ef50094c4b1749c32acd6ef6062fd810907ae0094eb7efd53df31682b",
+    "K056": "8f13b261d249720253ceae627ed09252207d085dd5cc76ab7564bf84a7ed2fc5",
+    "K057": "e7129bde6b4c863a40525fed54f385fb9fee45f9d621e0ff479521d26c43ba08",
+    "K058": "cc7086b37ada7db1af3f36887e57e078bcec0a3f3bc35668fd0da3ffdeeef05d",
+    "K059": "a8f435cb21e4536bd2a8f2e4a6b16410c50660a92d7b213181b9491aabec342f",
+    "K060": "49608f0578576cfb8e03d240ddd1f9640a4599f7d18e1e4e50ba3ab9f8b51a0f",
+    "K061": "93a5f7dea0636cc680ecea62d97457c35a86ce9eb7d279b8be9153dbae8c71d3",
+    "K062": "566d58e189530564a8c1fa8a52d6320bde2bd329078aa84ea29f7832e7d9bcd3",
+    "K063": "ce522d781ed81b40f6574fb8f44cac8b7cfbd2a0158dbf8e4f44443fdc131e15",
+    "K064": "a02dcefa4a52a37f040118b00d39d4eb22f17384ec3811ffd617dcd96bed9464",
+    "K065": "fcf1d70ae794813b9a93f311696ab156d49b2717fab2ad8e9a718facd8530e61",
+    "K066": "c8f2b566b2ba8e0687183069b9e373d51367fe116647b2f733a2cf8446efb1cf",
+    "K067": "3be6d85b00285f8193b9c4e17e2e91c584528c3c3139815aee50925bdc040a6c",
+    "K068": "19f27a465efd49ff36e5f69b8bcfe45fce3db74703eaba9aed7743fa23c46021",
+    "K069": "52ea292415302a2bf68627c35aab4ac5411b51156795be9066552292c9dcac91",
+    "K070": "3e7ee111aa963a7afcb4489c1ebe1933a496e57b4c65c1784bdab7c0ab98f989",
+    "K071": "1a23ed2852e89d58e04fba0c41ac5f6f0831e30f1bc66e69a0baca50e4004b2b",
+    "K072": "1d2034f15a0c4e65bc8cc714e7a737ecb0bd99e994724a8474dfd05c4a831aac",
+    "K073": "204d9a5a3eb4bd4fe868f53d3b8ae142afb63b88d759080c7bcf78da1aad4e73",
+    "K074": "6fd5110b5310cb9fc308fdd97f494a68e1923706472ff2ee271fa6cf5ec377e2",
+    "K075": "337c6cd5d5a767f1a9a4abc0347a1ecf929e850cfa66be80701cd212ca807e6e",
+    "K076": "52970794450e6e42a5f5a5ce9ef80f9351ae90068c35afeb151abcdcaa61278e",
+    "K077": "0899f20233ddb8d37c0458a2c1c81ec6a55ddfeea27385717e85df57c7025e08",
+    "K078": "782ebb0dad2da0fd85928c741bd7916e1ad1a1b5b66922b252628fa040977aa3",
+    "K079": "a6ab0a5ea1f499b94a45fd3ec5ee10f5a208d346c8555c90a2083f04fdc5de4b",
+    "K080": "23f8ccf9e638f70727eb4573d8dab9bfd78c94112e8861bc2a65e8fd7f41b830",
+    "K081": "4521cfdd1f5226247dcdcb7cf7899c746673b1d62f62259e862cba7c58af9f6e",
+    "K082": "119ffa50227fc19686454a98da7bcbfbeaf921058081d82616eff0108a17e961",
+    "K083": "0147e63e31b6c34854fc08c2493919b8e74bc0904f9e6dbc53a5116d003e79f8",
+    "K084": "c91dd8ba516cb4a02f4975b5d815a03271455dff61de28403119163dd9203ac9",
+    "K085": "0dee0b4d180d5ded031e2b31032aefe28004b33672de444601ce49b7aa9e8bdd",
+    "K086": "274c7698ce6c7c3f61d8dfa8d9ca60eb609ba227e4dfa18757b80264c72234f2",
+    "K087": "1daacc46e9938c3bac8b8c058a65b14885894fd65b544362e95164d0be3d4cd6",
+    "K088": "e36637aaf93eafe07539832c6d26b41628601d36c16d4077103ab90d7610dffd",
+    "K089": "279e1de8a19b0587bd7f2cc674c4b64005a3df0d9fad8b87257be3d46ab3a60f",
+    "K090": "62944e2183fc955ff6a73f718d705315e2c0c9869842c46c1f6dded81c2ccbb3",
+    "K091": "23369ef3c42bdf84f729e278127498bce6462c5eed4bb6b192a8a3182ccd80f3",
+    "K092": "1be79a0f6cf5392b6316d5fde6852cec52079f36d021e2b31ca5331e679d0a6b",
+    "K093": "02c8bc2e3e6c0debbf1c314478c7a6a649f3230f4e248e155f531a7c7cc86aed",
+    "K094": "06ab760de2d92182da48d8f721d10433636c93e5d2fbcd69bb6604244c12c565",
+    "K095": "801dc115c23e34f11a7f0c2282b2fe7a7c63a3cdf2e01f6a9f0c790e7f45d735",
+    "K096": "08d40cb477333d6f31bcf457b406970e1dd9ee0bf536bf8dfeca49c6dfb9fc17",
+    "K097": "6a2fce20681b5a68cb7d2df537cbb69c3553acc43e0eb402a6c5395ab16b32ac",
+    "K098": "b1b3fda638a2ce4e82c5e224feedb58affb38e23e620e9bb95bfdcaf3bc7388b",
+    "K099": "1501bde35b6b0a6eba79ee5b9e8721a1f4afa595438b63d60e6f57eb1676be48",
+    "K100": "0e5be4ff6e4a7d3acf5a76ac0f912b73d9bf20bb98ab6720942ffa163bb90f2c",
+    "K101": "5a0b2c75fc1694dee43403404c573c948e92b6bb957526ca1c7e040f9a527fe5",
+    "K102": "305a30c8371102dc453d8500d3801ebca23b438cd3a8bf175a9122600e8a7b13",
+    "K103": "4b6a48639520d8b76840593134f6ed51ce0623613eb709dfc846c09d424f8f17",
+    "K104": "c05eeae199432366c7a800fc4de48110508ddc92494857e9f272060d5e97ef1a",
+    "K105": "6e8cfb3a92b8e2d564afe4ecdbd3b2ff0825e1849c4aa7350fe9e554e262ec12",
+    "K106": "874105d189d00ca264b96ed0dda0cb99797fe47401e92395e8173617489ca44f",
+    "K107": "c6198b0ac7cef5b05b8a69060c66df756c9bda61ab20083d6b783c9fe574134d",
+    "K108": "0a6465eee77dd845f64cb8e82c600eadb0ac9545333f844894a3fa4c9a751824",
+    "K109": "6cff601fd70e4fbfb8ca440d8ec3c22d703680c7de2b231bf72d2e26c68fe14d",
+    "K110": "aef2edfc9d3b59514a95c3a81e81f47fa0f9083ad264881f42c6a9d20a682f38",
+    "K111": "006bef8968f8d0437e33807ed7cc39ca53f73cb11be5bdccfc1328ec12f8975f",
+    "K112": "644c1c7a1adc1e569d53b4545e07c61ff56fc84cee0f4f15c4d4de0a3f25b46a",
+    "K113": "c507792cfa1a2907b47159807a16afef3060227afa0e07b0e10759ca40a7154c",
+    "K114": "b34aa5341aa8e43cb90afdb932ab61413c3138e373f2b2a4588054816f842492",
+    "K115": "951e7233f2258c859c5f374c8cb491b7068b70a94331e4e7b8a58e44e65dcbb2",
+    "K116": "079263e597b2dd6038c2981302b11c20f12aed6d0952f1d5592d7e6a535dc8cf",
+    "K117": "46ea87137ca29a09711069d28cc36f95236eda8bb54f2d869b36f9695e13fe88",
+    "K118": "14381e24c9f9b19c440c8d7d97ce592586e55f64c93cd3ed932833d47f066fe7",
+    "K119": "1fbae3bf4d2a2e02063f49a9dca266070bc54262c7d04b117cd2fcf4774ff62d",
+    "K120": "956efb1095cb2c9a53c477212c6e5a5ef02223160790cc5d4ac06760b36beb96",
+    "K121": "b6b1b692592da9565bbe8a2fbf7a993efe46d9500f1e5384ca7c11f76a56014a",
+    "K122": "df643dd1291b070685a82ed933ad378e4083981dbac885e6e7dd4b075d5bfb63",
+    "K123": "3368bc67ef24af35f791f64e079ab396ec873383223f38a0a5590661eccb5459",
+    "K124": "ff03bc0936906bb0bd3f8b4264549828bb292b9c76df7eca76253b4218330897",
+    "K125": "ef7202a7edd35fb115f0d608b3fc91e92db631a4d2606e02d004e143e38ed50e",
+    "K126": "38c16cb5cfa4255e334cffc481832515033cbe13f1ef7d126e0d99f32340a7c5",
+    "K127": "746bc05e0c9588a0710d1d5c5a3d615561853000ff33b95b9d6f756253a14177",
+    "K128": "267238fe49b4810e5b5804686b84a017247de0a091c29e4c6d6186c0253adacd",
+    "K129": "e8c2b928b68e2544b65134bdda190fe83d8c76d8653e9da2d4cbbb52dcdb6272",
+    "K130": "9754f55667d6e055423595268788a8666dea0dc5b52e42e090b67ab611811b33",
+    "K131": "cd261630604e791e81d1922f61ebfb31c36bfa81eddbb1f527b428bba4fe73b5",
+    "K132": "c2de6161554caa8be707d217ea9a6ef685eaaa64f50f17f68d71c30bc8c63b45",
+    "K133": "934ea7c046920dceb43f749338b3fd95efd00acef7a8fe08a9f9d5f9864e6447",
+    "K134": "920e3c4b459fb7e3c489325ed63f4e2f93d2d991f46d02f1a6b9a5039ce97f53",
+    "K135": "3b2898c2a60bf758b437997c4c14318d43125c7080025e5a590eed9dfc7030b5"
+  },
+  "pages": [
+    {
+      "file": "page-1.png",
+      "SHA256": "1b05aa77949311fa07111aeb76758e6a908840cda4e0f7819f57569b393ce732"
+    },
+    {
+      "file": "page-2.png",
+      "SHA256": "1c665b228c97cec8a18ce58d8b3699ff90819d3ac118510b69d7093277508a0a"
+    },
+    {
+      "file": "page-3.png",
+      "SHA256": "8b899cd8c51a7876db9fbb893375d398dd99a666c4e2b5adf48b374977618a30"
+    },
+    {
+      "file": "page-4.png",
+      "SHA256": "1b3289bed973587cc19c3f4b6891821b743be00a184588717ae96a16475bd403"
+    },
+    {
+      "file": "page-5.png",
+      "SHA256": "a99ea2df2f607a3f597687f02463eb832afb7c9ee869c10236b3f0e6a1d35cb9"
+    },
+    {
+      "file": "page-6.png",
+      "SHA256": "c8f2f3630dca811f51a5f07620e6712dd96361d17a999da113adc51c1db16c70"
+    },
+    {
+      "file": "page-7.png",
+      "SHA256": "b041f7a2b2ea5b6c712a9a44bc276d40c4c2be1f46a92ccffcc53bd2b66b5652"
+    },
+    {
+      "file": "page-8.png",
+      "SHA256": "961a18ae0ba3e98f89e8b5abd587d62f92d52a580333b7e6a92ec535000967b3"
+    },
+    {
+      "file": "page-9.png",
+      "SHA256": "9364d6d58e0f43d07dafcf05a5d51a40ff69e5492950bbfcf0f812becac572cd"
+    }
+  ],
+  "raters": [
+    "01a19aed-73d8-7662-81ef-5d6ec2287589",
+    "01a19b0b-12bd-7592-9a5f-809818cebc3a",
+    "01a19b0b-13a1-7340-89c7-095b3dc85ed2"
+  ],
+  "conflictingOldRatings": [],
+  "humanRecognitionMeasured": false,
+  "rule": "Exact RGB road-body pixels only. Conflicting old ratings require fresh judgment; related geometry is not equivalent.",
+  "additionalOldFingerprints": [
+    "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39",
+    "1beb46fef6d3923b2422d21b3efe15836c6fa0c02a24159497e03c68bc5e3984",
+    "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347",
+    "8f70b783a366563d6dd5897527ab6b4b17a5f131f2f88c5ec4ff745ba520d4aa",
+    "0733ba8dea3e756c21227dab9ab352900a59fd2bd8ca90473bd8dbd74221e61f"
+  ],
+  "fingerprint": "dd75dbbd1daef82043bb848f83fdc0ae701304b10ebc3d04dfcefad34b7e6913"
+}

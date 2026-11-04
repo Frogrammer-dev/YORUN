@@ -1,0 +1,748 @@
+{
+  "oldFingerprint": "e934a3ee3fe40716ea306de4dbf15bf49efc5f5463e7cab8bb2e56dc94e7a9c5",
+  "studies": [
+    {
+      "folder": "public\\eval\\route-study-20261102-d",
+      "fingerprint": "8f70b783a366563d6dd5897527ab6b4b17a5f131f2f88c5ec4ff745ba520d4aa",
+      "rows": [
+        {
+          "token": "R001",
+          "hash": "7a728d60f3ef96776d8f1e24701b616a1f93dd297b2ea620104a3fe928ebdb83",
+          "reuse": {}
+        },
+        {
+          "token": "R002",
+          "hash": "efd839ed51d2e392bf93d064d955a7ce4af636c025727b12a098eef67ba0fd9a",
+          "reuse": {}
+        },
+        {
+          "token": "R003",
+          "hash": "eef2ec2aa22fcab55d815345f5d6efcb35de79661ec7877110d3d2c877170910",
+          "reuse": {}
+        },
+        {
+          "token": "R004",
+          "hash": "aa1e94e8670055b4246cd89d2ce9ef439d144d86b8104efa76b0ccb95e0b2f42",
+          "reuse": {}
+        },
+        {
+          "token": "R005",
+          "hash": "e36ae0cff8fc5f3095539ba1c6aa2b8ac09508d98f94b0afd7077ca0e8bddef5",
+          "reuse": {}
+        },
+        {
+          "token": "R006",
+          "hash": "a8bad957bc960a43fea1bb6dc7fdb8f265472e06d941a42c27c32d48816ac589",
+          "reuse": {}
+        },
+        {
+          "token": "R007",
+          "hash": "ca203bcd36d20d14ef1a50df4de902e1d0d14f1aa574ee9f8dad1d4bfef458f2",
+          "reuse": {}
+        },
+        {
+          "token": "R008",
+          "hash": "335aef8c88663223d247a474763f98e39a9c9923d6b826b7753009c469ad5226",
+          "reuse": {}
+        },
+        {
+          "token": "R009",
+          "hash": "3e809e24c3521b0ec558d5cc4133771a65b43fd18af25ce99fbc26a04115480b",
+          "reuse": {}
+        },
+        {
+          "token": "R010",
+          "hash": "71f35590c6d75c68bb1e61fb37ee4634bad455fd57de163376e1e6a5299e6856",
+          "reuse": {}
+        },
+        {
+          "token": "R011",
+          "hash": "8834c0c9dfe081c9e807eff63e7495473661092fb6b913624202bd725f6a60ff",
+          "reuse": {}
+        },
+        {
+          "token": "R012",
+          "hash": "90ff23bcab6f164b979bdee75181af13e8ca96c51f3215aa05686dd8257fc3d3",
+          "reuse": {}
+        },
+        {
+          "token": "R013",
+          "hash": "ec55b36a974517cb8725c26699ccddce6ca44c5263294bda0ff135183d502b45",
+          "reuse": {}
+        },
+        {
+          "token": "R014",
+          "hash": "80541f761e93a2e8e168138a4870967f273da9b2abc914cef43e78a548824d90",
+          "reuse": {}
+        },
+        {
+          "token": "R015",
+          "hash": "edbe9cde3424d531785635e086faa5e86217c3743464468d264d4672d4ba4258",
+          "reuse": {}
+        },
+        {
+          "token": "R016",
+          "hash": "5b39332d28887fd5089ca609ed236e7410847473eeab7ce9a6a2eaf4a0f02c66",
+          "reuse": {}
+        },
+        {
+          "token": "R017",
+          "hash": "771b8ce31aaf53365be582d8d395264e2d1a2a7f3528a53fb952e41c652fa3ab",
+          "reuse": {}
+        },
+        {
+          "token": "R018",
+          "hash": "47aba1b8e2ea60f0f40d82bc20f30ba9e81b34555c29916b1b23989b58a2d74a",
+          "reuse": {}
+        },
+        {
+          "token": "R019",
+          "hash": "7133def909fc7859778b8991abecc32e9a9da94995643dcae55874abc842447d",
+          "reuse": {}
+        },
+        {
+          "token": "R020",
+          "hash": "a35393e64ec07db6611cd8a0a224dfb2ed738c10376473589cca5b7ce966043e",
+          "reuse": {}
+        },
+        {
+          "token": "R021",
+          "hash": "d311c54ab55c5d182cc18044f2d0f0de8e0474e4b452be96da64c63fa5839821",
+          "reuse": {}
+        },
+        {
+          "token": "R022",
+          "hash": "7ed7ce6f294cd88d2310b7850164405e208a1ba6f4603b5ab5193345975d2742",
+          "reuse": {}
+        },
+        {
+          "token": "R023",
+          "hash": "c324fa54f8d90d6627d7ecbb8fbaf647b68835da86bc5934b51e79b470bccbfe",
+          "reuse": {}
+        },
+        {
+          "token": "R024",
+          "hash": "267313387a062521c1159bf09a6070dc8f2b4fbfc0a6ec5a0c6474647608fa62",
+          "reuse": {}
+        },
+        {
+          "token": "R025",
+          "hash": "41103ae651e6fea2b96a544b457f93b1239ad69680c76d7c7dcddbeba6d5e61f",
+          "reuse": {}
+        },
+        {
+          "token": "R026",
+          "hash": "786cfb75cea356c777ef3bba84678529089eca1a9a1b0c04b1c5b5424d49fca8",
+          "reuse": {}
+        },
+        {
+          "token": "R027",
+          "hash": "419bfde675ca09cd7cc4b2f7a1bd7782d407533d8c8ec5a0eb14ad767b1c2b98",
+          "reuse": {}
+        },
+        {
+          "token": "R028",
+          "hash": "f73d705353e8406112baf180e9b436074d9c7b7ded3385bff49e90fec9f62150",
+          "reuse": {}
+        },
+        {
+          "token": "R029",
+          "hash": "bf8ff1ef0990a4c990c97e001d4005c591d868ad6ed04df0ddbdbb7d5a70d565",
+          "reuse": {}
+        },
+        {
+          "token": "R030",
+          "hash": "9b9bcee0e19629d5bbd9c7a304a322bcc8b9c83c569d9e795e12e939d2b974fe",
+          "reuse": {}
+        },
+        {
+          "token": "R031",
+          "hash": "fea15141b9275f48c09cb46921dca511a44e448c0a6234173dc017d4c79c3bdc",
+          "reuse": {}
+        },
+        {
+          "token": "R032",
+          "hash": "942de74409bb68f85055b649f743aa10fb122e7c958d7d6c4b21a779105f464c",
+          "reuse": {}
+        },
+        {
+          "token": "R033",
+          "hash": "2b70566454b4ed4618406716bf1e481ce698b67abeb252c8f9cf3b730f7c0a76",
+          "reuse": {}
+        },
+        {
+          "token": "R034",
+          "hash": "a43adce7217fce2e8ac40fa848a60e5ab4451cf612ecb5db0a349cf39f34632f",
+          "reuse": {}
+        },
+        {
+          "token": "R035",
+          "hash": "2a6ab3a021b74385fb4605ae0818769c70b48ecd2325c3e8b7ccb9d7850fd8e7",
+          "reuse": {}
+        },
+        {
+          "token": "R036",
+          "hash": "abd31cff36b1fb3933f6f5c95691b78fb053f808ad51a8a427f753b36c4e766a",
+          "reuse": {}
+        },
+        {
+          "token": "R037",
+          "hash": "c141f28b8816151e0a707d46563ca4798924c6a593dc01d615d5a04323fc8ef7",
+          "reuse": {}
+        },
+        {
+          "token": "R038",
+          "hash": "f1883bb7d98e609b8e10e4a108b0fd36e041f6a927bcd8889ddaba798e9123a5",
+          "reuse": {}
+        },
+        {
+          "token": "R039",
+          "hash": "a1d1c78f7dc6ac2e5b7abf21b356f194a78b1a49cd1859e6a13a8bef9cc22df1",
+          "reuse": {}
+        },
+        {
+          "token": "R040",
+          "hash": "0828c16d74c420cfdabc14145ca0a53d6c14c1203bd7c9494afea943668ecee9",
+          "reuse": {}
+        },
+        {
+          "token": "R041",
+          "hash": "874b7289c554c150ca3c448e5706ed3c989a457fb623ab0e5073150600bba056",
+          "reuse": {}
+        },
+        {
+          "token": "R042",
+          "hash": "f866622d83d6f6531266c9f3b6a9ce78093a6aa55ef73283d515b02ec8a66d46",
+          "reuse": {}
+        },
+        {
+          "token": "R043",
+          "hash": "53c443f911ea9513f02538c57dc855889bfc7f5bc432cdd4e5a22ae966151d51",
+          "reuse": {}
+        },
+        {
+          "token": "R044",
+          "hash": "c9df09e59abe7bf7b2059dae252d97b67d36bb008e3e7716c0556574c2611615",
+          "reuse": {}
+        },
+        {
+          "token": "R045",
+          "hash": "47757ec42d549bc1faba44c146da253da98a13d2f214346195fef9f9b9be1422",
+          "reuse": {}
+        },
+        {
+          "token": "R046",
+          "hash": "73e727379dfeec6306344fe52a0861f5d56f2faddaf53cd800240d6514bb32a3",
+          "reuse": {}
+        },
+        {
+          "token": "R047",
+          "hash": "2bfb3d9cb6cd3e09f03a6e13252371c57f39ad6d7c4ed465439f63a74f33900b",
+          "reuse": {}
+        },
+        {
+          "token": "R048",
+          "hash": "a33e711315657376774aeb643f460c1fc3350fd0892d2ec690de7814b2254548",
+          "reuse": {}
+        },
+        {
+          "token": "R049",
+          "hash": "bb3d253880302aed67c4a5abbbb881ebfa65325b14655c2989047b3e19cd0d91",
+          "reuse": {}
+        },
+        {
+          "token": "R050",
+          "hash": "0cf542c206a56039f974031944a26018e85e825876489011e68746c545472423",
+          "reuse": {}
+        },
+        {
+          "token": "R051",
+          "hash": "a455d1810f61b76f650fd791cd3e3ed78e761830e479c7c7d28838054ed003c9",
+          "reuse": {}
+        },
+        {
+          "token": "R052",
+          "hash": "ae679d61b6bd3532cea3dfa67087653f876d24b76975dad550664359b5a020a7",
+          "reuse": {}
+        },
+        {
+          "token": "R053",
+          "hash": "554a21e59fdca2ebeb696cc5b94187f81cabec3c46930e397d047075ec0113dd",
+          "reuse": {}
+        },
+        {
+          "token": "R054",
+          "hash": "c9dfbee5244bb74c35c64d58b5142e847495ff95f95228be39144756d18f2a78",
+          "reuse": {}
+        },
+        {
+          "token": "R055",
+          "hash": "f6f9a74aac1b94c063cd78dd0d6e8615cf82399171490f0b77fdffafadf9901e",
+          "reuse": {}
+        },
+        {
+          "token": "R056",
+          "hash": "9e3cc24474c96ed81f1a93803e70ffe5d4dbc6c41e29d882c6b12da6b55035b2",
+          "reuse": {}
+        },
+        {
+          "token": "R057",
+          "hash": "051f668391c0916f258801f7cb5c50a0f0e7002cef5b45e7411acf53b554dc32",
+          "reuse": {}
+        },
+        {
+          "token": "R058",
+          "hash": "a16b4e6daf2fc59e3ee725588cacd3b374aa9c55fdec52455118345571e5a36c",
+          "reuse": {}
+        },
+        {
+          "token": "R059",
+          "hash": "f31226fb556e566b95b64ef460880a7511ddc7124ee4dd9f59baa18c52ca2e6f",
+          "reuse": {}
+        },
+        {
+          "token": "R060",
+          "hash": "7befddda0f00b9d620f81f1ac736687242a54b877b2594e48200a8aa66fb591e",
+          "reuse": {}
+        },
+        {
+          "token": "R061",
+          "hash": "c47e0742b5eae33ca3ffd461720dda69ea6fffed9e4435cb352e79f23a57db4e",
+          "reuse": {}
+        },
+        {
+          "token": "R062",
+          "hash": "0fa12753b669b2a24d85283d56b53d195eaac5951fa9e97b9b7f7ed6a74c7dff",
+          "reuse": {}
+        }
+      ]
+    },
+    {
+      "folder": "public\\eval\\route-study-20261102-e",
+      "fingerprint": "0733ba8dea3e756c21227dab9ab352900a59fd2bd8ca90473bd8dbd74221e61f",
+      "rows": [
+        {
+          "token": "R001",
+          "hash": "673f7b8caf00de72b95cec612182cc55b152e1a822382e2d33b545b1f6d56629",
+          "reuse": {}
+        },
+        {
+          "token": "R002",
+          "hash": "602e48ba0a01cfbc422c7733023214982edacf697b4f8097ae5370dd024fc801",
+          "reuse": {}
+        },
+        {
+          "token": "R003",
+          "hash": "eef2ec2aa22fcab55d815345f5d6efcb35de79661ec7877110d3d2c877170910",
+          "reuse": {}
+        },
+        {
+          "token": "R004",
+          "hash": "225ba567b2fee84da83f2250fa51b3b346721a4c359a3c82d1e467f5b9be66ea",
+          "reuse": {}
+        },
+        {
+          "token": "R005",
+          "hash": "f18b84600f1f5d290f2c940141e78a5ab8604afc56afd0a7760cb9c615be00c5",
+          "reuse": {}
+        },
+        {
+          "token": "R006",
+          "hash": "b55bf791b57ea7791368b97ddc09be402d8afbab279a7f7f04bb88675d423411",
+          "reuse": {}
+        },
+        {
+          "token": "R007",
+          "hash": "f698cf4e3e9a6e74fb785c74757ec907f94d64c238e4a12885dee3ee6de3cd13",
+          "reuse": {}
+        },
+        {
+          "token": "R008",
+          "hash": "335aef8c88663223d247a474763f98e39a9c9923d6b826b7753009c469ad5226",
+          "reuse": {}
+        },
+        {
+          "token": "R009",
+          "hash": "b62cb34979f17aca3eaf0bef6da998d579e167698201a22a798b486aa1b644e8",
+          "reuse": {}
+        },
+        {
+          "token": "R010",
+          "hash": "71f35590c6d75c68bb1e61fb37ee4634bad455fd57de163376e1e6a5299e6856",
+          "reuse": {}
+        },
+        {
+          "token": "R011",
+          "hash": "8dae127eede169663d32beed6e7a041d77031905435d4c5385fe61b4aefd00b0",
+          "reuse": {}
+        },
+        {
+          "token": "R012",
+          "hash": "019b4bdd777b5b14fcedc3d71193b3e0d5428f02eef6361d20cc30bd8bec0ec6",
+          "reuse": {}
+        },
+        {
+          "token": "R013",
+          "hash": "85152f837337e206a1a70b9e1210b98e725f4a1420c95316f23b3957c88aa7d4",
+          "reuse": {}
+        },
+        {
+          "token": "R014",
+          "hash": "d75478ce45f5d4d947dd5362894110c9d518179292a7c0e76491b4babae4eba3",
+          "reuse": {}
+        },
+        {
+          "token": "R015",
+          "hash": "ae710ac4c928b887cb492286bee696d7f0d68d77927da006d85c87e061f495e0",
+          "reuse": {}
+        },
+        {
+          "token": "R016",
+          "hash": "fedabc8d88390a07a0d64d034c59b9e1b09ab40edc5042433817d4f4ff61af67",
+          "reuse": {}
+        },
+        {
+          "token": "R017",
+          "hash": "771b8ce31aaf53365be582d8d395264e2d1a2a7f3528a53fb952e41c652fa3ab",
+          "reuse": {}
+        },
+        {
+          "token": "R018",
+          "hash": "47aba1b8e2ea60f0f40d82bc20f30ba9e81b34555c29916b1b23989b58a2d74a",
+          "reuse": {}
+        },
+        {
+          "token": "R019",
+          "hash": "a7fd7b4bb6199d3700302c0ccc0139e671c7df4db7220d58bc4477ad3a393f7e",
+          "reuse": {}
+        },
+        {
+          "token": "R020",
+          "hash": "d311c54ab55c5d182cc18044f2d0f0de8e0474e4b452be96da64c63fa5839821",
+          "reuse": {}
+        },
+        {
+          "token": "R021",
+          "hash": "b29e16937ed0e2315ec5ceefaf3f7b443e10eb1c516f55e2bc73717438d9ce54",
+          "reuse": {}
+        },
+        {
+          "token": "R022",
+          "hash": "267313387a062521c1159bf09a6070dc8f2b4fbfc0a6ec5a0c6474647608fa62",
+          "reuse": {}
+        },
+        {
+          "token": "R023",
+          "hash": "f73daba698508148ed1ff70abe78b2c396f7f4e5b0b4959c9f2b210e7d7f1585",
+          "reuse": {}
+        },
+        {
+          "token": "R024",
+          "hash": "59111f382089bf1e7c5ea7b4cc7f83e54251a40784a061515b157d3bf896f1d6",
+          "reuse": {}
+        },
+        {
+          "token": "R025",
+          "hash": "6f6d9a3d80786edf38ab191c2e84a9f2c4d872bbed0fa3fc7aeca2886ab78287",
+          "reuse": {}
+        },
+        {
+          "token": "R026",
+          "hash": "83adfeaa43a6d48da161eea23e47cd45561dc283f4f4f18e75811d3aa3f16334",
+          "reuse": {}
+        },
+        {
+          "token": "R027",
+          "hash": "bf8ff1ef0990a4c990c97e001d4005c591d868ad6ed04df0ddbdbb7d5a70d565",
+          "reuse": {}
+        },
+        {
+          "token": "R028",
+          "hash": "d385be109c33045b6d54c62d440d4917f207acb6af9615a8649e6562d098ba1e",
+          "reuse": {}
+        },
+        {
+          "token": "R029",
+          "hash": "942de74409bb68f85055b649f743aa10fb122e7c958d7d6c4b21a779105f464c",
+          "reuse": {}
+        },
+        {
+          "token": "R030",
+          "hash": "2b70566454b4ed4618406716bf1e481ce698b67abeb252c8f9cf3b730f7c0a76",
+          "reuse": {}
+        },
+        {
+          "token": "R031",
+          "hash": "2ac6fb512fb69249113e69fce14426f2cbcec918f731c523e876abbe8c5b5bae",
+          "reuse": {}
+        },
+        {
+          "token": "R032",
+          "hash": "2a6ab3a021b74385fb4605ae0818769c70b48ecd2325c3e8b7ccb9d7850fd8e7",
+          "reuse": {}
+        },
+        {
+          "token": "R033",
+          "hash": "3d029c7aabdf7c12fcb6fd79fdc29bace38ab4af2f409fcbd353a1146148075a",
+          "reuse": {}
+        },
+        {
+          "token": "R034",
+          "hash": "c141f28b8816151e0a707d46563ca4798924c6a593dc01d615d5a04323fc8ef7",
+          "reuse": {}
+        },
+        {
+          "token": "R035",
+          "hash": "f1883bb7d98e609b8e10e4a108b0fd36e041f6a927bcd8889ddaba798e9123a5",
+          "reuse": {}
+        },
+        {
+          "token": "R036",
+          "hash": "a1d1c78f7dc6ac2e5b7abf21b356f194a78b1a49cd1859e6a13a8bef9cc22df1",
+          "reuse": {}
+        },
+        {
+          "token": "R037",
+          "hash": "874b7289c554c150ca3c448e5706ed3c989a457fb623ab0e5073150600bba056",
+          "reuse": {}
+        },
+        {
+          "token": "R038",
+          "hash": "a530c8e236eee8264c3c393af89de2b83e5d751a4dfaf453fdcbf70c8f21c1c6",
+          "reuse": {}
+        },
+        {
+          "token": "R039",
+          "hash": "53c443f911ea9513f02538c57dc855889bfc7f5bc432cdd4e5a22ae966151d51",
+          "reuse": {}
+        },
+        {
+          "token": "R040",
+          "hash": "7db97aa2d4bbc83727b36fe3292040d8c5eda4efdfc4269999ab8e92adf19b47",
+          "reuse": {}
+        },
+        {
+          "token": "R041",
+          "hash": "47757ec42d549bc1faba44c146da253da98a13d2f214346195fef9f9b9be1422",
+          "reuse": {}
+        },
+        {
+          "token": "R042",
+          "hash": "eab7d097662cf3a8b81600c0a9f87df5ae43be81d73b68fee8a158fd03db3e1c",
+          "reuse": {}
+        },
+        {
+          "token": "R043",
+          "hash": "6c7e93fba29e915a89e75b2fae50b11e3221a52c07fe2b988d41c83d607ae9bf",
+          "reuse": {}
+        },
+        {
+          "token": "R044",
+          "hash": "2142f14dd10647d9644ae02b230712705fe22c39349ff7c7b54b4015f45cb5bd",
+          "reuse": {}
+        },
+        {
+          "token": "R045",
+          "hash": "a455d1810f61b76f650fd791cd3e3ed78e761830e479c7c7d28838054ed003c9",
+          "reuse": {}
+        },
+        {
+          "token": "R046",
+          "hash": "d79b227d9836e07e713d5d47b72ed9b9390791604afa1b05996eeb3edf7bc379",
+          "reuse": {}
+        },
+        {
+          "token": "R047",
+          "hash": "554a21e59fdca2ebeb696cc5b94187f81cabec3c46930e397d047075ec0113dd",
+          "reuse": {}
+        },
+        {
+          "token": "R048",
+          "hash": "a54b70cf0868ba39b2fb2152639fb2b7b0a9a71e2ea913a8f61067d9de54c648",
+          "reuse": {}
+        },
+        {
+          "token": "R049",
+          "hash": "f6f9a74aac1b94c063cd78dd0d6e8615cf82399171490f0b77fdffafadf9901e",
+          "reuse": {}
+        },
+        {
+          "token": "R050",
+          "hash": "9e3cc24474c96ed81f1a93803e70ffe5d4dbc6c41e29d882c6b12da6b55035b2",
+          "reuse": {}
+        },
+        {
+          "token": "R051",
+          "hash": "1af15d8cd8148d55730a02aff37618d0b5b1895e2e267c3fb442d929f0d23051",
+          "reuse": {}
+        },
+        {
+          "token": "R052",
+          "hash": "7483a1eb9dbf2979444a2e410a4ba4588ed8a48d1f23aa2119e165e2f5927b96",
+          "reuse": {}
+        },
+        {
+          "token": "R053",
+          "hash": "f31226fb556e566b95b64ef460880a7511ddc7124ee4dd9f59baa18c52ca2e6f",
+          "reuse": {}
+        },
+        {
+          "token": "R054",
+          "hash": "e8039a58caae8357a0f1730d51e15bc9f9664fd32b61229c0536a305a24a5787",
+          "reuse": {}
+        },
+        {
+          "token": "R055",
+          "hash": "31345f7eeaa61a978c165557b5300a529ac052ad807c174a079734a2721d162a",
+          "reuse": {}
+        },
+        {
+          "token": "R056",
+          "hash": "0fa12753b669b2a24d85283d56b53d195eaac5951fa9e97b9b7f7ed6a74c7dff",
+          "reuse": {}
+        }
+      ]
+    }
+  ],
+  "pendingTokens": {
+    "K001": "2142f14dd10647d9644ae02b230712705fe22c39349ff7c7b54b4015f45cb5bd",
+    "K002": "f6f9a74aac1b94c063cd78dd0d6e8615cf82399171490f0b77fdffafadf9901e",
+    "K003": "a33e711315657376774aeb643f460c1fc3350fd0892d2ec690de7814b2254548",
+    "K004": "90ff23bcab6f164b979bdee75181af13e8ca96c51f3215aa05686dd8257fc3d3",
+    "K005": "051f668391c0916f258801f7cb5c50a0f0e7002cef5b45e7411acf53b554dc32",
+    "K006": "9b9bcee0e19629d5bbd9c7a304a322bcc8b9c83c569d9e795e12e939d2b974fe",
+    "K007": "eef2ec2aa22fcab55d815345f5d6efcb35de79661ec7877110d3d2c877170910",
+    "K008": "942de74409bb68f85055b649f743aa10fb122e7c958d7d6c4b21a779105f464c",
+    "K009": "d75478ce45f5d4d947dd5362894110c9d518179292a7c0e76491b4babae4eba3",
+    "K010": "47757ec42d549bc1faba44c146da253da98a13d2f214346195fef9f9b9be1422",
+    "K011": "f866622d83d6f6531266c9f3b6a9ce78093a6aa55ef73283d515b02ec8a66d46",
+    "K012": "225ba567b2fee84da83f2250fa51b3b346721a4c359a3c82d1e467f5b9be66ea",
+    "K013": "554a21e59fdca2ebeb696cc5b94187f81cabec3c46930e397d047075ec0113dd",
+    "K014": "abd31cff36b1fb3933f6f5c95691b78fb053f808ad51a8a427f753b36c4e766a",
+    "K015": "d311c54ab55c5d182cc18044f2d0f0de8e0474e4b452be96da64c63fa5839821",
+    "K016": "a16b4e6daf2fc59e3ee725588cacd3b374aa9c55fdec52455118345571e5a36c",
+    "K017": "c47e0742b5eae33ca3ffd461720dda69ea6fffed9e4435cb352e79f23a57db4e",
+    "K018": "0cf542c206a56039f974031944a26018e85e825876489011e68746c545472423",
+    "K019": "59111f382089bf1e7c5ea7b4cc7f83e54251a40784a061515b157d3bf896f1d6",
+    "K020": "31345f7eeaa61a978c165557b5300a529ac052ad807c174a079734a2721d162a",
+    "K021": "2bfb3d9cb6cd3e09f03a6e13252371c57f39ad6d7c4ed465439f63a74f33900b",
+    "K022": "f73daba698508148ed1ff70abe78b2c396f7f4e5b0b4959c9f2b210e7d7f1585",
+    "K023": "2b70566454b4ed4618406716bf1e481ce698b67abeb252c8f9cf3b730f7c0a76",
+    "K024": "f73d705353e8406112baf180e9b436074d9c7b7ded3385bff49e90fec9f62150",
+    "K025": "41103ae651e6fea2b96a544b457f93b1239ad69680c76d7c7dcddbeba6d5e61f",
+    "K026": "80541f761e93a2e8e168138a4870967f273da9b2abc914cef43e78a548824d90",
+    "K027": "a455d1810f61b76f650fd791cd3e3ed78e761830e479c7c7d28838054ed003c9",
+    "K028": "7db97aa2d4bbc83727b36fe3292040d8c5eda4efdfc4269999ab8e92adf19b47",
+    "K029": "bb3d253880302aed67c4a5abbbb881ebfa65325b14655c2989047b3e19cd0d91",
+    "K030": "2ac6fb512fb69249113e69fce14426f2cbcec918f731c523e876abbe8c5b5bae",
+    "K031": "a54b70cf0868ba39b2fb2152639fb2b7b0a9a71e2ea913a8f61067d9de54c648",
+    "K032": "fea15141b9275f48c09cb46921dca511a44e448c0a6234173dc017d4c79c3bdc",
+    "K033": "267313387a062521c1159bf09a6070dc8f2b4fbfc0a6ec5a0c6474647608fa62",
+    "K034": "602e48ba0a01cfbc422c7733023214982edacf697b4f8097ae5370dd024fc801",
+    "K035": "771b8ce31aaf53365be582d8d395264e2d1a2a7f3528a53fb952e41c652fa3ab",
+    "K036": "8834c0c9dfe081c9e807eff63e7495473661092fb6b913624202bd725f6a60ff",
+    "K037": "c9df09e59abe7bf7b2059dae252d97b67d36bb008e3e7716c0556574c2611615",
+    "K038": "7a728d60f3ef96776d8f1e24701b616a1f93dd297b2ea620104a3fe928ebdb83",
+    "K039": "71f35590c6d75c68bb1e61fb37ee4634bad455fd57de163376e1e6a5299e6856",
+    "K040": "f1883bb7d98e609b8e10e4a108b0fd36e041f6a927bcd8889ddaba798e9123a5",
+    "K041": "ae710ac4c928b887cb492286bee696d7f0d68d77927da006d85c87e061f495e0",
+    "K042": "b29e16937ed0e2315ec5ceefaf3f7b443e10eb1c516f55e2bc73717438d9ce54",
+    "K043": "8dae127eede169663d32beed6e7a041d77031905435d4c5385fe61b4aefd00b0",
+    "K044": "53c443f911ea9513f02538c57dc855889bfc7f5bc432cdd4e5a22ae966151d51",
+    "K045": "b62cb34979f17aca3eaf0bef6da998d579e167698201a22a798b486aa1b644e8",
+    "K046": "6c7e93fba29e915a89e75b2fae50b11e3221a52c07fe2b988d41c83d607ae9bf",
+    "K047": "a530c8e236eee8264c3c393af89de2b83e5d751a4dfaf453fdcbf70c8f21c1c6",
+    "K048": "47aba1b8e2ea60f0f40d82bc20f30ba9e81b34555c29916b1b23989b58a2d74a",
+    "K049": "2a6ab3a021b74385fb4605ae0818769c70b48ecd2325c3e8b7ccb9d7850fd8e7",
+    "K050": "419bfde675ca09cd7cc4b2f7a1bd7782d407533d8c8ec5a0eb14ad767b1c2b98",
+    "K051": "a35393e64ec07db6611cd8a0a224dfb2ed738c10376473589cca5b7ce966043e",
+    "K052": "f31226fb556e566b95b64ef460880a7511ddc7124ee4dd9f59baa18c52ca2e6f",
+    "K053": "fedabc8d88390a07a0d64d034c59b9e1b09ab40edc5042433817d4f4ff61af67",
+    "K054": "3d029c7aabdf7c12fcb6fd79fdc29bace38ab4af2f409fcbd353a1146148075a",
+    "K055": "b55bf791b57ea7791368b97ddc09be402d8afbab279a7f7f04bb88675d423411",
+    "K056": "7ed7ce6f294cd88d2310b7850164405e208a1ba6f4603b5ab5193345975d2742",
+    "K057": "c324fa54f8d90d6627d7ecbb8fbaf647b68835da86bc5934b51e79b470bccbfe",
+    "K058": "0fa12753b669b2a24d85283d56b53d195eaac5951fa9e97b9b7f7ed6a74c7dff",
+    "K059": "335aef8c88663223d247a474763f98e39a9c9923d6b826b7753009c469ad5226",
+    "K060": "edbe9cde3424d531785635e086faa5e86217c3743464468d264d4672d4ba4258",
+    "K061": "bf8ff1ef0990a4c990c97e001d4005c591d868ad6ed04df0ddbdbb7d5a70d565",
+    "K062": "7befddda0f00b9d620f81f1ac736687242a54b877b2594e48200a8aa66fb591e",
+    "K063": "d385be109c33045b6d54c62d440d4917f207acb6af9615a8649e6562d098ba1e",
+    "K064": "eab7d097662cf3a8b81600c0a9f87df5ae43be81d73b68fee8a158fd03db3e1c",
+    "K065": "73e727379dfeec6306344fe52a0861f5d56f2faddaf53cd800240d6514bb32a3",
+    "K066": "ec55b36a974517cb8725c26699ccddce6ca44c5263294bda0ff135183d502b45",
+    "K067": "a43adce7217fce2e8ac40fa848a60e5ab4451cf612ecb5db0a349cf39f34632f",
+    "K068": "aa1e94e8670055b4246cd89d2ce9ef439d144d86b8104efa76b0ccb95e0b2f42",
+    "K069": "786cfb75cea356c777ef3bba84678529089eca1a9a1b0c04b1c5b5424d49fca8",
+    "K070": "e36ae0cff8fc5f3095539ba1c6aa2b8ac09508d98f94b0afd7077ca0e8bddef5",
+    "K071": "ae679d61b6bd3532cea3dfa67087653f876d24b76975dad550664359b5a020a7",
+    "K072": "c9dfbee5244bb74c35c64d58b5142e847495ff95f95228be39144756d18f2a78",
+    "K073": "1af15d8cd8148d55730a02aff37618d0b5b1895e2e267c3fb442d929f0d23051",
+    "K074": "5b39332d28887fd5089ca609ed236e7410847473eeab7ce9a6a2eaf4a0f02c66",
+    "K075": "ca203bcd36d20d14ef1a50df4de902e1d0d14f1aa574ee9f8dad1d4bfef458f2",
+    "K076": "efd839ed51d2e392bf93d064d955a7ce4af636c025727b12a098eef67ba0fd9a",
+    "K077": "874b7289c554c150ca3c448e5706ed3c989a457fb623ab0e5073150600bba056",
+    "K078": "83adfeaa43a6d48da161eea23e47cd45561dc283f4f4f18e75811d3aa3f16334",
+    "K079": "c141f28b8816151e0a707d46563ca4798924c6a593dc01d615d5a04323fc8ef7",
+    "K080": "f18b84600f1f5d290f2c940141e78a5ab8604afc56afd0a7760cb9c615be00c5",
+    "K081": "a8bad957bc960a43fea1bb6dc7fdb8f265472e06d941a42c27c32d48816ac589",
+    "K082": "a1d1c78f7dc6ac2e5b7abf21b356f194a78b1a49cd1859e6a13a8bef9cc22df1",
+    "K083": "019b4bdd777b5b14fcedc3d71193b3e0d5428f02eef6361d20cc30bd8bec0ec6",
+    "K084": "673f7b8caf00de72b95cec612182cc55b152e1a822382e2d33b545b1f6d56629",
+    "K085": "7133def909fc7859778b8991abecc32e9a9da94995643dcae55874abc842447d",
+    "K086": "0828c16d74c420cfdabc14145ca0a53d6c14c1203bd7c9494afea943668ecee9",
+    "K087": "9e3cc24474c96ed81f1a93803e70ffe5d4dbc6c41e29d882c6b12da6b55035b2",
+    "K088": "f698cf4e3e9a6e74fb785c74757ec907f94d64c238e4a12885dee3ee6de3cd13",
+    "K089": "d79b227d9836e07e713d5d47b72ed9b9390791604afa1b05996eeb3edf7bc379",
+    "K090": "6f6d9a3d80786edf38ab191c2e84a9f2c4d872bbed0fa3fc7aeca2886ab78287",
+    "K091": "a7fd7b4bb6199d3700302c0ccc0139e671c7df4db7220d58bc4477ad3a393f7e",
+    "K092": "85152f837337e206a1a70b9e1210b98e725f4a1420c95316f23b3957c88aa7d4",
+    "K093": "3e809e24c3521b0ec558d5cc4133771a65b43fd18af25ce99fbc26a04115480b",
+    "K094": "e8039a58caae8357a0f1730d51e15bc9f9664fd32b61229c0536a305a24a5787",
+    "K095": "7483a1eb9dbf2979444a2e410a4ba4588ed8a48d1f23aa2119e165e2f5927b96"
+  },
+  "pages": [
+    {
+      "file": "page-1.png",
+      "SHA256": "31cc546e342c0495fc755fcb184a9e0fb34b6d5aea4ae66599fa8f186d22662c"
+    },
+    {
+      "file": "page-2.png",
+      "SHA256": "3c0742ac993eacd3930c2494dc0a315124c373849b1ce3419e066985cab5082e"
+    },
+    {
+      "file": "page-3.png",
+      "SHA256": "6aa0eb76300609d749aff7169b4253cc8958f9222d2e9f60bf0e48b342fd5358"
+    },
+    {
+      "file": "page-4.png",
+      "SHA256": "670bcbc8024b2be65b1e9dbdbf69fa60cacb7a79192ebcd26e43621c1143978f"
+    },
+    {
+      "file": "page-5.png",
+      "SHA256": "5a53ee47a611daba4e1b4f07de22a4907992f5a29cf513d09b35800b29eea517"
+    },
+    {
+      "file": "page-6.png",
+      "SHA256": "c802062f00f6c615caf68b4efee400f8aea3ebaf2dd580fd6b59bf8a0d95fd82"
+    },
+    {
+      "file": "page-7.png",
+      "SHA256": "75144410512c7ca0bb9aa419628fc1529e5a8b05be710e36419280ef24007829"
+    }
+  ],
+  "raters": [
+    "01a19aed-73d8-7662-81ef-5d6ec2287589",
+    "01a19b0b-12bd-7592-9a5f-809818cebc3a",
+    "01a19b0b-13a1-7340-89c7-095b3dc85ed2"
+  ],
+  "conflictingOldRatings": [],
+  "humanRecognitionMeasured": false,
+  "rule": "Exact RGB road-body pixels only. Conflicting old ratings require fresh judgment; related geometry is not equivalent.",
+  "additionalOldFingerprints": [
+    "fcdfa1acb3b29d5183e452670e659049af1cee1074ef7bc39de9bea92f00af39",
+    "1beb46fef6d3923b2422d21b3efe15836c6fa0c02a24159497e03c68bc5e3984",
+    "bb64989861d46b6323c2cdb74fbdb41292ee51d0020f81212f43f0c7a5d5c347"
+  ],
+  "fingerprint": "1af98c7c4d335e05b42ba292a7dbac00e2a901c0e8c756a484b75329db174c7c"
+}

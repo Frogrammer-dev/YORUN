@@ -1,0 +1,678 @@
+{
+  "classes": [
+    {
+      "name": "house",
+      "word": "house",
+      "object": true
+    },
+    {
+      "name": "tree",
+      "word": "tree",
+      "object": true
+    },
+    {
+      "name": "car",
+      "word": "car",
+      "object": true
+    },
+    {
+      "name": "coffee_cup",
+      "word": "coffee cup",
+      "object": true
+    },
+    {
+      "name": "airplane",
+      "word": "airplane",
+      "object": true
+    },
+    {
+      "name": "t-shirt",
+      "word": "t-shirt",
+      "object": true
+    },
+    {
+      "name": "pants",
+      "word": "pants",
+      "object": true
+    },
+    {
+      "name": "hammer",
+      "word": "hammer",
+      "object": true
+    },
+    {
+      "name": "wine_bottle",
+      "word": "wine bottle",
+      "object": true
+    },
+    {
+      "name": "key",
+      "word": "key",
+      "object": true
+    },
+    {
+      "name": "chair",
+      "word": "chair",
+      "object": true
+    },
+    {
+      "name": "square",
+      "word": "square",
+      "object": false
+    },
+    {
+      "name": "circle",
+      "word": "circle",
+      "object": false
+    },
+    {
+      "name": "triangle",
+      "word": "triangle",
+      "object": false
+    },
+    {
+      "name": "hexagon",
+      "word": "hexagon",
+      "object": false
+    },
+    {
+      "name": "octagon",
+      "word": "octagon",
+      "object": false
+    },
+    {
+      "name": "line",
+      "word": "line",
+      "object": false
+    },
+    {
+      "name": "zigzag",
+      "word": "zigzag",
+      "object": false
+    },
+    {
+      "name": "map",
+      "word": "map",
+      "object": false
+    },
+    {
+      "name": "cat",
+      "word": "cat",
+      "object": true
+    },
+    {
+      "name": "fish",
+      "word": "fish",
+      "object": true
+    },
+    {
+      "name": "dog",
+      "word": "dog",
+      "object": true
+    },
+    {
+      "name": "rabbit",
+      "word": "rabbit",
+      "object": true
+    },
+    {
+      "name": "bird",
+      "word": "bird",
+      "object": true
+    },
+    {
+      "name": "whale",
+      "word": "whale",
+      "object": true
+    },
+    {
+      "name": "sea_turtle",
+      "word": "sea turtle",
+      "object": true
+    },
+    {
+      "name": "elephant",
+      "word": "elephant",
+      "object": true
+    },
+    {
+      "name": "giraffe",
+      "word": "giraffe",
+      "object": true
+    },
+    {
+      "name": "butterfly",
+      "word": "butterfly",
+      "object": true
+    },
+    {
+      "name": "duck",
+      "word": "duck",
+      "object": true
+    },
+    {
+      "name": "apple",
+      "word": "apple",
+      "object": true
+    },
+    {
+      "name": "crown",
+      "word": "crown",
+      "object": true
+    }
+  ],
+  "sources": [
+    {
+      "name": "house",
+      "word": "house",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/house.ndjson",
+      "cacheSHA256": "32593c4a013641ca6c87a8ee94a015e8eaab296a900753802643a3889f10db97",
+      "counts": {
+        "train": 48,
+        "val": 12,
+        "test": 12
+      },
+      "scanned": 74,
+      "rejected": {
+        "game_not_recognized": 2
+      }
+    },
+    {
+      "name": "tree",
+      "word": "tree",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/tree.ndjson",
+      "cacheSHA256": "980f6844f9b93ddd720f0a4961dbfd0c1665ea307598d0408ef6607e008f9cac",
+      "counts": {
+        "train": 47,
+        "val": 12,
+        "test": 13
+      },
+      "scanned": 76,
+      "rejected": {
+        "game_not_recognized": 4
+      }
+    },
+    {
+      "name": "car",
+      "word": "car",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/car.ndjson",
+      "cacheSHA256": "86b85f991da5536eca0f68f83dd432c96c4478fda33dbaf942e2eadb637c55bc",
+      "counts": {
+        "train": 52,
+        "val": 8,
+        "test": 12
+      },
+      "scanned": 79,
+      "rejected": {
+        "game_not_recognized": 7
+      }
+    },
+    {
+      "name": "coffee_cup",
+      "word": "coffee cup",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/coffee%20cup.ndjson",
+      "cacheSHA256": "b2c89255b3638fa46dceb09a4e0de0c9df6d68e606705e3f3b230cf82d0904ee",
+      "counts": {
+        "train": 52,
+        "val": 9,
+        "test": 11
+      },
+      "scanned": 77,
+      "rejected": {
+        "game_not_recognized": 5
+      }
+    },
+    {
+      "name": "airplane",
+      "word": "airplane",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/airplane.ndjson",
+      "cacheSHA256": "0c5097aa5e3efd3d75011612790c928c6fc822f4cbae9d85496c8222a05ac65e",
+      "counts": {
+        "train": 56,
+        "val": 6,
+        "test": 10
+      },
+      "scanned": 79,
+      "rejected": {
+        "game_not_recognized": 7
+      }
+    },
+    {
+      "name": "t-shirt",
+      "word": "t-shirt",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/t-shirt.ndjson",
+      "cacheSHA256": "27a26a0c3713f8e16da65e28ddc835394822a2e9cf4a7fbc02d0711c077113a2",
+      "counts": {
+        "train": 46,
+        "val": 14,
+        "test": 12
+      },
+      "scanned": 72,
+      "rejected": {}
+    },
+    {
+      "name": "pants",
+      "word": "pants",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/pants.ndjson",
+      "cacheSHA256": "2bde94a78402ceee06109d39dc1edb359f4062ca47dabafe2dcdf01562c0d9bb",
+      "counts": {
+        "train": 52,
+        "val": 10,
+        "test": 10
+      },
+      "scanned": 77,
+      "rejected": {
+        "game_not_recognized": 5
+      }
+    },
+    {
+      "name": "hammer",
+      "word": "hammer",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/hammer.ndjson",
+      "cacheSHA256": "a7a14463b3f4bb15322cee4b4bf907f49691f195434e02d7633bfff96f38959d",
+      "counts": {
+        "train": 53,
+        "val": 9,
+        "test": 10
+      },
+      "scanned": 80,
+      "rejected": {
+        "game_not_recognized": 8
+      }
+    },
+    {
+      "name": "wine_bottle",
+      "word": "wine bottle",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/wine%20bottle.ndjson",
+      "cacheSHA256": "9138299f1e125fe4efe78bfefc5017be27672cbb45af59904ac6d59d145f5c62",
+      "counts": {
+        "train": 48,
+        "val": 12,
+        "test": 12
+      },
+      "scanned": 73,
+      "rejected": {
+        "game_not_recognized": 1
+      }
+    },
+    {
+      "name": "key",
+      "word": "key",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/key.ndjson",
+      "cacheSHA256": "26f201f1d65de96d0640f885a4cfd3c9e169e0d6b563dd0942351251e2c55651",
+      "counts": {
+        "train": 52,
+        "val": 11,
+        "test": 9
+      },
+      "scanned": 86,
+      "rejected": {
+        "game_not_recognized": 14
+      }
+    },
+    {
+      "name": "chair",
+      "word": "chair",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/chair.ndjson",
+      "cacheSHA256": "6e428528d6bfa93e3a4903b037808f7049b82d1c634ef1117750591af04f691c",
+      "counts": {
+        "train": 46,
+        "val": 13,
+        "test": 13
+      },
+      "scanned": 79,
+      "rejected": {
+        "game_not_recognized": 7
+      }
+    },
+    {
+      "name": "square",
+      "word": "square",
+      "object": false,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/square.ndjson",
+      "cacheSHA256": "2025c0c14a954b3b47df496da815e2e46fa2f261b11047859beeed1eee036539",
+      "counts": {
+        "train": 49,
+        "val": 11,
+        "test": 12
+      },
+      "scanned": 73,
+      "rejected": {
+        "game_not_recognized": 1
+      }
+    },
+    {
+      "name": "circle",
+      "word": "circle",
+      "object": false,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/circle.ndjson",
+      "cacheSHA256": "77b7b67c177cf41817730bf359c3d0e78f97542a666ca583b36fb5db595ca86d",
+      "counts": {
+        "train": 51,
+        "val": 10,
+        "test": 11
+      },
+      "scanned": 74,
+      "rejected": {
+        "game_not_recognized": 2
+      }
+    },
+    {
+      "name": "triangle",
+      "word": "triangle",
+      "object": false,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/triangle.ndjson",
+      "cacheSHA256": "b80d3724858d3d0e1a3ed601a2caa4f2613f8f5abe94860dceae476939eaae5c",
+      "counts": {
+        "train": 56,
+        "val": 9,
+        "test": 7
+      },
+      "scanned": 72,
+      "rejected": {}
+    },
+    {
+      "name": "hexagon",
+      "word": "hexagon",
+      "object": false,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/hexagon.ndjson",
+      "cacheSHA256": "0da9c9d68a2d140c01c96711ccc17868bf7b0e9c37a9f1cd07ce08cf21538b5a",
+      "counts": {
+        "train": 56,
+        "val": 6,
+        "test": 10
+      },
+      "scanned": 77,
+      "rejected": {
+        "game_not_recognized": 5
+      }
+    },
+    {
+      "name": "octagon",
+      "word": "octagon",
+      "object": false,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/octagon.ndjson",
+      "cacheSHA256": "d2325db00e266f3ae5e539f83026cbdb22f28b022b6eceed512179bed6ef0707",
+      "counts": {
+        "train": 43,
+        "val": 15,
+        "test": 14
+      },
+      "scanned": 81,
+      "rejected": {
+        "game_not_recognized": 9
+      }
+    },
+    {
+      "name": "line",
+      "word": "line",
+      "object": false,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/line.ndjson",
+      "cacheSHA256": "06418137d2af1c5a19ee1dd3e268d9d40308a93edbdfdc881790c97b4d146f32",
+      "counts": {
+        "train": 48,
+        "val": 13,
+        "test": 11
+      },
+      "scanned": 73,
+      "rejected": {
+        "game_not_recognized": 1
+      }
+    },
+    {
+      "name": "zigzag",
+      "word": "zigzag",
+      "object": false,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/zigzag.ndjson",
+      "cacheSHA256": "8143a8d715cbc1df6f5d2e9c1bc37fa50c3dda4c4477a3e43f2246bcacdcb694",
+      "counts": {
+        "train": 50,
+        "val": 11,
+        "test": 11
+      },
+      "scanned": 73,
+      "rejected": {
+        "game_not_recognized": 1
+      }
+    },
+    {
+      "name": "map",
+      "word": "map",
+      "object": false,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/map.ndjson",
+      "cacheSHA256": "f8c853f8d90fee979de47f9c6da88f1b2cefdd253434f401e04ccf80b0ea578f",
+      "counts": {
+        "train": 55,
+        "val": 9,
+        "test": 8
+      },
+      "scanned": 84,
+      "rejected": {
+        "game_not_recognized": 12
+      }
+    },
+    {
+      "name": "cat",
+      "word": "cat",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/cat.ndjson",
+      "cacheSHA256": "0d84e0ff87c4e7a7ee4bb50c989708f4939ed22297604b1d76343f27abb3f820",
+      "counts": {
+        "train": 49,
+        "val": 10,
+        "test": 13
+      },
+      "scanned": 82,
+      "rejected": {
+        "game_not_recognized": 10
+      }
+    },
+    {
+      "name": "fish",
+      "word": "fish",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/fish.ndjson",
+      "cacheSHA256": "419cde2c6f15ed71f74dd4c26c52f0d78769058c8b5e30ebc4018b0a2bcd2b6d",
+      "counts": {
+        "train": 54,
+        "val": 6,
+        "test": 12
+      },
+      "scanned": 91,
+      "rejected": {
+        "game_not_recognized": 4,
+        "prior_id": 15
+      }
+    },
+    {
+      "name": "dog",
+      "word": "dog",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/dog.ndjson",
+      "cacheSHA256": "2837a2313181bb8c541d7dd489a7957c1fcad9088d03e1bac3aad21b5af2a2a1",
+      "counts": {
+        "train": 55,
+        "val": 8,
+        "test": 9
+      },
+      "scanned": 76,
+      "rejected": {
+        "game_not_recognized": 4
+      }
+    },
+    {
+      "name": "rabbit",
+      "word": "rabbit",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/rabbit.ndjson",
+      "cacheSHA256": "af2f2455782048dfc4fcfc0c64b123bf3db323b1fb66e4aa55c8b24d85d3fe7f",
+      "counts": {
+        "train": 61,
+        "val": 6,
+        "test": 5
+      },
+      "scanned": 80,
+      "rejected": {
+        "game_not_recognized": 8
+      }
+    },
+    {
+      "name": "bird",
+      "word": "bird",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/bird.ndjson",
+      "cacheSHA256": "076801e4986bb7a0b313d22cefc4d22a32035d097b42522ccb977d1a312bdfa2",
+      "counts": {
+        "train": 48,
+        "val": 16,
+        "test": 8
+      },
+      "scanned": 91,
+      "rejected": {
+        "game_not_recognized": 17,
+        "prior_id": 2
+      }
+    },
+    {
+      "name": "whale",
+      "word": "whale",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/whale.ndjson",
+      "cacheSHA256": "6098064f992d8e7d6db605ae1c18274a9d363ccf47470d3cd130463185f65aaa",
+      "counts": {
+        "train": 43,
+        "val": 15,
+        "test": 14
+      },
+      "scanned": 76,
+      "rejected": {
+        "game_not_recognized": 4
+      }
+    },
+    {
+      "name": "sea_turtle",
+      "word": "sea turtle",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/sea%20turtle.ndjson",
+      "cacheSHA256": "d22e4fca8673fdfdd7f8ae6d6540c957d7f8bd032053499d8759882a55689d06",
+      "counts": {
+        "train": 56,
+        "val": 7,
+        "test": 9
+      },
+      "scanned": 76,
+      "rejected": {
+        "game_not_recognized": 4
+      }
+    },
+    {
+      "name": "elephant",
+      "word": "elephant",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/elephant.ndjson",
+      "cacheSHA256": "43eaab777e05b65e1f560527a9e8e9df6fa13ca0d82c79529f8be8c62e990b6a",
+      "counts": {
+        "train": 58,
+        "val": 8,
+        "test": 6
+      },
+      "scanned": 82,
+      "rejected": {
+        "game_not_recognized": 10
+      }
+    },
+    {
+      "name": "giraffe",
+      "word": "giraffe",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/giraffe.ndjson",
+      "cacheSHA256": "1092180ac89ee04827fa2c17a943e7de01e4c5f1aad1436656b166f8e25aad91",
+      "counts": {
+        "train": 50,
+        "val": 12,
+        "test": 10
+      },
+      "scanned": 77,
+      "rejected": {
+        "game_not_recognized": 5
+      }
+    },
+    {
+      "name": "butterfly",
+      "word": "butterfly",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/butterfly.ndjson",
+      "cacheSHA256": "e694ece4e54f69931fb636b4f98c5ee317f3b0f5507c635b6387c4a8a96e2ee2",
+      "counts": {
+        "train": 49,
+        "val": 12,
+        "test": 11
+      },
+      "scanned": 72,
+      "rejected": {}
+    },
+    {
+      "name": "duck",
+      "word": "duck",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/duck.ndjson",
+      "cacheSHA256": "461cee20c0f39e8f7dbf8771f2392be5214ab14fd0fd6e609f076c3674d63bcb",
+      "counts": {
+        "train": 51,
+        "val": 4,
+        "test": 17
+      },
+      "scanned": 82,
+      "rejected": {
+        "game_not_recognized": 10
+      }
+    },
+    {
+      "name": "apple",
+      "word": "apple",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/apple.ndjson",
+      "cacheSHA256": "8c85c8b2549d6253585b72828c5f147a72a3fff592c06e3d363a25a7bdc50f85",
+      "counts": {
+        "train": 57,
+        "val": 6,
+        "test": 9
+      },
+      "scanned": 81,
+      "rejected": {
+        "game_not_recognized": 4,
+        "prior_id": 5
+      }
+    },
+    {
+      "name": "crown",
+      "word": "crown",
+      "object": true,
+      "url": "https://storage.googleapis.com/quickdraw_dataset/full/simplified/crown.ndjson",
+      "cacheSHA256": "1072f16f89ec9e0d5e566c23b840a1e9685db2a6112565d1ccc6c3804236cbf7",
+      "counts": {
+        "train": 55,
+        "val": 6,
+        "test": 11
+      },
+      "scanned": 78,
+      "rejected": {
+        "game_not_recognized": 6
+      }
+    }
+  ],
+  "records": 2304,
+  "datasetSHA256": "ada8b04a03d19906c3e4c09c752730dfa9a1cf4067be52ea2c480c9fad6effc8",
+  "roadJudgmentsUsed": false
+}

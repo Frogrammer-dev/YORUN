@@ -1,0 +1,26 @@
+[
+  {
+    "id": "AR01", "title": "Art class 2 / Cat-Grinch-Mario attempt", "creator": "Howard Calvert", "activity_id": "12426875383", "count_in_main_30": false,
+    "source_url": "https://stories.strava.com/articles/how-hard-is-it-to-make-strava-art", "activity_url": "https://www.strava.com/activities/12426875383", "card_url": "https://strava-embeds.com/activity/12426875383",
+    "image_url": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/ZMLPJLYPH5CKJH5MKI2YQ37ZNGM2WYFPVMQKZYSCKG3VYGSQEER5LKBR6TESOVOLJMRQGHYNMIWVXZUMHTPQ6===",
+    "run_evidence": "공개 카드 Run, 2024-09-16, 12.4 km. 본인 설명에서 고양이→Grinch→Mario로 의도를 바꾼 시도를 밝히며 본인 기사도 실행과 낮은 완성도를 설명한다.",
+    "visual_method": "IAB 공개 카드와 카드 지도 img src의 전체 스크린샷 직접 확인", "visual_scope": "full route map",
+    "internal_strokes": "yes", "branch_or_open_strokes": "yes", "parts_relation": "yes", "parts_evidence": "큰 얼굴 외곽 안에 양쪽 눈/안경처럼 읽히는 두 고리, 가운데 코처럼 읽히는 획, 큰 입 고리가 있고 위쪽 넓은 모자 모양이 배치된다. 제목을 알고 본 해석이며 어느 캐릭터인지 확정하지 않는다.",
+    "angular_road_noise": "yes", "simple_single_outline": "no", "distance_km": 12.4, "distance_original": "12.4 km", "distance_source": "https://strava-embeds.com/activity/12426875383", "distance_3_to_8": "above_8",
+    "retracing_known": "unknown", "pause_known": "unknown", "composite_or_multi_session": "unknown", "confidence": "high for internal shapes and run evidence; low for character identity",
+    "interpretation": "counter to sufficiency: 여러 내부 특징과 부분 배치가 있다고 목표 캐릭터를 안정적으로 뜻하는 것은 아니다. 의미 판정이 따로 필요하다는 실패에 가까운 제작기 사례.",
+    "limitations": "실패라는 평가는 창작자 본인의 제작기 서술이며 사람들의 블라인드 실험이 아니다. 부분 특징의 인과적 기여나 반복률·도로 접근성은 확인하지 않았다."
+  },
+  {
+    "id": "AR02", "title": "The Impossible (Penrose) Triangle", "creator": "Peter GPS Artist / Big Bird GPS Art", "activity_id": "12437193412", "count_in_main_30": false,
+    "source_url": "https://stories.strava.com/articles/how-hard-is-it-to-make-strava-art", "activity_url": "https://www.strava.com/activities/12437193412", "card_url": "https://strava-embeds.com/activity/12437193412",
+    "image_url": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/OIKNVFUQVMN6YZY2SFZW5NLEMNYX7M3T3GJ7JWU3GE2HCV5R4JENDW5ZVKGSTU4BEKQU3DIYZ4FKAS3JGN5JK===",
+    "run_evidence": "공개 카드 Run, 2024-09-18. 표시 거리는 0.1 km이지만 본문에서 동반자와 21 km run을 했으며 모든 점 사이 시계를 멈추는 teleporting 기법을 썼다고 명시한다.",
+    "visual_method": "IAB 공개 카드와 카드 지도 img src의 전체 스크린샷 직접 확인", "visual_scope": "full route map; artificial straight connections explicitly disclosed",
+    "internal_strokes": "yes", "branch_or_open_strokes": "yes", "parts_relation": "yes", "parts_evidence": "삼각형 세 변과 평행한 안쪽 경계, 꼭짓점별 접속 선이 있어 불가능 도형의 빔 배치를 만든다. 선이 실제 도로를 따라 굽지 않고 가로지른다.",
+    "angular_road_noise": "no", "simple_single_outline": "no", "distance_km": null, "distance_original": "card displayed 0.1 km; self-reported physical run 21 km", "distance_source": "https://strava-embeds.com/activity/12437193412", "distance_3_to_8": "not_comparable_due_to_pause_connections", "displayed_distance_km": 0.1, "self_reported_physical_distance_km": 21,
+    "retracing_known": "unknown", "pause_known": "yes: creator explicitly says pausing watch between all points", "composite_or_multi_session": "unknown", "confidence": "high",
+    "interpretation": "condition-gap control only: 멋진 GPS 지도 선이 연속 실제 도로 경로와 동등하지 않을 수 있음을 보여주는 직접 사례. 본30 거리 통계와 현재 앱의 실제 도로 연결 성능 비교에는 넣지 않는다.",
+    "limitations": "표시 0.1 km를 실제 달린 거리로 읽지 않는다. 실제 21 km는 본인 서술이며 원본 GPX로 검증하지 않았다. 본30 교체용보다 보조 조건 비교 표에 적합하다."
+  }
+]

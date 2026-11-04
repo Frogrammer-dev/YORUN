@@ -1,0 +1,41 @@
+{
+  "sourceHash": "987b275af044ff934308fd6a72ef4303182553cc83fd35a774cfe7384aab02a2",
+  "summary": [
+    {
+      "mode": "original",
+      "denominator": 6,
+      "valid": 6,
+      "meanGeometry": 73.05328954517735,
+      "meanFeatureError": 0.11485593048975122,
+      "meanUniformError": 0.08693522529457433,
+      "attempts": 1152,
+      "expanded": 822193,
+      "wallMs": 8875.869399999998,
+      "semanticStatus": "pending independent judgement"
+    },
+    {
+      "mode": "uniform",
+      "denominator": 6,
+      "valid": 6,
+      "meanGeometry": 54.05137505456501,
+      "meanFeatureError": 0.0993425333424786,
+      "meanUniformError": 0.07663074190616906,
+      "attempts": 1152,
+      "expanded": 843054,
+      "wallMs": 8760.209499999997,
+      "semanticStatus": "pending independent judgement"
+    },
+    {
+      "mode": "feature",
+      "denominator": 6,
+      "valid": 6,
+      "meanGeometry": 60.92930643460233,
+      "meanFeatureError": 0.09552880210475916,
+      "meanUniformError": 0.07550907812478974,
+      "attempts": 1152,
+      "expanded": 814948,
+      "wallMs": 8624.337800000001,
+      "semanticStatus": "pending independent judgement"
+    }
+  ]
+}

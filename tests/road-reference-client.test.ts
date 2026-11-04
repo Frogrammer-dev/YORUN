@@ -27,6 +27,54 @@ function provider(pool: ReturnType<typeof rawLoop>[], none = false) {
 }
 
 describe("road-first reference client", () => {
+  it("keeps object-hypothesis search local and experimental with at most three raw routes", () => {
+    const pool = [rawLoop(), rawLoop(1), rawLoop(2), rawLoop(3)];
+    pool[1].latlngs[2][1] += .006;
+    pool[2].latlngs[1][0] += .007;
+    const before = structuredClone(pool);
+    const selected = selectRoadReferenceInputs(pool, bounds, 10, "hypothesis");
+    expect(selected).toHaveLength(3);
+    expect(selected.every(p => pool.includes(p.candidate))).toBe(true);
+    expect(selected.every(p => Object.keys(p).sort().join(",") === "candidate,packet,renderLine")).toBe(true);
+    expect(selected.every(p => Object.keys(p.packet).sort().join(",") === "candidateId,coordinateSpace,fingerprint,route")).toBe(true);
+    expect(selectRoadReferenceInputs([...pool].reverse(), bounds, 3, "hypothesis").map(p => p.packet.fingerprint)).toEqual(selected.map(p => p.packet.fingerprint));
+    expect(selectRoadReferenceInputs(pool, bounds).map(p => p.packet.fingerprint)).toEqual(selectRoadReferenceInputs(pool, bounds, 3, "baseline").map(p => p.packet.fingerprint));
+    expect(pool).toEqual(before);
+  });
+  it("keeps the parts selector experimental, anonymous and within the same candidate budget", () => {
+    const pool = [rawLoop(), rawLoop(1), rawLoop(2), rawLoop(3)];
+    pool[1].latlngs.splice(2, 0, [37.55, 127]);
+    const before = structuredClone(pool);
+    const baseline = selectRoadReferenceInputs(pool, bounds, 3, "baseline");
+    const parts = selectRoadReferenceInputs(pool, bounds, 30, "parts");
+    expect(parts).toHaveLength(3);
+    expect(parts[0].candidate.id).toBe(baseline[0].candidate.id);
+    expect(selectRoadReferenceInputs(pool, bounds).map(p => p.packet.fingerprint)).toEqual(baseline.map(p => p.packet.fingerprint));
+    expect(selectRoadReferenceInputs([...pool].reverse(), bounds, 3, "parts").map(p => p.packet.fingerprint)).toEqual(parts.map(p => p.packet.fingerprint));
+    expect(parts.every(p => pool.includes(p.candidate))).toBe(true);
+    expect(pool).toEqual(before);
+    expect(parts.map(p => p.packet.candidateId)).toEqual(["road-01", "road-02", "road-03"]);
+  });
+  it("preserves the baseline first slot and selects macro structure without changing the call budget", () => {
+    const pool = Array.from({ length: 6 }, (_, i) => {
+      const road = rawLoop(i);
+      road.latlngs = Array.from({ length: 64 }, (_, j): [number, number] => {
+        const angle = j * 2 * Math.PI / 64;
+        const radius = .006 * (1 + i * .05 * Math.cos(3 * angle));
+        return [37.5 + i * .05 + radius * Math.sin(angle), 127 + radius * Math.cos(angle)];
+      });
+      road.latlngs.push([...road.latlngs[0]]);
+      return road;
+    });
+    const baseline = selectRoadReferenceInputs(pool, bounds, 3, "baseline");
+    const improved = selectRoadReferenceInputs(pool, bounds, 3, "structure");
+    expect(improved).toHaveLength(3);
+    expect(improved[0].candidate.id).toBe(baseline[0].candidate.id);
+    expect(improved[1].candidate.id).toBe(pool.filter(c => c.id !== baseline[0].candidate.id).at(-1)!.id);
+    expect(selectRoadReferenceInputs([...pool].reverse(), bounds, 3, "structure").map(p => p.candidate.id)).toEqual(improved.map(p => p.candidate.id));
+    expect(selectRoadReferenceInputs(pool, bounds).map(p => p.candidate.id)).toEqual(baseline.map(p => p.candidate.id));
+    expect(improved.every(p => pool.includes(p.candidate))).toBe(true);
+  });
   it("sends only anonymous normalized points, preserving all native vertices and all completed routes", async () => {
     const road = rawLoop(), templ = makeCandidate(), original = structuredClone(road);
     const fetcher = provider([road]), recognize = vi.fn(async () => []);

@@ -1,0 +1,460 @@
+{
+  "fingerprint": "62dd19e1f581e8f76a068b5ee3c504fad5854b9502480e8fc4a943d1979d1e36",
+  "evaluatorAgent": "01a19aed-73d8-7662-81ef-5d6ec2287589",
+  "evaluationType": "AI surrogate, not human evaluation",
+  "results": [
+    {
+      "token": "R001",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R002",
+      "name": "티셔츠",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R003",
+      "name": "나무",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R004",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R005",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R006",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R007",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R008",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R009",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R010",
+      "name": "바지",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R011",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R012",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R013",
+      "name": "네발 동물",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R014",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R015",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R016",
+      "name": "나무",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R017",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R018",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R019",
+      "name": "바지",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R020",
+      "name": "망치",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R021",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R022",
+      "name": "기린",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R023",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R024",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R025",
+      "name": "네발 동물",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R026",
+      "name": "기린",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R027",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R028",
+      "name": "의자",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R029",
+      "name": "바지",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R030",
+      "name": "자동차",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R031",
+      "name": "오리",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R032",
+      "name": "의자",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R033",
+      "name": "오리",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R034",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R035",
+      "name": "냄비",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R036",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R037",
+      "name": "말",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R038",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R039",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R040",
+      "name": "나무",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R041",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R042",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R043",
+      "name": "물고기",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R044",
+      "name": "망치",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R045",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R046",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R047",
+      "name": "물고기",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R048",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R049",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R050",
+      "name": "물고기",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R051",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R052",
+      "name": "물고기",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R053",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R054",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R055",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R056",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R057",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R058",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R059",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R060",
+      "name": "냄비",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R061",
+      "name": "티셔츠",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R062",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R063",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R064",
+      "name": "망치",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R065",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R066",
+      "name": "코끼리",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R067",
+      "name": "자동차",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R068",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R069",
+      "name": "의자",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R070",
+      "name": "개",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R071",
+      "name": "물고기",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R072",
+      "name": "네발 동물",
+      "clarity": "weak",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R073",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R074",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    },
+    {
+      "token": "R075",
+      "name": "없음",
+      "clarity": "none",
+      "source": "prior exact-pixel rating"
+    }
+  ],
+  "exactPixelRatingsReused": 75,
+  "bridgeFingerprint": "6ea0977b426858c60b5e19349e6d86875f6739f75677c10b0cc71c49fde65c58",
+  "humanRecognitionMeasured": false
+}

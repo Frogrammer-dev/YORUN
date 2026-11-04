@@ -1,0 +1,198 @@
+// Opt-in development experiment: target-guided generation, NOT a model-only comparison.
+import { existsSync, readFileSync, writeFileSync, mkdirSync, renameSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { performance } from 'node:perf_hooks';
+import { expect, it } from 'vitest';
+import { graphFromOverpass, type BBox } from '@/lib/route/osm';
+import { hasEdge, project, type RoadGraph } from '@/lib/route/graph';
+import { generateObjectProposals, auditObjectPath } from '@/lib/route/objectProposals';
+import { OBJECT_TEMPLATES } from '@/lib/route/objectTemplates';
+import { SHAPE_BY_ID } from '@/lib/route/shapes';
+import type { Region } from '@/lib/route/fit';
+
+type XY = [number, number];
+type SourceRow = {
+  id: string; area: string; path: number[]; xy: XY[]; latlon: XY[];
+  meters: number; repeatRatio: number; roadHash: string; baselineId: string | null;
+  [key: string]: unknown;
+};
+const SHAPES = ['house', 'tree', 'car', 'rocket', 'mug', 'airplane'] as const;
+const sha = (bytes: string | Buffer) => createHash('sha256').update(bytes).digest('hex');
+
+function audit(g: RoadGraph, region: Region, path: number[]) {
+  const reasons: string[] = [];
+  if (path.length < 4 || path[0] !== path.at(-1)) reasons.push('not_closed');
+  if (!path.every(v => Number.isInteger(v) && v >= 0 && v < g.n)) return { reasons: ['invalid_node'] };
+  if (!path.every(v => g.x[v] >= region.minX && g.x[v] <= region.maxX && g.y[v] >= region.minY && g.y[v] <= region.maxY)) reasons.push('outside_region');
+  let meters = 0, projectedMeters = 0, repeated = 0, projectedRepeated = 0;
+  const edges = new Set<string>();
+  for (let i = 1; i < path.length; i++) {
+    const a = path[i - 1], b = path[i];
+    if (!hasEdge(g, a, b)) return { reasons: [...reasons, 'missing_edge'] };
+    let length = NaN;
+    for (let e = g.adjStart[a]; e < g.adjStart[a + 1]; e++) if (g.adjTo[e] === b) { length = g.adjLen[e]; break; }
+    if (!Number.isFinite(length) || length <= 0) return { reasons: [...reasons, 'invalid_edge_length'] };
+    const projected = Math.hypot(g.x[a] - g.x[b], g.y[a] - g.y[b]);
+    const key = a < b ? `${a}:${b}` : `${b}:${a}`;
+    meters += length; projectedMeters += projected;
+    if (edges.has(key)) { repeated += length; projectedRepeated += projected; }
+    edges.add(key);
+  }
+  const repeatRatio = repeated / meters, projectedRepeatRatio = projectedRepeated / projectedMeters;
+  if (![meters, projectedMeters, repeatRatio, projectedRepeatRatio].every(Number.isFinite)) reasons.push('nonfinite_measurement');
+  if (meters < 3000 || meters > 8000) reasons.push('native_distance');
+  if (projectedMeters < 3000 || projectedMeters > 8000) reasons.push('projected_distance');
+  if (repeatRatio > .2) reasons.push('native_repeat');
+  if (projectedRepeatRatio > .2) reasons.push('projected_repeat');
+  return { reasons, meters, projectedMeters, repeatRatio, projectedRepeatRatio, edgeHash: sha([...edges].sort().join('|')) };
+}
+
+
+it.skipIf(!process.env.ROAD_OBJECT_HYPOTHESES)('compares intent-preserving generation on frozen v8 development roads without altering v8', () => {
+  const began = performance.now();
+  const sourceFile = 'eval/recognition/road-ranker-20261102/validation-v8.json';
+  const protocolFile = 'reports/road-ranker-20261102/protocol-v9.md';
+  const output = 'data/v9-proposals.json', progress = 'data/v9-proposals.running.json';
+  const report = 'reports/road-ranker-20261102/proposals-v9.json';
+  expect(existsSync(protocolFile), 'Register v9 protocol first').toBe(true);
+  for (const file of [output, progress, report]) expect(existsSync(file), `Preserve existing ${file}`).toBe(false);
+  const sourceBytes = readFileSync(sourceFile), sourceHash = sha(sourceBytes);
+  expect(sourceHash).toBe('96662ff3c9c97098bc28c930e0f11e3a21a22d21dcb1791cecf23ca01b5a876a');
+  const v8 = JSON.parse(sourceBytes.toString()) as {
+    status: string; results: SourceRow[];
+    provenance: {coreSHA256: string; generatorSHA256: string; templatesSHA256: string;
+      sourceSnapshots: {area: string; bbox: BBox; sourceFile: string; roadHash: string}[];
+      sqliteSHA256: string; sqliteManifestSHA256: string};
+  };
+  expect(v8.status).toBe('complete');
+  const naturals = v8.results.filter(r => !r.proposalShape);
+  expect(naturals).toHaveLength(360);
+  expect(naturals.filter(r => r.baselineId)).toHaveLength(6);
+  const naturalSnapshot = JSON.stringify(naturals);
+  const templates = [...SHAPES.map(key => ({key, shape: SHAPE_BY_ID[key]})), ...OBJECT_TEMPLATES];
+  expect(new Set(templates.map(t => t.key)).size).toBe(12);
+  const areas = v8.provenance.sourceSnapshots;
+  expect(areas.map(a => a.area)).toEqual(['cheonan-buldang', 'jeonju-hyoja', 'ulsan-samsan']);
+  const coreHash = sha(readFileSync('src/lib/route/objectProposals.ts'));
+  const generatorHash = sha(readFileSync('src/lib/route/globalSearch.ts'));
+  const templatesHash = sha(JSON.stringify(templates));
+  expect(coreHash).toBe(v8.provenance.coreSHA256);
+  expect(generatorHash).toBe(v8.provenance.generatorSHA256);
+  expect(templatesHash).toBe(v8.provenance.templatesSHA256);
+  const results: SourceRow[] = [...naturals];
+  const counts: Record<string, unknown>[] = [];
+  const provenance = {
+    sourceFile, sourceSHA256: sourceHash, protocolFile, protocolSHA256: sha(readFileSync(protocolFile)),
+    codeSHA256: sha(readFileSync('tests/eval/road-object-hypotheses-20261102.test.ts')),
+    coreSHA256: coreHash, generatorSHA256: generatorHash, templatesSHA256: templatesHash,
+    graphSHA256: sha(readFileSync('src/lib/route/graph.ts')), osmSHA256: sha(readFileSync('src/lib/route/osm.ts')),
+    shapesSHA256: sha(readFileSync('src/lib/route/shapes.ts')),
+    templatesModuleSHA256: sha(readFileSync('src/lib/route/objectTemplates.ts')),
+    sourceSnapshots: areas, sqliteSHA256: v8.provenance.sqliteSHA256,
+    sqliteManifestSHA256: v8.provenance.sqliteManifestSHA256,
+    preserveHypotheses: true, sameIntentGeometryPolicy: 'highest generatorSimilarity; ties keep first',
+    finalRecommendationPolicy: 'one per exact undirected edge geometry; downstream runner, not executed here',
+    templates: templates.map(t => t.key), attempts: 60, fullRotation: true, rankBySimilarity: true,
+    minMeters: 3000, maxMeters: 8000, maxRepeatRatio: .2, maxPoolPerRequest: 8,
+    requestedCases: 36, timeoutMs: 1200000, sharedBudget: null,
+    budgetWarning: 'coarseSeeds are retained seeds, not all coarse evaluations; evaluated includes local refinements',
+    v8RegionsAreDevelopmentData: true, independentHoldout: false, holdoutV2Read: false,
+    naturalCandidatesRegenerated: false, semanticInferenceExecuted: false, humanRecognitionMeasured: false,
+    changedGenerationPolicy: 'preserveHypotheses:false -> true; same search/templates/budgets/snapshots',
+  };
+  const save = (status: 'running' | 'complete') => writeFileSync(progress, JSON.stringify({
+    results, counts, provenance, status, sourceCount: naturals.length, addedCount: results.length - naturals.length,
+    completedRequests: counts.length, elapsedSeconds: (performance.now() - began) / 1000,
+  }));
+  mkdirSync('data', {recursive: true});
+  save('running');
+  const graphs = new Map<string, {g: RoadGraph; region: Region}>();
+  for (const area of areas) {
+    process.stdout.write(`[v9] START ${area.area} preserveHypotheses:true\n`);
+    let state: {g: RoadGraph; region: Region} | null = null;
+    let sourceError: string | null = null;
+    try {
+      const bytes = readFileSync(area.sourceFile);
+      expect(sha(bytes)).toBe(area.roadHash);
+      const g = graphFromOverpass(JSON.parse(bytes.toString()), area.bbox, {detail: 'simple', excludeSteps: true});
+      const [minX, minY] = project(g.origin, area.bbox.south, area.bbox.west);
+      const [maxX, maxY] = project(g.origin, area.bbox.north, area.bbox.east);
+      state = {g, region: {minX, minY, maxX, maxY}};
+      graphs.set(area.area, state);
+    } catch (e) { sourceError = e instanceof Error ? `${e.name}: ${e.message}` : String(e); }
+    if (!state) {
+      for (const template of templates) {
+        const count = {area: area.area, proposalShape: template.key, preserveHypotheses: true, attempts: 60,
+          evaluated: 0, coarseSeeds: 0, returned: 0, added: 0, duplicates: 0, replaced: 0, failures: {},
+          error: sourceError, partial: true, status: 'error', budgetBefore: null, budgetAfter: null, budgetExhausted: false};
+        counts.push(count); save('running'); process.stdout.write(`[v9] DONE ${JSON.stringify(count)}\n`);
+      }
+      continue;
+    }
+    const {g, region} = state;
+    const proposed = generateObjectProposals(g, region, templates, {
+      area: area.area, roadHash: area.roadHash, idPrefix: 'proposal-v9', attempts: 60, preserveHypotheses: true,
+      onProgress: count => { counts.push(count); save('running'); process.stdout.write(`[v9] DONE ${JSON.stringify(count)}\n`); },
+    });
+    expect(proposed.counts).toHaveLength(12);
+    for (const row of proposed.results) {
+      const check = auditObjectPath(g, region, row.path);
+      expect(check.valid, row.id).toBe(true);
+      if (!check.valid) continue;
+      // Do not geometry-dedup here: other intents AND a geometry shared with a natural loop remain eligible.
+      results.push({...row, sourceFile: area.sourceFile, edgeHash: sha(check.edgeKey), source: 'twelve-object-multiintent-v9'});
+    }
+    save('running');
+    process.stdout.write(`[v9] AREA COMPLETE ${area.area} hypotheses=${proposed.results.length}\n`);
+  }
+  expect(counts).toHaveLength(36);
+  expect(counts.every(c => c.preserveHypotheses === true)).toBe(true);
+  expect(JSON.stringify(results.slice(0, 360))).toBe(naturalSnapshot);
+  expect(new Set(results.map(r => r.id)).size).toBe(results.length);
+  const proposals = results.slice(360);
+  expect(proposals.length).toBeLessThanOrEqual(288);
+  expect(counts.reduce((n, c) => n + Number(c.added), 0)).toBe(proposals.length);
+  expect(new Set(proposals.map(r => JSON.stringify([r.proposalShape, r.geometryKey]))).size).toBe(proposals.length);
+  for (const row of results) {
+    const state = graphs.get(row.area);
+    expect(state, `Missing graph for included row ${row.id}`).toBeDefined();
+    if (!state) continue;
+    const checked = auditObjectPath(state.g, state.region, row.path);
+    expect(checked.valid, row.id).toBe(true);
+    expect(audit(state.g, state.region, row.path).reasons, row.id).toEqual([]);
+    expect(row.xy).toEqual(row.path.map(v => [state.g.x[v], state.g.y[v]]));
+    expect(row.latlon).toEqual(row.path.map(v => [state.g.lat[v], state.g.lon[v]]));
+    if (checked.valid) {
+      expect(row.meters).toBe(checked.meters); expect(row.repeatRatio).toBe(checked.repeatRatio);
+      expect(row.projectedMeters).toBe(checked.projectedMeters); expect(row.projectedRepeatRatio).toBe(checked.projectedRepeatRatio);
+      expect(row.geometryKey).toBe(JSON.stringify([row.area, row.roadHash, checked.edgeKey]));
+    }
+    expect(row.roadHash).toBe(areas.find(a => a.area === row.area)!.roadHash);
+  }
+  for (const area of areas) {
+    expect(sha(readFileSync(area.sourceFile))).toBe(area.roadHash);
+    expect(results.filter(r => r.area === area.area && r.baselineId)).toHaveLength(2);
+  }
+  expect(readFileSync(sourceFile)).toEqual(sourceBytes);
+  const hypothesisKey = (r: SourceRow) => JSON.stringify([r.proposalShape, r.geometryKey]);
+  const oldHypotheses = v8.results.filter(r => r.proposalShape);
+  const current = new Map(proposals.map(r => [hypothesisKey(r), r]));
+  const comparisonToV8 = {
+    v8Hypotheses: oldHypotheses.length, v9Hypotheses: proposals.length,
+    addedIntentGeometryPairs: proposals.filter(r => !oldHypotheses.some(o => hypothesisKey(o) === hypothesisKey(r))).length,
+    missingV8IntentGeometryPairs: oldHypotheses.filter(r => !current.has(hypothesisKey(r))).length,
+    improvedSimilarityPairs: oldHypotheses.filter(r => current.has(hypothesisKey(r)) && current.get(hypothesisKey(r))!.generatorSimilarity as number > (r.generatorSimilarity as number)).length,
+  };
+  // Report the actual preservation effect; never relabel this as recognition improvement.
+  const summary = {sourceCount: 360, addedCount: proposals.length, total: results.length,
+    uniqueProposalGeometries: new Set(proposals.map(r => r.geometryKey)).size,
+    uniqueGeometriesIncludingNaturals: new Set(results.map(r => r.geometryKey)).size,
+    requests: counts.length, errors: counts.filter(c => c.error).length,
+    partialRequests: counts.filter(c => c.partial).length, budgetExhaustedRequests: counts.filter(c => c.budgetExhausted).length,
+    comparisonToV8, humanRecognitionMeasured: false, recognitionImprovementMeasured: false};
+  save('complete');
+  renameSync(progress, output);
+  writeFileSync(report, JSON.stringify({summary, counts, provenance, output, outputSHA256: sha(readFileSync(output)),
+    elapsedSeconds: (performance.now() - began) / 1000}, null, 2), {flag: 'wx'});
+  process.stdout.write(`[v9] COMPLETE ${JSON.stringify({...summary, seconds: (performance.now() - began) / 1000, outputSHA256: sha(readFileSync(output))})}\n`);
+}, 1200000);

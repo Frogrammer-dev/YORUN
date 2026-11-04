@@ -1,0 +1,30 @@
+{
+  "counts": [
+    {
+      "area": "daejeon-dunsan",
+      "blocks": 323,
+      "naturalLoops": 1948,
+      "exported": 6
+    },
+    {
+      "area": "daegu-center",
+      "blocks": 572,
+      "naturalLoops": 3509,
+      "exported": 6
+    },
+    {
+      "area": "seoul-songpa",
+      "blocks": 660,
+      "naturalLoops": 4102,
+      "exported": 6
+    }
+  ],
+  "roadInputCount": 18,
+  "targetShapesUsed": false,
+  "labelsAsInput": false,
+  "modelRetrained": false,
+  "humanRecognitionMeasured": false,
+  "roadSourceHash": "53d202f5ac27b9e2fc383c6c1dbf4a30e33290394cfdf582fa0d4a7fdb43ec2d",
+  "checkpointHash": "1d21addf30445be63de8632f9ced2530ddb09d3c28a1136bd33a22c6f3db1756",
+  "meanModelDisplacementMeters": 42.78051047854953
+}

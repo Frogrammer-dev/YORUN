@@ -1,0 +1,168 @@
+"""Two frozen alternative geometries per75 requests; sampled lower bound, not a selector."""
+import argparse
+import copy
+import hashlib
+import importlib.util
+import json
+from pathlib import Path
+
+PRIMARY='01a19aed-73d8-7662-81ef-5d6ec2287589'
+RATERS={PRIMARY,'01a19b0b-12bd-7592-9a5f-809818cebc3a','01a19b0b-13a1-7340-89c7-095b3dc85ed2'}
+spec=importlib.util.spec_from_file_location('score',Path(__file__).with_name('diversity-score.py'))
+score=importlib.util.module_from_spec(spec);spec.loader.exec_module(score)
+def sha(raw):return hashlib.sha256(raw).hexdigest()
+def read(p):return json.loads(p.read_text(encoding='utf-8'))
+def write(p,d):
+    with p.open('x',encoding='utf-8') as stream:json.dump(d,stream,ensure_ascii=False,indent=2,allow_nan=False)
+
+
+def choose(source,source_sha,protocol_sha):
+    if source.get('status')!='complete' or len(source['results'])!=1003 or len(source['reviewSlots'])!=75:raise ValueError('Expected frozen1003 rows/75 requests')
+    rows={r['id']:r for r in source['results']}
+    if len(rows)!=1003:raise ValueError('Duplicate source ID')
+    pairs={(s['area'],s['proposalShape']) for s in source['reviewSlots']}
+    if len(pairs)!=75 or len({a for a,k in pairs})!=3 or len({k for a,k in pairs})!=25:raise ValueError('Keep full25x3 request grid')
+    chosen=[[],[]];counts=[]
+    for s in source['reviewSlots']:
+        baseline=rows.get(s['id'])
+        if not baseline or baseline['area']!=s['area'] or baseline.get('proposalShape')!=s['proposalShape']:raise ValueError('Baseline/source mismatch')
+        pool={}
+        for r in source['results']:
+            if r['area']!=s['area'] or r.get('proposalShape')!=s['proposalShape'] or r['geometryKey']==baseline['geometryKey']:continue
+            if r['geometryKey'] not in pool or r['id']<pool[r['geometryKey']]['id']:pool[r['geometryKey']]=r
+        alternatives=sorted(pool.values(),key=lambda r:(sha(('v16-fixed-pool|'+s['area']+'|'+s['proposalShape']+'|'+r['geometryKey']).encode()),r['id']))[:2]
+        counts.append({'area':s['area'],'proposalShape':s['proposalShape'],'baselineId':s['id'],'availableDistinctAlternatives':len(pool),
+                       'selectedIds':[r['id'] for r in alternatives]})
+        for i in range(2):
+            row=alternatives[i] if i<len(alternatives) else None
+            chosen[i].append({**copy.deepcopy(s),'id':row['id'] if row else None,'validRoad':bool(row),
+                'proposalPoolRank':row.get('proposalPoolRank') if row else None,'selectionReason':'frozen geometry-hash sample' if row else 'no distinct remaining alternative',
+                'baselineIdForDiagnostic':s['id'],'alternativeOrdinal':i+1})
+    outputs=[]
+    for i in range(2):
+        d=copy.deepcopy(source);d['reviewSlots']=chosen[i]
+        d['selectedDisplayRotations']={s['id']:(-rows[s['id']]['generatorPlacement']['rotDeg'])%360 for s in chosen[i] if s['id']}
+        d['selection']={'kind':'sampled pool diagnostic;NOT model recommendation','alternativeOrdinal':i+1,'sourceSHA256':source_sha,'protocolSHA256':protocol_sha,
+            'method':'exclude baseline geometry;minID per remaining geometry;salted hash first2','sourceRowsChanged':False,'newGenerationExecuted':False,
+            'humanRecognitionMeasured':False,'counts':counts}
+        outputs.append(d)
+    return outputs
+
+
+def union(baseline,alternatives,catalog):
+    studies=[baseline,*alternatives]
+    if len(studies)!=3:raise ValueError('Baseline and exactly two alternatives required')
+    keyed=[]
+    for d in studies:
+        rows={(c['area'],c['proposalShape']):c for c in d['cases']}
+        if len(rows)!=75 or len(d['cases'])!=75:raise ValueError('Keep all75 requests')
+        if len(d['raters'])!=3 or set(d['raters'])!=RATERS:raise ValueError('Frozen three-rater roster required')
+        keyed.append(rows)
+    if any(set(k)!=set(keyed[0]) for k in keyed):raise ValueError('Mismatched request grid')
+    aliases={c['key']:{score.normalize_name(x) for x in c['freeNameAliases']} for c in catalog}
+    kinds={c['key']:c['kind'] for c in catalog}
+    cases=[]
+    for key in keyed[0]:
+        rows=[k[key] for k in keyed];majority=[];primary=[];by_rater={r:[] for r in sorted(RATERS)}
+        if any(c['kind']!=kinds[key[1]] for c in rows):raise ValueError('Catalog/request kind mismatch')
+        for study,c in zip(studies,rows):
+            if c.get('id') is None and not c.get('missingRoute'):raise ValueError('Null ID must be a missing image')
+            if c.get('missingRoute'):
+                if c.get('targetClear') or c.get('ratings'):raise ValueError('Missing image cannot have target-clear ratings')
+                for flags in by_rater.values():flags.append(False)
+                primary.append(False);majority.append(False);continue
+            if len(c.get('ratings',[]))!=3:raise ValueError('Each displayed image requires three ratings')
+            if any(r.get('clarity') not in ('clear','weak','none') or not isinstance(r.get('name'),str) or not r['name'].strip() for r in c['ratings']):raise ValueError('Invalid image rating')
+            if any(r.get('token')!=c.get('token') for r in c['ratings']):raise ValueError('Rating token differs from case image')
+            votes=sum(r['clarity']=='clear' and score.normalize_name(r['name']) in aliases[key[1]] for r in c['ratings'])
+            majority.append(votes>=2)
+            if c['targetClear']!=(votes>=2):raise ValueError('Stored target-clear differs from frozen alias votes')
+            for identity,flags in by_rater.items():
+                r=c['ratings'][study['raters'].index(identity)]
+                flags.append(r['clarity']=='clear' and score.normalize_name(r['name']) in aliases[key[1]])
+            rating=c['ratings'][study['raters'].index(PRIMARY)]
+            primary.append(rating['clarity']=='clear' and score.normalize_name(rating['name']) in aliases[key[1]])
+        cases.append({'area':key[0],'proposalShape':key[1],'kind':rows[0]['kind'],'majorityByCandidate':majority,'primaryByCandidate':primary,
+                      'raterByCandidate':by_rater,
+                      'ids':[c.get('id') for c in rows],'tokens':[c.get('token') for c in rows]})
+    totals={}
+    for mode in ['majority','primary']:
+        hits=[c for c in cases if not c[mode+'ByCandidate'][0] and any(c[mode+'ByCandidate'][1:])]
+        animals=[c for c in hits if c['kind']=='animal'];species=sorted({c['proposalShape'] for c in animals})
+        totals[mode]={'baselineClearRequests':sum(c[mode+'ByCandidate'][0] for c in cases),
+            'sampledAtLeastOneClearRequests':sum(any(c[mode+'ByCandidate']) for c in cases),'additionalMissedRequests':len(hits),
+            'additionalByAlternative':[sum(not c[mode+'ByCandidate'][0] and c[mode+'ByCandidate'][i] for c in cases) for i in [1,2]],
+            'additionalAnimalRequests':len(animals),'additionalAnimalSpecies':species,
+            'diagnosticCriterionMet':len(hits)>=5 and len(animals)>=3 and len(species)>=2}
+        supported={kind:sorted({c['proposalShape'] for c in cases if c['kind']==kind and sum(any(x[mode+'ByCandidate']) for x in cases if x['proposalShape']==c['proposalShape'])>=2}) for kind in ['animal','object']}
+        totals[mode]['sampledUnionSpeciesClearInTwoAreas']=supported
+        totals[mode]['sampledUnionDiversityGateMet']=all(len(keys)>=3 for keys in supported.values())
+    per_rater={r:{'baselineClearRequests':sum(c['raterByCandidate'][r][0] for c in cases),
+        'sampledAtLeastOneClearRequests':sum(any(c['raterByCandidate'][r]) for c in cases),
+        'additionalMissedRequests':sum(not c['raterByCandidate'][r][0] and any(c['raterByCandidate'][r][1:]) for c in cases)} for r in sorted(RATERS)}
+    return {'evaluationType':'Sampled attainability lower bound;NOT automatic top1 model performance','requests':75,'cases':cases,'summary':totals,'perRater':per_rater,
+        'completePoolOracle':False,'modelImprovementVerified':False,'humanRecognitionMeasured':False,'priorBenchmarkChanged':False,
+        'limitations':'At most two alternate geometries;related requests and reused pixels;development regions/AI;no absence claim outside sample'}
+
+
+def validate_linkage(source,selections,manifests,studies,source_sha,selection_shas,catalog_sha):
+    if len(selections)!=2 or len(manifests)!=3 or len(studies)!=3 or len(selection_shas)!=2:raise ValueError('Exactly baseline and two bound alternatives required')
+    if len({m['fingerprint'] for m in manifests})!=3 or len(set(selection_shas))!=2:raise ValueError('Repeated study or selection input')
+    sources=[source,*selections]
+    for i,selection in enumerate(selections):
+        policy=selection.get('selection',{})
+        if policy.get('sourceSHA256')!=source_sha or policy.get('alternativeOrdinal')!=i+1:raise ValueError('Alternative source/ordinal mismatch')
+        expected=choose(source,source_sha,policy['protocolSHA256'])[i]
+        for field in ['results','counts','reviewSlots','selectedDisplayRotations','selection']:
+            if selection[field]!=expected[field]:raise ValueError('Alternative differs from frozen selection recipe: '+field)
+    for i,(manifest,study,selected) in enumerate(zip(manifests,studies,sources)):
+        expected_hash=source_sha if i==0 else selection_shas[i-1]
+        if manifest.get('inputSHA256')!=expected_hash or manifest.get('catalogSHA256')!=catalog_sha:raise ValueError('Review input/catalog hash mismatch')
+        if study.get('fingerprint')!=manifest['fingerprint']:raise ValueError('Ratings belong to another review')
+        slots={(s['area'],s['proposalShape']):s['id'] for s in selected['reviewSlots']}
+        actual={(s['area'],s['proposalShape']):s['id'] for s in manifest['slots']}
+        if len(manifest['slots'])!=75 or actual!=slots:raise ValueError('Manifest slots differ from frozen IDs')
+        images={r['id']:r for r in manifest['mapping']}
+        if any(r['token']!=f'R{n+1:03d}' for n,r in enumerate(manifest['mapping'])):raise ValueError('Image token order/uniqueness changed')
+        if len(images)!=len(manifest['mapping']) or set(images)!={v for v in slots.values() if v is not None}:raise ValueError('Image ID coverage differs')
+        cases={(c['area'],c['proposalShape']):c for c in study['cases']}
+        if len(study['cases'])!=75 or set(cases)!=set(slots):raise ValueError('Case coverage differs')
+        for key,identifier in slots.items():
+            c=cases[key];image=images.get(identifier)
+            if c.get('id')!=identifier or bool(c.get('missingRoute'))!=(identifier is None):raise ValueError('Scored ID/missing differs from frozen selection')
+            if c.get('token')!=(image['token'] if image else None):raise ValueError('Scored token differs from frozen image')
+            if image and (image.get('area'),image.get('proposalShape'))!=key:raise ValueError('Image request differs')
+
+
+def verify_lock(lock,paths):
+    expected=lock['files']
+    for path in paths:
+        if str(path.resolve()) not in expected:raise ValueError('Input not in frozen study lock')
+    for name,digest in expected.items():
+        if sha(Path(name).read_bytes())!=digest:raise ValueError('Frozen study input changed: '+name)
+
+
+if __name__=='__main__':
+    p=argparse.ArgumentParser(description=__doc__);sub=p.add_subparsers(dest='command',required=True)
+    a=sub.add_parser('select');a.add_argument('--input',type=Path,required=True);a.add_argument('--protocol',type=Path,required=True);a.add_argument('--out1',type=Path,required=True);a.add_argument('--out2',type=Path,required=True)
+    a=sub.add_parser('score');a.add_argument('--baseline',type=Path,required=True);a.add_argument('--alternative',type=Path,action='append',required=True);a.add_argument('--catalog',type=Path,required=True);a.add_argument('--out',type=Path,required=True)
+    a.add_argument('--source',type=Path,required=True);a.add_argument('--selection',type=Path,action='append',required=True);a.add_argument('--mapping',type=Path,action='append',required=True)
+    a.add_argument('--lock',type=Path,required=True)
+    args=p.parse_args()
+    if args.command=='select':
+        if args.out1.exists() or args.out2.exists() or args.out1.resolve()==args.out2.resolve():raise ValueError('Use two fresh distinct paths')
+        raw=args.input.read_bytes();output=choose(json.loads(raw),sha(raw),sha(args.protocol.read_bytes()))
+        for path,d in zip([args.out1,args.out2],output):write(path,d)
+        print(json.dumps({'observations':[sum(s['id'] is not None for s in d['reviewSlots']) for d in output],'requests':75}))
+    else:
+        if args.out.exists():raise ValueError('Use a fresh output')
+        verify_lock(read(args.lock),[args.source,*args.selection,*args.mapping,args.catalog])
+        manifests=[read(x) for x in args.mapping];studies=[read(args.baseline),*[read(x) for x in args.alternative]]
+        validate_linkage(read(args.source),[read(x) for x in args.selection],manifests,studies,sha(args.source.read_bytes()),[sha(x.read_bytes()) for x in args.selection],sha(args.catalog.read_bytes()))
+        for path,manifest in zip(args.mapping,manifests):
+            for page in manifest['pages']:
+                if sha((path.parent/page['file']).read_bytes())!=page['SHA256']:raise ValueError('Frozen review image changed')
+        result=union(studies[0],studies[1:],read(args.catalog)['catalog'])
+        result['inputSHA256']={str(path):sha(path.read_bytes()) for path in [args.baseline,*args.alternative,args.catalog,args.source,*args.selection,*args.mapping]}
+        result['studyLockSHA256']=sha(args.lock.read_bytes())
+        write(args.out,result);print(json.dumps(result['summary']))

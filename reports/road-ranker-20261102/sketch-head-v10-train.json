@@ -1,0 +1,558 @@
+{
+  "schemaVersion": 1,
+  "classLabels": [
+    {
+      "name": "house",
+      "word": "house",
+      "object": true,
+      "key": "house"
+    },
+    {
+      "name": "tree",
+      "word": "tree",
+      "object": true,
+      "key": "tree"
+    },
+    {
+      "name": "car",
+      "word": "car",
+      "object": true,
+      "key": "car"
+    },
+    {
+      "name": "coffee_cup",
+      "word": "coffee cup",
+      "object": true,
+      "key": "coffee_cup"
+    },
+    {
+      "name": "airplane",
+      "word": "airplane",
+      "object": true,
+      "key": "airplane"
+    },
+    {
+      "name": "t-shirt",
+      "word": "t-shirt",
+      "object": true,
+      "key": "t-shirt"
+    },
+    {
+      "name": "pants",
+      "word": "pants",
+      "object": true,
+      "key": "pants"
+    },
+    {
+      "name": "hammer",
+      "word": "hammer",
+      "object": true,
+      "key": "hammer"
+    },
+    {
+      "name": "wine_bottle",
+      "word": "wine bottle",
+      "object": true,
+      "key": "wine_bottle"
+    },
+    {
+      "name": "key",
+      "word": "key",
+      "object": true,
+      "key": "key"
+    },
+    {
+      "name": "chair",
+      "word": "chair",
+      "object": true,
+      "key": "chair"
+    },
+    {
+      "name": "square",
+      "word": "square",
+      "object": false,
+      "key": "square"
+    },
+    {
+      "name": "circle",
+      "word": "circle",
+      "object": false,
+      "key": "circle"
+    },
+    {
+      "name": "triangle",
+      "word": "triangle",
+      "object": false,
+      "key": "triangle"
+    },
+    {
+      "name": "hexagon",
+      "word": "hexagon",
+      "object": false,
+      "key": "hexagon"
+    },
+    {
+      "name": "octagon",
+      "word": "octagon",
+      "object": false,
+      "key": "octagon"
+    },
+    {
+      "name": "line",
+      "word": "line",
+      "object": false,
+      "key": "line"
+    },
+    {
+      "name": "zigzag",
+      "word": "zigzag",
+      "object": false,
+      "key": "zigzag"
+    },
+    {
+      "name": "map",
+      "word": "map",
+      "object": false,
+      "key": "map"
+    }
+  ],
+  "dimensions": 512,
+  "views": 4,
+  "models": {
+    "head": {
+      "lambda": 0.01,
+      "policy": {
+        "rejectAll": false,
+        "marginThreshold": 0.01,
+        "validationMacroAcceptedCorrectRecall": 0.9407254361799815,
+        "validationGenericFalseAccept": 0.0,
+        "genericMeaning": "exclusion classes, not real-road object absence",
+        "humanProbabilityCalibrated": false,
+        "realRoadRejectCalibrated": false
+      },
+      "validationMetrics": {
+        "count": 200,
+        "macroAccuracy": 0.9341041998936737,
+        "accuracy": 0.935,
+        "perClassCount": [
+          12,
+          12,
+          8,
+          9,
+          6,
+          14,
+          10,
+          9,
+          12,
+          11,
+          13,
+          11,
+          10,
+          9,
+          6,
+          15,
+          13,
+          11,
+          9
+        ],
+        "perClassAccuracy": [
+          0.9166666666666666,
+          0.9166666666666666,
+          1.0,
+          0.8888888888888888,
+          1.0,
+          1.0,
+          0.8,
+          1.0,
+          0.9166666666666666,
+          0.9090909090909091,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6666666666666666,
+          0.7333333333333333,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "objectCoverage": 0.9827586206896551,
+        "objectMacroAcceptedCorrectRecall": 0.9407254361799815,
+        "genericFalseAccept": 0.0,
+        "acceptedCount": 114,
+        "humanRecognitionMeasured": false
+      },
+      "testMetrics": {
+        "count": 208,
+        "macroAccuracy": 0.9318707608181293,
+        "accuracy": 0.9278846153846154,
+        "perClassCount": [
+          12,
+          13,
+          12,
+          11,
+          10,
+          12,
+          10,
+          10,
+          12,
+          9,
+          13,
+          12,
+          11,
+          7,
+          10,
+          14,
+          11,
+          11,
+          8
+        ],
+        "perClassAccuracy": [
+          0.75,
+          1.0,
+          1.0,
+          1.0,
+          0.8,
+          1.0,
+          1.0,
+          0.9,
+          1.0,
+          1.0,
+          0.9230769230769231,
+          1.0,
+          1.0,
+          1.0,
+          0.8,
+          0.7142857142857143,
+          0.8181818181818182,
+          1.0,
+          1.0
+        ],
+        "objectCoverage": 0.9758064516129032,
+        "objectMacroAcceptedCorrectRecall": 0.943006993006993,
+        "genericFalseAccept": 0.047619047619047616,
+        "acceptedCount": 125,
+        "humanRecognitionMeasured": false
+      }
+    },
+    "prototype": {
+      "policy": {
+        "rejectAll": false,
+        "marginThreshold": 0.0,
+        "validationMacroAcceptedCorrectRecall": 0.8337480701117065,
+        "validationGenericFalseAccept": 0.047619047619047616,
+        "genericMeaning": "exclusion classes, not real-road object absence",
+        "humanProbabilityCalibrated": false,
+        "realRoadRejectCalibrated": false
+      },
+      "validationMetrics": {
+        "count": 200,
+        "macroAccuracy": 0.8369758896074685,
+        "accuracy": 0.84,
+        "perClassCount": [
+          12,
+          12,
+          8,
+          9,
+          6,
+          14,
+          10,
+          9,
+          12,
+          11,
+          13,
+          11,
+          10,
+          9,
+          6,
+          15,
+          13,
+          11,
+          9
+        ],
+        "perClassAccuracy": [
+          1.0,
+          0.9166666666666666,
+          0.75,
+          1.0,
+          1.0,
+          0.9285714285714286,
+          0.9,
+          0.6666666666666666,
+          0.6666666666666666,
+          0.7272727272727273,
+          0.6153846153846154,
+          0.9090909090909091,
+          1.0,
+          0.8888888888888888,
+          0.3333333333333333,
+          0.6,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "objectCoverage": 0.9741379310344828,
+        "objectMacroAcceptedCorrectRecall": 0.8337480701117065,
+        "genericFalseAccept": 0.047619047619047616,
+        "acceptedCount": 117,
+        "humanRecognitionMeasured": false
+      },
+      "testMetrics": {
+        "count": 208,
+        "macroAccuracy": 0.8493002611423666,
+        "accuracy": 0.8461538461538461,
+        "perClassCount": [
+          12,
+          13,
+          12,
+          11,
+          10,
+          12,
+          10,
+          10,
+          12,
+          9,
+          13,
+          12,
+          11,
+          7,
+          10,
+          14,
+          11,
+          11,
+          8
+        ],
+        "perClassAccuracy": [
+          0.8333333333333334,
+          0.9230769230769231,
+          0.6666666666666666,
+          1.0,
+          0.9,
+          0.9166666666666666,
+          0.8,
+          0.6,
+          0.9166666666666666,
+          1.0,
+          0.6923076923076923,
+          1.0,
+          0.9090909090909091,
+          1.0,
+          0.5,
+          0.7857142857142857,
+          0.8181818181818182,
+          1.0,
+          0.875
+        ],
+        "objectCoverage": 0.9758064516129032,
+        "objectMacroAcceptedCorrectRecall": 0.8407925407925407,
+        "genericFalseAccept": 0.09523809523809523,
+        "acceptedCount": 129,
+        "humanRecognitionMeasured": false
+      }
+    }
+  },
+  "lambdaGrid": [
+    {
+      "lambda": 0.01,
+      "validationMacroAccuracy": 0.9341041998936737
+    },
+    {
+      "lambda": 0.1,
+      "validationMacroAccuracy": 0.9076820839978735
+    },
+    {
+      "lambda": 1.0,
+      "validationMacroAccuracy": 0.8804216251584672
+    },
+    {
+      "lambda": 10.0,
+      "validationMacroAccuracy": 0.8339038154827628
+    }
+  ],
+  "selectedLambda": 0.01,
+  "classWeights": [
+    1.0526315789473684,
+    1.0750279955207167,
+    0.97165991902834,
+    0.97165991902834,
+    0.9022556390977443,
+    1.0983981693363845,
+    0.97165991902834,
+    0.9533267130089375,
+    1.0526315789473684,
+    0.97165991902834,
+    1.0983981693363845,
+    1.0311493018259936,
+    0.9907120743034056,
+    0.9022556390977443,
+    0.9022556390977443,
+    1.175030599755202,
+    1.0526315789473684,
+    1.0105263157894737,
+    0.9186602870813397
+  ],
+  "splitClassCounts": {
+    "train": [
+      48,
+      47,
+      52,
+      52,
+      56,
+      46,
+      52,
+      53,
+      48,
+      52,
+      46,
+      49,
+      51,
+      56,
+      56,
+      43,
+      48,
+      50,
+      55
+    ],
+    "val": [
+      12,
+      12,
+      8,
+      9,
+      6,
+      14,
+      10,
+      9,
+      12,
+      11,
+      13,
+      11,
+      10,
+      9,
+      6,
+      15,
+      13,
+      11,
+      9
+    ],
+    "test": [
+      12,
+      13,
+      12,
+      11,
+      10,
+      12,
+      10,
+      10,
+      12,
+      9,
+      13,
+      12,
+      11,
+      7,
+      10,
+      14,
+      11,
+      11,
+      8
+    ]
+  },
+  "datasetSHA256": "b3539f068236fa936888c6f7d218dbedf3ac3a18fc31aefd4e9a1a05c50c4d2b",
+  "featuresSHA256": "2bd68f882d10de99697ffda1a20b4c12ddfd78b201b48bd34279746d0f55d19c",
+  "protocolSHA256": "f131b8dec05a1dda1dcb41bc268e796206cd22ddf4f4c6fed5d949880c784ee3",
+  "codeSHA256": "ea41e791d25aa4f7e4ddae2de942e8b663ff52a9df3f08e097271c5b39854daa",
+  "idsVerifiedInFeatures": false,
+  "featureProvenance": {
+    "sidecarVerified": true,
+    "metadataSHA256": "d39cc233923a931daa1b6f04ebd03c9d7abbcaaed600d55e4ab0fdb3a8d44c06",
+    "extractorMetadata": {
+      "checkpoint": "openai/clip-vit-base-patch32",
+      "revision": null,
+      "rendererCodeSHA256": "b954c219ea05c7360f9efaa51af791afc1ad9c91d25ae981897bb2f47a25ea78",
+      "rotations": 4,
+      "torch": "2.14.1+cpu",
+      "roadJudgmentsUsed": false,
+      "datasetSHA256": "b3539f068236fa936888c6f7d218dbedf3ac3a18fc31aefd4e9a1a05c50c4d2b",
+      "featuresSHA256": "2bd68f882d10de99697ffda1a20b4c12ddfd78b201b48bd34279746d0f55d19c",
+      "elapsedSeconds": 375.7207457000004
+    }
+  },
+  "featureOrderContract": "NPZ order must match records; ids checked when present",
+  "trainingInput": "mean unchanged; weighted one-hot ridge with unpenalized bias, no standardization",
+  "sampleWeightFormula": "N_train / (C * n_train_class)",
+  "gateSelection": "val macro accepted-correct object recall; generic FAR<=0.10; ties lower FAR then higher margin",
+  "classificationTies": "lowest classIndex",
+  "displayRule": "per-view predicted-class score maximum; lowest index tie; rotation=(90*index-generatorPlacement.rotDeg)%360",
+  "auxiliary": {
+    "macroAccuracyDelta": 0.08257049967576269,
+    "genericFalseAcceptDelta": -0.047619047619047616,
+    "passed": true
+  },
+  "humanRecognitionMeasured": false,
+  "roadLabelsUsedForTraining": false,
+  "realRoadGeneralizationMeasured": false,
+  "textBaseline": {
+    "vocabularySize": 345,
+    "threshold": 0.3,
+    "margin": 0.003,
+    "notes": "Full supplied vocabulary competes, including excluded classes; pooled features; not the original single-view v7 policy.",
+    "humanRecognitionMeasured": false,
+    "val": {
+      "macroAccuracy": 0.25302621355252936,
+      "perClassAccuracy": [
+        0.16666666666666666,
+        0.0,
+        0.25,
+        0.0,
+        0.3333333333333333,
+        0.0,
+        0.2,
+        0.6666666666666666,
+        0.5,
+        0.0,
+        0.23076923076923078,
+        0.8181818181818182,
+        0.3,
+        0.7777777777777778,
+        0.3333333333333333,
+        0.0,
+        0.23076923076923078,
+        0.0,
+        0.0
+      ],
+      "genericFalseAccept": 0.23809523809523808,
+      "objectMacroAcceptedCorrectRecall": 0.16794871794871796,
+      "acceptedCount": 83
+    },
+    "test": {
+      "macroAccuracy": 0.3317016317016317,
+      "perClassAccuracy": [
+        0.0,
+        0.0,
+        0.25,
+        0.0,
+        0.5,
+        0.0,
+        0.5,
+        0.8,
+        0.6666666666666666,
+        0.0,
+        0.15384615384615385,
+        0.75,
+        0.6363636363636364,
+        1.0,
+        0.5,
+        0.0,
+        0.45454545454545453,
+        0.09090909090909091,
+        0.0
+      ],
+      "genericFalseAccept": 0.14285714285714285,
+      "objectMacroAcceptedCorrectRecall": 0.21701631701631702,
+      "acceptedCount": 78
+    }
+  },
+  "numpy": "2.5.3",
+  "python": "3.12.14",
+  "elapsedSeconds": 0.5695092000005388,
+  "checkpointSHA256": "ee53bef892765a0eb16f1c0fcd4b8feac1ce279e7bc592377613c68820e29cdd"
+}

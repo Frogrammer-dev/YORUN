@@ -1,0 +1,3577 @@
+{
+  "fingerprint": "2f680a156cb41478717d4b09c9eee2b02f17ec0992a8f1f6fc2ad30003489b64",
+  "inputSHA256": "1e53b808d9cbd56647737cdf1f6b49d4b4e286ddc1c5e809046f18f876168f43",
+  "catalogSHA256": "880a2b1f87006cf9f84e23fae68a23d8d554f7127c8f551b10c805f6c62e8fa6",
+  "rendererSHA256": "b1e07a57743e20e322050ff887d62120df2ccba469d1675db61cb23856d16d5d",
+  "slots": [
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "cat",
+      "category": "animal",
+      "id": "chuncheon-center-v19-cat-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.8159916474447502,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "fish",
+      "category": "animal",
+      "id": "chuncheon-center-v19-fish-3",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 3,
+      "retrievalScore": 0.9539813842209024,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "dog",
+      "category": "animal",
+      "id": "chuncheon-center-v19-dog-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.8913411757262677,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "rabbit",
+      "category": "animal",
+      "id": "chuncheon-center-v19-rabbit-6",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 6,
+      "retrievalScore": 0.7782324122832375,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "bird",
+      "category": "animal",
+      "id": "chuncheon-center-v19-bird-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.8808919089926321,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "whale",
+      "category": "animal",
+      "id": "chuncheon-center-v19-whale-7",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 7,
+      "retrievalScore": 0.8833080573465055,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "turtle",
+      "category": "animal",
+      "id": "chuncheon-center-v19-turtle-5",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 5,
+      "retrievalScore": 0.8404372756522044,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "elephant",
+      "category": "animal",
+      "id": "chuncheon-center-v19-elephant-6",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 6,
+      "retrievalScore": 0.9015755971474027,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "giraffe",
+      "category": "animal",
+      "id": "chuncheon-center-v19-giraffe-3",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 3,
+      "retrievalScore": 0.9272586746637689,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "butterfly",
+      "category": "animal",
+      "id": "chuncheon-center-v19-butterfly-3",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 3,
+      "retrievalScore": 0.8814796031172293,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "duck",
+      "category": "animal",
+      "id": "chuncheon-center-v19-duck-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.849370887010886,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "house",
+      "category": "object",
+      "id": "chuncheon-center-v19-house-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.8721921018648541,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "tree",
+      "category": "object",
+      "id": "chuncheon-center-v19-tree-7",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 7,
+      "retrievalScore": 0.8766305042131001,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "car",
+      "category": "object",
+      "id": "chuncheon-center-v19-car-8",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 8,
+      "retrievalScore": 0.9216474236132031,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "rocket",
+      "category": "object",
+      "id": "chuncheon-center-v19-rocket-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 76.0,
+      "scoreType": "geometry",
+      "handQueryFallback": true,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "apple",
+      "category": "object",
+      "id": "chuncheon-center-v19-apple-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.8194533937117322,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "crown",
+      "category": "object",
+      "id": "chuncheon-center-v19-crown-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.8849558213887652,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "airplane",
+      "category": "object",
+      "id": "chuncheon-center-v19-airplane-6",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 6,
+      "retrievalScore": 0.9234577580644439,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "mug",
+      "category": "object",
+      "id": "chuncheon-center-v19-mug-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.8264128287900192,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "tshirt",
+      "category": "object",
+      "id": "chuncheon-center-v19-tshirt-8",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 8,
+      "retrievalScore": 0.8581059566215851,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "pants",
+      "category": "object",
+      "id": "chuncheon-center-v19-pants-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.9111084062219654,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "hammer",
+      "category": "object",
+      "id": "chuncheon-center-v19-hammer-3",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 3,
+      "retrievalScore": 0.9370199428355726,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "bottle",
+      "category": "object",
+      "id": "chuncheon-center-v19-bottle-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.9037963913946576,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "key",
+      "category": "object",
+      "id": "chuncheon-center-v19-key-2",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 2,
+      "retrievalScore": 0.870765024821205,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "chuncheon-center",
+      "proposalShape": "chair",
+      "category": "object",
+      "id": "chuncheon-center-v19-chair-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.9169873872798524,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "cat",
+      "category": "animal",
+      "id": "changwon-center-v19-cat-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.7594049411017296,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "fish",
+      "category": "animal",
+      "id": "changwon-center-v19-fish-5",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 5,
+      "retrievalScore": 0.8544348699711338,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "dog",
+      "category": "animal",
+      "id": "changwon-center-v19-dog-7",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 7,
+      "retrievalScore": 0.849125576431824,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "rabbit",
+      "category": "animal",
+      "id": "changwon-center-v19-rabbit-8",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 8,
+      "retrievalScore": 0.7920943697460895,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "bird",
+      "category": "animal",
+      "id": "changwon-center-v19-bird-6",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 6,
+      "retrievalScore": 0.8962242358394519,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "whale",
+      "category": "animal",
+      "id": "changwon-center-v19-whale-3",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 3,
+      "retrievalScore": 0.8761078252927654,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "turtle",
+      "category": "animal",
+      "id": "changwon-center-v19-turtle-8",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 8,
+      "retrievalScore": 0.8267363385283039,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "elephant",
+      "category": "animal",
+      "id": "changwon-center-v19-elephant-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.8803887416699152,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "giraffe",
+      "category": "animal",
+      "id": "changwon-center-v19-giraffe-8",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 8,
+      "retrievalScore": 0.9270972006161595,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "butterfly",
+      "category": "animal",
+      "id": "changwon-center-v19-butterfly-8",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 8,
+      "retrievalScore": 0.8712107829589606,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "duck",
+      "category": "animal",
+      "id": "changwon-center-v19-duck-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.8492281691479059,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "house",
+      "category": "object",
+      "id": "changwon-center-v19-house-6",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 6,
+      "retrievalScore": 0.8904921640055046,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "tree",
+      "category": "object",
+      "id": "changwon-center-v19-tree-5",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 5,
+      "retrievalScore": 0.9146602512966324,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "car",
+      "category": "object",
+      "id": "changwon-center-v19-car-5",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 5,
+      "retrievalScore": 0.9326154012675649,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "rocket",
+      "category": "object",
+      "id": "changwon-center-v19-rocket-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 73.0,
+      "scoreType": "geometry",
+      "handQueryFallback": true,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "apple",
+      "category": "object",
+      "id": "changwon-center-v19-apple-5",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 5,
+      "retrievalScore": 0.8265250159078368,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "crown",
+      "category": "object",
+      "id": "changwon-center-v19-crown-3",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 3,
+      "retrievalScore": 0.9389825914245615,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "airplane",
+      "category": "object",
+      "id": "changwon-center-v19-airplane-6",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 6,
+      "retrievalScore": 0.8871965085887573,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "mug",
+      "category": "object",
+      "id": "changwon-center-v19-mug-5",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 5,
+      "retrievalScore": 0.862578759480371,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "tshirt",
+      "category": "object",
+      "id": "changwon-center-v19-tshirt-7",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 7,
+      "retrievalScore": 0.9212075122346353,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "pants",
+      "category": "object",
+      "id": "changwon-center-v19-pants-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.8660819136021396,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "hammer",
+      "category": "object",
+      "id": "changwon-center-v19-hammer-7",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 7,
+      "retrievalScore": 0.942520551012216,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "bottle",
+      "category": "object",
+      "id": "changwon-center-v19-bottle-6",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 6,
+      "retrievalScore": 0.9020227504864932,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "key",
+      "category": "object",
+      "id": "changwon-center-v19-key-5",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 5,
+      "retrievalScore": 0.8929266076784245,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "changwon-center",
+      "proposalShape": "chair",
+      "category": "object",
+      "id": "changwon-center-v19-chair-8",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 8,
+      "retrievalScore": 0.9118881233148577,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "cat",
+      "category": "animal",
+      "id": "busan-yeongdo-v19-cat-8",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 8,
+      "retrievalScore": 0.8480678349455196,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "fish",
+      "category": "animal",
+      "id": "busan-yeongdo-v19-fish-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.8466187161443228,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "dog",
+      "category": "animal",
+      "id": "busan-yeongdo-v19-dog-2",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 2,
+      "retrievalScore": 0.8561078293963399,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "rabbit",
+      "category": "animal",
+      "id": "busan-yeongdo-v19-rabbit-6",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 6,
+      "retrievalScore": 0.8355512645103846,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "bird",
+      "category": "animal",
+      "id": "busan-yeongdo-v19-bird-6",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 6,
+      "retrievalScore": 0.8237009465900501,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "whale",
+      "category": "animal",
+      "id": "busan-yeongdo-v19-whale-3",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 3,
+      "retrievalScore": 0.8963636326212756,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "turtle",
+      "category": "animal",
+      "id": "busan-yeongdo-v19-turtle-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.8267592006580188,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "elephant",
+      "category": "animal",
+      "id": "busan-yeongdo-v19-elephant-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.908648953757708,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "giraffe",
+      "category": "animal",
+      "id": "busan-yeongdo-v19-giraffe-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.9340966485646676,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "butterfly",
+      "category": "animal",
+      "id": "busan-yeongdo-v19-butterfly-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.8681014359170052,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "duck",
+      "category": "animal",
+      "id": "busan-yeongdo-v19-duck-5",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 5,
+      "retrievalScore": 0.8593200155187268,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "house",
+      "category": "object",
+      "id": "busan-yeongdo-v19-house-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.8739189586224356,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "tree",
+      "category": "object",
+      "id": "busan-yeongdo-v19-tree-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.8825585719680124,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "car",
+      "category": "object",
+      "id": "busan-yeongdo-v19-car-7",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 7,
+      "retrievalScore": 0.8992124226982466,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "rocket",
+      "category": "object",
+      "id": "busan-yeongdo-v19-rocket-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 69.0,
+      "scoreType": "geometry",
+      "handQueryFallback": true,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "apple",
+      "category": "object",
+      "id": "busan-yeongdo-v19-apple-2",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 2,
+      "retrievalScore": 0.844777593264556,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "crown",
+      "category": "object",
+      "id": "busan-yeongdo-v19-crown-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.8251412258482954,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "airplane",
+      "category": "object",
+      "id": "busan-yeongdo-v19-airplane-4",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 4,
+      "retrievalScore": 0.8744438767191252,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "mug",
+      "category": "object",
+      "id": "busan-yeongdo-v19-mug-6",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 6,
+      "retrievalScore": 0.8805334629382418,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "tshirt",
+      "category": "object",
+      "id": "busan-yeongdo-v19-tshirt-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.8887246545310722,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "pants",
+      "category": "object",
+      "id": "busan-yeongdo-v19-pants-6",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 6,
+      "retrievalScore": 0.8961919082862233,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "hammer",
+      "category": "object",
+      "id": "busan-yeongdo-v19-hammer-7",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 7,
+      "retrievalScore": 0.9122817402666039,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "bottle",
+      "category": "object",
+      "id": "busan-yeongdo-v19-bottle-8",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 8,
+      "retrievalScore": 0.8694860058737173,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "key",
+      "category": "object",
+      "id": "busan-yeongdo-v19-key-3",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 3,
+      "retrievalScore": 0.8335388800826332,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    },
+    {
+      "area": "busan-yeongdo",
+      "proposalShape": "chair",
+      "category": "object",
+      "id": "busan-yeongdo-v19-chair-1",
+      "validRoad": true,
+      "selection": "v19 frozen conditional top1",
+      "proposalPoolRank": 1,
+      "retrievalScore": 0.9266071231571528,
+      "scoreType": "cosine",
+      "handQueryFallback": false,
+      "selectionReason": "hand conditional top1;fixed minimum-ID geometry representatives;no gate"
+    }
+  ],
+  "mapping": [
+    {
+      "token": "R001",
+      "id": "chuncheon-center-v19-car-8",
+      "area": "chuncheon-center",
+      "proposalShape": "car",
+      "category": "object",
+      "rotation": 310.2353009183253
+    },
+    {
+      "token": "R002",
+      "id": "changwon-center-v19-tshirt-7",
+      "area": "changwon-center",
+      "proposalShape": "tshirt",
+      "category": "object",
+      "rotation": 37.069514517543944
+    },
+    {
+      "token": "R003",
+      "id": "changwon-center-v19-tree-5",
+      "area": "changwon-center",
+      "proposalShape": "tree",
+      "category": "object",
+      "rotation": 209.4234544173683
+    },
+    {
+      "token": "R004",
+      "id": "chuncheon-center-v19-bird-4",
+      "area": "chuncheon-center",
+      "proposalShape": "bird",
+      "category": "animal",
+      "rotation": 35.438619172879214
+    },
+    {
+      "token": "R005",
+      "id": "chuncheon-center-v19-key-2",
+      "area": "chuncheon-center",
+      "proposalShape": "key",
+      "category": "object",
+      "rotation": 123.03059014853977
+    },
+    {
+      "token": "R006",
+      "id": "chuncheon-center-v19-crown-4",
+      "area": "chuncheon-center",
+      "proposalShape": "crown",
+      "category": "object",
+      "rotation": 120.97138851107687
+    },
+    {
+      "token": "R007",
+      "id": "busan-yeongdo-v19-butterfly-1",
+      "area": "busan-yeongdo",
+      "proposalShape": "butterfly",
+      "category": "animal",
+      "rotation": 33.0
+    },
+    {
+      "token": "R008",
+      "id": "chuncheon-center-v19-rabbit-6",
+      "area": "chuncheon-center",
+      "proposalShape": "rabbit",
+      "category": "animal",
+      "rotation": 0.1437877657041712
+    },
+    {
+      "token": "R009",
+      "id": "chuncheon-center-v19-giraffe-3",
+      "area": "chuncheon-center",
+      "proposalShape": "giraffe",
+      "category": "animal",
+      "rotation": 178.70788136496694
+    },
+    {
+      "token": "R010",
+      "id": "busan-yeongdo-v19-pants-6",
+      "area": "busan-yeongdo",
+      "proposalShape": "pants",
+      "category": "object",
+      "rotation": 39.0
+    },
+    {
+      "token": "R011",
+      "id": "busan-yeongdo-v19-bird-6",
+      "area": "busan-yeongdo",
+      "proposalShape": "bird",
+      "category": "animal",
+      "rotation": 108.47319930449156
+    },
+    {
+      "token": "R012",
+      "id": "chuncheon-center-v19-mug-1",
+      "area": "chuncheon-center",
+      "proposalShape": "mug",
+      "category": "object",
+      "rotation": 329.2244597160368
+    },
+    {
+      "token": "R013",
+      "id": "chuncheon-center-v19-elephant-6",
+      "area": "chuncheon-center",
+      "proposalShape": "elephant",
+      "category": "animal",
+      "rotation": 35.951809362318045
+    },
+    {
+      "token": "R014",
+      "id": "changwon-center-v19-key-5",
+      "area": "changwon-center",
+      "proposalShape": "key",
+      "category": "object",
+      "rotation": 34.524112373208474
+    },
+    {
+      "token": "R015",
+      "id": "chuncheon-center-v19-rocket-1",
+      "area": "chuncheon-center",
+      "proposalShape": "rocket",
+      "category": "object",
+      "rotation": 38.2480866721102
+    },
+    {
+      "token": "R016",
+      "id": "busan-yeongdo-v19-tree-1",
+      "area": "busan-yeongdo",
+      "proposalShape": "tree",
+      "category": "object",
+      "rotation": 249.19037531329255
+    },
+    {
+      "token": "R017",
+      "id": "chuncheon-center-v19-cat-4",
+      "area": "chuncheon-center",
+      "proposalShape": "cat",
+      "category": "animal",
+      "rotation": 65.13366799822049
+    },
+    {
+      "token": "R018",
+      "id": "changwon-center-v19-bottle-6",
+      "area": "changwon-center",
+      "proposalShape": "bottle",
+      "category": "object",
+      "rotation": 289.61344200224625
+    },
+    {
+      "token": "R019",
+      "id": "changwon-center-v19-pants-4",
+      "area": "changwon-center",
+      "proposalShape": "pants",
+      "category": "object",
+      "rotation": 306.3377831026669
+    },
+    {
+      "token": "R020",
+      "id": "chuncheon-center-v19-hammer-3",
+      "area": "chuncheon-center",
+      "proposalShape": "hammer",
+      "category": "object",
+      "rotation": 33.63326635261989
+    },
+    {
+      "token": "R021",
+      "id": "busan-yeongdo-v19-rabbit-6",
+      "area": "busan-yeongdo",
+      "proposalShape": "rabbit",
+      "category": "animal",
+      "rotation": 33.0
+    },
+    {
+      "token": "R022",
+      "id": "changwon-center-v19-giraffe-8",
+      "area": "changwon-center",
+      "proposalShape": "giraffe",
+      "category": "animal",
+      "rotation": 119.99352441318715
+    },
+    {
+      "token": "R023",
+      "id": "chuncheon-center-v19-butterfly-3",
+      "area": "chuncheon-center",
+      "proposalShape": "butterfly",
+      "category": "animal",
+      "rotation": 352.70436555638867
+    },
+    {
+      "token": "R024",
+      "id": "busan-yeongdo-v19-rocket-1",
+      "area": "busan-yeongdo",
+      "proposalShape": "rocket",
+      "category": "object",
+      "rotation": 185.65966067895528
+    },
+    {
+      "token": "R025",
+      "id": "busan-yeongdo-v19-elephant-4",
+      "area": "busan-yeongdo",
+      "proposalShape": "elephant",
+      "category": "animal",
+      "rotation": 36.0
+    },
+    {
+      "token": "R026",
+      "id": "busan-yeongdo-v19-giraffe-4",
+      "area": "busan-yeongdo",
+      "proposalShape": "giraffe",
+      "category": "animal",
+      "rotation": 30.51230362073538
+    },
+    {
+      "token": "R027",
+      "id": "changwon-center-v19-turtle-8",
+      "area": "changwon-center",
+      "proposalShape": "turtle",
+      "category": "animal",
+      "rotation": 298.32220024871174
+    },
+    {
+      "token": "R028",
+      "id": "changwon-center-v19-chair-8",
+      "area": "changwon-center",
+      "proposalShape": "chair",
+      "category": "object",
+      "rotation": 309.1949006363339
+    },
+    {
+      "token": "R029",
+      "id": "chuncheon-center-v19-pants-4",
+      "area": "chuncheon-center",
+      "proposalShape": "pants",
+      "category": "object",
+      "rotation": 315.32201429751365
+    },
+    {
+      "token": "R030",
+      "id": "changwon-center-v19-car-5",
+      "area": "changwon-center",
+      "proposalShape": "car",
+      "category": "object",
+      "rotation": 123.2922836367735
+    },
+    {
+      "token": "R031",
+      "id": "changwon-center-v19-duck-1",
+      "area": "changwon-center",
+      "proposalShape": "duck",
+      "category": "animal",
+      "rotation": 22.640877313782237
+    },
+    {
+      "token": "R032",
+      "id": "busan-yeongdo-v19-chair-1",
+      "area": "busan-yeongdo",
+      "proposalShape": "chair",
+      "category": "object",
+      "rotation": 23.991283739488452
+    },
+    {
+      "token": "R033",
+      "id": "chuncheon-center-v19-duck-4",
+      "area": "chuncheon-center",
+      "proposalShape": "duck",
+      "category": "animal",
+      "rotation": 264.8630896988043
+    },
+    {
+      "token": "R034",
+      "id": "busan-yeongdo-v19-cat-8",
+      "area": "busan-yeongdo",
+      "proposalShape": "cat",
+      "category": "animal",
+      "rotation": 216.0
+    },
+    {
+      "token": "R035",
+      "id": "chuncheon-center-v19-house-4",
+      "area": "chuncheon-center",
+      "proposalShape": "house",
+      "category": "object",
+      "rotation": 237.68022576150565
+    },
+    {
+      "token": "R036",
+      "id": "chuncheon-center-v19-bottle-1",
+      "area": "chuncheon-center",
+      "proposalShape": "bottle",
+      "category": "object",
+      "rotation": 28.958827575915567
+    },
+    {
+      "token": "R037",
+      "id": "changwon-center-v19-dog-7",
+      "area": "changwon-center",
+      "proposalShape": "dog",
+      "category": "animal",
+      "rotation": 239.98598348122306
+    },
+    {
+      "token": "R038",
+      "id": "chuncheon-center-v19-apple-4",
+      "area": "chuncheon-center",
+      "proposalShape": "apple",
+      "category": "object",
+      "rotation": 299.44265278305147
+    },
+    {
+      "token": "R039",
+      "id": "changwon-center-v19-mug-5",
+      "area": "changwon-center",
+      "proposalShape": "mug",
+      "category": "object",
+      "rotation": 306.0
+    },
+    {
+      "token": "R040",
+      "id": "chuncheon-center-v19-tree-7",
+      "area": "chuncheon-center",
+      "proposalShape": "tree",
+      "category": "object",
+      "rotation": 30.72711871586748
+    },
+    {
+      "token": "R041",
+      "id": "busan-yeongdo-v19-mug-6",
+      "area": "busan-yeongdo",
+      "proposalShape": "mug",
+      "category": "object",
+      "rotation": 225.0
+    },
+    {
+      "token": "R042",
+      "id": "chuncheon-center-v19-tshirt-8",
+      "area": "chuncheon-center",
+      "proposalShape": "tshirt",
+      "category": "object",
+      "rotation": 138.8532766217069
+    },
+    {
+      "token": "R043",
+      "id": "chuncheon-center-v19-fish-3",
+      "area": "chuncheon-center",
+      "proposalShape": "fish",
+      "category": "animal",
+      "rotation": 344.00397695642397
+    },
+    {
+      "token": "R044",
+      "id": "busan-yeongdo-v19-hammer-7",
+      "area": "busan-yeongdo",
+      "proposalShape": "hammer",
+      "category": "object",
+      "rotation": 255.0
+    },
+    {
+      "token": "R045",
+      "id": "busan-yeongdo-v19-apple-2",
+      "area": "busan-yeongdo",
+      "proposalShape": "apple",
+      "category": "object",
+      "rotation": 141.0
+    },
+    {
+      "token": "R046",
+      "id": "busan-yeongdo-v19-crown-4",
+      "area": "busan-yeongdo",
+      "proposalShape": "crown",
+      "category": "object",
+      "rotation": 270.0
+    },
+    {
+      "token": "R047",
+      "id": "busan-yeongdo-v19-fish-4",
+      "area": "busan-yeongdo",
+      "proposalShape": "fish",
+      "category": "animal",
+      "rotation": 90.0
+    },
+    {
+      "token": "R048",
+      "id": "changwon-center-v19-rabbit-8",
+      "area": "changwon-center",
+      "proposalShape": "rabbit",
+      "category": "animal",
+      "rotation": 262.72195081714665
+    },
+    {
+      "token": "R049",
+      "id": "changwon-center-v19-bird-6",
+      "area": "changwon-center",
+      "proposalShape": "bird",
+      "category": "animal",
+      "rotation": 88.40194710093262
+    },
+    {
+      "token": "R050",
+      "id": "changwon-center-v19-whale-3",
+      "area": "changwon-center",
+      "proposalShape": "whale",
+      "category": "animal",
+      "rotation": 118.32420469672152
+    },
+    {
+      "token": "R051",
+      "id": "busan-yeongdo-v19-airplane-4",
+      "area": "busan-yeongdo",
+      "proposalShape": "airplane",
+      "category": "object",
+      "rotation": 195.0
+    },
+    {
+      "token": "R052",
+      "id": "changwon-center-v19-fish-5",
+      "area": "changwon-center",
+      "proposalShape": "fish",
+      "category": "animal",
+      "rotation": 280.30533560146756
+    },
+    {
+      "token": "R053",
+      "id": "chuncheon-center-v19-turtle-5",
+      "area": "chuncheon-center",
+      "proposalShape": "turtle",
+      "category": "animal",
+      "rotation": 149.75412720381104
+    },
+    {
+      "token": "R054",
+      "id": "changwon-center-v19-airplane-6",
+      "area": "changwon-center",
+      "proposalShape": "airplane",
+      "category": "object",
+      "rotation": 315.0
+    },
+    {
+      "token": "R055",
+      "id": "chuncheon-center-v19-airplane-6",
+      "area": "chuncheon-center",
+      "proposalShape": "airplane",
+      "category": "object",
+      "rotation": 124.02503079481303
+    },
+    {
+      "token": "R056",
+      "id": "busan-yeongdo-v19-turtle-1",
+      "area": "busan-yeongdo",
+      "proposalShape": "turtle",
+      "category": "animal",
+      "rotation": 20.844433141318333
+    },
+    {
+      "token": "R057",
+      "id": "changwon-center-v19-butterfly-8",
+      "area": "changwon-center",
+      "proposalShape": "butterfly",
+      "category": "animal",
+      "rotation": 359.7434748399613
+    },
+    {
+      "token": "R058",
+      "id": "changwon-center-v19-cat-1",
+      "area": "changwon-center",
+      "proposalShape": "cat",
+      "category": "animal",
+      "rotation": 194.06826634712075
+    },
+    {
+      "token": "R059",
+      "id": "changwon-center-v19-crown-3",
+      "area": "changwon-center",
+      "proposalShape": "crown",
+      "category": "object",
+      "rotation": 34.0
+    },
+    {
+      "token": "R060",
+      "id": "changwon-center-v19-house-6",
+      "area": "changwon-center",
+      "proposalShape": "house",
+      "category": "object",
+      "rotation": 40.4019145054655
+    },
+    {
+      "token": "R061",
+      "id": "busan-yeongdo-v19-tshirt-1",
+      "area": "busan-yeongdo",
+      "proposalShape": "tshirt",
+      "category": "object",
+      "rotation": 243.0
+    },
+    {
+      "token": "R062",
+      "id": "busan-yeongdo-v19-duck-5",
+      "area": "busan-yeongdo",
+      "proposalShape": "duck",
+      "category": "animal",
+      "rotation": 149.5393662010208
+    },
+    {
+      "token": "R063",
+      "id": "changwon-center-v19-rocket-1",
+      "area": "changwon-center",
+      "proposalShape": "rocket",
+      "category": "object",
+      "rotation": 343.73997545134654
+    },
+    {
+      "token": "R064",
+      "id": "changwon-center-v19-hammer-7",
+      "area": "changwon-center",
+      "proposalShape": "hammer",
+      "category": "object",
+      "rotation": 210.01047555090355
+    },
+    {
+      "token": "R065",
+      "id": "busan-yeongdo-v19-bottle-8",
+      "area": "busan-yeongdo",
+      "proposalShape": "bottle",
+      "category": "object",
+      "rotation": 209.1824514208931
+    },
+    {
+      "token": "R066",
+      "id": "changwon-center-v19-elephant-1",
+      "area": "changwon-center",
+      "proposalShape": "elephant",
+      "category": "animal",
+      "rotation": 144.18210010944773
+    },
+    {
+      "token": "R067",
+      "id": "busan-yeongdo-v19-car-7",
+      "area": "busan-yeongdo",
+      "proposalShape": "car",
+      "category": "object",
+      "rotation": 286.2624777460984
+    },
+    {
+      "token": "R068",
+      "id": "busan-yeongdo-v19-house-4",
+      "area": "busan-yeongdo",
+      "proposalShape": "house",
+      "category": "object",
+      "rotation": 300.0
+    },
+    {
+      "token": "R069",
+      "id": "chuncheon-center-v19-chair-1",
+      "area": "chuncheon-center",
+      "proposalShape": "chair",
+      "category": "object",
+      "rotation": 33.0
+    },
+    {
+      "token": "R070",
+      "id": "chuncheon-center-v19-dog-1",
+      "area": "chuncheon-center",
+      "proposalShape": "dog",
+      "category": "animal",
+      "rotation": 45.121094249555526
+    },
+    {
+      "token": "R071",
+      "id": "chuncheon-center-v19-whale-7",
+      "area": "chuncheon-center",
+      "proposalShape": "whale",
+      "category": "animal",
+      "rotation": 266.8882272644286
+    },
+    {
+      "token": "R072",
+      "id": "busan-yeongdo-v19-dog-2",
+      "area": "busan-yeongdo",
+      "proposalShape": "dog",
+      "category": "animal",
+      "rotation": 93.0
+    },
+    {
+      "token": "R073",
+      "id": "busan-yeongdo-v19-key-3",
+      "area": "busan-yeongdo",
+      "proposalShape": "key",
+      "category": "object",
+      "rotation": 33.0
+    },
+    {
+      "token": "R074",
+      "id": "busan-yeongdo-v19-whale-3",
+      "area": "busan-yeongdo",
+      "proposalShape": "whale",
+      "category": "animal",
+      "rotation": 308.8821897177693
+    },
+    {
+      "token": "R075",
+      "id": "changwon-center-v19-apple-5",
+      "area": "changwon-center",
+      "proposalShape": "apple",
+      "category": "object",
+      "rotation": 346.20569074834475
+    }
+  ],
+  "pages": [
+    {
+      "file": "blind-1.png",
+      "SHA256": "fcdf87e561713b5f1fa76e4fc97c2f9b3f447125191ed26734243ed0e3d2bb09"
+    },
+    {
+      "file": "blind-2.png",
+      "SHA256": "0b806d5a0f7d06781d9c18360092ccb0f3e7983210e28b18b7848b9275f594af"
+    },
+    {
+      "file": "blind-3.png",
+      "SHA256": "0234d8ed03df237d9ada5cd170deff2ab9ccd774b680a92a659736527e488400"
+    },
+    {
+      "file": "blind-4.png",
+      "SHA256": "420c11289da92c30b0b7d67102f5678d02d6362994570cdc8722082738c689fb"
+    },
+    {
+      "file": "blind-5.png",
+      "SHA256": "4a7501e944c52c1c9eb569bdd7facd463bef068b48b42e99a531cb50c5e7c969"
+    }
+  ],
+  "species": [
+    {
+      "key": "cat",
+      "name": "고양이",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 19,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "fish",
+      "name": "물고기",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 22,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "dog",
+      "name": "강아지",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 23,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "rabbit",
+      "name": "토끼",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 22,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "bird",
+      "name": "새",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 13,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "whale",
+      "name": "고래",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 18,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "turtle",
+      "name": "거북이",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 20,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "elephant",
+      "name": "코끼리",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 13,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "giraffe",
+      "name": "기린",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 22,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "butterfly",
+      "name": "나비",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 16,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "duck",
+      "name": "오리",
+      "kind": "animal",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 18,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "house",
+      "name": "집",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 17,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "tree",
+      "name": "나무",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 12,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "car",
+      "name": "자동차",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 17,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "rocket",
+      "name": "로켓",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 18,
+      "headSupported": false,
+      "clipSupported": false,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "apple",
+      "name": "사과",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 19,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "crown",
+      "name": "왕관",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 19,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "airplane",
+      "name": "비행기",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 17,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "mug",
+      "name": "컵",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 14,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "tshirt",
+      "name": "티셔츠",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 23,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "pants",
+      "name": "바지",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 21,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "hammer",
+      "name": "망치",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 21,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "bottle",
+      "name": "병",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 17,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "key",
+      "name": "열쇠",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 14,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    },
+    {
+      "key": "chair",
+      "name": "의자",
+      "kind": "object",
+      "validRoadRequests": 3,
+      "requests": 3,
+      "validCandidates": 13,
+      "headSupported": true,
+      "clipSupported": true,
+      "humanRecognitionMeasured": false
+    }
+  ],
+  "requests": 75,
+  "missing": 0,
+  "humanRecognitionMeasured": false,
+  "AIRecognitionMeasured": false,
+  "selection": {
+    "source": "1b1a3ef5f7afacbb123b0af16f9b39be502fa1d53b3003611e2710451c3f482e",
+    "catalog": "880a2b1f87006cf9f84e23fae68a23d8d554f7127c8f551b10c805f6c62e8fa6",
+    "road_features": "2a12393735036b785a7b75ec0f651dc664c4a0d59cd6d08949b5c12b75cb4b81",
+    "hand_checkpoint": "cf5849f668dcdebb381a5ff400931667a66c871d1eefbc191d8d1875ada34e24",
+    "query_protocol": "d293a36a5280da29196395917933f92ef0194c9c196695941ac20a791fbd27d6",
+    "protocol": "5ce56058d46d8344a3d53f3807438787aa64edcf4d8e2457291884be2d44f38e",
+    "codeSHA256": "fb95d1508af1c1d04707bfab929f2e201399003bb09ee3c86a5d7bed752e2957",
+    "frozenV18CodeSHA256": "74b9c12be612e5c0b5718ad88a666f0048a506bae857e961c384337a23c0c89a",
+    "queriesSHA256": "481382effa2882bb12a44df18cb2afb31d9b034b912617001b5750dc15e1823c",
+    "queryMetadataSHA256": "87410fd01d06ac92c819cc22bdeee8b54502e32e904e5b4d54a7e676f95afbbb",
+    "featureIDsVerified": false,
+    "featureCompatibility": {
+      "verified": true,
+      "comparedFields": [
+        "checkpoint",
+        "revision",
+        "rendererCodeSHA256",
+        "rotations"
+      ],
+      "extractorIdentity": {
+        "checkpoint": "openai/clip-vit-base-patch32",
+        "revision": null,
+        "rendererCodeSHA256": "2b85b48e4104cfd57d3c6bfd31fc07db05dad8b27ec659c606389f16fd4d4f0e",
+        "rotations": 4
+      },
+      "revisionPinned": false,
+      "weightFileHashesVerified": false,
+      "limitation": "Matching explicit null revisions do not independently prove encoder weight-file identity"
+    },
+    "newWeightsTrained": false,
+    "humanLabelsFitted": false,
+    "view": "canonical0",
+    "requests": 75,
+    "method": "hand",
+    "choices": [
+      {
+        "area": "chuncheon-center",
+        "key": "cat",
+        "representativeCandidates": 5,
+        "choices": {
+          "geometry": {
+            "id": "chuncheon-center-v19-cat-1",
+            "score": 69.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "chuncheon-center-v19-cat-4",
+            "score": 0.8159916474447502,
+            "fallback": false
+          },
+          "image": {
+            "id": "chuncheon-center-v19-cat-4",
+            "score": 0.8936428147097158,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "chuncheon-center",
+        "key": "fish",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "chuncheon-center-v19-fish-1",
+            "score": 80.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "chuncheon-center-v19-fish-3",
+            "score": 0.9539813842209024,
+            "fallback": false
+          },
+          "image": {
+            "id": "chuncheon-center-v19-fish-1",
+            "score": 0.9550661098372297,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "chuncheon-center",
+        "key": "dog",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "chuncheon-center-v19-dog-1",
+            "score": 75.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "chuncheon-center-v19-dog-1",
+            "score": 0.8913411757262677,
+            "fallback": false
+          },
+          "image": {
+            "id": "chuncheon-center-v19-dog-4",
+            "score": 0.949690615888104,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "chuncheon-center",
+        "key": "rabbit",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "chuncheon-center-v19-rabbit-1",
+            "score": 73.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "chuncheon-center-v19-rabbit-6",
+            "score": 0.7782324122832375,
+            "fallback": false
+          },
+          "image": {
+            "id": "chuncheon-center-v19-rabbit-6",
+            "score": 0.801694699449897,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "chuncheon-center",
+        "key": "bird",
+        "representativeCandidates": 4,
+        "choices": {
+          "geometry": {
+            "id": "chuncheon-center-v19-bird-1",
+            "score": 75.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "chuncheon-center-v19-bird-4",
+            "score": 0.8808919089926321,
+            "fallback": false
+          },
+          "image": {
+            "id": "chuncheon-center-v19-bird-4",
+            "score": 0.9254182561098936,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "chuncheon-center",
+        "key": "whale",
+        "representativeCandidates": 6,
+        "choices": {
+          "geometry": {
+            "id": "chuncheon-center-v19-whale-1",
+            "score": 75.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "chuncheon-center-v19-whale-7",
+            "score": 0.8833080573465055,
+            "fallback": false
+          },
+          "image": {
+            "id": "chuncheon-center-v19-whale-7",
+            "score": 0.8568728616623549,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "chuncheon-center",
+        "key": "turtle",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "chuncheon-center-v19-turtle-1",
+            "score": 76.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "chuncheon-center-v19-turtle-5",
+            "score": 0.8404372756522044,
+            "fallback": false
+          },
+          "image": {
+            "id": "chuncheon-center-v19-turtle-6",
+            "score": 0.9534971301521723,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "chuncheon-center",
+        "key": "elephant",
+        "representativeCandidates": 4,
+        "choices": {
+          "geometry": {
+            "id": "chuncheon-center-v19-elephant-1",
+            "score": 70.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "chuncheon-center-v19-elephant-6",
+            "score": 0.9015755971474027,
+            "fallback": false
+          },
+          "image": {
+            "id": "chuncheon-center-v19-elephant-6",
+            "score": 0.8787895053835468,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "chuncheon-center",
+        "key": "giraffe",
+        "representativeCandidates": 6,
+        "choices": {
+          "geometry": {
+            "id": "chuncheon-center-v19-giraffe-1",
+            "score": 73.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "chuncheon-center-v19-giraffe-3",
+            "score": 0.9272586746637689,
+            "fallback": false
+          },
+          "image": {
+            "id": "chuncheon-center-v19-giraffe-3",
+            "score": 0.923997903065017,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "chuncheon-center",
+        "key": "butterfly",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "chuncheon-center-v19-butterfly-1",
+            "score": 76.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "chuncheon-center-v19-butterfly-3",
+            "score": 0.8814796031172293,
+            "fallback": false
+          },
+          "image": {
+            "id": "chuncheon-center-v19-butterfly-4",
+            "score": 0.858533718862701,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "chuncheon-center",
+        "key": "duck",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "chuncheon-center-v19-duck-1",
+            "score": 75.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "chuncheon-center-v19-duck-4",
+            "score": 0.849370887010886,
+            "fallback": false
+          },
+          "image": {
+            "id": "chuncheon-center-v19-duck-4",
+            "score": 0.9188197136319685,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "chuncheon-center",
+        "key": "house",
+        "representativeCandidates": 4,
+        "choices": {
+          "geometry": {
+            "id": "chuncheon-center-v19-house-1",
+            "score": 74.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "chuncheon-center-v19-house-4",
+            "score": 0.8721921018648541,
+            "fallback": false
+          },
+          "image": {
+            "id": "chuncheon-center-v19-house-1",
+            "score": 0.8332081189853335,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "chuncheon-center",
+        "key": "tree",
+        "representativeCandidates": 4,
+        "choices": {
+          "geometry": {
+            "id": "chuncheon-center-v19-tree-1",
+            "score": 76.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "chuncheon-center-v19-tree-7",
+            "score": 0.8766305042131001,
+            "fallback": false
+          },
+          "image": {
+            "id": "chuncheon-center-v19-tree-7",
+            "score": 0.856687583011817,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "chuncheon-center",
+        "key": "car",
+        "representativeCandidates": 4,
+        "choices": {
+          "geometry": {
+            "id": "chuncheon-center-v19-car-1",
+            "score": 82.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "chuncheon-center-v19-car-8",
+            "score": 0.9216474236132031,
+            "fallback": false
+          },
+          "image": {
+            "id": "chuncheon-center-v19-car-8",
+            "score": 0.918156902532846,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "chuncheon-center",
+        "key": "rocket",
+        "representativeCandidates": 6,
+        "choices": {
+          "geometry": {
+            "id": "chuncheon-center-v19-rocket-1",
+            "score": 76.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "chuncheon-center-v19-rocket-1",
+            "score": 76.0,
+            "fallback": true
+          },
+          "image": {
+            "id": "chuncheon-center-v19-rocket-3",
+            "score": 0.7590251944764719,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "chuncheon-center",
+        "key": "apple",
+        "representativeCandidates": 6,
+        "choices": {
+          "geometry": {
+            "id": "chuncheon-center-v19-apple-1",
+            "score": 73.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "chuncheon-center-v19-apple-4",
+            "score": 0.8194533937117322,
+            "fallback": false
+          },
+          "image": {
+            "id": "chuncheon-center-v19-apple-4",
+            "score": 0.7913035070477152,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "chuncheon-center",
+        "key": "crown",
+        "representativeCandidates": 5,
+        "choices": {
+          "geometry": {
+            "id": "chuncheon-center-v19-crown-1",
+            "score": 74.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "chuncheon-center-v19-crown-4",
+            "score": 0.8849558213887652,
+            "fallback": false
+          },
+          "image": {
+            "id": "chuncheon-center-v19-crown-7",
+            "score": 0.8392005525059477,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "chuncheon-center",
+        "key": "airplane",
+        "representativeCandidates": 6,
+        "choices": {
+          "geometry": {
+            "id": "chuncheon-center-v19-airplane-1",
+            "score": 71.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "chuncheon-center-v19-airplane-6",
+            "score": 0.9234577580644439,
+            "fallback": false
+          },
+          "image": {
+            "id": "chuncheon-center-v19-airplane-6",
+            "score": 0.8636459945011057,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "chuncheon-center",
+        "key": "mug",
+        "representativeCandidates": 2,
+        "choices": {
+          "geometry": {
+            "id": "chuncheon-center-v19-mug-1",
+            "score": 75.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "chuncheon-center-v19-mug-1",
+            "score": 0.8264128287900192,
+            "fallback": false
+          },
+          "image": {
+            "id": "chuncheon-center-v19-mug-1",
+            "score": 0.8737069973572611,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "chuncheon-center",
+        "key": "tshirt",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "chuncheon-center-v19-tshirt-1",
+            "score": 75.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "chuncheon-center-v19-tshirt-8",
+            "score": 0.8581059566215851,
+            "fallback": false
+          },
+          "image": {
+            "id": "chuncheon-center-v19-tshirt-8",
+            "score": 0.8360824777110337,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "chuncheon-center",
+        "key": "pants",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "chuncheon-center-v19-pants-1",
+            "score": 66.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "chuncheon-center-v19-pants-4",
+            "score": 0.9111084062219654,
+            "fallback": false
+          },
+          "image": {
+            "id": "chuncheon-center-v19-pants-3",
+            "score": 0.8675080735102676,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "chuncheon-center",
+        "key": "hammer",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "chuncheon-center-v19-hammer-1",
+            "score": 71.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "chuncheon-center-v19-hammer-3",
+            "score": 0.9370199428355726,
+            "fallback": false
+          },
+          "image": {
+            "id": "chuncheon-center-v19-hammer-3",
+            "score": 0.8517750288313449,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "chuncheon-center",
+        "key": "bottle",
+        "representativeCandidates": 3,
+        "choices": {
+          "geometry": {
+            "id": "chuncheon-center-v19-bottle-1",
+            "score": 79.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "chuncheon-center-v19-bottle-1",
+            "score": 0.9037963913946576,
+            "fallback": false
+          },
+          "image": {
+            "id": "chuncheon-center-v19-bottle-1",
+            "score": 0.8995144599188687,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "chuncheon-center",
+        "key": "key",
+        "representativeCandidates": 5,
+        "choices": {
+          "geometry": {
+            "id": "chuncheon-center-v19-key-1",
+            "score": 78.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "chuncheon-center-v19-key-2",
+            "score": 0.870765024821205,
+            "fallback": false
+          },
+          "image": {
+            "id": "chuncheon-center-v19-key-2",
+            "score": 0.859378051349975,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "chuncheon-center",
+        "key": "chair",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "chuncheon-center-v19-chair-1",
+            "score": 71.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "chuncheon-center-v19-chair-1",
+            "score": 0.9169873872798524,
+            "fallback": false
+          },
+          "image": {
+            "id": "chuncheon-center-v19-chair-4",
+            "score": 0.860230520465398,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "changwon-center",
+        "key": "cat",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "changwon-center-v19-cat-1",
+            "score": 70.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "changwon-center-v19-cat-1",
+            "score": 0.7594049411017296,
+            "fallback": false
+          },
+          "image": {
+            "id": "changwon-center-v19-cat-1",
+            "score": 0.8221196852879159,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "changwon-center",
+        "key": "fish",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "changwon-center-v19-fish-1",
+            "score": 74.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "changwon-center-v19-fish-5",
+            "score": 0.8544348699711338,
+            "fallback": false
+          },
+          "image": {
+            "id": "changwon-center-v19-fish-3",
+            "score": 0.845093186250469,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "changwon-center",
+        "key": "dog",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "changwon-center-v19-dog-1",
+            "score": 74.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "changwon-center-v19-dog-7",
+            "score": 0.849125576431824,
+            "fallback": false
+          },
+          "image": {
+            "id": "changwon-center-v19-dog-5",
+            "score": 0.8720804032658548,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "changwon-center",
+        "key": "rabbit",
+        "representativeCandidates": 6,
+        "choices": {
+          "geometry": {
+            "id": "changwon-center-v19-rabbit-1",
+            "score": 78.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "changwon-center-v19-rabbit-8",
+            "score": 0.7920943697460895,
+            "fallback": false
+          },
+          "image": {
+            "id": "changwon-center-v19-rabbit-7",
+            "score": 0.7922994100324898,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "changwon-center",
+        "key": "bird",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "changwon-center-v19-bird-1",
+            "score": 73.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "changwon-center-v19-bird-6",
+            "score": 0.8962242358394519,
+            "fallback": false
+          },
+          "image": {
+            "id": "changwon-center-v19-bird-2",
+            "score": 0.9031306306658236,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "changwon-center",
+        "key": "whale",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "changwon-center-v19-whale-1",
+            "score": 72.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "changwon-center-v19-whale-3",
+            "score": 0.8761078252927654,
+            "fallback": false
+          },
+          "image": {
+            "id": "changwon-center-v19-whale-7",
+            "score": 0.8256213671304994,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "changwon-center",
+        "key": "turtle",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "changwon-center-v19-turtle-1",
+            "score": 77.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "changwon-center-v19-turtle-8",
+            "score": 0.8267363385283039,
+            "fallback": false
+          },
+          "image": {
+            "id": "changwon-center-v19-turtle-4",
+            "score": 0.906194170614125,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "changwon-center",
+        "key": "elephant",
+        "representativeCandidates": 4,
+        "choices": {
+          "geometry": {
+            "id": "changwon-center-v19-elephant-1",
+            "score": 74.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "changwon-center-v19-elephant-1",
+            "score": 0.8803887416699152,
+            "fallback": false
+          },
+          "image": {
+            "id": "changwon-center-v19-elephant-1",
+            "score": 0.9015110624237979,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "changwon-center",
+        "key": "giraffe",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "changwon-center-v19-giraffe-1",
+            "score": 77.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "changwon-center-v19-giraffe-8",
+            "score": 0.9270972006161595,
+            "fallback": false
+          },
+          "image": {
+            "id": "changwon-center-v19-giraffe-8",
+            "score": 0.9114741528696523,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "changwon-center",
+        "key": "butterfly",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "changwon-center-v19-butterfly-1",
+            "score": 68.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "changwon-center-v19-butterfly-8",
+            "score": 0.8712107829589606,
+            "fallback": false
+          },
+          "image": {
+            "id": "changwon-center-v19-butterfly-5",
+            "score": 0.8432127425064351,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "changwon-center",
+        "key": "duck",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "changwon-center-v19-duck-1",
+            "score": 74.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "changwon-center-v19-duck-1",
+            "score": 0.8492281691479059,
+            "fallback": false
+          },
+          "image": {
+            "id": "changwon-center-v19-duck-1",
+            "score": 0.911670925089054,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "changwon-center",
+        "key": "house",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "changwon-center-v19-house-1",
+            "score": 70.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "changwon-center-v19-house-6",
+            "score": 0.8904921640055046,
+            "fallback": false
+          },
+          "image": {
+            "id": "changwon-center-v19-house-6",
+            "score": 0.8962870064132694,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "changwon-center",
+        "key": "tree",
+        "representativeCandidates": 6,
+        "choices": {
+          "geometry": {
+            "id": "changwon-center-v19-tree-1",
+            "score": 79.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "changwon-center-v19-tree-5",
+            "score": 0.9146602512966324,
+            "fallback": false
+          },
+          "image": {
+            "id": "changwon-center-v19-tree-4",
+            "score": 0.9118686567753684,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "changwon-center",
+        "key": "car",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "changwon-center-v19-car-1",
+            "score": 84.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "changwon-center-v19-car-5",
+            "score": 0.9326154012675649,
+            "fallback": false
+          },
+          "image": {
+            "id": "changwon-center-v19-car-2",
+            "score": 0.9662857034670576,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "changwon-center",
+        "key": "rocket",
+        "representativeCandidates": 6,
+        "choices": {
+          "geometry": {
+            "id": "changwon-center-v19-rocket-1",
+            "score": 73.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "changwon-center-v19-rocket-1",
+            "score": 73.0,
+            "fallback": true
+          },
+          "image": {
+            "id": "changwon-center-v19-rocket-8",
+            "score": 0.8489941963571612,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "changwon-center",
+        "key": "apple",
+        "representativeCandidates": 6,
+        "choices": {
+          "geometry": {
+            "id": "changwon-center-v19-apple-1",
+            "score": 75.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "changwon-center-v19-apple-5",
+            "score": 0.8265250159078368,
+            "fallback": false
+          },
+          "image": {
+            "id": "changwon-center-v19-apple-2",
+            "score": 0.8126357447527106,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "changwon-center",
+        "key": "crown",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "changwon-center-v19-crown-1",
+            "score": 63.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "changwon-center-v19-crown-3",
+            "score": 0.9389825914245615,
+            "fallback": false
+          },
+          "image": {
+            "id": "changwon-center-v19-crown-3",
+            "score": 0.887097860397301,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "changwon-center",
+        "key": "airplane",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "changwon-center-v19-airplane-1",
+            "score": 74.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "changwon-center-v19-airplane-6",
+            "score": 0.8871965085887573,
+            "fallback": false
+          },
+          "image": {
+            "id": "changwon-center-v19-airplane-1",
+            "score": 0.8055066767503685,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "changwon-center",
+        "key": "mug",
+        "representativeCandidates": 6,
+        "choices": {
+          "geometry": {
+            "id": "changwon-center-v19-mug-1",
+            "score": 69.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "changwon-center-v19-mug-5",
+            "score": 0.862578759480371,
+            "fallback": false
+          },
+          "image": {
+            "id": "changwon-center-v19-mug-1",
+            "score": 0.9358871581953114,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "changwon-center",
+        "key": "tshirt",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "changwon-center-v19-tshirt-1",
+            "score": 75.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "changwon-center-v19-tshirt-7",
+            "score": 0.9212075122346353,
+            "fallback": false
+          },
+          "image": {
+            "id": "changwon-center-v19-tshirt-7",
+            "score": 0.8969289018116497,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "changwon-center",
+        "key": "pants",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "changwon-center-v19-pants-1",
+            "score": 73.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "changwon-center-v19-pants-4",
+            "score": 0.8660819136021396,
+            "fallback": false
+          },
+          "image": {
+            "id": "changwon-center-v19-pants-3",
+            "score": 0.8554924694421477,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "changwon-center",
+        "key": "hammer",
+        "representativeCandidates": 6,
+        "choices": {
+          "geometry": {
+            "id": "changwon-center-v19-hammer-1",
+            "score": 77.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "changwon-center-v19-hammer-7",
+            "score": 0.942520551012216,
+            "fallback": false
+          },
+          "image": {
+            "id": "changwon-center-v19-hammer-7",
+            "score": 0.9152115756946477,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "changwon-center",
+        "key": "bottle",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "changwon-center-v19-bottle-1",
+            "score": 78.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "changwon-center-v19-bottle-6",
+            "score": 0.9020227504864932,
+            "fallback": false
+          },
+          "image": {
+            "id": "changwon-center-v19-bottle-6",
+            "score": 0.9049976032879441,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "changwon-center",
+        "key": "key",
+        "representativeCandidates": 4,
+        "choices": {
+          "geometry": {
+            "id": "changwon-center-v19-key-1",
+            "score": 79.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "changwon-center-v19-key-5",
+            "score": 0.8929266076784245,
+            "fallback": false
+          },
+          "image": {
+            "id": "changwon-center-v19-key-5",
+            "score": 0.9381984871462654,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "changwon-center",
+        "key": "chair",
+        "representativeCandidates": 4,
+        "choices": {
+          "geometry": {
+            "id": "changwon-center-v19-chair-1",
+            "score": 75.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "changwon-center-v19-chair-8",
+            "score": 0.9118881233148577,
+            "fallback": false
+          },
+          "image": {
+            "id": "changwon-center-v19-chair-1",
+            "score": 0.9313701921062602,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "busan-yeongdo",
+        "key": "cat",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "busan-yeongdo-v19-cat-1",
+            "score": 61.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "busan-yeongdo-v19-cat-8",
+            "score": 0.8480678349455196,
+            "fallback": false
+          },
+          "image": {
+            "id": "busan-yeongdo-v19-cat-5",
+            "score": 0.8835881938145634,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "busan-yeongdo",
+        "key": "fish",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "busan-yeongdo-v19-fish-1",
+            "score": 67.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "busan-yeongdo-v19-fish-4",
+            "score": 0.8466187161443228,
+            "fallback": false
+          },
+          "image": {
+            "id": "busan-yeongdo-v19-fish-4",
+            "score": 0.8036966070515961,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "busan-yeongdo",
+        "key": "dog",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "busan-yeongdo-v19-dog-1",
+            "score": 67.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "busan-yeongdo-v19-dog-2",
+            "score": 0.8561078293963399,
+            "fallback": false
+          },
+          "image": {
+            "id": "busan-yeongdo-v19-dog-2",
+            "score": 0.8687589151493299,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "busan-yeongdo",
+        "key": "rabbit",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "busan-yeongdo-v19-rabbit-1",
+            "score": 61.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "busan-yeongdo-v19-rabbit-6",
+            "score": 0.8355512645103846,
+            "fallback": false
+          },
+          "image": {
+            "id": "busan-yeongdo-v19-rabbit-6",
+            "score": 0.8446346830814898,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "busan-yeongdo",
+        "key": "bird",
+        "representativeCandidates": 2,
+        "choices": {
+          "geometry": {
+            "id": "busan-yeongdo-v19-bird-1",
+            "score": 68.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "busan-yeongdo-v19-bird-6",
+            "score": 0.8237009465900501,
+            "fallback": false
+          },
+          "image": {
+            "id": "busan-yeongdo-v19-bird-6",
+            "score": 0.8632429406778499,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "busan-yeongdo",
+        "key": "whale",
+        "representativeCandidates": 4,
+        "choices": {
+          "geometry": {
+            "id": "busan-yeongdo-v19-whale-1",
+            "score": 67.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "busan-yeongdo-v19-whale-3",
+            "score": 0.8963636326212756,
+            "fallback": false
+          },
+          "image": {
+            "id": "busan-yeongdo-v19-whale-6",
+            "score": 0.8330322975862297,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "busan-yeongdo",
+        "key": "turtle",
+        "representativeCandidates": 4,
+        "choices": {
+          "geometry": {
+            "id": "busan-yeongdo-v19-turtle-1",
+            "score": 73.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "busan-yeongdo-v19-turtle-1",
+            "score": 0.8267592006580188,
+            "fallback": false
+          },
+          "image": {
+            "id": "busan-yeongdo-v19-turtle-5",
+            "score": 0.8704455668948075,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "busan-yeongdo",
+        "key": "elephant",
+        "representativeCandidates": 5,
+        "choices": {
+          "geometry": {
+            "id": "busan-yeongdo-v19-elephant-1",
+            "score": 67.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "busan-yeongdo-v19-elephant-4",
+            "score": 0.908648953757708,
+            "fallback": false
+          },
+          "image": {
+            "id": "busan-yeongdo-v19-elephant-4",
+            "score": 0.8758617234055874,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "busan-yeongdo",
+        "key": "giraffe",
+        "representativeCandidates": 8,
+        "choices": {
+          "geometry": {
+            "id": "busan-yeongdo-v19-giraffe-1",
+            "score": 68.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "busan-yeongdo-v19-giraffe-4",
+            "score": 0.9340966485646676,
+            "fallback": false
+          },
+          "image": {
+            "id": "busan-yeongdo-v19-giraffe-2",
+            "score": 0.9004338259437459,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "busan-yeongdo",
+        "key": "butterfly",
+        "representativeCandidates": 1,
+        "choices": {
+          "geometry": {
+            "id": "busan-yeongdo-v19-butterfly-1",
+            "score": 64.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "busan-yeongdo-v19-butterfly-1",
+            "score": 0.8681014359170052,
+            "fallback": false
+          },
+          "image": {
+            "id": "busan-yeongdo-v19-butterfly-1",
+            "score": 0.7847426040280283,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "busan-yeongdo",
+        "key": "duck",
+        "representativeCandidates": 4,
+        "choices": {
+          "geometry": {
+            "id": "busan-yeongdo-v19-duck-1",
+            "score": 73.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "busan-yeongdo-v19-duck-5",
+            "score": 0.8593200155187268,
+            "fallback": false
+          },
+          "image": {
+            "id": "busan-yeongdo-v19-duck-5",
+            "score": 0.9087181654013993,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "busan-yeongdo",
+        "key": "house",
+        "representativeCandidates": 6,
+        "choices": {
+          "geometry": {
+            "id": "busan-yeongdo-v19-house-1",
+            "score": 65.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "busan-yeongdo-v19-house-4",
+            "score": 0.8739189586224356,
+            "fallback": false
+          },
+          "image": {
+            "id": "busan-yeongdo-v19-house-4",
+            "score": 0.8418756800689323,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "busan-yeongdo",
+        "key": "tree",
+        "representativeCandidates": 2,
+        "choices": {
+          "geometry": {
+            "id": "busan-yeongdo-v19-tree-1",
+            "score": 69.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "busan-yeongdo-v19-tree-1",
+            "score": 0.8825585719680124,
+            "fallback": false
+          },
+          "image": {
+            "id": "busan-yeongdo-v19-tree-1",
+            "score": 0.8571762619971602,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "busan-yeongdo",
+        "key": "car",
+        "representativeCandidates": 6,
+        "choices": {
+          "geometry": {
+            "id": "busan-yeongdo-v19-car-1",
+            "score": 74.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "busan-yeongdo-v19-car-7",
+            "score": 0.8992124226982466,
+            "fallback": false
+          },
+          "image": {
+            "id": "busan-yeongdo-v19-car-2",
+            "score": 0.8646411260249369,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "busan-yeongdo",
+        "key": "rocket",
+        "representativeCandidates": 6,
+        "choices": {
+          "geometry": {
+            "id": "busan-yeongdo-v19-rocket-1",
+            "score": 69.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "busan-yeongdo-v19-rocket-1",
+            "score": 69.0,
+            "fallback": true
+          },
+          "image": {
+            "id": "busan-yeongdo-v19-rocket-4",
+            "score": 0.8436637964014226,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "busan-yeongdo",
+        "key": "apple",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "busan-yeongdo-v19-apple-1",
+            "score": 58.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "busan-yeongdo-v19-apple-2",
+            "score": 0.844777593264556,
+            "fallback": false
+          },
+          "image": {
+            "id": "busan-yeongdo-v19-apple-1",
+            "score": 0.7979201980460306,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "busan-yeongdo",
+        "key": "crown",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "busan-yeongdo-v19-crown-1",
+            "score": 54.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "busan-yeongdo-v19-crown-4",
+            "score": 0.8251412258482954,
+            "fallback": false
+          },
+          "image": {
+            "id": "busan-yeongdo-v19-crown-6",
+            "score": 0.8007344196089663,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "busan-yeongdo",
+        "key": "airplane",
+        "representativeCandidates": 3,
+        "choices": {
+          "geometry": {
+            "id": "busan-yeongdo-v19-airplane-1",
+            "score": 68.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "busan-yeongdo-v19-airplane-4",
+            "score": 0.8744438767191252,
+            "fallback": false
+          },
+          "image": {
+            "id": "busan-yeongdo-v19-airplane-3",
+            "score": 0.7810808291832552,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "busan-yeongdo",
+        "key": "mug",
+        "representativeCandidates": 6,
+        "choices": {
+          "geometry": {
+            "id": "busan-yeongdo-v19-mug-1",
+            "score": 61.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "busan-yeongdo-v19-mug-6",
+            "score": 0.8805334629382418,
+            "fallback": false
+          },
+          "image": {
+            "id": "busan-yeongdo-v19-mug-6",
+            "score": 0.9170123817004352,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "busan-yeongdo",
+        "key": "tshirt",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "busan-yeongdo-v19-tshirt-1",
+            "score": 62.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "busan-yeongdo-v19-tshirt-1",
+            "score": 0.8887246545310722,
+            "fallback": false
+          },
+          "image": {
+            "id": "busan-yeongdo-v19-tshirt-1",
+            "score": 0.8509595393198424,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "busan-yeongdo",
+        "key": "pants",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "busan-yeongdo-v19-pants-1",
+            "score": 62.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "busan-yeongdo-v19-pants-6",
+            "score": 0.8961919082862233,
+            "fallback": false
+          },
+          "image": {
+            "id": "busan-yeongdo-v19-pants-6",
+            "score": 0.8811357980590683,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "busan-yeongdo",
+        "key": "hammer",
+        "representativeCandidates": 7,
+        "choices": {
+          "geometry": {
+            "id": "busan-yeongdo-v19-hammer-1",
+            "score": 61.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "busan-yeongdo-v19-hammer-7",
+            "score": 0.9122817402666039,
+            "fallback": false
+          },
+          "image": {
+            "id": "busan-yeongdo-v19-hammer-5",
+            "score": 0.8206063973917417,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "busan-yeongdo",
+        "key": "bottle",
+        "representativeCandidates": 6,
+        "choices": {
+          "geometry": {
+            "id": "busan-yeongdo-v19-bottle-1",
+            "score": 74.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "busan-yeongdo-v19-bottle-8",
+            "score": 0.8694860058737173,
+            "fallback": false
+          },
+          "image": {
+            "id": "busan-yeongdo-v19-bottle-1",
+            "score": 0.8881666572738108,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "busan-yeongdo",
+        "key": "key",
+        "representativeCandidates": 5,
+        "choices": {
+          "geometry": {
+            "id": "busan-yeongdo-v19-key-1",
+            "score": 65.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "busan-yeongdo-v19-key-3",
+            "score": 0.8335388800826332,
+            "fallback": false
+          },
+          "image": {
+            "id": "busan-yeongdo-v19-key-3",
+            "score": 0.8131348647921401,
+            "fallback": false
+          }
+        }
+      },
+      {
+        "area": "busan-yeongdo",
+        "key": "chair",
+        "representativeCandidates": 1,
+        "choices": {
+          "geometry": {
+            "id": "busan-yeongdo-v19-chair-1",
+            "score": 68.0,
+            "fallback": false
+          },
+          "hand": {
+            "id": "busan-yeongdo-v19-chair-1",
+            "score": 0.9266071231571528,
+            "fallback": false
+          },
+          "image": {
+            "id": "busan-yeongdo-v19-chair-1",
+            "score": 0.9125845458314248,
+            "fallback": false
+          }
+        }
+      }
+    ],
+    "humanRecognitionMeasured": false
+  }
+}
