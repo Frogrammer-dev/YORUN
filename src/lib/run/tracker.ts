@@ -94,6 +94,24 @@ export class RouteTracker {
   distanceToStart(lat: number, lon: number) {
     return haversineMeters({ lat, lon }, { lat: this.lat0, lon: this.lon0 });
   }
+
+  voiceWaypoints() {
+    return this.turns.flatMap((turn, i) => {
+      const direction = turn.dir === "uturn" ? "돌아서 주세요" : TURN_LABEL[turn.dir] + "이에요";
+      const previous = this.turns[i - 1]?.atMeters ?? 0;
+      const offsets = turn.atMeters - previous >= 120 ? [100, 0] : [0];
+      return offsets.map(offset => {
+        const at = turn.atMeters - offset;
+        const end = Math.max(1, this.cum.findIndex(meters => meters >= at));
+        const start = end - 1;
+        const fraction = (at - this.cum[start]) / (this.cum[end] - this.cum[start] || 1);
+        const x = this.xs[start] + fraction * (this.xs[end] - this.xs[start]);
+        const y = this.ys[start] + fraction * (this.ys[end] - this.ys[start]);
+        return { lat: this.lat0 + y / (R * RAD), lon: this.lon0 + x / (R * RAD * this.cos0),
+          radius: offset ? 12 : 20, label: offset ? `약 100미터 후 ${direction}.` : `잠시 후 ${direction}.` };
+      });
+    });
+  }
 }
 
 /** 코스에서 40° 이상 꺾이는 지점을 방향 안내로 만든다 (y = 북쪽, 반시계 = 좌회전). */
@@ -138,6 +156,7 @@ export interface RunRecord {
   /** 진행 중이면 마지막 재개 시각 */
   resumedAt: number | null;
   startedAt: number | null;
+  lastValidAt?: number;
 }
 
 export const emptyRecord = (): RunRecord => ({ segments: [], distanceMeters: 0, activeMs: 0, resumedAt: null, startedAt: null });
@@ -145,10 +164,11 @@ export const emptyRecord = (): RunRecord => ({ segments: [], distanceMeters: 0, 
 export const MAX_ACCURACY_M = 35;
 /** 사람이 달릴 수 없는 순간 이동은 GPS 튐으로 보고 버린다 (≈ 1km 2분) */
 export const MAX_SPEED_MS = 8.5;
+export const GPS_GAP_MS = 60_000;
 
 export function startOrResume(r: RunRecord, now: number): RunRecord {
   if (r.resumedAt !== null) return r;
-  return { ...r, segments: [...r.segments, []], resumedAt: now, startedAt: r.startedAt ?? now };
+  return { ...r, segments: [...r.segments, []], resumedAt: now, startedAt: r.startedAt ?? now, lastValidAt: undefined };
 }
 
 export function pause(r: RunRecord, now: number): RunRecord {
@@ -163,18 +183,37 @@ export function elapsedMs(r: RunRecord, now: number) {
 /** 위치 하나를 기록에 반영. 반환: 갱신된 기록과 채택 여부 */
 export function addFix(r: RunRecord, f: Fix): { record: RunRecord; accepted: boolean; reason?: "paused" | "accuracy" | "jump" | "still" } {
   if (r.resumedAt === null) return { record: r, accepted: false, reason: "paused" };
-  if (!(f.accuracy <= MAX_ACCURACY_M)) return { record: r, accepted: false, reason: "accuracy" };
+  if (!(f.accuracy >= 0 && f.accuracy <= MAX_ACCURACY_M && Math.abs(f.lat) <= 90 && Math.abs(f.lon) <= 180 && Number.isFinite(f.time))) return { record: r, accepted: false, reason: "accuracy" };
+  if (f.time < r.resumedAt) return { record: r, accepted: false, reason: "jump" };
   const seg = r.segments[r.segments.length - 1];
   const last = seg[seg.length - 1];
   let add = 0;
   if (last) {
+    const previousTime = r.lastValidAt ?? last.time;
+    const interval = f.time - previousTime;
+    if (interval <= 0) return { record: r, accepted: false, reason: "jump" };
+    if (interval > GPS_GAP_MS) {
+      const point = { lat: f.lat, lon: f.lon, time: f.time };
+      return { accepted: true, record: { ...r, segments: [...r.segments, [point]],
+        activeMs: r.activeMs + previousTime - r.resumedAt, resumedAt: f.time, lastValidAt: f.time } };
+    }
     add = haversineMeters({ lat: last.lat, lon: last.lon }, { lat: f.lat, lon: f.lon });
     const dt = (f.time - last.time) / 1000;
     if (dt > 0 && add / dt > MAX_SPEED_MS) return { record: r, accepted: false, reason: "jump" };
-    if (add < 3) return { record: r, accepted: false, reason: "still" };
+    // 이 이동 앞에 마지막 수신 지점을 끼워 넣는 경우, 그 지점 기준 속도도 대결 검증과 맞춘다
+    if (f.time - last.time > GPS_GAP_MS && previousTime > last.time && add / (interval / 1000) > MAX_SPEED_MS) return { record: r, accepted: false, reason: "jump" };
+    if (add < 3) {
+      // Keep evidence of a live stationary GPS fix without adding movement or rewards.
+      const segments = f.time - last.time >= GPS_GAP_MS / 2
+        ? [...r.segments.slice(0,-1), [...seg, ...(f.time-last.time>GPS_GAP_MS ? [{lat:last.lat,lon:last.lon,time:previousTime}] : []), {lat:last.lat,lon:last.lon,time:f.time}]]
+        : r.segments;
+      return { record: { ...r, segments, lastValidAt:f.time }, accepted:false, reason:"still" };
+    }
   }
-  const segments = r.segments.slice(0, -1).concat([[...seg, { lat: f.lat, lon: f.lon, time: f.time }]]);
-  return { record: { ...r, segments, distanceMeters: r.distanceMeters + add }, accepted: true };
+  const observed = last && f.time-last.time>GPS_GAP_MS && r.lastValidAt && r.lastValidAt>last.time
+    ? [...seg,{lat:last.lat,lon:last.lon,time:r.lastValidAt}] : seg;
+  const segments = r.segments.slice(0, -1).concat([[...observed, { lat: f.lat, lon: f.lon, time: f.time }]]);
+  return { record: { ...r, segments, distanceMeters: r.distanceMeters + add, lastValidAt: f.time }, accepted: true };
 }
 
 export function formatDuration(ms: number) {
