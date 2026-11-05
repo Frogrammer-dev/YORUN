@@ -62,6 +62,15 @@ export function boothRaceResult(raceId: string, seats: readonly BoothSeat[]): Bo
   };
 }
 
+/** 매칭 마감까지 남은 초. 남은 시간이 조금이라도 있으면 올림해 0은 정말 끝났을 때만 나온다 */
+export const countdownSeconds = (deadline: number, now: number) => Math.max(0, Math.ceil((deadline - now) / 1000));
+
+/** 새 서버 응답으로 마감 시각을 고친다. 지연된 응답 때문에 숫자가 거꾸로 올라가지 않게 앞당기기만 한다 */
+export const nextDeadline = (current: number | null, now: number, msLeft: number) => {
+  const reported = now + Math.max(0, msLeft);
+  return current === null ? reported : Math.min(current, reported);
+};
+
 /** 구간 도착 시각으로 현재 진행 구간 수(0~12)를 구한다 */
 export function raceProgress(splits: readonly number[], clock: number): number {
   const done = splits.filter((t) => t <= clock).length;

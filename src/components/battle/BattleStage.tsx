@@ -68,9 +68,9 @@ function CreatureArt({ f, pose, side, glow = 0 }: { f: SceneFighter; pose: Pose;
   const pts = deform(c, pose.moves).map((l) => l.map((p) => `${p[0].toFixed(4)},${p[1].toFixed(4)}`).join(" "));
   const flip = side === 0 ? 1 : -1;
   const at = (k: PartName): Pt => [c.parts[k].at[0] + (pose.moves[k]?.[0] ?? 0), c.parts[k].at[1] + (pose.moves[k]?.[1] ?? 0)];
-  const head = at("head");
-  // 눈은 머리에서 몸 쪽으로 조금 들어온 곳, 눈동자는 상대(+x) 쪽을 본다
-  const eye: Pt = [head[0] + (c.center[0] - head[0]) * 0.18, head[1] + (c.center[1] - head[1]) * 0.18];
+  // 눈은 몸 안쪽 자리에서 머리를 따라 움직이고, 눈동자는 상대(+x) 쪽을 본다
+  const eye: Pt = [c.eye[0] + (pose.moves.head?.[0] ?? 0), c.eye[1] + (pose.moves.head?.[1] ?? 0)];
+  const eyeR = c.eyeRadius, eyeGap = eyeR * 1.25;
   const air = Math.min(1, -Math.min(0, pose.dy) / 150);
   return (
     <g className={side === 0 ? "bt-blue" : "bt-red"} opacity={pose.opacity}>
@@ -79,21 +79,21 @@ function CreatureArt({ f, pose, side, glow = 0 }: { f: SceneFighter; pose: Pose;
         {glow > 0 && ["bt-halo", "bt-rim"].map((cls) => pts.map((p, i) => <polyline key={cls + i} points={p} className={cls} opacity={glow} vectorEffect="non-scaling-stroke" />))}
         {pts.map((p, i) => <polyline key={i} points={p} className="bt-line" vectorEffect="non-scaling-stroke" />)}
         {(Object.keys(c.parts) as PartName[]).map((k) => {
-          if (!c.parts[k].stub) return null;
-          // 튀어나온 곳이 없던 부위: 몸에서 막대를 뻗고 끝에 주먹·발을 단다
-          const p = at(k), [ax, ay] = c.parts[k].at, len = Math.hypot(ax - c.center[0], ay - c.center[1]) || 1;
-          const base: Pt = [ax - ((ax - c.center[0]) / len) * 0.16, ay - ((ay - c.center[1]) / len) * 0.16];
+          const part = c.parts[k];
+          if (!part.stub || !part.root) return null;
+          // 튀어나온 곳이 없던 부위: 윤곽선에서 짧은 팔다리를 뻗고 끝에 주먹·발을 단다
+          const p = at(k);
           return (
             <g key={k}>
-              <line x1={base[0]} y1={base[1]} x2={p[0]} y2={p[1]} className="bt-line" vectorEffect="non-scaling-stroke" />
-              {k !== "head" && <circle cx={p[0]} cy={p[1]} r={0.025} className="bt-fist" />}
+              <line x1={part.root[0]} y1={part.root[1]} x2={p[0]} y2={p[1]} className="bt-line" vectorEffect="non-scaling-stroke" />
+              <circle cx={p[0]} cy={p[1]} r={0.025} className="bt-fist" />
             </g>
           );
         })}
-        {[-0.045, 0.045].map((ex) => (
+        {[-eyeGap, eyeGap].map((ex) => (
           <g key={ex}>
-            <circle cx={eye[0] + ex} cy={eye[1]} r={0.035} className="bt-eye" vectorEffect="non-scaling-stroke" />
-            <circle cx={eye[0] + ex + 0.013} cy={eye[1] + 0.005} r={0.016} className="bt-pupil" />
+            <circle cx={eye[0] + ex} cy={eye[1]} r={eyeR} className="bt-eye" vectorEffect="non-scaling-stroke" />
+            <circle cx={eye[0] + ex + eyeR * 0.37} cy={eye[1] + eyeR * 0.14} r={eyeR * 0.46} className="bt-pupil" />
           </g>
         ))}
       </g>

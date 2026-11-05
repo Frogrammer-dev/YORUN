@@ -54,12 +54,17 @@ export function GET(req: Request) {
     const status = await db.rpc("booth_race_status", { p_race: race.data });
     if (status.error) throw mapDbError(status.error);
     const { closed, secondsLeft } = status.data as { closed: boolean; secondsLeft: number };
+    // 화면 카운트는 초를 올림한 값이 아니라 실제 마감 시각으로 계산한다
+    const closes = await db.from("booth_races").select("closes").eq("id", race.data).single();
+    if (closes.error) throw mapDbError(closes.error);
+    const msLeft = closed ? 0 : Math.max(0, Date.parse(closes.data.closes) - Date.now());
     const nameOf = await playerNames(db, entries.data.map((row) => row.owner_id));
     const seats = entries.data.map((row) => ({ lane: row.lane, name: nameOf(row.owner_id), stats: row.stats as DerbyStats, mine: row.owner_id === user.id, body: (row.stats as { body?: BodyPlan }).body }));
     return ok({
       race: race.data,
       closed,
       secondsLeft,
+      msLeft,
       players: seats.map(({ lane, name, mine }) => ({ lane, name, mine })),
       result: closed ? boothRaceResult(race.data, seats) : null,
     });

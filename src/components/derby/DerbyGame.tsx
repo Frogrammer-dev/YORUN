@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AuthForm } from "@/components/AuthForm";
 import { watchBattleDraft, type BattleDraft } from "@/lib/battle/battleDraft";
-import { boothRaceResult, boothStats, raceProgress, type BoothRaceReplay, type BoothStyle } from "@/lib/battle/boothRace";
+import { boothRaceResult, boothStats, countdownSeconds, nextDeadline, raceProgress, type BoothRaceReplay, type BoothStyle } from "@/lib/battle/boothRace";
 import { browserSupabase } from "@/lib/client/supabaseBrowser";
 import { CharacterFace, Gauge } from "./CharacterParts";
 import { bodyLabel, loadCharacters, type DerbyCharacter } from "./characters";
@@ -15,7 +15,7 @@ import "./derby.css";
 const StadiumMap = dynamic(() => import("./StadiumMap").then((module) => module.StadiumMap), { ssr: false, loading: () => <div className="derby-canvas derby-canvas-empty" role="status">경기장을 여는 중이에요.</div> });
 
 type Player = { lane: number; name: string; mine: boolean };
-type RoomState = { race: string; closed: boolean; secondsLeft: number; players: Player[]; result: BoothRaceReplay | null };
+type RoomState = { race: string; closed: boolean; secondsLeft: number; msLeft: number; players: Player[]; result: BoothRaceReplay | null };
 type Phase = "select" | "matching" | "arrival" | "loading" | "starting" | "race" | "result";
 
 const PLAY_SPEED = 16;
@@ -34,7 +34,7 @@ function practiceRoom(character: DerbyCharacter): RoomState {
   const race = `practice-${Date.now()}`;
   const style: BoothStyle = "style" in character.entry ? character.entry.style : "balance";
   const seat = { lane: 1, name: "나", stats: boothStats(style, Math.random), mine: true, body: character.body };
-  return { race, closed: true, secondsLeft: 0, players: [{ lane: 1, name: "나", mine: true }], result: boothRaceResult(race, [seat]) };
+  return { race, closed: true, secondsLeft: 0, msLeft: 0, players: [{ lane: 1, name: "나", mine: true }], result: boothRaceResult(race, [seat]) };
 }
 
 export function DerbyGame({ returnTo = "/derby" }: { returnTo?: string }) {
@@ -53,6 +53,8 @@ export function DerbyGame({ returnTo = "/derby" }: { returnTo?: string }) {
   const [count, setCount] = useState(3);
   const [clock, setClock] = useState(0);
   const [camera, setCamera] = useState<CameraMode>("director");
+  const [left, setLeft] = useState(10);
+  const deadline = useRef<number | null>(null);
 
   useEffect(() => watchBattleDraft(setDraft), []);
   useEffect(() => {
@@ -87,7 +89,10 @@ export function DerbyGame({ returnTo = "/derby" }: { returnTo?: string }) {
     setMessage("");
     try {
       const { race } = await request<{ race: string }>("/api/booth/race", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...character.entry, body: character.body }) });
-      setRoom(await request<RoomState>(`/api/booth/race?race=${race}`));
+      const entered = await request<RoomState>(`/api/booth/race?race=${race}`);
+      deadline.current = nextDeadline(null, Date.now(), entered.msLeft);
+      setLeft(countdownSeconds(deadline.current, Date.now()));
+      setRoom(entered);
       setPhase("matching");
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "매칭을 시작하지 못했어요.");
@@ -105,6 +110,7 @@ export function DerbyGame({ returnTo = "/derby" }: { returnTo?: string }) {
     setClock(0);
     setArrived(0);
     setCount(3);
+    deadline.current = null;
     setCamera("director");
     setMessage("");
     setPhase("select");
@@ -121,11 +127,24 @@ export function DerbyGame({ returnTo = "/derby" }: { returnTo?: string }) {
       setPhase("arrival");
       return;
     }
-    const poll = setInterval(() => {
-      void request<RoomState>(`/api/booth/race?race=${raceId}`).then(setRoom).catch((error: Error) => setMessage(error.message));
-    }, 2000);
-    const tick = setInterval(() => setRoom((current) => (current && current.secondsLeft > 0 ? { ...current, secondsLeft: current.secondsLeft - 1 } : current)), 1000);
-    return () => { clearInterval(poll); clearInterval(tick); };
+    // 숫자는 마감 시각으로 자주 계산하고, 서버 확인은 2초마다, 시간이 다 되면 마감될 때까지 자주 한다
+    let lastPoll = Date.now(), waiting = false;
+    const tick = setInterval(() => {
+      const now = Date.now();
+      const seconds = countdownSeconds(deadline.current ?? now, now);
+      setLeft(seconds);
+      if (waiting || now - lastPoll < (seconds > 0 ? 2000 : 500)) return;
+      lastPoll = now;
+      waiting = true;
+      void request<RoomState>(`/api/booth/race?race=${raceId}`)
+        .then((next) => {
+          deadline.current = nextDeadline(deadline.current, Date.now(), next.msLeft);
+          setRoom(next);
+        })
+        .catch((error: Error) => setMessage(error.message))
+        .finally(() => { waiting = false; });
+    }, 200);
+    return () => clearInterval(tick);
   }, [phase, raceId, closed]);
 
   // 봇이 차례대로 입장한다
@@ -259,7 +278,7 @@ export function DerbyGame({ returnTo = "/derby" }: { returnTo?: string }) {
             <p className="derby-status" role="status">봇이 빈 자리에 들어오고 있어요</p>
           ) : (
             <>
-              <p className="derby-count" role="timer" aria-label={`${room?.secondsLeft ?? 0}초 남음`}>{room?.secondsLeft ?? 0}</p>
+              <p className="derby-count" role="timer" aria-label={`${left}초 남음`}>{left}</p>
               <p className="derby-status" role="status">다른 러너를 찾고 있어요</p>
             </>
           )}

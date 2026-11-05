@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { BOOTH_STYLES, boothRaceResult, boothStats, raceProgress, type BoothSeat, type BoothStyle } from "@/lib/battle/boothRace";
+import { BOOTH_STYLES, boothRaceResult, boothStats, countdownSeconds, nextDeadline, raceProgress, type BoothSeat, type BoothStyle } from "@/lib/battle/boothRace";
 import { seededRandom } from "@/lib/battle/seed";
 
 const STYLES = Object.keys(BOOTH_STYLES) as BoothStyle[];
@@ -44,5 +44,22 @@ describe("raceProgress", () => {
     expect(raceProgress(splits, 0)).toBe(0);
     expect(raceProgress(splits, 15)).toBeCloseTo(1.5);
     expect(raceProgress(splits, 999)).toBe(12);
+  });
+});
+
+describe("매칭 카운트", () => {
+  it("남은 시간을 올림해 보여 주고, 끝나면 0에서 멈춘다", () => {
+    expect(countdownSeconds(10_000, 0)).toBe(10);
+    expect(countdownSeconds(10_000, 1)).toBe(10);
+    expect(countdownSeconds(10_000, 1000)).toBe(9);
+    expect(countdownSeconds(10_000, 9999)).toBe(1);
+    expect(countdownSeconds(10_000, 10_000)).toBe(0);
+    expect(countdownSeconds(10_000, 20_000)).toBe(0);
+  });
+  it("늦게 온 응답이 마감 시각을 뒤로 미루지 않고, 더 이른 마감은 받아들인다", () => {
+    expect(nextDeadline(null, 1000, 10_000)).toBe(11_000);
+    expect(nextDeadline(11_000, 3000, 9000)).toBe(11_000);
+    expect(nextDeadline(11_000, 3000, 2000)).toBe(5000);
+    expect(nextDeadline(11_000, 3000, -5)).toBe(3000);
   });
 });

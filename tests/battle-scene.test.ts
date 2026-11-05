@@ -1,7 +1,9 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it, vi } from "vitest";
 vi.mock("./battle.css", () => ({}));
 import { ENTER_MS, HIT_MS, REVEAL_MS, idleView, introView, outroView, turnView, type SceneFighter } from "@/components/battle/scene";
 import { deform, josa, makeCreature, toRenderLine } from "@/lib/battle/creature";
+import { SHAPES, groupLines, type ShapeGroup } from "@/lib/route/shapes";
 import type { TurnLog } from "@/lib/battle/turnBattle";
 import { turnFx } from "@/lib/battle/turnFx";
 
@@ -96,5 +98,44 @@ describe("대결 장면", () => {
   it("기다릴 때는 체력을 유지하고 다음 선택을 묻는다", () => {
     expect(idleView(fs, 500, [40, 70]).hp).toEqual([40, 70]);
     expect(idleView(fs, 500, [40, 70]).say).toBe("무엇을 낼까?");
+  });
+});
+
+describe("부위 판별 기준", () => {
+  // 사전 기준: 눈은 몸 안, 짧은 팔다리는 윤곽선에서 시작, 발은 몸 아래쪽, 머리에는 막대가 없다
+  const inside = ([x, y]: number[], polygon: number[][]) => {
+    let hit = false;
+    for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+      if (polygon[i][1] > y !== polygon[j][1] > y && x < ((polygon[j][0] - polygon[i][0]) * (y - polygon[i][1])) / (polygon[j][1] - polygon[i][1]) + polygon[i][0]) hit = !hit;
+    }
+    return hit;
+  };
+  const near = (p: number[], line: number[][]) => Math.min(...line.map((q) => Math.hypot(p[0] - q[0], p[1] - q[1])));
+  const outlines = JSON.parse(readFileSync("tests/fixtures/booth-outlines-image.json", "utf8")) as { prompt: string; model: string; group: ShapeGroup }[];
+  const cases: [string, readonly (readonly number[])[]][] = [
+    ...SHAPES.map((s): [string, readonly (readonly number[])[]] => [s.name, s.points]),
+    ...outlines.map((o): [string, readonly (readonly number[])[]] => [`${o.model} ${o.prompt}`, groupLines(o.group)[0]]),
+  ];
+  it.each(cases)("%s", (_name, line) => {
+    const c = makeCreature([toRenderLine(line)]);
+    const body = c.lines[0];
+    expect(inside(c.eye, body)).toBe(true);
+    expect(near(c.eye, body)).toBeGreaterThanOrEqual(c.eyeRadius * 0.9);
+    expect(c.parts.head.stub).toBe(false);
+    expect(near(c.parts.head.at, body)).toBeLessThan(0.02);
+    for (const name of ["handL", "handR", "footL", "footR"] as const) {
+      const part = c.parts[name];
+      if (part.stub) expect(near(part.root!, body)).toBeLessThan(0.02);
+      else expect(near(part.at, body)).toBeLessThan(0.02);
+    }
+    expect(c.parts.footL.at[1]).toBeGreaterThan(c.center[1]);
+    expect(c.parts.footR.at[1]).toBeGreaterThan(c.center[1]);
+    expect(c.parts.head.at[0]).toBeGreaterThanOrEqual(c.center[0] - 0.021);
+  });
+  it("강아지는 머리를 위쪽 앞에서 찾고 꼬리와 헷갈리지 않는다", () => {
+    const dog = SHAPES.find((s) => s.id === "dog")!;
+    const c = makeCreature([toRenderLine(dog.points)]);
+    expect(c.parts.head.at[0]).toBeGreaterThan(c.center[0]);
+    expect(c.parts.head.at[1]).toBeLessThan(c.center[1]);
   });
 });
