@@ -1,192 +1,164 @@
 // 선수 그림 묶음. 한 장의 캔버스에 달리기 프레임을 나란히 그리고, 3D에서는 프레임만 넘긴다.
+// 눈과 팔다리는 1대1 대결과 같은 부위 판별(makeCreature)과 몸 비틀기(deform)로 만든다.
 // 캔버스는 CSS 토큰을 읽지 못하므로 색을 이곳에 둔다.
 
+import { gait } from "@/components/battle/scene";
 import type { BodyPlan } from "@/lib/battle/bodyPlan";
+import { deform, makeCreature, toRenderLine, type Creature, type PartName } from "@/lib/battle/creature";
+import { SHAPE_BY_ID, type ShapeId } from "@/lib/route/shapes";
 
 export const FRAME_COUNT = 6;
-export const FRAME_SIZE = 128;
+export const FRAME_SIZE = 160;
+/** 팔다리가 흔들려도 옆 프레임을 넘지 않도록 그림을 칸 안쪽에 둔다 */
+const INSET = 0.12, SCALE = 0.76;
+/** 그림 발끝 아래에 남는 칸의 비율. 3D에서 이만큼 내려 땅에 닿게 한다 */
+export const FOOT_GAP = 0.158;
 const INK = "#0b1f36";
 const WHITE = "#ffffff";
-const SWEAT = "#9fd6ff";
+const GOLD = "#f6c042";
 
 type Ctx = CanvasRenderingContext2D;
+type Pt = [number, number];
+type Line = readonly (readonly number[])[] | null;
 
-function eyes(ctx: Ctx, x: number, y: number, frame: number) {
-  // 힘든 표정: 위로 치켜뜬 왕눈이와 내려온 눈썹
-  for (const dx of [-8, 8]) {
+/** 코스 그림이 없는 선수(봇, 코스를 받지 않는 다른 참가자, 기본 유형)가 쓰는 모양 */
+const STAND_INS: Record<BodyPlan, ShapeId[]> = {
+  biped: ["star", "rabbit", "bird", "duck"],
+  quadruped: ["dog", "cat", "elephant", "giraffe"],
+  roller: ["apple", "heart", "turtle", "fish"],
+};
+const GAIT_AMP: Record<BodyPlan, number> = { biped: 1.8, quadruped: 2.2, roller: 0.8 };
+
+/** line은 지도 좌표(y가 아래). 1대1과 똑같이 y를 뒤집어 생명체로 만든다 */
+export function runnerCreature(body: BodyPlan, lane: number, line: Line): Creature {
+  const list = STAND_INS[body];
+  const source = line?.length ? line.map(([x, y]) => [x, -y]) : SHAPE_BY_ID[list[(lane - 1) % list.length]].points;
+  return makeCreature([toRenderLine(source)]);
+}
+
+/** 한 프레임의 몸 선과 부위 위치. 값은 칸 크기를 1로 본 좌표다 */
+export function runnerPose(creature: Creature, body: BodyPlan, frame: number) {
+  const moves = gait((frame / FRAME_COUNT) * Math.PI * 2 * 90, GAIT_AMP[body]);
+  // 구르는 몸은 칸 가운데를 축으로 돌도록 그림 가운데를 맞춘다
+  const ys = creature.lines.flat().map((p) => p[1]);
+  const shiftY = body === "roller" ? 0.5 - (Math.min(...ys) + Math.max(...ys)) / 2 : 0;
+  const place = ([x, y]: readonly number[]): Pt => [INSET + x * SCALE, INSET + (y + shiftY) * SCALE];
+  const moved = (k: PartName): Pt => {
+    const at = creature.parts[k].at, d = moves[k];
+    return place([at[0] + (d?.[0] ?? 0), at[1] + (d?.[1] ?? 0)]);
+  };
+  const stubs = (Object.keys(creature.parts) as PartName[]).flatMap((k) => {
+    const part = creature.parts[k];
+    return part.stub && part.root ? [{ from: place(part.root), to: moved(k) }] : [];
+  });
+  const eye = place([creature.eye[0] + (moves.head?.[0] ?? 0), creature.eye[1] + (moves.head?.[1] ?? 0)]);
+  // 중계 화면에서는 대결 무대보다 작게 보여 눈을 조금 키운다
+  const eyeR = Math.max(0.03, Math.min(0.046, creature.eyeRadius * 1.4));
+  return { lines: deform(creature, moves).map((l) => l.map(place)), stubs, eye, eyeR };
+}
+
+/** 땅에서 그림 꼭대기까지의 높이(칸 크기 대비). 번호표를 머리 바로 위에 두는 데 쓴다. 구르는 몸은 돌아도 닿지 않게 칸 높이로 본다 */
+export function runnerHeight(creature: Creature, body: BodyPlan) {
+  if (body === "roller") return 0.82;
+  const top = Math.min(...creature.lines.flat().map((p) => p[1]));
+  return 1 - FOOT_GAP - (INSET + top * SCALE);
+}
+
+function drawPose(ctx: Ctx, pose: ReturnType<typeof runnerPose>, color: string) {
+  const S = FRAME_SIZE;
+  ctx.lineJoin = "round";
+  ctx.lineCap = "round";
+  for (const { from, to } of pose.stubs) {
+    for (const [width, stroke] of [[11, INK], [5, color]] as const) {
+      ctx.strokeStyle = stroke;
+      ctx.lineWidth = width;
+      ctx.beginPath();
+      ctx.moveTo(from[0] * S, from[1] * S);
+      ctx.lineTo(to[0] * S, to[1] * S);
+      ctx.stroke();
+    }
+    ctx.fillStyle = color;
+    ctx.strokeStyle = INK;
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.arc(to[0] * S, to[1] * S, 6.5, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+  }
+  ctx.fillStyle = color;
+  ctx.strokeStyle = INK;
+  ctx.lineWidth = 5;
+  for (const line of pose.lines) {
+    ctx.beginPath();
+    line.forEach(([x, y], i) => (i ? ctx.lineTo(x * S, y * S) : ctx.moveTo(x * S, y * S)));
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+  }
+  // 1대1과 같은 두 눈: 눈동자는 달리는 쪽(+x)을 본다
+  const r = pose.eyeR * SCALE * S, gap = r * 1.25;
+  for (const dx of [-gap, gap]) {
+    const x = pose.eye[0] * S + dx, y = pose.eye[1] * S;
     ctx.fillStyle = WHITE;
     ctx.strokeStyle = INK;
     ctx.lineWidth = 2.5;
     ctx.beginPath();
-    ctx.arc(x + dx, y, 7, 0, Math.PI * 2);
+    ctx.arc(x, y, r, 0, Math.PI * 2);
     ctx.fill();
     ctx.stroke();
     ctx.fillStyle = INK;
     ctx.beginPath();
-    ctx.arc(x + dx + 2 + Math.sin(frame) * 1, y - 1, 3, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    ctx.moveTo(x + dx - 7, y - 9 - (dx > 0 ? 0 : 2));
-    ctx.lineTo(x + dx + 6, y - 9 + (dx > 0 ? -2 : 0));
-    ctx.stroke();
-  }
-  // 앙다문 입
-  ctx.lineWidth = 3;
-  ctx.beginPath();
-  ctx.moveTo(x - 5, y + 13);
-  ctx.quadraticCurveTo(x + 2, y + 9 + (frame % 2) * 3, x + 8, y + 13);
-  ctx.stroke();
-}
-
-function sweat(ctx: Ctx, x: number, y: number, frame: number) {
-  ctx.fillStyle = SWEAT;
-  const drift = frame * 3;
-  ctx.beginPath();
-  ctx.arc(x - 18 - drift, y - 8 + drift / 2, 3.4, 0, Math.PI * 2);
-  ctx.fill();
-  if (frame % 2) {
-    ctx.beginPath();
-    ctx.arc(x - 25 - drift, y + 4, 2.4, 0, Math.PI * 2);
+    ctx.arc(x + r * 0.37, y + r * 0.14, r * 0.46, 0, Math.PI * 2);
     ctx.fill();
   }
 }
 
-function leg(ctx: Ctx, x: number, y: number, swing: number, length: number, color: string) {
-  const footX = x + Math.sin(swing) * length * 0.7;
-  const footY = y + length - Math.max(0, Math.cos(swing)) * length * 0.35;
-  ctx.strokeStyle = color;
-  ctx.lineWidth = 8;
-  ctx.lineCap = "round";
-  ctx.beginPath();
-  ctx.moveTo(x, y);
-  ctx.lineTo(footX, footY);
-  ctx.stroke();
-  // 우스꽝스럽게 큰 신발
-  ctx.fillStyle = INK;
-  ctx.beginPath();
-  ctx.ellipse(footX + 4, footY + 2, 9, 5, 0, 0, Math.PI * 2);
-  ctx.fill();
-}
-
-/** 내 코스 그림을 주어진 상자에 맞춰 칠한다 */
-function silhouette(ctx: Ctx, line: readonly (readonly number[])[], box: [number, number, number, number], color: string) {
-  const xs = line.map((p) => p[0]), ys = line.map((p) => p[1]);
-  const minX = Math.min(...xs), minY = Math.min(...ys);
-  const k = Math.min(box[2] / (Math.max(...xs) - minX || 1), box[3] / (Math.max(...ys) - minY || 1));
-  ctx.fillStyle = color;
-  ctx.strokeStyle = INK;
+/** 머리 위에 띄우는 번호표. 앱의 네이비 판에 선수 색 숫자를 얹고, 내 번호표만 금색으로 채운다. 몸과 따로 있어 함께 돌지 않는다 */
+export function drawNumberTag(lane: number, mine: boolean, color: string): HTMLCanvasElement {
+  const canvas = document.createElement("canvas");
+  canvas.width = 128;
+  canvas.height = 128;
+  const ctx = canvas.getContext("2d")!;
+  const left = 22, right = 106, top = 18, bottom = 82, r = 16, mid = 64;
+  ctx.fillStyle = mine ? GOLD : INK;
+  ctx.strokeStyle = mine ? INK : color;
   ctx.lineWidth = 4;
   ctx.lineJoin = "round";
   ctx.beginPath();
-  line.forEach(([x, y], i) => {
-    const px = box[0] + (x - minX) * k, py = box[1] + (y - minY) * k;
-    if (i) ctx.lineTo(px, py);
-    else ctx.moveTo(px, py);
-  });
+  ctx.moveTo(left + r, top);
+  ctx.arcTo(right, top, right, bottom, r);
+  ctx.arcTo(right, bottom, left, bottom, r);
+  ctx.lineTo(mid + 10, bottom);
+  ctx.lineTo(mid, bottom + 16);
+  ctx.lineTo(mid - 10, bottom);
+  ctx.arcTo(left, bottom, left, top, r);
+  ctx.arcTo(left, top, right, top, r);
   ctx.closePath();
   ctx.fill();
   ctx.stroke();
-}
-
-function drawBiped(ctx: Ctx, frame: number, color: string, line: Line) {
-  const swing = (frame / FRAME_COUNT) * Math.PI * 2;
-  leg(ctx, 54, 84, swing, 26, color);
-  leg(ctx, 74, 84, swing + Math.PI, 26, color);
-  if (line) silhouette(ctx, line, [30, 18, 68, 72], color);
-  else {
-    ctx.fillStyle = color;
-    ctx.strokeStyle = INK;
-    ctx.lineWidth = 4;
-    ctx.beginPath();
-    ctx.ellipse(64, 54, 28, 36, 0.12, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.stroke();
-  }
-  eyes(ctx, 68, 42, frame);
-  sweat(ctx, 40, 32, frame);
-}
-
-function drawQuadruped(ctx: Ctx, frame: number, color: string, line: Line) {
-  // 앞다리 둘과 뒷다리 둘이 번갈아 뻗는 전력 질주
-  const swing = (frame / FRAME_COUNT) * Math.PI * 2;
-  leg(ctx, 34, 76, swing + 0.5, 22, color);
-  leg(ctx, 44, 76, swing + 1.1, 22, color);
-  leg(ctx, 84, 76, swing + Math.PI, 22, color);
-  leg(ctx, 94, 76, swing + Math.PI + 0.6, 22, color);
-  if (line) silhouette(ctx, line, [18, 26, 92, 54], color);
-  else {
-    ctx.fillStyle = color;
-    ctx.strokeStyle = INK;
-    ctx.lineWidth = 4;
-    ctx.beginPath();
-    ctx.ellipse(58, 62, 38, 22, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.arc(96, 46, 19, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.stroke();
-    // 뒤로 휘날리는 꼬리
-    ctx.lineWidth = 7;
-    ctx.strokeStyle = color;
-    ctx.beginPath();
-    ctx.moveTo(22, 56);
-    ctx.quadraticCurveTo(8, 42 + (frame % 3) * 5, 6, 30);
-    ctx.stroke();
-  }
-  eyes(ctx, 98, 42, frame);
-  sweat(ctx, 66, 28, frame);
-}
-
-function drawRoller(ctx: Ctx, frame: number, color: string, line: Line) {
-  if (line) silhouette(ctx, line, [22, 22, 84, 84], color);
-  else {
-    ctx.fillStyle = color;
-    ctx.strokeStyle = INK;
-    ctx.lineWidth = 4;
-    ctx.beginPath();
-    ctx.arc(64, 64, 40, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.stroke();
-  }
-  eyes(ctx, 64, 58, frame);
-}
-
-type Line = readonly (readonly number[])[] | null;
-
-/** 머리 위에 띄우는 작은 번호표. 몸과 따로 있어 구르는 캐릭터와 함께 돌지 않는다 */
-export function drawNumberTag(lane: number, mine: boolean): HTMLCanvasElement {
-  const canvas = document.createElement("canvas");
-  canvas.width = 64;
-  canvas.height = 64;
-  const ctx = canvas.getContext("2d")!;
-  ctx.fillStyle = mine ? "#ffb020" : WHITE;
-  ctx.strokeStyle = INK;
-  ctx.lineWidth = 4;
-  ctx.beginPath();
-  ctx.arc(32, 32, 26, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.stroke();
-  ctx.fillStyle = INK;
-  ctx.font = "bold 34px sans-serif";
+  const face = getComputedStyle(document.body).getPropertyValue("--font-num").trim() || "sans-serif";
+  ctx.fillStyle = mine ? INK : color;
+  ctx.font = `700 44px ${face}`;
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.fillText(String(lane), 32, 34);
+  ctx.fillText(String(lane), mid, (top + bottom) / 2 + 2);
   return canvas;
 }
 
 /** 프레임을 가로로 이어 그린 캔버스를 돌려준다. 그림은 오른쪽을 본다 */
-export function drawRunnerFrames(body: BodyPlan, color: string, line: Line): HTMLCanvasElement {
+export function drawRunnerFrames(body: BodyPlan, color: string, line: Line, lane: number): HTMLCanvasElement {
   const canvas = document.createElement("canvas");
   canvas.width = FRAME_SIZE * FRAME_COUNT;
   canvas.height = FRAME_SIZE;
   const ctx = canvas.getContext("2d")!;
-  const draw = body === "quadruped" ? drawQuadruped : body === "roller" ? drawRoller : drawBiped;
+  const creature = runnerCreature(body, lane, line);
   for (let frame = 0; frame < FRAME_COUNT; frame++) {
     ctx.save();
     ctx.translate(frame * FRAME_SIZE, 0);
-    draw(ctx, frame, color, line);
+    ctx.beginPath();
+    ctx.rect(0, 0, FRAME_SIZE, FRAME_SIZE);
+    ctx.clip();
+    drawPose(ctx, runnerPose(creature, body, frame), color);
     ctx.restore();
   }
   return canvas;

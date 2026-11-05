@@ -53,7 +53,7 @@ export interface Pose {
 }
 
 /** 달리는 다리·흔드는 팔 (상대 쪽이 +x인 자기 좌표) */
-function gait(t: number, amp: number): Partial<Record<PartName, Pt>> {
+export function gait(t: number, amp: number): Partial<Record<PartName, Pt>> {
   const s = Math.sin(t / 90), c = Math.cos(t / 90);
   return {
     footL: [s * 0.07 * amp, -Math.max(0, s) * 0.06 * amp],

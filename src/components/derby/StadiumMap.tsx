@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import type { BodyPlan } from "@/lib/battle/bodyPlan";
 import { TRACK, outwardAt, trackPoint } from "@/lib/battle/stadiumTrack";
-import { FRAME_COUNT, bodyMotion, drawNumberTag, drawRunnerFrames } from "./runnerArt";
+import { FOOT_GAP, FRAME_COUNT, bodyMotion, drawNumberTag, drawRunnerFrames, runnerCreature, runnerHeight } from "./runnerArt";
 
 export type StadiumRunner = { lane: number; progress: number; mine: boolean; body: BodyPlan; line?: readonly (readonly number[])[] | null };
 export type CameraMode = "director" | "mine";
@@ -177,7 +177,7 @@ export function StadiumMap({ runners, camera: cameraMode }: { runners: StadiumRu
     const shadowShape = new THREE.CircleGeometry(1, 20);
     const shadowMaterial = new THREE.MeshBasicMaterial({ color: PALETTE.ink, transparent: true, opacity: 0.28, depthWrite: false });
     disposables.push(paper, shadowShape, shadowMaterial);
-    type Runner3D = { sheet: THREE.Mesh; tag: THREE.Sprite; shadow: THREE.Mesh; texture: THREE.Texture; seed: number };
+    type Runner3D = { sheet: THREE.Mesh; tag: THREE.Sprite; shadow: THREE.Mesh; texture: THREE.Texture; seed: number; height: number };
     const sprites = new Map<number, Runner3D>();
     function canvasTexture(canvas: HTMLCanvasElement) {
       const texture = new THREE.CanvasTexture(canvas);
@@ -187,10 +187,10 @@ export function StadiumMap({ runners, camera: cameraMode }: { runners: StadiumRu
     }
     function makeRunner(runner: StadiumRunner) {
       const color = RUNNER_COLORS[(runner.lane - 1) % RUNNER_COLORS.length];
-      const texture = canvasTexture(drawRunnerFrames(runner.body, color, runner.line ?? null));
+      const texture = canvasTexture(drawRunnerFrames(runner.body, color, runner.line ?? null, runner.lane));
       texture.repeat.set(1 / FRAME_COUNT, 1);
       const sheetMaterial = new THREE.MeshBasicMaterial({ map: texture, transparent: true, alphaTest: 0.5, side: THREE.DoubleSide });
-      const tagMaterial = new THREE.SpriteMaterial({ map: canvasTexture(drawNumberTag(runner.lane, runner.mine)), depthTest: false });
+      const tagMaterial = new THREE.SpriteMaterial({ map: canvasTexture(drawNumberTag(runner.lane, runner.mine, color)), depthTest: false });
       disposables.push(sheetMaterial, tagMaterial);
       const sheet = new THREE.Mesh(paper, sheetMaterial);
       sheet.rotation.order = "YXZ";
@@ -198,7 +198,7 @@ export function StadiumMap({ runners, camera: cameraMode }: { runners: StadiumRu
       const shadow = new THREE.Mesh(shadowShape, shadowMaterial);
       shadow.rotation.x = -Math.PI / 2;
       scene.add(sheet, tag, shadow);
-      const made = { sheet, tag, shadow, texture, seed: runner.lane };
+      const made = { sheet, tag, shadow, texture, seed: runner.lane, height: runnerHeight(runnerCreature(runner.body, runner.lane, runner.line ?? null), runner.body) };
       sprites.set(runner.lane, made);
       return made;
     }
@@ -243,16 +243,16 @@ export function StadiumMap({ runners, camera: cameraMode }: { runners: StadiumRu
           ? bodyMotion(runner.body, now, runner.lane, runner.progress * 100)
           // 완주하면 제자리에서 기뻐 뛴다
           : { rise: runner.progress >= SECTIONS && !reduced.matches ? Math.abs(Math.sin(now / 160 + runner.lane)) * 1.4 : 0, tilt: 0, squashX: 1, squashY: 1 };
-        // 구르는 몸은 그림 칸 안쪽에 있어 발이 없으니 조금 내려 땅에 닿게 한다
-        sheet.position.set(point.x, size / 2 + pose.rise - (runner.body === "roller" ? size * 0.16 : 0), point.z);
+        // 그림 칸 아래의 빈 곳만큼 내려 발이 땅에 닿게 한다
+        sheet.position.set(point.x, size / 2 + pose.rise - size * FOOT_GAP, point.z);
         sheet.scale.set(size * pose.squashX, size * pose.squashY, 1);
         // 종이를 달리는 방향으로 세운다. 옆에서는 넓고 앞뒤에서는 얇게 보이며, 바람에 살짝 펄럭인다
         const heading = -Math.atan2(ahead.z - point.z, ahead.x - point.x);
         sheet.rotation.y = heading + (animate ? Math.sin(now / 130 + made.seed) * 0.14 : 0);
         sheet.rotation.z = pose.tilt;
         made.texture.offset.x = (animate ? Math.floor(now / 70 + runner.lane) % FRAME_COUNT : 0) / FRAME_COUNT;
-        made.tag.position.set(point.x, size + pose.rise + 1, point.z);
-        made.tag.scale.setScalar(runner.mine ? 1.9 : 1.5);
+        made.tag.position.set(point.x, size * made.height + pose.rise + 1.4, point.z);
+        made.tag.scale.setScalar(runner.mine ? 3.4 : 2.7);
         made.shadow.position.set(point.x, 0.14, point.z);
         made.shadow.scale.setScalar(size * 0.34);
         const sprite = sheet;
