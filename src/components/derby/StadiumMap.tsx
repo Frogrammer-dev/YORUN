@@ -5,8 +5,8 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import type { BodyPlan } from "@/lib/battle/bodyPlan";
-import { TRACK, trackPoint } from "@/lib/battle/stadiumTrack";
-import { FRAME_COUNT, bodyMotion, drawRunnerFrames } from "./runnerArt";
+import { TRACK, outwardAt, trackPoint } from "@/lib/battle/stadiumTrack";
+import { FRAME_COUNT, bodyMotion, drawNumberTag, drawRunnerFrames } from "./runnerArt";
 
 export type StadiumRunner = { lane: number; progress: number; mine: boolean; body: BodyPlan; line?: readonly (readonly number[])[] | null };
 export type CameraMode = "director" | "mine";
@@ -15,18 +15,23 @@ const PALETTE = {
   sky: "#0b1f36", ground: "#0f2a47", trackSurface: "#0a72d6", infield: "#2f6f58", pitch: "#3a8268", line: "#e5f2ff",
   seatA: "#1b3d61", seatB: "#2a4664", roof: "#a9bdd3", ring: "#ffffff", ink: "#0b1f36",
 };
+const CROWD_SHIRTS = ["#ffb020", "#5cb4ff", "#ff6b6b", "#e879f9", "#34d399", "#f4f5f7", "#fb923c", "#a5b4fc", "#1f6fd1", "#fde68a"];
+const CROWD_SKIN = ["#f6d1b1", "#e8b98f", "#c98f64", "#8d5a3b"];
 const RUNNER_COLORS = ["#ffb020", "#5cb4ff", "#ff6b6b", "#e879f9", "#34d399", "#fb923c", "#a5b4fc", "#f4f5f7"];
 const SECTIONS = 12;
 const LAPS = 3;
 
 const lanePoint = (lane: number, progress: number) => trackPoint((progress / SECTIONS) * LAPS, TRACK.radius + (lane - 0.5) * TRACK.laneWidth);
 
-/** 경기 진행률에 따라 카메라를 고른다. 시작은 낮게, 중간은 선두와 내 선수를 번갈아, 끝은 결승선 */
-export function directorShot(fraction: number): "start" | "leader" | "mine" | "wide" | "finish" {
-  if (fraction < 0.08) return "start";
-  if (fraction > 0.9) return "finish";
-  const beat = Math.floor((fraction - 0.08) / 0.1) % 4;
-  return beat === 0 ? "leader" : beat === 1 ? "mine" : beat === 2 ? "wide" : "leader";
+/**
+ * 선두의 진행 구간(0~12)으로 카메라를 고른다. 평균이 아니라 선두를 봐서, 결승 카메라가 선수보다 먼저 가 있지 않게 한다.
+ * 선수 안쪽(관중이 배경)과 관중석 쪽(관중 너머로 선수)을 번갈아 쓴다.
+ */
+export function directorShot(leaderProgress: number): "start" | "leader" | "mine" | "wide" | "stands" | "finish" {
+  if (leaderProgress < 0.7) return "start";
+  if (leaderProgress >= 11.7) return "finish";
+  const order = ["leader", "stands", "mine", "wide", "stands", "leader", "mine"] as const;
+  return order[Math.floor((leaderProgress - 0.7) / 1.2) % order.length];
 }
 
 export function StadiumMap({ runners, camera: cameraMode }: { runners: StadiumRunner[]; camera: CameraMode }) {
@@ -129,19 +134,73 @@ export function StadiumMap({ runners, camera: cameraMode }: { runners: StadiumRu
     }
     scene.add(stand);
 
+    // 관중: 네 무리로 나눠 무리마다 들썩이게 한다. 사람마다 움직이면 휴대폰에서 무겁다
+    const crowdBody = new THREE.BoxGeometry(0.9, 1.2, 0.5);
+    const crowdHead = new THREE.IcosahedronGeometry(0.34, 0);
+    disposables.push(crowdBody, crowdHead);
+    const crowdMaterial = new THREE.MeshLambertMaterial({ color: "#ffffff" });
+    disposables.push(crowdMaterial);
+    const seatsOfCrowd: { x: number; y: number; z: number }[][] = [[], [], [], []];
+    // 값이 늘 같아 다시 그려도 관중이 바뀌지 않는다
+    let pick = 12345;
+    const next = () => (pick = (pick * 1103515245 + 12345) % 2147483648) / 2147483648;
+    for (let tier = 0; tier < 9; tier++) {
+      for (let spot = 0; spot < 150 + tier * 12; spot++) {
+        if (next() < 0.14) continue; // 빈자리
+        const p = trackPoint(spot / (150 + tier * 12), 52 + tier * 2.5);
+        seatsOfCrowd[Math.floor(next() * 4)].push({ x: p.x, y: 2.2 + tier * 1.3, z: p.z });
+      }
+    }
+    const crowds = seatsOfCrowd.map((people) => {
+      const group = new THREE.Group();
+      const bodies = new THREE.InstancedMesh(crowdBody, crowdMaterial, people.length);
+      const heads = new THREE.InstancedMesh(crowdHead, crowdMaterial, people.length);
+      people.forEach((person, i) => {
+        place3.rotation.set(0, Math.atan2(person.x, person.z), 0);
+        place3.scale.set(1, 1, 1);
+        place3.position.set(person.x, person.y, person.z);
+        place3.updateMatrix();
+        bodies.setMatrixAt(i, place3.matrix);
+        bodies.setColorAt(i, tint.set(CROWD_SHIRTS[Math.floor(next() * CROWD_SHIRTS.length)]));
+        place3.position.set(person.x, person.y + 0.92, person.z);
+        place3.updateMatrix();
+        heads.setMatrixAt(i, place3.matrix);
+        heads.setColorAt(i, tint.set(CROWD_SKIN[Math.floor(next() * CROWD_SKIN.length)]));
+      });
+      group.add(bodies, heads);
+      scene.add(group);
+      return { group, bodies, heads };
+    });
+
     const textures: THREE.Texture[] = [];
-    const sprites = new Map<number, THREE.Sprite>();
+    const paper = new THREE.PlaneGeometry(1, 1);
+    const shadowShape = new THREE.CircleGeometry(1, 20);
+    const shadowMaterial = new THREE.MeshBasicMaterial({ color: PALETTE.ink, transparent: true, opacity: 0.28, depthWrite: false });
+    disposables.push(paper, shadowShape, shadowMaterial);
+    type Runner3D = { sheet: THREE.Mesh; tag: THREE.Sprite; shadow: THREE.Mesh; texture: THREE.Texture; seed: number };
+    const sprites = new Map<number, Runner3D>();
+    function canvasTexture(canvas: HTMLCanvasElement) {
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.colorSpace = THREE.SRGBColorSpace;
+      textures.push(texture);
+      return texture;
+    }
     function makeRunner(runner: StadiumRunner) {
       const color = RUNNER_COLORS[(runner.lane - 1) % RUNNER_COLORS.length];
-      const texture = new THREE.CanvasTexture(drawRunnerFrames(runner.body, color, runner.lane, runner.mine, runner.line ?? null));
+      const texture = canvasTexture(drawRunnerFrames(runner.body, color, runner.line ?? null));
       texture.repeat.set(1 / FRAME_COUNT, 1);
-      textures.push(texture);
-      const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
-      disposables.push(spriteMaterial);
-      const sprite = new THREE.Sprite(spriteMaterial);
-      scene.add(sprite);
-      sprites.set(runner.lane, sprite);
-      return sprite;
+      const sheetMaterial = new THREE.MeshBasicMaterial({ map: texture, transparent: true, alphaTest: 0.5, side: THREE.DoubleSide });
+      const tagMaterial = new THREE.SpriteMaterial({ map: canvasTexture(drawNumberTag(runner.lane, runner.mine)), depthTest: false });
+      disposables.push(sheetMaterial, tagMaterial);
+      const sheet = new THREE.Mesh(paper, sheetMaterial);
+      sheet.rotation.order = "YXZ";
+      const tag = new THREE.Sprite(tagMaterial);
+      const shadow = new THREE.Mesh(shadowShape, shadowMaterial);
+      shadow.rotation.x = -Math.PI / 2;
+      scene.add(sheet, tag, shadow);
+      const made = { sheet, tag, shadow, texture, seed: runner.lane };
+      sprites.set(runner.lane, made);
+      return made;
     }
 
     const resize = () => {
@@ -166,10 +225,15 @@ export function StadiumMap({ runners, camera: cameraMode }: { runners: StadiumRu
       const dt = Math.min((now - previous) / 1000, 0.1);
       previous = now;
       const rows = live.current;
-      let leader: THREE.Sprite | undefined, leaderProgress = -1, mineSprite: THREE.Sprite | undefined;
-      let sum = 0;
+      let leader: THREE.Mesh | undefined, leaderProgress = -1, mineSprite: THREE.Mesh | undefined;
+      if (!reduced.matches) {
+        crowds.forEach(({ group }, i) => {
+          group.position.y = Math.max(0, Math.sin(now / 240 + i * 1.7)) * 0.32;
+        });
+      }
       for (const runner of rows) {
-        const sprite = sprites.get(runner.lane) ?? makeRunner(runner);
+        const made = sprites.get(runner.lane) ?? makeRunner(runner);
+        const sheet = made.sheet;
         const point = lanePoint(runner.lane, runner.progress);
         const ahead = lanePoint(runner.lane, runner.progress + 0.02);
         const moving = runner.progress > 0 && runner.progress < SECTIONS;
@@ -179,39 +243,46 @@ export function StadiumMap({ runners, camera: cameraMode }: { runners: StadiumRu
           ? bodyMotion(runner.body, now, runner.lane, runner.progress * 100)
           // 완주하면 제자리에서 기뻐 뛴다
           : { rise: runner.progress >= SECTIONS && !reduced.matches ? Math.abs(Math.sin(now / 160 + runner.lane)) * 1.4 : 0, tilt: 0, squashX: 1, squashY: 1 };
-        sprite.position.set(point.x, size / 2 + pose.rise, point.z);
-        sprite.scale.set(size * pose.squashX, size * pose.squashY, 1);
-        // 화면에서 달려가는 쪽을 보게 그림을 뒤집는다
-        const screenNow = probe.set(point.x, 0, point.z).project(camera).x;
-        const screenNext = probe.set(ahead.x, 0, ahead.z).project(camera).x;
-        const facingLeft = screenNext < screenNow;
-        const material = sprite.material as THREE.SpriteMaterial;
-        const texture = material.map!;
-        const frameIndex = animate ? Math.floor(now / 70 + runner.lane) % FRAME_COUNT : 0;
-        texture.repeat.x = (facingLeft ? -1 : 1) / FRAME_COUNT;
-        texture.offset.x = (frameIndex + (facingLeft ? 1 : 0)) / FRAME_COUNT;
-        material.rotation = facingLeft ? -pose.tilt : pose.tilt;
+        // 구르는 몸은 그림 칸 안쪽에 있어 발이 없으니 조금 내려 땅에 닿게 한다
+        sheet.position.set(point.x, size / 2 + pose.rise - (runner.body === "roller" ? size * 0.16 : 0), point.z);
+        sheet.scale.set(size * pose.squashX, size * pose.squashY, 1);
+        // 종이를 달리는 방향으로 세운다. 옆에서는 넓고 앞뒤에서는 얇게 보이며, 바람에 살짝 펄럭인다
+        const heading = -Math.atan2(ahead.z - point.z, ahead.x - point.x);
+        sheet.rotation.y = heading + (animate ? Math.sin(now / 130 + made.seed) * 0.14 : 0);
+        sheet.rotation.z = pose.tilt;
+        made.texture.offset.x = (animate ? Math.floor(now / 70 + runner.lane) % FRAME_COUNT : 0) / FRAME_COUNT;
+        made.tag.position.set(point.x, size + pose.rise + 1, point.z);
+        made.tag.scale.setScalar(runner.mine ? 1.9 : 1.5);
+        made.shadow.position.set(point.x, 0.14, point.z);
+        made.shadow.scale.setScalar(size * 0.34);
+        const sprite = sheet;
         if (runner.progress > leaderProgress) { leaderProgress = runner.progress; leader = sprite; }
         if (runner.mine) mineSprite = sprite;
-        sum += runner.progress;
       }
-      const fraction = rows.length ? sum / rows.length / SECTIONS : 0;
-      const shot = reduced.matches ? "wide" : mode.current === "mine" ? "mine" : directorShot(fraction);
+      const shot = reduced.matches ? "wide" : mode.current === "mine" ? "mine" : directorShot(leaderProgress);
       const target = (shot === "mine" ? mineSprite ?? leader : leader)?.position;
       if (shot === "wide" || !target) {
         destination.set(0, 62, 92);
         look.set(0, 0, 0);
-      } else if (shot === "start") {
-        destination.set(target.x - 20, 11, target.z + 22);
-        look.copy(target);
       } else if (shot === "finish") {
-        destination.set(-TRACK.straight / 2 - 6, 7, TRACK.radius + 28);
-        look.set(-TRACK.straight / 2, 1, TRACK.radius + 5);
+        const finishX = -TRACK.straight / 2;
+        destination.set(finishX + 12, 6, TRACK.radius - 16);
+        look.set(finishX, 3, TRACK.radius + 6);
       } else {
-        // 선수 바깥쪽 위에서 따라간다
-        const outward = Math.hypot(target.x, target.z) || 1;
-        destination.set(target.x + (target.x / outward) * 26, 19, target.z + (target.z / outward) * 26);
-        look.copy(target);
+        const out = outwardAt(target.x, target.z);
+        if (shot === "start") {
+          // 출발선을 비스듬히 앞에서 본다. 정면으로 보면 여덟 레인이 한 줄로 겹친다
+          const middle = TRACK.radius + (TRACK.lanes * TRACK.laneWidth) / 2;
+          destination.set(target.x + 17, 8, middle - 21);
+          look.set(target.x, 3, middle);
+        } else if (shot === "stands") {
+          // 관중석 위쪽에서 앞줄 관중 머리 너머로 선수를 본다
+          destination.set(target.x + out.x * 32, 17, target.z + out.z * 32);
+        } else {
+          // 선수의 안쪽에서 따라간다. 뒤로 좌석 대신 관중이 보인다
+          destination.set(target.x - out.x * 26, 11, target.z - out.z * 26);
+        }
+        if (shot !== "start") look.copy(target);
       }
       const blend = reduced.matches ? 1 : 1 - Math.exp(-dt * 7);
       camera.position.lerp(destination, blend);
@@ -226,6 +297,7 @@ export function StadiumMap({ runners, camera: cameraMode }: { runners: StadiumRu
       cancelAnimationFrame(frame);
       observer.disconnect();
       stand.dispose();
+      crowds.forEach(({ bodies, heads }) => { bodies.dispose(); heads.dispose(); });
       textures.forEach((texture) => texture.dispose());
       disposables.forEach((item) => item.dispose());
       renderer.dispose();

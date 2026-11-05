@@ -155,8 +155,29 @@ function drawRoller(ctx: Ctx, frame: number, color: string, line: Line) {
 
 type Line = readonly (readonly number[])[] | null;
 
+/** 머리 위에 띄우는 작은 번호표. 몸과 따로 있어 구르는 캐릭터와 함께 돌지 않는다 */
+export function drawNumberTag(lane: number, mine: boolean): HTMLCanvasElement {
+  const canvas = document.createElement("canvas");
+  canvas.width = 64;
+  canvas.height = 64;
+  const ctx = canvas.getContext("2d")!;
+  ctx.fillStyle = mine ? "#ffb020" : WHITE;
+  ctx.strokeStyle = INK;
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.arc(32, 32, 26, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.stroke();
+  ctx.fillStyle = INK;
+  ctx.font = "bold 34px sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(String(lane), 32, 34);
+  return canvas;
+}
+
 /** 프레임을 가로로 이어 그린 캔버스를 돌려준다. 그림은 오른쪽을 본다 */
-export function drawRunnerFrames(body: BodyPlan, color: string, lane: number, mine: boolean, line: Line): HTMLCanvasElement {
+export function drawRunnerFrames(body: BodyPlan, color: string, line: Line): HTMLCanvasElement {
   const canvas = document.createElement("canvas");
   canvas.width = FRAME_SIZE * FRAME_COUNT;
   canvas.height = FRAME_SIZE;
@@ -166,14 +187,6 @@ export function drawRunnerFrames(body: BodyPlan, color: string, lane: number, mi
     ctx.save();
     ctx.translate(frame * FRAME_SIZE, 0);
     draw(ctx, frame, color, line);
-    // 레인 번호는 구르는 동안에도 몸에 붙어 돌아가 더 우습게 보인다
-    ctx.fillStyle = mine ? "#ffb020" : WHITE;
-    ctx.strokeStyle = INK;
-    ctx.lineWidth = 4;
-    ctx.font = "bold 24px sans-serif";
-    ctx.textAlign = "center";
-    ctx.strokeText(String(lane), 24, 118);
-    ctx.fillText(String(lane), 24, 118);
     ctx.restore();
   }
   return canvas;
@@ -183,8 +196,8 @@ export function drawRunnerFrames(body: BodyPlan, color: string, lane: number, mi
 export function bodyMotion(body: BodyPlan, time: number, seed: number, distance: number) {
   const beat = time / 95 + seed;
   if (body === "roller") {
-    // 달린 거리만큼 실제로 구른다. 가끔 돌부리에 걸린 듯 통통 튄다
-    return { rise: Math.abs(Math.sin(beat * 0.6)) * 0.45, tilt: -distance * 1.15, squashX: 1, squashY: 1 };
+    // 달린 거리만큼 구른다. 재생 속도가 빨라 실제 회전보다 천천히 돌리고, 가끔 돌부리에 걸린 듯 통통 튄다
+    return { rise: Math.abs(Math.sin(beat * 0.6)) * 0.45, tilt: -distance * 0.22, squashX: 1, squashY: 1 };
   }
   if (body === "quadruped") {
     // 말이 뛰듯 앞뒤로 기우뚱하며 크게 도약한다

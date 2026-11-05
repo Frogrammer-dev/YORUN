@@ -16,10 +16,11 @@ const StadiumMap = dynamic(() => import("./StadiumMap").then((module) => module.
 
 type Player = { lane: number; name: string; mine: boolean };
 type RoomState = { race: string; closed: boolean; secondsLeft: number; players: Player[]; result: BoothRaceReplay | null };
-type Phase = "select" | "matching" | "arrival" | "countdown" | "race" | "result";
+type Phase = "select" | "matching" | "arrival" | "loading" | "starting" | "race" | "result";
 
 const PLAY_SPEED = 16;
 const BOT_ARRIVAL_MS = 450;
+const LOADING_MS = 1800;
 
 async function request<T>(url: string, init?: RequestInit): Promise<T> {
   const response = await fetch(url, { cache: "no-store", ...init });
@@ -146,21 +147,31 @@ export function DerbyGame({ returnTo = "/derby" }: { returnTo?: string }) {
     if (phase !== "arrival") return;
     const bots = roster.length - humans;
     if (arrived >= bots) {
-      const done = setTimeout(() => setPhase("countdown"), 500);
+      const done = setTimeout(() => setPhase("loading"), 500);
       return () => clearTimeout(done);
     }
     const next = setTimeout(() => setArrived((n) => n + 1), BOT_ARRIVAL_MS);
     return () => clearTimeout(next);
   }, [phase, arrived, roster.length, humans]);
 
+  // 로딩 바가 다 차면 경기장으로 들어간다
   useEffect(() => {
-    if (phase !== "countdown") return;
-    countdownTimer.current = setInterval(() => setCount((n) => n - 1), 800);
+    if (phase !== "loading") return;
+    const done = setTimeout(() => {
+      setCount(3);
+      setPhase("starting");
+    }, LOADING_MS);
+    return () => clearTimeout(done);
+  }, [phase]);
+  // 출발선에 선 채로 3, 2, 1, 출발
+  useEffect(() => {
+    if (phase !== "starting") return;
+    countdownTimer.current = setInterval(() => setCount((n) => n - 1), 1000);
     return () => { if (countdownTimer.current) clearInterval(countdownTimer.current); };
   }, [phase]);
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- 카운트가 끝나면 출발한다
-    if (phase === "countdown" && count <= 0) setPhase("race");
+    if (phase === "starting" && count <= 0) setPhase("race");
   }, [phase, count]);
 
   useEffect(() => {
@@ -185,7 +196,8 @@ export function DerbyGame({ returnTo = "/derby" }: { returnTo?: string }) {
     if (!result) return [];
     return result.placings
       .map((p) => ({ ...p, progress: raceProgress(p.splits, clock) }))
-      .sort((a, b) => b.progress - a.progress || a.rank - b.rank);
+      // 출발 전에는 레인 순서로 둔다. 결과 순서로 두면 최종 순위가 미리 드러난다
+      .sort((a, b) => b.progress - a.progress || (clock > 0 ? a.rank - b.rank : a.lane - b.lane));
   }, [result, clock]);
   const mine = standing.find((p) => p.mine);
   const myRank = mine ? standing.indexOf(mine) + 1 : null;
@@ -195,6 +207,7 @@ export function DerbyGame({ returnTo = "/derby" }: { returnTo?: string }) {
   const leadSection = standing[0] ? Math.min(11, Math.floor(standing[0].progress)) : 0;
   const callout = (() => {
     if (!result || !standing[0]) return "";
+    if (phase === "starting") return "출발선에 모두 섰어요";
     if (standing[0].progress >= 11) return "마지막 100m!";
     const spurt = result.spurts.find((s) => s.section === leadSection);
     if (spurt) return `${result.placings.find((p) => p.lane === spurt.lane)?.name}의 코너 스퍼트!`;
@@ -241,8 +254,8 @@ export function DerbyGame({ returnTo = "/derby" }: { returnTo?: string }) {
     );
   }
 
-  if (phase === "matching" || phase === "arrival" || phase === "countdown") {
-    const shownBots = phase === "countdown" ? roster.length : humans + arrived;
+  if (phase === "matching" || phase === "arrival" || phase === "loading") {
+    const shownBots = phase === "loading" ? roster.length : humans + arrived;
     const humansFirst = [...roster].sort((a, b) => {
       const isHuman = (p: Player) => (room?.players.some((h) => h.lane === p.lane) ? 0 : 1);
       return isHuman(a) - isHuman(b) || a.lane - b.lane;
@@ -251,8 +264,11 @@ export function DerbyGame({ returnTo = "/derby" }: { returnTo?: string }) {
     return (
       <div className="derby-screen">
         <div className="derby-versus">
-          {phase === "countdown" ? (
-            <p className="derby-count" key={count} role="status">{Math.max(count, 1)}</p>
+          {phase === "loading" ? (
+            <div className="derby-loading">
+              <p className="derby-status" role="status">경기장으로 들어가는 중이에요</p>
+              <div className="derby-loading-bar" role="progressbar" aria-label="경기장 입장"><i /></div>
+            </div>
           ) : phase === "arrival" ? (
             <p className="derby-status" role="status">봇이 빈 자리에 들어오고 있어요</p>
           ) : (
@@ -274,15 +290,19 @@ export function DerbyGame({ returnTo = "/derby" }: { returnTo?: string }) {
     );
   }
 
-  if (phase === "race" && result) {
+  if ((phase === "race" || phase === "starting") && result) {
     return (
       <div className="derby-screen derby-live">
         <div className="derby-hud">
-          <div className="derby-hud-rank"><span>내 순위</span><strong>{myRank}</strong></div>
+          <div className="derby-hud-rank"><span>내 순위</span><strong>{clock > 0 ? myRank : "-"}</strong></div>
           <p className="derby-callout" aria-live="off">{callout}</p>
           <div className="derby-hud-dist"><span>남은 거리</span><strong>{Math.max(0, Math.round((12 - (mine?.progress ?? 0)) * 100))}m</strong></div>
         </div>
-        <StadiumMap runners={runners} camera={camera} />
+        <div className="derby-stage">
+          <StadiumMap runners={runners} camera={camera} />
+          {phase === "starting" && <p className="derby-go" key={count} role="status">{count}</p>}
+          {phase === "race" && clock < 8 && <p className="derby-go derby-go-out" aria-hidden="true">출발!</p>}
+        </div>
         <ol className="derby-board" aria-label="현재 순위">
           {standing.map((p, i) => (
             <li key={p.lane} data-mine={p.mine || undefined}>
@@ -321,7 +341,7 @@ export function DerbyGame({ returnTo = "/derby" }: { returnTo?: string }) {
         </ol>
         <p className="derby-note">기록과 별개인 체험 경기예요. 빈 자리의 봇은 사람이 아니에요.</p>
         <button type="button" className="derby-start" onClick={leave}>다시 경기하기</button>
-        <button type="button" className="derby-quiet" onClick={() => { setClock(0); setPhase("race"); }}>경기 다시 보기</button>
+        <button type="button" className="derby-quiet" onClick={() => { setClock(0); setCount(3); setPhase("starting"); }}>경기 다시 보기</button>
       </div>
     );
   }

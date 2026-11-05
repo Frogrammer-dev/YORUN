@@ -55,7 +55,17 @@
 .derby-seat span { overflow: hidden; font-size: var(--fs-callout); text-overflow: ellipsis; white-space: nowrap; }
 .derby-seat-wait { color: var(--derby-ink-2); }
 
+/* 입장 로딩 */
+.derby-loading { display: flex; flex-direction: column; gap: var(--sp-3); width: 100%; }
+.derby-loading-bar { height: 14px; overflow: hidden; border-radius: var(--r-pill); background: var(--derby-line); }
+.derby-loading-bar i { display: block; height: 100%; background: var(--derby-gold); transform-origin: left; animation: derby-fill 1.8s ease-in-out both; }
+@keyframes derby-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
 /* 중계 */
+.derby-stage { position: relative; }
+.derby-go { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; margin: 0; font-family: var(--font-num); font-size: clamp(96px, 30vw, 140px); font-weight: 700; color: var(--derby-gold); pointer-events: none; animation: derby-pop .32s ease; }
+.derby-go-out { font-family: var(--font-sans); font-size: clamp(56px, 18vw, 84px); font-weight: 800; animation: derby-out .6s ease both; }
+@keyframes derby-out { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(1.5); } }
 .derby-hud { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--sp-3); }
 .derby-hud span { display: block; font-size: var(--fs-caption); color: var(--derby-ink-2); }
 .derby-hud strong { font-family: var(--font-num); font-size: var(--fs-display); font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1; color: var(--derby-gold); }
@@ -103,6 +113,7 @@
 @keyframes derby-pop { from { opacity: 0; transform: scale(1.3); } to { opacity: 1; transform: scale(1); } }
 @keyframes derby-seat { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) {
-  .derby-count, .derby-seat-in { animation: none; }
+  .derby-count, .derby-seat-in, .derby-go, .derby-loading-bar i { animation: none; }
+  .derby-go-out { display: none; }
   .derby-card, .derby-start { transition: none; }
 }
