@@ -1,7 +1,9 @@
 // 달리기 흐름 (옛 e2e/route-run-flow.mjs 뒷부분). 코스 찾기 결과에 기대지 않도록, 가짜 길 바둑판 위의
 // 네모 코스를 저장소에 직접 넣고 시작한다 → GPS 이동 → 이탈 경고 → 새로고침 후 이어 달리기 → 종료 → 작품방
-import type { BrowserContext, Page } from "@playwright/test";
 import { expect, test } from "../fixtures";
+import { finishRun, installRunGps, moveRunGps } from "../run-gps";
+import { readFile } from "node:fs/promises";
+import { parseRouteTransfer } from "../../shared/route-transfer.mjs";
 
 /** tests/mocks/handlers.ts 바둑판과 같은 격자 (70m, 기준 위도 35°) 위의 8칸×8칸 네모 코스 */
 function squareRoute(): [number, number][] {
@@ -19,6 +21,7 @@ function squareRoute(): [number, number][] {
 const ROUTE = squareRoute();
 
 test.beforeEach(async ({ page }) => {
+  await installRunGps(page, ROUTE[0]);
   await page.addInitScript((latlngs) => {
     if (localStorage.getItem("e2e.seeded")) return;
     localStorage.setItem("e2e.seeded", "1");
@@ -27,6 +30,21 @@ test.beforeEach(async ({ page }) => {
       JSON.stringify({ id: "e2e-square", shapeId: "square", shapeName: "네모", latlngs, outline: latlngs, lengthMeters: 2240, similarity: 90, dataTimestamp: "2026-10-01T00:00:00Z" }),
     );
   }, ROUTE);
+});
+
+test("@run 선택한 코스를 설치형 앱이 읽는 파일로 저장한다", async ({ page }) => {
+  await page.goto("/run");
+  await page.getByText("Android·iPhone 설치형 앱에서 달리기", { exact: true }).click();
+  const downloadPromise = page.waitForEvent("download");
+  await page.getByRole("button", { name: "설치형 앱용 코스 저장" }).click();
+  const download = await downloadPromise;
+  expect(download.suggestedFilename()).toBe("yorun-course.json");
+  const text = await readFile((await download.path())!, "utf8");
+  const course = parseRouteTransfer(text);
+  expect(course.name).toBe("네모");
+  expect(course.points).toEqual(ROUTE);
+  expect(course.lengthMeters).toBeGreaterThan(2000);
+  expect(text).not.toContain("e2e-square");
 });
 
 const hav = (a: [number, number], b: [number, number]) => {
@@ -47,13 +65,7 @@ function along(route: [number, number][], count: number): [number, number][] {
   return pts;
 }
 
-async function moveTo(ctx: BrowserContext, page: Page, p: [number, number], wait = 2300) {
-  await ctx.setGeolocation({ latitude: p[0], longitude: p[1], accuracy: 8 });
-  await page.waitForTimeout(wait);
-}
-
-test("코스를 따라 달리고, 이탈 경고·이어 달리기·종료 후 작품방에 건다", async ({ page, context }) => {
-  await context.setGeolocation({ latitude: ROUTE[0][0], longitude: ROUTE[0][1], accuracy: 8 });
+test("@run 코스를 따라 달리고, 이탈 경고·이어 달리기·종료 후 작품방에 건다", async ({ page }) => {
   await page.goto("/run");
   await page.locator(".leaflet-container").waitFor();
   await expect(page.getByText(/네모 코스 · [\d.]+km · 유사도 90/)).toBeVisible();
@@ -62,7 +74,7 @@ test("코스를 따라 달리고, 이탈 경고·이어 달리기·종료 후 �
   await expect(page.getByRole("button", { name: /일시정지/ })).toBeVisible();
 
   const pts = along(ROUTE, 26);
-  for (const p of pts) await moveTo(context, page, p);
+  for (const p of pts) await moveRunGps(page, p);
   const dist = parseFloat((await page.locator("[data-stat=distance]").innerText()).replace("km", ""));
   expect(dist).toBeGreaterThan(0.3);
   expect(parseInt(await page.locator("[data-stat=progress]").innerText())).toBeGreaterThan(0);
@@ -75,27 +87,34 @@ test("코스를 따라 달리고, 이탈 경고·이어 달리기·종료 후 �
 
   // 코스 이탈
   const last = pts[pts.length - 1];
-  for (let k = 0; k < 4; k++) await moveTo(context, page, [last[0] + 0.0012 + k * 0.00002, last[1] + 0.0012], 1500);
+  for (let k = 0; k < 4; k++) await moveRunGps(page, [last[0] + 0.0012 + k * 0.00002, last[1] + 0.0012], 1500);
   await expect(page.getByText(/코스에서 \d+m 벗어났어요/)).toBeVisible();
 
   // 진행 중 기록 보관 → 새로고침 후 이어 달리기
-  await page.waitForTimeout(5500);
   await page.reload();
   await expect(page.getByText(/끝내지 않은 달리기/)).toBeVisible();
   await page.getByRole("button", { name: "이어 달리기" }).click();
-  for (const p of pts.slice(-4).reverse()) await moveTo(context, page, p);
-  await page.getByRole("button", { name: /종료/ }).click();
+  for (const p of pts.slice(-4).reverse()) await moveRunGps(page, p);
+  await finishRun(page);
   await expect(page.getByRole("heading", { name: "달리기 완료" })).toBeVisible();
-  expect(await page.evaluate(() => localStorage.getItem("runcanvas.activeRun"))).toBeNull();
+  const finished = await page.evaluate(() => JSON.parse(localStorage.getItem("runcanvas.activeRun") ?? "null"));
+  expect(finished.finished).toMatchObject({ shapeName: "네모" });
   // 새로고침 전에 주운 객체도 이어져 적립된다
   const award = parseInt((await page.locator("[data-stat=award]").innerText()).replace(/[^\d]/g, ""));
   expect(award).toBeGreaterThanOrEqual(livePoints);
   const wallet = await page.evaluate(() => JSON.parse(localStorage.getItem("runcanvas.points") ?? "null"));
   expect(wallet).toMatchObject({ balance: award, dayPoints: award });
 
+  // 완료 후에도 작품으로 옮기기 전까지 기록을 보존하고, 재실행 시 중복 적립하지 않는다.
+  await page.reload();
+  await expect(page.getByRole("heading", { name: "달리기 완료" })).toBeVisible();
+  await expect(page.locator("[data-stat=award]")).toHaveText(`+${award.toLocaleString()}P`);
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("runcanvas.points") ?? "null"))).toEqual(wallet);
+
   // 작품방에 걸기: 재개 전후 끊김을 이어 붙이지 않는다
   await page.getByRole("button", { name: /작품방에 걸기/ }).click();
   await page.waitForURL("**/room");
+  expect(await page.evaluate(() => localStorage.getItem("runcanvas.activeRun"))).toBeNull();
   await expect(page.locator(".scene-item").first()).toBeVisible();
   await page.locator(".scene-item").first().focus();
   await page.keyboard.press("Enter");

@@ -5,11 +5,13 @@ import type { ElevationProfile } from "@/lib/route/elevation";
 import type { RouteCandidate } from "@/lib/route/fit";
 import { Icon } from "@/components/Icon";
 import { courseGrade } from "@/lib/route/present";
+import { isClosedRoute } from "@/lib/route/endpoints";
 import { ShapeExplanation } from "./ShapeExplanation";
 
 export type ElevationState = ElevationProfile | "loading" | "error" | undefined;
 
 export function SelectedCourse({ c, elev, onRun, onExport }: { c: RouteCandidate; elev: ElevationState; onRun: () => void; onExport: () => void }) {
+  const closed = isClosedRoute(c.latlngs);
   return (
     <>
       <p className="sel-desc">
@@ -19,7 +21,9 @@ export function SelectedCourse({ c, elev, onRun, onExport }: { c: RouteCandidate
         —{" "}
         {c.moves?.length
           ? `획 ${c.moves.length + 1}개를 차례로 그려요. 획 사이 점선 ${(c.moveMeters / 1000).toFixed(1)}km는 이동 구간이라 기록을 멈추고 이동하면 돼요.`
-          : "초록 점에서 출발해 같은 곳으로 돌아오는 한붓 코스예요."}{" "}
+          : closed
+          ? "초록 점에서 출발해 같은 곳으로 돌아오는 한붓 코스예요."
+          : "초록 출발점에서 빨간 도착점까지 이어지는 한붓 코스예요."}{" "}
         {c.shapeId === "run"
           ? `쾌적도 ${c.similarity}점 — 큰 차도·차 없는 길·비포장·계단·터널·잦은 꺾임으로 매긴 잠정 점수예요.${c.repeatRatio > 0.02 ? ` 출발점에서 고리까지 ${Math.round(c.repeatRatio * 100)}%는 같은 길로 오가요.` : ""}`
           : c.semanticExplanation?.decision === "interpretation"
@@ -42,8 +46,9 @@ export function SelectedCourse({ c, elev, onRun, onExport }: { c: RouteCandidate
           </span>
         )}
         <span>
-          <i className="lg-start" />출발·도착
+          <i className="lg-start" />{closed ? "출발·도착" : "출발"}
         </span>
+        {!closed && <span><i style={{ background: "#EF4444", borderRadius: "50%" }} />도착</span>}
         {c.moves?.length ? (
           <span>
             <i className="lg-move" />이동 구간

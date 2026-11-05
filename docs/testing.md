@@ -8,7 +8,7 @@ Playwright 보고서·trace가 남는다.
 | 1. 타입·규칙 | `npm run typecheck` · `npm run lint` | TypeScript 7 타입, ESLint(next core-web-vitals + typescript) | 수십 초 |
 | 2. 단위 | `npm test` | 알고리즘·파서·계약, 외부 서버 주고받기(MSW), 화면 조각(Testing Library), 탐색 결정성 | 약 1분 |
 | 3. 코스 품질 기준선 | `npm run test:quality` | 고정한 실제 지도(강남 2곳)에서 코스 품질이 기준선보다 나빠지지 않았는지 | 약 20초 (2에 포함) |
-| 4. 브라우저 E2E | `npm run test:e2e` | 작품방·코스 찾기·달리기·화면 이동 흐름, 360px 화면 | 약 5분 |
+| 4. 브라우저 E2E | `npm run test:e2e -- --project=desktop --project=mobile --project=mobile-webkit` | 작품방·코스 찾기·달리기·화면 이동, Android/iPhone 화면 및 기록 복원 | 환경에 따라 수분 |
 | 실서버 확인 | `npm run test:e2e:live` | 실제 바탕 지도 서버가 키 없이 뜨는지 (CI 제외) | 1분 |
 | 사람 판정 보정 | `npm run eval:make-set` → 판정 → `npm run eval:calibrate` | 점수 등급(또렷함·그럭저럭) 기준선 | 사람 판정 시간 |
 
@@ -32,14 +32,47 @@ Playwright 보고서·trace가 남는다.
 ## 브라우저 E2E
 
 ```bash
-npm run test:e2e                    # 빌드 → 서버 → desktop·mobile 프로젝트 (이미 :3123에 서버가 있으면 재사용)
-PW_CHANNEL=msedge npm run test:e2e  # Playwright 브라우저를 받지 않고 설치된 Edge로
+npm run test:e2e -- --project=desktop --project=mobile --project=mobile-webkit  # 빌드 → 서버 → 브라우저 3종
+npm run test:e2e -- --grep '@run' --project=mobile --project=mobile-webkit     # 두 모바일의 러닝 흐름만
+PW_CHANNEL=msedge npm run test:e2e -- --project=desktop --project=mobile      # 설치된 Edge로 Chromium 시험
 npm run test:e2e:report             # 지난 실행 보고서
 npx playwright show-trace test-results/<테스트>/trace.zip   # 실패 trace 보기
 ```
 
-- 처음 한 번 Playwright 브라우저가 필요하다: `npx playwright install chromium` (또는 `PW_CHANNEL=msedge`)
-- 테스트 이름에 `@mobile`이 있으면 360px 프로젝트, `@live`가 있으면 실서버 프로젝트에서만 돈다.
+- 처음 한 번 Playwright 브라우저가 필요하다: `npx playwright install chromium webkit`. `PW_CHANNEL=msedge`는 Chromium 프로젝트만 대체하며 iPhone 시험에는 WebKit 설치가 필요하다.
+- 이미 `:3123`에 서버가 떠 있으면 재사용한다. 코드 변경 후에는 해당 서버가 최신 빌드를 사용하는지 확인한다.
+- `mobile`은 Pixel 7을 바탕으로 한 360px Chromium, `mobile-webkit`은 iPhone 13을 바탕으로 한 WebKit이다. `@mobile` 화면 시험과 `@run` 러닝 시험을 두 프로젝트에서 모두 실행한다. 데스크톱도 `@run`을 실행한다.
+- `@run`은 코스 달리기·이탈 경고·일시정지·재개·종료 확인·완료 화면 복원·포인트 중복 방지·작품방 이동·GPX 내보내기·설치형 앱용 코스 파일 저장을 검증한다. 화면 숨김/`pagehide` 시 즉시 저장, 위치 권한 거절, 저장 용량 초과 경고도 포함한다.
+- GPS 좌표와 시각은 `e2e/run-gps.ts`가 브라우저의 Geolocation 경계에 주입한다. Chromium/WebKit의 위치 에뮬레이션 차이와 실제 이동 대기에 기대지 않으며, 앱에 테스트용 분기는 넣지 않는다.
+- `@live`는 실제 지도 서버를 쓰므로 별도 명령 `npm run test:e2e:live`로 실행한다. 전체 브라우저 명령에는 위처럼 프로젝트를 지정해 실서버 시험을 제외한다.
+
+### 설치형 시제품의 자동 시험
+
+```bash
+npm ci --prefix mobile
+npm run mobile:test
+npm run test:mobile-app
+```
+
+`mobile:test`는 기록 모델·비동기 조회·공용 코스 계약·목표 저장소를 Node.js에서 검사한다. `test:mobile-app`은 별도의 로컬 서버(3191 포트)에서 번들된 화면을 Chromium과 WebKit으로 실행한다. 코스 파일 가져오기·잘못된 파일·저장 용량 부족·재실행·러닝 중 목표 변경 금지·파일 선택 화면에서 복귀 중 조회 경합·실제 기록만 담은 GPX를 검사한다. 루트 Playwright 의존성과 Chromium/WebKit이 필요하다.
+
+네이티브 호출 경계의 고정 응답은 화면 동작 시험용이다. Android 서비스·iOS CoreLocation·실제 파일 선택기·권한 화면·공유 시트가 정상인지까지 증명하지 않는다. CI 브라우저 작업에도 이 시험을 추가했고, 네이티브 컴파일은 별도 `.github/workflows/mobile-native.yml`에서 수행한다. 설정 추가와 원격 CI 실행 성공은 구분한다.
+
+2026-10-20 로컬 검증: 모바일 단위 27개, 설치형 화면 6개, 웹 러닝 및 모바일 너비 E2E 27개 통과. Android debug APK 빌드·서명 검증 완료. 자세한 기기 시험과 빌드 절차는 [모바일 시험·출시 안내](mobile-testing-release.md)를 따른다.
+
+### Android·iPhone 실기기에서 반드시 확인할 항목
+
+브라우저의 모바일 에뮬레이션은 화면 크기와 웹 동작을 검증한다. OS가 화면을 잠그거나 앱을 백그라운드로 보냈을 때 GPS를 계속 기록하는지는 설치형 앱의 출시용 빌드로 따로 확인한다.
+
+| 상황 | 확인할 결과 |
+|---|---|
+| 위치 권한 거절·재허용, 정확한 위치 끄기 | 안내와 시작 가능 상태가 실제 권한에 맞게 바뀐다 |
+| 화면 잠금·음악 앱 전환 후 30분 야외 러닝 | GPS 수신 간격·배터리·발열·거리 오차를 기록하고 복귀 시 전체 경로를 확인한다 |
+| 통신 끊김·재연결 | 진행 중 기록이 기기에 남고 연결 복구 후 저장을 재시도할 수 있다 |
+| 강제 종료·OS 종료 후 재실행 | 이미 보관한 기록을 복원하고 GPS 공백을 임의의 직선으로 잇지 않는다 |
+| 저장 실패·완료 직후 종료 | 저장 실패 안내와 GPX 내보내기를 확인하고, 저장에 성공한 완료 기록은 작품방 이동 전까지 복원한다 |
+
+Android는 USB 디버깅과 Chrome의 `chrome://inspect/#devices`, 네이티브 부분은 Android Studio 로그로 확인한다. iPhone은 Mac의 Safari Web Inspector와 Xcode를 사용한다. 마지막 실기기 시험은 디버거를 분리해 실행하고 기기·OS·앱 버전을 결과와 함께 남긴다.
 
 ## 사람 판정으로 점수 등급 보정
 

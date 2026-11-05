@@ -129,7 +129,7 @@ test("없는 공유 링크는 404와 안내", async ({ page, allowedErrors }) =>
   await expect(page.getByText("공유가 종료되었거나 링크를 찾을 수 없어요.")).toBeVisible();
 });
 
-test("@mobile 360px 작품방에 가로 스크롤 없음", async ({ page }) => {
+test("@mobile 기기 너비에서 작품방에 가로 스크롤 없음", async ({ page }) => {
   await startWithHeart(page);
-  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(360);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(page.viewportSize()!.width);
 });

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { RouteTracker, addFix, elapsedMs, emptyRecord, formatPace, pause, spokenDuration, startOrResume, toGpx } from "@/lib/run/tracker";
+import { RouteTracker, addFix, elapsedMs, emptyRecord, formatPace, isValidFix, pause, spokenDuration, startOrResume, toGpx } from "@/lib/run/tracker";
 import { recoverRecord } from "@/lib/run/storage";
+import { trackDistanceMeters } from "@/lib/gpx/metrics";
 import { parse } from "./helpers";
 
 const LAT0 = 35.15, LON0 = 129.1;
@@ -60,6 +61,120 @@ describe("기록", () => {
     expect(r.segments).toHaveLength(2);
     expect(r.distanceMeters).toBeCloseTo(10, 0);
     expect(elapsedMs(r, 70_000)).toBe(20_000);
+  });
+
+  it("화면 잠금으로 1분간 GPS가 끊기면 공백을 거리나 GPX 직선으로 연결하지 않음", async () => {
+    let r = startOrResume(emptyRecord(), 0);
+    // 10m 이동 → 수신 중단 동안 1km 떨어진 곳으로 이동 → 다시 10m 이동.
+    for (const f of [fix(0, 0, 1000), fix(10, 0, 4000), fix(1010, 0, 64_000), fix(1020, 0, 67_000)]) {
+      r = addFix(r, f).record;
+    }
+    expect(r.segments.map((s) => s.length)).toEqual([2, 2]);
+    expect(r.distanceMeters).toBeCloseTo(20, 0);
+    expect(elapsedMs(r, 67_000)).toBe(67_000);
+    const exported = await parse(toGpx("화면 잠금 시험", r.segments));
+    expect(exported.tracks[0].segments.map((s) => s.length)).toEqual([2, 2]);
+    expect(trackDistanceMeters(exported.tracks[0])).toBeCloseTo(20, 0);
+  });
+
+  it("정확히 30초 간격의 정상 이동은 같은 구간으로 기록", () => {
+    let r = startOrResume(emptyRecord(), 0);
+    r = addFix(r, fix(0, 0, 1000)).record;
+    r = addFix(r, fix(100, 0, 31_000)).record;
+    expect(r.segments.map((s) => s.length)).toEqual([2]);
+    expect(r.distanceMeters).toBeCloseTo(100, 0);
+  });
+
+  it("서 있는 동안 GPS가 정상 수신되면 30초가 지나도 불필요하게 구간을 끊지 않음", () => {
+    let r = startOrResume(emptyRecord(), 0);
+    r = addFix(r, fix(0, 0, 1000)).record;
+    for (const time of [10_000, 20_000, 30_000, 40_000]) {
+      const result = addFix(r, fix(0, 0, time));
+      expect(result.reason).toBe("still");
+      r = result.record;
+    }
+    expect(addFix(r, fix(4, 0, 40_000)).reason).toBe("timestamp");
+    r = addFix(r, fix(4, 0, 45_000)).record;
+    expect(r.segments.map((s) => s.length)).toEqual([2]);
+    expect(r.distanceMeters).toBeCloseTo(4, 0);
+  });
+
+  it("정확도가 낮은 수신은 GPS 공백을 숨기지 않으며 이전 저장 형식도 분리", () => {
+    let r = startOrResume(emptyRecord(), 0);
+    r = addFix(r, fix(0, 0, 1000)).record;
+    // lastFixAt이 없던 버전에서 저장된 진행 기록.
+    delete r.lastFixAt;
+    delete r.lastFix;
+    for (const time of [20_000, 40_000]) r = addFix(r, fix(100, 0, time, 80)).record;
+    r = addFix(r, fix(200, 0, 50_000)).record;
+    expect(r.segments.map((s) => s.length)).toEqual([1, 1]);
+    expect(r.distanceMeters).toBe(0);
+  });
+
+  it("오래 정지한 뒤 1초 만에 150m 튄 위치를 정지 시간으로 평균 내어 채택하지 않음", () => {
+    let r = startOrResume(emptyRecord(), 0);
+    for (const time of [1000, 20_000, 40_000, 60_000]) r = addFix(r, fix(0, 0, time)).record;
+    const jumped = addFix(r, fix(150, 0, 61_000));
+    expect(jumped.reason).toBe("jump");
+    expect(jumped.record).toBe(r);
+    expect(jumped.record.distanceMeters).toBe(0);
+    expect(jumped.record.segments[0]).toHaveLength(1);
+  });
+
+  it("정지 오차 이후 속도는 직전 정상 수신 위치로 판정하고 거리는 경로 채택점부터 누적", () => {
+    let r = addFix(startOrResume(emptyRecord(), 0), fix(0, 0, 1000)).record;
+    for (const time of [20_000, 40_000, 60_000]) r = addFix(r, fix(2.5, 0, time)).record;
+    // 실제 직전 위치에서는 1초간 8m 이동. 경로 채택점부터의 10.5m로 속도를 재면 오판한다.
+    const moved = addFix(r, fix(10.5, 0, 61_000));
+    expect(moved.accepted).toBe(true);
+    expect(moved.record.distanceMeters).toBeCloseTo(10.5, 0);
+    expect(moved.record.segments[0]).toHaveLength(2);
+  });
+
+  it.each([
+    ["NaN 위도", { lat: NaN }, "coordinate"],
+    ["범위 밖 위도", { lat: 91 }, "coordinate"],
+    ["무한 경도", { lon: Infinity }, "coordinate"],
+    ["범위 밖 경도", { lon: -181 }, "coordinate"],
+    ["음수 정확도", { accuracy: -1 }, "accuracy"],
+    ["NaN 정확도", { accuracy: NaN }, "accuracy"],
+    ["NaN 시각", { time: NaN }, "timestamp"],
+    ["무한 시각", { time: Infinity }, "timestamp"],
+    ["음수 시각", { time: -1 }, "timestamp"],
+    ["날짜 범위 밖 시각", { time: 8.64e15 + 1 }, "timestamp"],
+  ])("%s인 GPS는 기록과 지도에 사용하지 않음", (_label, patch, reason) => {
+    const r = addFix(startOrResume(emptyRecord(), 0), fix(0, 0, 1000)).record;
+    const invalid = { ...fix(4, 0, 2000), ...patch };
+    expect(isValidFix(invalid)).toBe(false);
+    expect(addFix(r, invalid)).toEqual({ record: r, accepted: false, reason });
+  });
+
+  it("중복·역순 시각 및 재개 전 캐시 위치는 거리나 구간을 바꾸지 않음", () => {
+    let r = addFix(startOrResume(emptyRecord(), 0), fix(0, 0, 1000)).record;
+    for (const time of [1000, 999]) {
+      expect(addFix(r, fix(4, 0, time))).toEqual({ record: r, accepted: false, reason: "timestamp" });
+    }
+    r = startOrResume(pause(r, 10_000), 60_000);
+    expect(addFix(r, fix(100, 0, 59_999))).toEqual({ record: r, accepted: false, reason: "timestamp" });
+    r = addFix(r, fix(100, 0, 60_000)).record;
+    expect(r.segments.map((s) => s.length)).toEqual([1, 1]);
+    expect(r.distanceMeters).toBe(0);
+  });
+
+  it("재개·일시정지 중복 호출과 기기 시계 역행으로 기존 기록이나 활동 시간을 잃지 않음", () => {
+    let r = addFix(startOrResume(emptyRecord(), 0), fix(0, 0, 1000)).record;
+    r = addFix(r, fix(10, 0, 4000)).record;
+    expect(startOrResume(r, 5000)).toBe(r);
+    r = pause(r, 10_000);
+    expect(pause(r, 20_000)).toBe(r);
+    const recorded = r.segments[0];
+    r = startOrResume(r, 60_000);
+    expect(elapsedMs(r, 59_000)).toBe(10_000);
+    r = pause(r, 59_000);
+    expect(r.activeMs).toBe(10_000);
+    expect(r.segments[0]).toBe(recorded);
+    expect(r.distanceMeters).toBeCloseTo(10, 0);
+    expect(startOrResume(r, NaN)).toBe(r);
   });
 
   it("앱이 꺼졌다 켜져도 마지막 저장까지 달린 시간을 잃지 않음", () => {

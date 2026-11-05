@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#172f28"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'"><title>요런 러닝 기록</title><link rel="stylesheet" href="style.css"></head>
+<body><main><header><span class="brand">YORUN</span><span id="platform">러닝 기록 시제품</span></header>
+<h1>오늘의 달리기</h1><p class="intro">러닝 중 화면을 꺼도 휴대폰에 위치를 기록합니다. 앱을 강제 종료하면 기록이 중단될 수 있습니다.</p>
+<section class="course-panel" aria-label="목표 코스">
+<h2 id="route-title">다음 러닝 목표: 자유 달리기</h2><p id="route-meta"></p>
+<svg id="route-preview" viewBox="0 0 320 220" role="img" aria-label="가져온 목표 코스" hidden></svg>
+<label for="route-file">코스 파일 가져오기</label><input id="route-file" type="file" accept=".json,application/json">
+<button id="route-clear" class="secondary" disabled>목표 코스 지우기</button>
+<p class="hint">웹의 달리기 준비 화면에서 ‘설치형 앱용 코스 저장’으로 받은 파일을 선택하세요. 파란 선은 목표, 회색 점선은 획 사이 이동 구간입니다. 배경 지도·방향 안내는 아직 제공하지 않습니다.</p>
+</section>
+<p id="status" role="status">기록 불러오는 중…</p>
+<div class="metrics"><div><strong id="distance">0.00</strong><span>km</span></div><div><strong id="duration">00:00</strong><span>러닝 시간</span></div></div>
+<svg id="track" viewBox="0 0 320 220" role="img" aria-label="현재 러닝 경로 미리보기"></svg>
+<p id="quality">위치를 기다리고 있습니다.</p><p id="error" role="alert" hidden></p>
+<div class="actions"><button id="start">새 러닝 시작</button><button id="pause" hidden>일시정지</button><button id="resume" hidden>기록 재개</button><button id="stop" hidden class="secondary">러닝 종료</button></div>
+<div class="exports"><button id="gpx" class="secondary" disabled>GPX 공유</button><button id="diagnostics" class="secondary" disabled>진단 기록 공유</button></div>
+<p class="hint">GPX에는 실제 이동 경로가 포함됩니다. 진단 파일은 위치 좌표 없이 수신·기록 상태만 담으며, 공유 대상을 직접 선택합니다.</p>
+<label for="history">저장된 러닝</label><select id="history"><option value="">현재 기록</option></select><button id="current" class="secondary" hidden>현재 러닝으로 돌아가기</button>
+<p class="hint">완료한 GPX를 PC로 옮겨 기존 요런 웹의 ‘GPX 가져오기’에서 작품으로 만드세요. 이 시제품은 이 휴대폰에만 저장합니다. 앱 삭제 시 사라질 수 있으니 GPX로 보관하세요. 계정 자동 동기화는 아직 제공하지 않습니다.</p>
+</main><script type="module" src="main.js"></script></body></html>

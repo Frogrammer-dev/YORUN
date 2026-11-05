@@ -1,0 +1,10 @@
+node_modules/
+dist/
+/android/
+/ios/
+/plugins/recorder/android/build/
+/plugins/recorder/android/.gradle/
+/plugins/recorder/.build/
+.npm-cache/
+.tools/
+*.log

@@ -1,0 +1,8 @@
+{
+  "appId": "kr.yorun.recorder",
+  "appName": "요런 러닝 기록",
+  "webDir": "dist",
+  "ios": { "contentInset": "always" },
+  "android": { "allowMixedContent": false },
+  "includePlugins": ["@yorun/recorder"]
+}

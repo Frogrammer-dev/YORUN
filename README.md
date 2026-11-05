@@ -17,7 +17,7 @@ npm install
 npm run dev            # http://localhost:3000  → /routes 에서 코스 찾기
 ```
 
-- 위치(GPS)는 **보안 연결(HTTPS) 또는 localhost**에서만 동작합니다. 휴대폰에서 시험하려면 HTTPS로 배포하거나 `npx next dev --experimental-https`를 쓰세요.
+- 위치(GPS)는 **보안 연결(HTTPS) 또는 localhost**에서만 동작합니다. 휴대폰은 신뢰할 수 있는 인증서가 있는 HTTPS 시험 서버에 접속하세요. 개발 서버의 `--experimental-https` 자체 서명 인증서는 휴대폰에서 별도로 신뢰 설정이 필요합니다. 자세한 연결 방법은 [모바일 시험·출시 안내](docs/mobile-testing-release.md)를 참고하세요.
 - 홈 화면에 추가하면 앱처럼 열립니다 (`/manifest.webmanifest`, 시작 주소 `/routes`).
 - Supabase 환경변수가 없어도 코스 찾기·달리기·임시 작품방·PNG는 동작합니다. 로그인 저장·공유는 아래 설정이 필요합니다.
 
@@ -64,9 +64,18 @@ npm run dev            # http://localhost:3000  → /routes 에서 코스 찾기
 ## 달리기 (`/run`, `src/lib/run/tracker.ts`)
 
 - GPS 위치로 **코스 진행률·남은 거리·다음 방향(“60m 앞 우회전”)**, 40m 이상 3회 연속 이탈 시 경고·진동.
-- 정확도 35m 초과·초속 8.5m 초과 순간 이동은 기록에서 제외. 일시정지 후 재개는 새 구간(끊긴 곳을 잇지 않음).
-- 화면 꺼짐 방지(Wake Lock), 5초마다 이 기기에 진행 기록 보관 → 새로고침·종료 후 **이어 달리기**.
+- 정확도 35m 초과·초속 8.5m 초과 순간 이동·잘못된 좌표·역순 시각은 기록에서 제외. 일시정지 후 재개와 30초 초과 GPS 공백은 새 구간으로 나눠 끊긴 곳을 잇지 않습니다.
+- 화면 꺼짐 방지(Wake Lock), 5초 주기 및 화면 숨김·이탈 시 기기 보관을 시도합니다. 저장 실패는 화면에 알리고, 저장된 진행·완료 기록은 다시 열었을 때 복원합니다. 브라우저의 백그라운드 GPS 수집은 보장하지 않습니다.
 - 완료 후: **달린 GPS 선 그대로** 작품방에 걸기(계획 코스로 빈 곳을 메우지 않음) · GPX 저장. 코스 없이 자유롭게 달리기도 가능.
+- 러닝 화면의 진단 내보내기로 GPS 수신·저장·화면 잠금 방지 상태를 확인합니다. 웹 진단에는 좌표·코스 ID·인증 토큰을 넣지 않으며 자동 업로드하지 않습니다.
+
+### Android·iPhone 설치형 기록 시제품
+
+`mobile/`에는 Capacitor와 자체 Android/iOS 기록 모듈을 사용하는 **독립 러닝 기록 시제품**이 있습니다. 위치 수집과 기기 파일 저장은 네이티브 코드가 맡고, 화면은 저장된 이벤트를 읽습니다. 시작·일시정지·재개·종료, 저장 기록 복원, GPX 공유를 시험하기 위한 구성입니다.
+
+HTTPS 서버 없이 **웹에서 코스 파일 저장 → 설치형 앱에서 가져와 기록 → GPX를 웹 작품방으로 가져오기**를 시험할 수 있습니다. 2026-10-20 Windows에서 Android debug APK를 빌드하고 서명을 검증했습니다. [Android APK 빌드·설치 방법](mobile/ANDROID-BUILD.md)을 참고하세요.
+
+배경 지도·방향 안내·로그인·서버 자동 동기화는 후속 작업입니다. iOS 컴파일과 양쪽 휴대폰의 화면 잠금 30분 실기기 시험은 아직 남아 있습니다. [파일 전달과 시제품 실행법](mobile/README.md) 및 [모바일 시험·출시 안내](docs/mobile-testing-release.md)에 절차를 정리했습니다.
 
 ## 시험
 
@@ -84,7 +93,8 @@ npm run dev            # http://localhost:3000  → /routes 에서 코스 찾기
 | `npm run typecheck` · `npm run lint` | TypeScript 7 타입 검사 · ESLint (next core-web-vitals + typescript) |
 | `npm test` | 단위 테스트 (알고리즘·파서·계약·외부 서버 주고받기(MSW)·화면 조각·탐색 결정성) + 코스 품질 기준선 |
 | `npm run test:quality` | 고정한 실제 지도(강남 2곳)에서 코스 품질이 기준선보다 나빠지지 않았는지 (`:update`로 기준선 갱신) |
-| `npm run test:e2e` | Playwright: 작품방·코스 찾기·달리기·화면 이동 회귀·360px (외부 서버는 가짜 응답, 서버는 자동 기동) |
+| `npm run test:e2e -- --project=desktop --project=mobile --project=mobile-webkit` | Playwright: 데스크톱·Android/iPhone 화면, 달리기·저장·복원 (외부 서버는 가짜 응답, 서버는 자동 기동) |
+| `npm run mobile:test` · `npm run test:mobile-app` | 설치형 기록 모델·코스 전달 단위 시험 및 Chromium/WebKit 화면 시험 (`mobile` 의존성 별도 설치) |
 | `npm run test:e2e:live` | 실제 바탕 지도 서버가 키 없이 뜨는지 (CI 제외) |
 | `npm run test:db` | DB 마이그레이션(RLS·RPC·권한) — PGlite |
 | `npm run eval:make-set` · `npm run eval:calibrate` | 사람 판정으로 점수 등급 기준선 보정 |
@@ -102,12 +112,13 @@ src/lib/(gpx|art|contracts|room|render|draft|server)   GPX → 작품 → 작품
 supabase/          마이그레이션 + DB 검증 스크립트
 e2e/               Playwright 테스트(specs·fixtures) + 수동 디자인 캡처 도구(tools)
 tests/             단위·화면 조각·품질 기준선 테스트, 공용 가짜 응답(mocks), 고정 지도 데이터(fixtures)
+mobile/            독립 Capacitor 러닝 기록 시제품 + Android/iOS 네이티브 기록 모듈
 ```
 
 ## 아직 하지 않은 것 / 알려진 한계
 
 - **실제 휴대폰에서 달려 보는 시험은 아직 안 했습니다.** GPS 흔들림·건물 사이 오차·배터리, 방향 안내 타이밍은 실기기로 조정해야 합니다.
-- **웹 앱의 백그라운드 위치 제한**: 화면이 꺼지거나 다른 앱으로 가면 기록이 멈출 수 있습니다 (안내 문구 표시). 화면을 끄고 달리는 기록이 필수라면 네이티브 앱(React Native/Capacitor 등)으로 감싸야 합니다.
+- **웹 앱의 백그라운드 위치 제한**: 화면이 꺼지거나 다른 앱으로 가면 기록이 멈출 수 있습니다 (안내 문구 표시). `mobile/`의 네이티브 기록 시제품은 별도 앱이며, 코스·GPX 파일 전달을 지원합니다. 전체 웹 기능 통합과 실기기 검증이 남아 있습니다. 단순히 웹 화면을 감싸는 것만으로 백그라운드 기록이 보장되지는 않습니다.
 - **지도 데이터**: OSM은 실제 통행 가능 여부·공사·임시 통제·보도 유무·야간 조명을 보장하지 않습니다 (화면에 미확인으로 표시). 지역에 따라 데이터 누락이 있습니다.
 - **공개 서버 사용**: 길 데이터(Overpass)와 바탕 지도(OpenFreeMap)는 무료 공개 서버입니다. 키는 필요 없지만 기부로 운영되므로, 실제 서비스 규모에서는 사용량을 확인하고 자체 서버(OpenFreeMap은 자체 설치 가능)도 검토해야 합니다. 지도 영역 좌표가 이 서버들로 전송됩니다 (화면에 안내).
 - **그림 품질 한계**: 길 간격보다 작은 특징(불규칙한 동네의 고양이 귀 등)은 약해질 수 있고, 바둑판 도로에서 비스듬한 선은 계단 모양이 됩니다. 유사도는 사람이 느끼는 ‘닮음’과 다를 수 있습니다. 거리를 늘리면 그림이 커져 덜 뭉개집니다.

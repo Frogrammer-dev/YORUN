@@ -1,0 +1,9 @@
+{
+  "name": "@yorun/recorder",
+  "version": "0.1.0",
+  "description": "Yorun native location journal",
+  "main": "index.js",
+  "type": "module",
+  "capacitor": { "android": { "src": "android" }, "ios": { "src": "ios" } },
+  "peerDependencies": { "@capacitor/core": ">=8.0.0 <9" }
+}

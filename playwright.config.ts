@@ -12,7 +12,7 @@ const channel = process.env.PW_CHANNEL || undefined;
 export default defineConfig({
   testDir: "e2e/specs",
   outputDir: "test-results",
-  // 달리기 흐름은 GPS 이동을 기다리므로 길다
+  // 코스 탐색 등 긴 흐름의 상한. 달리기는 결정론적인 GPS 입력을 쓴다.
   timeout: 180_000,
   expect: { timeout: 15_000 },
   fullyParallel: false,
@@ -23,7 +23,6 @@ export default defineConfig({
   use: {
     baseURL: `http://localhost:${PORT}`,
     locale: "ko-KR",
-    channel,
     trace: CI ? "on-first-retry" : "retain-on-failure",
     screenshot: "only-on-failure",
     // 부산 광안리 (가짜 길 데이터는 어디든 바둑판을 만들어 준다)
@@ -32,7 +31,9 @@ export default defineConfig({
   },
   projects: [
     { name: "desktop", use: { ...devices["Desktop Chrome"], channel, viewport: { width: 1280, height: 900 } }, grepInvert: /@live|@mobile/ },
-    { name: "mobile", use: { ...devices["Pixel 7"], channel, viewport: { width: 360, height: 780 } }, grep: /@mobile/ },
+    { name: "mobile", use: { ...devices["Pixel 7"], channel, viewport: { width: 360, height: 780 } }, grep: /@mobile|@run/ },
+    // PW_CHANNEL은 Chromium 전용이다. iPhone 프로젝트는 Playwright WebKit으로 실행한다.
+    { name: "mobile-webkit", use: { ...devices["iPhone 13"] }, grep: /@mobile|@run/ },
     // 실제 바탕 지도 서버 접속 확인 (기본 실행에서 제외): npm run test:e2e:live
     { name: "live", use: { ...devices["Desktop Chrome"], channel }, grep: /@live/ },
   ],

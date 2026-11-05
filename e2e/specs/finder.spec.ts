@@ -162,10 +162,12 @@ test("지도 출처는 ⓘ로 접혀 있다가 누르면 펼쳐진다", async ({
   await expect(page.locator(".leaflet-control-attribution")).toBeHidden();
 });
 
-test("@mobile 360px 코스 찾기·달리기 화면에 가로 스크롤 없음", async ({ page }) => {
-  for (const p of ["/routes", "/run"]) {
-    await page.goto(p);
-    await page.locator(".leaflet-container").waitFor();
-    expect(await page.evaluate(() => document.documentElement.scrollWidth), p).toBeLessThanOrEqual(360);
-  }
-});
+// 각 화면의 지도 초기화가 끝난 뒤 검사한다. 한 페이지에서 바로 goto하면
+// WebKit이 이전 화면의 로딩 중인 지도 Worker를 취소해 너비 검사와 무관한 오류가 난다.
+for (const path of ["/routes", "/run"]) {
+  test(`@mobile 기기 너비에서 ${path} 화면에 가로 스크롤 없음`, async ({ page }) => {
+    await page.goto(path);
+    await waitForMap(page);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth), path).toBeLessThanOrEqual(page.viewportSize()!.width);
+  });
+}

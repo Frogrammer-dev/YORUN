@@ -20,5 +20,11 @@ export default defineConfig([
     "e2e/output/**",
     "test-results/**",
     "playwright-report/**",
+    "mobile/node_modules/**",
+    "mobile/dist/**",
+    "mobile/android/**",
+    "mobile/ios/**",
+    "mobile/.npm-cache/**",
+    "mobile/.tools/**",
   ]),
 ]);

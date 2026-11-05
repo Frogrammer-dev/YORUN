@@ -131,13 +131,17 @@ export interface Fix {
 }
 
 export interface RunRecord {
-  /** 일시정지마다 새 구간. 구간 사이는 연결하지 않는다. */
+  /** 일시정지 또는 GPS 공백마다 새 구간. 구간 사이는 연결하지 않는다. */
   segments: Array<Array<{ lat: number; lon: number; time: number }>>;
   distanceMeters: number;
   activeMs: number;
   /** 진행 중이면 마지막 재개 시각 */
   resumedAt: number | null;
   startedAt: number | null;
+  /** 좌표·정확도·순서 검사를 통과한 마지막 위치 시각. 정지 중 수신도 포함한다. */
+  lastFixAt?: number;
+  /** 정지 중 수신도 포함한 속도 판정 기준점. 경로 단순화용 마지막 채택점과 구분한다. */
+  lastFix?: { lat: number; lon: number; time: number };
 }
 
 export const emptyRecord = (): RunRecord => ({ segments: [], distanceMeters: 0, activeMs: 0, resumedAt: null, startedAt: null });
@@ -145,36 +149,70 @@ export const emptyRecord = (): RunRecord => ({ segments: [], distanceMeters: 0, 
 export const MAX_ACCURACY_M = 35;
 /** 사람이 달릴 수 없는 순간 이동은 GPS 튐으로 보고 버린다 (≈ 1km 2분) */
 export const MAX_SPEED_MS = 8.5;
+/** 30초를 넘게 믿을 만한 위치가 없으면 이동 경로를 추측하지 않고 새 구간을 연다. */
+export const MAX_FIX_GAP_MS = 30_000;
+
+const validTime = (time: number) => Number.isFinite(time) && time >= 0 && time <= 8.64e15;
+
+function invalidFixReason(f: Fix): "coordinate" | "timestamp" | "accuracy" | null {
+  if (!Number.isFinite(f.lat) || !Number.isFinite(f.lon) || Math.abs(f.lat) > 90 || Math.abs(f.lon) > 180) return "coordinate";
+  if (!Number.isFinite(f.accuracy) || f.accuracy < 0) return "accuracy";
+  if (!validTime(f.time)) return "timestamp";
+  return null;
+}
+
+/** 지도 표시도 불가능한 잘못된 값만 거른다. 정확도·속도·시각 순서 채택 기준은 addFix에서 적용한다. */
+export function isValidFix(f: Fix): boolean {
+  return invalidFixReason(f) === null;
+}
 
 export function startOrResume(r: RunRecord, now: number): RunRecord {
-  if (r.resumedAt !== null) return r;
+  if (r.resumedAt !== null || !validTime(now)) return r;
   return { ...r, segments: [...r.segments, []], resumedAt: now, startedAt: r.startedAt ?? now };
 }
 
 export function pause(r: RunRecord, now: number): RunRecord {
-  if (r.resumedAt === null) return r;
-  return { ...r, activeMs: r.activeMs + (now - r.resumedAt), resumedAt: null };
+  if (r.resumedAt === null || !validTime(now)) return r;
+  return { ...r, activeMs: elapsedMs(r, now), resumedAt: null };
 }
 
 export function elapsedMs(r: RunRecord, now: number) {
-  return r.activeMs + (r.resumedAt !== null ? now - r.resumedAt : 0);
+  return r.activeMs + (r.resumedAt !== null && validTime(now) ? Math.max(0, now - r.resumedAt) : 0);
 }
 
-/** 위치 하나를 기록에 반영. 반환: 갱신된 기록과 채택 여부 */
-export function addFix(r: RunRecord, f: Fix): { record: RunRecord; accepted: boolean; reason?: "paused" | "accuracy" | "jump" | "still" } {
+export type FixRejectionReason = "paused" | "coordinate" | "timestamp" | "accuracy" | "jump" | "still";
+
+/**
+ * 위치 하나를 기록에 반영. accepted는 경로 점 채택 여부다.
+ * 정지 중에도 정상 수신 시각은 갱신하므로, 호출자는 accepted와 관계없이 반환 record를 보관한다.
+ */
+export function addFix(r: RunRecord, f: Fix): { record: RunRecord; accepted: boolean; reason?: FixRejectionReason } {
   if (r.resumedAt === null) return { record: r, accepted: false, reason: "paused" };
-  if (!(f.accuracy <= MAX_ACCURACY_M)) return { record: r, accepted: false, reason: "accuracy" };
-  const seg = r.segments[r.segments.length - 1];
+  const invalid = invalidFixReason(f);
+  if (invalid) return { record: r, accepted: false, reason: invalid };
+  if (f.accuracy > MAX_ACCURACY_M) return { record: r, accepted: false, reason: "accuracy" };
+  const seg = r.segments[r.segments.length - 1] ?? [];
   const last = seg[seg.length - 1];
-  let add = 0;
-  if (last) {
-    add = haversineMeters({ lat: last.lat, lon: last.lon }, { lat: f.lat, lon: f.lon });
-    const dt = (f.time - last.time) / 1000;
-    if (dt > 0 && add / dt > MAX_SPEED_MS) return { record: r, accepted: false, reason: "jump" };
-    if (add < 3) return { record: r, accepted: false, reason: "still" };
+  // lastFixAt이 없는 이전 저장 형식도 복원할 수 있다. 재개 직후의 캐시 위치도 거절한다.
+  const lastFixAt = r.lastFix?.time ?? r.lastFixAt ?? last?.time;
+  if (f.time < r.resumedAt || (lastFixAt !== undefined && f.time <= lastFixAt)) {
+    return { record: r, accepted: false, reason: "timestamp" };
   }
-  const segments = r.segments.slice(0, -1).concat([[...seg, { lat: f.lat, lon: f.lon, time: f.time }]]);
-  return { record: { ...r, segments, distanceMeters: r.distanceMeters + add }, accepted: true };
+  const gap = last !== undefined && f.time - (lastFixAt ?? last.time) > MAX_FIX_GAP_MS;
+  const point = { lat: f.lat, lon: f.lon, time: f.time };
+  let add = 0;
+  if (last && !gap) {
+    add = haversineMeters({ lat: last.lat, lon: last.lon }, { lat: f.lat, lon: f.lon });
+    // 오래 정지한 시간을 나눗셈에 포함하면 직후의 큰 GPS 튐이 정상 속도로 보인다.
+    const previous = r.lastFix ?? last;
+    const dt = (f.time - previous.time) / 1000;
+    if (haversineMeters({ lat: previous.lat, lon: previous.lon }, { lat: f.lat, lon: f.lon }) / dt > MAX_SPEED_MS) return { record: r, accepted: false, reason: "jump" };
+    if (add < 3) return { record: { ...r, lastFixAt: f.time, lastFix: point }, accepted: false, reason: "still" };
+  }
+  const segments = gap
+    ? [...r.segments, [point]]
+    : r.segments.slice(0, -1).concat([[...seg, point]]);
+  return { record: { ...r, segments, distanceMeters: r.distanceMeters + add, lastFixAt: f.time, lastFix: point }, accepted: true };
 }
 
 export function formatDuration(ms: number) {
@@ -207,7 +245,7 @@ export function toGpx(name: string, segments: Array<Array<{ lat: number; lon: nu
     .filter((s) => s.length)
     .map(
       (s) =>
-        `<trkseg>${s.map((p) => `<trkpt lat="${p.lat.toFixed(7)}" lon="${p.lon.toFixed(7)}">${p.time ? `<time>${new Date(p.time).toISOString()}</time>` : ""}</trkpt>`).join("")}</trkseg>`,
+        `<trkseg>${s.map((p) => `<trkpt lat="${p.lat.toFixed(7)}" lon="${p.lon.toFixed(7)}">${p.time !== undefined ? `<time>${new Date(p.time).toISOString()}</time>` : ""}</trkpt>`).join("")}</trkseg>`,
     )
     .join("");
   return `<?xml version="1.0" encoding="UTF-8"?>\n<gpx version="1.1" creator="Yorun" xmlns="http://www.topografix.com/GPX/1/1"><trk><name>${esc(name)}</name>${segXml}</trk></gpx>\n`;

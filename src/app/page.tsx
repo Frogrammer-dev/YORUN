@@ -64,6 +64,9 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ [
             <Link href="/room" className="btn btn-link">
               작품방
             </Link>
+            <Link href="/battle" className="btn btn-link">
+              대결
+            </Link>
           </nav>
         </header>
 

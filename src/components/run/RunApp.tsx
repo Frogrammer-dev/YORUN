@@ -13,7 +13,12 @@ import type { GpxTrack } from "@/lib/gpx/parser";
 import { setPendingArtwork } from "@/lib/client/pending";
 import { downloadBlob } from "@/lib/render/png";
 import { Icon, PathThumb, latlngToXY, type IconName } from "@/components/Icon";
-import { awardRun, loadActiveRun, loadPlannedRoute, loadWallet, plannedRouteBadge, recoverRecord, saveActiveRun, type PlannedRoute } from "@/lib/run/storage";
+import { awardRun, loadActiveRun, loadPlannedRoute, loadWallet, plannedRouteBadge, recoverRecord, saveActiveRun, type ActiveRun, type PlannedRoute } from "@/lib/run/storage";
+import { watchBrowserLocation } from "@/lib/run/browserLocation";
+import { keepScreenAwake, onRunLifecycle, type ScreenLockState } from "@/lib/run/browserLifecycle";
+import { createRunDiagnostics, type SaveReason } from "@/lib/run/diagnostics";
+import { isClosedRoute } from "@/lib/route/endpoints";
+import { createRouteTransfer, stringifyRouteTransfer } from "../../../shared/route-transfer.mjs";
 import { loadVoicePref, primeVoice, saveVoicePref, speak, voiceSupported } from "@/lib/run/voice";
 import { DAILY_POINT_CAP, POINTS_PER_CHECKPOINT, cappedPoints, collectedCount, emptyRewards, isMissed, placeCheckpoints, stepRewards, type RewardState } from "@/lib/run/rewards";
 import {
@@ -43,6 +48,7 @@ export function RunApp() {
   const [route, setRoute] = useState<PlannedRoute | null>(null);
   const [loaded, setLoaded] = useState(false);
   const [status, setStatus] = useState<Status>("ready");
+  const isFinished = status === "finished";
   const [record, setRecord] = useState<RunRecord>(emptyRecord);
   const recordRef = useRef(record);
   const [now, setNow] = useState(() => Date.now());
@@ -59,8 +65,12 @@ export function RunApp() {
   // eslint-disable-next-line react-hooks/exhaustive-deps -- 달리기를 새로 시작할 때(trackerKey 증가) 추적기를 새로 만든다
   const tracker = useMemo(() => (route ? new RouteTracker(route.latlngs) : null), [route, trackerKey]);
   const layers = useRef<{ me?: Leaflet.CircleMarker; acc?: Leaflet.Circle; track?: Leaflet.Polyline; casing?: Leaflet.Polyline; guide?: Leaflet.Polyline } | null>(null);
-  const wakeLock = useRef<{ release: () => Promise<void> } | null>(null);
   const lastSave = useRef(0);
+  const session = useRef<{ status: Status; routeId: string | null; finished?: ActiveRun["finished"] }>({ status: "ready", routeId: null });
+  const diagnostics = useRef(createRunDiagnostics());
+  const lastFixTime = useRef<number | null>(null);
+  const [storageFailed, setStorageFailed] = useState(false);
+  const [screenLock, setScreenLock] = useState<ScreenLockState>("released");
   // 포인트: 코스 달리기는 그림 구간 100m마다 놓인 객체, 자유 달리기는 달린 거리 100m마다
   const checkpoints = useMemo(() => (route ? placeCheckpoints(route.latlngs, route.moves) : []), [route]);
   const checkpointsRef = useRef(checkpoints);
@@ -85,6 +95,24 @@ export function RunApp() {
     rewardsRef.current = s;
     setRewards(s);
   }, []);
+  const persistCurrent = useCallback((reason: SaveReason) => {
+    const current = session.current;
+    if (current.status === "ready") return true;
+    const savedAt = Date.now();
+    const ok = saveActiveRun({ routeId: current.routeId, record: recordRef.current, rewards: rewardsRef.current, savedAt, finished: current.finished });
+    if (ok) lastSave.current = savedAt;
+    setStorageFailed(!ok);
+    diagnostics.current.add({ type: "storage", reason, ok });
+    return ok;
+  }, []);
+  function clearSavedRun(reason: "discard" | "artwork") {
+    const ok = saveActiveRun(null);
+    setStorageFailed(!ok);
+    diagnostics.current.add({ type: "storage", reason, ok });
+    // A failed deletion must not pretend the record was discarded.
+    if (ok) session.current = { status: "ready", routeId: route?.id ?? null };
+    return ok;
+  }
   useEffect(() => {
     checkpointsRef.current = checkpoints;
   }, [checkpoints]);
@@ -94,6 +122,7 @@ export function RunApp() {
     const r = loadPlannedRoute();
     // eslint-disable-next-line react-hooks/set-state-in-effect -- 브라우저 전용 값(저장소·위치·로그인 세션)은 서버 렌더와 어긋나지 않게 첫 화면 뒤 효과에서 읽는다
     setRoute(r);
+    session.current = { status: "ready", routeId: r?.id ?? null };
     const active = loadActiveRun();
     if (active?.finished && active.record.segments.length) {
       // 종료 뒤 작품방에 걸기 전에 앱이 꺼졌다: 결과 화면을 그대로 되살린다
@@ -102,6 +131,7 @@ export function RunApp() {
       setAward({ points: active.finished.points, collected: active.finished.collected });
       setFinishedShape(active.finished.shapeName);
       setStatus("finished");
+      session.current = { status: "finished", routeId: active.routeId, finished: active.finished };
     } else if (active && active.record.segments.length && (active.routeId === (r?.id ?? null))) {
       setResumeOffer(recoverRecord(active));
       resumeRewards.current = active.rewards ?? null;
@@ -138,7 +168,9 @@ export function RunApp() {
         L.polyline(mv, { ...round, color: "#646B78", weight: 4, dashArray: "2 9", opacity: 1, interactive: false }).addTo(g);
       }
       guideLine = L.polyline(route.outlines ?? route.outline, { ...round, color: "#2B2F38", weight: 2.5, dashArray: "1 8", opacity: 0, interactive: false }).addTo(g);
-      L.circleMarker(route.latlngs[0], { radius: 12, color: "#fff", weight: 3, fillColor: "#12B76A", fillOpacity: 1, pane: startPane }).bindTooltip("출발·도착").addTo(g);
+      const closed = isClosedRoute(route.latlngs);
+      L.circleMarker(route.latlngs[0], { radius: 12, color: "#fff", weight: 3, fillColor: "#12B76A", fillOpacity: 1, pane: startPane }).bindTooltip(closed ? "출발·도착" : "출발").addTo(g);
+      if (!closed) L.circleMarker(route.latlngs[route.latlngs.length - 1], { radius: 12, color: "#fff", weight: 3, fillColor: "#EF4444", fillOpacity: 1, pane: startPane }).bindTooltip("도착").addTo(g);
       map.invalidateSize({ pan: false });
       map.fitBounds(L.latLngBounds(route.latlngs), { paddingTopLeft: [24, 80], paddingBottomRight: [24, 48], animate: false });
     }
@@ -179,30 +211,28 @@ export function RunApp() {
     layers.current?.guide?.setStyle({ opacity: status === "ready" ? 0.5 : 0 });
   }, [status, lm, route]);
 
-  // 위치 추적 (화면이 켜져 있는 동안. 웹 앱은 백그라운드 위치 기록이 제한된다)
+  // 브라우저 위치 수신을 기록·저장과 분리한다. 설치형 시제품은 native recorder를 사용한다.
   useEffect(() => {
-    if (!("geolocation" in navigator)) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- 브라우저 전용 값(저장소·위치·로그인 세션)은 서버 렌더와 어긋나지 않게 첫 화면 뒤 효과에서 읽는다
-      setGpsState("unsupported");
-      return;
-    }
-    const id = navigator.geolocation.watchPosition(
-      (p) => {
-        const fix = { lat: p.coords.latitude, lon: p.coords.longitude, accuracy: p.coords.accuracy, time: p.timestamp || Date.now() };
+    if (isFinished) return;
+    return watchBrowserLocation(
+      (fix) => {
         setPos(fix);
         setGpsState(fix.accuracy <= 35 ? "ok" : "weak");
         const before = recordRef.current;
         const res = addFix(before, fix);
+        diagnostics.current.add({ type: "gps", accepted: res.accepted, reason: res.reason ?? "accepted", accuracy: fix.accuracy <= 35 ? "good" : "weak", intervalMs: lastFixTime.current === null ? null : fix.time - lastFixTime.current });
+        lastFixTime.current = fix.time;
+        if (res.record !== before) setRec(res.record);
         if (!res.accepted) return;
-        setRec(res.record);
         const seg = res.record.segments[res.record.segments.length - 1];
         setRew(stepRewards(rewardsRef.current, checkpointsRef.current, fix, res.record.distanceMeters - before.distanceMeters, seg.length === 1).state);
       },
-      (e) => setGpsState(e.code === e.PERMISSION_DENIED ? "denied" : "weak"),
-      { enableHighAccuracy: true, maximumAge: 1000, timeout: 20000 },
+      (reason) => {
+        diagnostics.current.add({ type: "gps-error", reason });
+        setGpsState(reason === "denied" ? "denied" : reason === "unsupported" ? "unsupported" : "weak");
+      },
     );
-    return () => navigator.geolocation.clearWatch(id);
-  }, [setRec, setRew]);
+  }, [setRec, setRew, isFinished]);
 
   // 안내 갱신
   useEffect(() => {
@@ -248,28 +278,24 @@ export function RunApp() {
     if (status !== "running") return;
     const t = setInterval(() => {
       setNow(Date.now());
-      if (Date.now() - lastSave.current > 5000) {
-        lastSave.current = Date.now();
-        saveActiveRun({ routeId: route?.id ?? null, record: recordRef.current, rewards: rewardsRef.current, savedAt: Date.now() });
-      }
+      if (Date.now() - lastSave.current >= 5000) persistCurrent("interval");
     }, 1000);
     return () => clearInterval(t);
-  }, [status, route]);
+  }, [status, persistCurrent]);
+
+  // 타이머가 멈추기 전에 저장. 완료 메타데이터도 유지해 결과 화면을 덮어쓰지 않는다.
+  useEffect(() => {
+    if (!loaded) return;
+    return onRunLifecycle(persistCurrent);
+  }, [loaded, persistCurrent]);
 
   // 화면 꺼짐 방지
   useEffect(() => {
-    if (status !== "running") {
-      void wakeLock.current?.release().catch(() => undefined);
-      wakeLock.current = null;
-      return;
-    }
-    const nav = navigator as Navigator & { wakeLock?: { request: (t: "screen") => Promise<{ release: () => Promise<void> }> } };
-    const req = () => void nav.wakeLock?.request("screen").then((l) => (wakeLock.current = l)).catch(() => undefined);
-    req();
-    // 다른 앱에 다녀오면 브라우저가 잠금을 풀어 버리므로, 화면이 다시 보일 때 다시 요청한다
-    const onVis = () => document.visibilityState === "visible" && req();
-    document.addEventListener("visibilitychange", onVis);
-    return () => document.removeEventListener("visibilitychange", onVis);
+    if (status !== "running") return;
+    return keepScreenAwake((state) => {
+      setScreenLock(state);
+      diagnostics.current.add({ type: "wake-lock", state });
+    });
   }, [status]);
 
   function start() {
@@ -282,15 +308,25 @@ export function RunApp() {
       resumeRewards.current = null;
     }
     setRec(startOrResume(resumeOffer ?? recordRef.current, Date.now()));
+    session.current = { status: "running", routeId: route?.id ?? null };
+    persistCurrent("start");
     setResumeOffer(null);
     setStatus("running");
     setFollow(true);
     setNow(Date.now());
   }
+  function exportMobileCourse() {
+    if (!route) return;
+    try {
+      const course = createRouteTransfer({ name: route.shapeName, points: route.latlngs, moves: route.moves });
+      downloadBlob(new Blob([stringifyRouteTransfer(course)], { type: "application/json" }), "yorun-course.json");
+    } catch (error) { setMessage(error instanceof Error ? error.message : "코스 파일을 만들지 못했어요."); }
+  }
   function doPause() {
     const r = pause(recordRef.current, Date.now());
     setRec(r);
-    saveActiveRun({ routeId: route?.id ?? null, record: r, rewards: rewardsRef.current, savedAt: Date.now() });
+    session.current.status = "paused";
+    persistCurrent("pause");
     setStatus("paused");
   }
   function finish() {
@@ -301,12 +337,13 @@ export function RunApp() {
     setAward({ points, collected });
     setTodayPoints(wallet.dayPoints);
     // 작품방에 걸거나 버릴 때까지 기기에 남긴다 (결과 화면에서 앱이 꺼져도 기록을 잃지 않게)
-    saveActiveRun({ routeId: route?.id ?? null, record: r, rewards: rewardsRef.current, savedAt: Date.now(), finished: { points, collected, shapeName: route?.shapeName ?? null } });
+    session.current = { status: "finished", routeId: route?.id ?? null, finished: { points, collected, shapeName: route?.shapeName ?? null } };
+    persistCurrent("finish");
     setFinishedShape(undefined);
     setStatus("finished");
   }
   function discard() {
-    saveActiveRun(null);
+    if (!clearSavedRun("discard")) return;
     setRec(emptyRecord());
     setRew(emptyRewards(checkpoints.length));
     resumeRewards.current = null;
@@ -337,8 +374,8 @@ export function RunApp() {
       const { view } = buildArtwork(track, { title: shapeName ? `${shapeName} 러닝` : "나의 러닝 그림", recordedDate: date });
       // 작품 아래 흐린 도로망: 뒤에서 받아 이 기기에만 보관한다. 못 받으면 지도 없이 그대로.
       attachRoadMap(view.id, track.segments);
+      if (!clearSavedRun("artwork")) return;
       setPendingArtwork(view);
-      saveActiveRun(null);
       router.push("/room");
     } catch (e) {
       setMessage(describeImportError(e).title);
@@ -350,12 +387,32 @@ export function RunApp() {
     downloadBlob(new Blob([gpx], { type: "application/gpx+xml" }), "yorun-run.gpx");
   }
 
+  function exportDiagnostics() {
+    downloadBlob(new Blob([JSON.stringify(diagnostics.current.report(navigator.userAgent), null, 2)], { type: "application/json" }), "yorun-run-diagnostics.json");
+  }
+
   const elapsed = elapsedMs(record, now);
   const startDist = pos && tracker ? tracker.distanceToStart(pos.lat, pos.lon) : null;
   const offRoute = status === "running" && offStreak >= 3;
   const pct = guide && tracker ? Math.min(100, Math.round((guide.progressMeters / tracker.total) * 100)) : 0;
   const active = status === "running" || status === "paused";
   const tooShort = record.segments.every((s) => s.length < 2);
+  const storageWarning = storageFailed && (
+    <div className="run-storage-warning" role="alert">
+      <p>기기에 기록을 저장하지 못했어요. 앱을 닫기 전에 GPX로 저장해 주세요.</p>
+      <div className="row">
+        <button type="button" className="btn" onClick={() => persistCurrent("retry")}>다시 저장</button>
+        {!isFinished && <button type="button" className="btn" onClick={exportRecord} disabled={record.segments.every((s) => !s.length)}>GPX로 저장</button>}
+      </div>
+    </div>
+  );
+  const diagnosticControl = (
+    <details className="run-note">
+      <summary>기록 문제 진단</summary>
+      <p>GPS 수신 간격·저장 상태를 파일로 저장해요. 위치 좌표와 코스, 계정 정보는 포함하지 않아요. 자동으로 전송하지 않아요.</p>
+      <button type="button" className="btn" onClick={exportDiagnostics}>진단 파일 저장</button>
+    </details>
+  );
 
   // ── 스크린리더 안내: 보이는 숫자는 계속 바뀌므로 aria-live를 달지 않고, 의미 있는 순간에만 따로 알린다.
   const [sayPolite, setSayPolite] = useState("");
@@ -473,7 +530,7 @@ export function RunApp() {
         <span className="turn-icon"><Icon name={icon} size={40} strokeWidth={2.4} /></span>
         <span className="turn-text">
           {guide.nearEnd ? (
-            <span>거의 다 왔어요! 출발점이 도착점이에요.</span>
+            <span>{isClosedRoute(route.latlngs) ? "거의 다 왔어요! 출발점이 도착점이에요." : "거의 다 왔어요! 빨간 도착점까지 이동해 주세요."}</span>
           ) : t ? (
             <>
               <strong>{Math.max(0, Math.round(t.inMeters / 10) * 10)}m</strong> <span>앞 {TURN_LABEL[t.dir]}</span>
@@ -534,6 +591,10 @@ export function RunApp() {
 
       <section className="hud-sheet" aria-label="달리기 기록">
         {isWide && topCard}
+        {!isFinished && storageWarning}
+        {status === "running" && screenLock !== "held" && (
+          <p className="run-storage-warning" role="status">화면 꺼짐 방지를 사용할 수 없어요. 화면을 켜 두고 달려 주세요.</p>
+        )}
         {active ? (
           <>
             <div className="hud-hero">
@@ -649,6 +710,13 @@ export function RunApp() {
                 </div>
               </div>
             )}
+            {route && (
+              <details className="run-note">
+                <summary>Android·iPhone 설치형 앱에서 달리기</summary>
+                <p>코스 파일을 휴대폰에 옮긴 뒤 요런 기록 앱의 ‘코스 파일 가져오기’에서 선택하세요. 파일에는 실제 코스 위치가 포함됩니다.</p>
+                <button type="button" className="btn" onClick={exportMobileCourse}>설치형 앱용 코스 저장</button>
+              </details>
+            )}
             {resumeOffer ? (
               <div className="resume">
                 <p>이 기기에 끝내지 않은 달리기({(resumeOffer.distanceMeters / 1000).toFixed(2)}km)가 있어요.</p>
@@ -674,10 +742,11 @@ export function RunApp() {
                 달리는 동안 화면을 켜 두세요
                 <Icon name="chevronDown" size={14} />
               </summary>
-              <p>웹 앱은 화면이 꺼지거나 다른 앱으로 전환하면 위치 기록이 멈출 수 있어요. 달리는 동안 화면 꺼짐을 막아 두지만, 잠금 버튼을 누르면 기록이 멈춰요. 기록은 이 기기에만 저장돼요.</p>
+              <p>웹 앱은 화면이 꺼지거나 다른 앱으로 전환하면 위치 기록이 멈출 수 있어요. 화면 꺼짐 방지도 기기에서 거절될 수 있어요. 화면을 켜 두고 달려 주세요. 기록은 이 기기에만 저장돼요.</p>
             </details>
           </>
         )}
+        {!isFinished && diagnosticControl}
       </section>
 
       {status === "finished" && (
@@ -733,6 +802,7 @@ export function RunApp() {
               </div>
             )}
             <div className="done-actions">
+              {storageWarning}
               {tooShort && (
                 <p className="done-reason">
                   <Icon name="info" size={16} />
@@ -753,6 +823,7 @@ export function RunApp() {
                 </button>
               </div>
               <p className="done-note">작품은 실제로 달린 GPS 선 그대로 만들어요. 계획 코스로 빈 곳을 메우지 않아요.</p>
+              {diagnosticControl}
             </div>
           </div>
         </div>

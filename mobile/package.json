@@ -1,0 +1,26 @@
+{
+  "name": "yorun-mobile-recorder",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "android": "npm run build && node scripts/prepare-native.mjs android",
+    "ios": "npm run build && node scripts/prepare-native.mjs ios",
+    "open:android": "cap open android",
+    "open:ios": "cap open ios"
+  },
+  "dependencies": {
+    "@capacitor/android": "8.5.3",
+    "@capacitor/core": "8.5.3",
+    "@capacitor/ios": "8.5.3",
+    "@yorun/recorder": "file:plugins/recorder"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.5.3",
+    "esbuild": "0.28.2",
+    "plist": "3.1.0"
+  },
+  "engines": { "node": ">=22" }
+}

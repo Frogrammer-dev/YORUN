@@ -16,6 +16,8 @@ export interface ShapeDef {
   emoji: string;
   /** 정규화된 외곽선(가로·세로 중 큰 쪽 = 1, 중심 0) */
   points: [number, number][];
+  /** false이면 끝점에서 끝나는 열린 선. 생략한 기존 그림은 닫힌 외곽선이다. */
+  closed?: boolean;
   /** 꼭짓점이 뚜렷한 다각형이면 꼭짓점을 반드시 기준점으로 쓴다. */
   corners: boolean;
   /** 회전 대칭이 강해 회전 탐색이 의미 없는 도형 */
@@ -26,6 +28,8 @@ export interface ShapeDef {
   /** 45° 이상 꺾이는 꼭짓점(귀 끝·별 끝 등). 이 점이 코스에 담기지 않으면 그림이 무너진다. */
   features: [number, number][];
 }
+
+export const isClosedShape = (shape: Pick<ShapeDef, "closed">): boolean => shape.closed !== false;
 
 /** 닫힌 외곽선에서 minDeg 이상 꺾이는 꼭짓점 */
 export function sharpVertices(points: readonly (readonly [number, number])[], minDeg = 45): [number, number][] {
@@ -234,7 +238,7 @@ export interface ShapePart {
   frame?: { cx: number; cy: number; size: number };
 }
 
-/** 떨어진 여러 닫힌 획으로 된 그림 (예: 글자 "520"). 획 순서대로 달리고, 획 사이는 이동 구간으로 잇는다. */
+/** 여러 획으로 된 그림. 획은 열리거나 닫힐 수 있고, 획 사이는 이동 구간으로 잇는다. */
 export interface ShapeGroup {
   id: ShapeKey;
   name: string;
@@ -288,6 +292,63 @@ export function groupFromLoops(
       ox: (cx - gx) / size,
       oy: (cy - gy) / size,
       s: ext / size,
+      frame,
+    });
+  }
+  if (!parts.length) return null;
+  if (opts.order === "leftToRight") parts.sort((p, q) => p.ox - q.ox);
+  return { id: "custom", name: opts.name ?? "내 그림", parts: parts.slice(0, opts.maxParts ?? 6) };
+}
+
+/**
+ * 손그림의 획을 입력한 순서와 끝점 그대로 정리한다. 기본은 열린 선이며 직선도 허용한다.
+ * closed를 켰을 때만 기존 닫힌 윤곽 변환을 사용한다. 글자·이미지 윤곽은 groupFromLoops를 쓴다.
+ */
+export function groupFromStrokes(
+  strokes: readonly (readonly (readonly [number, number])[])[],
+  opts: { name?: string; order?: "given" | "leftToRight"; minPartRatio?: number; maxParts?: number; maxVertices?: number; closed?: boolean } = {},
+): ShapeGroup | null {
+  if (opts.closed) return groupFromLoops(strokes, opts);
+  const lines = strokes
+    .filter((stroke) => stroke.every(([x, y]) => Number.isFinite(x) && Number.isFinite(y)))
+    .map((stroke) => stroke
+      .filter(([x, y], i) => !i || x !== stroke[i - 1][0] || y !== stroke[i - 1][1])
+      .map(([x, y]) => [x, -y] as [number, number]))
+    .filter((stroke) => stroke.length >= 2);
+  if (!lines.length) return null;
+  const bounds = (points: readonly (readonly [number, number])[]) => {
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    for (const [x, y] of points) {
+      minX = Math.min(minX, x); minY = Math.min(minY, y);
+      maxX = Math.max(maxX, x); maxY = Math.max(maxY, y);
+    }
+    return { cx: (minX + maxX) / 2, cy: (minY + maxY) / 2, size: Math.max(maxX - minX, maxY - minY) };
+  };
+  const whole = bounds(lines.flat());
+  if (!(whole.size > 0)) return null;
+  const parts: ShapePart[] = [];
+  for (const line of lines) {
+    const frame = bounds(line);
+    if (!(frame.size > 0) || frame.size < (opts.minPartRatio ?? 0.08) * whole.size) continue;
+    let tolerance = frame.size * 0.02;
+    let keep = rdpIndices(line, tolerance);
+    while (keep.length > Math.max(2, opts.maxVertices ?? 24)) {
+      tolerance *= 1.3;
+      keep = rdpIndices(line, tolerance);
+    }
+    const points = keep.map((i) => [(line[i][0] - frame.cx) / frame.size, (line[i][1] - frame.cy) / frame.size] as [number, number]);
+    const features: [number, number][] = [[...points[0]]];
+    for (let i = 1; i < points.length - 1; i++) {
+      const a = points[i - 1], b = points[i], c = points[i + 1];
+      const angle = Math.atan2(c[1] - b[1], c[0] - b[0]) - Math.atan2(b[1] - a[1], b[0] - a[0]);
+      if (Math.acos(Math.cos(angle)) >= Math.PI / 4) features.push([...b]);
+    }
+    features.push([...points[points.length - 1]]);
+    parts.push({
+      shape: { id: "custom", name: opts.name ?? "내 그림", emoji: "✏️", corners: true, closed: false, points, perimeter: polylineLength(points), features },
+      ox: (frame.cx - whole.cx) / whole.size,
+      oy: (frame.cy - whole.cy) / whole.size,
+      s: frame.size / whole.size,
       frame,
     });
   }

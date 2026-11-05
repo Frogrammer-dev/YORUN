@@ -13,7 +13,8 @@ import { fetchElevation } from "@/lib/route/elevation";
 import { recognizeCourses } from "@/lib/art/recognize";
 import { nameRoadDiscoveries } from "@/lib/art/roadReferenceClient";
 import { moveLines, pixelToLatLng } from "@/lib/route/present";
-import type { ShapeGroup } from "@/lib/route/shapes";
+import { isClosedShape, type ShapeGroup } from "@/lib/route/shapes";
+import { isClosedRoute } from "@/lib/route/endpoints";
 import { artImageLayer } from "@/components/route/artImageLayer";
 import { PlaceSearch } from "@/components/route/PlaceSearch";
 import { AREAS, DEFAULT_SETTINGS, MAX_SIDE, MIN_SIDE, RANGES, nearbyDataBox, type AreaId, type FinderSettingsValue } from "@/components/route/finderOptions";
@@ -202,9 +203,12 @@ export function RouteFinderApp() {
         }
         for (const o of active.outlines ?? [active.outline])
           lm.L.polyline(o, { ...round, color: "#2B2F38", weight: 2.5, dashArray: "1 8", opacity: 0.7, interactive: false }).addTo(g);
+        const closed = isClosedRoute(active.latlngs);
         lm.L.circleMarker(active.latlngs[0], { radius: 10, color: "#fff", weight: 3, fillColor: "#12B76A", fillOpacity: 1 })
-          .bindTooltip("출발·도착", { permanent: false })
+          .bindTooltip(closed ? "출발·도착" : "출발", { permanent: false })
           .addTo(g);
+        if (!closed) lm.L.circleMarker(active.latlngs[active.latlngs.length - 1], { radius: 10, color: "#fff", weight: 3, fillColor: "#EF4444", fillOpacity: 1 })
+          .bindTooltip("도착", { permanent: false }).addTo(g);
       }
     },
     [lm],
@@ -271,7 +275,8 @@ export function RouteFinderApp() {
       return;
     }
     const discover = !running && shape === "auto";
-    const compareNearby = !running && nearby && !(shape === "custom" && custom && custom.parts.length > 1);
+    const compareNearby = !running && nearby && !(shape === "custom" && custom &&
+      (custom.parts.length > 1 || custom.parts.some((part) => !isClosedShape(part.shape))));
     const id = ++reqId.current;
     referenceAbortRef.current?.abort();
     setSelected(null);

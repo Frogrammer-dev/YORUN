@@ -2,7 +2,7 @@
 // 코스 찾기 조건 (그림·영역·거리·길 조건)과 찾기 버튼·진행 표시 (표시 전용: 상태는 부모가 가진다)
 
 import { forwardRef } from "react";
-import { SHAPES, groupLines, type ShapeId } from "@/lib/route/shapes";
+import { SHAPES, groupLines, isClosedShape, type ShapeId } from "@/lib/route/shapes";
 import { CustomShapeInput } from "@/components/route/CustomShapeInput";
 import { Icon, PathThumb } from "@/components/Icon";
 import { AREAS, ASCENTS, DETAILS, MAX_SIDE, RANGES, type FinderSettingsValue, type SearchProgress } from "./finderOptions";
@@ -122,7 +122,9 @@ export const FinderSettings = forwardRef<HTMLElement, FinderSettingsProps>(funct
 
       {toggle("nearby", "주변 동네도 비교")}
       <p className="hint">선택한 영역의 코스를 유지하며 가까운 주변도 찾아요. 시간이 더 걸릴 수 있어요.</p>
-      {v.nearby && v.shape === "custom" && v.custom && v.custom.parts.length > 1 && <p className="hint">여러 획으로 된 그림은 선택한 영역에서 찾아요.</p>}
+      {v.nearby && v.shape === "custom" && v.custom &&
+        (v.custom.parts.length > 1 || v.custom.parts.some((part) => !isClosedShape(part.shape))) &&
+        <p className="hint">열린 선이나 여러 획으로 된 그림은 선택한 영역에서 찾아요.</p>}
         </>
       )}
 

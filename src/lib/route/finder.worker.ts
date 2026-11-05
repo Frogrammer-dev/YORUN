@@ -8,8 +8,9 @@ import { budgetSlice, improveRoutes } from "./qualitySearch";
 import type { FindResult } from "./fit";
 import { project, type RoadGraph } from "./graph";
 import { findGroupRoutes } from "./group";
+import { findStrokeRoutes } from "./strokeRoutes";
 import { graphFromOverpass, mergeOverpass, type BBox, type GraphOptions, type OverpassJson, type RoadDetail } from "./osm";
-import { SHAPES, SHAPE_BY_ID, type ShapeGroup, type ShapeId } from "./shapes";
+import { SHAPES, SHAPE_BY_ID, isClosedShape, type ShapeGroup, type ShapeId } from "./shapes";
 
 export type FinderRequest = {
   type: "find";
@@ -91,7 +92,8 @@ ctx.onmessage = (ev: MessageEvent<FinderRequest>) => {
       return;
     }
     if (req.region.south < req.dataBox.south || req.region.north > req.dataBox.north || req.region.west < req.dataBox.west || req.region.east > req.dataBox.east) throw new Error("검색 영역의 길 데이터를 다시 받아야 해요.");
-    const compareNearby = !!req.nearby && !req.custom?.parts.some((_,i)=>i>0) && JSON.stringify(req.region) !== JSON.stringify(req.dataBox);
+    const hasOpenStroke = req.custom?.parts.some((part) => !isClosedShape(part.shape)) ?? false;
+    const compareNearby = !!req.nearby && !hasOpenStroke && !req.custom?.parts.some((_,i)=>i>0) && JSON.stringify(req.region) !== JSON.stringify(req.dataBox);
     let localGraph = graph;
     if (compareNearby) {
       const innerKey = `${req.region.south},${req.region.west},${req.region.north},${req.region.east}`;
@@ -115,6 +117,9 @@ ctx.onmessage = (ev: MessageEvent<FinderRequest>) => {
         return;
       }
       result = r;
+    } else if (req.mode === "shape" && req.custom && hasOpenStroke) {
+      // 열린 획은 마지막 점에서 끝낸다. 고리 후보 생성·폐곡선 보정에 넘기지 않는다.
+      result = findStrokeRoutes(localGraph, req.custom, { minMeters: req.minMeters, maxMeters: req.maxMeters, region, onProgress });
     } else if (req.mode === "shape" && req.custom && req.custom.parts.length > 1) {
       // 여러 획 그림: 그림 전체를 함께 놓고 획 사이를 이동 구간으로 잇는다
       result = findGroupRoutes(localGraph, req.custom, { minMeters: req.minMeters, maxMeters: req.maxMeters, region, onProgress });

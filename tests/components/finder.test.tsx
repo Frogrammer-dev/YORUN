@@ -32,6 +32,19 @@ describe("고른 코스", () => {
     expect(screen.getByText(/원래 그림에서 평균 15m, 최대 47m 벗어나요/)).toBeTruthy();
     expect(screen.getByText("원래 그림")).toBeTruthy();
     expect(screen.getByText("…")).toBeTruthy(); // 고도 받는 중
+    expect(screen.getByText(/같은 곳으로 돌아오는 한붓 코스/)).toBeTruthy();
+    expect(screen.getByText("출발·도착")).toBeTruthy();
+  });
+
+  it("열린 코스는 실제 양 끝 좌표에 따라 출발·도착 안내를 나눈다", () => {
+    const c = makeCandidate();
+    c.latlngs = c.latlngs.slice(0, -1);
+    render(<SelectedCourse c={c} elev="error" onRun={() => {}} onExport={() => {}} />);
+    expect(screen.getByText(/초록 출발점에서 빨간 도착점까지/)).toBeTruthy();
+    expect(screen.getByText("출발")).toBeTruthy();
+    expect(screen.getByText("도착")).toBeTruthy();
+    expect(screen.queryByText("출발·도착")).toBeNull();
+    expect(screen.queryByText(/같은 곳으로 돌아오는/)).toBeNull();
   });
 
   it("낙서 인식 코스: 모델 판정이라고 밝히고, 원래 그림 범례는 없다", () => {

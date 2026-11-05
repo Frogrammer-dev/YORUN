@@ -1,10 +1,10 @@
 "use client";
 // 찾고 싶은 그림 만들기: 손으로 그리기(여러 획 가능) · 글자 입력 · 이미지 올리기.
-// 어느 방법이든 '닫힌 획 여러 개'로 바꾸고, 획 사이는 코스에서 이동 구간이 된다.
+// 손그림은 열린 선을 유지하고, 글자·이미지는 닫힌 바깥 윤곽을 쓴다.
 
 import { useRef, useState } from "react";
 import { binarize, traceOutlines } from "@/lib/art/trace";
-import { groupFromLoops, groupLines, type ShapeGroup } from "@/lib/route/shapes";
+import { groupFromLoops, groupFromStrokes, groupLines, isClosedShape, type ShapeGroup } from "@/lib/route/shapes";
 
 type Tab = "draw" | "text" | "image";
 type Pt = [number, number];
@@ -35,7 +35,7 @@ export function CustomShapeInput({ value, onChange }: { value: ShapeGroup | null
       {value && tab !== "draw" && <GroupPreview group={value} />}
       {value && (
         <p className="hint">
-          {value.parts.length > 1 ? `획 ${value.parts.length}개 — 획마다 고리 코스를 만들고, 획 사이는 이동 구간(점선)으로 이어요.` : "이 그림과 닮은 코스를 찾아요."}
+          {value.parts.length > 1 ? `획 ${value.parts.length}개 — 그린 획을 차례로 따라가고, 획 사이는 이동 구간(점선)으로 이어요.` : "이 그림과 닮은 코스를 찾아요."}
         </p>
       )}
     </div>
@@ -49,7 +49,7 @@ function GroupPreview({ group }: { group: ShapeGroup }) {
   return (
     <svg className="draw-canvas draw-preview" viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={`정리된 그림 미리보기, 획 ${group.parts.length}개`}>
       {lines.map((l, i) => (
-        <path key={i} d={l.map(([x, y], k) => `${k ? "L" : "M"}${(SIZE / 2 + x * inner).toFixed(1)} ${(SIZE / 2 - y * inner).toFixed(1)}`).join("") + "Z"} fill="none" className="draw-ink" />
+        <path key={i} d={l.map(([x, y], k) => `${k ? "L" : "M"}${(SIZE / 2 + x * inner).toFixed(1)} ${(SIZE / 2 - y * inner).toFixed(1)}`).join("") + (isClosedShape(group.parts[i].shape) ? "Z" : "")} fill="none" className="draw-ink" />
       ))}
     </svg>
   );
@@ -59,16 +59,19 @@ function DrawTab({ onChange }: { onChange: (g: ShapeGroup | null) => void }) {
   const [strokes, setStrokes] = useState<Pt[][]>([]);
   const [cur, setCur] = useState<Pt[] | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const drawing = useRef(false);
+  const [closed, setClosed] = useState(false);
+  const activeStroke = useRef<{ pointerId: number; points: Pt[] } | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
 
   const at = (e: React.PointerEvent): Pt => {
     const r = svgRef.current!.getBoundingClientRect();
     return [((e.clientX - r.left) / r.width) * SIZE, ((e.clientY - r.top) / r.height) * SIZE];
   };
-  const update = (list: Pt[][]) => {
+  // 손으로 명시한 작은 획은 보존한다. 탭 수준의 흔들림은 입력 단계에서 걸러낸다.
+  const makeGroup = (list: Pt[][], connect = closed) => groupFromStrokes(list, { order: "given", minPartRatio: 0, maxParts: MAX_PARTS, closed: connect });
+  const update = (list: Pt[][], connect = closed) => {
     setStrokes(list);
-    const g = list.length ? groupFromLoops(list, { order: "given", minPartRatio: 0.08, maxParts: MAX_PARTS }) : null;
+    const g = list.length ? makeGroup(list, connect) : null;
     onChange(g);
     return g;
   };
@@ -80,39 +83,55 @@ function DrawTab({ onChange }: { onChange: (g: ShapeGroup | null) => void }) {
         className="draw-canvas"
         viewBox={`0 0 ${SIZE} ${SIZE}`}
         role="img"
-        aria-label="찾고 싶은 그림을 그리는 칸. 획마다 손을 떼면 시작점과 끝점이 이어져요. 여러 획을 그릴 수 있어요."
+        aria-label="찾고 싶은 그림을 그리는 칸. 시작점과 끝점을 잇지 않고 여러 획을 그릴 수 있어요."
         onPointerDown={(e) => {
+          if (activeStroke.current) return;
           e.currentTarget.setPointerCapture(e.pointerId);
-          drawing.current = true;
           setError(null);
-          setCur([at(e)]);
+          const points = [at(e)];
+          activeStroke.current = { pointerId: e.pointerId, points };
+          setCur(points);
         }}
         onPointerMove={(e) => {
-          if (!drawing.current) return;
+          const active = activeStroke.current;
+          if (!active || active.pointerId !== e.pointerId) return;
           const p = at(e);
-          setCur((s) => (!s ? [p] : Math.hypot(p[0] - s[s.length - 1][0], p[1] - s[s.length - 1][1]) < 2 ? s : [...s, p]));
+          const last = active.points[active.points.length - 1];
+          if (Math.hypot(p[0] - last[0], p[1] - last[1]) < 2) return;
+          active.points = [...active.points, p];
+          setCur(active.points);
         }}
-        onPointerUp={() => {
-          if (!drawing.current) return;
-          drawing.current = false;
-          const s = cur;
+        onPointerUp={(e) => {
+          const active = activeStroke.current;
+          if (!active || active.pointerId !== e.pointerId) return;
+          activeStroke.current = null;
+          // 마지막 move 이후의 실제 손 뗀 좌표도 포함한다. 두 점만 있는 직선도 유효하다.
+          const end = at(e), last = active.points[active.points.length - 1];
+          const s = end[0] === last[0] && end[1] === last[1] ? active.points : [...active.points, end];
           setCur(null);
-          if (!s || s.length < 8) return;
+          const x = s.map((p) => p[0]), y = s.map((p) => p[1]);
+          if (Math.max(Math.max(...x) - Math.min(...x), Math.max(...y) - Math.min(...y)) < 4) {
+            setError("짧은 점 대신 조금 더 길게 선을 그려 주세요.");
+            return;
+          }
+          if (!makeGroup([s])) {
+            setError("시작점과 끝점을 연결해도 안쪽이 없는 획이에요. 연결 옵션을 끄면 직선도 사용할 수 있어요.");
+            return;
+          }
           if (strokes.length >= MAX_PARTS) {
             setError(`획은 ${MAX_PARTS}개까지 그릴 수 있어요.`);
             return;
           }
-          const before = strokes.length ? (groupFromLoops(strokes, { order: "given", minPartRatio: 0.08, maxParts: MAX_PARTS })?.parts.length ?? 0) : 0;
-          const g = update([...strokes, s]);
-          if (!g || g.parts.length <= before) setError("방금 획은 너무 작거나 안쪽이 없어서 빠졌어요. 조금 더 크게, 닫힌 모양으로 그려 주세요.");
+          update([...strokes, s]);
         }}
-        onPointerCancel={() => {
-          drawing.current = false;
+        onPointerCancel={(e) => {
+          if (activeStroke.current?.pointerId !== e.pointerId) return;
+          activeStroke.current = null;
           setCur(null);
         }}
       >
         {strokes.map((s, i) => (
-          <path key={i} d={s.map((p, k) => `${k ? "L" : "M"}${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join("") + "Z"} fill="none" className="draw-ink" />
+          <path key={i} d={s.map((p, k) => `${k ? "L" : "M"}${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join("") + (closed ? "Z" : "")} fill="none" className="draw-ink" />
         ))}
         {cur && <polyline points={cur.map((p) => p.join(",")).join(" ")} fill="none" className="draw-ink" />}
         {!strokes.length && !cur && (
@@ -121,16 +140,31 @@ function DrawTab({ onChange }: { onChange: (g: ShapeGroup | null) => void }) {
           </text>
         )}
       </svg>
+      <label className="hint">
+        <input
+          type="checkbox"
+          checked={closed}
+          onChange={(e) => {
+            const connect = e.target.checked;
+            setClosed(connect);
+            const g = update(strokes, connect);
+            setError(connect && strokes.length && (g?.parts.length ?? 0) < strokes.length
+              ? "직선처럼 안쪽이 없는 획은 연결 옵션을 켜면 탐색에서 제외돼요."
+              : null);
+          }}
+        />{" "}
+        시작점과 끝점 연결
+      </label>
       <div className="draw-foot">
         <p className="hint" role={error ? "alert" : undefined}>
-          {error ?? "획마다 손을 떼면 시작점과 끝점이 이어져요. 떨어진 여러 획(예: 하트 두 개)도 그릴 수 있어요."}
+          {error ?? (closed ? "각 획의 시작점과 끝점을 연결해 고리를 만들어요." : "그린 선의 시작점과 끝점을 그대로 사용해요. 직선이나 떨어진 여러 획도 그릴 수 있어요.")}
         </p>
         {strokes.length > 0 && (
           <>
-            <button type="button" className="btn btn-ghost btn-sm" onClick={() => update(strokes.slice(0, -1))}>
+            <button type="button" className="btn btn-ghost btn-sm" onClick={() => { setError(null); update(strokes.slice(0, -1)); }}>
               한 획 지우기
             </button>
-            <button type="button" className="btn btn-ghost btn-sm" onClick={() => update([])}>
+            <button type="button" className="btn btn-ghost btn-sm" onClick={() => { setError(null); update([]); }}>
               모두 지우기
             </button>
           </>
@@ -196,7 +230,7 @@ function TextTab({ onChange }: { onChange: (g: ShapeGroup | null) => void }) {
       <label htmlFor="shape-text">글자 (최대 4자)</label>
       <input id="shape-text" type="text" maxLength={4} value={text} placeholder="예: 520, LOVE, 별" onChange={(e) => make(e.target.value)} />
       <p className="hint" role={error ? "alert" : undefined}>
-        {error ?? "굵은 글꼴의 바깥 윤곽을 따라 달려요. 글자 하나가 획 하나가 되고, 작은 점(예: i의 점)은 빠져요."}
+        {error ?? "굵은 글꼴의 닫힌 바깥 윤곽을 따라 달려요. 떨어진 윤곽마다 한 획이 되며 작은 점은 빠져요. 최대 6개 윤곽을 사용해요."}
       </p>
     </div>
   );
