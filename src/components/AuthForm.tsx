@@ -5,7 +5,7 @@ import { useState } from "react";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { ConsentFields, UNDER14_NOTICE } from "./ConsentFields";
 import { MIN_PASSWORD_LENGTH, authErrorMessage } from "@/lib/client/authMessages";
-import { consentRecord, type AgeGroup } from "@/lib/legal/policy";
+import { CONSENT_REQUIRED_MESSAGE, INITIAL_AGE, consentRecord, type AgeGroup } from "@/lib/legal/policy";
 
 type Mode = "signin" | "signup" | "reset" | "link";
 
@@ -46,7 +46,7 @@ export function AuthForm({ supabase, prepareNext, onNavigate, keepNotice, draftL
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [sent, setSent] = useState<Exclude<Mode, "signin"> | null>(null);
-  const [age, setAge] = useState<AgeGroup | null>(null);
+  const [age, setAge] = useState<AgeGroup | null>(INITIAL_AGE);
   const [agreed, setAgreed] = useState(false);
 
   const needsPassword = mode === "signin" || mode === "signup";
@@ -80,7 +80,7 @@ export function AuthForm({ supabase, prepareNext, onNavigate, keepNotice, draftL
       return;
     }
     if (mode === "signup" && (age !== "14+" || !agreed)) {
-      setError("나이를 고르고 필수 항목에 동의해 주세요.");
+      setError(CONSENT_REQUIRED_MESSAGE);
       return;
     }
     if (mode === "signup" && password.length < MIN_PASSWORD_LENGTH) {

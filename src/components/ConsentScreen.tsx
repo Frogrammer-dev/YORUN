@@ -6,10 +6,10 @@ import { useState } from "react";
 import { ConsentFields } from "./ConsentFields";
 import { BrandMark } from "./Icon";
 import { browserSupabase } from "@/lib/client/supabaseBrowser";
-import { consentRecord, type AgeGroup } from "@/lib/legal/policy";
+import { CONSENT_REQUIRED_MESSAGE, FEATURES, INITIAL_AGE, consentRecord, type AgeGroup } from "@/lib/legal/policy";
 
 export function ConsentScreen({ next }: { next: string }) {
-  const [age, setAge] = useState<AgeGroup | null>(null);
+  const [age, setAge] = useState<AgeGroup | null>(INITIAL_AGE);
   const [agreed, setAgreed] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -17,7 +17,7 @@ export function ConsentScreen({ next }: { next: string }) {
   async function agree() {
     if (busy) return;
     if (age !== "14+" || !agreed) {
-      setError("나이를 고르고 필수 항목에 동의해 주세요.");
+      setError(CONSENT_REQUIRED_MESSAGE);
       return;
     }
     setBusy(true);
@@ -43,7 +43,7 @@ export function ConsentScreen({ next }: { next: string }) {
         <div className="auth-head">
           <BrandMark size={44} />
           <h1>시작하기 전에 확인해 주세요</h1>
-          <p>요런 계정을 쓰려면 나이 확인과 개인정보 동의가 필요해요.</p>
+          <p>요런 계정을 쓰려면 {FEATURES.signupAgeAndTerms ? "나이 확인과 " : ""}개인정보 동의가 필요해요.</p>
         </div>
         <section className="hub-card">
           <ConsentFields age={age} onAge={(value) => { setAge(value); setError(null); }} agreed={agreed} onAgreed={setAgreed} />

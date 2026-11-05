@@ -7,6 +7,18 @@ import { CONSENT_SUMMARY, FEATURES, type AgeGroup } from "@/lib/legal/policy";
 export const UNDER14_NOTICE = "만 14세 미만은 보호자의 동의가 먼저 필요해요. 보호자 확인 방법을 준비하고 있어서 지금은 가입할 수 없어요. 로그인 없이 코스 찾기와 달리기는 할 수 있어요.";
 
 export function ConsentFields({ age, onAge, agreed, onAgreed }: { age: AgeGroup | null; onAge: (age: AgeGroup) => void; agreed: boolean; onAgreed: (agreed: boolean) => void }) {
+  const privacyLink = <p className="hint"><Link href="/privacy" target="_blank">개인정보 처리방침 전문 보기</Link></p>;
+  if (!FEATURES.signupAgeAndTerms) {
+    return (
+      <div className="consent-box">
+        <label className="consent">
+          <input type="checkbox" checked={agreed} onChange={(e) => onAgreed(e.target.checked)} />
+          <span>(필수) 개인정보 수집과 이용에 동의해요.</span>
+        </label>
+        {privacyLink}
+      </div>
+    );
+  }
   return (
     <div className="consent-box">
       <fieldset className="seg-field">
@@ -31,7 +43,7 @@ export function ConsentFields({ age, onAge, agreed, onAgreed }: { age: AgeGroup 
             <input type="checkbox" checked={agreed} onChange={(e) => onAgreed(e.target.checked)} />
             <span>(필수) 위 내용을 확인했고 개인정보 수집과 이용에 동의해요.</span>
           </label>
-          <p className="hint"><Link href="/privacy" target="_blank">개인정보 처리방침 전문 보기</Link></p>
+          {privacyLink}
         </>
       )}
     </div>

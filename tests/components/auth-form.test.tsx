@@ -14,10 +14,7 @@ const navigate = vi.fn();
 const setup = (props = {}) => render(<AuthForm supabase={{ auth } as unknown as SupabaseClient} prepareNext={async () => "/room?draft=d1"} onNavigate={navigate} {...props} />);
 const typeEmail = () => fireEvent.change(screen.getByLabelText("이메일"), { target: { value: " runner@example.com " } });
 const typePassword = (value: string) => fireEvent.change(screen.getByLabelText(/^비밀번호/), { target: { value } });
-const agree = () => {
-  fireEvent.click(screen.getByRole("radio", { name: "만 14세 이상" }));
-  fireEvent.click(screen.getByRole("checkbox"));
-};
+const agree = () => fireEvent.click(screen.getByRole("checkbox"));
 const submit = () => fireEvent.submit(document.querySelector("form")!);
 
 beforeEach(() => {
@@ -84,16 +81,17 @@ describe("AuthForm", () => {
     agree();
     submit();
     await waitFor(() => expect(auth.signUp).toHaveBeenCalled());
-    expect(auth.signUp.mock.calls[0][0].options.data.consent).toMatchObject({ ageGroup: "14+", version: POLICY_VERSION });
+    expect(auth.signUp.mock.calls[0][0].options.data.consent).toMatchObject({ ageGroup: "unconfirmed", version: POLICY_VERSION });
   });
 
-  it("회원가입: 프로토타입에서는 만 14세 미만을 고를 수 없고 계정을 만들지 않는다", async () => {
+  it("회원가입: 프로토타입에서는 나이 선택과 수집 항목 설명을 숨기고, 동의 전에는 계정을 만들지 않는다", async () => {
     setup();
     fireEvent.click(screen.getByRole("radio", { name: "회원가입" }));
-    const under14 = screen.getByRole("radio", { name: "만 14세 미만" }) as HTMLButtonElement;
-    expect(under14.disabled).toBe(true);
-    fireEvent.click(under14);
-    expect(under14.getAttribute("aria-checked")).toBe("false");
+    expect(screen.queryByRole("radio", { name: "만 14세 이상" })).toBeNull();
+    expect(screen.queryByRole("radio", { name: "만 14세 미만" })).toBeNull();
+    expect(screen.queryByText("왜 모으나요")).toBeNull();
+    expect(screen.getByRole("checkbox", { name: /개인정보 수집과 이용에 동의/ })).toBeTruthy();
+    expect(screen.getByRole("link", { name: /처리방침/ })).toBeTruthy();
     typeEmail();
     typePassword("password1");
     submit();
@@ -158,9 +156,10 @@ describe("safeNext", () => {
 });
 
 describe("hasValidConsent", () => {
-  it("현재 판의 만 14세 이상 동의만 유효하다", () => {
+  it("현재 판의 동의만 유효하고, 만 14세 미만 기록은 유효하지 않다", () => {
     expect(hasValidConsent({ consent: { version: POLICY_VERSION, ageGroup: "14+", at: "x" } })).toBe(true);
     expect(hasValidConsent({ consent: { version: POLICY_VERSION, ageGroup: "under14", at: "x" } })).toBe(false);
+    expect(hasValidConsent({ consent: { version: POLICY_VERSION, ageGroup: "unconfirmed", at: "x" } })).toBe(true);
     expect(hasValidConsent({ consent: { version: "old", ageGroup: "14+", at: "x" } })).toBe(false);
     expect(hasValidConsent({})).toBe(false);
     expect(hasValidConsent(undefined)).toBe(false);

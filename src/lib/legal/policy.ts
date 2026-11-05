@@ -16,7 +16,11 @@ export const OPERATOR = {
 };
 
 /** 프로토타입에서는 끈다. 보호자 동의 확인 방법(시행령 제17조의2)을 구현한 뒤에만 켠다. */
-export const FEATURES = { under14Signup: false };
+export const FEATURES = {
+  under14Signup: false,
+  /** 프로토타입에서는 가입 때 나이 선택과 수집 항목 설명을 숨긴다. 공개 출시 전에 켠다. */
+  signupAgeAndTerms: false,
+};
 
 export const isPolicyDraft = () => Object.values(OPERATOR).some((value) => value === null);
 
@@ -29,12 +33,18 @@ export const CONSENT_SUMMARY = {
 };
 
 export type AgeGroup = "14+" | "under14";
-export interface ConsentRecord { version: string; ageGroup: AgeGroup; at: string }
+export interface ConsentRecord { version: string; ageGroup: AgeGroup | "unconfirmed"; at: string }
 
-export const consentRecord = (ageGroup: AgeGroup): ConsentRecord => ({ version: POLICY_VERSION, ageGroup, at: new Date().toISOString() });
+/** 나이 선택을 숨기면 입력 검사만 통과시킨다. 기록에는 consentRecord가 "unconfirmed"로 남긴다 */
+export const INITIAL_AGE: AgeGroup | null = FEATURES.signupAgeAndTerms ? null : "14+";
+export const CONSENT_REQUIRED_MESSAGE = FEATURES.signupAgeAndTerms ? "나이를 고르고 필수 항목에 동의해 주세요." : "필수 항목에 동의해 주세요.";
+
+/** 묻지 않은 나이를 기록하지 않는다. 나이 선택을 다시 켜면 "unconfirmed" 계정은 다시 동의한다 */
+export const consentRecord = (ageGroup: AgeGroup): ConsentRecord => ({ version: POLICY_VERSION, ageGroup: FEATURES.signupAgeAndTerms ? ageGroup : "unconfirmed", at: new Date().toISOString() });
 
 /** 만 14세 미만은 법정대리인 동의를 확인하기 전까지 동의 완료로 보지 않는다 */
 export function hasValidConsent(metadata: Record<string, unknown> | undefined): boolean {
   const consent = metadata?.consent as Partial<ConsentRecord> | undefined;
-  return consent?.version === POLICY_VERSION && consent.ageGroup === "14+";
+  if (consent?.version !== POLICY_VERSION) return false;
+  return consent.ageGroup === "14+" || (!FEATURES.signupAgeAndTerms && consent.ageGroup === "unconfirmed");
 }
