@@ -1,0 +1,82 @@
+/* Hallmark · shape: app screen · genre: playful · theme: brand (by request) · v2.0.0
+ * critique: 사용자가 만든 그림 대결 연출을 옮긴다. 무대는 밝은 하늘과 풀밭, 바깥은 8인 경기와 같은 네이비로 묶는다.
+ * waive: motion-is-state, 등장과 공격 연출이 이 화면의 핵심이며 동작 줄이기 설정에서는 뺀다 */
+:root {
+  --bt-sky: #ddf0ff;
+  --bt-field: #e8f5dc;
+  --bt-plat: #c7e3b2;
+  --bt-plat-edge: #a6ccb8;
+  --bt-ink: #111318;
+  --bt-white: #ffffff;
+  --bt-shadow: rgb(0 0 0 / 14%);
+  --bt-dim-fill: #0b0d12;
+  --bt-red-line: #d92d20;
+  --bt-hp: #12b76a;
+  --bt-hp-mid: #f5b70a;
+  --bt-hp-low: #f04438;
+  --bt-hp-trail: #fda29b;
+  --bt-hp-track: #d5d8de;
+  --bt-panel: rgb(255 255 255 / 92%);
+  --bt-band-outline: rgb(0 0 0 / 25%);
+  --bt-band-sub-ink: rgb(255 255 255 / 92%);
+  --bt-crit: #f79009;
+}
+.bt-blue { --bt: var(--brand); }
+.bt-red { --bt: var(--bt-red-line); }
+.bt-stage { position: relative; overflow: hidden; border-radius: var(--r-md) var(--r-md) 0 0; }
+.bt-arena { display: block; width: 100%; height: auto; }
+.bt-sky { fill: var(--bt-sky); }
+.bt-field { fill: var(--bt-field); }
+.bt-plat { fill: var(--bt-plat); stroke: var(--bt-plat-edge); stroke-width: 6; }
+.bt-shadow { fill: var(--bt-shadow); }
+.bt-flash { fill: var(--bt-white); pointer-events: none; }
+.bt-line { fill: none; stroke: var(--bt); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.bt-fist { fill: var(--bt); }
+.bt-eye { fill: var(--bt-white); stroke: var(--bt-ink); stroke-width: 2.5; }
+.bt-pupil { fill: var(--bt-ink); }
+.bt-pop { font-size: 48px; font-weight: 900; fill: var(--bt-ink); paint-order: stroke; stroke: var(--bt-white); stroke-width: 8px; }
+.bt-pop.bt-crit { font-size: 64px; fill: var(--bt-crit); }
+.bt-pick-bubble rect { fill: var(--bt-white); stroke: var(--bt-ink); stroke-width: 4; }
+.bt-pick-bubble text { font-size: 36px; font-weight: 800; fill: var(--bt-ink); }
+.bt-band { fill: var(--bt); stroke: var(--bt-white); stroke-width: 6; }
+.bt-band-name { font-size: 58px; font-weight: 900; fill: var(--bt-white); paint-order: stroke; stroke: var(--bt-band-outline); stroke-width: 6px; }
+.bt-band-sub { font-size: 34px; font-weight: 800; fill: var(--bt-band-sub-ink); }
+.bt-dim { fill: var(--bt-dim-fill); }
+.bt-wave { fill: none; stroke: var(--bt); }
+.bt-ring { fill: none; stroke: var(--bt); stroke-width: 10; }
+.bt-halo { fill: none; stroke: var(--bt); stroke-width: 30; stroke-opacity: .35; stroke-linecap: round; stroke-linejoin: round; }
+.bt-rim { fill: none; stroke: var(--bt-white); stroke-width: 11; stroke-linecap: round; stroke-linejoin: round; }
+.bt-speed { fill: var(--bt-white); }
+.bt-impact { fill: var(--bt-ink); }
+.bt-panel { position: absolute; width: 46%; padding: 6px 10px; border: 2px solid var(--bt-ink); border-radius: 10px 4px 10px 4px; background: var(--bt-panel); color: var(--bt-ink); font-size: 12px; animation: bt-panel-in .35s ease-out; }
+.bt-panel-foe { top: 4%; left: 3%; }
+.bt-panel-me { top: 63%; right: 3%; }
+.bt-panel-name { display: flex; font-weight: 800; }
+.bt-panel-name span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bt-hpline { display: flex; align-items: center; gap: 6px; margin-top: 3px; }
+.bt-hpline small { font-size: 10px; font-weight: 900; }
+.bt-bar { position: relative; flex: 1; height: 8px; overflow: hidden; border-radius: var(--r-pill); background: var(--bt-hp-track); }
+.bt-bar i { position: absolute; inset: 0; background: var(--bt-hp); transform-origin: left; }
+/* 데미지 잔상: 잠깐 머물렀다가 앞 막대를 따라잡는다 */
+.bt-bar i.bt-trail { background: var(--bt-hp-trail); transition: transform .9s ease-in .45s; }
+.bt-bar i.bt-mid { background: var(--bt-hp-mid); }
+.bt-bar i.bt-low { background: var(--bt-hp-low); }
+.bt-hpnum { margin: 2px 0 0; font-family: var(--font-num); font-size: 14px; font-weight: 700; text-align: right; }
+.bt-msg { display: flex; align-items: center; gap: var(--sp-3); min-height: 72px; padding: var(--sp-3) var(--sp-4); border-radius: 0 0 var(--r-md) var(--r-md); background: var(--derby-raised); color: var(--derby-ink); }
+.bt-msg p { flex: 1; margin: 0; font-size: var(--fs-callout); font-weight: 800; line-height: 1.4; word-break: keep-all; }
+.bt-msg .derby-quiet { flex: none; }
+.duel-arena .bt-stage + .bt-msg { margin-top: calc(var(--sp-3) * -1); }
+.bt-result { display: flex; flex-direction: column; align-items: center; gap: var(--sp-2); text-align: center; animation: bt-result-in .4s ease-out; }
+.bt-result h2 { margin: 0; font-size: 44px; font-weight: 900; line-height: 1.1; color: var(--derby-gold); }
+.bt-result[data-result="lose"] h2 { color: var(--derby-ink); }
+.bt-result p { margin: 0; color: var(--derby-ink-2); font-size: var(--fs-callout); word-break: keep-all; }
+.bt-result dl { display: grid; grid-template-columns: auto 1fr; gap: var(--sp-1) var(--sp-3); width: 100%; margin: var(--sp-1) 0; padding: var(--sp-3); border-radius: var(--r-md); background: var(--derby-raised); font-size: var(--fs-callout); text-align: left; }
+.bt-result dt { color: var(--derby-ink-2); }
+.bt-result dd { margin: 0; font-family: var(--font-num); font-weight: 700; text-align: right; }
+.bt-result .derby-start, .bt-result .derby-quiet { width: 100%; }
+@keyframes bt-panel-in { from { opacity: 0; transform: translateY(-8px); } }
+@keyframes bt-result-in { from { opacity: 0; transform: translateY(16px) scale(.94); } }
+@media (prefers-reduced-motion: reduce) {
+  .bt-panel, .bt-result { animation: none; }
+  .bt-bar i.bt-trail { transition: none; }
+}

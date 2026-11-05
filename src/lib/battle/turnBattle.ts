@@ -102,5 +102,12 @@ export const BATTLE_BOTS = [
   { id: "bot-artist", name: "봇 그림쟁이", stats: { distanceM: 3000, adherence: 0.95 } },
 ] as const;
 
+/** 달린 기록이 없는 캐릭터의 능력치. 범위는 달린 기록과 같아 상성이 승부를 좌우한다 */
+export const BATTLE_STYLE_SHEETS = {
+  speed: { maxHp: 92, attack: 21 },
+  balance: { maxHp: 100, attack: 20 },
+  corner: { maxHp: 108, attack: 18 },
+} as const satisfies Record<string, BattleSheet>;
+
 /** 대표 캐릭터가 아직 없는 사람의 체험 캐릭터 */
 export const TRIAL_STATS = { distanceM: 5000, adherence: 0.6 };

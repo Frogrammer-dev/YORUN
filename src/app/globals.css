@@ -710,7 +710,7 @@ a.hub-tile:active { transform: scale(.98); }
 .duel-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-2); }
 .duel-choice { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 76px; padding: var(--sp-2); border: 1px solid var(--line-strong); border-radius: var(--r-md); background: var(--surface); color: var(--text); font: inherit; cursor: pointer; }
 .duel-choice small { font-size: var(--fs-caption); }
-.duel-choice-allin { border-color: var(--panel); background: var(--panel); color: var(--on-panel); }
+.duel-choice-allin { border-color: var(--derby-gold); background: var(--derby-gold); color: var(--derby-bg); }
 .duel-choice:disabled { border-color: var(--line); background: var(--disabled-bg); color: var(--text-disabled); cursor: not-allowed; }
 .duel-result { text-align: center; font-size: var(--fs-title1, 28px); }
 .battle-lead { margin: var(--sp-1) 0; font-size: var(--fs-callout); color: var(--text-2); }
@@ -924,14 +924,6 @@ a.hub-tile:active { transform: scale(.98); }
   --content-ink: #172e3c;
   --content-paper: #edf0ec;
   --content-frame: #f9f8f3;
-  --arena-sky: #dff0fc;
-  --arena-grass: #e8f4da;
-  --arena-platform: #c9e4af;
-  --arena-border: #a7c88c;
-  --arena-paper: #fff;
-  --arena-ink: #243641;
-  --arena-blue: #168ddd;
-  --arena-red: #d5402f;
   --content-shade: rgb(0 0 0 / 35%);
 }
 .content-menu { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sp-3); }
@@ -946,21 +938,4 @@ a.hub-tile:active { transform: scale(.98); }
 .content-room-preview { background-image: url("/images/contents/room-canvas.png"); background-size: 190% auto; background-position: center 50%; }
 @media (max-width: 640px) { .content-menu-preview { height: 210px; } }
 @media (min-width: 720px) { .content-menu { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.duel-arena-field { position: relative; height: 320px; overflow: clip; border-radius: 18px; background: linear-gradient(var(--arena-sky) 45%, var(--arena-grass) 45%); color: var(--arena-ink); }
-.duel-platform { position: absolute; height: 35px; border: 2px solid var(--arena-border); border-radius: 50%; background: var(--arena-platform); }
-.duel-platform-foe { top: 115px; right: 3%; width: 42%; }
-.duel-platform-me { bottom: 20px; left: -5%; width: 52%; }
-.duel-hud { position: absolute; z-index: 1; width: 43%; padding: 10px 12px; border: 2px solid var(--arena-ink); border-radius: 9px; background: var(--arena-paper); }
-.duel-hud-foe { top: 16px; left: 14px; }
-.duel-hud-me { right: 14px; bottom: 22px; }
-.duel-hud strong { display: block; overflow: hidden; font-size: 14px; text-overflow: ellipsis; white-space: nowrap; }
-.duel-hud div { display: flex; align-items: center; gap: 8px; font-size: 11px; }
-.duel-hud progress { width: 100%; height: 9px; accent-color: var(--arena-border); }
-.duel-hud small { display: block; font-size: 11px; text-align: right; }
-.duel-route { position: absolute; }
-.duel-route-foe { top: 29px; right: 12%; color: var(--arena-red); }
-.duel-route-me { bottom: 30px; left: 10%; color: var(--arena-blue); }
-.duel-route-move { animation: duel-lunge 450ms ease-out; }
-@keyframes duel-lunge { 50% { transform: translate(10px, -8px) scale(1.06); } }
-@media (prefers-reduced-motion: reduce) { .duel-route-move { animation: none; } }
 .duel-choice:focus-visible { outline: 3px solid var(--brand-text); outline-offset: 2px; }

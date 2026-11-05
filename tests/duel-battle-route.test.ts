@@ -95,3 +95,8 @@ it("다른 사람의 대결은 찾을 수 없다", async () => {
   db.battle = null;
   expect((await send({ action: "turn", id: "11111111-1111-4111-8111-111111111111", choice: "rock" })).status).toBe(404);
 });
+
+it("고른 기본 캐릭터의 능력치로 대결을 시작한다", async () => {
+  const response = await send({ action: "start", opponent: "bot-artist", style: "corner" });
+  expect((await response.json()).state.sheets[0]).toEqual({ maxHp: 108, attack: 18 });
+});

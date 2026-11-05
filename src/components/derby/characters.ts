@@ -4,6 +4,7 @@
 import { BOOTH_STYLE_IDS, BOOTH_STYLES, type BoothStyle } from "@/lib/battle/boothRace";
 import { BODY_LABELS, STYLE_BODIES, classifyBody, type BodyPlan } from "@/lib/battle/bodyPlan";
 import { assessTrace } from "@/lib/battle/derbyTrace";
+import { BATTLE_STYLE_SHEETS, battleSheet, type BattleSheet } from "@/lib/battle/turnBattle";
 import type { BattleDraft } from "@/lib/battle/battleDraft";
 import { nodes } from "@/components/booth/course";
 
@@ -20,6 +21,8 @@ export interface DerbyCharacter {
   corner: number;
   /** 생김새로 고른 달리는 방식 */
   body: BodyPlan;
+  /** 1대1 대결 능력치 */
+  duel: BattleSheet;
   entry: { style: BoothStyle } | { consent: true; session: string; trace: BattleDraft["trace"] };
   /** 참가할 수 없는 기록이면 이유 */
   blocked?: string;
@@ -38,7 +41,7 @@ function styleOf(id: string): BoothStyle {
 
 const STARTERS: DerbyCharacter[] = BOOTH_STYLE_IDS.map((style) => ({
   id: `starter-${style}`, kind: "starter", name: BOOTH_STYLES[style].label, note: BOOTH_STYLES[style].hint,
-  line: null, ...styleGauges(style), body: STYLE_BODIES[style], entry: { style },
+  line: null, ...styleGauges(style), body: STYLE_BODIES[style], duel: BATTLE_STYLE_SHEETS[style], entry: { style },
 }));
 
 function verifiedCharacter(draft: BattleDraft): DerbyCharacter {
@@ -46,9 +49,9 @@ function verifiedCharacter(draft: BattleDraft): DerbyCharacter {
   const base = { id: `verified-${draft.id}`, kind: "verified" as const, name: "내 달리기 기록", line, body: classifyBody(line), entry: { consent: true as const, session: draft.id, trace: draft.trace } };
   try {
     const stats = assessTrace(draft.trace);
-    return { ...base, note: `실제로 달린 ${(stats.distanceM / 1000).toFixed(1)}km 기록이에요.`, straight: paceGauge(stats.avgPaceSecPerKm), corner: stats.cornering };
+    return { ...base, note: `실제로 달린 ${(stats.distanceM / 1000).toFixed(1)}km 기록이에요.`, straight: paceGauge(stats.avgPaceSecPerKm), corner: stats.cornering, duel: battleSheet(stats) };
   } catch (error) {
-    return { ...base, note: "경기 조건을 채우지 못한 기록이에요.", straight: 0, corner: 0, blocked: (error as Error).message };
+    return { ...base, note: "경기 조건을 채우지 못한 기록이에요.", straight: 0, corner: 0, duel: BATTLE_STYLE_SHEETS.balance, blocked: (error as Error).message };
   }
 }
 
@@ -62,7 +65,7 @@ function boothCharacters(): DerbyCharacter[] {
       return {
         id: `trial-${card.id}`, kind: "trial", name: `${card.number}번 러너의 ${String(card.shape).slice(0, 12)}`,
         note: `체험 코스예요. ${BOOTH_STYLES[style].label}으로 달려요.`,
-        line, ...styleGauges(style), body: classifyBody(line, `${card.prompt ?? ""} ${card.shape}`), entry: { style },
+        line, ...styleGauges(style), body: classifyBody(line, `${card.prompt ?? ""} ${card.shape}`), duel: BATTLE_STYLE_SHEETS[style], entry: { style },
       };
     });
   } catch {

@@ -4,10 +4,10 @@
 import dynamic from "next/dynamic";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AuthForm } from "@/components/AuthForm";
-import { PathThumb } from "@/components/Icon";
 import { watchBattleDraft, type BattleDraft } from "@/lib/battle/battleDraft";
 import { boothRaceResult, boothStats, raceProgress, type BoothRaceReplay, type BoothStyle } from "@/lib/battle/boothRace";
 import { browserSupabase } from "@/lib/client/supabaseBrowser";
+import { CharacterFace, Gauge } from "./CharacterParts";
 import { bodyLabel, loadCharacters, type DerbyCharacter } from "./characters";
 import type { CameraMode } from "./StadiumMap";
 import "./derby.css";
@@ -27,20 +27,6 @@ async function request<T>(url: string, init?: RequestInit): Promise<T> {
   const data = await response.json().catch(() => null);
   if (!response.ok) throw new Error(data?.message ?? "경기 서버에 연결하지 못했어요.");
   return data as T;
-}
-
-function Gauge({ label, value }: { label: string; value: number }) {
-  return (
-    <div className="derby-gauge">
-      <span>{label}</span>
-      <div className="derby-gauge-bar"><i style={{ transform: `scaleX(${Math.max(0.04, Math.min(1, value))})` }} /></div>
-    </div>
-  );
-}
-
-function CharacterFace({ character, size }: { character: DerbyCharacter; size: number }) {
-  if (!character.line) return <span className="derby-face derby-face-empty" style={{ width: size, height: size }} aria-hidden="true">{character.name.slice(0, 1)}</span>;
-  return <span className="derby-face" aria-hidden="true"><PathThumb lines={[character.line.map(([x, y]) => [x, -y] as [number, number])]} size={size} width={3} /></span>;
 }
 
 /** 서버 없이도 끝까지 해 볼 수 있는 연습 경기. 기록에 남지 않는다 */

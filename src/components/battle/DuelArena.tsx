@@ -1,16 +1,27 @@
 "use client";
-// 1대1 턴 대결 화면. 상대 고르기 → 매 턴 직접 선택 → 결과. 판정은 서버가 한다.
+// 1대1 턴 대결 화면. 캐릭터 고르기 → 상대 고르기 → 매 턴 직접 선택 → 결과. 판정은 서버가 한다.
 
 import { useCallback, useEffect, useState } from "react";
 import { AuthForm } from "@/components/AuthForm";
+import { CharacterFace, Gauge } from "@/components/derby/CharacterParts";
+import { loadCharacters, type DerbyCharacter } from "@/components/derby/characters";
+import "@/components/derby/derby.css";
 import { PathThumb } from "@/components/Icon";
-import { BATTLE_CHOICES, BATTLE_RULES, CHOICE_LABELS, criticalDamage, type BattleChoice, type BattleSheet, type BattleState, type TurnLog } from "@/lib/battle/turnBattle";
+import { watchBattleDraft, type BattleDraft } from "@/lib/battle/battleDraft";
+import type { DuelAction } from "@/lib/battle/duel";
+import { BATTLE_CHOICES, BATTLE_RULES, CHOICE_LABELS, criticalDamage, type BattleSheet, type BattleState, type TurnLog } from "@/lib/battle/turnBattle";
+import { BattleStage } from "./BattleStage";
 import { browserSupabase } from "@/lib/client/supabaseBrowser";
 import { SHAPES } from "@/lib/route/shapes";
 
 type Opponent = { id: string; name: string; bot: boolean; sheet: BattleSheet };
 type Lobby = { me: { name: string; registered: boolean; sheet: BattleSheet }; opponents: Opponent[]; history: { id: string; opponent: string; winner: BattleState["winner"]; turns: number }[] };
 type Battle = { id: string; opponent: string; state: BattleState; log: TurnLog | null };
+
+/** 등록 API가 받는 기존 필드. 새 대결은 매 턴 직접 고르므로 이 값을 쓰지 않는다 */
+const UNUSED_PLAN: DuelAction[] = ["strike", "guard", "pierce", "strike", "guard"];
+const hpGauge = (sheet: BattleSheet) => (sheet.maxHp - 80) / 30;
+const attackGauge = (sheet: BattleSheet) => (sheet.attack - 15) / 7;
 
 const resultLabel = (winner: BattleState["winner"]) => (winner === 0 ? "승리" : winner === 1 ? "패배" : "무승부");
 
@@ -19,29 +30,6 @@ async function request<T>(init?: { body: unknown }): Promise<T> {
   const data = await response.json().catch(() => null);
   if (!response.ok) throw new Error(data?.message ?? "대결 서버에 연결하지 못했어요.");
   return data as T;
-}
-
-function describe(log: TurnLog, foe: string): string {
-  const [mine, theirs] = log.choices;
-  const shown = `나 ${CHOICE_LABELS[mine]}, ${foe} ${CHOICE_LABELS[theirs]}. `;
-  if (log.critical[0] && log.critical[1]) return shown + "둘 다 이판사판 성공! 서로 피해가 없어요.";
-  if (log.critical[0] && log.damage[1]) return shown + `이판사판 성공! 치명타 ${log.damage[1]} 피해!`;
-  if (log.critical[1] && log.damage[0]) return shown + `상대 이판사판 성공! 치명타 ${log.damage[0]} 피해를 받았어요.`;
-  if (log.missed[0] && log.damage[0]) return shown + `이판사판 실패! ${log.damage[0]} 피해를 받았어요.`;
-  if (log.missed[1] && log.damage[1]) return shown + `상대 이판사판 실패! ${log.damage[1]} 피해를 입혔어요.`;
-  if (log.damage[1]) return shown + `이겼어요! ${log.damage[1]} 피해를 입혔어요.`;
-  if (log.damage[0]) return shown + `졌어요. ${log.damage[0]} 피해를 받았어요.`;
-  return shown + "아무 일도 일어나지 않았어요.";
-}
-
-function Hud({ name, hp, maxHp, side }: { name: string; hp: number; maxHp: number; side: "me" | "foe" }) {
-  return (
-    <div className={`duel-hud duel-hud-${side}`}>
-      <strong>{name}</strong>
-      <div><span>HP</span><progress aria-label={`${name} 체력`} max={maxHp} value={hp} /></div>
-      <small>{hp} / {maxHp}</small>
-    </div>
-  );
 }
 
 /** 코스 그림이 캐릭터가 된다. 상대는 이름으로 모양을 고르므로 같은 상대는 늘 같은 모양이다 */
@@ -59,6 +47,21 @@ export function DuelArena({ returnTo }: { returnTo: string }) {
   const [battle, setBattle] = useState<Battle | null>(null);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
+  // 등장이나 턴 연출이 끝나면 다음 선택을 받는다
+  const [settled, setSettled] = useState(false);
+  const [foeUsed, setFoeUsed] = useState<Opponent | null>(null);
+  const [view, setView] = useState<"pick" | "opponents">("pick");
+  const [draft, setDraft] = useState<BattleDraft | null>(null);
+  const [saved, setSaved] = useState<DerbyCharacter[]>([]);
+  const [selected, select] = useState("");
+  const [consent, agree] = useState(false);
+  const [needLogin, setNeedLogin] = useState(false);
+
+  useEffect(() => watchBattleDraft(setDraft), []);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 기록은 이 기기 저장소에서만 읽는다
+    setSaved(loadCharacters(draft));
+  }, [draft]);
 
   const refresh = useCallback(async () => {
     try {
@@ -83,6 +86,7 @@ export function DuelArena({ returnTo }: { returnTo: string }) {
     setBusy(true);
     setMessage("");
     try {
+      setSettled(false);
       setBattle(await request<Battle>({ body }));
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "요청을 처리하지 못했어요.");
@@ -90,84 +94,143 @@ export function DuelArena({ returnTo }: { returnTo: string }) {
     setBusy(false);
   }
 
-  if (!supabase) return <p role="status">이 실행 환경에서는 대결 서버를 쓸 수 없어요.</p>;
-  if (signedIn === undefined) return <p role="status">참가 상태를 확인하고 있어요.</p>;
-  if (!signedIn) {
-    return (
-      <>
-        <p>대결에 표시할 이름이 필요해요. 게스트로 바로 참여할 수 있어요.</p>
-        <AuthForm supabase={supabase} prepareNext={async () => returnTo} onNavigate={() => setSignedIn(true)} />
-      </>
-    );
+  // 이미 등록한 대표 캐릭터가 있으면 맨 앞에 둔다
+  const characters: DerbyCharacter[] = lobby?.me.registered
+    ? [{ id: "registered", kind: "verified", name: "내 대표 캐릭터", note: "", line: null, straight: 0, corner: 0, body: "biped", duel: lobby.me.sheet, entry: { style: "balance" } }, ...saved]
+    : saved;
+  const character = characters.find((c) => c.id === selected) ?? characters.find((c) => !c.blocked);
+  const isDraft = character?.id.startsWith("verified-") ?? false;
+  const myLines = character?.line ? character.line.map(([x, y]) => [x, -y] as [number, number]) : MY_SHAPE.points;
+
+  async function toOpponents() {
+    if (!character || busy) return;
+    if (!signedIn) {
+      setNeedLogin(true);
+      return;
+    }
+    setBusy(true);
+    setMessage("");
+    try {
+      if (isDraft && "session" in character.entry) {
+        const response = await fetch("/api/duel", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "register", trace: character.entry.trace, session: character.entry.session, plan: UNUSED_PLAN, consent: true }) });
+        const data = await response.json().catch(() => null);
+        if (!response.ok) throw new Error(data?.message ?? "대표 캐릭터를 등록하지 못했어요.");
+      }
+      setLobby(await request<Lobby>());
+      setView("opponents");
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : "대결 정보를 불러오지 못했어요.");
+    }
+    setBusy(false);
   }
+  const startWith = (opponent: Opponent) => {
+    const style = character && character.id !== "registered" && "style" in character.entry ? character.entry.style : undefined;
+    setFoeUsed(opponent);
+    void act({ action: "start", opponent: opponent.id, ...(style ? { style } : {}) });
+  };
+
+  if (signedIn === undefined) return <p role="status" className="derby-note">참가 상태를 확인하고 있어요.</p>;
 
   if (battle && lobby) {
     const { state, log } = battle;
-    const over = state.winner !== null;
+    const over = state.winner !== null && settled;
+    const dealt = state.sheets[1].maxHp - state.hp[1], taken = state.sheets[0].maxHp - state.hp[0];
     return (
-      <div className="duel-arena">
-        <div className="duel-arena-field">
-          <div className="duel-platform duel-platform-foe" />
-          <div className="duel-platform duel-platform-me" />
-          <Hud name={battle.opponent} hp={state.hp[1]} maxHp={state.sheets[1].maxHp} side="foe" />
-          <div key={`foe-${state.turn}`} className={`duel-route duel-route-foe${log?.damage[0] ? " duel-route-move" : ""}`} aria-hidden="true">
-            <PathThumb lines={[foeShape(battle.opponent).points]} size={120} width={3.5} />
-          </div>
-          <div key={`me-${state.turn}`} className={`duel-route duel-route-me${log?.damage[1] ? " duel-route-move" : ""}`} aria-hidden="true">
-            <PathThumb lines={[MY_SHAPE.points]} size={155} width={3.5} />
-          </div>
-          <Hud name={lobby.me.name} hp={state.hp[0]} maxHp={state.sheets[0].maxHp} side="me" />
-        </div>
-        <p className="duel-log" role="status">{log ? describe(log, battle.opponent) : `${battle.opponent}이(가) 나타났어요! 무엇을 낼까요?`}</p>
-        {message && <p className="auth-error" role="alert">{message}</p>}
+      <div className="duel-arena derby-screen">
+        <BattleStage
+          key={battle.id}
+          me={{ name: lobby.me.name, lines: myLines }}
+          foe={{ name: battle.opponent, lines: foeShape(battle.opponent).points }}
+          state={state}
+          log={log}
+          onSettled={() => setSettled(true)}
+        />
+        {message && <p className="derby-error" role="alert">{message}</p>}
         {over ? (
-          <>
-            <h2 className="duel-result">{resultLabel(state.winner)}</h2>
-            <button type="button" className="btn btn-primary wide" onClick={() => { setBattle(null); void refresh(); }}>다른 상대 고르기</button>
-          </>
-        ) : (
-          <>
-            <div className="duel-choices">
-              {BATTLE_CHOICES.map((choice) => (
-                <button key={choice} type="button" className={`duel-choice duel-choice-${choice}`} disabled={busy} onClick={() => void act({ action: "turn", id: battle.id, choice })}>
-                  <strong>{CHOICE_LABELS[choice]}</strong>
-                  {choice === "allin" && <small>성공 {Math.round(BATTLE_RULES.allinChance * 100)}%, 치명타 {criticalDamage(state, 0)}</small>}
-                </button>
-              ))}
-            </div>
-            <p className="hint">가위바위보를 이기면 공격해요. 이판사판은 30% 확률로 피해 없이 치명타를 넣고, 실패하면 공격을 맞아요. 뒤처질수록 치명타가 세져요.</p>
-          </>
+          <div className="bt-result" data-result={state.winner === 0 ? "win" : "lose"}>
+            <h2>{resultLabel(state.winner)}</h2>
+            <dl>
+              <dt>준 피해</dt><dd>{dealt}</dd>
+              <dt>받은 피해</dt><dd>{taken}</dd>
+              <dt>남은 체력</dt><dd>{state.hp[0]} / {state.sheets[0].maxHp}</dd>
+              <dt>턴</dt><dd>{state.turn}</dd>
+            </dl>
+            {foeUsed && <button type="button" className="derby-start" disabled={busy} onClick={() => startWith(foeUsed)}>다시 대결</button>}
+            <button type="button" className="derby-quiet" onClick={() => { setBattle(null); setView("opponents"); void refresh(); }}>다른 상대 고르기</button>
+          </div>
+        ) : state.winner === null && (
+          <div className="duel-choices">
+            {BATTLE_CHOICES.map((choice) => (
+              <button key={choice} type="button" className={`duel-choice duel-choice-${choice}`} disabled={busy || !settled} onClick={() => void act({ action: "turn", id: battle.id, choice })}>
+                <strong>{CHOICE_LABELS[choice]}</strong>
+                {choice === "allin" && <small>성공 {Math.round(BATTLE_RULES.allinChance * 100)}%, 치명타 {criticalDamage(state, 0)}</small>}
+              </button>
+            ))}
+          </div>
         )}
       </div>
     );
   }
 
+  if (view === "opponents" && lobby) {
+    return (
+      <div className="derby-screen">
+        <h2 className="derby-title">겨룰 상대를 고르세요</h2>
+        {message && <p className="derby-error" role="alert">{message}</p>}
+        <ol className="duel-foes">
+          {lobby.opponents.map((opponent) => (
+            <li key={opponent.id}>
+              <button type="button" className="duel-foe" disabled={busy} onClick={() => startWith(opponent)}>
+                <span className="duel-foe-face" aria-hidden="true"><PathThumb lines={[foeShape(opponent.name).points]} size={72} width={3} /></span>
+                <strong>{opponent.name}</strong>
+                <Gauge label="체력" value={hpGauge(opponent.sheet)} />
+                <Gauge label="공격" value={attackGauge(opponent.sheet)} />
+              </button>
+            </li>
+          ))}
+        </ol>
+        {lobby.history.length > 0 && (
+          <details className="duel-history">
+            <summary>최근 대결</summary>
+            <ul>{lobby.history.map((item) => <li key={item.id}><span>{item.opponent}</span><b>{resultLabel(item.winner)}</b></li>)}</ul>
+          </details>
+        )}
+        <button type="button" className="derby-quiet" onClick={() => { setMessage(""); setView("pick"); }}>캐릭터 바꾸기</button>
+      </div>
+    );
+  }
+
   return (
-    <div className="duel-arena">
-      {message && <p className="auth-error" role="alert">{message}</p>}
-      {!lobby && !message && <p role="status">상대를 불러오고 있어요.</p>}
-      {lobby && (
-        <>
-          <p>내 캐릭터 <strong>{lobby.me.name}</strong>{lobby.me.registered ? "" : " (체험 캐릭터)"}<br />체력 {lobby.me.sheet.maxHp}, 공격 {lobby.me.sheet.attack}</p>
-          <h2>상대를 고르세요</h2>
-          <ol className="battle-list">
-            {lobby.opponents.map((opponent) => (
-              <li key={opponent.id}>
-                <span><strong>{opponent.name}</strong><br />체력 {opponent.sheet.maxHp}, 공격 {opponent.sheet.attack}</span>
-                <button type="button" className="btn btn-secondary btn-sm" disabled={busy} onClick={() => void act({ action: "start", opponent: opponent.id })}>대결</button>
-              </li>
-            ))}
-          </ol>
-          <p className="hint">다른 사람의 대표 캐릭터를 골라도 상대의 선택은 인공지능이 대신해요.</p>
-          {lobby.history.length > 0 && (
-            <>
-              <h2>최근 대결</h2>
-              <ul className="battle-list">
-                {lobby.history.map((item) => <li key={item.id}><strong>{item.opponent}</strong><span>{resultLabel(item.winner)}, {item.turns}턴</span></li>)}
-              </ul>
-            </>
-          )}
-        </>
+    <div className="derby-screen">
+      <h2 className="derby-title">대표 캐릭터를 고르세요</h2>
+      <div className="derby-roster" role="radiogroup" aria-label="대표 캐릭터">
+        {characters.map((c) => (
+          <button key={c.id} type="button" role="radio" aria-checked={c.id === character?.id} className="derby-card" disabled={!!c.blocked} onClick={() => { select(c.id); setMessage(""); }}>
+            <CharacterFace character={c} size={72} />
+            <strong>{c.name}</strong>
+            {c.blocked && <small>{c.blocked}</small>}
+            <Gauge label="체력" value={hpGauge(c.duel)} />
+            <Gauge label="공격" value={attackGauge(c.duel)} />
+          </button>
+        ))}
+      </div>
+      {isDraft && (
+        <label className="consent derby-consent">
+          <input type="checkbox" checked={consent} onChange={(e) => agree(e.target.checked)} />
+          <span>위치를 뺀 기록을 검증하고 내 캐릭터를 상대 목록에 표시하는 데 동의해요.</span>
+        </label>
+      )}
+      {message && <p className="derby-error" role="alert">{message}</p>}
+      {!supabase && <p className="derby-note" role="status">이 실행 환경에서는 대결 서버를 쓸 수 없어요.</p>}
+      {needLogin && supabase ? (
+        <section className="derby-login">
+          <p>대결에 표시할 이름이 필요해요.</p>
+          <AuthForm supabase={supabase} prepareNext={async () => returnTo} onNavigate={() => { setSignedIn(true); setNeedLogin(false); }} />
+        </section>
+      ) : (
+        <button type="button" className="derby-start" disabled={!supabase || !character || busy || (isDraft && !consent)} aria-busy={busy} onClick={() => void toOpponents()}>
+          {busy ? "상대를 찾는 중" : "1대1 대결하기"}
+        </button>
       )}
     </div>
   );

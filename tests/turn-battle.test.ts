@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { seededRandom } from "@/lib/battle/seed";
-import { BATTLE_BOTS, BATTLE_CHOICES, TRIAL_STATS, battleSheet, botChoice, criticalDamage, resolveTurn, startBattle, type BattleChoice, type BattleState } from "@/lib/battle/turnBattle";
+import { BATTLE_BOTS, BATTLE_CHOICES, BATTLE_STYLE_SHEETS, TRIAL_STATS, battleSheet, botChoice, criticalDamage, resolveTurn, startBattle, type BattleChoice, type BattleState } from "@/lib/battle/turnBattle";
 
 const sheet = { maxHp: 100, attack: 20 };
 const fresh = (hp: [number, number] = [100, 100]): BattleState => ({ ...startBattle(sheet, sheet), hp });
@@ -90,5 +90,29 @@ describe("능력치와 봇", () => {
   });
   it("봇은 결과를 보고 고를 수 없다: 함수가 사용자의 이번 선택을 받지 않는다", () => {
     expect(botChoice.length).toBe(3);
+  });
+});
+
+describe("기본 캐릭터 능력치", () => {
+  // 사전 기준: 세 유형이 서로 가위바위보만 낼 때 승률이 40~60%를 벗어나지 않는다
+  it.each([["speed", "corner"], ["speed", "balance"], ["balance", "corner"]] as const)("%s와 %s의 승률이 크게 기울지 않는다", (a, b) => {
+    let wins = 0;
+    const games = 20000;
+    for (let i = 0; i < games; i++) {
+      const random = seededRandom(a + b + i);
+      let state = startBattle(BATTLE_STYLE_SHEETS[a], BATTLE_STYLE_SHEETS[b]);
+      while (state.winner === null) state = resolveTurn(state, [BATTLE_CHOICES[Math.floor(random() * 3)], BATTLE_CHOICES[Math.floor(random() * 3)]], [random(), random()]).state;
+      wins += state.winner === 0 ? 1 : state.winner === "draw" ? 0.5 : 0;
+    }
+    expect(wins / games).toBeGreaterThan(0.4);
+    expect(wins / games).toBeLessThan(0.6);
+  });
+  it("달린 기록과 같은 범위에 있다", () => {
+    for (const sheet of Object.values(BATTLE_STYLE_SHEETS)) {
+      expect(sheet.maxHp).toBeGreaterThanOrEqual(90);
+      expect(sheet.maxHp).toBeLessThanOrEqual(110);
+      expect(sheet.attack).toBeGreaterThanOrEqual(18);
+      expect(sheet.attack).toBeLessThanOrEqual(22);
+    }
   });
 });

@@ -1,13 +1,13 @@
 import { randomInt } from "node:crypto";
 import { z } from "zod";
-import { BATTLE_BOTS, BATTLE_CHOICES, TRIAL_STATS, battleSheet, botChoice, resolveTurn, startBattle, type BattleState } from "@/lib/battle/turnBattle";
+import { BATTLE_BOTS, BATTLE_CHOICES, BATTLE_STYLE_SHEETS, TRIAL_STATS, battleSheet, botChoice, resolveTurn, startBattle, type BattleState } from "@/lib/battle/turnBattle";
 import type { DuelStats } from "@/lib/battle/duel";
 import { battleDatabase, playerNames } from "@/lib/server/battle";
 import { HttpError, assertWriteRequest, handle, limit, mapDbError, ok, readJson, requireUser } from "@/lib/server/http";
 
 const random = () => randomInt(1_000_000) / 1_000_000;
 const command = z.discriminatedUnion("action", [
-  z.object({ action: z.literal("start"), opponent: z.string().min(1).max(40) }),
+  z.object({ action: z.literal("start"), opponent: z.string().min(1).max(40), style: z.enum(["speed", "balance", "corner"]).optional() }),
   z.object({ action: z.literal("turn"), id: z.uuid(), choice: z.enum(BATTLE_CHOICES) }),
 ]);
 
@@ -60,7 +60,9 @@ export function POST(req: Request) {
         opponentName = (await playerNames(db, [foe.data.owner_id]))(foe.data.owner_id);
         stats = foe.data.stats as DuelStats;
       }
-      const state = startBattle(battleSheet((me.data?.stats as DuelStats | undefined) ?? TRIAL_STATS), battleSheet(stats));
+      // 고른 캐릭터가 있으면 그 능력치로, 없으면 등록한 대표 캐릭터로 겨룬다
+      const mine = input.style ? BATTLE_STYLE_SHEETS[input.style] : battleSheet((me.data?.stats as DuelStats | undefined) ?? TRIAL_STATS);
+      const state = startBattle(mine, battleSheet(stats));
       const created = await db.from("duel_battles").insert({ owner_id: user.id, opponent_name: opponentName, state }).select("id").single();
       if (created.error) throw mapDbError(created.error);
       return ok({ id: created.data.id, opponent: opponentName, state, log: null }, 201);

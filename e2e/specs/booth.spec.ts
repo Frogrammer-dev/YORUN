@@ -55,3 +55,12 @@ test("@mobile 8인 경기: 캐릭터를 고르고 봇 입장, 중계, 결과까�
   await page.getByRole("button", { name: "다시 경기하기" }).click();
   await expect(page.getByRole("heading", { name: "출전할 캐릭터를 고르세요" })).toBeVisible();
 });
+
+test("@mobile 1대1 대결: 대표 캐릭터 고르기 화면이 먼저 나온다", async ({ page }) => {
+  await page.goto("/duel");
+  await expect(page.getByRole("heading", { name: "대표 캐릭터를 고르세요" })).toBeVisible();
+  await page.getByRole("radio", { name: /코너형/ }).click();
+  await expect(page.getByRole("radio", { name: /코너형/ })).toHaveAttribute("aria-checked", "true");
+  await expect(page.getByRole("button", { name: "1대1 대결하기" })).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(page.viewportSize()!.width);
+});
