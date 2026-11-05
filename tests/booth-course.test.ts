@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { extract, extractOutline, nodes, shapes } from "@/components/booth/course";
+import { findBoothCourse, presetShape } from "@/components/booth/engine";
+import roads from "@/components/booth/roads.json";
 
 const connected = (path: number[]) => path.every((id, i) => Number.isInteger(id) && nodes[id] && (i === 0 || id !== path[i - 1]));
 
@@ -30,5 +32,16 @@ describe("부스 코스", () => {
   it("도로를 세 곳도 잇지 못하면 코스를 만들지 않는다", () => {
     expect(() => extractOutline([[0, 0], [0.0001, 0], [0, 0.0001]], [0, 0])).not.toThrow();
     expect(() => extractOutline([[0, 0], [0, 0], [0, 0]], [0, 0])).toThrow();
+  });
+});
+
+describe("부스 코스 탐색 엔진", () => {
+  const edges = new Set(roads.edges.flatMap(([a, b]) => [`${a},${b}`, `${b},${a}`]));
+  it.each(shapes)("%s: 실제 도로 간선만 지나는 닫힌 코스를 찾고 왕복 잔가지가 없다", (shape) => {
+    const target = presetShape(shape)!;
+    const course = findBoothCourse(target, [0, 0], { timeBudgetMs: 2000 })!;
+    expect(course.path[0]).toBe(course.path[course.path.length - 1]);
+    course.path.slice(1).forEach((id, i) => expect(edges.has(`${course.path[i]},${id}`)).toBe(true));
+    course.path.slice(2).forEach((id, i) => expect(id).not.toBe(course.path[i]));
   });
 });

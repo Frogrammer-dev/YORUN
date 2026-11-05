@@ -7,9 +7,10 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { simulateDerby } from "@/lib/battle/derby";
 import { simulateDuel, type DuelAction } from "@/lib/battle/duel";
 import { browserSupabase } from "@/lib/client/supabaseBrowser";
-import { groupLines, type ShapeGroup } from "@/lib/route/shapes";
+import { groupLines, type ShapeDef, type ShapeGroup } from "@/lib/route/shapes";
 import { BoothRace } from "./BoothRace";
 import { drawing, extract, extractOutline, nodes, shapes, streets, type Course, type Shape } from "./course";
+import { findBoothCourse, presetShape } from "./engine";
 import "./booth.css";
 
 type Card = { id: string; shape: string; center: number[]; path: number[]; distance: number; number: number };
@@ -60,7 +61,8 @@ export default function Booth() {
   const [result, showResult] = useState("");
   const [runner, setRunner] = useState<number[] | null>(null);
   const [prompt, setPrompt] = useState("");
-  const [outline, setOutline] = useState<[number, number][] | null>(null);
+  const [outline, setOutline] = useState<{ line: [number, number][]; shape: ShapeDef } | null>(null);
+  const [searching, setSearching] = useState(false);
   const [drawingBusy, setDrawingBusy] = useState(false);
   const routeEl = useRef<SVGPathElement>(null);
   const map = useRef<SVGSVGElement>(null);
@@ -100,17 +102,22 @@ export default function Booth() {
     warn("");
   }
   function extractCourse() {
-    try {
-      if (shape === CUSTOM) {
-        if (!outline) return warn("먼저 윤곽을 만들어 주세요.");
-        setCourse(extractOutline(outline, center));
-      } else {
-        setCourse(extract(shape as Shape, center));
+    if (searching) return;
+    if (shape === CUSTOM && !outline) return warn("먼저 윤곽을 만들어 주세요.");
+    setSearching(true);
+    warn("");
+    // 계산으로 화면이 멈추기 전에 "찾는 중"을 먼저 그린다
+    setTimeout(() => {
+      try {
+        const target = shape === CUSTOM ? outline!.shape : presetShape(shape as Shape);
+        const found = target ? findBoothCourse(target, center) : null;
+        setCourse(found ?? (shape === CUSTOM ? extractOutline(outline!.line, center) : extract(shape as Shape, center)));
+      } catch {
+        warn("다른 중심을 골라 주세요.");
+      } finally {
+        setSearching(false);
       }
-      warn("");
-    } catch {
-      warn("다른 중심을 골라 주세요.");
-    }
+    }, 30);
   }
   async function makeOutline() {
     pendingOutline.current?.abort();
@@ -124,9 +131,10 @@ export default function Booth() {
       const response = await fetch("/api/recognition/outline", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ prompt }), signal: controller.signal });
       const data = await response.json().catch(() => null);
       if (!response.ok) throw new Error(data?.message ?? "윤곽을 만들지 못했어요. 준비된 모양을 골라 주세요.");
-      const line = groupLines(data.group as ShapeGroup)[0];
+      const group = data.group as ShapeGroup;
+      const line = groupLines(group)[0];
       if (!line) throw new Error("윤곽을 만들지 못했어요. 준비된 모양을 골라 주세요.");
-      if (!controller.signal.aborted) setOutline(line);
+      if (!controller.signal.aborted) setOutline({ line, shape: group.parts[0].shape });
     } catch (error) {
       if (!controller.signal.aborted) warn(error instanceof Error ? error.message : "윤곽을 만들지 못했어요.");
     } finally {
@@ -257,7 +265,7 @@ export default function Booth() {
             ))}
           </div>
           <div className="booth-actions">
-            <button type="button" className="btn btn-primary wide" onClick={extractCourse}>이곳에서 경로 추출</button>
+            <button type="button" className="btn btn-primary wide" disabled={searching} aria-busy={searching} onClick={extractCourse}>{searching ? "도로에서 코스를 찾는 중" : "이곳에서 경로 추출"}</button>
             {course && <button type="button" className="btn btn-primary wide" onClick={() => setPhase("run")}>{(course.distance / 1000).toFixed(2)} km · 가상 달리기 시작</button>}
           </div>
         </>
