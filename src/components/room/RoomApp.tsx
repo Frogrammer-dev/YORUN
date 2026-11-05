@@ -11,7 +11,6 @@ import { DraftRepository } from "@/lib/draft/DraftRepository";
 import type { Scene } from "@/lib/render/scene";
 import { takePendingArtwork } from "@/lib/client/pending";
 import { browserSupabase } from "@/lib/client/supabaseBrowser";
-import { ImportPanel } from "@/components/ImportPanel";
 import { SceneSvg } from "@/components/SceneSvg";
 import { ItemPanel } from "./ItemPanel";
 import { ArchivePanel, ExportPanel, LoginPanel, SharePanel } from "./Panels";
@@ -392,15 +391,8 @@ export function RoomApp() {
               ariaLabel={`내 작품방, 전시 작품 ${scene.items.length}개. 작품을 선택해 끌거나 방향키로 옮길 수 있어요.`}
             />
           </div>
-          {scene.items.length === 0 && <p className="hint center">전시 중인 작품이 없어요. GPX를 가져오거나 보관 목록에서 전시해 보세요.</p>}
-          <div className="stage-tools">
-            <ImportPanel
-              compact
-              onCreated={(v) => void room.addArtwork(v)}
-              disabledReason={room.model.artworkCount >= ROOM.maxArtworksPerAccount ? "보관 작품 한도(50개)에 도달했어요." : null}
-            />
-            {displayFull && <p className="hint">전시 한도(20개)에 도달했어요. 새 작품은 보관 목록에만 추가돼요.</p>}
-          </div>
+          {scene.items.length === 0 && <p className="hint center">전시 중인 작품이 없어요. 보관 목록에서 작품을 전시하거나 콘텐츠 메뉴에서 GPX를 불러와 주세요.</p>}
+          {displayFull && <p className="hint">전시 한도(20개)에 도달했어요. 새 작품은 보관 목록에만 추가돼요.</p>}
         </div>
 
         <aside className="side">

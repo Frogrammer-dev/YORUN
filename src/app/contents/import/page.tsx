@@ -1,11 +1,11 @@
-import Link from "next/link";
+import { BackButton } from "@/components/BackButton";
 import { LandingStart } from "@/components/LandingStart";
 
 export const metadata = { title: "GPX 불러오기 — 요런" };
 
 export default function ImportPage() {
   return <main className="hub-page">
-    <Link href="/contents">← 콘텐츠</Link>
+    <BackButton />
     <h1>GPX 기록 가져오기</h1>
     <p>다른 러닝 앱이나 시계에서 내보낸 기록으로 작품을 만들어요.</p>
     <section className="hub-card">
