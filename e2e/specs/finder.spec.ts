@@ -131,8 +131,13 @@ test("글자로 찾기: 'LO' → 획 2개, 획 사이 이동 구간 점선", asy
   await openFinder(page);
   await page.getByRole("radio", { name: /직접 그리기/ }).click();
   await expect(page.getByRole("button", { name: "지금 보이는 지도에서 코스 찾기" })).toBeDisabled();
-  await page.getByRole("tab", { name: "글자" }).click();
-  await page.getByLabel("글자 (최대 4자)").fill("LO");
+  // @로 시작하면 서버로 보내지 않고 바로 글자를 그린다
+  let outlineCalls = 0;
+  await page.route("**/api/recognition/outline", (route) => { outlineCalls++; return route.fulfill({ status: 503, json: {} }); });
+  await page.getByRole("tab", { name: "글자·설명" }).click();
+  await page.getByLabel("어떤 모습으로 달릴까요?").fill("@LO");
+  await expect(page.getByRole("button", { name: "윤곽 만들기" })).toHaveCount(0);
+  expect(outlineCalls).toBe(0);
   await expect(page.getByText(/획 2개 — 획마다 고리 코스/)).toBeVisible();
   await searchCourses(page);
   const meta = await page.locator(".cand-meta").allInnerTexts();
@@ -187,4 +192,23 @@ test("@mobile 360px 코스 찾기·달리기 화면에 가로 스크롤 없음",
     await page.locator(".leaflet-container").waitFor();
     expect(await page.evaluate(() => document.documentElement.scrollWidth), p).toBeLessThanOrEqual(360);
   }
+});
+
+test("체험 완주: 코스를 5초 안에 지나가고 콘텐츠로 이어지며 캐릭터가 된다", async ({ page }) => {
+  await openFinder(page);
+  await searchCourses(page);
+  await page.locator(".cand").first().click();
+  const started = Date.now();
+  await page.getByRole("button", { name: "(체험) 완주하기" }).first().click();
+  await expect(page.getByRole("progressbar", { name: "체험 완주 진행률" })).toBeInViewport();
+  await expect(page.getByRole("heading", { name: "체험 완주!" })).toBeInViewport({ timeout: 8000 });
+  expect(Date.now() - started).toBeLessThan(6000);
+  await expect(page.getByRole("link", { name: "콘텐츠 즐기기" })).toBeInViewport();
+  await expect(page.locator(".trial-facts dd").nth(1)).toHaveText(/^(5:\d\d|6:[0-3]\d)\/km$/);
+  const runLog = await page.evaluate(() => localStorage.getItem("runcanvas.runLog"));
+  expect(runLog).toBeNull();
+  await page.getByRole("link", { name: "콘텐츠 즐기기" }).click();
+  await page.waitForURL("**/hub");
+  await page.goto("/derby");
+  await expect(page.locator(".derby-card").first()).toContainText("체험 완주 기록");
 });

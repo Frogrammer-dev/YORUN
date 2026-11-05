@@ -28,7 +28,7 @@ describe("찾은 코스 목록", () => {
 
 describe("고른 코스", () => {
   it("도형 코스: 벗어난 정도와 원래 그림 범례", () => {
-    render(<SelectedCourse c={makeCandidate({ meanDeviationMeters: 15, maxDeviationMeters: 47 })} elev="loading" onRun={() => {}} onExport={() => {}} />);
+    render(<SelectedCourse c={makeCandidate({ meanDeviationMeters: 15, maxDeviationMeters: 47 })} elev="loading" onRun={() => {}} onExport={() => {}} onTrial={() => {}} />);
     expect(screen.getByText(/원래 그림에서 평균 15m, 최대 47m 벗어나요/)).toBeTruthy();
     expect(screen.getByText("원래 그림")).toBeTruthy();
     expect(screen.getByText("…")).toBeTruthy(); // 고도 받는 중
@@ -36,7 +36,7 @@ describe("고른 코스", () => {
 
   it("낙서 인식 코스: 모델 판정이라고 밝히고, 원래 그림 범례는 없다", () => {
     const c = makeCandidate({ shapeName: "양", similarity: 72, doodle: { name: "sheep", prob: 0.72 }, outline: [], outlines: [] });
-    render(<SelectedCourse c={c} elev="error" onRun={() => {}} onExport={() => {}} />);
+    render(<SelectedCourse c={c} elev="error" onRun={() => {}} onExport={() => {}} onTrial={() => {}} />);
     expect(screen.getByText(/낙서 인식 모델.*'양'\(으\)로 봤어요 \(또렷함 · 모델 점수 72\)/)).toBeTruthy();
     expect(screen.queryByText("원래 그림")).toBeNull();
     expect(screen.getByText("확인 못 함")).toBeTruthy();
@@ -45,7 +45,7 @@ describe("고른 코스", () => {
   it("길 정보·고도 그래프, 달리기·GPX 버튼", async () => {
     const onRun = vi.fn(), onExport = vi.fn();
     const c = makeCandidate({ roadInfo: { major: 0.5, unpaved: 0.1, lit: 0.75, litKnown: 0.4, steps: 2, carFree: 0, tunnels: 0 } });
-    render(<SelectedCourse c={c} elev={{ dist: [0, 500, 1000], elev: [20, 50, 20], ascent: 30, min: 20, max: 50 }} onRun={onRun} onExport={onExport} />);
+    render(<SelectedCourse c={c} elev={{ dist: [0, 500, 1000], elev: [20, 50, 20], ascent: 30, min: 20, max: 50 }} onRun={onRun} onExport={onExport} onTrial={() => {}} />);
     const facts = screen.getByRole("list", { name: "코스 길 정보" });
     expect(within(facts).getByText("50%")).toBeTruthy();
     expect(within(facts).getByText("75%")).toBeTruthy();

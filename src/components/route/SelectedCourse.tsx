@@ -10,9 +10,12 @@ import { ShapeExplanation } from "./ShapeExplanation";
 export type ElevationState = ElevationProfile | "loading" | "error" | undefined;
 
 /** 달리기·GPX 버튼: 결과와 상세 화면에서 같은 자리에 하나만 둔다 */
-export function CourseActions({ onRun, onExport }: { onRun: () => void; onExport: () => void }) {
+export function CourseActions({ onRun, onExport, onTrial }: { onRun: () => void; onExport: () => void; onTrial: () => void }) {
   return (
     <div className="sheet-cta sheet-cta-split">
+      <button type="button" className="btn btn-secondary btn-lg sheet-cta-trial" onClick={onTrial}>
+        (체험) 완주하기
+      </button>
       <button type="button" className="btn btn-primary btn-lg" onClick={onRun}>
         <Icon name="play" size={18} />
         이 코스로 달리기
@@ -24,7 +27,7 @@ export function CourseActions({ onRun, onExport }: { onRun: () => void; onExport
   );
 }
 
-export function SelectedCourse({ c, elev, onRun, onExport }: { c: RouteCandidate; elev: ElevationState; onRun: () => void; onExport: () => void }) {
+export function SelectedCourse({ c, elev, onRun, onExport, onTrial }: { c: RouteCandidate; elev: ElevationState; onRun: () => void; onExport: () => void; onTrial: () => void }) {
   return (
     <>
       <p className="sel-desc">
@@ -66,7 +69,7 @@ export function SelectedCourse({ c, elev, onRun, onExport }: { c: RouteCandidate
       </div>
       {/* 해석 그림은 실제 길 정보 뒤에 둔다 (이름·참고 그림·꾸밈선의 비중을 높이지 않는다) */}
       <ShapeExplanation key={c.id} c={c} />
-      <CourseActions onRun={onRun} onExport={onExport} />
+      <CourseActions onRun={onRun} onExport={onExport} onTrial={onTrial} />
     </>
   );
 }

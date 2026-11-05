@@ -20,6 +20,7 @@ import { AREAS, DEFAULT_SETTINGS, MAX_SIDE, MIN_SIDE, RANGES, nearbyDataBox, typ
 import { FinderSettings } from "@/components/route/FinderSettings";
 import { CourseList } from "@/components/route/CourseList";
 import { CourseActions, SelectedCourse, type ElevationState } from "@/components/route/SelectedCourse";
+import { formatDuration, formatPace, makeTrialRecord, saveTrialRecord, type TrialRecord } from "@/lib/battle/trialRecords";
 import { savePlannedRoute } from "@/lib/run/storage";
 import { toGpx } from "@/lib/run/tracker";
 import { downloadBlob } from "@/lib/render/png";
@@ -35,6 +36,9 @@ type Phase =
   | { kind: "searching"; fraction: number; label: string }
   | { kind: "done"; candidates: RouteCandidate[]; partial: boolean; dataTimestamp: string | null; nodes: number; discover: boolean; doodleError?: boolean; naming?: boolean; interpretationMode?: "server" | "clip"; referenceError?: boolean }
   | { kind: "error"; message: string };
+
+/** 체험 완주 시간. 5초 안에 끝나게 조금 여유를 둔다 */
+const TRIAL_MS = 4600;
 
 export function RouteFinderApp() {
   const router = useRouter();
@@ -416,6 +420,9 @@ export function RouteFinderApp() {
     return () => void marker.remove();
   }, [lm, running, start]);
 
+  const [trial, setTrial] = useState<{ pct: number; record: TrialRecord | null } | null>(null);
+  const trialStop = useRef<(() => void) | null>(null);
+
   /** 코스 고도는 한 번만 받는다 (고른 코스, 또는 오르막 상한을 켰을 때 모든 후보) */
   const elevAsked = useRef(new Set<string>());
   function loadElevation(c: RouteCandidate) {
@@ -475,6 +482,57 @@ export function RouteFinderApp() {
     });
     router.push("/run");
   }
+
+  /** 체험 완주: 내 위치 표시가 코스를 5초 안에 지나가고, 실제 기록과 별개인 체험 기록을 남긴다 */
+  function startTrial(c: RouteCandidate) {
+    if (!lm || c.latlngs.length < 2) return;
+    choose(c);
+    setSheetFull(false);
+    trialStop.current?.();
+    const finish = () => {
+      const record = makeTrialRecord({ id: c.id, name: c.shapeName, latlngs: c.latlngs, meters: c.lengthMeters }, Math.random, Date.now());
+      saveTrialRecord(record);
+      setTrial({ pct: 100, record });
+    };
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      finish();
+      return;
+    }
+    // 코스 길이에 비례해 움직이도록 지점별 누적 거리를 구한다
+    const dist = [0];
+    for (let i = 1; i < c.latlngs.length; i++) dist.push(dist[i - 1] + lm.L.latLng(c.latlngs[i - 1]).distanceTo(c.latlngs[i]));
+    const total = dist[dist.length - 1] || 1;
+    // 체험 중에는 이 아이콘이 내 위치를 대신한다. 실제 위치 표시는 끝난 뒤 되돌린다
+    locMarker.current?.remove();
+    const marker = lm.L.circleMarker(c.latlngs[0], { radius: 9, color: "#fff", weight: 3, fillColor: "#1A73E8", fillOpacity: 1, interactive: false }).addTo(lm.map);
+    const started = performance.now();
+    let frame = 0, index = 0;
+    const stop = () => {
+      cancelAnimationFrame(frame);
+      marker.remove();
+      if (mapAlive(lm.map)) locMarker.current?.addTo(lm.map);
+      trialStop.current = null;
+    };
+    trialStop.current = stop;
+    setTrial({ pct: 0, record: null });
+    const tick = (now: number) => {
+      const fraction = Math.min(1, (now - started) / TRIAL_MS);
+      const at = fraction * total;
+      while (index < dist.length - 2 && dist[index + 1] < at) index++;
+      const span = dist[index + 1] - dist[index] || 1, k = (at - dist[index]) / span;
+      const [a, b] = [c.latlngs[index], c.latlngs[index + 1]];
+      marker.setLatLng([a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k]);
+      if (fraction >= 1) {
+        stop();
+        finish();
+        return;
+      }
+      setTrial({ pct: Math.round(fraction * 100), record: null });
+      frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+  }
+  useEffect(() => () => trialStop.current?.(), []);
 
   function exportGpx(c: RouteCandidate) {
     const gpx = toGpx(`Yorun ${c.shapeName} 코스`, [c.latlngs.map(([lat, lon]) => ({ lat, lon }))]);
@@ -583,7 +641,30 @@ export function RouteFinderApp() {
               </p>
             )}
 
-            {phase.kind === "done" && view === "results" && (
+            {trial && (
+              <section className="trial-panel" aria-label="체험 완주">
+                {trial.record ? (
+                  <>
+                    <h2>체험 완주!</h2>
+                    <p role="status">{trial.record.name} 기록이 대결과 경주 캐릭터로 저장됐어요. 실제 달리기 기록에는 넣지 않아요.</p>
+                    <dl className="trial-facts">
+                      <div><dt>거리</dt><dd>{(trial.record.meters / 1000).toFixed(2)}km</dd></div>
+                      <div><dt>페이스</dt><dd>{formatPace(trial.record.paceSecPerKm)}</dd></div>
+                      <div><dt>기록</dt><dd>{formatDuration((trial.record.meters / 1000) * trial.record.paceSecPerKm)}</dd></div>
+                    </dl>
+                    <Link href="/hub" className="btn btn-primary btn-lg wide">콘텐츠 즐기기</Link>
+                    <button type="button" className="btn btn-secondary wide" onClick={() => setTrial(null)}>다른 코스 보기</button>
+                  </>
+                ) : (
+                  <>
+                    <h2>체험 완주 중</h2>
+                    <div className="trial-bar" role="progressbar" aria-label="체험 완주 진행률" aria-valuemin={0} aria-valuemax={100} aria-valuenow={trial.pct}><i style={{ transform: `scaleX(${trial.pct / 100})` }} /></div>
+                  </>
+                )}
+              </section>
+            )}
+
+            {phase.kind === "done" && view === "results" && !trial && (
               <section className="sheet-section" aria-label="찾은 코스">
                 <div className="sheet-head">
                   <h2>찾은 코스 {visible.length}개</h2>
@@ -629,11 +710,11 @@ export function RouteFinderApp() {
                   {phase.referenceError && " 참고 그림 생성을 사용할 수 없어 기존 모양 인식으로 살펴봤어요."}
                   {phase.discover && !phase.naming && !phase.doodleError && phase.interpretationMode === "clip" && " '처럼 보이는 코스'는 CLIP이 해석한 실험 추천이에요. 위치를 제외한 외곽선만 앱 서버에서 처리해요."}
                 </p>
-                {sel && <CourseActions onRun={() => runThis(sel, phase.dataTimestamp)} onExport={() => exportGpx(sel)} />}
+                {sel && <CourseActions onRun={() => runThis(sel, phase.dataTimestamp)} onExport={() => exportGpx(sel)} onTrial={() => startTrial(sel)} />}
               </section>
             )}
 
-            {phase.kind === "done" && view === "detail" && sel && (
+            {phase.kind === "done" && view === "detail" && sel && !trial && (
               <section className="sheet-section" aria-label="고른 코스 자세히">
                 <button
                   type="button"
@@ -646,12 +727,12 @@ export function RouteFinderApp() {
                   <Icon name="back" size={18} />
                   찾은 코스 {visible.length}개
                 </button>
-                <SelectedCourse c={sel} elev={elev[sel.id]} onRun={() => runThis(sel, phase.dataTimestamp)} onExport={() => exportGpx(sel)} />
+                <SelectedCourse c={sel} elev={elev[sel.id]} onRun={() => runThis(sel, phase.dataTimestamp)} onExport={() => exportGpx(sel)} onTrial={() => startTrial(sel)} />
               </section>
             )}
 
             {/* 조건은 숨겨도 마운트를 유지한다: 그리던 그림·펼침 상태를 잃지 않게 */}
-            <div hidden={view !== "settings"}>
+            <div hidden={view !== "settings" || !!trial}>
               {phase.kind === "done" && (
                 <button
                   type="button"

@@ -502,6 +502,16 @@ legend { font-weight: 700; font-size: var(--fs-callout); padding-right: var(--sp
 
 /* ───────── 2라운드 보완 ───────── */
 .sheet-cta-split { display: grid; grid-template-columns: 1fr 56px; gap: var(--sp-2); }
+.sheet-cta-trial { grid-column: 1 / -1; }
+.trial-panel { display: flex; flex-direction: column; gap: var(--sp-2); padding: var(--sp-2) 0; }
+.trial-panel h2 { margin: 0; font-size: var(--fs-title2); font-weight: 800; }
+.trial-panel p { margin: 0; color: var(--text-2); }
+.trial-bar { height: 10px; overflow: hidden; border-radius: var(--r-pill); background: var(--line); }
+.trial-bar i { display: block; height: 100%; background: var(--brand); transform-origin: left; }
+.trial-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sp-2); margin: var(--sp-1) 0; }
+.trial-facts div { display: flex; flex-direction: column; gap: 2px; }
+.trial-facts dt { font-size: var(--fs-caption); color: var(--text-3); }
+.trial-facts dd { margin: 0; font-family: var(--font-num); font-size: var(--fs-title3); font-weight: 700; }
 .btn-square { width: 56px; padding: 0; }
 .icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; border: 0; background: transparent; color: var(--text-2); cursor: pointer; }
 .stage { position: relative; }

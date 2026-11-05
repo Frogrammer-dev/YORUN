@@ -56,12 +56,13 @@ export function DuelArena({ returnTo }: { returnTo: string }) {
   const [selected, select] = useState("");
   const [consent, agree] = useState(false);
   const [needLogin, setNeedLogin] = useState(false);
+  const [guest, setGuest] = useState(false);
 
   useEffect(() => watchBattleDraft(setDraft), []);
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- 기록은 이 기기 저장소에서만 읽는다
-    setSaved(loadCharacters(draft));
-  }, [draft]);
+    setSaved(loadCharacters(draft, guest));
+  }, [draft, guest]);
 
   const refresh = useCallback(async () => {
     try {
@@ -74,8 +75,11 @@ export function DuelArena({ returnTo }: { returnTo: string }) {
 
   useEffect(() => {
     if (!supabase) return;
-    void supabase.auth.getUser().then(({ data }) => setSignedIn(!!data.user));
-  }, [supabase]);
+    void supabase.auth.getUser().then(({ data }) => {
+      setSignedIn(!!data.user);
+      setGuest(!!data.user?.is_anonymous);
+    });
+  }, [supabase, signedIn]);
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- 로그인을 확인한 뒤 서버에서 받아 온 값을 반영한다
     if (signedIn) void refresh();

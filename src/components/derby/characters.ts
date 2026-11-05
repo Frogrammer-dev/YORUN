@@ -6,7 +6,7 @@ import { BODY_LABELS, STYLE_BODIES, classifyBody, type BodyPlan } from "@/lib/ba
 import { assessTrace } from "@/lib/battle/derbyTrace";
 import { BATTLE_STYLE_SHEETS, battleSheet, type BattleSheet } from "@/lib/battle/turnBattle";
 import type { BattleDraft } from "@/lib/battle/battleDraft";
-import { nodes } from "@/components/booth/course";
+import { GUEST_RECORDS, formatPace, loadTrialRecords, type TrialRecord } from "@/lib/battle/trialRecords";
 
 export type CharacterKind = "verified" | "trial" | "starter";
 export interface DerbyCharacter {
@@ -33,12 +33,6 @@ const paceGauge = (pace: number) => Math.max(0, Math.min(1, (420 - pace) / 210))
 const middle = ([low, high]: readonly [number, number]) => (low + high) / 2;
 const styleGauges = (style: BoothStyle) => ({ straight: paceGauge(middle(BOOTH_STYLES[style].pace)), corner: middle(BOOTH_STYLES[style].cornering) });
 
-/** 같은 체험 기록은 언제나 같은 유형으로 뛴다 */
-function styleOf(id: string): BoothStyle {
-  const hash = Array.from(id).reduce((n, ch) => (n * 31 + ch.charCodeAt(0)) >>> 0, 7);
-  return BOOTH_STYLE_IDS[hash % BOOTH_STYLE_IDS.length];
-}
-
 const STARTERS: DerbyCharacter[] = BOOTH_STYLE_IDS.map((style) => ({
   id: `starter-${style}`, kind: "starter", name: BOOTH_STYLES[style].label, note: BOOTH_STYLES[style].hint,
   line: null, ...styleGauges(style), body: STYLE_BODIES[style], duel: BATTLE_STYLE_SHEETS[style], entry: { style },
@@ -55,27 +49,21 @@ function verifiedCharacter(draft: BattleDraft): DerbyCharacter {
   }
 }
 
-function boothCharacters(): DerbyCharacter[] {
-  try {
-    const raw = JSON.parse(localStorage.getItem("yorun.booth.v1") ?? "[]");
-    if (!Array.isArray(raw)) return [];
-    return raw.filter((card) => typeof card?.id === "string" && Array.isArray(card.path) && card.path.every((id: unknown) => Number.isInteger(id) && nodes[id as number])).slice(-8).reverse().map((card): DerbyCharacter => {
-      const style = styleOf(card.id);
-      const line = (card.path as number[]).map((id) => nodes[id]);
-      return {
-        id: `trial-${card.id}`, kind: "trial", name: `${card.number}번 러너의 ${String(card.shape).slice(0, 12)}`,
-        note: `체험 코스예요. ${BOOTH_STYLES[style].label}으로 달려요.`,
-        line, ...styleGauges(style), body: classifyBody(line, `${card.prompt ?? ""} ${card.shape}`), duel: BATTLE_STYLE_SHEETS[style], entry: { style },
-      };
-    });
-  } catch {
-    return [];
-  }
+function recordCharacter(record: TrialRecord, preset: boolean): DerbyCharacter {
+  return {
+    id: `trial-${record.id}`, kind: "trial", name: record.name,
+    note: `${preset ? "기본 체험 기록" : "체험 완주 기록"}이에요. 페이스 ${formatPace(record.paceSecPerKm)}`,
+    line: record.line, ...styleGauges(record.style), body: classifyBody(record.line, record.name), duel: BATTLE_STYLE_SHEETS[record.style], entry: { style: record.style },
+  };
 }
 
 export const bodyLabel = (body: BodyPlan) => BODY_LABELS[body];
 
-/** 인증 기록, 체험 기록, 기본 캐릭터 순서 */
-export function loadCharacters(draft: BattleDraft | null): DerbyCharacter[] {
-  return [...(draft ? [verifiedCharacter(draft)] : []), ...boothCharacters(), ...STARTERS];
+/** 인증 기록, 내 체험 완주 기록 다음에 게스트는 기본 기록 다섯, 그 밖에는 기본 유형 셋을 둔다 */
+export function loadCharacters(draft: BattleDraft | null, guest = false): DerbyCharacter[] {
+  return [
+    ...(draft ? [verifiedCharacter(draft)] : []),
+    ...loadTrialRecords().map((record) => recordCharacter(record, false)),
+    ...(guest ? GUEST_RECORDS.map((record) => recordCharacter(record, true)) : STARTERS),
+  ];
 }

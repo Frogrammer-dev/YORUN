@@ -40,6 +40,7 @@ function practiceRoom(character: DerbyCharacter): RoomState {
 export function DerbyGame({ returnTo = "/derby" }: { returnTo?: string }) {
   const supabase = browserSupabase();
   const [signedIn, setSignedIn] = useState<boolean | undefined>(supabase ? undefined : false);
+  const [guest, setGuest] = useState(false);
   const [draft, setDraft] = useState<BattleDraft | null>(null);
   const [characters, setCharacters] = useState<DerbyCharacter[]>([]);
   const [selected, select] = useState("");
@@ -59,14 +60,17 @@ export function DerbyGame({ returnTo = "/derby" }: { returnTo?: string }) {
   useEffect(() => watchBattleDraft(setDraft), []);
   useEffect(() => {
     if (!supabase) return;
-    void supabase.auth.getUser().then(({ data }) => setSignedIn(!!data.user));
-  }, [supabase]);
+    void supabase.auth.getUser().then(({ data }) => {
+      setSignedIn(!!data.user);
+      setGuest(!!data.user?.is_anonymous);
+    });
+  }, [supabase, signedIn]);
   useEffect(() => {
-    const list = loadCharacters(draft);
+    const list = loadCharacters(draft, guest);
     // eslint-disable-next-line react-hooks/set-state-in-effect -- 기록은 이 기기 저장소에서만 읽는다
     setCharacters(list);
     select((current) => (list.some((c) => c.id === current) ? current : list.find((c) => !c.blocked)?.id ?? ""));
-  }, [draft]);
+  }, [draft, guest]);
 
   const character = characters.find((c) => c.id === selected);
   const needsConsent = character?.kind === "verified";

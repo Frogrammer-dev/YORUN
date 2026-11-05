@@ -2,8 +2,6 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import sharp from "sharp";
 import { expect, it } from "vitest";
-import { nodes } from "@/components/booth/course";
-import { findBoothCourse } from "@/components/booth/engine";
 import { makeCreature, toRenderLine, type Creature, type PartName } from "@/lib/battle/creature";
 import { SHAPES, groupLines, type ShapeGroup } from "@/lib/route/shapes";
 
@@ -29,8 +27,6 @@ it.skipIf(!OUT)("모양별 부위 판별을 그린다", async () => {
   const fixtures: { prompt: string; model: string; group: ShapeGroup }[] = JSON.parse(readFileSync("tests/fixtures/booth-outlines-image.json", "utf8"));
   for (const f of fixtures.filter((x) => x.model === "gpt-image-1-mini")) {
     items.push({ label: `윤곽 ${f.prompt.slice(0, 8)}`, line: groupLines(f.group)[0] });
-    const course = findBoothCourse(f.group.parts[0].shape, [0, 0], { timeBudgetMs: 1500 });
-    if (course) items.push({ label: `코스 ${f.prompt.slice(0, 8)}`, line: course.path.map((id) => [nodes[id][0], -nodes[id][1]]) });
   }
   const size = 150, gap = 30, columns = 8;
   const rows = Math.ceil(items.length / columns);

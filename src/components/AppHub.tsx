@@ -47,16 +47,6 @@ export function HomeScreen() {
             오늘의 드로잉 런 시작
           </Link>
         </section>
-        <Link href="/booth" className="hub-row">
-          <span className="hub-row-icon">
-            <Icon name="route" size={24} />
-          </span>
-          <span className="hub-row-body">
-            <strong>부스 체험</strong>
-            <span>지도에서 그림 코스를 찾고 가상으로 완주해 보세요.</span>
-          </span>
-          <Icon name="chevronRight" size={20} />
-        </Link>
       </div>
     </main>
   );
