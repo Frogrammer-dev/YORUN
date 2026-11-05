@@ -4,6 +4,7 @@
 import { forwardRef, useState } from "react";
 import { SHAPES, groupLines, type ShapeId } from "@/lib/route/shapes";
 import { CustomShapeInput } from "@/components/route/CustomShapeInput";
+import { wheelRailRef } from "@/components/route/wheelRail";
 import { Icon, PathThumb } from "@/components/Icon";
 import { AREAS, ASCENTS, DETAILS, MAX_SIDE, RANGES, type FinderSettingsValue, type SearchProgress } from "./finderOptions";
 
@@ -84,7 +85,7 @@ export const FinderSettings = forwardRef<HTMLElement, FinderSettingsProps>(funct
       ) : (
         <>
       <h2 id="settings-title">어떤 그림을 달릴까요?</h2>
-      <div className="shape-rail" role="radiogroup" aria-label="그림 모양">
+      <div className="shape-rail" ref={wheelRailRef} role="radiogroup" aria-label="그림 모양">
         <button type="button" role="radio" aria-checked={v.shape === "auto"} aria-label="동네 길로 만들 수 있는 코스 추천" className="shape-tile shape-tile-wide" onClick={() => onChange({ shape: "auto" })}>
           <span className="tick"><Icon name="check" size={12} strokeWidth={3} /></span>
           <Icon name="sparkle" size={30} strokeWidth={1.8} />

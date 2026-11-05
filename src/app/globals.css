@@ -918,6 +918,8 @@ a.hub-tile:active { transform: scale(.98); }
 /* 달리기 HUD는 데스크톱에서 위로 띄우지 않는다 */
 @media (min-width: 861px) {
   .tab-shell { padding-bottom: 0; }
+  /* 코스 찾기는 화면 높이에 묶어 패널이 내용만큼 늘어나지 않고 안에서 스크롤되게 한다 */
+  .tab-shell:has(> .finder) { height: 100svh; }
   .tabbar {
     position: sticky; top: 0; bottom: auto; order: -1; align-items: center; gap: var(--sp-2);
     padding: var(--safe-t) var(--sp-6) 0; border-top: 0; border-bottom: 1px solid var(--line);
