@@ -8,7 +8,8 @@ import { deform, makeCreature, toRenderLine, type Creature, type PartName } from
 import { SHAPE_BY_ID, type ShapeId } from "@/lib/route/shapes";
 
 export const FRAME_COUNT = 6;
-export const FRAME_SIZE = 256;
+/** 칸 크기. 내 선수는 클로즈업이 잦아 더 크게 만든다 */
+const FRAME_SIZE = 256, MY_FRAME_SIZE = 512;
 /** 선 두께와 눈 크기를 정하는 그림 단위. 클로즈업에서 흐려지지 않도록 칸은 이보다 크게 만들어 확대해 그린다 */
 const DRAW_SIZE = 160;
 /** 팔다리가 흔들려도 옆 프레임을 넘지 않도록 그림을 칸 안쪽에 둔다 */
@@ -124,9 +125,11 @@ function drawPose(ctx: Ctx, pose: ReturnType<typeof runnerPose>, color: string) 
 /** 머리 위에 띄우는 번호표. 앱의 네이비 판에 선수 색 숫자를 얹고, 내 번호표만 금색으로 채운다. 몸과 따로 있어 함께 돌지 않는다 */
 export function drawNumberTag(lane: number, mine: boolean, color: string): HTMLCanvasElement {
   const canvas = document.createElement("canvas");
-  canvas.width = 128;
-  canvas.height = 128;
+  // 그림 단위 128을 두 배로 그려 가까이서도 숫자가 또렷하다
+  canvas.width = 256;
+  canvas.height = 256;
   const ctx = canvas.getContext("2d")!;
+  ctx.scale(2, 2);
   const left = 22, right = 106, top = 18, bottom = 82, r = 16, mid = 64;
   ctx.fillStyle = mine ? GOLD : INK;
   ctx.strokeStyle = mine ? INK : color;
@@ -154,19 +157,20 @@ export function drawNumberTag(lane: number, mine: boolean, color: string): HTMLC
 }
 
 /** 프레임을 가로로 이어 그린 캔버스를 돌려준다. 그림은 오른쪽을 본다 */
-export function drawRunnerFrames(body: BodyPlan, color: string, line: Line, lane: number): HTMLCanvasElement {
+export function drawRunnerFrames(body: BodyPlan, color: string, line: Line, lane: number, mine = false): HTMLCanvasElement {
+  const size = mine ? MY_FRAME_SIZE : FRAME_SIZE;
   const canvas = document.createElement("canvas");
-  canvas.width = FRAME_SIZE * FRAME_COUNT;
-  canvas.height = FRAME_SIZE;
+  canvas.width = size * FRAME_COUNT;
+  canvas.height = size;
   const ctx = canvas.getContext("2d")!;
   const creature = runnerCreature(body, lane, line);
   for (let frame = 0; frame < FRAME_COUNT; frame++) {
     ctx.save();
-    ctx.translate(frame * FRAME_SIZE, 0);
+    ctx.translate(frame * size, 0);
     ctx.beginPath();
-    ctx.rect(0, 0, FRAME_SIZE, FRAME_SIZE);
+    ctx.rect(0, 0, size, size);
     ctx.clip();
-    ctx.scale(FRAME_SIZE / DRAW_SIZE, FRAME_SIZE / DRAW_SIZE);
+    ctx.scale(size / DRAW_SIZE, size / DRAW_SIZE);
     drawPose(ctx, runnerPose(creature, body, frame), color);
     ctx.restore();
   }

@@ -7,6 +7,7 @@ import * as THREE from "three";
 import type { BodyPlan } from "@/lib/battle/bodyPlan";
 import { TRACK, trackPoint } from "@/lib/battle/stadiumTrack";
 import { FOLLOW_CUT, OVERVIEW_CUT, directorCut, shotFrame } from "./raceCamera";
+import { SAFE_RATIO, qualityGuard, startRatio } from "./renderQuality";
 import { FOOT_GAP, FRAME_COUNT, bodyMotion, drawNumberTag, drawRunnerFrames, runnerCreature, runnerEye, runnerHeight } from "./runnerArt";
 
 export type StadiumRunner = { lane: number; progress: number; mine: boolean; body: BodyPlan; line?: readonly (readonly number[])[] | null };
@@ -43,7 +44,8 @@ export function StadiumMap({ runners, camera: cameraMode }: { runners: StadiumRu
       setError("이 기기는 3D 중계를 지원하지 않아요. 아래 순위로 경기를 볼 수 있어요.");
       return;
     }
-    renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+    renderer.setPixelRatio(startRatio(devicePixelRatio));
+    const anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
     renderer.domElement.setAttribute("role", "img");
     renderer.domElement.setAttribute("aria-label", "8개 레인 트랙을 달리는 선수들의 3D 중계 화면");
     container.appendChild(renderer.domElement);
@@ -172,14 +174,16 @@ export function StadiumMap({ runners, camera: cameraMode }: { runners: StadiumRu
     function canvasTexture(canvas: HTMLCanvasElement) {
       const texture = new THREE.CanvasTexture(canvas);
       texture.colorSpace = THREE.SRGBColorSpace;
+      // 비스듬히 보는 로우앵글과 사선 샷에서도 뭉개지지 않게 한다
+      texture.anisotropy = anisotropy;
       textures.push(texture);
       return texture;
     }
     function makeRunner(runner: StadiumRunner) {
       const color = RUNNER_COLORS[(runner.lane - 1) % RUNNER_COLORS.length];
-      const texture = canvasTexture(drawRunnerFrames(runner.body, color, runner.line ?? null, runner.lane));
+      const texture = canvasTexture(drawRunnerFrames(runner.body, color, runner.line ?? null, runner.lane, runner.mine));
       texture.repeat.set(1 / FRAME_COUNT, 1);
-      const sheetMaterial = new THREE.MeshBasicMaterial({ map: texture, transparent: true, alphaTest: 0.5, side: THREE.DoubleSide });
+      const sheetMaterial = new THREE.MeshBasicMaterial({ map: texture, alphaTest: 0.5, alphaToCoverage: true, side: THREE.DoubleSide });
       const tagMaterial = new THREE.SpriteMaterial({ map: canvasTexture(drawNumberTag(runner.lane, runner.mine, color)), depthTest: false });
       disposables.push(sheetMaterial, tagMaterial);
       const sheet = new THREE.Mesh(paper, sheetMaterial);
@@ -210,7 +214,12 @@ export function StadiumMap({ runners, camera: cameraMode }: { runners: StadiumRu
     let cutId = "";
     let subjectLane = 1;
     let frame = 0;
+    let previous = performance.now();
+    const tooSlow = qualityGuard();
     function render(now: number) {
+      // 기기가 버거워하면 화면 배율을 낮춘다. setPixelRatio가 크기도 다시 맞춘다
+      if (tooSlow(now - previous) && renderer.getPixelRatio() > SAFE_RATIO) renderer.setPixelRatio(SAFE_RATIO);
+      previous = now;
       const rows = live.current;
       let leader: StadiumRunner | undefined, leaderProgress = -1, mine: StadiumRunner | undefined;
       if (!reduced.matches) {
