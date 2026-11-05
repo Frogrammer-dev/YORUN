@@ -5,9 +5,9 @@
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { simulateDerby } from "@/lib/battle/derby";
-import { simulateDuel, type DuelAction } from "@/lib/battle/duel";
 import { browserSupabase } from "@/lib/client/supabaseBrowser";
 import { groupLines, type ShapeDef, type ShapeGroup } from "@/lib/route/shapes";
+import { DuelArena } from "@/components/battle/DuelArena";
 import { BoothRace } from "./BoothRace";
 import { drawing, extract, extractOutline, nodes, shapes, streets, type Course, type Shape } from "./course";
 import { findBoothCourse, presetShape } from "./engine";
@@ -18,7 +18,6 @@ type Game = "duel" | "practice" | "race";
 const HISTORY_KEY = "yorun.booth.v1";
 const ACTIVE_KEY = "yorun.booth.active";
 const CUSTOM = "내 그림";
-const LABELS: Record<DuelAction, string> = { strike: "강타", pierce: "꿰뚫기", guard: "방어" };
 
 function valid(c: Card) {
   return c && typeof c.id === "string" && typeof c.shape === "string" && c.shape.length <= 20 && Array.isArray(c.path) && c.path.length > 1 && c.path.every((n) => Number.isInteger(n) && nodes[n]) && Number.isFinite(c.distance) && Number.isInteger(c.number);
@@ -56,8 +55,6 @@ export default function Booth() {
   const [fraction, move] = useState(0);
   const [warning, warn] = useState("");
   const [game, setGame] = useState<Game | null>(null);
-  const [opponent, pick] = useState(0);
-  const [action, plan] = useState<DuelAction>("strike");
   const [result, showResult] = useState("");
   const [runner, setRunner] = useState<number[] | null>(null);
   const [prompt, setPrompt] = useState("");
@@ -189,26 +186,14 @@ export default function Booth() {
 
   function play() {
     if (!card) return;
-    const stats = (distance: number) => ({ distanceM: distance, adherence: 0.82, climbMPerKm: null });
-    const seed = `${card.id}:${game}`;
-    if (game === "duel") {
-      const foe = peers[opponent];
-      const duel = simulateDuel(
-        { id: card.id, stats: stats(card.distance), plan: [action, "guard", "pierce", "strike", action] },
-        { id: foe?.id ?? "practice", stats: stats(foe?.distance ?? 3000), plan: ["guard", "strike", "pierce", "guard", "strike"] },
-        seed,
-      );
-      showResult(`${foe ? title(foe) : "연습 러너"}와의 체험 대결 · ${duel.winner === null ? "무승부" : duel.winner === 0 ? "승리" : "패배"} · ${duel.turns.length}턴`);
-    } else {
-      const field = Array.from({ length: 8 }, (_, i) => {
-        const c = i === 0 ? card : peers[i - 1];
-        const identity = c?.id ?? `practice-${i}`;
-        const variant = Array.from(identity).reduce((n, ch) => (n * 31 + ch.charCodeAt(0)) >>> 0, 7);
-        return { id: identity, name: c ? title(c) : `연습 러너 ${i}`, stats: { avgPaceSecPerKm: 320 + (variant % 75), cornering: 0.69 + (variant % 24) / 100, corners: [], paceSplits: [] } };
-      });
-      const derby = simulateDerby(field, seed);
-      showResult(derby.entries.map((r) => `${r.rank}위  ${field.find((f) => f.id === r.id)!.name}${r.id === card.id ? "  · 나" : ""}`).join("\n"));
-    }
+    const field = Array.from({ length: 8 }, (_, i) => {
+      const c = i === 0 ? card : peers[i - 1];
+      const identity = c?.id ?? `practice-${i}`;
+      const variant = Array.from(identity).reduce((n, ch) => (n * 31 + ch.charCodeAt(0)) >>> 0, 7);
+      return { id: identity, name: c ? title(c) : `연습 러너 ${i}`, stats: { avgPaceSecPerKm: 320 + (variant % 75), cornering: 0.69 + (variant % 24) / 100, corners: [], paceSplits: [] } };
+    });
+    const derby = simulateDerby(field, `${card.id}:${game}`);
+    showResult(derby.entries.map((r) => `${r.rank}위  ${field.find((f) => f.id === r.id)!.name}${r.id === card.id ? "  · 나" : ""}`).join("\n"));
   }
 
   return (
@@ -276,29 +261,16 @@ export default function Booth() {
         <>
           <div className="booth-choices">
             <button type="button" className="booth-choice" aria-pressed={game === "race"} onClick={() => { setGame("race"); showResult(""); }}>8인 실시간 경주</button>
-            <button type="button" className="booth-choice" aria-pressed={game === "duel"} onClick={() => { setGame("duel"); showResult(""); pick(0); }}>1대1 체험 대결</button>
+            <button type="button" className="booth-choice" aria-pressed={game === "duel"} onClick={() => { setGame("duel"); showResult(""); }}>1대1 대결</button>
             <button type="button" className="booth-choice" aria-pressed={game === "practice"} onClick={() => { setGame("practice"); showResult(""); }}>혼자 연습 경주</button>
           </div>
           {game === "race" && <section className="booth-card"><BoothRace key={card.id} /></section>}
-          {(game === "duel" || game === "practice") && (
+          {game === "duel" && <section className="booth-card"><DuelArena key={card.id} returnTo="/booth" /></section>}
+          {game === "practice" && (
             <section className="booth-card">
-              <h2>{game === "duel" ? "상대와 첫 전략을 고르세요" : "여덟 레인에서 경주하기"}</h2>
-              <p>{game === "duel" ? "이 기기에서 먼저 체험한 러너에게 도전해요." : "이 기기의 이전 기록으로 편성하고 빈 레인은 연습 러너로 채워요."} 능력치는 체험용이에요.</p>
-              {game === "duel" && (
-                <>
-                  <label className="booth-field">상대
-                    <select value={opponent} onChange={(e) => { pick(+e.target.value); showResult(""); }}>
-                      {peers.length ? peers.map((p, i) => <option key={p.id} value={i}>{title(p)}</option>) : <option value={0}>연습 러너</option>}
-                    </select>
-                  </label>
-                  <label className="booth-field">첫 전략
-                    <select value={action} onChange={(e) => { plan(e.target.value as DuelAction); showResult(""); }}>
-                      {(Object.keys(LABELS) as DuelAction[]).map((id) => <option key={id} value={id}>{LABELS[id]}</option>)}
-                    </select>
-                  </label>
-                </>
-              )}
-              <button type="button" className="btn btn-primary wide" onClick={play}>{game === "duel" ? "대결 시작" : "경주 결과 보기"}</button>
+              <h2>여덟 레인에서 경주하기</h2>
+              <p>이 기기의 이전 기록으로 편성하고 빈 레인은 연습 러너로 채워요. 능력치는 체험용이에요.</p>
+              <button type="button" className="btn btn-primary wide" onClick={play}>경주 결과 보기</button>
               {result && <pre role="status">{result}</pre>}
             </section>
           )}
