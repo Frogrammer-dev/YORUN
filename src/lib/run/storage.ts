@@ -79,6 +79,7 @@ export interface PointWallet {
   dayPoints: number;
   /** 마지막으로 적립한 달리기 (같은 달리기를 두 번 적립하지 않게) */
   lastRunId: number | null;
+  awardedIds?: number[];
 }
 
 /** 날짜가 바뀌었으면 오늘 적립량을 0으로 본다 */
@@ -90,9 +91,10 @@ export function loadWallet(now: number): PointWallet {
 /** 달리기 하나를 적립한다. 반환: 실제로 적립된 포인트 (하루 상한·중복 적립 반영) */
 export function awardRun(runId: number, collected: number, now: number): { points: number; wallet: PointWallet } {
   const w = loadWallet(now);
-  if (w.lastRunId === runId) return { points: 0, wallet: w };
+  const awardedIds = w.awardedIds ?? (w.lastRunId === null ? [] : [w.lastRunId]);
+  if (awardedIds.includes(runId)) return { points: 0, wallet: w };
   const points = cappedPoints(collected, w.dayPoints);
-  const next = { ...w, balance: w.balance + points, dayPoints: w.dayPoints + points, lastRunId: runId };
+  const next = { ...w, balance: w.balance + points, dayPoints: w.dayPoints + points, lastRunId: runId, awardedIds: [...awardedIds, runId] };
   write(WALLET_KEY, next);
   return { points, wallet: next };
 }

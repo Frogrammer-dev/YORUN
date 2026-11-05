@@ -13,6 +13,10 @@ describe("코스 안내", () => {
     const t = new RouteTracker(square);
     expect(t.total).toBeCloseTo(1600, -1);
     expect(t.turns.map((x) => x.dir)).toEqual(["left", "left", "left"]);
+    const [advance, near] = t.voiceWaypoints();
+    expect(advance.label).toBe("약 100미터 후 좌회전이에요.");
+    expect(advance.lon).toBeCloseTo(ll(300, 0)[1], 5);
+    expect(near.label).toBe("잠시 후 좌회전이에요.");
     const g = t.update(...ll(200, 3));
     expect(g.progressMeters).toBeCloseTo(200, -1);
     expect(g.offRouteMeters).toBeLessThan(5);
@@ -69,6 +73,18 @@ describe("기록", () => {
     const restored = recoverRecord({ routeId: null, record: r, savedAt: 30 * 60_000 });
     expect(restored.resumedAt).toBeNull();
     expect(elapsedMs(restored, 99 * 60_000)).toBe(30 * 60_000);
+  });
+
+  it("10분 GPS 공백은 구간을 분리하고 거리와 활동 시간에서 제외한다", () => {
+    let r = addFix(startOrResume(emptyRecord(), 0), fix(0, 0, 1000)).record;
+    r = addFix(r, fix(5, 0, 2000)).record;
+    r = addFix(r, fix(2005, 0, 602000)).record;
+    expect(r.distanceMeters).toBeCloseTo(5, 0);
+    expect(r.segments.map(s => s.length)).toEqual([2, 1]);
+    expect(elapsedMs(r, 602000)).toBe(2000);
+    expect(toGpx("test", r.segments).match(/<trkseg>/g)).toHaveLength(2);
+    expect(addFix(r, fix(2505, 0, 603000)).accepted).toBe(false);
+    expect(addFix(r, fix(2009, 0, 603000)).accepted).toBe(true);
   });
 
   it("음성용 시간", () => {
