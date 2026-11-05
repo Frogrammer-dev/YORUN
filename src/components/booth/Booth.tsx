@@ -8,12 +8,12 @@ import { simulateDerby } from "@/lib/battle/derby";
 import { browserSupabase } from "@/lib/client/supabaseBrowser";
 import { groupLines, type ShapeDef, type ShapeGroup } from "@/lib/route/shapes";
 import { DuelArena } from "@/components/battle/DuelArena";
-import { BoothRace } from "./BoothRace";
+import { DerbyGame } from "@/components/derby/DerbyGame";
 import { drawing, extract, extractOutline, nodes, shapes, streets, type Course, type Shape } from "./course";
 import { findBoothCourse, presetShape } from "./engine";
 import "./booth.css";
 
-type Card = { id: string; shape: string; center: number[]; path: number[]; distance: number; number: number };
+type Card = { id: string; shape: string; center: number[]; path: number[]; distance: number; number: number; prompt?: string };
 type Game = "duel" | "practice" | "race";
 const HISTORY_KEY = "yorun.booth.v1";
 const ACTIVE_KEY = "yorun.booth.active";
@@ -143,7 +143,7 @@ export default function Booth() {
     if (!course) return;
     const previous = history();
     const number = Math.max(0, ...cards.map((c) => c.number), ...previous.map((c) => c.number)) + 1;
-    const record: Card = { id: crypto.randomUUID(), number, shape, center, path: course.path, distance: course.distance };
+    const record: Card = { id: crypto.randomUUID(), number, shape, center, path: course.path, distance: course.distance, ...(shape === CUSTOM ? { prompt: prompt.slice(0, 40) } : {}) };
     const next = [...(previous.length ? previous : cards), record].slice(-40);
     try {
       localStorage.setItem(HISTORY_KEY, JSON.stringify(next));
@@ -260,11 +260,11 @@ export default function Booth() {
       {phase === "done" && card && (
         <>
           <div className="booth-choices">
-            <button type="button" className="booth-choice" aria-pressed={game === "race"} onClick={() => { setGame("race"); showResult(""); }}>8인 실시간 경주</button>
+            <button type="button" className="booth-choice" aria-pressed={game === "race"} onClick={() => { setGame("race"); showResult(""); }}>8인 경기</button>
             <button type="button" className="booth-choice" aria-pressed={game === "duel"} onClick={() => { setGame("duel"); showResult(""); }}>1대1 대결</button>
             <button type="button" className="booth-choice" aria-pressed={game === "practice"} onClick={() => { setGame("practice"); showResult(""); }}>혼자 연습 경주</button>
           </div>
-          {game === "race" && <section className="booth-card"><BoothRace key={card.id} /></section>}
+          {game === "race" && <DerbyGame key={card.id} returnTo="/booth" />}
           {game === "duel" && <section className="booth-card"><DuelArena key={card.id} returnTo="/booth" /></section>}
           {game === "practice" && (
             <section className="booth-card">

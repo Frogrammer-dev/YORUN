@@ -6,7 +6,7 @@ const sql=name=>readFile(new URL("../migrations/"+name,import.meta.url),"utf8");
 const rows=async(q,p)=>(await db.query(q,p)).rows;
 try{
   await db.exec("create role anon;create role authenticated;create role service_role bypassrls;create schema auth;create table auth.users(id uuid primary key);grant usage on schema auth to service_role;");
-  await db.exec(await sql("0008_booth_race.sql"));
+  await db.exec(await sql("0008_booth_race.sql"));await db.exec(await sql("0010_booth_race_ten_seconds.sql"));
   const ids=(await rows("insert into auth.users select gen_random_uuid() from generate_series(1,10) returning id")).map(r=>r.id);
   await db.exec("set role service_role");
   const enter=async id=>(await rows("select public.booth_race_enter($1,'{\"avgPaceSecPerKm\":330}') race",[id]))[0].race;
@@ -17,7 +17,7 @@ try{
   assert.equal(await enter(ids[0]),first);
   assert.equal((await rows("select 1 from public.booth_race_entries where race=$1",[first])).length,1);
   let state=await status(first);
-  assert.equal(state.closed,false);assert.ok(state.secondsLeft>0&&state.secondsLeft<=60);
+  assert.equal(state.closed,false);assert.ok(state.secondsLeft>0&&state.secondsLeft<=10);
 
   // 8명이 차면 바로 마감되고, 레인은 1~8로 겹치지 않으며, 9번째는 새 경주로 간다
   for(let i=1;i<8;i++)assert.equal(await enter(ids[i]),first);
@@ -48,5 +48,5 @@ try{
     await assert.rejects(db.query("select public.booth_race_enter($1,'{}')",[ids[1]]));
     await db.exec("reset role");
   }
-  console.log("PASS: one seat per person, 8 seats then new race, 60s close, anonymized on delete, clients blocked");
+  console.log("PASS: one seat per person, 8 seats then new race, 10s close, anonymized on delete, clients blocked");
 }finally{await db.close();}

@@ -40,7 +40,7 @@ function Fighter({ name, hp, maxHp, side }: { name: string; hp: number; maxHp: n
       <div className="duel-status">
         <strong>{name}</strong>
         <div className="duel-hp" role="meter" aria-label={`${name} 체력`} aria-valuemin={0} aria-valuemax={maxHp} aria-valuenow={hp}>
-          <span data-low={percent <= 30} style={{ width: `${percent}%` }} />
+          <span data-low={percent <= 30} style={{ transform: `scaleX(${percent / 100})` }} />
         </div>
         <small>{hp} / {maxHp}</small>
       </div>

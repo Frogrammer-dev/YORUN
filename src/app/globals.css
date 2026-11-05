@@ -713,7 +713,7 @@ a.hub-tile:active { transform: scale(.98); }
 .duel-status strong { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .duel-status small { font-size: var(--fs-caption); color: var(--text-2); }
 .duel-hp { height: 8px; margin: 4px 0; overflow: hidden; border-radius: var(--r-pill); background: var(--line); }
-.duel-hp span { display: block; height: 100%; border-radius: inherit; background: var(--brand); transition: width .4s ease; }
+.duel-hp span { display: block; height: 100%; background: var(--brand); transform-origin: left; transition: transform .4s ease; }
 .duel-hp span[data-low="true"] { background: var(--panel); }
 .duel-avatar { display: flex; flex: none; align-items: center; justify-content: center; width: 72px; height: 72px; border-radius: 50%; background: var(--panel); color: var(--on-panel); font-size: var(--fs-title2); font-weight: 800; }
 .duel-log { min-height: 3.2em; margin: 0; padding: var(--sp-3); border: 1px solid var(--line); border-radius: var(--r-sm); line-height: 1.5; }
@@ -722,7 +722,7 @@ a.hub-tile:active { transform: scale(.98); }
 .duel-choice span { font-size: 24px; line-height: 1; }
 .duel-choice small { font-size: var(--fs-caption); }
 .duel-choice-allin { border-color: var(--panel); background: var(--panel); color: var(--on-panel); }
-.duel-choice:disabled { opacity: .55; cursor: default; }
+.duel-choice:disabled { border-color: var(--line); background: var(--disabled-bg); color: var(--text-disabled); cursor: not-allowed; }
 .duel-result { text-align: center; font-size: var(--fs-title1, 28px); }
 @media (prefers-reduced-motion: reduce) { .duel-hp span { transition: none; } }
 .battle-lead { margin: var(--sp-1) 0; font-size: var(--fs-callout); color: var(--text-2); }

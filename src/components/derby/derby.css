@@ -1,0 +1,108 @@
+/* Hallmark · shape: app screen · genre: playful · theme: brand (by request) · v2.0.0
+ * critique: 게임 화면이지만 앱의 파랑과 네이비를 벗어나지 않는다. 숫자를 크게 두고 캐릭터 얼굴은 달린 코스 그림으로 한다.
+ * waive: motion-is-state, 게임의 등장·카운트다운 연출은 사용자가 요청한 게임 느낌의 일부이며 reduced-motion에서 끈다 */
+:root {
+  --derby-bg: var(--panel);
+  --derby-ink: var(--on-panel);
+  --derby-ink-2: var(--on-panel-2);
+  --derby-line: var(--panel-line);
+  --derby-raised: color-mix(in oklab, var(--panel) 82%, var(--on-panel));
+  --derby-accent: var(--brand);
+  --derby-accent-soft: color-mix(in oklab, var(--brand) 42%, var(--panel));
+  --derby-gold: oklch(84% 0.15 85);
+  --derby-danger: oklch(78% 0.13 25);
+}
+
+.derby-screen { display: flex; flex-direction: column; gap: var(--sp-3); min-width: 0; padding: var(--sp-4); border-radius: var(--r-lg); background: var(--derby-bg); color: var(--derby-ink); }
+.derby-title { margin: 0; font-size: var(--fs-title2); font-weight: 800; color: var(--derby-ink); }
+.derby-note { margin: 0; font-size: var(--fs-caption); line-height: 1.5; color: var(--derby-ink-2); }
+.derby-error { margin: 0; font-size: var(--fs-callout); color: var(--derby-danger); }
+.derby-consent { color: var(--derby-ink-2); }
+.derby-login { padding: var(--sp-4); border-radius: var(--r-md); background: var(--surface); color: var(--text); }
+.derby-login p { margin: 0 0 var(--sp-3); }
+
+/* 캐릭터 선택 */
+.derby-roster { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(150px, 46%); gap: var(--sp-2); margin: 0 calc(var(--sp-4) * -1); padding: var(--sp-1) var(--sp-4) var(--sp-2); overflow-x: auto; scroll-snap-type: x proximity; }
+.derby-card { display: flex; flex-direction: column; align-items: flex-start; gap: var(--sp-1); min-width: 0; padding: var(--sp-3); border: 2px solid var(--derby-line); border-radius: var(--r-md); background: var(--derby-raised); color: var(--derby-ink); font: inherit; text-align: left; cursor: pointer; scroll-snap-align: start; transition: transform .16s ease, border-color .16s ease; }
+.derby-card[aria-checked="true"] { border-color: var(--derby-gold); transform: translateY(-3px); }
+.derby-card:disabled { background: var(--disabled-bg); color: var(--text-disabled); cursor: not-allowed; }
+.derby-card strong { overflow-wrap: anywhere; font-size: var(--fs-callout); font-weight: 800; }
+.derby-card small { min-height: 3em; font-size: var(--fs-caption); line-height: 1.4; color: var(--derby-ink-2); }
+.derby-body { font-size: var(--fs-caption); font-style: normal; font-weight: 700; color: var(--derby-gold); }
+.derby-face { display: flex; align-items: center; justify-content: center; align-self: center; margin-bottom: var(--sp-1); color: var(--derby-gold); }
+.derby-face-empty { border-radius: 50%; background: var(--derby-accent); color: var(--derby-ink); font-size: var(--fs-title1); font-weight: 800; }
+.derby-gauge { display: flex; align-items: center; gap: var(--sp-2); width: 100%; font-size: var(--fs-caption); color: var(--derby-ink-2); }
+.derby-gauge > span { flex: none; }
+.derby-gauge-bar { flex: 1; height: 6px; overflow: hidden; border-radius: var(--r-pill); background: var(--derby-line); }
+.derby-gauge-bar i { display: block; height: 100%; background: var(--derby-gold); transform-origin: left; }
+
+.derby-start { min-height: 56px; border: 0; border-radius: var(--r-md); background: var(--derby-gold); color: var(--derby-bg); font: inherit; font-size: var(--fs-title3); font-weight: 800; cursor: pointer; transition: transform .12s ease; }
+.derby-start:active { transform: scale(.98); }
+.derby-start:disabled { background: var(--disabled-bg); color: var(--text-disabled); cursor: not-allowed; }
+.derby-quiet { min-height: 44px; padding: 0 var(--sp-3); border: 1px solid var(--derby-line); border-radius: var(--r-sm); background: transparent; color: var(--derby-ink); font: inherit; font-size: var(--fs-callout); cursor: pointer; }
+.derby-quiet:disabled { border-color: var(--derby-line); color: var(--text-disabled); cursor: not-allowed; }
+.derby-card:focus-visible, .derby-start:focus-visible, .derby-quiet:focus-visible { outline: 3px solid var(--derby-gold); outline-offset: 2px; }
+
+/* 매칭과 입장 */
+.derby-versus { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--sp-1); min-height: 148px; text-align: center; }
+.derby-status { margin: 0; font-size: var(--fs-callout); color: var(--derby-ink-2); }
+.derby-count { margin: 0; font-family: var(--font-num); font-size: clamp(80px, 26vw, 112px); font-weight: 700; font-variant-numeric: tabular-nums; line-height: .95; color: var(--derby-gold); animation: derby-pop .32s ease; }
+.derby-seats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-2); margin: 0; padding: 0; list-style: none; }
+.derby-seat { display: flex; align-items: center; gap: var(--sp-2); min-width: 0; min-height: 52px; padding: var(--sp-2) var(--sp-3); border: 1px dashed var(--derby-line); border-radius: var(--r-sm); }
+.derby-seat-in { border: 1px solid var(--derby-line); background: var(--derby-raised); animation: derby-seat .28s ease; }
+.derby-seat[data-mine] { border-color: var(--derby-gold); }
+.derby-seat b { flex: none; font-family: var(--font-num); font-size: var(--fs-title2); color: var(--derby-gold); }
+.derby-seat span { overflow: hidden; font-size: var(--fs-callout); text-overflow: ellipsis; white-space: nowrap; }
+.derby-seat-wait { color: var(--derby-ink-2); }
+
+/* 중계 */
+.derby-hud { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--sp-3); }
+.derby-hud span { display: block; font-size: var(--fs-caption); color: var(--derby-ink-2); }
+.derby-hud strong { font-family: var(--font-num); font-size: var(--fs-display); font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1; color: var(--derby-gold); }
+.derby-hud-dist { text-align: right; }
+.derby-callout { margin: 0; overflow-wrap: anywhere; font-size: var(--fs-callout); font-weight: 700; text-align: center; }
+.derby-stadium { margin: 0 calc(var(--sp-4) * -1); overflow: clip; }
+.derby-canvas { width: 100%; min-height: 260px; background: var(--derby-raised); }
+.derby-canvas canvas { display: block; }
+.derby-canvas-empty { display: flex; align-items: center; justify-content: center; color: var(--derby-ink-2); }
+.derby-board { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px var(--sp-3); margin: 0; padding: 0; list-style: none; }
+.derby-board li { display: grid; grid-template-columns: 1.2em minmax(0, 1fr); align-items: center; column-gap: var(--sp-1); font-size: var(--fs-caption); }
+.derby-board b { font-family: var(--font-num); font-size: var(--fs-callout); }
+.derby-board span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.derby-board .derby-gauge-bar { grid-column: 2; height: 3px; }
+.derby-board li[data-mine] { font-weight: 800; color: var(--derby-gold); }
+.derby-controls { display: flex; gap: var(--sp-2); }
+.derby-controls > * { flex: 1; }
+
+/* 결과 */
+.derby-final { min-height: 0; }
+.derby-rank small { font-size: .32em; }
+.derby-podium { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: end; gap: var(--sp-1); margin: 0; padding: 0; list-style: none; }
+.derby-podium li { display: flex; flex-direction: column; align-items: stretch; gap: var(--sp-1); min-width: 0; text-align: center; }
+.derby-podium span { overflow: hidden; font-size: var(--fs-caption); text-overflow: ellipsis; white-space: nowrap; }
+.derby-podium b { display: flex; align-items: center; justify-content: center; border-radius: var(--r-sm) var(--r-sm) 0 0; background: var(--derby-accent-soft); font-family: var(--font-num); font-size: var(--fs-title1); }
+.derby-podium [data-place="1"] b { height: 92px; background: var(--derby-gold); color: var(--derby-bg); }
+.derby-podium [data-place="2"] b { height: 68px; }
+.derby-podium [data-place="3"] b { height: 48px; }
+.derby-podium li[data-mine] span { font-weight: 800; color: var(--derby-gold); }
+.derby-results { margin: 0; padding: 0; list-style: none; }
+.derby-results li { display: flex; align-items: baseline; gap: var(--sp-3); padding: var(--sp-2) 0; border-top: 1px solid var(--derby-line); }
+.derby-results b { width: 1.4em; font-family: var(--font-num); font-size: var(--fs-title3); }
+.derby-results span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.derby-results small { font-family: var(--font-num); font-size: var(--fs-callout); font-variant-numeric: tabular-nums; color: var(--derby-ink-2); }
+.derby-results li[data-mine] { font-weight: 800; color: var(--derby-gold); }
+
+.tab-shell:has(.derby-live) { padding-bottom: 0; }
+.tab-shell:has(.derby-live) .tabbar { display: none; }
+
+@media (min-width: 720px) {
+  .derby-roster { grid-auto-flow: row; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); grid-auto-columns: auto; margin: 0; padding: var(--sp-1) 0; overflow: visible; }
+  .derby-seats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .derby-board { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@keyframes derby-pop { from { opacity: 0; transform: scale(1.3); } to { opacity: 1; transform: scale(1); } }
+@keyframes derby-seat { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .derby-count, .derby-seat-in { animation: none; }
+  .derby-card, .derby-start { transition: none; }
+}

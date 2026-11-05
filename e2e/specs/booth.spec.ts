@@ -40,3 +40,20 @@ test("@mobile 콘텐츠 탭: 도감과 GPX 불러오기로 갈 수 있다", asyn
   await page.waitForURL("**/contents");
   await expect(page.getByText("지원 파일과 개인정보 안내")).toBeVisible();
 });
+
+test("@mobile 8인 경기: 캐릭터를 고르고 봇 입장, 중계, 결과까지 간다", async ({ page }) => {
+  await page.goto("/derby");
+  await expect(page.getByRole("heading", { name: "출전할 캐릭터를 고르세요" })).toBeVisible();
+  await page.getByRole("radio", { name: /코너형/ }).click();
+  await expect(page.getByRole("radio", { name: /코너형/ })).toHaveAttribute("aria-checked", "true");
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(page.viewportSize()!.width);
+  await page.getByRole("button", { name: "봇과 연습 경기" }).click();
+  await expect(page.locator(".derby-seat-in")).toHaveCount(8, { timeout: 15_000 });
+  await expect(page.getByLabel("현재 순위")).toBeVisible({ timeout: 15_000 });
+  await expect(page.locator(".tabbar")).toBeHidden();
+  await page.getByRole("button", { name: "결과 바로 보기" }).click();
+  await expect(page.getByLabel("1위부터 3위")).toBeVisible();
+  await expect(page.locator(".derby-results li")).toHaveCount(8);
+  await page.getByRole("button", { name: "다시 경기하기" }).click();
+  await expect(page.getByRole("heading", { name: "출전할 캐릭터를 고르세요" })).toBeVisible();
+});

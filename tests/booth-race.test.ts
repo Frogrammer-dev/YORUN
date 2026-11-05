@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { BOOTH_STYLES, boothRaceResult, boothStats, type BoothSeat, type BoothStyle } from "@/lib/battle/boothRace";
+import { BOOTH_STYLES, boothRaceResult, boothStats, raceProgress, type BoothSeat, type BoothStyle } from "@/lib/battle/boothRace";
 import { seededRandom } from "@/lib/battle/seed";
 
 const STYLES = Object.keys(BOOTH_STYLES) as BoothStyle[];
@@ -7,12 +7,12 @@ const seat = (lane: number, style: BoothStyle, seed: string, mine = false): Boot
 
 describe("boothRaceResult", () => {
   it("한 명만 있어도 연습 러너로 8레인을 채우고, 연습 러너임을 밝힌다", () => {
-    const placings = boothRaceResult("race-a", [seat(1, "balance", "x", true)]);
+    const placings = boothRaceResult("race-a", [seat(1, "balance", "x", true)]).placings;
     expect(placings.map((p) => p.rank)).toEqual([1, 2, 3, 4, 5, 6, 7, 8]);
     expect(new Set(placings.map((p) => p.lane)).size).toBe(8);
     expect(placings.filter((p) => p.mine).map((p) => p.lane)).toEqual([1]);
     expect(placings.filter((p) => p.practice)).toHaveLength(7);
-    expect(placings.filter((p) => p.practice).every((p) => p.name.startsWith("연습 러너"))).toBe(true);
+    expect(placings.filter((p) => p.practice).every((p) => p.name.startsWith("봇 "))).toBe(true);
   });
 
   it("같은 경주는 다시 계산해도 결과가 같다", () => {
@@ -28,12 +28,21 @@ describe("boothRaceResult", () => {
       const random = seededRandom(`balance-${i}`);
       const styles = Array.from({ length: 8 }, (_, lane) => STYLES[lane % 3]);
       const seats = styles.map((style, lane) => ({ lane: lane + 1, name: "", stats: boothStats(style, random) }));
-      const winner = boothRaceResult(`balance-${i}`, seats)[0];
+      const winner = boothRaceResult(`balance-${i}`, seats).placings[0];
       wins[styles[winner.lane - 1]]++;
     }
     for (const style of STYLES) {
       expect(wins[style] / races, style).toBeGreaterThanOrEqual(0.2);
       expect(wins[style] / races, style).toBeLessThanOrEqual(0.5);
     }
+  });
+});
+
+describe("raceProgress", () => {
+  it("구간 사이를 이어 주고 완주하면 12에서 멈춘다", () => {
+    const splits = Array.from({ length: 12 }, (_, i) => (i + 1) * 10);
+    expect(raceProgress(splits, 0)).toBe(0);
+    expect(raceProgress(splits, 15)).toBeCloseTo(1.5);
+    expect(raceProgress(splits, 999)).toBe(12);
   });
 });
