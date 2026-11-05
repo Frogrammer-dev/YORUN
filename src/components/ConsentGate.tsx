@@ -1,5 +1,6 @@
 "use client";
 // Google 로그인과 기존 계정은 가입 폼을 거치지 않으므로, 동의 기록이 없으면 동의 화면으로 보낸다.
+// 게스트는 이름만 입력하고 바로 참여하므로 동의 화면을 거치지 않는다. 동의 기록도 남기지 않는다.
 
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -16,7 +17,7 @@ export function ConsentGate() {
     const auth = browserSupabase()?.auth;
     if (!auth || OPEN.some((path) => pathname === path || pathname.startsWith(path + "/"))) return;
     const { data } = auth.onAuthStateChange((_event, session) => {
-      if (session && !hasValidConsent(session.user.user_metadata)) router.replace(`/consent?next=${encodeURIComponent(pathname)}`);
+      if (session && !session.user.is_anonymous && !hasValidConsent(session.user.user_metadata)) router.replace(`/consent?next=${encodeURIComponent(pathname)}`);
     });
     return () => data.subscription.unsubscribe();
   }, [pathname, router]);

@@ -1,6 +1,6 @@
 import {verifyRun} from "@/lib/server/verifyRun";
 import {createHash} from "node:crypto";
-import {battleDatabase as database,playerName} from "@/lib/server/battle";
+import {battleDatabase as database,playerNames} from "@/lib/server/battle";
 import {z} from "zod";
 import {handle,ok,requireUser,HttpError,limit,readJson,assertWriteRequest,mapDbError} from "@/lib/server/http";
 
@@ -31,5 +31,6 @@ export function GET(req:Request){return handle("GET derby",async()=>{
   const rows=await db.from("derby_entries").select("lane,stats,owner_id").eq("race",entry.race).order("lane");
   if(rows.error) throw mapDbError(rows.error);
   const runners=rows.data.map(r=>({id:String(r.lane),ghost:true,stats:r.stats}));
-  return ok({race:entry.race,lane:String(entry.lane),count:runners.length,players:rows.data.map(r=>({lane:String(r.lane),name:playerName(r.owner_id)})),result:runners.length===8?simulateDerby(runners,entry.race):null});
+  const nameOf=await playerNames(db,rows.data.map(r=>r.owner_id));
+  return ok({race:entry.race,lane:String(entry.lane),count:runners.length,players:rows.data.map(r=>({lane:String(r.lane),name:nameOf(r.owner_id)})),result:runners.length===8?simulateDerby(runners,entry.race):null});
 });}

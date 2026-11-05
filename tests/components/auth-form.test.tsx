@@ -4,11 +4,11 @@ import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/re
 import { afterEach } from "vitest";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { AuthForm } from "@/components/AuthForm";
-import { POLICY_VERSION, hasValidConsent } from "@/lib/legal/policy";
+import { FEATURES, POLICY_VERSION, hasValidConsent } from "@/lib/legal/policy";
 import { safeNext } from "@/lib/safeNext";
 
 const auth = {
-  signInWithPassword: vi.fn(), signUp: vi.fn(), signInWithOAuth: vi.fn(), signInWithOtp: vi.fn(), resetPasswordForEmail: vi.fn(),
+  signInWithPassword: vi.fn(), signUp: vi.fn(), signInWithOAuth: vi.fn(), signInWithOtp: vi.fn(), resetPasswordForEmail: vi.fn(), signInAnonymously: vi.fn(),
 };
 const navigate = vi.fn();
 const setup = (props = {}) => render(<AuthForm supabase={{ auth } as unknown as SupabaseClient} prepareNext={async () => "/room?draft=d1"} onNavigate={navigate} {...props} />);
@@ -20,8 +20,51 @@ const submit = () => fireEvent.submit(document.querySelector("form")!);
 beforeEach(() => {
   vi.clearAllMocks();
   for (const fn of Object.values(auth)) fn.mockResolvedValue({ data: {}, error: null });
+  FEATURES.emailAuth = true;
 });
-afterEach(cleanup);
+afterEach(() => { cleanup(); FEATURES.emailAuth = false; });
+
+describe("AuthForm: Google과 게스트만 쓰는 부스 설정", () => {
+  beforeEach(() => { FEATURES.emailAuth = false; });
+  const openGuest = () => fireEvent.click(screen.getByRole("button", { name: "게스트로 참여하기" }));
+  const typeName = (value: string) => fireEvent.change(screen.getByLabelText("이름"), { target: { value } });
+
+  it("이메일 입력과 가입 탭 없이 Google과 게스트만 보여 준다", () => {
+    setup();
+    expect(screen.getByRole("button", { name: "Google로 계속하기" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "게스트로 참여하기" })).toBeTruthy();
+    expect(screen.queryByLabelText("이메일")).toBeNull();
+    expect(screen.queryByRole("radio", { name: "회원가입" })).toBeNull();
+  });
+
+  it("이름만 입력하면 게스트로 들어가고, 동의 기록은 남기지 않는다", async () => {
+    setup();
+    openGuest();
+    typeName("  달리는 토끼 ");
+    submit();
+    await waitFor(() => expect(navigate).toHaveBeenCalledWith("/room?draft=d1"));
+    expect(auth.signInAnonymously).toHaveBeenCalledWith({ options: { data: { guest_name: "달리는 토끼" } } });
+  });
+
+  it.each(["   ", "가".repeat(13), "씨.발", "f u c k"])("쓸 수 없는 이름 %j은 계정을 만들지 않는다", async (name) => {
+    setup();
+    openGuest();
+    typeName(name);
+    submit();
+    expect((await screen.findByRole("alert")).textContent).toContain("다른 이름");
+    expect(auth.signInAnonymously).not.toHaveBeenCalled();
+  });
+
+  it("게스트 참여가 꺼진 프로젝트에서는 다음에 할 일을 안내한다", async () => {
+    auth.signInAnonymously.mockResolvedValue({ data: {}, error: { code: "anonymous_provider_disabled" } });
+    setup();
+    openGuest();
+    typeName("토끼");
+    submit();
+    expect((await screen.findByRole("alert")).textContent).toContain("Google");
+    expect(navigate).not.toHaveBeenCalled();
+  });
+});
 
 describe("AuthForm", () => {
   it("로그인 성공: 돌아갈 주소로 이동한다", async () => {

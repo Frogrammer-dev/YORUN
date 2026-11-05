@@ -42,6 +42,7 @@ export default function PrivacyPage() {
               <thead><tr><th scope="col">목적</th><th scope="col">항목</th><th scope="col">보유 기간</th></tr></thead>
               <tbody>
                 <tr><td>{CONSENT_SUMMARY.purpose}</td><td>{CONSENT_SUMMARY.items}, 동의 기록</td><td>회원 탈퇴 시까지</td></tr>
+                <tr><td>게스트 참여와 대결 화면 표시 (선택)</td><td>입력한 이름, 임시 계정 식별자, 게스트로 남긴 작품과 대결 기록</td><td>참여 후 6시간. 끝난 더비의 능력치는 누구의 기록인지 알 수 없게 바꿔 다른 참가자의 결과로 남겨요</td></tr>
                 <tr><td>작품방 저장과 공유</td><td>작품 제목, 위치를 뺀 상대 모양, 달린 거리와 시간</td><td>작품 삭제 또는 탈퇴 시까지</td></tr>
                 <tr><td>1대1 대결과 8인 더비 (선택)</td><td>능력치, 전략, 대결 결과, 기록 확인용 해시와 시각. 참가할 때 위치를 뺀 코스와 달린 선을 검증에 쓰고 저장하지 않아요</td><td>탈퇴 시까지. 끝난 더비 능력치는 다른 참가자의 결과라서 누구의 기록인지 알 수 없게 바꿔 보관해요</td></tr>
               </tbody>

@@ -20,6 +20,8 @@ export const FEATURES = {
   under14Signup: false,
   /** 프로토타입에서는 가입 때 나이 선택과 수집 항목 설명을 숨긴다. 공개 출시 전에 켠다. */
   signupAgeAndTerms: false,
+  /** 부스 운영에서는 이메일 가입·로그인을 숨기고 Google과 게스트만 쓴다. 코드는 남겨 둔다. */
+  emailAuth: false,
 };
 
 export const isPolicyDraft = () => Object.values(OPERATOR).some((value) => value === null);

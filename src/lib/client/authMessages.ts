@@ -19,6 +19,8 @@ export function authErrorMessage(error: { code?: string; message?: string; statu
     case "signup_disabled":
     case "email_provider_disabled":
       return "지금은 이메일 가입을 받을 수 없어요. Google로 계속해 주세요.";
+    case "anonymous_provider_disabled":
+      return "지금은 게스트로 참여할 수 없어요. Google로 계속해 주세요.";
     default:
       return "요청을 처리하지 못했어요. 연결을 확인하고 다시 시도해 주세요.";
   }

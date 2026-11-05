@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Barlow_Condensed } from "next/font/google";
 import { ConsentGate } from "@/components/ConsentGate";
+import { GuestExpiry } from "@/components/GuestExpiry";
 import "./globals.css";
 
 const numFont = Barlow_Condensed({ weight: ["600", "700"], subsets: ["latin"], variable: "--font-num-loaded", display: "swap" });
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <ConsentGate />
+        <GuestExpiry />
         {children}
       </body>
     </html>

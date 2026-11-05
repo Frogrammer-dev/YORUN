@@ -5,7 +5,8 @@ import { useState } from "react";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { ConsentFields, UNDER14_NOTICE } from "./ConsentFields";
 import { MIN_PASSWORD_LENGTH, authErrorMessage } from "@/lib/client/authMessages";
-import { CONSENT_REQUIRED_MESSAGE, INITIAL_AGE, consentRecord, type AgeGroup } from "@/lib/legal/policy";
+import { GUEST_NAME_MAX, cleanGuestName } from "@/lib/guestName";
+import { CONSENT_REQUIRED_MESSAGE, FEATURES, INITIAL_AGE, consentRecord, type AgeGroup } from "@/lib/legal/policy";
 
 type Mode = "signin" | "signup" | "reset" | "link";
 
@@ -48,6 +49,8 @@ export function AuthForm({ supabase, prepareNext, onNavigate, keepNotice, draftL
   const [sent, setSent] = useState<Exclude<Mode, "signin"> | null>(null);
   const [age, setAge] = useState<AgeGroup | null>(INITIAL_AGE);
   const [agreed, setAgreed] = useState(false);
+  const [guestOpen, setGuestOpen] = useState(false);
+  const [guestName, setGuestName] = useState("");
 
   const needsPassword = mode === "signin" || mode === "signup";
   const tooShort = mode === "signup" && password.length > 0 && password.length < MIN_PASSWORD_LENGTH;
@@ -68,6 +71,27 @@ export function AuthForm({ supabase, prepareNext, onNavigate, keepNotice, draftL
     // 성공하면 구글 화면으로 이동했다가 /auth/callback으로 돌아온다
     if (failure) {
       setError("Google 로그인을 시작하지 못했어요. 이메일로 계속하거나 다시 시도해 주세요.");
+      setBusy(false);
+    }
+  }
+
+  async function joinAsGuest(event: React.FormEvent) {
+    event.preventDefault();
+    if (busy) return;
+    const name = cleanGuestName(guestName);
+    if (!name) {
+      setError(`다른 이름을 1~${GUEST_NAME_MAX}자로 입력해 주세요.`);
+      return;
+    }
+    setBusy(true);
+    setError(null);
+    try {
+      const next = await prepareNext();
+      const { error: failure } = await supabase.auth.signInAnonymously({ options: { data: { guest_name: name } } });
+      if (failure) throw failure;
+      onNavigate(next);
+    } catch (failure) {
+      setError(authErrorMessage(failure as { code?: string }));
       setBusy(false);
     }
   }
@@ -131,12 +155,44 @@ export function AuthForm({ supabase, prepareNext, onNavigate, keepNotice, draftL
     );
   }
 
+  const googleButton = (
+    <button type="button" className="google-btn" onClick={() => void google()} disabled={busy}>
+      <GoogleLogo />
+      <span>Google로 계속하기</span>
+    </button>
+  );
+
+  if (!FEATURES.emailAuth) {
+    return (
+      <div className="auth-form">
+        {googleButton}
+        <p className="auth-divider"><span>또는</span></p>
+        {guestOpen ? (
+          <form onSubmit={(e) => void joinAsGuest(e)}>
+            <label className="field">
+              <span>이름</span>
+              <input name="guest-name" required autoFocus maxLength={GUEST_NAME_MAX * 2} value={guestName} onChange={(e) => { setGuestName(e.target.value); setError(null); }} autoComplete="off" aria-invalid={error ? true : undefined} aria-describedby={error ? "auth-error" : undefined} />
+            </label>
+            <p className="hint">이름은 대결과 더비에서 다른 참가자에게 보여요. 별명을 써도 돼요. 이름과 기록은 6시간 뒤 자동으로 지워져요.</p>
+            {error && <p id="auth-error" className="auth-error" role="alert">{error}</p>}
+            <button type="submit" className="btn btn-primary wide" disabled={busy} aria-busy={busy}>
+              {busy ? "처리하는 중" : "참여하기"}
+            </button>
+          </form>
+        ) : (
+          <>
+            {keepNotice && <p className="hint">{keepNotice}</p>}
+            {error && <p id="auth-error" className="auth-error" role="alert">{error}</p>}
+            <button type="button" className="btn btn-secondary wide" disabled={busy} onClick={() => { setGuestOpen(true); setError(null); }}>게스트로 참여하기</button>
+          </>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="auth-form">
-      <button type="button" className="google-btn" onClick={() => void google()} disabled={busy}>
-        <GoogleLogo />
-        <span>Google로 계속하기</span>
-      </button>
+      {googleButton}
       <p className="auth-divider"><span>또는 이메일로</span></p>
 
       {needsPassword ? (
