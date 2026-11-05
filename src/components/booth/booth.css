@@ -1,0 +1,35 @@
+/* 부스 체험 화면. 색은 앱의 파란 테마 토큰을 그대로 쓴다. */
+.booth { max-width: 740px; min-height: 100vh; margin: auto; padding: 20px 22px 48px; box-sizing: border-box; color: var(--text); background: var(--bg, var(--surface)); }
+.booth > header { display: flex; align-items: center; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.booth > header strong { font-size: var(--fs-title2); font-weight: 800; color: var(--brand-text); }
+.booth > header a { margin-left: auto; font-size: var(--fs-caption); color: var(--text-2); }
+.booth h1 { margin: 24px 0 10px; font-size: clamp(26px, 4.5vw, 40px); line-height: 1.17; }
+.booth h2 { margin: 0 0 8px; font-size: var(--fs-title3); }
+.booth p { line-height: 1.6; }
+.booth-choices { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+.booth-choice { min-height: 44px; padding: 9px 15px; border: 1px solid var(--line-strong); border-radius: var(--r-md); background: var(--surface); color: var(--text); font: inherit; cursor: pointer; }
+.booth-choice[aria-pressed="true"] { border-color: var(--brand); background: var(--brand); color: var(--on-brand, #fff); }
+.booth-actions { display: flex; flex-direction: column; gap: 8px; margin: 10px 0; }
+.booth-map { position: relative; overflow: hidden; border-radius: var(--r-lg); background: var(--brand-soft); }
+.booth-map svg { display: block; width: 100%; height: min(44vh, 420px); cursor: crosshair; }
+.booth-map small { position: absolute; right: 8px; bottom: 6px; padding: 2px 4px; background: var(--surface); font-size: 10px; pointer-events: none; }
+.booth-road { fill: none; stroke: var(--line-strong); stroke-width: 6; }
+.booth-route-edge { fill: none; stroke: var(--surface); stroke-width: 25; }
+.booth-route { fill: none; stroke: var(--brand); stroke-width: 15; stroke-linejoin: round; }
+.booth-route-pending { opacity: .4; }
+.booth-route-run { fill: none; stroke: var(--brand); stroke-width: 17; }
+.booth-pin { fill: var(--brand); }
+.booth-runner { fill: var(--brand-press); stroke: var(--surface); stroke-width: 8; }
+.booth-card { margin: 10px 0; padding: 16px; border: 1px solid var(--line); border-radius: var(--r-card); background: var(--surface); }
+.booth-field { display: block; margin: 0 0 8px; font-size: var(--fs-caption); font-weight: 600; color: var(--text-3); }
+.booth-field input, .booth-field select { display: block; box-sizing: border-box; width: 100%; min-height: 44px; margin-top: 4px; padding: 9px 12px; border: 1px solid var(--line-strong); border-radius: var(--r-sm); background: var(--surface); color: var(--text); font: inherit; font-weight: 400; }
+.booth pre { margin: 10px 0 0; font: inherit; line-height: 1.6; white-space: pre-wrap; }
+.booth-standing { margin: 10px 0 0; padding: 0; list-style: none; }
+.booth-standing li { display: flex; align-items: baseline; gap: 10px; padding: 8px 0; border-top: 1px solid var(--line); }
+.booth-standing li[data-mine="true"] { font-weight: 800; color: var(--brand-text); }
+.booth-standing span:last-child { margin-left: auto; font-size: var(--fs-caption); font-weight: 400; color: var(--text-3); }
+.booth-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(125px, 1fr)); gap: 8px; margin-top: 12px; }
+.booth-gallery svg { display: block; width: 100%; height: 75px; }
+.booth-gallery path { fill: none; stroke: var(--brand); stroke-width: 24; }
+.booth summary { cursor: pointer; }
+.booth > footer { margin-top: 22px; padding-top: 10px; border-top: 1px solid var(--line); font-size: var(--fs-caption); color: var(--text-3); }

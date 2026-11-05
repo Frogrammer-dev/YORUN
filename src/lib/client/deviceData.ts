@@ -3,7 +3,7 @@
 
 import { loadActiveRun } from "@/lib/run/storage";
 
-const KEYS = ["runcanvas.route", "runcanvas.activeRun", "runcanvas.runLog", "runcanvas.points", "yorun.lastDerbyTrace"];
+const KEYS = ["runcanvas.route", "runcanvas.activeRun", "runcanvas.runLog", "runcanvas.points", "yorun.lastDerbyTrace", "yorun.booth.v1"];
 const PREFIXES = ["yorun.battle."];
 const DATABASES = ["runcanvas", "yorun-roadmaps"];
 

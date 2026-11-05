@@ -18,6 +18,7 @@ const VENDORS: Array<[string, string, string]> = [
   ["Open-Meteo", "코스 고도 계산", "고른 코스의 좌표"],
   ["카카오", "장소 검색 (선택)", "입력한 검색어"],
   ["OpenAI", "동네 추천 코스 해석 (선택, 끌 수 있음)", "위치를 뺀 코스 선 그림"],
+  ["OpenAI", "설명으로 코스 윤곽 만들기와 안전 검사 (선택)", "입력한 그림 설명, 생성한 윤곽 이미지"],
 ];
 
 export default function PrivacyPage() {

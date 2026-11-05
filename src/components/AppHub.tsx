@@ -66,6 +66,16 @@ export function HubScreen() {
         <section className="hub-band">
           <h2>원하는 콘텐츠를 선택하세요</h2>
           <div className="hub-tiles">
+            <Link href="/booth" className="hub-tile hub-tile-wide">
+              <span className="hub-tile-icon">
+                <Icon name="route" size={24} />
+              </span>
+              <span className="hub-tile-text">
+                <strong>부스 체험</strong>
+                <span>코스를 뽑고 가상으로 완주해 8인 경주에 참가해요.</span>
+              </span>
+              <Icon name="chevronRight" size={20} />
+            </Link>
             <Link href="/room" className="hub-tile hub-tile-wide">
               <span className="hub-tile-icon">
                 <Icon name="frame" size={24} />
@@ -90,18 +100,21 @@ export function HubScreen() {
               <strong>8인 더비</strong>
               <span>여덟 명의 코스 기록으로 경주해요.</span>
             </Link>
+            <Link href="/contents/catalog" className="hub-tile hub-tile-wide">
+              <span className="hub-tile-icon">
+                <Icon name="grid" size={24} />
+              </span>
+              <span className="hub-tile-text">
+                <strong>도감</strong>
+                <span>달리기로 그릴 수 있는 모양을 만나요.</span>
+              </span>
+              <Icon name="chevronRight" size={20} />
+            </Link>
           </div>
         </section>
-        <div className="hub-head">
-          <h2>추천 콘텐츠</h2>
-        </div>
-        <section className="hub-feature-card">
-          <h3>기록으로 작품 만들기</h3>
-          <p>다른 러닝 앱이나 시계에서 내보낸 GPX 기록으로 작품을 만들어요.</p>
-          <Link href="/contents#import" className="btn btn-primary btn-lg wide">
-            기록 가져오기
-          </Link>
-        </section>
+        <p className="hub-import-link">
+          <Link href="/contents">GPX 불러오기</Link>
+        </p>
         <Link href="/settings" className="hub-row">
           <span className="hub-row-icon">
             <Icon name="layers" size={24} />

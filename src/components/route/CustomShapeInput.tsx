@@ -2,11 +2,11 @@
 // 찾고 싶은 그림 만들기: 손으로 그리기(여러 획 가능) · 글자 입력 · 이미지 올리기.
 // 어느 방법이든 '닫힌 획 여러 개'로 바꾸고, 획 사이는 코스에서 이동 구간이 된다.
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { binarize, traceOutlines } from "@/lib/art/trace";
 import { groupFromLoops, groupLines, type ShapeGroup } from "@/lib/route/shapes";
 
-type Tab = "draw" | "text" | "image";
+type Tab = "draw" | "text" | "image" | "prompt";
 type Pt = [number, number];
 
 const SIZE = 240;
@@ -22,14 +22,16 @@ export function CustomShapeInput({ value, onChange }: { value: ShapeGroup | null
             ["draw", "그리기"],
             ["text", "글자"],
             ["image", "이미지"],
+            ["prompt", "설명"],
           ] as const
         ).map(([id, label]) => (
-          <button key={id} type="button" role="tab" aria-selected={tab === id} className={`seg-btn ${tab === id ? "seg-on" : ""}`} onClick={() => setTab(id)}>
+          <button key={id} type="button" role="tab" aria-selected={tab === id} className={`seg-btn ${tab === id ? "seg-on" : ""}`} onClick={() => { if (tab !== id) { setTab(id); onChange(null); } }}>
             {label}
           </button>
         ))}
       </div>
       {tab === "draw" && <DrawTab onChange={onChange} />}
+      {tab === "prompt" && <PromptTab onChange={onChange} />}
       {tab === "text" && <TextTab onChange={onChange} />}
       {tab === "image" && <ImageTab onChange={onChange} />}
       {value && tab !== "draw" && <GroupPreview group={value} />}
@@ -40,6 +42,46 @@ export function CustomShapeInput({ value, onChange }: { value: ShapeGroup | null
       )}
     </div>
   );
+}
+
+/** 설명을 서버에 보내 윤곽을 받는다 */
+function PromptTab({ onChange }: { onChange: (g: ShapeGroup | null) => void }) {
+  const [prompt, setPrompt] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [message, setMessage] = useState("");
+  const pending = useRef<AbortController | null>(null);
+  useEffect(() => () => pending.current?.abort(), []);
+
+  async function generate() {
+    pending.current?.abort();
+    const controller = new AbortController();
+    pending.current = controller;
+    setBusy(true);
+    setMessage("");
+    onChange(null);
+    try {
+      const response = await fetch("/api/recognition/outline", { method: "POST",
+        headers: { "Content-Type": "application/json" }, body: JSON.stringify({ prompt }), signal: controller.signal });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.message || "윤곽을 만들지 못했어요.");
+      if (!controller.signal.aborted) onChange(result.group);
+    } catch (error) {
+      if (!controller.signal.aborted) setMessage(error instanceof Error ? error.message : "다시 시도해 주세요.");
+    } finally {
+      if (!controller.signal.aborted) setBusy(false);
+    }
+  }
+  return <>
+    <label className="field">어떤 모습으로 달릴까요?
+      <input value={prompt} maxLength={300} placeholder="예: 귀 한쪽이 접힌 토끼의 옆모습"
+        onChange={e => { pending.current?.abort(); setBusy(false); setMessage(""); setPrompt(e.target.value); onChange(null); }} />
+    </label>
+    <p className="hint">설명과 생성된 윤곽은 윤곽 생성과 안전 검사를 위해 OpenAI로 전송돼요. 이름이나 연락처 같은 개인정보는 빼 주세요.</p>
+    <button type="button" className="seg-btn" disabled={!prompt.trim() || busy} onClick={() => void generate()}>
+      {busy ? "윤곽 만드는 중…" : "윤곽 만들기"}
+    </button>
+    {message && <p role="alert">{message}</p>}
+  </>;
 }
 
 /** 그림 전체 미리보기 (정리된 획) */

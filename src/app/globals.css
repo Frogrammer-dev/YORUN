@@ -765,6 +765,8 @@ a.hub-tile:active { transform: scale(.98); }
 .auth-links:empty { display: none; }
 .auth-sent p { margin: 0 0 var(--sp-3); }
 .appbar .btn-sm { flex: none; min-height: 44px; }
+.hub-import-link { margin: 0; text-align: right; font-size: var(--fs-caption); }
+.hub-import-link a { display: inline-block; padding: var(--sp-3) 0; color: var(--text-2); }
 .hub-feature-card { display: flex; flex-direction: column; gap: var(--sp-2); padding: var(--sp-4); border-radius: var(--r-card); background: var(--surface); box-shadow: var(--sh-1); }
 .hub-feature-card h3 { margin: 0; font-size: var(--fs-title3); font-weight: 800; }
 .hub-feature-card p { margin: 0 0 var(--sp-2); font-size: var(--fs-caption); line-height: 1.45; color: var(--text-2); }

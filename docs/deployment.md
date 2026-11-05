@@ -18,7 +18,8 @@ Vercel 프로젝트 설정의 Environment Variables에 넣습니다. `.env.local
 | `SUPABASE_SERVICE_ROLE_KEY` | 공유 링크 조회 | 공유 조회 불가. 서버 전용 |
 | `APP_ORIGIN` | 공유 링크 주소, 예: `https://배포주소` | 요청 주소를 사용 |
 | `KAKAO_REST_API_KEY` | 장소 검색 | 검색창에 미설정 안내 |
-| `OPENAI_API_KEY`, `ROAD_REFERENCE_MODEL`, `ROAD_REFERENCE_MAX_CALLS_PER_HOUR` | AI 선 그림 해석 | 외부 호출 없음 |
+| `OPENAI_API_KEY`, `ROAD_REFERENCE_MODEL`, `ROAD_REFERENCE_MAX_CALLS_PER_HOUR` | AI 선 그림 해석, 설명으로 윤곽 만들기 | 외부 호출 없음. 윤곽 만들기는 503 |
+| `OUTLINE_MODEL` | 윤곽 만들기 모델 지정 (선택) | 기본 모델 사용 |
 
 `NEXT_PUBLIC_*` 값은 빌드에 포함되므로 바꾼 뒤 다시 배포해야 합니다.
 

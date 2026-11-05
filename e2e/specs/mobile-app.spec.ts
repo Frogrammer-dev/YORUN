@@ -33,7 +33,7 @@ test.describe("앱 셸", () => {
   test("@mobile 콘텐츠 탭: 세 입구, 대결 화면의 탭 유지, 지도 자료 출처", async ({ page }) => {
     await page.goto("/hub");
     const nav = page.getByRole("navigation", { name: "주요 메뉴" });
-    for (const href of ["/room", "/duel", "/derby"]) await expect(page.locator(`.hub-tile[href="${href}"]`)).toBeVisible();
+    for (const href of ["/booth", "/room", "/duel", "/derby", "/contents/catalog"]) await expect(page.locator(`.hub-tile[href="${href}"]`)).toBeVisible();
     await expect(page.getByRole("link", { name: "© OpenStreetMap contributors" })).toHaveAttribute("href", "https://www.openstreetmap.org/copyright");
     for (const [href, heading] of [["/duel", "1대1 플레이어 대결"], ["/derby", "8인 드로잉 더비"]]) {
       await page.goto("/hub");
