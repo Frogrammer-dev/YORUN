@@ -8,7 +8,9 @@ import { deform, makeCreature, toRenderLine, type Creature, type PartName } from
 import { SHAPE_BY_ID, type ShapeId } from "@/lib/route/shapes";
 
 export const FRAME_COUNT = 6;
-export const FRAME_SIZE = 160;
+export const FRAME_SIZE = 256;
+/** 선 두께와 눈 크기를 정하는 그림 단위. 클로즈업에서 흐려지지 않도록 칸은 이보다 크게 만들어 확대해 그린다 */
+const DRAW_SIZE = 160;
 /** 팔다리가 흔들려도 옆 프레임을 넘지 않도록 그림을 칸 안쪽에 둔다 */
 const INSET = 0.12, SCALE = 0.76;
 /** 그림 발끝 아래에 남는 칸의 비율. 3D에서 이만큼 내려 땅에 닿게 한다 */
@@ -64,8 +66,14 @@ export function runnerHeight(creature: Creature, body: BodyPlan) {
   return 1 - FOOT_GAP - (INSET + top * SCALE);
 }
 
+/** 카메라가 표정을 잡을 눈 위치 (그림 크기 대비). 구르는 몸은 눈이 돌아가므로 몸 가운데를 본다 */
+export function runnerEye(creature: Creature, body: BodyPlan) {
+  if (body === "roller") return { along: 0, height: 0.5 - FOOT_GAP };
+  return { along: INSET + creature.eye[0] * SCALE - 0.5, height: 1 - FOOT_GAP - (INSET + creature.eye[1] * SCALE) };
+}
+
 function drawPose(ctx: Ctx, pose: ReturnType<typeof runnerPose>, color: string) {
-  const S = FRAME_SIZE;
+  const S = DRAW_SIZE;
   ctx.lineJoin = "round";
   ctx.lineCap = "round";
   for (const { from, to } of pose.stubs) {
@@ -158,6 +166,7 @@ export function drawRunnerFrames(body: BodyPlan, color: string, line: Line, lane
     ctx.beginPath();
     ctx.rect(0, 0, FRAME_SIZE, FRAME_SIZE);
     ctx.clip();
+    ctx.scale(FRAME_SIZE / DRAW_SIZE, FRAME_SIZE / DRAW_SIZE);
     drawPose(ctx, runnerPose(creature, body, frame), color);
     ctx.restore();
   }

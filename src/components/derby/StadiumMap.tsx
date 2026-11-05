@@ -5,8 +5,9 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import type { BodyPlan } from "@/lib/battle/bodyPlan";
-import { TRACK, outwardAt, trackPoint } from "@/lib/battle/stadiumTrack";
-import { FOOT_GAP, FRAME_COUNT, bodyMotion, drawNumberTag, drawRunnerFrames, runnerCreature, runnerHeight } from "./runnerArt";
+import { TRACK, trackPoint } from "@/lib/battle/stadiumTrack";
+import { FOLLOW_CUT, OVERVIEW_CUT, directorCut, shotFrame } from "./raceCamera";
+import { FOOT_GAP, FRAME_COUNT, bodyMotion, drawNumberTag, drawRunnerFrames, runnerCreature, runnerEye, runnerHeight } from "./runnerArt";
 
 export type StadiumRunner = { lane: number; progress: number; mine: boolean; body: BodyPlan; line?: readonly (readonly number[])[] | null };
 export type CameraMode = "director" | "mine";
@@ -22,17 +23,6 @@ const SECTIONS = 12;
 const LAPS = 3;
 
 const lanePoint = (lane: number, progress: number) => trackPoint((progress / SECTIONS) * LAPS, TRACK.radius + (lane - 0.5) * TRACK.laneWidth);
-
-/**
- * 선두의 진행 구간(0~12)으로 카메라를 고른다. 평균이 아니라 선두를 봐서, 결승 카메라가 선수보다 먼저 가 있지 않게 한다.
- * 선수 안쪽(관중이 배경)과 관중석 쪽(관중 너머로 선수)을 번갈아 쓴다.
- */
-export function directorShot(leaderProgress: number): "start" | "leader" | "mine" | "wide" | "stands" | "finish" {
-  if (leaderProgress < 0.7) return "start";
-  if (leaderProgress >= 11.7) return "finish";
-  const order = ["leader", "stands", "mine", "wide", "stands", "leader", "mine"] as const;
-  return order[Math.floor((leaderProgress - 0.7) / 1.2) % order.length];
-}
 
 export function StadiumMap({ runners, camera: cameraMode }: { runners: StadiumRunner[]; camera: CameraMode }) {
   const host = useRef<HTMLDivElement>(null);
@@ -177,7 +167,7 @@ export function StadiumMap({ runners, camera: cameraMode }: { runners: StadiumRu
     const shadowShape = new THREE.CircleGeometry(1, 20);
     const shadowMaterial = new THREE.MeshBasicMaterial({ color: PALETTE.ink, transparent: true, opacity: 0.28, depthWrite: false });
     disposables.push(paper, shadowShape, shadowMaterial);
-    type Runner3D = { sheet: THREE.Mesh; tag: THREE.Sprite; shadow: THREE.Mesh; texture: THREE.Texture; seed: number; height: number };
+    type Runner3D = { sheet: THREE.Mesh; tag: THREE.Sprite; shadow: THREE.Mesh; texture: THREE.Texture; seed: number; height: number; eye: { along: number; height: number } };
     const sprites = new Map<number, Runner3D>();
     function canvasTexture(canvas: HTMLCanvasElement) {
       const texture = new THREE.CanvasTexture(canvas);
@@ -198,7 +188,8 @@ export function StadiumMap({ runners, camera: cameraMode }: { runners: StadiumRu
       const shadow = new THREE.Mesh(shadowShape, shadowMaterial);
       shadow.rotation.x = -Math.PI / 2;
       scene.add(sheet, tag, shadow);
-      const made = { sheet, tag, shadow, texture, seed: runner.lane, height: runnerHeight(runnerCreature(runner.body, runner.lane, runner.line ?? null), runner.body) };
+      const creature = runnerCreature(runner.body, runner.lane, runner.line ?? null);
+      const made = { sheet, tag, shadow, texture, seed: runner.lane, height: runnerHeight(creature, runner.body), eye: runnerEye(creature, runner.body) };
       sprites.set(runner.lane, made);
       return made;
     }
@@ -215,17 +206,13 @@ export function StadiumMap({ runners, camera: cameraMode }: { runners: StadiumRu
     resize();
 
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
-    const aim = new THREE.Vector3();
-    const destination = new THREE.Vector3();
-    const look = new THREE.Vector3();
-    const probe = new THREE.Vector3();
-    let previous = performance.now();
+    let raceStart: number | null = null;
+    let cutId = "";
+    let subjectLane = 1;
     let frame = 0;
     function render(now: number) {
-      const dt = Math.min((now - previous) / 1000, 0.1);
-      previous = now;
       const rows = live.current;
-      let leader: THREE.Mesh | undefined, leaderProgress = -1, mineSprite: THREE.Mesh | undefined;
+      let leader: StadiumRunner | undefined, leaderProgress = -1, mine: StadiumRunner | undefined;
       if (!reduced.matches) {
         crowds.forEach(({ group }, i) => {
           group.position.y = Math.max(0, Math.sin(now / 240 + i * 1.7)) * 0.32;
@@ -255,39 +242,29 @@ export function StadiumMap({ runners, camera: cameraMode }: { runners: StadiumRu
         made.tag.scale.setScalar(runner.mine ? 3.4 : 2.7);
         made.shadow.position.set(point.x, 0.14, point.z);
         made.shadow.scale.setScalar(size * 0.34);
-        const sprite = sheet;
-        if (runner.progress > leaderProgress) { leaderProgress = runner.progress; leader = sprite; }
-        if (runner.mine) mineSprite = sprite;
+        if (runner.progress > leaderProgress) { leaderProgress = runner.progress; leader = runner; }
+        if (runner.mine) mine = runner;
       }
-      const shot = reduced.matches ? "wide" : mode.current === "mine" ? "mine" : directorShot(leaderProgress);
-      const target = (shot === "mine" ? mineSprite ?? leader : leader)?.position;
-      if (shot === "wide" || !target) {
-        destination.set(0, 62, 92);
-        look.set(0, 0, 0);
-      } else if (shot === "finish") {
-        const finishX = -TRACK.straight / 2;
-        destination.set(finishX + 12, 6, TRACK.radius - 16);
-        look.set(finishX, 3, TRACK.radius + 6);
-      } else {
-        const out = outwardAt(target.x, target.z);
-        if (shot === "start") {
-          // 출발선을 비스듬히 앞에서 본다. 정면으로 보면 여덟 레인이 한 줄로 겹친다
-          const middle = TRACK.radius + (TRACK.lanes * TRACK.laneWidth) / 2;
-          destination.set(target.x + 17, 8, middle - 21);
-          look.set(target.x, 3, middle);
-        } else if (shot === "stands") {
-          // 관중석 위쪽에서 앞줄 관중 머리 너머로 선수를 본다
-          destination.set(target.x + out.x * 32, 17, target.z + out.z * 32);
-        } else {
-          // 선수의 안쪽에서 따라간다. 뒤로 좌석 대신 관중이 보인다
-          destination.set(target.x - out.x * 26, 11, target.z - out.z * 26);
-        }
-        if (shot !== "start") look.copy(target);
+      // 경기를 다시 보면 컷 순서도 처음부터 시작한다
+      if (leaderProgress <= 0) raceStart = null;
+      else if (raceStart === null) raceStart = now;
+      const cut = reduced.matches ? OVERVIEW_CUT : mode.current === "mine" ? FOLLOW_CUT : directorCut(raceStart === null ? 0 : now - raceStart, leaderProgress);
+      if (cut.id !== cutId) {
+        // 샷을 시작할 때 대상을 정해 둔다. 샷 도중 선두가 바뀌어도 화면이 튀지 않는다
+        cutId = cut.id;
+        subjectLane = (cut.subject === "mine" ? mine ?? leader : leader)?.lane ?? 1;
       }
-      const blend = reduced.matches ? 1 : 1 - Math.exp(-dt * 7);
-      camera.position.lerp(destination, blend);
-      aim.lerp(look, blend);
-      camera.lookAt(aim);
+      const subject = rows.find((runner) => runner.lane === subjectLane);
+      const packProgress = rows.reduce((sum, runner) => sum + runner.progress, 0) / (rows.length || 1);
+      const view = shotFrame(cut, cut.subject === "pack"
+        ? { lane: (TRACK.lanes + 1) / 2, progress: packProgress, size: 6.4, eye: { along: 0, height: 0.4 } }
+        : { lane: subjectLane, progress: subject?.progress ?? 0, size: subject?.mine ? 8 : 6.4, eye: sprites.get(subjectLane)?.eye ?? { along: 0, height: 0.4 } });
+      camera.position.set(...view.position);
+      camera.lookAt(...view.look);
+      if (camera.fov !== view.fov) {
+        camera.fov = view.fov;
+        camera.updateProjectionMatrix();
+      }
       renderer.render(scene, camera);
       frame = requestAnimationFrame(render);
     }
