@@ -7,6 +7,8 @@ import { expect, test } from "../fixtures";
 const S = "samples";
 
 async function importGpx(page: Page, file: string, count: number) {
+  await page.goto("/contents");
+  await page.waitForLoadState("networkidle");
   await page.locator('input[type="file"]').setInputFiles(join(S, file));
   await page.getByRole("button", { name: "작품 만들기" }).click();
   await expect(page.locator(".scene-item")).toHaveCount(count);
@@ -29,6 +31,8 @@ test("가입 없이 첫 작품이 임시 작품방에 자동 전시된다", asyn
 
 test("끊긴 구간은 잇지 않고 구간별 선·단일점으로 전시", async ({ page }) => {
   await startWithHeart(page);
+  await page.goto("/contents");
+  await page.waitForLoadState("networkidle");
   await page.locator('input[type="file"]').setInputFiles(join(S, "02-star-two-segments-gap.gpx"));
   await expect(page.getByText("3개 구간이 있어요. 사이를 연결하지 않고 전시합니다.")).toBeVisible();
   await page.getByRole("button", { name: "작품 만들기" }).click();

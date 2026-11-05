@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AccountButton } from "./AccountButton";
+import { BackButton } from "./BackButton";
 import { BrandMark, Icon } from "./Icon";
 import { MonthPanel, PointsRow, WeekChart } from "./HomeStats";
 import { LandingStart } from "./LandingStart";
@@ -46,6 +47,16 @@ export function HomeScreen() {
             오늘의 드로잉 런 시작
           </Link>
         </section>
+        <Link href="/booth" className="hub-row">
+          <span className="hub-row-icon">
+            <Icon name="route" size={24} />
+          </span>
+          <span className="hub-row-body">
+            <strong>부스 체험</strong>
+            <span>지도에서 그림 코스를 찾고 가상으로 완주해 보세요.</span>
+          </span>
+          <Icon name="chevronRight" size={20} />
+        </Link>
       </div>
     </main>
   );
@@ -63,55 +74,23 @@ export function HubScreen() {
       </header>
       <div className="hub-body">
         <PointsRow />
-        <section className="hub-band">
-          <h2>원하는 콘텐츠를 선택하세요</h2>
-          <div className="hub-tiles">
-            <Link href="/booth" className="hub-tile hub-tile-wide">
-              <span className="hub-tile-icon">
-                <Icon name="route" size={24} />
-              </span>
-              <span className="hub-tile-text">
-                <strong>부스 체험</strong>
-                <span>코스를 뽑고 가상으로 완주해 8인 경주에 참가해요.</span>
-              </span>
-              <Icon name="chevronRight" size={20} />
-            </Link>
-            <Link href="/room" className="hub-tile hub-tile-wide">
-              <span className="hub-tile-icon">
-                <Icon name="frame" size={24} />
-              </span>
-              <span className="hub-tile-text">
-                <strong>작품방</strong>
-                <span>달린 선으로 만든 작품을 모아요.</span>
-              </span>
-              <Icon name="chevronRight" size={20} />
-            </Link>
-            <Link href="/duel" className="hub-tile">
-              <span className="hub-tile-icon">
-                <Icon name="duo" size={24} />
-              </span>
-              <strong>1대1 대결</strong>
-              <span>상대 선수를 골라 비동기 대결에 도전해요.</span>
-            </Link>
-            <Link href="/derby" className="hub-tile">
-              <span className="hub-tile-icon">
-                <Icon name="flag" size={24} />
-              </span>
-              <strong>8인 더비</strong>
-              <span>여덟 명의 코스 기록으로 경주해요.</span>
-            </Link>
-            <Link href="/contents/catalog" className="hub-tile hub-tile-wide">
-              <span className="hub-tile-icon">
-                <Icon name="grid" size={24} />
-              </span>
-              <span className="hub-tile-text">
-                <strong>도감</strong>
-                <span>달리기로 그릴 수 있는 모양을 만나요.</span>
-              </span>
-              <Icon name="chevronRight" size={20} />
-            </Link>
-          </div>
-        </section>
+        <div className="content-menu">
+          <Link href="/duel" className="content-menu-card">
+            <div className="content-menu-preview content-duel-preview" aria-hidden="true" />
+            <h2>1대1 플레이어 대결</h2>
+            <p>상대 선수를 골라 매 턴 직접 겨뤄요.</p>
+          </Link>
+          <Link href="/derby" className="content-menu-card">
+            <div className="content-menu-preview content-stadium-preview" aria-hidden="true" />
+            <h2>8인 경주</h2>
+            <p>내 캐릭터로 여덟 명이 경주해요.</p>
+          </Link>
+          <Link href="/room" className="content-menu-card">
+            <div className="content-menu-preview content-room-preview" aria-hidden="true" />
+            <h2>나의 작품방</h2>
+            <p>기록으로 만든 작품을 배치하고 나만의 공간을 꾸며보세요.</p>
+          </Link>
+        </div>
         <p className="hub-import-link">
           <Link href="/contents">GPX 불러오기</Link>
         </p>
@@ -164,9 +143,7 @@ export function ImportScreen() {
   return (
     <main className="hub-page">
       <header className="appbar">
-        <Link href="/room" className="icon-btn appbar-back" aria-label="작품방으로 돌아가기">
-          <Icon name="back" size={24} />
-        </Link>
+        <BackButton fallback="/hub" />
         <span className="appbar-title">
           <h1>기록 가져오기</h1>
         </span>

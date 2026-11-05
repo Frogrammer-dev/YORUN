@@ -11,7 +11,6 @@ import { DraftRepository } from "@/lib/draft/DraftRepository";
 import type { Scene } from "@/lib/render/scene";
 import { takePendingArtwork } from "@/lib/client/pending";
 import { browserSupabase } from "@/lib/client/supabaseBrowser";
-import { ImportPanel } from "@/components/ImportPanel";
 import { SceneSvg } from "@/components/SceneSvg";
 import { ItemPanel } from "./ItemPanel";
 import { ArchivePanel, ExportPanel, LoginPanel, SharePanel } from "./Panels";
@@ -411,19 +410,7 @@ export function RoomApp() {
             )}
           </div>
           {!empty && <p className="hint center">작품을 누르면 크기·회전·색·액자를 바꿀 수 있어요.</p>}
-          {!empty && (
-            <div className="stage-tools">
-              <ImportPanel
-                compact
-                onCreated={(v) => void room.addArtwork(v)}
-                disabledReason={room.model.artworkCount >= ROOM.maxArtworksPerAccount ? "보관 작품 한도(50개)에 도달했어요." : null}
-              />
-              <Link href="/contents#import" className="btn btn-link btn-sm">
-                기록 가져오기
-              </Link>
-              {displayFull && <p className="hint">전시 한도(20개)에 도달했어요. 새 작품은 보관 목록에만 추가돼요.</p>}
-            </div>
-          )}
+          {!empty && displayFull && <p className="hint">전시 한도(20개)에 도달했어요. 새 작품은 보관 목록에만 추가돼요.</p>}
         </div>
 
         <aside className="side" hidden={empty && room.model.artworkCount === 0 && activeTab === "archive"}>

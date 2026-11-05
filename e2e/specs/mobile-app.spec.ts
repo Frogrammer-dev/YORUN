@@ -33,11 +33,11 @@ test.describe("앱 셸", () => {
   test("@mobile 콘텐츠 탭: 세 입구, 대결 화면의 탭 유지, 지도 자료 출처", async ({ page }) => {
     await page.goto("/hub");
     const nav = page.getByRole("navigation", { name: "주요 메뉴" });
-    for (const href of ["/booth", "/room", "/duel", "/derby", "/contents/catalog"]) await expect(page.locator(`.hub-tile[href="${href}"]`)).toBeVisible();
+    for (const href of ["/room", "/duel", "/derby"]) await expect(page.locator(`.content-menu-card[href="${href}"]`)).toBeVisible();
     await expect(page.getByRole("link", { name: "© OpenStreetMap contributors" })).toHaveAttribute("href", "https://www.openstreetmap.org/copyright");
     for (const [href, heading] of [["/duel", "1대1 플레이어 대결"], ["/derby", "8인 드로잉 더비"]]) {
       await page.goto("/hub");
-      await page.locator(`.hub-tile[href="${href}"]`).click();
+      await page.locator(`.content-menu-card[href="${href}"]`).click();
       await page.waitForURL("**" + href);
       await expect(page.getByRole("heading", { name: heading, level: 1 })).toBeVisible();
       await expect(nav.locator('[aria-current="page"]')).toHaveText("콘텐츠");
@@ -105,12 +105,14 @@ test.describe("앱 셸", () => {
     }
   });
 
-  test("@mobile 기록 가져오기: 예시 데모와 개인정보 안내가 남아 있고, 뒤로 버튼은 작품방으로", async ({ page }) => {
-    await page.goto("/contents");
+  test("@mobile 기록 가져오기: 예시 데모와 개인정보 안내가 남아 있고, 뒤로 버튼은 들어온 화면으로", async ({ page }) => {
+    await page.goto("/hub");
+    await page.getByRole("link", { name: "GPX 불러오기" }).click();
+    await page.waitForURL("**/contents");
     await expect(page.getByRole("button", { name: /예시 기록으로 둘러보기/ })).toBeVisible();
     await expect(page.getByText("지원 파일과 개인정보 안내")).toBeVisible();
-    await page.getByRole("link", { name: "작품방으로 돌아가기" }).click();
-    await page.waitForURL("**/room");
+    await page.getByRole("button", { name: "뒤로가기" }).click();
+    await page.waitForURL("**/hub");
   });
 
   test("@mobile 탭이 CTA·마지막 행을 가리지 않는다", async ({ page }) => {

@@ -30,11 +30,9 @@ test("@mobile 부스 체험: 윤곽을 만들지 못해도 준비된 모양으�
   await expect(page.getByRole("button", { name: /가상 달리기 시작/ })).toBeVisible();
 });
 
-test("@mobile 콘텐츠 탭: 도감과 GPX 불러오기로 갈 수 있다", async ({ page }) => {
-  await page.goto("/hub");
-  await page.locator('.hub-tile[href="/contents/catalog"]').click();
-  await page.waitForURL("**/contents/catalog");
-  await expect(page.getByRole("heading", { name: "도감", level: 1 })).toBeVisible();
+test("@mobile 콘텐츠 탭: GPX 불러오기로 가고, 메인에서 부스 체험으로 갈 수 있다", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByRole("link", { name: /부스 체험/ })).toHaveAttribute("href", "/booth");
   await page.goto("/hub");
   await page.getByRole("link", { name: "GPX 불러오기" }).click();
   await page.waitForURL("**/contents");

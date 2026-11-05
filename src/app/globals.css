@@ -706,25 +706,13 @@ a.hub-tile:active { transform: scale(.98); }
 .hub-credits a { display: inline-flex; align-items: center; min-height: 44px; color: var(--text-2); }
 .duel-arena { display: flex; flex-direction: column; gap: var(--sp-3); }
 .duel-arena h2 { margin: 0; }
-.duel-field { display: flex; flex-direction: column; gap: var(--sp-4); padding: var(--sp-4); border-radius: var(--r-md); background: var(--brand-soft); }
-.duel-fighter { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); }
-.duel-fighter-me { flex-direction: row-reverse; }
-.duel-status { flex: 1; min-width: 0; padding: var(--sp-2) var(--sp-3); border-radius: var(--r-sm); background: var(--surface); }
-.duel-status strong { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.duel-status small { font-size: var(--fs-caption); color: var(--text-2); }
-.duel-hp { height: 8px; margin: 4px 0; overflow: hidden; border-radius: var(--r-pill); background: var(--line); }
-.duel-hp span { display: block; height: 100%; background: var(--brand); transform-origin: left; transition: transform .4s ease; }
-.duel-hp span[data-low="true"] { background: var(--panel); }
-.duel-avatar { display: flex; flex: none; align-items: center; justify-content: center; width: 72px; height: 72px; border-radius: 50%; background: var(--panel); color: var(--on-panel); font-size: var(--fs-title2); font-weight: 800; }
 .duel-log { min-height: 3.2em; margin: 0; padding: var(--sp-3); border: 1px solid var(--line); border-radius: var(--r-sm); line-height: 1.5; }
 .duel-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-2); }
 .duel-choice { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 76px; padding: var(--sp-2); border: 1px solid var(--line-strong); border-radius: var(--r-md); background: var(--surface); color: var(--text); font: inherit; cursor: pointer; }
-.duel-choice span { font-size: 24px; line-height: 1; }
 .duel-choice small { font-size: var(--fs-caption); }
 .duel-choice-allin { border-color: var(--panel); background: var(--panel); color: var(--on-panel); }
 .duel-choice:disabled { border-color: var(--line); background: var(--disabled-bg); color: var(--text-disabled); cursor: not-allowed; }
 .duel-result { text-align: center; font-size: var(--fs-title1, 28px); }
-@media (prefers-reduced-motion: reduce) { .duel-hp span { transition: none; } }
 .battle-lead { margin: var(--sp-1) 0; font-size: var(--fs-callout); color: var(--text-2); }
 .battle-head { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); }
 .battle-head h2 { margin: 0; }
@@ -930,3 +918,49 @@ a.hub-tile:active { transform: scale(.98); }
 
 /* 좁은 종료 칸: "한 번 더"가 칸 안에 들어가게 */
 .run-btns .btn-run.end { font-size: 18px; gap: 4px; }
+
+/* Codex 대결 경기장과 콘텐츠 메뉴 */
+:root {
+  --content-ink: #172e3c;
+  --content-paper: #edf0ec;
+  --content-frame: #f9f8f3;
+  --arena-sky: #dff0fc;
+  --arena-grass: #e8f4da;
+  --arena-platform: #c9e4af;
+  --arena-border: #a7c88c;
+  --arena-paper: #fff;
+  --arena-ink: #243641;
+  --arena-blue: #168ddd;
+  --arena-red: #d5402f;
+  --content-shade: rgb(0 0 0 / 35%);
+}
+.content-menu { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sp-3); }
+.content-menu-card { display: flex; flex-direction: column; justify-content: flex-start; overflow: clip; padding: 0 24px 24px; border-radius: var(--r-card); background: var(--content-paper); color: var(--content-ink); text-decoration: none; }
+.content-menu-card h2 { margin: 0 0 8px; color: var(--content-ink); }
+.content-menu-card p { margin: 0; max-width: 34ch; color: var(--content-ink); }
+.content-menu-card:focus-visible { outline: 3px solid var(--brand-text); outline-offset: 4px; }
+.content-menu-preview { position: relative; height: 240px; margin: 0 -24px 22px; background-repeat: no-repeat; }
+.content-menu-preview::after { content: ""; position: absolute; inset: 0; background: var(--content-shade); pointer-events: none; }
+.content-duel-preview { background-image: url("/images/contents/duel-screen.png"); background-size: cover; background-position: center 42%; background-color: var(--content-frame); }
+.content-stadium-preview { background-image: url("/images/contents/stadium.png"); background-size: 150% auto; background-position: 64% 58%; }
+.content-room-preview { background-image: url("/images/contents/room-canvas.png"); background-size: 190% auto; background-position: center 50%; }
+@media (max-width: 640px) { .content-menu-preview { height: 210px; } }
+@media (min-width: 720px) { .content-menu { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.duel-arena-field { position: relative; height: 320px; overflow: clip; border-radius: 18px; background: linear-gradient(var(--arena-sky) 45%, var(--arena-grass) 45%); color: var(--arena-ink); }
+.duel-platform { position: absolute; height: 35px; border: 2px solid var(--arena-border); border-radius: 50%; background: var(--arena-platform); }
+.duel-platform-foe { top: 115px; right: 3%; width: 42%; }
+.duel-platform-me { bottom: 20px; left: -5%; width: 52%; }
+.duel-hud { position: absolute; z-index: 1; width: 43%; padding: 10px 12px; border: 2px solid var(--arena-ink); border-radius: 9px; background: var(--arena-paper); }
+.duel-hud-foe { top: 16px; left: 14px; }
+.duel-hud-me { right: 14px; bottom: 22px; }
+.duel-hud strong { display: block; overflow: hidden; font-size: 14px; text-overflow: ellipsis; white-space: nowrap; }
+.duel-hud div { display: flex; align-items: center; gap: 8px; font-size: 11px; }
+.duel-hud progress { width: 100%; height: 9px; accent-color: var(--arena-border); }
+.duel-hud small { display: block; font-size: 11px; text-align: right; }
+.duel-route { position: absolute; }
+.duel-route-foe { top: 29px; right: 12%; color: var(--arena-red); }
+.duel-route-me { bottom: 30px; left: 10%; color: var(--arena-blue); }
+.duel-route-move { animation: duel-lunge 450ms ease-out; }
+@keyframes duel-lunge { 50% { transform: translate(10px, -8px) scale(1.06); } }
+@media (prefers-reduced-motion: reduce) { .duel-route-move { animation: none; } }
+.duel-choice:focus-visible { outline: 3px solid var(--brand-text); outline-offset: 2px; }

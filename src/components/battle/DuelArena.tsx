@@ -3,14 +3,15 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { AuthForm } from "@/components/AuthForm";
+import { PathThumb } from "@/components/Icon";
 import { BATTLE_CHOICES, BATTLE_RULES, CHOICE_LABELS, criticalDamage, type BattleChoice, type BattleSheet, type BattleState, type TurnLog } from "@/lib/battle/turnBattle";
 import { browserSupabase } from "@/lib/client/supabaseBrowser";
+import { SHAPES } from "@/lib/route/shapes";
 
 type Opponent = { id: string; name: string; bot: boolean; sheet: BattleSheet };
 type Lobby = { me: { name: string; registered: boolean; sheet: BattleSheet }; opponents: Opponent[]; history: { id: string; opponent: string; winner: BattleState["winner"]; turns: number }[] };
 type Battle = { id: string; opponent: string; state: BattleState; log: TurnLog | null };
 
-const ICONS: Record<BattleChoice, string> = { scissors: "✌️", rock: "✊", paper: "✋", allin: "🔥" };
 const resultLabel = (winner: BattleState["winner"]) => (winner === 0 ? "승리" : winner === 1 ? "패배" : "무승부");
 
 async function request<T>(init?: { body: unknown }): Promise<T> {
@@ -33,21 +34,23 @@ function describe(log: TurnLog, foe: string): string {
   return shown + "아무 일도 일어나지 않았어요.";
 }
 
-function Fighter({ name, hp, maxHp, side }: { name: string; hp: number; maxHp: number; side: "me" | "foe" }) {
-  const percent = Math.round((hp / maxHp) * 100);
+function Hud({ name, hp, maxHp, side }: { name: string; hp: number; maxHp: number; side: "me" | "foe" }) {
   return (
-    <div className={`duel-fighter duel-fighter-${side}`}>
-      <div className="duel-status">
-        <strong>{name}</strong>
-        <div className="duel-hp" role="meter" aria-label={`${name} 체력`} aria-valuemin={0} aria-valuemax={maxHp} aria-valuenow={hp}>
-          <span data-low={percent <= 30} style={{ transform: `scaleX(${percent / 100})` }} />
-        </div>
-        <small>{hp} / {maxHp}</small>
-      </div>
-      <div className="duel-avatar" aria-hidden="true">{name.slice(0, 1)}</div>
+    <div className={`duel-hud duel-hud-${side}`}>
+      <strong>{name}</strong>
+      <div><span>HP</span><progress aria-label={`${name} 체력`} max={maxHp} value={hp} /></div>
+      <small>{hp} / {maxHp}</small>
     </div>
   );
 }
+
+/** 코스 그림이 캐릭터가 된다. 상대는 이름으로 모양을 고르므로 같은 상대는 늘 같은 모양이다 */
+const FOE_SHAPES = ["airplane", "whale", "rocket", "turtle", "elephant", "rabbit", "butterfly", "car"];
+function foeShape(name: string) {
+  const hash = Array.from(name).reduce((n, ch) => (n * 31 + ch.charCodeAt(0)) >>> 0, 7);
+  return SHAPES.find((shape) => shape.id === FOE_SHAPES[hash % FOE_SHAPES.length]) ?? SHAPES[0];
+}
+const MY_SHAPE = SHAPES.find((shape) => shape.id === "dog") ?? SHAPES[0];
 
 export function DuelArena({ returnTo }: { returnTo: string }) {
   const supabase = browserSupabase();
@@ -103,9 +106,17 @@ export function DuelArena({ returnTo }: { returnTo: string }) {
     const over = state.winner !== null;
     return (
       <div className="duel-arena">
-        <div className="duel-field">
-          <Fighter name={battle.opponent} hp={state.hp[1]} maxHp={state.sheets[1].maxHp} side="foe" />
-          <Fighter name={lobby.me.name} hp={state.hp[0]} maxHp={state.sheets[0].maxHp} side="me" />
+        <div className="duel-arena-field">
+          <div className="duel-platform duel-platform-foe" />
+          <div className="duel-platform duel-platform-me" />
+          <Hud name={battle.opponent} hp={state.hp[1]} maxHp={state.sheets[1].maxHp} side="foe" />
+          <div key={`foe-${state.turn}`} className={`duel-route duel-route-foe${log?.damage[0] ? " duel-route-move" : ""}`} aria-hidden="true">
+            <PathThumb lines={[foeShape(battle.opponent).points]} size={120} width={3.5} />
+          </div>
+          <div key={`me-${state.turn}`} className={`duel-route duel-route-me${log?.damage[1] ? " duel-route-move" : ""}`} aria-hidden="true">
+            <PathThumb lines={[MY_SHAPE.points]} size={155} width={3.5} />
+          </div>
+          <Hud name={lobby.me.name} hp={state.hp[0]} maxHp={state.sheets[0].maxHp} side="me" />
         </div>
         <p className="duel-log" role="status">{log ? describe(log, battle.opponent) : `${battle.opponent}이(가) 나타났어요! 무엇을 낼까요?`}</p>
         {message && <p className="auth-error" role="alert">{message}</p>}
@@ -119,9 +130,8 @@ export function DuelArena({ returnTo }: { returnTo: string }) {
             <div className="duel-choices">
               {BATTLE_CHOICES.map((choice) => (
                 <button key={choice} type="button" className={`duel-choice duel-choice-${choice}`} disabled={busy} onClick={() => void act({ action: "turn", id: battle.id, choice })}>
-                  <span aria-hidden="true">{ICONS[choice]}</span>
                   <strong>{CHOICE_LABELS[choice]}</strong>
-                  {choice === "allin" && <small>{Math.round(BATTLE_RULES.allinChance * 100)}% · 치명타 {criticalDamage(state, 0)}</small>}
+                  {choice === "allin" && <small>성공 {Math.round(BATTLE_RULES.allinChance * 100)}%, 치명타 {criticalDamage(state, 0)}</small>}
                 </button>
               ))}
             </div>
@@ -138,12 +148,12 @@ export function DuelArena({ returnTo }: { returnTo: string }) {
       {!lobby && !message && <p role="status">상대를 불러오고 있어요.</p>}
       {lobby && (
         <>
-          <p>내 캐릭터 <strong>{lobby.me.name}</strong> · 체력 {lobby.me.sheet.maxHp} · 공격 {lobby.me.sheet.attack}{lobby.me.registered ? "" : " (체험 캐릭터)"}</p>
+          <p>내 캐릭터 <strong>{lobby.me.name}</strong>{lobby.me.registered ? "" : " (체험 캐릭터)"}<br />체력 {lobby.me.sheet.maxHp}, 공격 {lobby.me.sheet.attack}</p>
           <h2>상대를 고르세요</h2>
           <ol className="battle-list">
             {lobby.opponents.map((opponent) => (
               <li key={opponent.id}>
-                <span><strong>{opponent.name}</strong> · 체력 {opponent.sheet.maxHp} · 공격 {opponent.sheet.attack}</span>
+                <span><strong>{opponent.name}</strong><br />체력 {opponent.sheet.maxHp}, 공격 {opponent.sheet.attack}</span>
                 <button type="button" className="btn btn-secondary btn-sm" disabled={busy} onClick={() => void act({ action: "start", opponent: opponent.id })}>대결</button>
               </li>
             ))}
@@ -153,7 +163,7 @@ export function DuelArena({ returnTo }: { returnTo: string }) {
             <>
               <h2>최근 대결</h2>
               <ul className="battle-list">
-                {lobby.history.map((item) => <li key={item.id}><strong>{item.opponent}</strong><span>{resultLabel(item.winner)} · {item.turns}턴</span></li>)}
+                {lobby.history.map((item) => <li key={item.id}><strong>{item.opponent}</strong><span>{resultLabel(item.winner)}, {item.turns}턴</span></li>)}
               </ul>
             </>
           )}
