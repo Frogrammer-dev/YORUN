@@ -551,7 +551,7 @@ legend { font-weight: 700; font-size: var(--fs-callout); padding-right: var(--sp
 .turn-text span { text-wrap: balance; }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .cand { background: var(--surface-2); }
-  :root:not([data-theme="light"]) .switch { background: var(--c-5a606b); }
+  :root:not([data-theme="light"]) .switch:not(:checked) { background: var(--c-5a606b); }
 }
 @media (max-width: 380px) {
   .room-page .brand-text { display: none; }
