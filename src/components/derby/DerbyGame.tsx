@@ -49,7 +49,8 @@ export function DerbyGame({ returnTo = "/derby" }: { returnTo?: string }) {
   const [room, setRoom] = useState<RoomState | null>(null);
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
-  const [needLogin, setNeedLogin] = useState(false);
+  // 로그인 없이 봇 연습만 하기로 고른 상태
+  const [practiceOnly, setPracticeOnly] = useState(false);
   const [arrived, setArrived] = useState(0);
   const [count, setCount] = useState(3);
   const [clock, setClock] = useState(0);
@@ -83,11 +84,7 @@ export function DerbyGame({ returnTo = "/derby" }: { returnTo?: string }) {
   const raceEnd = result ? Math.max(...result.placings.map((p) => p.seconds)) : 0;
 
   async function enter() {
-    if (!character || busy || character.blocked) return;
-    if (!signedIn) {
-      setNeedLogin(true);
-      return;
-    }
+    if (!character || busy || character.blocked || !signedIn) return;
     if (needsConsent && !consent) return setMessage("기록을 쓰려면 동의가 필요해요.");
     setBusy(true);
     setMessage("");
@@ -225,6 +222,20 @@ export function DerbyGame({ returnTo = "/derby" }: { returnTo?: string }) {
 
   if (signedIn === undefined) return <p role="status" className="derby-note">참가 상태를 확인하고 있어요.</p>;
 
+  // 로그인부터 받는다. 로그인 없이 봇 연습만 할 수도 있다
+  if (phase === "select" && supabase && !signedIn && !practiceOnly) {
+    return (
+      <div className="derby-screen">
+        <h2 className="derby-title">경기에 참여해요</h2>
+        <section className="derby-login">
+          <p>경기에 표시할 이름이 필요해요. 참여한 뒤 출전 캐릭터를 고릅니다.</p>
+          <AuthForm supabase={supabase} prepareNext={async () => returnTo} onNavigate={() => setSignedIn(true)} />
+        </section>
+        <button type="button" className="derby-quiet" onClick={() => setPracticeOnly(true)}>로그인 없이 봇과 연습하기</button>
+      </div>
+    );
+  }
+
   if (phase === "select") {
     return (
       <div className="derby-screen">
@@ -248,17 +259,19 @@ export function DerbyGame({ returnTo = "/derby" }: { returnTo?: string }) {
           </label>
         )}
         {message && <p className="derby-error" role="alert">{message}</p>}
-        {needLogin && supabase ? (
-          <section className="derby-login">
-            <p>경기에 표시할 이름이 필요해요.</p>
-            <AuthForm supabase={supabase} prepareNext={async () => returnTo} onNavigate={() => { setSignedIn(true); setNeedLogin(false); }} />
-          </section>
+        {signedIn ? (
+          <>
+            <button type="button" className="derby-start" disabled={!character || !!character.blocked || busy || (needsConsent && !consent)} aria-busy={busy} onClick={() => void enter()}>
+              {busy ? "매칭 준비 중" : "매칭 시작"}
+            </button>
+            <button type="button" className="derby-quiet" disabled={!character} onClick={startPractice}>기록 없이 봇과 연습하기</button>
+          </>
         ) : (
-          <button type="button" className="derby-start" disabled={!character || !!character.blocked || busy || (needsConsent && !consent)} aria-busy={busy} onClick={() => void (supabase ? enter() : startPractice())}>
-            {busy ? "매칭 준비 중" : supabase ? "매칭 시작" : "봇과 연습 경기"}
-          </button>
+          <>
+            <button type="button" className="derby-start" disabled={!character || !!character.blocked} onClick={startPractice}>봇과 연습 경기</button>
+            {supabase && <button type="button" className="derby-quiet" onClick={() => setPracticeOnly(false)}>로그인하고 매칭하기</button>}
+          </>
         )}
-        {supabase && <button type="button" className="derby-quiet" disabled={!character} onClick={startPractice}>기록 없이 봇과 연습하기</button>}
       </div>
     );
   }

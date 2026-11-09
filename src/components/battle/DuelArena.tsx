@@ -55,7 +55,6 @@ export function DuelArena({ returnTo }: { returnTo: string }) {
   const [saved, setSaved] = useState<DerbyCharacter[]>([]);
   const [selected, select] = useState("");
   const [consent, agree] = useState(false);
-  const [needLogin, setNeedLogin] = useState(false);
   const [guest, setGuest] = useState(false);
 
   useEffect(() => watchBattleDraft(setDraft), []);
@@ -107,11 +106,7 @@ export function DuelArena({ returnTo }: { returnTo: string }) {
   const myLines = character?.line ? character.line.map(([x, y]) => [x, -y] as [number, number]) : MY_SHAPE.points;
 
   async function toOpponents() {
-    if (!character || busy) return;
-    if (!signedIn) {
-      setNeedLogin(true);
-      return;
-    }
+    if (!character || busy || !signedIn) return;
     setBusy(true);
     setMessage("");
     try {
@@ -134,6 +129,19 @@ export function DuelArena({ returnTo }: { returnTo: string }) {
   };
 
   if (signedIn === undefined) return <p role="status" className="derby-note">참가 상태를 확인하고 있어요.</p>;
+
+  // 로그인부터 받는다. 게스트 기본 기록 캐릭터는 로그인 뒤에야 보이므로 그다음에 캐릭터를 고른다
+  if (supabase && !signedIn) {
+    return (
+      <div className="derby-screen">
+        <h2 className="derby-title">대결에 참여해요</h2>
+        <section className="derby-login">
+          <p>대결에 표시할 이름이 필요해요. 참여한 뒤 대표 캐릭터를 고릅니다.</p>
+          <AuthForm supabase={supabase} prepareNext={async () => returnTo} onNavigate={() => setSignedIn(true)} />
+        </section>
+      </div>
+    );
+  }
 
   if (battle && lobby) {
     const { state, log } = battle;
@@ -226,16 +234,9 @@ export function DuelArena({ returnTo }: { returnTo: string }) {
       )}
       {message && <p className="derby-error" role="alert">{message}</p>}
       {!supabase && <p className="derby-note" role="status">이 실행 환경에서는 대결 서버를 쓸 수 없어요.</p>}
-      {needLogin && supabase ? (
-        <section className="derby-login">
-          <p>대결에 표시할 이름이 필요해요.</p>
-          <AuthForm supabase={supabase} prepareNext={async () => returnTo} onNavigate={() => { setSignedIn(true); setNeedLogin(false); }} />
-        </section>
-      ) : (
-        <button type="button" className="derby-start" disabled={!supabase || !character || busy || (isDraft && !consent)} aria-busy={busy} onClick={() => void toOpponents()}>
-          {busy ? "상대를 찾는 중" : "1대1 대결하기"}
-        </button>
-      )}
+      <button type="button" className="derby-start" disabled={!supabase || !character || busy || (isDraft && !consent)} aria-busy={busy} onClick={() => void toOpponents()}>
+        {busy ? "상대를 찾는 중" : "1대1 대결하기"}
+      </button>
     </div>
   );
 }
