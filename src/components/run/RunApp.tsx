@@ -15,9 +15,10 @@ import type { GpxTrack } from "@/lib/gpx/parser";
 import { setPendingArtwork } from "@/lib/client/pending";
 import { downloadBlob } from "@/lib/render/png";
 import { Icon, PathThumb, latlngToXY, type IconName } from "@/components/Icon";
-import { awardRun, loadActiveRun, loadPlannedRoute, loadWallet, plannedRouteBadge, recoverRecord, saveActiveRun, type PlannedRoute } from "@/lib/run/storage";
+import { awardRun, removeRunLog, saveRunLog, loadActiveRun, loadPlannedRoute, loadWallet, plannedRouteBadge, recoverRecord, saveActiveRun, type PlannedRoute } from "@/lib/run/storage";
+import { CAP_PHRASE, OFF_ROUTE_PHRASE, kmPhrase, pointsPhrase } from "@/lib/run/spoken";
 import { selectVoice, selectedVoice, stopVoice, type RunVoice, loadVoicePref, primeVoice, saveVoicePref, speak, voiceSupported } from "@/lib/run/voice";
-import { DAILY_POINT_CAP, POINTS_PER_CHECKPOINT, cappedPoints, collectedCount, emptyRewards, isMissed, placeCheckpoints, stepRewards, type RewardState } from "@/lib/run/rewards";
+import { DAILY_POINT_CAP, POINTS_PER_CHECKPOINT, SHOW_POINTS, cappedPoints, collectedCount, emptyRewards, isMissed, placeCheckpoints, stepRewards, type RewardState } from "@/lib/run/rewards";
 import {
   RouteTracker,
   TURN_LABEL,
@@ -141,8 +142,9 @@ export function RunApp() {
     // 출발점은 내 위치 점보다 위에 그린다 (출발 전 내 위치가 출발점을 덮지 않게)
     const startPane = map.getPane("start") ? "start" : (map.createPane("start").style.zIndex = "460", "start");
     if (route) {
-      L.polyline(route.latlngs, { ...round, color: "#fff", weight: 12, opacity: 0.6, interactive: false }).addTo(g);
-      L.polyline(route.latlngs, { ...round, color: "#0EA5E9", weight: 8, opacity: 0.45, interactive: false }).addTo(g);
+      // 그림을 알아보는 것이 핵심이라 계획 코스를 또렷하게 그린다 (달린 선은 검정 계열로 구분)
+      L.polyline(route.latlngs, { ...round, color: "#fff", weight: 10, opacity: 1, interactive: false }).addTo(g);
+      L.polyline(route.latlngs, { ...round, color: "#0866C2", weight: 6, opacity: 1, interactive: false }).addTo(g);
       // 여러 획 그림의 이동 구간: 그림이 아니라 다음 획으로 가는 길이라 회색 점선
       for (const [a, b] of route.moves ?? []) {
         const mv = route.latlngs.slice(a, b + 1);
@@ -152,10 +154,10 @@ export function RunApp() {
       guideLine = L.polyline(route.outlines ?? route.outline, { ...round, color: "#2B2F38", weight: 2.5, dashArray: "1 8", opacity: 0, interactive: false }).addTo(g);
       L.circleMarker(route.latlngs[0], { radius: 12, color: "#fff", weight: 3, fillColor: "#12B76A", fillOpacity: 1, pane: startPane }).bindTooltip("출발·도착").addTo(g);
       map.invalidateSize({ pan: false });
-      map.fitBounds(L.latLngBounds(route.latlngs), { paddingTopLeft: [24, 80], paddingBottomRight: [24, 48], animate: false });
+      map.fitBounds(L.latLngBounds(route.latlngs), { paddingTopLeft: [24, 80], paddingBottomRight: [68, 48], animate: false });
     }
     const casing = L.polyline([], { ...round, color: "#fff", weight: 9, opacity: 0.9, interactive: false }).addTo(g);
-    const track = L.polyline([], { ...round, color: "#075985", weight: 5, opacity: 1, interactive: false }).addTo(g);
+    const track = L.polyline([], { ...round, color: "#111318", weight: 5, opacity: 1, interactive: false }).addTo(g);
     layers.current = { track, casing, guide: guideLine };
     map.on("dragstart", () => setFollow(false));
     return () => {
@@ -167,10 +169,10 @@ export function RunApp() {
   // 포인트 객체: 주울 것(주황) · 주운 것(초록, 작게) · 지나쳐 놓친 것·오늘 한도를 넘은 것(회색)
   const cpMarkers = useRef<Leaflet.CircleMarker[]>([]);
   useEffect(() => {
-    if (!lm) return;
+    if (!lm || !SHOW_POINTS) return;
     const g = lm.L.layerGroup().addTo(lm.map);
     cpMarkers.current = checkpoints.map((c, i) =>
-      lm.L.circleMarker([c.lat, c.lon], { radius: 7, color: "#fff", weight: 2, fillColor: "#F59E0B", fillOpacity: 1 }).bindTooltip(`${(i + 1) * POINTS_PER_CHECKPOINT}m 지점 · ${POINTS_PER_CHECKPOINT}P`).addTo(g),
+      lm.L.circleMarker([c.lat, c.lon], { radius: 4, color: "#fff", weight: 1.5, fillColor: "#F59E0B", fillOpacity: 1 }).bindTooltip(`${(i + 1) * POINTS_PER_CHECKPOINT}m 지점 · ${POINTS_PER_CHECKPOINT}P`).addTo(g),
     );
     return () => {
       g.remove();
@@ -182,7 +184,7 @@ export function RunApp() {
     cpMarkers.current.forEach((m, i) => {
       const got = rewards.got[i];
       const grey = !got && (isMissed(rewards, i) || capReached);
-      m.setStyle({ radius: got ? 4 : 7, fillColor: got ? "#12B76A" : grey ? "#9CA3AF" : "#F59E0B", fillOpacity: got ? 0.8 : 1 });
+      m.setStyle({ radius: got ? 2.5 : 4, fillColor: got ? "#12B76A" : grey ? "#9CA3AF" : "#F59E0B", fillOpacity: got ? 0.8 : 1 });
     });
   }, [rewards, capReached, checkpoints]);
 
@@ -320,6 +322,15 @@ export function RunApp() {
     };
   }, [status, route]);
 
+  // 달리는 중 화면을 떠나면(뒤로가기 등) 5초 주기를 기다리지 않고 바로 저장한다
+  const saveOnLeave = useRef<() => void>(() => undefined);
+  useEffect(() => {
+    saveOnLeave.current = () => {
+      if (status === "running") saveActiveRun({ routeId: route?.id ?? null, record: recordRef.current, rewards: rewardsRef.current, savedAt: Date.now() });
+    };
+  }, [status, route]);
+  useEffect(() => () => saveOnLeave.current(), []);
+
   // 화면 꺼짐 방지
   useEffect(() => {
     if (status !== "running") {
@@ -402,6 +413,7 @@ export function RunApp() {
     const collected = collectedCount(rewardsRef.current);
     const { points, wallet } = awardRun(r.startedAt ?? Date.now(), collected, Date.now());
     setAward({ points, collected });
+    if (r.startedAt !== null && r.distanceMeters > 0) saveRunLog({ id: r.startedAt, finishedAt: Date.now(), meters: r.distanceMeters, activeMs: r.activeMs, onCourse: !!route });
     setTodayPoints(wallet.dayPoints);
     // 작품방에 걸거나 버릴 때까지 기기에 남긴다 (결과 화면에서 앱이 꺼져도 기록을 잃지 않게)
     saveActiveRun({ routeId: route?.id ?? null, record: r, rewards: rewardsRef.current, savedAt: Date.now(), finished: { points, collected, shapeName: route?.shapeName ?? null } });
@@ -409,6 +421,8 @@ export function RunApp() {
     setStatus("finished");
   }
   function discard() {
+    // 결과를 버리면 통계와 대결 후보에서도 뺀다
+    if (recordRef.current.startedAt !== null) removeRunLog(recordRef.current.startedAt);
     discardBattleRun(recordRef.current.startedAt);
     saveActiveRun(null);
     setRec(emptyRecord());
@@ -471,15 +485,16 @@ export function RunApp() {
   const lastGps = useRef(gpsState);
   // 같은 문장을 다시 넣어도 낭독되도록 한 번 비웠다가 넣는다
   // say: 음성으로도 말할지 (urgent는 앞선 말을 끊고 바로)
-  const announce = useCallback((set: (v: string) => void, text: string, say?: "polite" | "urgent") => {
+  // spoken: 소리로는 더 짧게 말할 때. 화면 낭독에는 text 전체가 전달된다
+  const announce = useCallback((set: (v: string) => void, text: string, say?: "polite" | "urgent", spoken: string = text) => {
     set("");
     requestAnimationFrame(() => set(text));
-    if (say && voiceRef.current) speak(text, say === "urgent");
+    if (say && voiceRef.current) speak(spoken, say === "urgent");
   }, []);
 
   useEffect(() => {
     const km = Math.floor(record.distanceMeters / 1000);
-    if (status === "running" && km > lastKm.current) announce(setSayPolite, `${km}킬로미터, ${spokenDuration(elapsed)}`, "polite");
+    if (status === "running" && km > lastKm.current) announce(setSayPolite, `${km}킬로미터, ${spokenDuration(elapsed)}`, "polite", kmPhrase(km));
     lastKm.current = km;
   }, [record.distanceMeters, status, elapsed, announce]);
 
@@ -491,12 +506,12 @@ export function RunApp() {
   useEffect(() => {
     const prev = lastCollected.current;
     lastCollected.current = collected;
-    if (status !== "running" || collected <= prev) return;
+    if (!SHOW_POINTS || status !== "running" || collected <= prev) return;
     const gained = livePoints - cappedPoints(prev, todayPoints);
     navigator.vibrate?.(80);
     const text = gained > 0 ? `+${gained}P` : "오늘 적립 완료";
     setToast({ text, key: collected });
-    announce(setSayPolite, gained > 0 ? `${gained}포인트 획득, 이번 달리기 ${livePoints}포인트` : `오늘 적립 한도 ${DAILY_POINT_CAP}포인트를 채웠어요`, "polite");
+    announce(setSayPolite, gained > 0 ? `${gained}포인트 획득, 이번 달리기 ${livePoints}포인트` : `오늘 적립 한도 ${DAILY_POINT_CAP}포인트를 채웠어요`, "polite", gained > 0 ? pointsPhrase(gained) : CAP_PHRASE);
     clearTimeout(toastTimer.current);
     toastTimer.current = setTimeout(() => setToast(null), 1600);
   }, [collected, livePoints, todayPoints, status, announce]);
@@ -528,7 +543,7 @@ export function RunApp() {
   }, [guide, status, offRoute, announce]);
 
   useEffect(() => {
-    if (offRoute && !wasOff.current) announce(setSayAlert, `코스에서 ${Math.round(guide?.offRouteMeters ?? 0)}미터 벗어났어요. 코스 쪽으로 돌아가 주세요.`, "urgent");
+    if (offRoute && !wasOff.current) announce(setSayAlert, `코스에서 ${Math.round(guide?.offRouteMeters ?? 0)}미터 벗어났어요. 코스 쪽으로 돌아가 주세요.`, "urgent", OFF_ROUTE_PHRASE);
     else if (!offRoute && wasOff.current && status === "running") announce(setSayAlert, "코스로 돌아왔어요", "urgent");
     wasOff.current = offRoute;
   }, [offRoute, guide, status, announce]);
@@ -568,7 +583,7 @@ export function RunApp() {
         <span className="turn-icon"><Icon name="warn" size={36} /></span>
         <span className="turn-text">
           <span>코스에서 {Math.round(guide!.offRouteMeters)}m 벗어났어요</span>
-          <small>분홍 코스 쪽으로 돌아가 주세요</small>
+          <small>파란 코스 쪽으로 돌아가 주세요</small>
         </span>
       </div>
     );
@@ -596,7 +611,7 @@ export function RunApp() {
   }
 
   return (
-    <main className={`run-page ${status === "paused" ? "hud-paused" : ""}`}>
+    <main className={`run-page ${status === "paused" ? "hud-paused" : ""} ${status === "running" ? "hud-running" : ""}`}>
       <p className="visually-hidden" aria-live="polite">
         {sayPolite}
       </p>
@@ -608,7 +623,7 @@ export function RunApp() {
         <div className="run-top">
           <div className="run-top-row">
             {!active && (
-              <Link href="/routes" className="map-fab" aria-label="코스 찾기" title="코스 찾기">
+              <Link href={route ? "/routes" : "/running"} className="map-fab" aria-label={route ? "코스 찾기로 돌아가기" : "달리기 화면으로 돌아가기"} title={route ? "코스 찾기로 돌아가기" : "달리기 화면으로 돌아가기"}>
                 <Icon name="back" size={22} />
               </Link>
             )}
@@ -653,9 +668,11 @@ export function RunApp() {
               <div className="hud-hero-row">
                 <span className="hud-label">거리</span>
                 <span className="hud-hero-side">
-                  <span className="hud-points" data-stat="points" title={`오늘 ${(todayPoints + livePoints).toLocaleString()} / ${DAILY_POINT_CAP.toLocaleString()}P`}>
-                    {livePoints.toLocaleString()}P
-                  </span>
+                  {SHOW_POINTS && (
+                    <span className="hud-points" data-stat="points" title={`오늘 ${(todayPoints + livePoints).toLocaleString()} / ${DAILY_POINT_CAP.toLocaleString()}P`}>
+                      {livePoints.toLocaleString()}P
+                    </span>
+                  )}
                   {status === "paused" && <span className="badge pause-badge">일시정지됨</span>}
                   {gpsState === "ok" && <span className="hud-gps">{gpsLabel}</span>}
                 </span>
@@ -708,6 +725,7 @@ export function RunApp() {
               <button
                 type="button"
                 className={`btn btn-run end ${endArmed ? "armed" : ""}`}
+                aria-label={endArmed ? "한 번 더 눌러 종료" : "종료"}
                 onClick={() => {
                   if (!endArmed) return setEndArmed(true);
                   setEndArmed(false);
@@ -715,7 +733,7 @@ export function RunApp() {
                 }}
               >
                 <Icon name="stop" size={22} />
-                {endArmed ? "한 번 더 눌러 종료" : "종료"}
+                {endArmed ? "한 번 더" : "종료"}
               </button>
             </div>
           </>
@@ -733,10 +751,12 @@ export function RunApp() {
                     {route.shapeName} 코스 · {(route.lengthMeters / 1000).toFixed(2)}km · {plannedRouteBadge(route)}
                     {startDist !== null && ` · 출발점까지 ${startDist < 1000 ? `${Math.round(startDist)}m` : `${(startDist / 1000).toFixed(1)}km`}`}
                   </p>
-                  <p>
-                    포인트 객체 {checkpoints.length}개 · 최대 {(checkpoints.length * POINTS_PER_CHECKPOINT).toLocaleString()}P
-                    {todayPoints > 0 && ` · 오늘 적립 ${todayPoints.toLocaleString()} / ${DAILY_POINT_CAP.toLocaleString()}P`}
-                  </p>
+                  {SHOW_POINTS && (
+                    <p>
+                      포인트 객체 {checkpoints.length}개 · 최대 {(checkpoints.length * POINTS_PER_CHECKPOINT).toLocaleString()}P
+                      {todayPoints > 0 && ` · 오늘 적립 ${todayPoints.toLocaleString()} / ${DAILY_POINT_CAP.toLocaleString()}P`}
+                    </p>
+                  )}
                   {route.moves?.length ? (
                     <p>
                       획 {route.moves.length + 1}개 · 점선 이동 구간 {((route.moveMeters ?? 0) / 1000).toFixed(1)}km는 그림이 아니에요. 한 획을 다 그리면 일시정지하고 다음 획
@@ -755,10 +775,12 @@ export function RunApp() {
                   <p>
                     선택한 그림 코스가 없어요. <Link href="/routes">코스를 먼저 찾거나</Link>, 코스 없이 달려 그림을 그릴 수도 있어요.
                   </p>
-                  <p>
-                    100m 달릴 때마다 {POINTS_PER_CHECKPOINT}P · 하루 최대 {DAILY_POINT_CAP.toLocaleString()}P
-                    {todayPoints > 0 && ` (오늘 ${todayPoints.toLocaleString()}P 적립)`}
-                  </p>
+                  {SHOW_POINTS && (
+                    <p>
+                      100m 달릴 때마다 {POINTS_PER_CHECKPOINT}P · 하루 최대 {DAILY_POINT_CAP.toLocaleString()}P
+                      {todayPoints > 0 && ` (오늘 ${todayPoints.toLocaleString()}P 적립)`}
+                    </p>
+                  )}
                 </div>
               </div>
             )}
@@ -834,7 +856,7 @@ export function RunApp() {
                 <i style={{ width: `${pct}%` }} />
               </div>
             )}
-            {award && (
+            {SHOW_POINTS && award && (
               <div className="done-points">
                 <span className="hud-label">적립 포인트</span>
                 <strong data-stat="award">+{award.points.toLocaleString()}P</strong>
@@ -852,10 +874,6 @@ export function RunApp() {
                   기록된 선이 너무 짧아 작품을 만들 수 없어요. GPS가 잡힌 상태로 조금 더 달려 주세요.
                 </p>
               )}
-              <button type="button" className="btn btn-primary btn-lg" onClick={toArtworkRoom} disabled={tooShort}>
-                <Icon name="frame" size={20} />
-                달린 그림을 작품방에 걸기
-              </button>
               <div className="row">
                 <button type="button" className="btn btn-dark2" onClick={exportRecord} disabled={record.segments.every((s) => s.length === 0)}>
                   <Icon name="download" size={18} />
@@ -866,6 +884,12 @@ export function RunApp() {
                 </button>
               </div>
               <p className="done-note">작품은 실제로 달린 GPS 선 그대로 만들어요. 계획 코스로 빈 곳을 메우지 않아요.</p>
+            </div>
+            <div className="done-cta">
+              <button type="button" className="btn btn-primary btn-lg wide" onClick={toArtworkRoom} disabled={tooShort}>
+                <Icon name="frame" size={20} />
+                달린 그림을 작품방에 걸기
+              </button>
             </div>
           </div>
         </div>

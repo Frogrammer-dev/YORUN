@@ -1,183 +1,300 @@
 "use client";
+// 8인 경기 3D 중계. 표준 400m 트랙의 일반 경기장이며 특정 경기장을 측량한 모델이 아니다.
+// 3D 색은 CSS 토큰을 읽지 못하므로 앱 테마 값을 이곳에 모은다.
 
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import type { BodyPlan } from "@/lib/battle/bodyPlan";
 import { TRACK, trackPoint } from "@/lib/battle/stadiumTrack";
+import { FOLLOW_CUT, OVERVIEW_CUT, directorCut, shotFrame } from "./raceCamera";
+import { SAFE_RATIO, qualityGuard, startRatio } from "./renderQuality";
+import { FOOT_GAP, FRAME_COUNT, bodyMotion, drawNumberTag, drawRunnerFrames, runnerCreature, runnerEye, runnerHeight } from "./runnerArt";
 
-type Runner = { id: string; progress: number };
-type View = "overview" | "follow" | "broadcast";
-const COLORS = ["#f97316", "#38bdf8", "#facc15", "#e879f9", "#34d399", "#fb7185", "#818cf8", "#ffffff"];
+export type StadiumRunner = { lane: number; progress: number; mine: boolean; body: BodyPlan; line?: readonly (readonly number[])[] | null };
+export type CameraMode = "director" | "mine";
 
-export function StadiumMap({ runners }: { runners: Runner[] }) {
+const PALETTE = {
+  sky: "#0b1f36", ground: "#0f2a47", trackSurface: "#0a72d6", infield: "#2f6f58", pitch: "#3a8268", line: "#e5f2ff",
+  seatA: "#1b3d61", seatB: "#2a4664", roof: "#a9bdd3", ring: "#ffffff", ink: "#0b1f36",
+};
+const CROWD_SHIRTS = ["#ffb020", "#5cb4ff", "#ff6b6b", "#e879f9", "#34d399", "#f4f5f7", "#fb923c", "#a5b4fc", "#1f6fd1", "#fde68a"];
+const CROWD_SKIN = ["#f6d1b1", "#e8b98f", "#c98f64", "#8d5a3b"];
+const RUNNER_COLORS = ["#ffb020", "#5cb4ff", "#ff6b6b", "#e879f9", "#34d399", "#fb923c", "#a5b4fc", "#f4f5f7"];
+const SECTIONS = 12;
+const LAPS = 3;
+
+const lanePoint = (lane: number, progress: number) => trackPoint((progress / SECTIONS) * LAPS, TRACK.radius + (lane - 0.5) * TRACK.laneWidth);
+
+export function StadiumMap({ runners, camera: cameraMode }: { runners: StadiumRunner[]; camera: CameraMode }) {
   const host = useRef<HTMLDivElement>(null);
   const live = useRef(runners);
-  const cameraMode = useRef<View>("overview");
-  const selected = useRef("");
-  const [view, setView] = useState<View>("overview");
-  const [target, setTarget] = useState("");
+  const mode = useRef(cameraMode);
   const [error, setError] = useState("");
   useEffect(() => { live.current = runners; }, [runners]);
-  useEffect(() => { cameraMode.current = view; selected.current = target; }, [view, target]);
+  useEffect(() => { mode.current = cameraMode; }, [cameraMode]);
 
   useEffect(() => {
-    const container = host.current!;
+    const container = host.current;
+    if (!container) return;
     let renderer: THREE.WebGLRenderer;
-    try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false }); }
-    catch { setError("3D 화면을 지원하지 않는 기기예요. 아래 진행률로 경기를 볼 수 있어요."); return; }
-    renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
-    container.appendChild(renderer.domElement);
-    renderer.domElement.style.display = "block";
-    renderer.domElement.setAttribute("aria-label", "부산 아시아드주경기장 참고 3D 경주장");
+    try {
+      renderer = new THREE.WebGLRenderer({ antialias: true });
+    } catch {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- WebGL 지원 여부는 브라우저에서만 알 수 있다
+      setError("이 기기는 3D 중계를 지원하지 않아요. 아래 순위로 경기를 볼 수 있어요.");
+      return;
+    }
+    renderer.setPixelRatio(startRatio(devicePixelRatio));
+    const anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
     renderer.domElement.setAttribute("role", "img");
+    renderer.domElement.setAttribute("aria-label", "8개 레인 트랙을 달리는 선수들의 3D 중계 화면");
+    container.appendChild(renderer.domElement);
+
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color("#dce8ec");
-    const camera = new THREE.PerspectiveCamera(48, 1, 0.1, 1000);
-    camera.position.set(120, 125, 150);
-    scene.add(new THREE.HemisphereLight("#ffffff", "#6f7960", 2.4));
-    const sun = new THREE.DirectionalLight("#fff4df", 3);
+    scene.background = new THREE.Color(PALETTE.sky);
+    const camera = new THREE.PerspectiveCamera(46, 1, 0.5, 900);
+    camera.position.set(120, 110, 150);
+    scene.add(new THREE.HemisphereLight("#dcecff", "#0f2a47", 2.6));
+    const sun = new THREE.DirectionalLight("#ffffff", 2.2);
     sun.position.set(-70, 120, 80);
     scene.add(sun);
-    const textures: THREE.Texture[] = [];
-    function box(x: number, y: number, z: number, width: number, height: number, depth: number, color: string) {
-      const mesh = new THREE.Mesh(new THREE.BoxGeometry(width, height, depth), new THREE.MeshStandardMaterial({ color }));
-      mesh.position.set(x, y, z);
-      scene.add(mesh);
-      return mesh;
-    }
-    function oval(radius: number, y: number, color: string) {
-      const points = Array.from({ length: 241 }, (_, i) => {
-        const p = trackPoint(i / 240, radius);
-        return new THREE.Vector3(p.x, y, p.z);
-      });
-      const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(points), new THREE.LineBasicMaterial({ color }));
-      scene.add(line);
-    }
-    // A filled outer oval with a smaller grass oval masks its centre.
+
+    const disposables: { dispose(): void }[] = [];
+    const material = (color: string) => {
+      const m = new THREE.MeshStandardMaterial({ color, side: THREE.DoubleSide });
+      disposables.push(m);
+      return m;
+    };
     function surface(radius: number, y: number, color: string) {
       const shape = new THREE.Shape();
       for (let i = 0; i <= 240; i++) {
         const p = trackPoint(i / 240, radius);
-        if (i === 0) shape.moveTo(p.x, -p.z); else shape.lineTo(p.x, -p.z);
+        if (i === 0) shape.moveTo(p.x, -p.z);
+        else shape.lineTo(p.x, -p.z);
       }
-      const mesh = new THREE.Mesh(new THREE.ShapeGeometry(shape), new THREE.MeshStandardMaterial({ color, side: THREE.DoubleSide }));
+      const geometry = new THREE.ShapeGeometry(shape);
+      disposables.push(geometry);
+      const mesh = new THREE.Mesh(geometry, material(color));
       mesh.rotation.x = -Math.PI / 2;
       mesh.position.y = y;
       scene.add(mesh);
     }
-    box(0, -0.6, 0, 2000, 1, 2000, "#9eaf87");
-    box(0, -0.08, 0, 290, 0.08, 220, "#d8d1bd");
-    for (const x of [-160, 160]) box(x, -0.06, 0, 8, 0.1, 600, "#ddd9cc");
-    for (const z of [-125, 125]) box(0, -0.06, z, 600, 0.1, 8, "#ddd9cc");
-    for (let i = 0; i < 18; i++) {
-      for (const side of [-1, 1]) {
-        const x = -145 + i * 17;
-        const z = side * 145;
-        box(x, 1.4, z, 0.8, 3, 0.8, "#75634c");
-        const tree = new THREE.Mesh(
-          new THREE.IcosahedronGeometry(4.2, 1),
-          new THREE.MeshStandardMaterial({ color: i % 2 ? "#617c55" : "#789363" }),
-        );
-        tree.position.set(x, 5.5, z);
-        scene.add(tree);
+    function loopLine(radius: number, y: number, color: string) {
+      const points = Array.from({ length: 241 }, (_, i) => {
+        const p = trackPoint(i / 240, radius);
+        return new THREE.Vector3(p.x, y, p.z);
+      });
+      const geometry = new THREE.BufferGeometry().setFromPoints(points);
+      const lineMaterial = new THREE.LineBasicMaterial({ color });
+      disposables.push(geometry, lineMaterial);
+      scene.add(new THREE.Line(geometry, lineMaterial));
+    }
+    surface(150, -0.2, PALETTE.ground);
+    surface(TRACK.radius + TRACK.laneWidth * TRACK.lanes, 0.02, PALETTE.trackSurface);
+    surface(TRACK.radius, 0.04, PALETTE.infield);
+    for (let lane = 0; lane <= TRACK.lanes; lane++) loopLine(TRACK.radius + lane * TRACK.laneWidth, 0.08, PALETTE.line);
+
+    const unitBox = new THREE.BoxGeometry(1, 1, 1);
+    disposables.push(unitBox);
+    const place = (x: number, y: number, z: number, sx: number, sy: number, sz: number, color: string) => {
+      const mesh = new THREE.Mesh(unitBox, material(color));
+      mesh.position.set(x, y, z);
+      mesh.scale.set(sx, sy, sz);
+      scene.add(mesh);
+      return mesh;
+    };
+    place(0, 0.07, 0, 90, 0.02, 56, PALETTE.pitch);
+    // 결승선
+    place(-TRACK.straight / 2, 0.12, TRACK.radius + (TRACK.lanes * TRACK.laneWidth) / 2, 0.5, 0.04, TRACK.lanes * TRACK.laneWidth, PALETTE.ring);
+
+    // 관중석: 조각이 많아 한 번에 그린다
+    const seats = 9 * 64;
+    const stand = new THREE.InstancedMesh(unitBox, material("#ffffff"), seats);
+    const place3 = new THREE.Object3D();
+    const tint = new THREE.Color();
+    for (let tier = 0, i = 0; tier < 9; tier++) {
+      for (let segment = 0; segment < 64; segment++, i++) {
+        const radius = 52 + tier * 2.5;
+        const p = trackPoint(segment / 64, radius), q = trackPoint((segment + 0.01) / 64, radius);
+        place3.position.set(p.x, 1 + tier * 1.3, p.z);
+        place3.rotation.y = -Math.atan2(q.z - p.z, q.x - p.x);
+        place3.scale.set(6.4, 1.1, 2.3);
+        place3.updateMatrix();
+        stand.setMatrixAt(i, place3.matrix);
+        stand.setColorAt(i, tint.set(tier % 3 === 0 ? PALETTE.seatB : PALETTE.seatA));
       }
     }
-    surface(TRACK.radius + TRACK.laneWidth * 8, 0.02, "#b95e48");
-    surface(TRACK.radius, 0.04, "#679653");
-    for (let lane = 0; lane <= 8; lane++) oval(TRACK.radius + lane * TRACK.laneWidth, 0.08, "#fff1dc");
-    // Pitch dimensions are a visual standard reference, not a surveyed Busan measurement.
-    box(0, 0.07, 0, 105, 0.02, 68, "#628f4e");
-    for (const z of [-34, 34]) box(0, 0.10, z, 105, 0.03, 0.12, "#f1f1d8");
-    for (const x of [-52.5, 0, 52.5]) box(x, 0.10, 0, 0.12, 0.03, 68, "#f1f1d8");
-    box(-TRACK.straight / 2, 0.12, TRACK.radius + 4.88, 0.35, 0.04, 9.76, "#ffffff");
+    scene.add(stand);
+
+    // 관중: 네 무리로 나눠 무리마다 들썩이게 한다. 사람마다 움직이면 휴대폰에서 무겁다
+    const crowdBody = new THREE.BoxGeometry(0.9, 1.2, 0.5);
+    const crowdHead = new THREE.IcosahedronGeometry(0.34, 0);
+    disposables.push(crowdBody, crowdHead);
+    const crowdMaterial = new THREE.MeshLambertMaterial({ color: "#ffffff" });
+    disposables.push(crowdMaterial);
+    const seatsOfCrowd: { x: number; y: number; z: number }[][] = [[], [], [], []];
+    // 값이 늘 같아 다시 그려도 관중이 바뀌지 않는다
+    let pick = 12345;
+    const next = () => (pick = (pick * 1103515245 + 12345) % 2147483648) / 2147483648;
     for (let tier = 0; tier < 9; tier++) {
-      const radius = 52 + tier * 2.5;
-      for (let segment = 0; segment < 64; segment++) {
-        const p = trackPoint(segment / 64, radius);
-        const next = trackPoint((segment + 0.001) / 64, radius);
-        const seat = box(p.x, 1 + tier * 1.3, p.z, 6, 1.1, 2.3, tier % 3 === 0 ? "#e8c79c" : "#56869a");
-        seat.rotation.y = -Math.atan2(next.z - p.z, next.x - p.x);
+      for (let spot = 0; spot < 150 + tier * 12; spot++) {
+        if (next() < 0.14) continue; // 빈자리
+        const p = trackPoint(spot / (150 + tier * 12), 52 + tier * 2.5);
+        seatsOfCrowd[Math.floor(next() * 4)].push({ x: p.x, y: 2.2 + tier * 1.3, z: p.z });
       }
     }
-    // Raised wave-like canopy segments retain a clear view of the running surface.
-    for (let i = 0; i < 64; i++) {
-      const p = trackPoint(i / 64, 78);
-      const q = trackPoint((i + 0.01) / 64, 78);
-      const roof = box(p.x, 22 + 2 * Math.sin(i / 64 * Math.PI * 4), p.z, 7.5, 0.45, 13, "#f3f0e6");
-      roof.rotation.y = -Math.atan2(q.z - p.z, q.x - p.x);
+    const crowds = seatsOfCrowd.map((people) => {
+      const group = new THREE.Group();
+      const bodies = new THREE.InstancedMesh(crowdBody, crowdMaterial, people.length);
+      const heads = new THREE.InstancedMesh(crowdHead, crowdMaterial, people.length);
+      people.forEach((person, i) => {
+        place3.rotation.set(0, Math.atan2(person.x, person.z), 0);
+        place3.scale.set(1, 1, 1);
+        place3.position.set(person.x, person.y, person.z);
+        place3.updateMatrix();
+        bodies.setMatrixAt(i, place3.matrix);
+        bodies.setColorAt(i, tint.set(CROWD_SHIRTS[Math.floor(next() * CROWD_SHIRTS.length)]));
+        place3.position.set(person.x, person.y + 0.92, person.z);
+        place3.updateMatrix();
+        heads.setMatrixAt(i, place3.matrix);
+        heads.setColorAt(i, tint.set(CROWD_SKIN[Math.floor(next() * CROWD_SKIN.length)]));
+      });
+      group.add(bodies, heads);
+      scene.add(group);
+      return { group, bodies, heads };
+    });
+
+    const textures: THREE.Texture[] = [];
+    const paper = new THREE.PlaneGeometry(1, 1);
+    const shadowShape = new THREE.CircleGeometry(1, 20);
+    const shadowMaterial = new THREE.MeshBasicMaterial({ color: PALETTE.ink, transparent: true, opacity: 0.28, depthWrite: false });
+    disposables.push(paper, shadowShape, shadowMaterial);
+    type Runner3D = { sheet: THREE.Mesh; tag: THREE.Sprite; shadow: THREE.Mesh; texture: THREE.Texture; seed: number; height: number; eye: { along: number; height: number } };
+    const sprites = new Map<number, Runner3D>();
+    function canvasTexture(canvas: HTMLCanvasElement) {
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.colorSpace = THREE.SRGBColorSpace;
+      // 비스듬히 보는 로우앵글과 사선 샷에서도 뭉개지지 않게 한다
+      texture.anisotropy = anisotropy;
+      textures.push(texture);
+      return texture;
     }
-    const sprites = new Map<string, THREE.Sprite>();
-    function makeRunner(id: string, lane: number) {
-      const canvas = document.createElement("canvas");
-      canvas.width = 96; canvas.height = 128;
-      const ctx = canvas.getContext("2d")!;
-      ctx.fillStyle = COLORS[lane % 8];
-      ctx.strokeStyle = "#172b36"; ctx.lineWidth = 5; ctx.lineCap = "round";
-      ctx.beginPath(); ctx.arc(48, 26, 13, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(48, 42); ctx.lineTo(48, 76);
-      ctx.moveTo(28, 57); ctx.lineTo(48, 48); ctx.lineTo(68, 60);
-      ctx.moveTo(48, 76); ctx.lineTo(30, 105); ctx.moveTo(48, 76); ctx.lineTo(66, 105); ctx.stroke();
-      ctx.fillStyle = "#172b36"; ctx.font = "bold 18px sans-serif"; ctx.textAlign = "center"; ctx.fillText(String(lane + 1), 48, 125);
-      const texture = new THREE.CanvasTexture(canvas); textures.push(texture);
-      const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, depthTest: true }));
-      sprite.scale.set(2.4, 3.2, 1); scene.add(sprite); sprites.set(id, sprite);
-      return sprite;
+    function makeRunner(runner: StadiumRunner) {
+      const color = RUNNER_COLORS[(runner.lane - 1) % RUNNER_COLORS.length];
+      const texture = canvasTexture(drawRunnerFrames(runner.body, color, runner.line ?? null, runner.lane, runner.mine));
+      texture.repeat.set(1 / FRAME_COUNT, 1);
+      const sheetMaterial = new THREE.MeshBasicMaterial({ map: texture, alphaTest: 0.5, alphaToCoverage: true, side: THREE.DoubleSide });
+      const tagMaterial = new THREE.SpriteMaterial({ map: canvasTexture(drawNumberTag(runner.lane, runner.mine, color)), depthTest: false });
+      disposables.push(sheetMaterial, tagMaterial);
+      const sheet = new THREE.Mesh(paper, sheetMaterial);
+      sheet.rotation.order = "YXZ";
+      const tag = new THREE.Sprite(tagMaterial);
+      const shadow = new THREE.Mesh(shadowShape, shadowMaterial);
+      shadow.rotation.x = -Math.PI / 2;
+      scene.add(sheet, tag, shadow);
+      const creature = runnerCreature(runner.body, runner.lane, runner.line ?? null);
+      const made = { sheet, tag, shadow, texture, seed: runner.lane, height: runnerHeight(creature, runner.body), eye: runnerEye(creature, runner.body) };
+      sprites.set(runner.lane, made);
+      return made;
     }
+
     const resize = () => {
       const width = container.clientWidth;
-      const height = Math.max(300, Math.min(540, width * 0.65));
-      renderer.setSize(width, height); camera.aspect = width / height; camera.updateProjectionMatrix();
+      const height = Math.max(260, Math.min(480, width * 0.72));
+      renderer.setSize(width, height);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
     };
-    const observer = new ResizeObserver(resize); observer.observe(container); resize();
+    const observer = new ResizeObserver(resize);
+    observer.observe(container);
+    resize();
+
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
-    const aim = new THREE.Vector3();
-    let previous = performance.now();
+    let raceStart: number | null = null;
+    let cutId = "";
+    let subjectLane = 1;
     let frame = 0;
+    let previous = performance.now();
+    const tooSlow = qualityGuard();
     function render(now: number) {
-      const dt = Math.min((now - previous) / 1000, 0.1); previous = now;
-      const rows = [...live.current].sort((a, b) => a.id.localeCompare(b.id));
-      rows.forEach((runner, lane) => {
-        const sprite = sprites.get(runner.id) ?? makeRunner(runner.id, lane);
-        const point = trackPoint(runner.progress / 4, TRACK.radius + (lane + 0.5) * TRACK.laneWidth);
-        sprite.position.set(point.x, 1.7, point.z);
-      });
-      const focus = sprites.get(selected.current) ?? sprites.get(live.current[0]?.id);
-      const destination = new THREE.Vector3(120, 125, 150);
-      const look = new THREE.Vector3();
-      if (!reduced.matches && focus && cameraMode.current !== "overview") {
-        look.copy(focus.position);
-        if (cameraMode.current === "follow") destination.copy(look).add(new THREE.Vector3(18, 13, 23));
-        else destination.set(look.x * 0.35, 65, 95);
+      // 기기가 버거워하면 화면 배율을 낮춘다. setPixelRatio가 크기도 다시 맞춘다
+      if (tooSlow(now - previous) && renderer.getPixelRatio() > SAFE_RATIO) renderer.setPixelRatio(SAFE_RATIO);
+      previous = now;
+      const rows = live.current;
+      let leader: StadiumRunner | undefined, leaderProgress = -1, mine: StadiumRunner | undefined;
+      if (!reduced.matches) {
+        crowds.forEach(({ group }, i) => {
+          group.position.y = Math.max(0, Math.sin(now / 240 + i * 1.7)) * 0.32;
+        });
       }
-      const blend = 1 - Math.exp(-dt * 3);
-      camera.position.lerp(destination, blend); aim.lerp(look, blend); camera.lookAt(aim);
+      for (const runner of rows) {
+        const made = sprites.get(runner.lane) ?? makeRunner(runner);
+        const sheet = made.sheet;
+        const point = lanePoint(runner.lane, runner.progress);
+        const ahead = lanePoint(runner.lane, runner.progress + 0.02);
+        const moving = runner.progress > 0 && runner.progress < SECTIONS;
+        const animate = moving && !reduced.matches;
+        const size = runner.mine ? 8 : 6.4;
+        const pose = animate
+          ? bodyMotion(runner.body, now, runner.lane, runner.progress * 100)
+          // 완주하면 제자리에서 기뻐 뛴다
+          : { rise: runner.progress >= SECTIONS && !reduced.matches ? Math.abs(Math.sin(now / 160 + runner.lane)) * 1.4 : 0, tilt: 0, squashX: 1, squashY: 1 };
+        // 그림 칸 아래의 빈 곳만큼 내려 발이 땅에 닿게 한다
+        sheet.position.set(point.x, size / 2 + pose.rise - size * FOOT_GAP, point.z);
+        sheet.scale.set(size * pose.squashX, size * pose.squashY, 1);
+        // 종이를 달리는 방향으로 세운다. 옆에서는 넓고 앞뒤에서는 얇게 보이며, 바람에 살짝 펄럭인다
+        const heading = -Math.atan2(ahead.z - point.z, ahead.x - point.x);
+        sheet.rotation.y = heading + (animate ? Math.sin(now / 130 + made.seed) * 0.14 : 0);
+        sheet.rotation.z = pose.tilt;
+        made.texture.offset.x = (animate ? Math.floor(now / 70 + runner.lane) % FRAME_COUNT : 0) / FRAME_COUNT;
+        made.tag.position.set(point.x, size * made.height + pose.rise + 1.4, point.z);
+        made.tag.scale.setScalar(runner.mine ? 3.4 : 2.7);
+        made.shadow.position.set(point.x, 0.14, point.z);
+        made.shadow.scale.setScalar(size * 0.34);
+        if (runner.progress > leaderProgress) { leaderProgress = runner.progress; leader = runner; }
+        if (runner.mine) mine = runner;
+      }
+      // 경기를 다시 보면 컷 순서도 처음부터 시작한다
+      if (leaderProgress <= 0) raceStart = null;
+      else if (raceStart === null) raceStart = now;
+      const cut = reduced.matches ? OVERVIEW_CUT : mode.current === "mine" ? FOLLOW_CUT : directorCut(raceStart === null ? 0 : now - raceStart, leaderProgress);
+      if (cut.id !== cutId) {
+        // 샷을 시작할 때 대상을 정해 둔다. 샷 도중 선두가 바뀌어도 화면이 튀지 않는다
+        cutId = cut.id;
+        subjectLane = (cut.subject === "mine" ? mine ?? leader : leader)?.lane ?? 1;
+      }
+      const subject = rows.find((runner) => runner.lane === subjectLane);
+      const packProgress = rows.reduce((sum, runner) => sum + runner.progress, 0) / (rows.length || 1);
+      const view = shotFrame(cut, cut.subject === "pack"
+        ? { lane: (TRACK.lanes + 1) / 2, progress: packProgress, size: 6.4, eye: { along: 0, height: 0.4 } }
+        : { lane: subjectLane, progress: subject?.progress ?? 0, size: subject?.mine ? 8 : 6.4, eye: sprites.get(subjectLane)?.eye ?? { along: 0, height: 0.4 } });
+      camera.position.set(...view.position);
+      camera.lookAt(...view.look);
+      if (camera.fov !== view.fov) {
+        camera.fov = view.fov;
+        camera.updateProjectionMatrix();
+      }
       renderer.render(scene, camera);
       frame = requestAnimationFrame(render);
     }
     frame = requestAnimationFrame(render);
+
     return () => {
-      cancelAnimationFrame(frame); observer.disconnect();
-      scene.traverse(object => {
-        if (object instanceof THREE.Mesh || object instanceof THREE.Line || object instanceof THREE.Sprite) {
-          if ("geometry" in object) object.geometry.dispose();
-          const materials = Array.isArray(object.material) ? object.material : [object.material];
-          materials.forEach(material => material.dispose());
-        }
-      });
-      textures.forEach(texture => texture.dispose());
-      renderer.dispose(); renderer.domElement.remove();
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      stand.dispose();
+      crowds.forEach(({ bodies, heads }) => { bodies.dispose(); heads.dispose(); });
+      textures.forEach((texture) => texture.dispose());
+      disposables.forEach((item) => item.dispose());
+      renderer.dispose();
+      renderer.domElement.remove();
     };
   }, []);
-  return <div>
-    <div className="seg" aria-label="경주 카메라">
-      {([["overview", "전체"], ["follow", "선수 추적"], ["broadcast", "중계"]] as const).map(([id, label]) =>
-        <button key={id} type="button" className="seg-btn" aria-pressed={view === id} onClick={() => setView(id)}>{label}</button>)}
-      <select aria-label="추적할 선수" value={target} onChange={event => setTarget(event.target.value)}>
-        <option value="">선두 추적</option>
-        {[...runners].sort((a, b) => a.id.localeCompare(b.id)).map(runner => <option key={runner.id} value={runner.id}>{runner.id}번 선수</option>)}
-      </select>
+
+  return (
+    <div className="derby-stadium">
+      <div ref={host} className="derby-canvas" />
+      {error && <p role="status" className="derby-note">{error}</p>}
     </div>
-    <div ref={host} style={{ width: "100%", minHeight: 300, overflow: "clip", borderRadius: 16 }} />
-    {error && <p role="status">{error}</p>}
-    <p className="hint">아시아드주경기장 참고 모델 · 표준 400m 트랙 3바퀴. 외곽 레인 이동은 경기 진행률에 맞춘 시각 연출이에요.</p>
-  </div>;
+  );
 }

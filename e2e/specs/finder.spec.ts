@@ -12,9 +12,20 @@ test.beforeEach(async ({page})=>{
 
 async function openFinder(page: Page) {
   await page.goto("/");
-  await page.getByRole("link", { name: /내 주변 드로잉 코스 찾기/ }).click();
+  await page.getByRole("link", { name: "오늘의 드로잉 런 시작" }).click();
   await page.waitForURL("**/routes");
   await waitForMap(page);
+}
+
+/** 시트를 설정/결과/상세로 나눠서, 결과가 나온 뒤 조건을 바꾸려면 조건 화면으로 가야 한다 */
+async function backToConditions(page: Page) {
+  await page.getByRole("button", { name: "조건 바꾸기" }).click();
+}
+
+/** 영역·단순화·길 조건은 "조건 더 보기" 안에 있다 */
+async function openMore(page: Page) {
+  const more = page.getByRole("button", { name: /조건 더 보기/ });
+  if ((await more.getAttribute("aria-expanded")) === "false") await more.click();
 }
 
 /** 그리기 칸에 정규화 좌표(0~1) 꼭짓점을 잇는 한 획을 그린다 */
@@ -51,6 +62,8 @@ test("동네 추천: 길 데이터 한 번 받아 코스 목록·선·안내 표
   await expect(page.locator('.cand[aria-pressed="true"] .cand-title')).toHaveText(chosenTitle);
   await expect(page.getByText(/지도 데이터 기준 .*통행 가능 여부/)).toBeVisible();
   expect(await page.locator("path.leaflet-interactive").count()).toBeGreaterThanOrEqual(2);
+  await backToConditions(page);
+  await openMore(page);
   await expect(page.getByRole("radio", { name: "큰길 위주" })).toHaveAttribute("aria-checked", "true");
   // 바탕 지도 전환
   await page.getByRole("button", { name: /기본 지도/ }).click();
@@ -61,6 +74,7 @@ test("같은 영역에서 그림만 바꾸면 길 데이터를 다시 받지 않
   await openFinder(page);
   await page.getByRole("radio", { name: "네모" }).click();
   await searchCourses(page);
+  await backToConditions(page);
   await page.getByRole("radio", { name: /하트/ }).click();
   await searchCourses(page);
   const titles = await page.locator(".cand-title").allInnerTexts();
@@ -72,11 +86,13 @@ test("같은 영역에서 그림만 바꾸면 길 데이터를 다시 받지 않
 test("주변 동네 비교: 원래 영역을 유지하고 넓힌 길 데이터를 재사용한다", async ({ page, apiCalls }) => {
   test.setTimeout(300_000);
   await openFinder(page);
+  await openMore(page);
   await page.getByRole("radio", { name: "지도 가운데 2km 사방" }).click();
   await page.getByRole("radio", { name: "네모" }).click();
   await searchCourses(page);
   await expect(page.locator(".cand").first()).toBeVisible();
   const original = apiCalls.overpass[0];
+  await backToConditions(page);
   await page.getByRole("switch", { name: "주변 동네도 비교" }).check();
   await searchCourses(page);
   await expect(page.locator(".cand").first()).toBeVisible();
@@ -84,6 +100,7 @@ test("주변 동네 비교: 원래 영역을 유지하고 넓힌 길 데이터�
   const expanded = apiCalls.overpass[1];
   expect((expanded.north-expanded.south)/(original.north-original.south)).toBeCloseTo(1.8,2);
   expect((expanded.north+expanded.south)/2).toBeCloseTo((original.north+original.south)/2,5);
+  await backToConditions(page);
   await page.getByRole("radio", { name: /하트/ }).click();
   await searchCourses(page);
   expect(apiCalls.overpass).toHaveLength(2);
@@ -95,6 +112,7 @@ test("고른 코스의 길 정보와 고도", async ({ page, apiCalls }) => {
   await page.getByRole("radio", { name: "네모" }).click();
   await searchCourses(page);
   await page.locator(".cand").first().click();
+  await page.getByRole("button", { name: /코스 자세히/ }).click();
   await expect(page.getByLabel("코스 길 정보")).toBeVisible();
   await expect(page.locator(".road-facts li", { hasText: /오르막\s*\d+m/ })).toBeVisible();
   await expect(page.locator(".elev-chart")).toBeVisible();
@@ -113,8 +131,13 @@ test("글자로 찾기: 'LO' → 획 2개, 획 사이 이동 구간 점선", asy
   await openFinder(page);
   await page.getByRole("radio", { name: /직접 그리기/ }).click();
   await expect(page.getByRole("button", { name: "지금 보이는 지도에서 코스 찾기" })).toBeDisabled();
-  await page.getByRole("tab", { name: "글자" }).click();
-  await page.getByLabel("글자 (최대 4자)").fill("LO");
+  // @로 시작하면 서버로 보내지 않고 바로 글자를 그린다
+  let outlineCalls = 0;
+  await page.route("**/api/recognition/outline", (route) => { outlineCalls++; return route.fulfill({ status: 503, json: {} }); });
+  await page.getByRole("tab", { name: "글자·설명" }).click();
+  await page.getByLabel("어떤 모습으로 달릴까요?").fill("@LO");
+  await expect(page.getByRole("button", { name: "윤곽 만들기" })).toHaveCount(0);
+  expect(outlineCalls).toBe(0);
   await expect(page.getByText(/획 2개 — 획마다 고리 코스/)).toBeVisible();
   await searchCourses(page);
   const meta = await page.locator(".cand-meta").allInnerTexts();
@@ -147,6 +170,7 @@ test("직접 그린 세모로 찾기", async ({ page }) => {
 test("넓은 영역 10km는 5km 칸 4개로 나눠 받는다", async ({ page, apiCalls }) => {
   await openFinder(page);
   await page.getByRole("radio", { name: "네모" }).click();
+  await openMore(page);
   await page.getByRole("radio", { name: "지도 가운데 10km 사방" }).click();
   const ms = await searchCourses(page, 170_000);
   perfBudget("10km 영역 네모", ms, 60_000);
@@ -168,4 +192,23 @@ test("@mobile 360px 코스 찾기·달리기 화면에 가로 스크롤 없음",
     await page.locator(".leaflet-container").waitFor();
     expect(await page.evaluate(() => document.documentElement.scrollWidth), p).toBeLessThanOrEqual(360);
   }
+});
+
+test("체험 완주: 코스를 5초 안에 지나가고 콘텐츠로 이어지며 캐릭터가 된다", async ({ page }) => {
+  await openFinder(page);
+  await searchCourses(page);
+  await page.locator(".cand").first().click();
+  const started = Date.now();
+  await page.getByRole("button", { name: "(체험) 완주하기" }).first().click();
+  await expect(page.getByRole("progressbar", { name: "체험 완주 진행률" })).toBeInViewport();
+  await expect(page.getByRole("heading", { name: "체험 완주!" })).toBeInViewport({ timeout: 8000 });
+  expect(Date.now() - started).toBeLessThan(6000);
+  await expect(page.getByRole("link", { name: "콘텐츠 즐기기" })).toBeInViewport();
+  await expect(page.locator(".trial-facts dd").nth(1)).toHaveText(/^(5:\d\d|6:[0-3]\d)\/km$/);
+  const runLog = await page.evaluate(() => localStorage.getItem("runcanvas.runLog"));
+  expect(runLog).toBeNull();
+  await page.getByRole("link", { name: "콘텐츠 즐기기" }).click();
+  await page.waitForURL("**/hub");
+  await page.goto("/derby");
+  await expect(page.locator(".derby-card").first()).toContainText("체험 완주 기록");
 });

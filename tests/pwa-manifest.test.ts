@@ -6,6 +6,16 @@ import manifest from "@/app/manifest";
 
 const publicFile = (src: string) => path.join("public", src);
 
+describe("PWA 시작 주소·색", () => {
+  it("앱 홈에서 시작하고 색이 앱 토큰과 같다", () => {
+    const m = manifest();
+    expect(m.start_url).toBe("/");
+    expect(m.id).toBe("/");
+    expect(m.theme_color).toBe("#F5F6F8");
+    expect(m.background_color).toBe("#F5F6F8");
+  });
+});
+
 describe("PWA 아이콘", () => {
   const icons = manifest().icons ?? [];
 

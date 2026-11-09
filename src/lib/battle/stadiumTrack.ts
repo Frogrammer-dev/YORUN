@@ -1,6 +1,5 @@
-/** Standard 400m layout, not an as-built survey of Busan Asiad.
- * Busan confirms 8 lanes: https://www.busan.go.kr/stadium/sfcimplexmain
- * World Athletics facilities manual: radius 36.5m, straights 84.39m, lane width 1.22m.
+/** 표준 400m 트랙 치수. 특정 경기장을 측량한 값이 아니다.
+ * World Athletics 시설 매뉴얼 기준: 곡선 반지름 36.5m, 직선 84.39m, 레인 폭 1.22m.
  */
 export const TRACK = { radius: 36.5, straight: 84.39, laneWidth: 1.22, lanes: 8 };
 
@@ -20,4 +19,13 @@ export function trackPoint(fraction: number, radius = TRACK.radius) {
   distance -= straight;
   const angle = -Math.PI / 2 - distance / radius;
   return { x: -straight / 2 + radius * Math.cos(angle), z: radius * Math.sin(angle) };
+}
+
+/** 트랙 위 지점에서 경기장 바깥쪽을 향하는 단위 벡터 */
+export function outwardAt(x: number, z: number) {
+  const half = TRACK.straight / 2;
+  if (Math.abs(x) <= half) return { x: 0, z: Math.sign(z) || 1 };
+  const dx = x - Math.sign(x) * half;
+  const length = Math.hypot(dx, z) || 1;
+  return { x: dx / length, z: z / length };
 }

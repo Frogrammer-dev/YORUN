@@ -1,0 +1,6 @@
+/* Hallmark 바닥 규칙 중 프로젝트에 없던 것만 둔다. 나머지는 globals.css가 맡는다. */
+html, body { overflow-x: clip; }
+h1, h2, h3 { overflow-wrap: break-word; min-width: 0; text-wrap: balance; }
+@media (prefers-reduced-motion: reduce) {
+  *:not(.keep-motion), *:not(.keep-motion)::before, *:not(.keep-motion)::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}

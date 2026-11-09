@@ -1,0 +1,257 @@
+"use client";
+// 로그인·회원가입 입력. Google과 이메일 방식을 함께 고른다. 비밀번호는 Supabase Auth만 다루고 앱은 저장하지 않는다.
+
+import { useState } from "react";
+import type { SupabaseClient } from "@supabase/supabase-js";
+import { ConsentFields, UNDER14_NOTICE } from "./ConsentFields";
+import { MIN_PASSWORD_LENGTH, authErrorMessage } from "@/lib/client/authMessages";
+import { GUEST_NAME_MAX, cleanGuestName } from "@/lib/guestName";
+import { CONSENT_REQUIRED_MESSAGE, FEATURES, INITIAL_AGE, consentRecord, type AgeGroup } from "@/lib/legal/policy";
+
+type Mode = "signin" | "signup" | "reset" | "link";
+
+const SUBMIT: Record<Mode, string> = { signin: "로그인", signup: "회원가입", reset: "재설정 메일 받기", link: "로그인 링크 받기" };
+const SENT: Record<Exclude<Mode, "signin">, string> = {
+  signup: "인증 메일을 보냈어요. 메일의 링크를 누르면 가입이 끝나요. 이미 가입한 이메일이라면 로그인해 주세요.",
+  reset: "가입한 이메일이라면 재설정 메일이 도착해요. 메일의 링크를 눌러 새 비밀번호를 정해 주세요.",
+  link: "메일로 로그인 링크를 보냈어요. 같은 브라우저에서 링크를 열어 주세요.",
+};
+
+/** 공식 지침의 표준 색 G 로고. 크기와 색을 바꾸지 않는다 */
+function GoogleLogo() {
+  return (
+    <svg className="google-logo" width="20" height="20" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+      <path fill="var(--google-red)" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+      <path fill="var(--google-blue)" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+      <path fill="var(--google-yellow)" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+      <path fill="var(--google-green)" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+    </svg>
+  );
+}
+
+export function AuthForm({ supabase, prepareNext, onNavigate, keepNotice, draftLost }: {
+  supabase: SupabaseClient;
+  /** 로그인 뒤 돌아갈 상대 경로 */
+  prepareNext: () => Promise<string>;
+  /** 세션을 쿠키에 쓴 뒤 화면 전체를 새로 연다 */
+  onNavigate: (path: string) => void;
+  /** 임시 작품을 이어받을 때의 안내 */
+  keepNotice?: string;
+  /** 메일 전송 뒤 임시 작품을 보관하지 못했다는 안내 */
+  draftLost?: boolean;
+}) {
+  const [mode, setMode] = useState<Mode>("signin");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [sent, setSent] = useState<Exclude<Mode, "signin"> | null>(null);
+  const [age, setAge] = useState<AgeGroup | null>(INITIAL_AGE);
+  const [agreed, setAgreed] = useState(false);
+  const [guestOpen, setGuestOpen] = useState(false);
+  const [guestName, setGuestName] = useState("");
+
+  const needsPassword = mode === "signin" || mode === "signup";
+  const tooShort = mode === "signup" && password.length > 0 && password.length < MIN_PASSWORD_LENGTH;
+
+  function choose(next: Mode) {
+    setMode(next);
+    setError(null);
+    setSent(null);
+    if (next !== "signin" && next !== "signup") setPassword("");
+  }
+
+  const callback = (next: string) => `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`;
+
+  async function google() {
+    setBusy(true);
+    setError(null);
+    const { error: failure } = await supabase.auth.signInWithOAuth({ provider: "google", options: { redirectTo: callback(await prepareNext()) } });
+    // 성공하면 구글 화면으로 이동했다가 /auth/callback으로 돌아온다
+    if (failure) {
+      setError("Google 로그인을 시작하지 못했어요. 이메일로 계속하거나 다시 시도해 주세요.");
+      setBusy(false);
+    }
+  }
+
+  async function joinAsGuest(event: React.FormEvent) {
+    event.preventDefault();
+    if (busy) return;
+    const name = cleanGuestName(guestName);
+    if (!name) {
+      setError(`다른 이름을 1~${GUEST_NAME_MAX}자로 입력해 주세요.`);
+      return;
+    }
+    setBusy(true);
+    setError(null);
+    try {
+      const next = await prepareNext();
+      const { error: failure } = await supabase.auth.signInAnonymously({ options: { data: { guest_name: name } } });
+      if (failure) throw failure;
+      onNavigate(next);
+    } catch (failure) {
+      setError(authErrorMessage(failure as { code?: string }));
+      setBusy(false);
+    }
+  }
+
+  async function submit(event: React.FormEvent) {
+    event.preventDefault();
+    if (busy) return;
+    if (mode === "signup" && age === "under14") {
+      setError(UNDER14_NOTICE);
+      return;
+    }
+    if (mode === "signup" && (age !== "14+" || !agreed)) {
+      setError(CONSENT_REQUIRED_MESSAGE);
+      return;
+    }
+    if (mode === "signup" && password.length < MIN_PASSWORD_LENGTH) {
+      setError(`비밀번호는 ${MIN_PASSWORD_LENGTH}자 이상이어야 해요.`);
+      return;
+    }
+    setBusy(true);
+    setError(null);
+    const address = email.trim();
+    try {
+      const next = await prepareNext();
+      if (mode === "signin") {
+        const { error: failure } = await supabase.auth.signInWithPassword({ email: address, password });
+        if (failure) throw failure;
+        onNavigate(next);
+        return;
+      }
+      if (mode === "signup") {
+        const { data, error: failure } = await supabase.auth.signUp({ email: address, password, options: { emailRedirectTo: callback(next), data: { consent: consentRecord("14+") } } });
+        if (failure) throw failure;
+        // 메일 인증을 끈 프로젝트에서는 가입과 동시에 로그인된다
+        if (data.session) {
+          onNavigate(next);
+          return;
+        }
+      } else if (mode === "reset") {
+        const { error: failure } = await supabase.auth.resetPasswordForEmail(address, { redirectTo: callback("/login/reset") });
+        if (failure) throw failure;
+      } else {
+        const { error: failure } = await supabase.auth.signInWithOtp({ email: address, options: { emailRedirectTo: callback(next) } });
+        if (failure) throw failure;
+      }
+      setPassword("");
+      setSent(mode);
+    } catch (failure) {
+      setError(authErrorMessage(failure as { code?: string }));
+    }
+    setBusy(false);
+  }
+
+  if (sent) {
+    return (
+      <div className="auth-sent" role="status">
+        <p>{SENT[sent]}</p>
+        {draftLost && <p className="auth-error">이 기기에 임시 작품을 보관하지 못했어요. 로그인 후 파일을 다시 선택해야 할 수 있어요.</p>}
+        <button type="button" className="btn btn-secondary wide" onClick={() => choose("signin")}>로그인 화면으로</button>
+      </div>
+    );
+  }
+
+  const googleButton = (
+    <button type="button" className="google-btn" onClick={() => void google()} disabled={busy}>
+      <GoogleLogo />
+      <span>Google로 계속하기</span>
+    </button>
+  );
+
+  if (!FEATURES.emailAuth) {
+    return (
+      <div className="auth-form">
+        {googleButton}
+        <p className="auth-divider"><span>또는</span></p>
+        {guestOpen ? (
+          <form onSubmit={(e) => void joinAsGuest(e)}>
+            <label className="field">
+              <span>이름</span>
+              <input name="guest-name" required autoFocus maxLength={GUEST_NAME_MAX * 2} value={guestName} onChange={(e) => { setGuestName(e.target.value); setError(null); }} autoComplete="off" aria-invalid={error ? true : undefined} aria-describedby={error ? "auth-error" : undefined} />
+            </label>
+            <p className="hint">이름은 대결과 더비에서 다른 참가자에게 보여요. 별명을 써도 돼요. 이름과 기록은 6시간 뒤 자동으로 지워져요.</p>
+            {error && <p id="auth-error" className="auth-error" role="alert">{error}</p>}
+            <button type="submit" className="btn btn-primary wide" disabled={busy} aria-busy={busy}>
+              {busy ? "처리하는 중" : "참여하기"}
+            </button>
+          </form>
+        ) : (
+          <>
+            {keepNotice && <p className="hint">{keepNotice}</p>}
+            {error && <p id="auth-error" className="auth-error" role="alert">{error}</p>}
+            <button type="button" className="btn btn-secondary wide" disabled={busy} onClick={() => { setGuestOpen(true); setError(null); }}>게스트로 참여하기</button>
+          </>
+        )}
+      </div>
+    );
+  }
+
+  return (
+    <div className="auth-form">
+      {googleButton}
+      <p className="auth-divider"><span>또는 이메일로</span></p>
+
+      {needsPassword ? (
+        <div className="seg" role="radiogroup" aria-label="이메일로 로그인 또는 회원가입">
+          {(["signin", "signup"] as const).map((m) => (
+            <button key={m} type="button" role="radio" aria-checked={mode === m} className={`seg-btn ${mode === m ? "seg-on" : ""}`} onClick={() => choose(m)}>
+              {SUBMIT[m]}
+            </button>
+          ))}
+        </div>
+      ) : (
+        <h3 className="auth-mode-title">{mode === "reset" ? "비밀번호 재설정" : "메일 링크로 로그인"}</h3>
+      )}
+
+      <form onSubmit={(e) => void submit(e)} noValidate={false}>
+        <label className="field">
+          <span>이메일</span>
+          <input type="email" name="email" required value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" inputMode="email" aria-invalid={error ? true : undefined} aria-describedby={error ? "auth-error" : undefined} />
+        </label>
+        {needsPassword && (
+          <div className="field">
+            <label htmlFor="auth-password">비밀번호{mode === "signup" ? ` (${MIN_PASSWORD_LENGTH}자 이상)` : ""}</label>
+            <div className="auth-password">
+              <input
+                id="auth-password"
+                type={showPassword ? "text" : "password"}
+                name="password"
+                required
+                minLength={mode === "signup" ? MIN_PASSWORD_LENGTH : undefined}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete={mode === "signup" ? "new-password" : "current-password"}
+                aria-invalid={error || tooShort ? true : undefined}
+                aria-describedby={error ? "auth-error" : undefined}
+              />
+              <button type="button" className="btn btn-ghost btn-sm" aria-pressed={showPassword} aria-label="입력한 글자 표시" onClick={() => setShowPassword((v) => !v)}>
+                {showPassword ? "숨기기" : "보기"}
+              </button>
+            </div>
+          </div>
+        )}
+        {mode === "signup" && <ConsentFields age={age} onAge={(value) => { setAge(value); setError(null); }} agreed={agreed} onAgreed={setAgreed} />}
+        {keepNotice && <p className="hint">{keepNotice}</p>}
+        {error && <p id="auth-error" className="auth-error" role="alert">{error}</p>}
+        <button type="submit" className="btn btn-primary wide" disabled={busy} aria-busy={busy}>
+          {busy ? "처리하는 중" : SUBMIT[mode]}
+        </button>
+      </form>
+
+      <div className="auth-links">
+        {mode === "signin" ? (
+          <>
+            <button type="button" className="btn btn-link" onClick={() => choose("reset")}>비밀번호를 잊었어요</button>
+            <button type="button" className="btn btn-link" onClick={() => choose("link")}>메일 링크로 로그인</button>
+          </>
+        ) : !needsPassword ? (
+          <button type="button" className="btn btn-link" onClick={() => choose("signin")}>비밀번호로 로그인</button>
+        ) : null}
+      </div>
+    </div>
+  );
+}

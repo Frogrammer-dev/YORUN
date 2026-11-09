@@ -40,18 +40,7 @@ export function ItemPanel({ room, item, artwork, onClose }: { room: RoomApi; ite
       </header>
 
       <fieldset>
-        <legend>위치·크기·회전</legend>
-        <div className="pad" role="group" aria-label="위치 이동">
-          <span />
-          <button type="button" className="btn" aria-label="위로 이동" onClick={() => u({ y: item.y - STEP })}>↑</button>
-          <span />
-          <button type="button" className="btn" aria-label="왼쪽으로 이동" onClick={() => u({ x: item.x - STEP })}>←</button>
-          <span />
-          <button type="button" className="btn" aria-label="오른쪽으로 이동" onClick={() => u({ x: item.x + STEP })}>→</button>
-          <span />
-          <button type="button" className="btn" aria-label="아래로 이동" onClick={() => u({ y: item.y + STEP })}>↓</button>
-          <span />
-        </div>
+        <legend>크기·회전</legend>
         <div className="row">
           <button type="button" className="btn" aria-label="작게" onClick={() => u({ size: item.size - STEP })} disabled={item.size <= ROOM.sizeMin}>
             － 작게
@@ -69,12 +58,6 @@ export function ItemPanel({ room, item, artwork, onClose }: { room: RoomApi; ite
           <button type="button" className="btn" onClick={() => u({ rotationDeg: item.rotationDeg - 15 })}>↺ 15°</button>
           <button type="button" className="btn" onClick={() => u({ rotationDeg: 0 })}>0°</button>
           <button type="button" className="btn" onClick={() => u({ rotationDeg: item.rotationDeg + 15 })}>↻ 15°</button>
-        </div>
-        <div className="row btn-grid btn-grid-4">
-          <button type="button" className="btn" onClick={() => room.reorder(item.id, "back")}>맨 뒤로</button>
-          <button type="button" className="btn" onClick={() => room.reorder(item.id, "backward")}>뒤로</button>
-          <button type="button" className="btn" onClick={() => room.reorder(item.id, "forward")}>앞으로</button>
-          <button type="button" className="btn" onClick={() => room.reorder(item.id, "front")}>맨 앞으로</button>
         </div>
       </fieldset>
 
@@ -127,6 +110,32 @@ export function ItemPanel({ room, item, artwork, onClose }: { room: RoomApi; ite
           ))}
         </div>
       </fieldset>
+
+      <fieldset>
+        <legend>앞뒤 순서</legend>
+        <div className="row btn-grid btn-grid-4">
+          <button type="button" className="btn" onClick={() => room.reorder(item.id, "back")}>맨 뒤로</button>
+          <button type="button" className="btn" onClick={() => room.reorder(item.id, "backward")}>뒤로</button>
+          <button type="button" className="btn" onClick={() => room.reorder(item.id, "forward")}>앞으로</button>
+          <button type="button" className="btn" onClick={() => room.reorder(item.id, "front")}>맨 앞으로</button>
+        </div>
+      </fieldset>
+
+      {/* 작품은 직접 끌어 옮길 수 있다. 끌기가 어려운 사용자를 위해 방향 버튼은 접어서 유지한다 */}
+      <details className="panel-more">
+        <summary>정밀 이동</summary>
+        <div className="pad" role="group" aria-label="위치 이동">
+          <span />
+          <button type="button" className="btn" aria-label="위로 이동" onClick={() => u({ y: item.y - STEP })}>↑</button>
+          <span />
+          <button type="button" className="btn" aria-label="왼쪽으로 이동" onClick={() => u({ x: item.x - STEP })}>←</button>
+          <span />
+          <button type="button" className="btn" aria-label="오른쪽으로 이동" onClick={() => u({ x: item.x + STEP })}>→</button>
+          <span />
+          <button type="button" className="btn" aria-label="아래로 이동" onClick={() => u({ y: item.y + STEP })}>↓</button>
+          <span />
+        </div>
+      </details>
 
       <fieldset>
         <legend>작품 정보</legend>

@@ -42,7 +42,7 @@ it("toggles native/reference/imagined layers separately and keeps original road 
 
 it("describes interpretation as an experiment without turning zero geometric score into recognition percent", () => {
   const c = interpreted();
-  const { container } = render(<><CourseList candidates={[c]} selected={c.id} discover onChoose={() => {}} onHover={() => {}} /><SelectedCourse c={c} elev="error" onRun={() => {}} onExport={() => {}} /></>);
+  const { container } = render(<><CourseList candidates={[c]} selected={c.id} discover onChoose={() => {}} onHover={() => {}} /><SelectedCourse c={c} elev="error" onRun={() => {}} onExport={() => {}} onTrial={() => {}} /></>);
   expect(screen.getByText("AI 해석 · 참고 그림")).toBeTruthy();
   expect(screen.getByText("옆얼굴처럼 보이는 코스")).toBeTruthy();
   expect(container.textContent).not.toMatch(/유사도 0|인식 0%|평균 12m/);

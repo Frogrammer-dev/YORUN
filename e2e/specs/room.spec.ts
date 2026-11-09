@@ -7,14 +7,16 @@ import { expect, test } from "../fixtures";
 const S = "samples";
 
 async function importGpx(page: Page, file: string, count: number) {
+  await page.goto("/contents");
+  await page.waitForLoadState("networkidle");
   await page.locator('input[type="file"]').setInputFiles(join(S, file));
   await page.getByRole("button", { name: "작품 만들기" }).click();
   await expect(page.locator(".scene-item")).toHaveCount(count);
 }
 
-/** 시작 화면에서 첫 작품을 만들어 작품방으로 */
+/** 기록 가져오기 화면에서 첫 작품을 만들어 작품방으로 */
 async function startWithHeart(page: Page) {
-  await page.goto("/");
+  await page.goto("/contents");
   await page.waitForLoadState("networkidle");
   await page.locator('input[type="file"]').setInputFiles(join(S, "01-heart-single-segment.gpx"));
   await page.getByRole("button", { name: "작품 만들기" }).click();
@@ -29,6 +31,8 @@ test("가입 없이 첫 작품이 임시 작품방에 자동 전시된다", asyn
 
 test("끊긴 구간은 잇지 않고 구간별 선·단일점으로 전시", async ({ page }) => {
   await startWithHeart(page);
+  await page.goto("/contents");
+  await page.waitForLoadState("networkidle");
   await page.locator('input[type="file"]').setInputFiles(join(S, "02-star-two-segments-gap.gpx"));
   await expect(page.getByText("3개 구간이 있어요. 사이를 연결하지 않고 전시합니다.")).toBeVisible();
   await page.getByRole("button", { name: "작품 만들기" }).click();
@@ -46,9 +50,10 @@ test("버튼·키보드·드래그로 편집하고 기준선과 비교", async (
   await page.keyboard.press("Enter");
   await expect(page.getByRole("region", { name: "선택한 작품 편집" })).toBeVisible();
   const before = await first.getAttribute("transform");
+  await page.getByText("정밀 이동").click();
   await page.getByRole("button", { name: "오른쪽으로 이동" }).click();
   await expect.poll(() => first.getAttribute("transform")).not.toBe(before);
-  await page.getByRole("radio", { name: /네온/ }).click();
+  await page.getByRole("radio", { name: /나이트/ }).click();
   await page.getByRole("button", { name: "작게" }).click();
   await first.focus();
   await page.keyboard.press("ArrowDown");

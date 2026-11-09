@@ -3,6 +3,8 @@ import sharp from "sharp";
 import { groupFromLoops } from "@/lib/route/shapes";
 import { assertWriteRequest, clientKey, handle, HttpError, limit, ok } from "@/lib/server/http";
 import { ROAD_REFERENCE_PROVIDER_MODEL } from "@/lib/art/roadReferenceProvider";
+import { SILHOUETTE_IMAGE_MODEL, silhouettePrompt, traceSilhouette } from "@/lib/art/silhouette";
+import type { ShapeGroup } from "@/lib/route/shapes";
 
 const coordinate = z.number().finite().min(0).max(100);
 const outline = z.object({ points: z.array(z.object({ x: coordinate, y: coordinate })).min(3).max(64) });
@@ -101,11 +103,29 @@ async function reviewSubject(prompt: string, key: string, signal: AbortSignal): 
   return review.subject.trim();
 }
 
+/** 이미지 모델의 실루엣을 윤곽으로 바꾼다. 실패하면 null을 돌려 좌표 방식으로 대신한다 */
+async function outlineFromImage(subject: string, key: string, signal: AbortSignal): Promise<ShapeGroup | null> {
+  try {
+    const response = await fetch("https://api.openai.com/v1/images/generations", {
+      method: "POST", headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" }, signal,
+      body: JSON.stringify({ model: process.env.OUTLINE_IMAGE_MODEL || SILHOUETTE_IMAGE_MODEL, prompt: silhouettePrompt(subject), size: "1024x1024", quality: "low", n: 1 }),
+    });
+    const body = await response.json().catch(() => null);
+    if (body?.error?.code === "moderation_blocked") throw inappropriate();
+    const image = z.object({ data: z.array(z.object({ b64_json: z.string() })).min(1) }).safeParse(body);
+    if (!response.ok || !image.success) return null;
+    return await traceSilhouette(Buffer.from(image.data.data[0].b64_json, "base64"));
+  } catch (error) {
+    if (error instanceof HttpError) throw error;
+    return null;
+  }
+}
+
 let active = 0;
 export function POST(req: Request) {
   return handle("drawing-outline", async () => {
     assertWriteRequest(req);
-    limit("drawing-outline:" + clientKey(req), 10);
+    limit("drawing-outline:" + clientKey(req), 20); // 부스 참가자는 같은 와이파이의 IP를 함께 쓴다
     const prompt = await readPrompt(req);
     checkLocalPolicy(prompt);
     const key = process.env.OPENAI_API_KEY?.trim();
@@ -118,6 +138,18 @@ export function POST(req: Request) {
       const signal = AbortSignal.any([req.signal, AbortSignal.timeout(45000)]);
       await checkSafety(prompt, key, signal);
       const subject = await reviewSubject(prompt, key, signal);
+      const group = await outlineFromImage(subject, key, signal) ?? await outlineFromPoints(subject, key, signal);
+      if (!group) throw new HttpError(422, "invalid_outline", "뚜렷한 테두리를 만들기 어려워요. 옆모습이나 특징을 조금 더 묘사해 주세요.");
+      const vertices = group.parts[0].shape.points.map(([x,y]) => `${128 + 216*x},${128 - 216*y}`).join(" ");
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256"><rect width="256" height="256" fill="white"/><polygon points="${vertices}" fill="none" stroke="black" stroke-width="5"/></svg>`;
+      const png = await sharp(Buffer.from(svg)).png().toBuffer();
+      await checkSafety([{ type: "image_url", image_url: { url: "data:image/png;base64," + png.toString("base64") } }], key, signal);
+      return ok({ group });
+    } finally { active--; }
+  });
+}
+
+async function outlineFromPoints(subject: string, key: string, signal: AbortSignal): Promise<ShapeGroup | null> {
       const response = await fetch("https://api.openai.com/v1/responses", {
         method: "POST", headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
         signal,
@@ -134,13 +166,5 @@ export function POST(req: Request) {
       let parsed: unknown;
       try { parsed = raw ? JSON.parse(raw) : null; } catch { parsed = null; }
       const data = outline.safeParse(parsed);
-      const group = data.success && groupFromLoops([data.data.points.map(({ x, y }) => [x, y])], { name: "설명으로 만든 그림" });
-      if (!group) throw new HttpError(422, "invalid_outline", "뚜렷한 테두리를 만들기 어려워요. 옆모습이나 특징을 조금 더 묘사해 주세요.");
-      const vertices = group.parts[0].shape.points.map(([x,y]) => `${128 + 216*x},${128 - 216*y}`).join(" ");
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256"><rect width="256" height="256" fill="white"/><polygon points="${vertices}" fill="none" stroke="black" stroke-width="5"/></svg>`;
-      const png = await sharp(Buffer.from(svg)).png().toBuffer();
-      await checkSafety([{ type: "image_url", image_url: { url: "data:image/png;base64," + png.toString("base64") } }], key, signal);
-      return ok({ group });
-    } finally { active--; }
-  });
+      return data.success ? groupFromLoops([data.data.points.map(({ x, y }) => [x, y])], { name: "설명으로 만든 그림", maxVertices: 48 }) : null;
 }

@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "name": "요런 GPS 기록기",
+    "slug": "yorun-recorder",
+    "version": "1.0.0",
+    "ios": { "bundleIdentifier": "app.yorun.recorder", "buildNumber": "1", "infoPlist": { "UIBackgroundModes": ["audio","location"] } },
+    "android": { "package": "app.yorun.recorder", "versionCode": 1,
+      "permissions": ["android.permission.POST_NOTIFICATIONS"],
+      "blockedPermissions": ["android.permission.SYSTEM_ALERT_WINDOW","android.permission.READ_EXTERNAL_STORAGE","android.permission.WRITE_EXTERNAL_STORAGE"] },
+    "plugins": [["expo-location", {
+      "locationWhenInUsePermission": "달리기 경로를 기록하려면 위치 접근을 허용해 주세요.",
+      "locationAlwaysAndWhenInUsePermission": "화면을 잠근 동안에도 진행 중인 달리기를 기록합니다.",
+      "isIosBackgroundLocationEnabled": true,
+      "isAndroidBackgroundLocationEnabled": true,
+      "isAndroidForegroundServiceEnabled": true
+    }], "expo-sqlite", ["expo-audio", {"microphonePermission":false,"recordAudioAndroid":false}]]
+  }
+}

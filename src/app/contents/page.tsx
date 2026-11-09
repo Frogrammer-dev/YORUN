@@ -1,3 +1,3 @@
-import { AppHub } from "@/components/AppHub";
-export const metadata = { title: "콘텐츠 — 요런" };
-export default function ContentsPage() { return <AppHub section="contents" />; }
+import { ImportScreen } from "@/components/AppHub";
+export const metadata = { title: "기록 가져오기 — 요런" };
+export default function ContentsPage() { return <ImportScreen />; }

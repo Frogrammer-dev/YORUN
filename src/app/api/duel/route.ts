@@ -2,7 +2,7 @@ import {verifyRun} from "@/lib/server/verifyRun";
 import {randomUUID} from "node:crypto";
 import {z} from "zod";
 import {handle,ok,requireUser,HttpError,limit,readJson,assertWriteRequest,mapDbError} from "@/lib/server/http";
-import {battleDatabase,playerName} from "@/lib/server/battle";
+import {battleDatabase,playerNames} from "@/lib/server/battle";
 import {derbyTrace,assessTrace} from "@/lib/battle/derbyTrace";
 import {simulateDuel} from "@/lib/battle/duel";
 
@@ -18,8 +18,10 @@ export function GET(){return handle("GET duel",async()=>{
     db.from("duel_matches").select("id,challenger,defender,result,played").or(`challenger.eq.${user.id},defender.eq.${user.id}`).order("played",{ascending:false}).limit(10)
   ]);
   if(me.error||others.error||history.error) throw mapDbError(me.error||others.error||history.error);
-  return ok({name:playerName(user.id),plan:me.data?.plan??null,players:others.data!.map(p=>({id:p.player_id,name:playerName(p.owner_id)})),
-    history:history.data!.map(m=>({id:m.id,attacking:m.challenger===user.id,opponent:playerName(m.challenger===user.id?m.defender:m.challenger),winner:m.result.winner,turns:m.result.turns.length}))});
+  const opponentOf=(m:{challenger:string|null;defender:string|null})=>m.challenger===user.id?m.defender:m.challenger;
+  const nameOf=await playerNames(db,[user.id,...others.data!.map(p=>p.owner_id),...history.data!.map(opponentOf)]);
+  return ok({name:nameOf(user.id),plan:me.data?.plan??null,players:others.data!.map(p=>({id:p.player_id,name:nameOf(p.owner_id)})),
+    history:history.data!.map(m=>({id:m.id,attacking:m.challenger===user.id,opponent:nameOf(opponentOf(m)),winner:m.result.winner,turns:m.result.turns.length}))});
 });}
 export function POST(req:Request){return handle("POST duel",async()=>{
   assertWriteRequest(req);

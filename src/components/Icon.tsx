@@ -2,6 +2,13 @@
 import type { SVGProps } from "react";
 
 const PATHS = {
+  home: (
+    <>
+      <path d="M4 11.5 12 4.5l8 7" />
+      <path d="M6.5 10v9.5h11V10" />
+      <path d="M10 19.5V14h4v5.5" />
+    </>
+  ),
   play: <path d="M7 4.5v15l12.5-7.5z" fill="currentColor" stroke="none" />,
   pause: (
     <>
@@ -94,6 +101,34 @@ const PATHS = {
     </>
   ),
   upload: <path d="M12 16V5m-5 5 5-5 5 5M4.5 19.5h15" />,
+  grid: (
+    <>
+      <rect x="4" y="4" width="7" height="7" rx="1.5" />
+      <rect x="13" y="4" width="7" height="7" rx="1.5" />
+      <rect x="4" y="13" width="7" height="7" rx="1.5" />
+      <rect x="13" y="13" width="7" height="7" rx="1.5" />
+    </>
+  ),
+  person: (
+    <>
+      <circle cx="12" cy="8" r="3.5" />
+      <path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6" />
+    </>
+  ),
+  duo: (
+    <>
+      <circle cx="8.5" cy="8" r="3" />
+      <circle cx="16.5" cy="8" r="3" />
+      <path d="M3 19.5c0-3 2.5-5 5.5-5s5.5 2 5.5 5M15 14.6c3.2-.4 6 1.6 6 4.9" />
+    </>
+  ),
+  route: (
+    <>
+      <circle cx="6" cy="6" r="2.5" />
+      <circle cx="18" cy="18" r="2.5" />
+      <path d="M8.5 6H16a3 3 0 0 1 0 6H8a3 3 0 0 0 0 6h7.5" />
+    </>
+  ),
   pencil: <path d="M4 20l4.5-1L19 8.5 15.5 5 5 15.5zM13.5 7l3.5 3.5" />,
 } as const;
 
@@ -124,8 +159,7 @@ export function BrandMark({ size = 22 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true" focusable="false">
       <rect width="32" height="32" rx="9" fill="var(--brand)" />
-      <path d="M16 23.7 20.3 22.6 22.8 19.2 23.3 15.2 22.3 12.1 23.3 8 19.6 10.4 16 9.9 12.4 10.4 8.7 8 9.7 12.1 8.7 15.2 9.2 19.2 11.7 22.6z" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinejoin="round" strokeLinecap="round" />
-      <circle cx="16" cy="23.7" r="1.9" fill="#fff" />
+      <path d="M16 11.25 10.25 7.42 5.96 11.58 6.02 14.18 16.03 24.58 26.04 13.92 25.91 11.9 22.01 7.68z" fill="none" stroke="var(--on-brand)" strokeWidth="2.4" strokeLinejoin="round" />
     </svg>
   );
 }

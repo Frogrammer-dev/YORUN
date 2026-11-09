@@ -4,6 +4,7 @@
 
 import { pause, type RunRecord } from "./tracker";
 import { cappedPoints, kstDay, type RewardState } from "./rewards";
+import { upsertRunLog, type RunLogEntry } from "./history";
 import type { ShapeKey } from "@/lib/route/shapes";
 
 export interface PlannedRoute {
@@ -33,6 +34,7 @@ export function plannedRouteBadge(route: PlannedRoute): string {
 const ROUTE_KEY = "runcanvas.route";
 const RUN_KEY = "runcanvas.activeRun";
 const WALLET_KEY = "runcanvas.points";
+const RUN_LOG_KEY = "runcanvas.runLog";
 
 function read<T>(key: string): T | null {
   try {
@@ -69,6 +71,11 @@ export const loadActiveRun = () => read<ActiveRun>(RUN_KEY);
 
 /** 앱이 꺼졌다 다시 열린 뒤: 마지막 저장 시각까지 달린 시간을 쌓고 일시정지 상태로 되돌린다 */
 export const recoverRecord = (a: ActiveRun): RunRecord => pause(a.record, a.savedAt);
+
+// 끝낸 달리기의 거리·시간만 남긴다 (메인 탭 통계용). 위치는 저장하지 않는다.
+export const loadRunLog = (): RunLogEntry[] => read<RunLogEntry[]>(RUN_LOG_KEY) ?? [];
+export const saveRunLog = (entry: RunLogEntry) => write(RUN_LOG_KEY, upsertRunLog(loadRunLog(), entry));
+export const removeRunLog = (id: number) => write(RUN_LOG_KEY, loadRunLog().filter((e) => e.id !== id));
 
 // ───────────────────────── 포인트 (지금은 이 기기에만 보관) ─────────────────────────
 

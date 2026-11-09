@@ -27,7 +27,7 @@ export function CourseList({
         <li key={c.id}>
           <button type="button" className={`cand ${c.id === selected ? "cand-on" : ""}`} aria-pressed={c.id === selected} onClick={() => onChoose(c)} onMouseEnter={() => onHover(c.id)} onMouseLeave={() => onHover(null)}>
             <span className="cand-thumb">
-              <PathThumb lines={[latlngToXY(c.latlngs)]} size={56} pad={5} width={3} stroke="#0EA5E9" />
+              <PathThumb lines={[latlngToXY(c.latlngs)]} size={84} pad={6} width={3} stroke="#0EA5E9" />
             </span>
             <span className="cand-body">
               <span className="cand-top">

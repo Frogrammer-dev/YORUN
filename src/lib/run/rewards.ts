@@ -6,6 +6,12 @@
 import { pointSegDist } from "@/lib/route/graph";
 import { haversineMeters } from "@/lib/gpx/metrics";
 
+/**
+ * 포인트를 쓸 곳(상점 등)이 아직 없어 화면·음성에는 보이지 않게 한다.
+ * 적립 계산과 저장은 그대로 해 두어, 쓸 곳이 생기면 true로 바꾸기만 하면 지금까지 모은 값이 그대로 보인다.
+ */
+export const SHOW_POINTS = false;
+
 export const CHECKPOINT_SPACING_M = 100;
 export const POINTS_PER_CHECKPOINT = 100;
 export const DAILY_POINT_CAP = 10_000;

@@ -1,12 +1,13 @@
 "use client";
-// 찾고 싶은 그림 만들기: 손으로 그리기(여러 획 가능) · 글자 입력 · 이미지 올리기.
+// 찾고 싶은 그림 만들기: 손으로 그리기(여러 획 가능) · 글자와 설명 입력 · 이미지 올리기.
 // 어느 방법이든 '닫힌 획 여러 개'로 바꾸고, 획 사이는 코스에서 이동 구간이 된다.
 
 import { useEffect, useRef, useState } from "react";
 import { binarize, traceOutlines } from "@/lib/art/trace";
+import { MAX_DRAWN_LETTERS, parsePromptInput } from "@/lib/route/promptInput";
 import { groupFromLoops, groupLines, type ShapeGroup } from "@/lib/route/shapes";
 
-type Tab = "draw" | "text" | "image" | "prompt";
+type Tab = "draw" | "prompt" | "image";
 type Pt = [number, number];
 
 const SIZE = 240;
@@ -19,9 +20,8 @@ export function CustomShapeInput({ value, onChange }: { value: ShapeGroup | null
       <div className="seg" role="tablist" aria-label="그림 만드는 방법">
         {(
           [
-            ["prompt", "설명으로 만들기"],
             ["draw", "그리기"],
-            ["text", "글자"],
+            ["prompt", "글자·설명"],
             ["image", "이미지"],
           ] as const
         ).map(([id, label]) => (
@@ -32,7 +32,6 @@ export function CustomShapeInput({ value, onChange }: { value: ShapeGroup | null
       </div>
       {tab === "draw" && <DrawTab onChange={onChange} />}
       {tab === "prompt" && <PromptTab onChange={onChange} />}
-      {tab === "text" && <TextTab onChange={onChange} />}
       {tab === "image" && <ImageTab onChange={onChange} />}
       {value && tab !== "draw" && <GroupPreview group={value} />}
       {value && (
@@ -44,15 +43,32 @@ export function CustomShapeInput({ value, onChange }: { value: ShapeGroup | null
   );
 }
 
-/** 그림 전체 미리보기 (정리된 획) */
+/** @로 시작하면 바로 글자를 그리고, 아니면 설명을 서버에 보내 윤곽을 받는다 */
 function PromptTab({ onChange }: { onChange: (g: ShapeGroup | null) => void }) {
   const [prompt, setPrompt] = useState("");
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const pending = useRef<AbortController | null>(null);
   useEffect(() => () => pending.current?.abort(), []);
+  const input = parsePromptInput(prompt);
+
+  function change(value: string) {
+    pending.current?.abort();
+    setBusy(false);
+    setMessage("");
+    setPrompt(value);
+    const next = parsePromptInput(value);
+    if (next.kind !== "text" || !next.text || next.tooLong) {
+      onChange(null);
+      return;
+    }
+    const group = groupFromText(next.text);
+    if (!group) setMessage("이 글자로는 달릴 수 있는 획을 만들지 못했어요.");
+    onChange(group);
+  }
 
   async function generate() {
+    if (input.kind !== "description") return;
     pending.current?.abort();
     const controller = new AbortController();
     pending.current = controller;
@@ -61,7 +77,7 @@ function PromptTab({ onChange }: { onChange: (g: ShapeGroup | null) => void }) {
     onChange(null);
     try {
       const response = await fetch("/api/recognition/outline", { method: "POST",
-        headers: { "Content-Type": "application/json" }, body: JSON.stringify({ prompt }), signal: controller.signal });
+        headers: { "Content-Type": "application/json" }, body: JSON.stringify({ prompt: input.text }), signal: controller.signal });
       const result = await response.json();
       if (!response.ok) throw new Error(result.message || "윤곽을 만들지 못했어요.");
       if (!controller.signal.aborted) onChange(result.group);
@@ -71,19 +87,30 @@ function PromptTab({ onChange }: { onChange: (g: ShapeGroup | null) => void }) {
       if (!controller.signal.aborted) setBusy(false);
     }
   }
+  const tooLong = input.kind === "text" && input.tooLong;
   return <>
-    <label className="field">어떤 모습으로 달릴까요?
-      <input value={prompt} maxLength={300} placeholder="예: 귀 한쪽이 접힌 토끼의 옆모습"
-        onChange={e => { pending.current?.abort(); setBusy(false); setMessage(""); setPrompt(e.target.value); onChange(null); }} />
+    <label className="field">
+      <span>어떤 모습으로 달릴까요?</span>
+      <input value={prompt} maxLength={300} placeholder="예: 귀 접힌 토끼, 글자는 @LOVE" aria-invalid={tooLong || undefined}
+        onChange={(e) => change(e.target.value)}
+        onFocus={(e) => e.target.scrollIntoView({ block: "center", behavior: "smooth" })}
+        onKeyDown={(e) => { if (e.key === "Enter" && input.kind === "description" && !busy) { e.preventDefault(); void generate(); } }} />
     </label>
-    <p className="hint">설명과 생성된 윤곽은 안전 검사를 위해 OpenAI로 전송돼요. 이름이나 연락처 같은 개인정보는 빼 주세요.</p>
-    <button type="button" className="seg-btn" disabled={!prompt.trim() || busy} onClick={() => void generate()}>
-      {busy ? "윤곽 만드는 중…" : "윤곽 만들기"}
-    </button>
+    {input.kind === "text" ? (
+      <p className="hint">{tooLong ? `글자는 ${MAX_DRAWN_LETTERS}자까지 그릴 수 있어요.` : "굵은 글꼴의 바깥 윤곽을 따라 달려요. 글자 하나가 획 하나가 되고, 작은 점(예: i의 점)은 빠져요."}</p>
+    ) : (
+      <>
+        <button type="button" className="seg-btn" disabled={input.kind === "empty" || busy} onClick={() => void generate()}>
+          {busy ? "윤곽 만드는 중…" : "윤곽 만들기"}
+        </button>
+        <p className="hint">앞에 @를 붙이면 그 글자를 그려요. 설명과 생성된 윤곽은 윤곽 생성과 안전 검사를 위해 OpenAI로 전송돼요. 이름이나 연락처 같은 개인정보는 빼 주세요.</p>
+      </>
+    )}
     {message && <p role="alert">{message}</p>}
   </>;
 }
 
+/** 그림 전체 미리보기 (정리된 획) */
 function GroupPreview({ group }: { group: ShapeGroup }) {
   const lines = groupLines(group);
   const pad = 20, inner = SIZE - pad * 2;
@@ -203,44 +230,21 @@ function outlinesFromCanvas(c: HTMLCanvasElement, mode: "alpha" | "luma"): Pt[][
   return traceOutlines(mask, c.width, c.height, (c.width * c.height) / 2000);
 }
 
-function TextTab({ onChange }: { onChange: (g: ShapeGroup | null) => void }) {
-  const [text, setText] = useState("");
-  const [error, setError] = useState<string | null>(null);
-
-  function make(t: string) {
-    setText(t);
-    const s = t.trim();
-    if (!s) {
-      setError(null);
-      onChange(null);
-      return;
-    }
-    const c = document.createElement("canvas");
-    c.width = 480;
-    c.height = 160;
-    const ctx = c.getContext("2d")!;
-    ctx.font = `900 120px ${getComputedStyle(document.body).fontFamily}`;
-    const w = ctx.measureText(s).width;
-    const size = Math.min(120, Math.floor((120 * 440) / Math.max(1, w)));
-    ctx.font = `900 ${size}px ${getComputedStyle(document.body).fontFamily}`;
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillStyle = "#000";
-    ctx.fillText(s, c.width / 2, c.height / 2);
-    const g = groupFromLoops(outlinesFromCanvas(c, "alpha"), { order: "leftToRight", name: `"${s}"`, minPartRatio: 0.1, maxParts: MAX_PARTS, maxVertices: 28 });
-    setError(g ? null : "이 글자로는 달릴 수 있는 획을 만들지 못했어요.");
-    onChange(g);
-  }
-
-  return (
-    <div className="field" style={{ marginTop: 12 }}>
-      <label htmlFor="shape-text">글자 (최대 4자)</label>
-      <input id="shape-text" type="text" maxLength={4} value={text} placeholder="예: 520, LOVE, 별" onChange={(e) => make(e.target.value)} />
-      <p className="hint" role={error ? "alert" : undefined}>
-        {error ?? "굵은 글꼴의 바깥 윤곽을 따라 달려요. 글자 하나가 획 하나가 되고, 작은 점(예: i의 점)은 빠져요."}
-      </p>
-    </div>
-  );
+/** 굵은 글꼴로 글자를 그려 윤곽을 뽑는다. 서버로 보내지 않는다 */
+function groupFromText(text: string): ShapeGroup | null {
+  const c = document.createElement("canvas");
+  c.width = 480;
+  c.height = 160;
+  const ctx = c.getContext("2d")!;
+  ctx.font = `900 120px ${getComputedStyle(document.body).fontFamily}`;
+  const w = ctx.measureText(text).width;
+  const size = Math.min(120, Math.floor((120 * 440) / Math.max(1, w)));
+  ctx.font = `900 ${size}px ${getComputedStyle(document.body).fontFamily}`;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillStyle = "#000";
+  ctx.fillText(text, c.width / 2, c.height / 2);
+  return groupFromLoops(outlinesFromCanvas(c, "alpha"), { order: "leftToRight", name: `"${text}"`, minPartRatio: 0.1, maxParts: MAX_PARTS, maxVertices: 28 });
 }
 
 function ImageTab({ onChange }: { onChange: (g: ShapeGroup | null) => void }) {

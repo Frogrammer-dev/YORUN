@@ -19,11 +19,12 @@ import { PlaceSearch } from "@/components/route/PlaceSearch";
 import { AREAS, DEFAULT_SETTINGS, MAX_SIDE, MIN_SIDE, RANGES, nearbyDataBox, type AreaId, type FinderSettingsValue } from "@/components/route/finderOptions";
 import { FinderSettings } from "@/components/route/FinderSettings";
 import { CourseList } from "@/components/route/CourseList";
-import { SelectedCourse, type ElevationState } from "@/components/route/SelectedCourse";
+import { CourseActions, SelectedCourse, type ElevationState } from "@/components/route/SelectedCourse";
+import { formatDuration, formatPace, makeTrialRecord, saveTrialRecord, type TrialRecord } from "@/lib/battle/trialRecords";
 import { savePlannedRoute } from "@/lib/run/storage";
 import { toGpx } from "@/lib/run/tracker";
 import { downloadBlob } from "@/lib/render/png";
-import { BrandMark, Icon } from "@/components/Icon";
+import { Icon } from "@/components/Icon";
 
 const ROUTE_COLOR = "#0EA5E9";
 /** 이보다 오차가 큰 현재 위치(대개 IP 기반 추정)로는 지도를 옮기지 않는다 (m) */
@@ -35,6 +36,9 @@ type Phase =
   | { kind: "searching"; fraction: number; label: string }
   | { kind: "done"; candidates: RouteCandidate[]; partial: boolean; dataTimestamp: string | null; nodes: number; discover: boolean; doodleError?: boolean; naming?: boolean; interpretationMode?: "server" | "clip"; referenceError?: boolean }
   | { kind: "error"; message: string };
+
+/** 체험 완주 시간. 5초 안에 끝나게 조금 여유를 둔다 */
+const TRIAL_MS = 4600;
 
 export function RouteFinderApp() {
   const router = useRouter();
@@ -83,7 +87,10 @@ export function RouteFinderApp() {
   const userTookOver = useRef(false);
   const locMarker = useRef<Leaflet.LayerGroup | null>(null);
   const [sheetFull, setSheetFull] = useState(false);
-  const settingsRef = useRef<HTMLElement>(null);
+  /** 시트에 보일 내용: 결과가 나오면 결과, 사용자가 고르면 조건·상세 (같은 스크롤에 쌓지 않는다) */
+  const [sheetView, setSheetView] = useState<"settings" | "results" | "detail">("results");
+  const sheetScroll = useRef<HTMLDivElement>(null);
+  const mapTop = useRef<HTMLDivElement>(null);
   /** 사용자가 마지막 탐색 뒤 지도를 직접 움직였는지 (앱이 코스로 확대한 이동은 제외) */
   const userMoved = useRef(false);
   const programmatic = useRef(false);
@@ -162,11 +169,24 @@ export function RouteFinderApp() {
     if (lm) locate(true);
   }, [lm, locate]);
 
-  useEffect(() => {
-    const w = new Worker(new URL("../../lib/route/finder.worker.ts", import.meta.url), { type: "module" });
-    workerRef.current = w;
-    return () => w.terminate();
+  const startWorker = useCallback(() => {
+    workerRef.current?.terminate();
+    workerRef.current = new Worker(new URL("../../lib/route/finder.worker.ts", import.meta.url), { type: "module" });
   }, []);
+  useEffect(() => {
+    startWorker();
+    return () => workerRef.current?.terminate();
+  }, [startWorker]);
+
+  // 탐색 취소: 늦게 오는 응답은 버리고, 길 데이터 받기를 멈추고, 계산 중인 워커는 새로 띄운다.
+  // 새 워커에는 길 데이터 캐시가 없어 다음 검색은 no_cache 처리로 다시 받아 온다.
+  const cancelSearch = useCallback(() => {
+    reqId.current++;
+    abortRef.current?.abort();
+    referenceAbortRef.current?.abort();
+    startWorker();
+    setPhase({ kind: "idle" });
+  }, [startWorker]);
 
   useEffect(() => () => { reqId.current++; referenceAbortRef.current?.abort(); }, []);
 
@@ -363,6 +383,8 @@ export function RouteFinderApp() {
         const finish = (cands: RouteCandidate[], doodleError = false) => {
           if (id !== reqId.current) return;
           setPhase({ kind: "done", candidates: cands, partial: m.result.partial, dataTimestamp: m.graph.dataTimestamp, nodes: m.graph.nodes, discover, doodleError });
+          setSheetView("results");
+          setSheetFull(false);
           // 원래 영역·주변 비교 후보 모두 실제 경로 좌표에 맞춰 지도를 확대한다.
           if (cands[0]) choose(cands[0]);
         };
@@ -411,6 +433,9 @@ export function RouteFinderApp() {
     return () => void marker.remove();
   }, [lm, running, start]);
 
+  const [trial, setTrial] = useState<{ pct: number; record: TrialRecord | null } | null>(null);
+  const trialStop = useRef<(() => void) | null>(null);
+
   /** 코스 고도는 한 번만 받는다 (고른 코스, 또는 오르막 상한을 켰을 때 모든 후보) */
   const elevAsked = useRef(new Set<string>());
   function loadElevation(c: RouteCandidate) {
@@ -447,7 +472,9 @@ export function RouteFinderApp() {
   function fitTo(b: Leaflet.LatLngBounds) {
     if (!lm) return;
     programmatic.current = true;
-    lm.map.fitBounds(b, { paddingTopLeft: [24, 72], paddingBottomRight: [68, 56], maxZoom: 16 });
+    // 상단 뒤로·검색 줄 아래로 맞춘다 (표시만 바뀌고 탐색 영역 계산에는 쓰지 않는다)
+    const top = mapTop.current ? mapTop.current.offsetTop + mapTop.current.offsetHeight + 12 : 72;
+    lm.map.fitBounds(b, { paddingTopLeft: [24, top], paddingBottomRight: [68, 56], maxZoom: 16 });
     window.setTimeout(() => (programmatic.current = false), 700);
   }
 
@@ -469,6 +496,57 @@ export function RouteFinderApp() {
     router.push("/run");
   }
 
+  /** 체험 완주: 내 위치 표시가 코스를 5초 안에 지나가고, 실제 기록과 별개인 체험 기록을 남긴다 */
+  function startTrial(c: RouteCandidate) {
+    if (!lm || c.latlngs.length < 2) return;
+    choose(c);
+    setSheetFull(false);
+    trialStop.current?.();
+    const finish = () => {
+      const record = makeTrialRecord({ id: c.id, name: c.shapeName, latlngs: c.latlngs, meters: c.lengthMeters }, Math.random, Date.now());
+      saveTrialRecord(record);
+      setTrial({ pct: 100, record });
+    };
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      finish();
+      return;
+    }
+    // 코스 길이에 비례해 움직이도록 지점별 누적 거리를 구한다
+    const dist = [0];
+    for (let i = 1; i < c.latlngs.length; i++) dist.push(dist[i - 1] + lm.L.latLng(c.latlngs[i - 1]).distanceTo(c.latlngs[i]));
+    const total = dist[dist.length - 1] || 1;
+    // 체험 중에는 이 아이콘이 내 위치를 대신한다. 실제 위치 표시는 끝난 뒤 되돌린다
+    locMarker.current?.remove();
+    const marker = lm.L.circleMarker(c.latlngs[0], { radius: 9, color: "#fff", weight: 3, fillColor: "#1A73E8", fillOpacity: 1, interactive: false }).addTo(lm.map);
+    const started = performance.now();
+    let frame = 0, index = 0;
+    const stop = () => {
+      cancelAnimationFrame(frame);
+      marker.remove();
+      if (mapAlive(lm.map)) locMarker.current?.addTo(lm.map);
+      trialStop.current = null;
+    };
+    trialStop.current = stop;
+    setTrial({ pct: 0, record: null });
+    const tick = (now: number) => {
+      const fraction = Math.min(1, (now - started) / TRIAL_MS);
+      const at = fraction * total;
+      while (index < dist.length - 2 && dist[index + 1] < at) index++;
+      const span = dist[index + 1] - dist[index] || 1, k = (at - dist[index]) / span;
+      const [a, b] = [c.latlngs[index], c.latlngs[index + 1]];
+      marker.setLatLng([a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k]);
+      if (fraction >= 1) {
+        stop();
+        finish();
+        return;
+      }
+      setTrial({ pct: Math.round(fraction * 100), record: null });
+      frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+  }
+  useEffect(() => () => trialStop.current?.(), []);
+
   function exportGpx(c: RouteCandidate) {
     const gpx = toGpx(`Yorun ${c.shapeName} 코스`, [c.latlngs.map(([lat, lon]) => ({ lat, lon }))]);
     downloadBlob(new Blob([gpx], { type: "application/gpx+xml" }), `yorun-${c.shapeId}-course.gpx`);
@@ -478,15 +556,18 @@ export function RouteFinderApp() {
   // 넓이 제한은 '지금 화면'으로 찾을 때만 (정사각형 영역을 고르면 지도가 그 영역을 보이려고 축소된다)
   const tooBig = area === "screen" && !!areaInfo && (areaInfo.w > MAX_SIDE || areaInfo.h > MAX_SIDE);
   const sel = visible.find((c) => c.id === selected);
+  const view = phase.kind !== "done" ? "settings" : sheetView === "detail" && !sel ? "results" : sheetView;
+  useEffect(() => {
+    sheetScroll.current?.scrollTo(0, 0);
+  }, [view]);
 
   function goSettings() {
+    setSheetView("settings");
     setSheetFull(true);
-    requestAnimationFrame(() => settingsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
   }
 
   const settingsPanel = (
     <FinderSettings
-      ref={settingsRef}
       value={settings}
       onChange={(patch) => {
         // 종류를 바꾸면 이전 결과는 지운다 (드로잉 결과와 러닝 결과는 기준이 다르다)
@@ -506,6 +587,7 @@ export function RouteFinderApp() {
       tooBig={!!tooBig}
       hasResults={phase.kind === "done"}
       onSearch={() => void search()}
+      onCancel={cancelSearch}
       start={start}
       pickingStart={pickingStart}
       onPickStart={() => setPickingStart((p) => !p)}
@@ -521,13 +603,9 @@ export function RouteFinderApp() {
       <div className="finder-layout">
         <div className="finder-map">
           <div ref={mapEl} className="map" role="application" aria-label="지도. 움직이거나 확대해 코스를 찾을 영역을 맞춰 주세요." />
-          <div className="map-tl">
-            <Link href="/" className="map-pill">
-              <BrandMark size={24} />
-              요런
-            </Link>
-            <Link href="/room" className="map-pill">
-              작품방
+          <div className="map-tl" ref={mapTop}>
+            <Link href="/running" className="map-fab" aria-label="달리기 화면으로 돌아가기" title="달리기 화면으로 돌아가기">
+              <Icon name="back" size={22} />
             </Link>
             <PlaceSearch
               onPick={(p) => {
@@ -569,7 +647,7 @@ export function RouteFinderApp() {
 
         <aside className={`finder-side ${sheetFull ? "sheet-full" : ""} ${phase.kind === "done" ? "has-results" : ""}`} aria-label="코스 찾기 설정과 결과">
           <button type="button" className="sheet-handle" aria-label={sheetFull ? "시트 접기" : "시트 펼치기"} aria-expanded={sheetFull} onClick={() => setSheetFull((v) => !v)} />
-          <div className="sheet-scroll">
+          <div className="sheet-scroll" ref={sheetScroll}>
             {phase.kind === "error" && (
               <p className="banner banner-error" role="alert" style={{ margin: "0 0 16px" }}>
                 <Icon name="warn" size={18} />
@@ -577,7 +655,30 @@ export function RouteFinderApp() {
               </p>
             )}
 
-            {phase.kind === "done" && (
+            {trial && (
+              <section className="trial-panel" aria-label="체험 완주">
+                {trial.record ? (
+                  <>
+                    <h2>체험 완주!</h2>
+                    <p role="status">{trial.record.name} 기록이 대결과 경주 캐릭터로 저장됐어요. 실제 달리기 기록에는 넣지 않아요.</p>
+                    <dl className="trial-facts">
+                      <div><dt>거리</dt><dd>{(trial.record.meters / 1000).toFixed(2)}km</dd></div>
+                      <div><dt>페이스</dt><dd>{formatPace(trial.record.paceSecPerKm)}</dd></div>
+                      <div><dt>기록</dt><dd>{formatDuration((trial.record.meters / 1000) * trial.record.paceSecPerKm)}</dd></div>
+                    </dl>
+                    <Link href="/hub" className="btn btn-primary btn-lg wide">콘텐츠 즐기기</Link>
+                    <button type="button" className="btn btn-secondary wide" onClick={() => setTrial(null)}>다른 코스 보기</button>
+                  </>
+                ) : (
+                  <>
+                    <h2>체험 완주 중</h2>
+                    <div className="trial-bar" role="progressbar" aria-label="체험 완주 진행률" aria-valuemin={0} aria-valuemax={100} aria-valuenow={trial.pct}><i style={{ transform: `scaleX(${trial.pct / 100})` }} /></div>
+                  </>
+                )}
+              </section>
+            )}
+
+            {phase.kind === "done" && view === "results" && !trial && (
               <section className="sheet-section" aria-label="찾은 코스">
                 <div className="sheet-head">
                   <h2>찾은 코스 {visible.length}개</h2>
@@ -596,7 +697,20 @@ export function RouteFinderApp() {
                   <p className="empty">이 영역·거리 조건에서는 그림이 잘 나오는 연결 코스를 찾지 못했어요. 지도를 옮기거나 거리 범위·그림·길 단순화를 바꿔 보세요. (끊긴 곳을 가짜 선으로 잇지 않아요.)</p>
                 )}
                 <CourseList candidates={visible} elev={elev} selected={selected} discover={phase.discover} onChoose={choose} onHover={setHover} />
-                {sel && <SelectedCourse c={sel} elev={elev[sel.id]} onRun={() => runThis(sel, phase.dataTimestamp)} onExport={() => exportGpx(sel)} />}
+                {sel && (
+                  <button
+                    type="button"
+                    className="more-toggle"
+                    onClick={() => {
+                      setSheetView("detail");
+                      setSheetFull(true);
+                    }}
+                  >
+                    <span>코스 자세히</span>
+                    <small>길 정보·고도</small>
+                    <Icon name="chevronRight" size={18} />
+                  </button>
+                )}
                 {visible.length > 0 && visible[0].shapeId !== "run" && !visible[0].semanticExplanation && !visible[0].doodle && visible[0].similarity < 65 && (
                   <p className="hint">그림이 또렷하지 않다면: 거리를 늘리면 그림이 커져 길 간격에 덜 뭉개지고, 바둑판처럼 반듯한 길이 많은 동네일수록 잘 나와요.</p>
                 )}
@@ -610,10 +724,44 @@ export function RouteFinderApp() {
                   {phase.referenceError && " 참고 그림 생성을 사용할 수 없어 기존 모양 인식으로 살펴봤어요."}
                   {phase.discover && !phase.naming && !phase.doodleError && phase.interpretationMode === "clip" && " '처럼 보이는 코스'는 CLIP이 해석한 실험 추천이에요. 위치를 제외한 외곽선만 앱 서버에서 처리해요."}
                 </p>
+                {sel && <CourseActions onRun={() => runThis(sel, phase.dataTimestamp)} onExport={() => exportGpx(sel)} onTrial={() => startTrial(sel)} />}
               </section>
             )}
 
-            {settingsPanel}
+            {phase.kind === "done" && view === "detail" && sel && !trial && (
+              <section className="sheet-section" aria-label="고른 코스 자세히">
+                <button
+                  type="button"
+                  className="btn btn-ghost btn-sm sheet-back"
+                  onClick={() => {
+                    setSheetView("results");
+                    setSheetFull(false);
+                  }}
+                >
+                  <Icon name="back" size={18} />
+                  찾은 코스 {visible.length}개
+                </button>
+                <SelectedCourse c={sel} elev={elev[sel.id]} onRun={() => runThis(sel, phase.dataTimestamp)} onExport={() => exportGpx(sel)} onTrial={() => startTrial(sel)} />
+              </section>
+            )}
+
+            {/* 조건은 숨겨도 마운트를 유지한다: 그리던 그림·펼침 상태를 잃지 않게 */}
+            <div hidden={view !== "settings" || !!trial}>
+              {phase.kind === "done" && (
+                <button
+                  type="button"
+                  className="btn btn-ghost btn-sm sheet-back"
+                  onClick={() => {
+                    setSheetView("results");
+                    setSheetFull(false);
+                  }}
+                >
+                  <Icon name="back" size={18} />
+                  찾은 코스 {visible.length}개
+                </button>
+              )}
+              {settingsPanel}
+            </div>
           </div>
         </aside>
       </div>

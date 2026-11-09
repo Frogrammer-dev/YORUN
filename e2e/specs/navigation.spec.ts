@@ -14,7 +14,7 @@ test("길 데이터를 받는 중(3초 지연)에 다른 화면으로 이동", a
   await page.waitForTimeout(4000);
   await page.getByRole("button", { name: "지금 보이는 지도에서 코스 찾기" }).click();
   await page.waitForTimeout(300);
-  await page.getByRole("link", { name: "작품방" }).click();
+  await page.getByRole("link", { name: "달리기 화면으로 돌아가기" }).click();
   await page.waitForTimeout(5000);
 });
 
@@ -25,7 +25,7 @@ test("확대 애니메이션 중 화면 이동 10회", async ({ page }) => {
     await page.waitForTimeout(1500);
     await page.locator(".leaflet-control-zoom-in").click();
     await page.waitForTimeout(30 + k * 15);
-    await page.getByRole("link", { name: "작품방" }).click();
+    await page.getByRole("link", { name: "달리기 화면으로 돌아가기" }).click();
     await page.waitForTimeout(800);
   }
 });
