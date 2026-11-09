@@ -18,7 +18,7 @@ import { Icon, PathThumb, latlngToXY, type IconName } from "@/components/Icon";
 import { awardRun, removeRunLog, saveRunLog, loadActiveRun, loadPlannedRoute, loadWallet, plannedRouteBadge, recoverRecord, saveActiveRun, type PlannedRoute } from "@/lib/run/storage";
 import { CAP_PHRASE, OFF_ROUTE_PHRASE, kmPhrase, pointsPhrase } from "@/lib/run/spoken";
 import { selectVoice, selectedVoice, stopVoice, type RunVoice, loadVoicePref, primeVoice, saveVoicePref, speak, voiceSupported } from "@/lib/run/voice";
-import { DAILY_POINT_CAP, POINTS_PER_CHECKPOINT, cappedPoints, collectedCount, emptyRewards, isMissed, placeCheckpoints, stepRewards, type RewardState } from "@/lib/run/rewards";
+import { DAILY_POINT_CAP, POINTS_PER_CHECKPOINT, SHOW_POINTS, cappedPoints, collectedCount, emptyRewards, isMissed, placeCheckpoints, stepRewards, type RewardState } from "@/lib/run/rewards";
 import {
   RouteTracker,
   TURN_LABEL,
@@ -169,7 +169,7 @@ export function RunApp() {
   // 포인트 객체: 주울 것(주황) · 주운 것(초록, 작게) · 지나쳐 놓친 것·오늘 한도를 넘은 것(회색)
   const cpMarkers = useRef<Leaflet.CircleMarker[]>([]);
   useEffect(() => {
-    if (!lm) return;
+    if (!lm || !SHOW_POINTS) return;
     const g = lm.L.layerGroup().addTo(lm.map);
     cpMarkers.current = checkpoints.map((c, i) =>
       lm.L.circleMarker([c.lat, c.lon], { radius: 4, color: "#fff", weight: 1.5, fillColor: "#F59E0B", fillOpacity: 1 }).bindTooltip(`${(i + 1) * POINTS_PER_CHECKPOINT}m 지점 · ${POINTS_PER_CHECKPOINT}P`).addTo(g),
@@ -506,7 +506,7 @@ export function RunApp() {
   useEffect(() => {
     const prev = lastCollected.current;
     lastCollected.current = collected;
-    if (status !== "running" || collected <= prev) return;
+    if (!SHOW_POINTS || status !== "running" || collected <= prev) return;
     const gained = livePoints - cappedPoints(prev, todayPoints);
     navigator.vibrate?.(80);
     const text = gained > 0 ? `+${gained}P` : "오늘 적립 완료";
@@ -668,9 +668,11 @@ export function RunApp() {
               <div className="hud-hero-row">
                 <span className="hud-label">거리</span>
                 <span className="hud-hero-side">
-                  <span className="hud-points" data-stat="points" title={`오늘 ${(todayPoints + livePoints).toLocaleString()} / ${DAILY_POINT_CAP.toLocaleString()}P`}>
-                    {livePoints.toLocaleString()}P
-                  </span>
+                  {SHOW_POINTS && (
+                    <span className="hud-points" data-stat="points" title={`오늘 ${(todayPoints + livePoints).toLocaleString()} / ${DAILY_POINT_CAP.toLocaleString()}P`}>
+                      {livePoints.toLocaleString()}P
+                    </span>
+                  )}
                   {status === "paused" && <span className="badge pause-badge">일시정지됨</span>}
                   {gpsState === "ok" && <span className="hud-gps">{gpsLabel}</span>}
                 </span>
@@ -749,10 +751,12 @@ export function RunApp() {
                     {route.shapeName} 코스 · {(route.lengthMeters / 1000).toFixed(2)}km · {plannedRouteBadge(route)}
                     {startDist !== null && ` · 출발점까지 ${startDist < 1000 ? `${Math.round(startDist)}m` : `${(startDist / 1000).toFixed(1)}km`}`}
                   </p>
-                  <p>
-                    포인트 객체 {checkpoints.length}개 · 최대 {(checkpoints.length * POINTS_PER_CHECKPOINT).toLocaleString()}P
-                    {todayPoints > 0 && ` · 오늘 적립 ${todayPoints.toLocaleString()} / ${DAILY_POINT_CAP.toLocaleString()}P`}
-                  </p>
+                  {SHOW_POINTS && (
+                    <p>
+                      포인트 객체 {checkpoints.length}개 · 최대 {(checkpoints.length * POINTS_PER_CHECKPOINT).toLocaleString()}P
+                      {todayPoints > 0 && ` · 오늘 적립 ${todayPoints.toLocaleString()} / ${DAILY_POINT_CAP.toLocaleString()}P`}
+                    </p>
+                  )}
                   {route.moves?.length ? (
                     <p>
                       획 {route.moves.length + 1}개 · 점선 이동 구간 {((route.moveMeters ?? 0) / 1000).toFixed(1)}km는 그림이 아니에요. 한 획을 다 그리면 일시정지하고 다음 획
@@ -771,10 +775,12 @@ export function RunApp() {
                   <p>
                     선택한 그림 코스가 없어요. <Link href="/routes">코스를 먼저 찾거나</Link>, 코스 없이 달려 그림을 그릴 수도 있어요.
                   </p>
-                  <p>
-                    100m 달릴 때마다 {POINTS_PER_CHECKPOINT}P · 하루 최대 {DAILY_POINT_CAP.toLocaleString()}P
-                    {todayPoints > 0 && ` (오늘 ${todayPoints.toLocaleString()}P 적립)`}
-                  </p>
+                  {SHOW_POINTS && (
+                    <p>
+                      100m 달릴 때마다 {POINTS_PER_CHECKPOINT}P · 하루 최대 {DAILY_POINT_CAP.toLocaleString()}P
+                      {todayPoints > 0 && ` (오늘 ${todayPoints.toLocaleString()}P 적립)`}
+                    </p>
+                  )}
                 </div>
               </div>
             )}
@@ -850,7 +856,7 @@ export function RunApp() {
                 <i style={{ width: `${pct}%` }} />
               </div>
             )}
-            {award && (
+            {SHOW_POINTS && award && (
               <div className="done-points">
                 <span className="hud-label">적립 포인트</span>
                 <strong data-stat="award">+{award.points.toLocaleString()}P</strong>

@@ -4,6 +4,7 @@
 import { useEffect, useState } from "react";
 import { formatPaceShort, summarizeMonth, summarizeWeek, type RunLogEntry } from "@/lib/run/history";
 import { loadRunLog, loadWallet } from "@/lib/run/storage";
+import { SHOW_POINTS } from "@/lib/run/rewards";
 
 const WEEKDAYS = ["월", "화", "수", "목", "금", "토", "일"];
 
@@ -82,6 +83,7 @@ export function PointsRow() {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- 브라우저 전용 값(저장소)은 첫 화면 뒤에 읽는다
     setBalance(loadWallet(Date.now()).balance);
   }, []);
+  if (!SHOW_POINTS) return null;
   return (
     <p className="points-row">
       <span>모은 포인트</span>
