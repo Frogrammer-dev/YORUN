@@ -287,6 +287,7 @@ legend { font-weight: 700; font-size: var(--fs-callout); padding-right: var(--sp
   min-height: var(--btn-h-lg); padding: 0 var(--sp-4); border-radius: var(--r-md); background: var(--surface-2); overflow: hidden; font-weight: 600;
 }
 .progress-cta .num { font-size: 22px; font-weight: 600; }
+.progress-cancel { margin-top: var(--sp-2); }
 .progress-bar { position: absolute; left: 0; bottom: 0; height: 4px; background: var(--brand); }
 .progress-indeterminate { width: 30%; animation: indet 1.2s ease-in-out infinite; }
 @keyframes indet { 0% { transform: translateX(-100%); } 100% { transform: translateX(340%); } }

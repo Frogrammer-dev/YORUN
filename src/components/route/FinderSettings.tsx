@@ -21,6 +21,8 @@ export interface FinderSettingsProps {
   /** 이미 결과가 있는가 (버튼 색만 바뀐다) */
   hasResults: boolean;
   onSearch: () => void;
+  /** 길 데이터 받기·탐색을 멈춘다 */
+  onCancel?: () => void;
   /** 러닝 코스 출발점 [위도, 경도]. null이면 찾을 때의 지도 가운데 */
   start?: [number, number] | null;
   /** 지도를 눌러 출발점을 고르는 중인가 */
@@ -36,7 +38,7 @@ export function progressText(p: SearchProgress, running = false): string {
 }
 
 export const FinderSettings = forwardRef<HTMLElement, FinderSettingsProps>(function FinderSettings(
-  { value: v, onChange, onChooseArea, progress, ready, tooBig, hasResults, onSearch, start = null, pickingStart = false, onPickStart, onClearStart },
+  { value: v, onChange, onChooseArea, progress, ready, tooBig, hasResults, onSearch, onCancel, start = null, pickingStart = false, onPickStart, onClearStart },
   ref,
 ) {
   const area = AREAS.find((a) => a.id === v.area)!;
@@ -222,7 +224,11 @@ export const FinderSettings = forwardRef<HTMLElement, FinderSettingsProps>(funct
               style={progress.kind === "searching" ? { width: `${Math.round(progress.fraction * 100)}%` } : undefined}
             />
           </div>
-        ) : (
+        ) : null}
+        {progress && onCancel && (
+          <button type="button" className="btn btn-ghost progress-cancel" onClick={onCancel}>탐색 취소</button>
+        )}
+        {progress ? null : (
           <button type="button" className={`btn btn-lg ${hasResults ? "btn-ink" : "btn-primary"}`} onClick={onSearch} disabled={!ready || pickingStart || (!running && (tooBig || (v.shape === "custom" && !v.custom)))}>
             {running ? "출발점에서 러닝 코스 찾기" : "지금 보이는 지도에서 코스 찾기"}
           </button>

@@ -169,11 +169,24 @@ export function RouteFinderApp() {
     if (lm) locate(true);
   }, [lm, locate]);
 
-  useEffect(() => {
-    const w = new Worker(new URL("../../lib/route/finder.worker.ts", import.meta.url), { type: "module" });
-    workerRef.current = w;
-    return () => w.terminate();
+  const startWorker = useCallback(() => {
+    workerRef.current?.terminate();
+    workerRef.current = new Worker(new URL("../../lib/route/finder.worker.ts", import.meta.url), { type: "module" });
   }, []);
+  useEffect(() => {
+    startWorker();
+    return () => workerRef.current?.terminate();
+  }, [startWorker]);
+
+  // 탐색 취소: 늦게 오는 응답은 버리고, 길 데이터 받기를 멈추고, 계산 중인 워커는 새로 띄운다.
+  // 새 워커에는 길 데이터 캐시가 없어 다음 검색은 no_cache 처리로 다시 받아 온다.
+  const cancelSearch = useCallback(() => {
+    reqId.current++;
+    abortRef.current?.abort();
+    referenceAbortRef.current?.abort();
+    startWorker();
+    setPhase({ kind: "idle" });
+  }, [startWorker]);
 
   useEffect(() => () => { reqId.current++; referenceAbortRef.current?.abort(); }, []);
 
@@ -574,6 +587,7 @@ export function RouteFinderApp() {
       tooBig={!!tooBig}
       hasResults={phase.kind === "done"}
       onSearch={() => void search()}
+      onCancel={cancelSearch}
       start={start}
       pickingStart={pickingStart}
       onPickStart={() => setPickingStart((p) => !p)}
