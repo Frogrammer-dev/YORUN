@@ -61,6 +61,15 @@
 .duel-foe:active { border-color: var(--derby-gold); transform: translateY(-3px); }
 .duel-foe:disabled { background: var(--disabled-bg); color: var(--text-disabled); cursor: not-allowed; }
 .duel-foe:focus-visible { outline: 3px solid var(--derby-gold); outline-offset: 2px; }
+/* 친구와 하는 대결 방 */
+.duel-friend { display: flex; flex-direction: column; gap: var(--sp-2); padding: var(--sp-3); border: 2px solid var(--derby-line); border-radius: var(--r-md); background: var(--derby-raised); }
+.duel-friend h3, .duel-subtitle { margin: 0; font-size: var(--fs-callout); font-weight: 800; }
+.duel-join { display: flex; gap: var(--sp-2); align-items: flex-end; }
+.duel-join label { flex: 1; display: flex; flex-direction: column; gap: 4px; font-size: var(--fs-caption); color: var(--derby-ink-2); }
+.duel-join input { min-height: 44px; padding: 0 var(--sp-3); border: 1px solid var(--derby-line); border-radius: var(--r-sm); background: var(--derby-bg); color: var(--derby-ink); font: inherit; font-size: var(--fs-title3); letter-spacing: .2em; font-variant-numeric: tabular-nums; }
+.duel-room-code { margin: var(--sp-2) 0; text-align: center; font-size: 44px; font-weight: 800; letter-spacing: .18em; font-variant-numeric: tabular-nums; color: var(--derby-gold); }
+.duel-room-wait { text-align: center; }
+.duel-choice[aria-pressed="true"] { outline: 3px solid var(--derby-gold); outline-offset: 2px; }
 .duel-foe strong { overflow-wrap: anywhere; font-size: var(--fs-callout); font-weight: 800; }
 .duel-foe-face { display: flex; justify-content: center; margin-bottom: var(--sp-1); color: var(--derby-danger); }
 .duel-history { color: var(--derby-ink-2); font-size: var(--fs-callout); }

@@ -11,6 +11,8 @@ import { watchBattleDraft, type BattleDraft } from "@/lib/battle/battleDraft";
 import type { DuelAction } from "@/lib/battle/duel";
 import { BATTLE_CHOICES, BATTLE_RULES, CHOICE_LABELS, criticalDamage, type BattleSheet, type BattleState, type TurnLog } from "@/lib/battle/turnBattle";
 import { BattleStage } from "./BattleStage";
+import { DuelRoom, roomRequest } from "./DuelRoom";
+import { ROOM_CODE, type RoomView } from "@/lib/battle/room";
 import { browserSupabase } from "@/lib/client/supabaseBrowser";
 import { SHAPES } from "@/lib/route/shapes";
 
@@ -56,6 +58,16 @@ export function DuelArena({ returnTo }: { returnTo: string }) {
   const [selected, select] = useState("");
   const [consent, agree] = useState(false);
   const [guest, setGuest] = useState(false);
+  // 친구와 하는 방: 지금 들어가 있는 방, 초대 링크(?room=123456)의 번호, 직접 입력한 번호, 돌아갈 수 있는 방
+  const [room, setRoom] = useState<RoomView | null>(null);
+  const [invite, setInvite] = useState("");
+  const [joinCode, setJoinCode] = useState("");
+  const [openRoom, setOpenRoom] = useState<RoomView | null>(null);
+  useEffect(() => {
+    const code = new URLSearchParams(location.search).get("room") ?? "";
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 초대 링크의 번호는 브라우저 주소에서만 읽는다
+    if (ROOM_CODE.test(code)) { setInvite(code); setJoinCode(code); }
+  }, []);
 
   useEffect(() => watchBattleDraft(setDraft), []);
   useEffect(() => {
@@ -82,6 +94,7 @@ export function DuelArena({ returnTo }: { returnTo: string }) {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- 로그인을 확인한 뒤 서버에서 받아 온 값을 반영한다
     if (signedIn) void refresh();
+    if (signedIn) void roomRequest().then(setOpenRoom).catch(() => setOpenRoom(null));
   }, [signedIn, refresh]);
 
   async function act(body: unknown) {
@@ -104,6 +117,31 @@ export function DuelArena({ returnTo }: { returnTo: string }) {
   const character = characters.find((c) => c.id === selected) ?? characters.find((c) => !c.blocked);
   const isDraft = character?.id.startsWith("verified-") ?? false;
   const myLines = character?.line ? character.line.map(([x, y]) => [x, -y] as [number, number]) : MY_SHAPE.points;
+
+  /** 이 기기에서 처음 쓰는 기록 캐릭터면 서버에 대표 캐릭터로 등록한다 */
+  async function ensureRegistered() {
+    if (character && isDraft && "session" in character.entry) {
+      const response = await fetch("/api/duel", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "register", trace: character.entry.trace, session: character.entry.session, plan: UNUSED_PLAN, consent: true }) });
+      const data = await response.json().catch(() => null);
+      if (!response.ok) throw new Error(data?.message ?? "대표 캐릭터를 등록하지 못했어요.");
+    }
+  }
+  const chosenStyle = () => (character && character.id !== "registered" && "style" in character.entry ? character.entry.style : undefined);
+  /** 친구와 하는 방 만들기·들어가기 */
+  async function enterRoom(body: { action: "create" } | { action: "join"; code: string }) {
+    if (!character || busy || !signedIn) return;
+    setBusy(true);
+    setMessage("");
+    try {
+      await ensureRegistered();
+      const style = chosenStyle();
+      setRoom(await roomRequest({ ...body, ...(style ? { style } : {}) }));
+      setOpenRoom(null);
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : "방에 들어가지 못했어요.");
+    }
+    setBusy(false);
+  }
 
   async function toOpponents() {
     if (!character || busy || !signedIn) return;
@@ -142,6 +180,39 @@ export function DuelArena({ returnTo }: { returnTo: string }) {
       </div>
     );
   }
+
+  if (room) {
+    return (
+      <DuelRoom
+        key={room.id}
+        initial={room}
+        myLines={myLines}
+        onExit={() => { setRoom(null); setView("opponents"); void refresh(); void roomRequest().then(setOpenRoom).catch(() => setOpenRoom(null)); }}
+        onNewRoom={() => { setRoom(null); void enterRoom({ action: "create" }); }}
+      />
+    );
+  }
+
+  // 친구와 하는 방: 만들기·번호로 들어가기·진행 중인 방으로 돌아가기
+  const friendRoom = (
+    <section className="duel-friend" aria-label="친구와 대결">
+      <h3>친구와 대결</h3>
+      {openRoom && (
+        <p className="derby-note">
+          {openRoom.status === "waiting" ? `방 ${openRoom.code}에서 상대를 기다리는 중이에요.` : `${openRoom.foe?.name ?? "상대"}와 대결 중이에요.`}{" "}
+          <button type="button" className="derby-quiet" onClick={() => { setRoom(openRoom); setOpenRoom(null); }}>돌아가기</button>
+        </p>
+      )}
+      <button type="button" className="derby-start" disabled={busy || !character} onClick={() => void enterRoom({ action: "create" })}>방 만들고 번호 공유하기</button>
+      <form className="duel-join" onSubmit={(e) => { e.preventDefault(); if (ROOM_CODE.test(joinCode)) void enterRoom({ action: "join", code: joinCode }); }}>
+        <label>
+          받은 방 번호
+          <input value={joinCode} onChange={(e) => setJoinCode(e.target.value.replace(/\D/g, "").slice(0, 6))} inputMode="numeric" autoComplete="off" placeholder="6자리 숫자" maxLength={6} />
+        </label>
+        <button type="submit" className="derby-quiet" disabled={busy || !ROOM_CODE.test(joinCode)}>들어가기</button>
+      </form>
+    </section>
+  );
 
   if (battle && lobby) {
     const { state, log } = battle;
@@ -189,6 +260,8 @@ export function DuelArena({ returnTo }: { returnTo: string }) {
       <div className="derby-screen">
         <h2 className="derby-title">겨룰 상대를 고르세요</h2>
         {message && <p className="derby-error" role="alert">{message}</p>}
+        {friendRoom}
+        <h3 className="duel-subtitle">봇·다른 러너 기록과 대결</h3>
         <ol className="duel-foes">
           {lobby.opponents.map((opponent) => (
             <li key={opponent.id}>
@@ -234,8 +307,13 @@ export function DuelArena({ returnTo }: { returnTo: string }) {
       )}
       {message && <p className="derby-error" role="alert">{message}</p>}
       {!supabase && <p className="derby-note" role="status">이 실행 환경에서는 대결 서버를 쓸 수 없어요.</p>}
-      <button type="button" className="derby-start" disabled={!supabase || !character || busy || (isDraft && !consent)} aria-busy={busy} onClick={() => void toOpponents()}>
-        {busy ? "상대를 찾는 중" : "1대1 대결하기"}
+      {invite && (
+        <button type="button" className="derby-start" disabled={!supabase || !character || busy || (isDraft && !consent)} aria-busy={busy} onClick={() => void enterRoom({ action: "join", code: invite })}>
+          {busy ? "들어가는 중" : `받은 방 ${invite}에 들어가기`}
+        </button>
+      )}
+      <button type="button" className={invite ? "derby-quiet" : "derby-start"} disabled={!supabase || !character || busy || (isDraft && !consent)} aria-busy={busy} onClick={() => void toOpponents()}>
+        {busy ? "상대를 찾는 중" : invite ? "다른 방식으로 대결하기" : "1대1 대결하기"}
       </button>
     </div>
   );
