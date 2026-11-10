@@ -113,6 +113,9 @@ test("새로고침하면 임시 초안이 복원되고, 원 위경도·시각은
 
 test("잘못된 GPX는 이유를 알려 주고, 여러 트랙이면 고르게 한다", async ({ page }) => {
   await startWithHeart(page);
+  // GPX 가져오기는 작품방이 아니라 기록 가져오기 화면에 있다
+  await page.goto("/contents");
+  await page.waitForLoadState("networkidle");
   const file = page.locator('input[type="file"]');
   await file.setInputFiles(join(S, "e2-doctype-entity.gpx"));
   await expect(page.getByText("DOCTYPE·ENTITY")).toBeVisible();

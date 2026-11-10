@@ -13,7 +13,7 @@ import { takePendingArtwork } from "@/lib/client/pending";
 import { browserSupabase } from "@/lib/client/supabaseBrowser";
 import { SceneSvg } from "@/components/SceneSvg";
 import { ItemPanel } from "./ItemPanel";
-import { ArchivePanel, ExportPanel, LoginPanel, SharePanel } from "./Panels";
+import { ArchivePanel, CoursesPanel, ExportPanel, LoginPanel, SharePanel } from "./Panels";
 import { useRoom, type SaveStatus, type Session } from "./useRoom";
 import { Icon } from "@/components/Icon";
 
@@ -406,11 +406,22 @@ export function RoomApp() {
                 <Link href="/contents#import" className="btn btn-sm">
                   기록 가져오기
                 </Link>
+                {room.model.artworkCount === 0 && (
+                  <a href="#room-courses" className="btn btn-sm">
+                    체험·기본 코스 걸기
+                  </a>
+                )}
               </div>
             )}
           </div>
           {!empty && <p className="hint center">작품을 누르면 크기·회전·색·액자를 바꿀 수 있어요.</p>}
           {!empty && displayFull && <p className="hint">전시 한도(20개)에 도달했어요. 새 작품은 보관 목록에만 추가돼요.</p>}
+          {/* 작품이 하나도 없으면 오른쪽 패널이 숨으므로, 체험·기본 코스는 여기서 바로 걸 수 있게 한다 */}
+          {empty && room.model.artworkCount === 0 && (
+            <div id="room-courses">
+              <CoursesPanel room={room} />
+            </div>
+          )}
         </div>
 
         <aside className="side" hidden={empty && room.model.artworkCount === 0 && activeTab === "archive"}>
@@ -429,7 +440,12 @@ export function RoomApp() {
             ))}
           </div>
           {activeTab === "edit" && selItem && selArt && <ItemPanel key={selItem.id} room={room} item={selItem} artwork={selArt} onClose={() => setSelected(null)} />}
-          {activeTab === "archive" && <ArchivePanel room={room} session={session} />}
+          {activeTab === "archive" && (
+            <>
+              <ArchivePanel room={room} session={session} />
+              <CoursesPanel room={room} />
+            </>
+          )}
           {activeTab === "export" && <ExportPanel scene={scene} />}
           {activeTab === "share" && <SharePanel room={room} session={session} onNeedLogin={() => setTab("login")} />}
           {activeTab === "login" && (

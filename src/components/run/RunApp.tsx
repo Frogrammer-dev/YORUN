@@ -627,7 +627,7 @@ export function RunApp() {
                 <Icon name="back" size={22} />
               </Link>
             )}
-            {loaded && status === "ready" && <label>안내 목소리 <select aria-label="안내 목소리" value={runVoice} onChange={event => {
+            {loaded && status === "ready" && <label className="voice-pick map-glass">안내 목소리 <select aria-label="안내 목소리" value={runVoice} onChange={event => {
               const choice = event.target.value === "male" ? "male" : "female";
               setRunVoice(choice);
               selectVoice(choice);

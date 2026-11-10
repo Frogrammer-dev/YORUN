@@ -88,12 +88,12 @@ export const FinderSettings = forwardRef<HTMLElement, FinderSettingsProps>(funct
         <>
       <h2 id="settings-title">어떤 그림을 달릴까요?</h2>
       <div className="shape-rail" ref={wheelRailRef} role="radiogroup" aria-label="그림 모양">
-        <button type="button" role="radio" aria-checked={v.shape === "auto"} aria-label="동네 길로 만들 수 있는 코스 추천" className="shape-tile shape-tile-wide" onClick={() => onChange({ shape: "auto" })}>
+        <button type="button" role="radio" aria-checked={v.shape === "auto"} aria-label="동네 추천: 동네 길로 만들 수 있는 코스" className="shape-tile shape-tile-wide" onClick={() => onChange({ shape: "auto" })}>
           <span className="tick"><Icon name="check" size={12} strokeWidth={3} /></span>
           <Icon name="sparkle" size={30} strokeWidth={1.8} />
           동네 추천
         </button>
-        <button type="button" role="radio" aria-checked={v.shape === "custom"} aria-label="찾고 싶은 그림 직접 그리기" className="shape-tile shape-tile-wide" onClick={() => onChange({ shape: "custom" })}>
+        <button type="button" role="radio" aria-checked={v.shape === "custom"} aria-label="내 그림: 찾고 싶은 그림 직접 그리기" className="shape-tile shape-tile-wide" onClick={() => onChange({ shape: "custom" })}>
           <span className="tick"><Icon name="check" size={12} strokeWidth={3} /></span>
           {v.custom ? <PathThumb lines={groupLines(v.custom)} size={36} pad={3} width={2.5} /> : <Icon name="pencil" size={30} strokeWidth={1.8} />}
           내 그림

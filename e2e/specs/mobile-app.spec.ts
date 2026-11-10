@@ -96,6 +96,32 @@ test.describe("앱 셸", () => {
     await expect(page.getByText("아직 초안이에요")).toHaveCount(0);
   });
 
+  test("@mobile 빈 작품방: 체험 완주 코스와 기본 코스를 예시 작품으로 걸고, 다시 들어와도 남는다", async ({ page }) => {
+    await page.goto("/hub");
+    await page.evaluate(() => localStorage.setItem("yorun.trial.records", JSON.stringify([{ id: "c1-1", name: "별", line: [[0, 0], [300, 0], [300, 300], [0, 300], [0, 0]], meters: 1200, paceSecPerKm: 330, style: "balance" }])));
+    await page.goto("/room");
+    await expect(page.getByRole("heading", { name: "코스로 작품 만들기" })).toBeVisible();
+    await page.getByRole("button", { name: "별 체험 코스를 작품으로 걸기" }).click();
+    await expect(page.locator(".scene-item")).toHaveCount(1);
+    await page.getByRole("button", { name: "하트 기본 코스를 작품으로 걸기" }).click();
+    await expect(page.locator(".scene-item")).toHaveCount(2);
+    await expect(page.locator('[aria-label="작품 보관 목록"] .tag', { hasText: "예시" })).toHaveCount(2);
+    // 바로 떠났다 돌아와도 남고, 이미 건 코스는 다시 걸지 않게 표시한다
+    await page.goto("/hub");
+    await page.goto("/room");
+    await expect(page.locator(".scene-item")).toHaveCount(2);
+    await expect(page.getByText("걸었어요")).toHaveCount(2);
+  });
+
+  test("@mobile 없는 주소: 한국어 안내와 메인으로 가는 링크", async ({ page, allowedErrors }) => {
+    allowedErrors.push(/404/);
+    const res = await page.goto("/no-such-page");
+    expect(res?.status()).toBe(404);
+    await expect(page.getByRole("heading", { name: "페이지를 찾을 수 없어요", level: 1 })).toBeVisible();
+    await page.getByRole("link", { name: "메인으로 가기" }).click();
+    await page.waitForURL((url) => url.pathname === "/");
+  });
+
   test("@mobile 동의 화면: 로그인 전에는 로그아웃·계정 삭제 없이 로그인으로 보낸다", async ({ page }) => {
     await page.goto("/consent?next=%2Fhub");
     await page.waitForURL((url) => url.pathname === "/login");
@@ -269,6 +295,44 @@ test.describe("코스 찾기", () => {
     await page.waitForURL("**/running");
   });
 
+  test("@mobile 내 그림을 고르면 그리기 칸이 찾기 버튼에 가리지 않고 보인다", async ({ page }) => {
+    await page.goto("/routes");
+    await waitForMap(page);
+    await page.getByRole("radio", { name: /^내 그림/ }).click();
+    await expect(page.locator(".finder-side")).toHaveClass(/sheet-full/);
+    await expect(page.locator(".draw-canvas")).toBeInViewport({ ratio: 0.9 });
+    // 부드럽게 스크롤되므로 끝날 때까지 기다린다
+    await expect.poll(async () => {
+      const pad = await box(page, ".draw-canvas");
+      const cta = await box(page, ".finder-side .sheet-cta");
+      return pad.y + pad.height - cta.y;
+    }).toBeLessThanOrEqual(1);
+  });
+
+  test("@mobile 결과 카드를 옆으로 넘기면 앞에 온 카드가 선택되고 위치가 보인다", async ({ page }) => {
+    await page.goto("/routes");
+    await waitForMap(page);
+    await page.getByRole("radio", { name: "네모" }).click();
+    await searchCourses(page);
+    const n = await page.locator(".cand").count();
+    test.skip(n < 2, "가짜 길 데이터에서 코스가 1개뿐");
+    await expect(page.locator(".cands-pos")).toContainText(`1/${n}`);
+    await page.locator(".cands").evaluate((e) => e.scrollBy({ left: e.clientWidth * 0.85 }));
+    await expect(page.locator(".cand").nth(1)).toHaveAttribute("aria-pressed", "true");
+    await expect(page.locator(".cands-pos")).toContainText(`2/${n}`);
+    // 카드가 아래 버튼에 가리지 않는다
+    const card = await box(page, ".cand-on");
+    const cta = await box(page, ".finder-side .sheet-cta");
+    expect(card.y + card.height).toBeLessThanOrEqual(cta.y + 16);
+  });
+
+  test("@mobile 그림 버튼의 읽히는 이름이 보이는 글자로 시작한다", async ({ page }) => {
+    await page.goto("/routes");
+    await waitForMap(page);
+    await expect(page.getByRole("radio", { name: /^동네 추천/ })).toHaveCount(1);
+    await expect(page.getByRole("radio", { name: /^내 그림/ })).toHaveCount(1);
+  });
+
   test("@mobile 줌·출처 버튼 터치 영역 44px", async ({ page }) => {
     await page.goto("/routes");
     await waitForMap(page);
@@ -303,6 +367,17 @@ test.describe("달리기", () => {
     await expect(page.getByRole("heading", { name: "달리기 완료" })).toBeVisible();
     // 완료 화면: 작품방에 걸기는 스크롤 없이 화면 안
     await expect(page.getByRole("button", { name: /작품방에 걸기/ })).toBeInViewport({ ratio: 1 });
+  });
+
+  test("@mobile 안내 목소리 선택은 밝은 지도 위에서도 읽히고 44px 이상", async ({ page }) => {
+    await page.goto("/run");
+    await page.locator(".leaflet-container").waitFor();
+    const pick = page.locator(".voice-pick");
+    await expect(pick).toBeVisible();
+    const look = await pick.evaluate((e) => { const s = getComputedStyle(e); return { fg: s.color, bg: s.backgroundColor }; });
+    expect(look.fg).toBe("rgb(17, 19, 24)");
+    expect(look.bg).not.toBe("rgba(0, 0, 0, 0)");
+    expect((await pick.boundingBox())!.height).toBeGreaterThanOrEqual(44);
   });
 
   test("@mobile 음성 버튼 아이콘이 배경과 구분된다", async ({ page }) => {

@@ -11,6 +11,8 @@ import { ApiError, api } from "@/lib/client/api";
 import { track } from "@/lib/client/analytics";
 import { browserSupabase } from "@/lib/client/supabaseBrowser";
 import type { RoomApi, Session } from "./useRoom";
+import { trialArtwork, trialTitle } from "@/lib/art/fromTrial";
+import { GUEST_RECORDS, loadTrialRecords, type TrialRecord } from "@/lib/battle/trialRecords";
 
 // ───────────────────────── 보관 목록 ─────────────────────────
 
@@ -88,6 +90,69 @@ export function ArchivePanel({ room, session }: { room: RoomApi; session: Sessio
           더 보기
         </button>
       )}
+    </section>
+  );
+}
+
+// ───────────────────────── 체험·기본 코스로 작품 만들기 ─────────────────────────
+
+/** 체험 완주 기록과 게스트 기본 코스를 작품으로 건다. 위치 없는 모양만 쓰고 예시로 표시한다 */
+export function CoursesPanel({ room }: { room: RoomApi }) {
+  const [trials, setTrials] = useState<TrialRecord[]>([]);
+  const [added, setAdded] = useState<Set<string>>(new Set());
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 이 기기에 보관한 체험 기록은 첫 화면 뒤에 읽는다
+    setTrials(loadTrialRecords());
+  }, []);
+  const full = room.model.items.length >= 20 || room.model.artworkCount >= 50;
+  // 이미 걸어 둔 코스는 다시 걸지 않게 표시한다 (다시 들어와도 유지)
+  const hungTitles = new Set(Object.values(room.model.artworks).map((a) => a.title));
+  const groups: Array<{ key: "trial" | "guest"; title: string; hint: string; rows: TrialRecord[] }> = [
+    { key: "trial", title: "체험 완주한 코스", hint: "코스 찾기에서 (체험) 완주하기로 끝낸 코스예요.", rows: trials },
+    { key: "guest", title: "기본 코스", hint: "게스트에게 처음 주는 다섯 모양이에요.", rows: GUEST_RECORDS },
+  ];
+
+  async function hang(record: TrialRecord, kind: "trial" | "guest") {
+    await room.addArtwork(trialArtwork(record, kind));
+    setAdded((s) => new Set(s).add(`${kind}:${record.id}`));
+  }
+
+  return (
+    <section className="panel" aria-label="체험·기본 코스로 작품 만들기">
+      <header className="panel-head">
+        <h2>코스로 작품 만들기</h2>
+      </header>
+      <p className="hint">실제로 달린 기록이 아니어서 &lsquo;예시&rsquo;로 표시돼요. 위치 없이 모양만 걸어요.</p>
+      {groups.map((g) => (
+        <div key={g.key}>
+          <h3 className="panel-sub">{g.title}</h3>
+          {g.rows.length === 0 ? (
+            <p className="hint">아직 없어요. {g.hint}</p>
+          ) : (
+            <ul className="archive">
+              {g.rows.map((r) => {
+                const done = added.has(`${g.key}:${r.id}`) || hungTitles.has(trialTitle(r, g.key));
+                return (
+                  <li key={`${g.key}:${r.id}`}>
+                    <span>
+                      <strong>{r.name}</strong>
+                      <br />
+                      <small>{formatDistance(r.meters)}</small>
+                    </span>
+                    {done ? (
+                      <span className="tag">걸었어요</span>
+                    ) : (
+                      <button type="button" className="btn" onClick={() => void hang(r, g.key)} disabled={full || !!room.busy} aria-label={`${r.name} ${g.key === "trial" ? "체험 코스" : "기본 코스"}를 작품으로 걸기`}>
+                        작품으로 걸기
+                      </button>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </div>
+      ))}
     </section>
   );
 }
