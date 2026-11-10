@@ -1,5 +1,5 @@
 import type { Budget } from "./budget";
-import { DistanceField, dominantGridAngle, placeShape, routePlacement, toCandidate, TUNING, type Placement, type Region, type RouteCandidate } from "./fit";
+import { DistanceField, dominantGridAngle, placeShape, routePlacement, toCandidate, type Placement, type Region, type RouteCandidate } from "./fit";
 import { hasEdge, PathFinder, type RoadGraph } from "./graph";
 import { resample, type ShapeDef } from "./shapes";
 
@@ -55,7 +55,7 @@ export function globalSearch(g: RoadGraph, shape: ShapeDef, region: Region, atte
     const c=toCandidate(g,shape,e.fit??p,e);
     if(c.lengthMeters<minMeters||c.lengthMeters>maxMeters||c.repeatRatio>.2)return undefined;
     if(!e.path.every(n=>g.x[n]>=region.minX-1&&g.x[n]<=region.maxX+1&&g.y[n]>=region.minY-1&&g.y[n]<=region.maxY+1))return undefined;
-    qualities.set(c,e.meanDev/(.08*c.placement.scale)+Math.log1p(TUNING.searchZigzag*e.zigzagPerKm)-Math.log(.55+.45*e.featureCoverage)-e.spikes*Math.log(.9));
+    qualities.set(c,e.meanDev/(.08*c.placement.scale)+Math.log1p(.03*e.zigzagPerKm)-Math.log(.55+.45*e.featureCoverage)-e.spikes*Math.log(.9));
     pool.push(c);return c;
   };
   for(const s of seeds.slice(0,attempts)){if(!available())break;check(s.p);}
