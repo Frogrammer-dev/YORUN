@@ -50,6 +50,21 @@ function PromptTab({ onChange }: { onChange: (g: ShapeGroup | null) => void }) {
   const [message, setMessage] = useState("");
   const pending = useRef<AbortController | null>(null);
   useEffect(() => () => pending.current?.abort(), []);
+  // 윤곽 생성은 10초 안팎 걸린다: 지난 시간을 보여 주고 취소할 수 있게 한다
+  const [elapsed, setElapsed] = useState(0);
+  useEffect(() => {
+    if (!busy) return;
+    const started = Date.now();
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 새 요청마다 0초부터 센다
+    setElapsed(0);
+    const timer = setInterval(() => setElapsed(Math.floor((Date.now() - started) / 1000)), 1000);
+    return () => clearInterval(timer);
+  }, [busy]);
+  function cancel() {
+    pending.current?.abort();
+    setBusy(false);
+    setMessage("윤곽 만들기를 취소했어요.");
+  }
   const input = parsePromptInput(prompt);
 
   function change(value: string) {
@@ -101,8 +116,14 @@ function PromptTab({ onChange }: { onChange: (g: ShapeGroup | null) => void }) {
     ) : (
       <>
         <button type="button" className="seg-btn" disabled={input.kind === "empty" || busy} onClick={() => void generate()}>
-          {busy ? "윤곽 만드는 중…" : "윤곽 만들기"}
+          {busy ? `윤곽 만드는 중… ${elapsed}초` : "윤곽 만들기"}
         </button>
+        {busy && (
+          <p className="hint" role="status">
+            안전 검사 → 실루엣 그리기 → 윤곽 정리 순서로 만들어요. 보통 10초 안팎 걸려요.{" "}
+            <button type="button" className="btn btn-ghost btn-sm" onClick={cancel}>취소</button>
+          </p>
+        )}
         <p className="hint">앞에 @를 붙이면 그 글자를 그려요. 설명과 생성된 윤곽은 윤곽 생성과 안전 검사를 위해 OpenAI로 전송돼요. 이름이나 연락처 같은 개인정보는 빼 주세요.</p>
       </>
     )}
