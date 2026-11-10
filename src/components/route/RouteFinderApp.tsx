@@ -9,7 +9,7 @@ import { boundsSizeMeters, mapAlive, setBasemap, useLeafletMap, type Basemap } f
 import type { FindResult, RouteCandidate } from "@/lib/route/fit";
 import type { FinderRequest, FinderResponse, ImprovedPart, MergeRequest, PartRequest, WarmRequest } from "@/lib/route/finder.worker";
 import { fetchOverpassTiles, splitBBox, type BBox } from "@/lib/route/osm";
-import { fetchElevation } from "@/lib/route/elevation";
+import { fetchElevation, slopeSegments, SLOPE_THRESHOLD, type SlopeKind } from "@/lib/route/elevation";
 import { recognizeCourses } from "@/lib/art/recognize";
 import { nameRoadDiscoveries } from "@/lib/art/roadReferenceClient";
 import { moveLines, pixelToLatLng } from "@/lib/route/present";
@@ -27,6 +27,8 @@ import { downloadBlob } from "@/lib/render/png";
 import { Icon } from "@/components/Icon";
 
 const ROUTE_COLOR = "#0EA5E9";
+/** 경사 색: 오르막·평지·내리막 (평지는 원래 코스 색) */
+const SLOPE_COLOR: Record<SlopeKind, string> = { up: "#E5484D", flat: ROUTE_COLOR, down: "#16A34A" };
 /** 이보다 오차가 큰 현재 위치(대개 IP 기반 추정)로는 지도를 옮기지 않는다 (m) */
 const MAX_LOCATE_ACCURACY = 3000;
 
@@ -54,6 +56,8 @@ export function RouteFinderApp() {
   const areaRect = useRef<Leaflet.Rectangle | null>(null);
   const [elev, setElev] = useState<Record<string, Exclude<ElevationState, undefined>>>({});
   const [basemap, setBasemapState] = useState<Basemap>("simple");
+  /** 고른 코스 선을 경사로 칠하기 (기본은 꺼짐: 그림 모양을 먼저 보게) */
+  const [slopeOn, setSlopeOn] = useState(false);
   /** 장소 검색으로 고른 곳 표시 (새로 고르면 바뀐다) */
   const placeMarker = useRef<Leaflet.CircleMarker | null>(null);
   /** 지금 결과를 찾을 때 쓴 내 그림 (이미지 겹쳐 보기용, 찾은 뒤 그림을 바꿔도 결과와 맞게 유지) */
@@ -215,7 +219,7 @@ export function RouteFinderApp() {
 
   // 후보 그리기
   const draw = useCallback(
-    (cands: RouteCandidate[], sel: string | null, hover: string | null) => {
+    (cands: RouteCandidate[], sel: string | null, hover: string | null, slope: ReturnType<typeof slopeSegments> | null = null) => {
       if (!lm || !layers.current || !mapAlive(lm.map)) return;
       const g = layers.current;
       g.clearLayers();
@@ -232,7 +236,8 @@ export function RouteFinderApp() {
         const toLL = active.shapeId === "custom" && art?.image && part?.frame && part.shape.points.length === active.outline.length ? pixelToLatLng(part.shape.points, active.outline, part.frame) : null;
         if (toLL && art?.image) artImageLayer(lm.L, art.image.url, [toLL(0, 0), toLL(art.image.width, 0), toLL(0, art.image.height)]).addTo(g);
         lm.L.polyline(active.latlngs, { ...round, color: "#fff", weight: 10, opacity: 0.95, interactive: false }).addTo(g);
-        lm.L.polyline(active.latlngs, { ...round, color: ROUTE_COLOR, weight: 6, opacity: 1, interactive: false }).addTo(g);
+        if (slope?.length) for (const seg of slope) lm.L.polyline(seg.latlngs, { ...round, color: SLOPE_COLOR[seg.kind], weight: 6, opacity: 1, interactive: false }).addTo(g);
+        else lm.L.polyline(active.latlngs, { ...round, color: ROUTE_COLOR, weight: 6, opacity: 1, interactive: false }).addTo(g);
         // 획 사이 이동 구간: 그림이 아니므로 회색 점선으로 덮는다
         for (const mv of moveLines(active)) {
           lm.L.polyline(mv, { ...round, color: "#fff", weight: 7, opacity: 1, interactive: false }).addTo(g);
@@ -248,9 +253,14 @@ export function RouteFinderApp() {
     [lm],
   );
 
+  const selectedProfile = selected ? elev[selected] : undefined;
+  const slope = useMemo(() => {
+    const c = visible.find((x) => x.id === selected);
+    return slopeOn && c && typeof selectedProfile === "object" ? slopeSegments(c.latlngs, selectedProfile) : null;
+  }, [slopeOn, visible, selected, selectedProfile]);
   useEffect(() => {
-    if (phase.kind === "done") draw(visible, selected, hover);
-  }, [phase, visible, selected, hover, draw]);
+    if (phase.kind === "done") draw(visible, selected, hover, slope);
+  }, [phase, visible, selected, hover, draw, slope]);
 
   /** 코스를 찾을 영역: 지금 화면, 또는 지도 가운데 중심의 정사각형 */
   function searchBounds(id: AreaId = area): Leaflet.LatLngBounds {
@@ -714,8 +724,29 @@ export function RouteFinderApp() {
             >
               <Icon name="layers" size={22} />
             </button>
+            {phase.kind === "done" && selected && (
+              <button
+                type="button"
+                className="map-fab"
+                aria-pressed={slopeOn}
+                aria-label={slopeOn ? "코스 경사 색 끄기" : "코스를 경사로 색칠하기"}
+                title={slopeOn ? "경사 색 끄기" : "경사 색 보기"}
+                onClick={() => setSlopeOn((v) => !v)}
+              >
+                <Icon name="mountain" size={22} />
+              </button>
+            )}
           </div>
           <div className="map-badges">
+            {slopeOn && phase.kind === "done" && selected && (
+              <span className="badge map-glass slope-legend" role="status">
+                {selectedProfile === "loading" ? "고도 받는 중…" : selectedProfile === "error" ? "고도를 받지 못했어요" : (
+                  <>
+                    <i style={{ background: SLOPE_COLOR.up }} />오르막 {SLOPE_THRESHOLD}%↑<i style={{ background: SLOPE_COLOR.flat }} />평지<i style={{ background: SLOPE_COLOR.down }} />내리막
+                  </>
+                )}
+              </span>
+            )}
             {basemapOk === false && <span className="badge badge-failed map-glass">바탕 지도 없음 · 코스 찾기는 돼요</span>}
             {areaInfo && (
               <span className={`badge map-glass ${tooBig ? "badge-failed" : ""} ${phase.kind === "done" && !tooBig ? "visually-hidden" : ""}`}>

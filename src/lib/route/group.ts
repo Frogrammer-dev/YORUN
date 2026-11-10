@@ -3,6 +3,7 @@
 // 이동 구간은 그림이 아니므로 달리기 화면에서 점선으로 보여 주고, 기록을 멈추고 이동하도록 안내한다.
 
 import { budgetOf, type Budget } from "./budget";
+import { groupBudgetMs } from "./groupBudget";
 import { overlap } from "./discover";
 import {
   DistanceField,
@@ -78,7 +79,8 @@ export function findGroupRoutes(g: RoadGraph, group: ShapeGroup, o: GroupOptions
   const R = o.region;
   const W = R.maxX - R.minX, H = R.maxY - R.minY;
   const tiles = Math.max(1, Math.round(W / 4500)) * Math.max(1, Math.round(H / 4500));
-  const budget = budgetOf(o, Math.min(75_000, 35_000 * tiles));
+  // 획이 많을수록 탐색 시간을 늘린다 (6획까지는 예전과 같다)
+  const budget = budgetOf(o, groupBudgetMs(group.parts.length, tiles));
   const finder = new PathFinder(g);
   const blocks = buildBlocks(g, (W * H) / 4);
   const field = new DistanceField(g, R, Math.max(15, Math.max(W, H) / 450));

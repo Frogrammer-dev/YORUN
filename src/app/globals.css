@@ -259,6 +259,10 @@ legend { font-weight: 700; font-size: var(--fs-callout); padding-right: var(--sp
 .map-tl { position: absolute; z-index: 500; top: calc(var(--safe-t) + 12px); left: calc(var(--safe-l) + 12px); display: flex; gap: var(--sp-2); align-items: center; width: calc(100% - 80px - var(--safe-l) - var(--safe-r)); }
 .map-tl .map-fab { flex: none; width: 48px; height: 48px; }
 .map-glass { background: var(--c-white-92); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: var(--sh-map); }
+.slope-legend { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; }
+.slope-legend::before { display: none; }
+.slope-legend i { display: inline-block; width: 14px; height: 4px; border-radius: 2px; margin-left: 6px; }
+.slope-legend i:first-child { margin-left: 0; }
 .map-badges { position: absolute; z-index: 500; left: 50%; transform: translateX(-50%); bottom: 36px; display: flex; gap: var(--sp-2); flex-wrap: wrap; justify-content: center; width: max-content; max-width: calc(100% - 24px); pointer-events: none; }
 .map-badges .badge { pointer-events: auto; }
 /* Leaflet 확대·축소는 오른쪽 아래 (fab와 겹치지 않게) */

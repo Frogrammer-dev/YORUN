@@ -1,17 +1,17 @@
 "use client";
 // 찾고 싶은 그림 만들기: 손으로 그리기(여러 획 가능) · 글자와 설명 입력 · 이미지 올리기.
-// 어느 방법이든 '닫힌 획 여러 개'로 바꾸고, 획 사이는 코스에서 이동 구간이 된다.
+// 어느 방법이든 '닫힌 획 여러 개'로 바꾸고(획 수 제한 없음, 많을수록 탐색이 오래 걸린다), 획 사이는 코스에서 이동 구간이 된다.
 
 import { useEffect, useRef, useState } from "react";
 import { binarize, traceOutlines } from "@/lib/art/trace";
 import { MAX_DRAWN_LETTERS, parsePromptInput } from "@/lib/route/promptInput";
 import { groupFromLoops, groupLines, type ShapeGroup } from "@/lib/route/shapes";
+import { GROUP_BASE_PARTS, groupBudgetMs } from "@/lib/route/groupBudget";
 
 type Tab = "draw" | "prompt" | "image";
 type Pt = [number, number];
 
 const SIZE = 240;
-const MAX_PARTS = 6;
 
 export function CustomShapeInput({ value, onChange }: { value: ShapeGroup | null; onChange: (g: ShapeGroup | null) => void }) {
   const [tab, setTab] = useState<Tab>("draw");
@@ -37,6 +37,13 @@ export function CustomShapeInput({ value, onChange }: { value: ShapeGroup | null
       {value && (
         <p className="hint">
           {value.parts.length > 1 ? `획 ${value.parts.length}개 — 획마다 고리 코스를 만들고, 획 사이는 이동 구간(점선)으로 이어요.` : "이 그림과 닮은 코스를 찾아요."}
+          {value.parts.length > 1 && (
+            <>
+              {" "}획이 많을수록 코스를 찾는 데 오래 걸려요
+              {value.parts.length > GROUP_BASE_PARTS ? ` (이 그림은 최대 약 ${Math.round(groupBudgetMs(value.parts.length) / 1000)}초, 넓은 영역은 더 걸릴 수 있어요)` : ""}.
+              {" "}획마다 길이를 나눠 가지므로, 획이 많으면 코스 거리를 길게 고르면 그림이 덜 뭉개져요.
+            </>
+          )}
         </p>
       )}
     </div>
@@ -155,7 +162,7 @@ type Stroke = { pts: Pt[]; open: boolean };
 /** 경로 찾기에는 닫힌 획만 쓴다 (열린 선의 왕복 경로는 아직 지원하지 않는다) */
 const closedGroup = (list: Stroke[]) => {
   const loops = list.filter((s) => !s.open).map((s) => s.pts);
-  return loops.length ? groupFromLoops(loops, { order: "given", minPartRatio: 0.08, maxParts: MAX_PARTS }) : null;
+  return loops.length ? groupFromLoops(loops, { order: "given", minPartRatio: 0.08 }) : null;
 };
 
 function DrawTab({ onChange }: { onChange: (g: ShapeGroup | null) => void }) {
@@ -206,10 +213,6 @@ function DrawTab({ onChange }: { onChange: (g: ShapeGroup | null) => void }) {
           const s = cur;
           setCur(null);
           if (!s || s.length < 8) return;
-          if (strokes.length >= MAX_PARTS) {
-            setError(`획은 ${MAX_PARTS}개까지 그릴 수 있어요.`);
-            return;
-          }
           const open = isOpenStroke(s);
           const before = closedGroup(strokes)?.parts.length ?? 0;
           const g = update([...strokes, { pts: s, open }]);
@@ -286,7 +289,7 @@ function groupFromText(text: string): ShapeGroup | null {
   ctx.textBaseline = "middle";
   ctx.fillStyle = "#000";
   ctx.fillText(text, c.width / 2, c.height / 2);
-  return groupFromLoops(outlinesFromCanvas(c, "alpha"), { order: "leftToRight", name: `"${text}"`, minPartRatio: 0.1, maxParts: MAX_PARTS, maxVertices: 28 });
+  return groupFromLoops(outlinesFromCanvas(c, "alpha"), { order: "leftToRight", name: `"${text}"`, minPartRatio: 0.1, maxVertices: 28 });
 }
 
 function ImageTab({ onChange }: { onChange: (g: ShapeGroup | null) => void }) {
@@ -314,7 +317,7 @@ function ImageTab({ onChange }: { onChange: (g: ShapeGroup | null) => void }) {
       c.width = Math.max(8, Math.round((img.naturalWidth || 240) * k));
       c.height = Math.max(8, Math.round((img.naturalHeight || 240) * k));
       c.getContext("2d")!.drawImage(img, 0, 0, c.width, c.height);
-      const g = groupFromLoops(outlinesFromCanvas(c, "luma"), { order: "leftToRight", name: "내 그림", minPartRatio: 0.15, maxParts: MAX_PARTS, maxVertices: 28 });
+      const g = groupFromLoops(outlinesFromCanvas(c, "luma"), { order: "leftToRight", name: "내 그림", minPartRatio: 0.15, maxVertices: 28 });
       setError(g ? null : "윤곽을 찾지 못했어요. 배경과 그림이 또렷하게 구분되는 단순한 그림을 써 주세요.");
       // ponytail: 올릴 때마다 object URL 하나가 탭이 닫힐 때까지 남는다 (이미지 몇 장 수준이라 해제하지 않음)
       if (!g) URL.revokeObjectURL(url);

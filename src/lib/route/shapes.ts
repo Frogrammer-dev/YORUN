@@ -293,7 +293,7 @@ export function groupFromLoops(
   }
   if (!parts.length) return null;
   if (opts.order === "leftToRight") parts.sort((p, q) => p.ox - q.ox);
-  return { id: "custom", name: opts.name ?? "내 그림", parts: parts.slice(0, opts.maxParts ?? 6) };
+  return { id: "custom", name: opts.name ?? "내 그림", parts: parts.slice(0, opts.maxParts ?? Infinity) };
 }
 
 /** 여러 획 그림의 획들을 그림 전체 좌표(y 위로)의 선 목록으로 (미리보기·썸네일용) */

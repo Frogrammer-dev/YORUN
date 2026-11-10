@@ -38,6 +38,59 @@ export function sampleAlong(latlngs: [number, number][], n = 100): { pts: [numbe
   return { pts, dist };
 }
 
+export type SlopeKind = "up" | "flat" | "down";
+export interface SlopeSegment { kind: SlopeKind; latlngs: [number, number][]; meters: number }
+
+/** 경사 구분 기준: 이 이상 오르면 오르막, 이 이상 내려가면 내리막 (%) */
+export const SLOPE_THRESHOLD = 4;
+/** 고도 자료가 약 90m 격자라 짧은 구간 경사는 잡음이 크다: 이 거리 이상으로 묶어 잰다 */
+const SLOPE_WINDOW_M = 120;
+
+/** 코스를 고도 그래프에 맞춰 오르막·평지·내리막 구간으로 나눈다 (지도 선 색칠용) */
+export function slopeSegments(latlngs: [number, number][], p: Pick<ElevationProfile, "dist" | "elev">): SlopeSegment[] {
+  if (latlngs.length < 2 || p.dist.length < 2) return [];
+  const cum = [0];
+  for (let i = 1; i < latlngs.length; i++) cum.push(cum[i - 1] + meters(latlngs[i - 1], latlngs[i]));
+  const total = cum[cum.length - 1];
+  const at = (d: number): [number, number] => {
+    let j = 1;
+    while (j < cum.length - 1 && cum[j] < d) j++;
+    const t = Math.max(0, Math.min(1, (d - cum[j - 1]) / (cum[j] - cum[j - 1] || 1)));
+    const a = latlngs[j - 1], b = latlngs[j];
+    return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+  };
+  // 고도 점 사이 구간마다, 앞뒤로 SLOPE_WINDOW_M 이상 떨어진 점으로 경사를 잰다
+  const kinds: { from: number; to: number; kind: SlopeKind }[] = [];
+  for (let i = 0; i < p.dist.length - 1; i++) {
+    const mid = (p.dist[i] + p.dist[i + 1]) / 2;
+    let a = i, b = i + 1;
+    while (p.dist[b] - p.dist[a] < SLOPE_WINDOW_M && (a > 0 || b < p.dist.length - 1)) {
+      if (a > 0 && (b === p.dist.length - 1 || mid - p.dist[a - 1] <= p.dist[b + 1] - mid)) a--;
+      else b++;
+    }
+    const grade = ((p.elev[b] - p.elev[a]) / Math.max(1, p.dist[b] - p.dist[a])) * 100;
+    const kind: SlopeKind = grade >= SLOPE_THRESHOLD ? "up" : grade <= -SLOPE_THRESHOLD ? "down" : "flat";
+    const last = kinds[kinds.length - 1];
+    if (last && last.kind === kind) last.to = p.dist[i + 1];
+    else kinds.push({ from: p.dist[i], to: p.dist[i + 1], kind });
+  }
+  // 꼭대기·바닥처럼 묶음 길이보다 짧은 조각은 앞 구간에 합친다 (지도에서 잡음처럼 깜빡이지 않게)
+  for (let i = 1; i < kinds.length; ) {
+    if (kinds[i].to - kinds[i].from < SLOPE_WINDOW_M) {
+      kinds[i - 1].to = kinds[i].to;
+      kinds.splice(i, 1);
+      if (i < kinds.length && kinds[i].kind === kinds[i - 1].kind) { kinds[i - 1].to = kinds[i].to; kinds.splice(i, 1); }
+    } else i++;
+  }
+  // 고도 거리와 코스 거리가 조금 달라도 끝까지 덮는다
+  kinds[0].from = 0;
+  kinds[kinds.length - 1].to = total;
+  return kinds.map(({ from, to, kind }) => {
+    const inner = latlngs.filter((_, i) => cum[i] > from && cum[i] < to);
+    return { kind, meters: Math.round(to - from), latlngs: [at(from), ...inner, at(to)] };
+  });
+}
+
 /** 높이 목록 → 오르막 합계. 고도 자료의 잔물결(±hysteresis m)은 오르막으로 세지 않는다 */
 export function ascentOf(elev: number[], hysteresis = 2): number {
   let up = 0, ref = elev[0];

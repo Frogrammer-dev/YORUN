@@ -187,7 +187,6 @@ export const FinderSettings = forwardRef<HTMLElement, FinderSettingsProps>(funct
       {running && toggle("preferCarFree", "차 없는 길 우선 (보행로·산책로)")}
       {running && toggle("avoidTunnels", "터널·지하도 피하기")}
       {toggle("preferLit", "가로등 있는 길 우선")}
-      <p className="hint">길 조건은 OpenStreetMap에 기록된 정보만 써요. 가로등은 기록된 길이 아주 적어(대부분 지역 2% 이하) 효과가 작아요.</p>
 
       {running && (
       <fieldset className="seg-field">
@@ -212,7 +211,6 @@ export const FinderSettings = forwardRef<HTMLElement, FinderSettingsProps>(funct
 
       {/* 전송 고지는 접지 않는다. 찾기 버튼이 항상 마지막에 오도록 버튼 위에 둔다 */}
       {!running && v.shape === "auto" && v.aiOutline && <p className="hint">동네 추천은 그림을 해석하려고 코스 선 그림(위치 정보 제외)을 외부 AI(OpenAI)로 보낼 수 있어요. 조건 더 보기에서 끌 수 있어요.</p>}
-      <p className="hint">지도 영역(좌표 범위)이 길 데이터를 받기 위해 OpenStreetMap 데이터 서버로 전송돼요. 내 정확한 위치는 보내지 않아요. 지도 위 장소 검색을 쓰면 검색어가 카카오로 전송돼요.</p>
 
       <div className="sheet-cta">
         {progress ? (
