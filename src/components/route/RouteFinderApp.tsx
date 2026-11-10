@@ -658,7 +658,7 @@ export function RouteFinderApp() {
         // 내 그림을 고르면 그리기 칸이 찾기 버튼 아래에 숨지 않게 시트를 펼치고 칸을 보여 준다
         if (patch.shape === "custom" && settings.shape !== "custom") {
           setSheetFull(true);
-          setTimeout(() => sheetScroll.current?.querySelector(".draw-canvas")?.scrollIntoView({ block: "center", behavior: "smooth" }), 250);
+          setTimeout(() => sheetScroll.current?.querySelector(".draw-foot")?.scrollIntoView({ block: "nearest", behavior: "smooth" }), 250);
         }
       }}
       onChooseArea={chooseArea}

@@ -301,11 +301,25 @@ test.describe("코스 찾기", () => {
     await page.getByRole("radio", { name: /^내 그림/ }).click();
     await expect(page.locator(".finder-side")).toHaveClass(/sheet-full/);
     await expect(page.locator(".draw-canvas")).toBeInViewport({ ratio: 0.9 });
-    // 부드럽게 스크롤되므로 끝날 때까지 기다린다
+    // 부드럽게 스크롤되므로 끝날 때까지 기다린다. 그리기 칸과 그 아래 안내 문구 모두 찾기 버튼 위에 있어야 한다
     await expect.poll(async () => {
-      const pad = await box(page, ".draw-canvas");
+      const hint = await box(page, ".draw-foot .hint");
       const cta = await box(page, ".finder-side .sheet-cta");
-      return pad.y + pad.height - cta.y;
+      return hint.y + hint.height - cta.y;
+    }).toBeLessThanOrEqual(1);
+    const pad = await box(page, ".draw-canvas");
+    expect(pad.y).toBeGreaterThanOrEqual((await box(page, ".finder-side")).y);
+    // 직선을 그리면 바뀐 안내도 가리지 않는다
+    const p = await box(page, ".draw-canvas");
+    await page.mouse.move(p.x + p.width * 0.15, p.y + p.height * 0.3);
+    await page.mouse.down();
+    for (let k = 1; k <= 20; k++) await page.mouse.move(p.x + p.width * (0.15 + 0.035 * k), p.y + p.height * (0.3 + 0.01 * k));
+    await page.mouse.up();
+    await expect(page.locator(".draw-foot .hint")).toContainText("점선으로 남아요");
+    await expect.poll(async () => {
+      const hint = await box(page, ".draw-foot .hint");
+      const cta = await box(page, ".finder-side .sheet-cta");
+      return hint.y + hint.height - cta.y;
     }).toBeLessThanOrEqual(1);
   });
 

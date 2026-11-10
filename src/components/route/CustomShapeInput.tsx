@@ -164,6 +164,11 @@ function DrawTab({ onChange }: { onChange: (g: ShapeGroup | null) => void }) {
   const [error, setError] = useState<string | null>(null);
   const drawing = useRef(false);
   const svgRef = useRef<SVGSVGElement>(null);
+  const footRef = useRef<HTMLDivElement>(null);
+  // 획을 그린 뒤 나오는 안내가 아래 고정 찾기 버튼에 가리지 않게 보이는 곳까지만 스크롤한다
+  useEffect(() => {
+    if (error) footRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }, [error]);
 
   const at = (e: React.PointerEvent): Pt => {
     const r = svgRef.current!.getBoundingClientRect();
@@ -226,7 +231,7 @@ function DrawTab({ onChange }: { onChange: (g: ShapeGroup | null) => void }) {
           </text>
         )}
       </svg>
-      <div className="draw-foot">
+      <div className="draw-foot" ref={footRef}>
         <p className="hint" role={error ? "alert" : undefined}>
           {error ?? "시작점 가까이에서 손을 떼면 이어진 획이 되고, 멀리서 떼면 이어지지 않은 선(직선)으로 남아요. 떨어진 여러 획(예: 하트 두 개)도 그릴 수 있어요."}
         </p>
