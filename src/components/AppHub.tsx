@@ -5,6 +5,7 @@ import { BrandMark, Icon } from "./Icon";
 import { MonthPanel, PointsRow, WeekChart } from "./HomeStats";
 import { LandingStart } from "./LandingStart";
 import { ResumeBanner, RunEntry } from "./RunEntry";
+import { isPolicyDraft } from "@/lib/legal/policy";
 
 const CourseRow = () => (
   <Link href="/routes" className="hub-row">
@@ -100,9 +101,11 @@ export function HubScreen() {
             © OpenStreetMap contributors
           </a>
         </p>
-        <p className="hub-credits">
-          <Link href="/privacy">개인정보 처리방침</Link>
-        </p>
+        {!isPolicyDraft() && (
+          <p className="hub-credits">
+            <Link href="/privacy">개인정보 처리방침</Link>
+          </p>
+        )}
       </div>
     </main>
   );

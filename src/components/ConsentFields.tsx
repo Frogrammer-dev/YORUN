@@ -2,12 +2,13 @@
 // 가입 때와 Google 첫 로그인 때 함께 쓰는 나이 확인과 개인정보 동의.
 
 import Link from "next/link";
-import { CONSENT_SUMMARY, FEATURES, type AgeGroup } from "@/lib/legal/policy";
+import { CONSENT_SUMMARY, FEATURES, isPolicyDraft, type AgeGroup } from "@/lib/legal/policy";
 
 export const UNDER14_NOTICE = "만 14세 미만은 보호자의 동의가 먼저 필요해요. 보호자 확인 방법을 준비하고 있어서 지금은 가입할 수 없어요. 로그인 없이 코스 찾기와 달리기는 할 수 있어요.";
 
 export function ConsentFields({ age, onAge, agreed, onAgreed }: { age: AgeGroup | null; onAge: (age: AgeGroup) => void; agreed: boolean; onAgreed: (agreed: boolean) => void }) {
-  const privacyLink = <p className="hint"><Link href="/privacy" target="_blank">개인정보 처리방침 전문 보기</Link></p>;
+  // 초안 처리방침은 공개하지 않으므로 링크도 숨긴다 (lib/legal/policy.ts의 OPERATOR를 모두 채우면 다시 보인다)
+  const privacyLink = isPolicyDraft() ? null : <p className="hint"><Link href="/privacy" target="_blank">개인정보 처리방침 전문 보기</Link></p>;
   if (!FEATURES.signupAgeAndTerms) {
     return (
       <div className="consent-box">

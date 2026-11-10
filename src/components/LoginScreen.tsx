@@ -7,7 +7,7 @@ import { AuthForm } from "./AuthForm";
 import { BrandMark, Icon } from "./Icon";
 import { browserSupabase } from "@/lib/client/supabaseBrowser";
 import { cleanGuestName } from "@/lib/guestName";
-import { FEATURES } from "@/lib/legal/policy";
+import { FEATURES, isPolicyDraft } from "@/lib/legal/policy";
 
 export function LoginScreen({ next }: { next: string }) {
   const supabase = browserSupabase();
@@ -70,7 +70,7 @@ export function LoginScreen({ next }: { next: string }) {
             <Link href="/settings" className="btn btn-link wide">데이터와 계정</Link>
           </section>
         )}
-        <p className="hub-credits"><Link href="/privacy">개인정보 처리방침</Link></p>
+        {!isPolicyDraft() && <p className="hub-credits"><Link href="/privacy">개인정보 처리방침</Link></p>}
       </div>
     </main>
   );

@@ -1,18 +1,34 @@
 "use client";
 // 첫 로그인 동의. 동의 없이는 계정 기능을 쓰지 못하고, 로그아웃하거나 계정을 지울 수 있다.
+// 동의가 필요한 계정(게스트가 아닌 로그인)에게만 보인다. 로그인 전이면 로그인으로, 이미 동의했거나 게스트면 원래 화면으로 보낸다.
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ConsentFields } from "./ConsentFields";
 import { BrandMark } from "./Icon";
 import { browserSupabase } from "@/lib/client/supabaseBrowser";
-import { CONSENT_REQUIRED_MESSAGE, FEATURES, INITIAL_AGE, consentRecord, type AgeGroup } from "@/lib/legal/policy";
+import { CONSENT_REQUIRED_MESSAGE, FEATURES, INITIAL_AGE, consentRecord, hasValidConsent, type AgeGroup } from "@/lib/legal/policy";
 
 export function ConsentScreen({ next }: { next: string }) {
   const [age, setAge] = useState<AgeGroup | null>(INITIAL_AGE);
   const [agreed, setAgreed] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [needsConsent, setNeedsConsent] = useState(false);
+
+  useEffect(() => {
+    const auth = browserSupabase()?.auth;
+    if (!auth) {
+      window.location.replace(`/login?next=${encodeURIComponent(next)}`);
+      return;
+    }
+    void auth.getUser().then(({ data }) => {
+      const user = data.user;
+      if (!user) window.location.replace(`/login?next=${encodeURIComponent(next)}`);
+      else if (user.is_anonymous || hasValidConsent(user.user_metadata)) window.location.replace(next);
+      else setNeedsConsent(true);
+    });
+  }, [next]);
 
   async function agree() {
     if (busy) return;
@@ -36,6 +52,9 @@ export function ConsentScreen({ next }: { next: string }) {
     await browserSupabase()?.auth.signOut();
     window.location.assign("/");
   }
+
+  // 계정 확인 전에는 로그아웃·계정 삭제 버튼을 보여 주지 않는다
+  if (!needsConsent) return <main className="hub-page auth-page" aria-busy="true" />;
 
   return (
     <main className="hub-page auth-page">

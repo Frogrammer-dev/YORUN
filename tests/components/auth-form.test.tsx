@@ -4,7 +4,7 @@ import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/re
 import { afterEach } from "vitest";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { AuthForm } from "@/components/AuthForm";
-import { FEATURES, POLICY_VERSION, hasValidConsent } from "@/lib/legal/policy";
+import { FEATURES, POLICY_VERSION, hasValidConsent, isPolicyDraft } from "@/lib/legal/policy";
 import { safeNext } from "@/lib/safeNext";
 
 const auth = {
@@ -134,7 +134,9 @@ describe("AuthForm", () => {
     expect(screen.queryByRole("radio", { name: "만 14세 미만" })).toBeNull();
     expect(screen.queryByText("왜 모으나요")).toBeNull();
     expect(screen.getByRole("checkbox", { name: /개인정보 수집과 이용에 동의/ })).toBeTruthy();
-    expect(screen.getByRole("link", { name: /처리방침/ })).toBeTruthy();
+    // 처리방침이 초안이면 공개하지 않으므로 링크도 없다
+    if (isPolicyDraft()) expect(screen.queryByRole("link", { name: /처리방침/ })).toBeNull();
+    else expect(screen.getByRole("link", { name: /처리방침/ })).toBeTruthy();
     typeEmail();
     typePassword("password1");
     submit();
