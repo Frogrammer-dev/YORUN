@@ -1,5 +1,5 @@
 import { StepBudget, type Budget } from './budget';
-import { evaluatePath, placeShape, toCandidate, type Placement, type Region, type RouteCandidate } from './fit';
+import { evaluatePath, placeShape, toCandidate, TUNING, type Placement, type Region, type RouteCandidate } from './fit';
 import type { RoadGraph } from './graph';
 import { buildBlocks, growLoops, matchShape, shapeSamples, unionForPlacement, type BlockMap, type NaturalLoop } from './loops';
 import type { ShapeDef } from './shapes';
@@ -118,7 +118,7 @@ export function refineLoopFacesBeam(g:RoadGraph,shape:ShapeDef,region:Region,inp
  const validPath=(p:number[])=>p.length>=4&&p[0]===p.at(-1)&&p.every((v,i)=>v>=0&&within(g.x[v],g.y[v])&&(!i||g.adjTo.slice(g.adjStart[p[i-1]],g.adjStart[p[i-1]+1]).includes(v)));
  const validPlacement=(p:Placement)=>placeShape(shape.points,p).every(([x,y])=>within(x,y));
  type State={faces:Set<number>;candidate:RouteCandidate;score:number};
- const objective=(e:ReturnType<typeof evaluatePath>,p:Placement)=>e.meanDev/(.08*p.scale)+Math.log1p(.03*e.zigzagPerKm)-Math.log(.55+.45*e.featureCoverage)-e.spikes*Math.log(.9);
+ const objective=(e:ReturnType<typeof evaluatePath>,p:Placement)=>e.meanDev/(.08*p.scale)+Math.log1p(TUNING.searchZigzag*e.zigzagPerKm)-Math.log(.55+.45*e.featureCoverage)-e.spikes*Math.log(.9);
  let best:RouteCandidate|null=null,bestScore=Infinity,evaluated=0,states=0,completedDepth=0;
  const seen=new Set<string>();
  const retained=new Map<string,{candidate:RouteCandidate;score:number}>();
