@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { Icon } from "@/components/Icon";
 import { CONSENT_SUMMARY, OPERATOR, POLICY_VERSION, isPolicyDraft } from "@/lib/legal/policy";
 
@@ -22,6 +23,8 @@ const VENDORS: Array<[string, string, string]> = [
 ];
 
 export default function PrivacyPage() {
+  // 운영자 정보가 비어 있는 초안은 공개하지 않는다 (lib/legal/policy.ts의 OPERATOR를 모두 채우면 다시 열린다)
+  if (isPolicyDraft()) notFound();
   return (
     <main className="hub-page policy-page">
       <header className="appbar">
@@ -33,9 +36,6 @@ export default function PrivacyPage() {
         </span>
       </header>
       <div className="hub-body">
-        {isPolicyDraft() && (
-          <p className="auth-error" role="status">아직 초안이에요. 표시된 항목을 채우고 법률 검토를 마친 뒤 공개해야 해요.</p>
-        )}
         <section>
           <h2>1. 처리 목적과 항목, 보유 기간</h2>
           <div className="table-scroll" tabIndex={0} role="region" aria-label="처리 항목 표">
