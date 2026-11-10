@@ -6,8 +6,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type * as Leaflet from "leaflet";
 import { boundsSizeMeters, mapAlive, setBasemap, useLeafletMap, type Basemap } from "@/components/map/useLeafletMap";
-import type { RouteCandidate } from "@/lib/route/fit";
-import type { FinderRequest, FinderResponse } from "@/lib/route/finder.worker";
+import type { FindResult, RouteCandidate } from "@/lib/route/fit";
+import type { FinderRequest, FinderResponse, ImprovedPart, MergeRequest, PartRequest, WarmRequest } from "@/lib/route/finder.worker";
 import { fetchOverpassTiles, splitBBox, type BBox } from "@/lib/route/osm";
 import { fetchElevation } from "@/lib/route/elevation";
 import { recognizeCourses } from "@/lib/art/recognize";
@@ -78,6 +78,10 @@ export function RouteFinderApp() {
   const [hover, setHover] = useState<string | null>(null);
   const [areaInfo, setAreaInfo] = useState<{ w: number; h: number } | null>(null);
   const workerRef = useRef<Worker | null>(null);
+  const helpersRef = useRef<Worker[]>([]);
+  const helperWarmKey = useRef("");
+  /** 마지막으로 받은 길 데이터 원문 (보조 Worker에 넘긴다) */
+  const lastTexts = useRef<string[] | null>(null);
   const reqId = useRef(0);
   const layers = useRef<Leaflet.LayerGroup | null>(null);
   const searchedBox = useRef<{ bbox: BBox; dataBox: BBox; nearby: boolean; rect: Leaflet.Rectangle | null; fetchedKey: string; area: AreaId } | null>(null);
@@ -172,11 +176,25 @@ export function RouteFinderApp() {
   const startWorker = useCallback(() => {
     workerRef.current?.terminate();
     workerRef.current = new Worker(new URL("../../lib/route/finder.worker.ts", import.meta.url), { type: "module" });
+    // 보조 Worker도 함께 멈춘다 (다음 병렬 검색에서 새로 띄우고 길 데이터를 다시 넘긴다)
+    for (const h of helpersRef.current) h.terminate();
+    helpersRef.current = [];
+    helperWarmKey.current = "";
   }, []);
   useEffect(() => {
     startWorker();
-    return () => workerRef.current?.terminate();
+    return () => {
+      workerRef.current?.terminate();
+      for (const h of helpersRef.current) h.terminate();
+    };
   }, [startWorker]);
+  /** 동네 추천 다듬기용 보조 Worker: 코어가 4개 이상일 때만 2개 (주 Worker까지 상위 그림 3개를 동시에) */
+  const ensureHelpers = useCallback(() => {
+    const cores = typeof navigator !== "undefined" ? navigator.hardwareConcurrency || 0 : 0;
+    if (cores < 4) return [];
+    while (helpersRef.current.length < 2) helpersRef.current.push(new Worker(new URL("../../lib/route/finder.worker.ts", import.meta.url), { type: "module" }));
+    return helpersRef.current;
+  }, []);
 
   // 탐색 취소: 늦게 오는 응답은 버리고, 길 데이터 받기를 멈추고, 계산 중인 워커는 새로 띄운다.
   // 새 워커에는 길 데이터 캐시가 없어 다음 검색은 no_cache 처리로 다시 받아 온다.
@@ -369,9 +387,66 @@ export function RouteFinderApp() {
       branches: discover && branches,
       nearby: compareNearby,
     };
+    if (texts) lastTexts.current = texts;
+    // 동네 추천 다듬기는 코어가 넉넉하면 보조 Worker들과 나눠 한다 (그림마다 같은 시간, 기다림만 짧게)
+    const helpers = discover && !running && !compareNearby && lastTexts.current ? ensureHelpers() : [];
+    req.parallel = helpers.length > 0;
+    if (req.parallel) {
+      const warmKey = JSON.stringify([req.dataBox, excludeSteps, detail, avoidUnpaved, avoidMajor, preferLit]);
+      if (helperWarmKey.current !== warmKey) {
+        for (const h of helpers) h.postMessage({ type: "warm", base: { ...req, texts: lastTexts.current } } satisfies WarmRequest);
+        helperWarmKey.current = warmKey;
+      }
+    }
+    // 병렬 다듬기 진행: 그림별 조각을 모아 끝나면 주 Worker에서 합친다
+    let parallelRun: { initial: FindResult; targets: string[]; budgetMs: number; parts: (ImprovedPart | null)[]; fractions: number[]; queue: Map<Worker, number[]> } | null = null;
+    const sendPart = (worker: Worker, i: number) => {
+      const run = parallelRun!;
+      run.queue.set(worker, [...(run.queue.get(worker) ?? []), i]);
+      worker.postMessage({ type: "part", reqId: id, base: { ...req, texts: null }, initial: run.initial, shapeId: run.targets[i], budgetMs: run.budgetMs } satisfies PartRequest);
+    };
+    /** 그림 조각 관련 메시지면 처리하고 true (Worker는 받은 순서대로 하나씩 처리하므로 대기열 맨 앞이 지금 그림) */
+    const onPartMessage = (worker: Worker, m: FinderResponse) => {
+      const run = parallelRun;
+      if (!run || m.reqId !== reqId.current) return false;
+      const current = run.queue.get(worker)?.[0];
+      if (current === undefined) return false;
+      if (m.type === "progress") {
+        run.fractions[current] = m.fraction;
+        const mean = run.fractions.reduce((a, b) => a + b, 0) / run.fractions.length;
+        setPhase({ kind: "searching", fraction: 0.3 + 0.7 * mean, label: m.label });
+        return true;
+      }
+      if (m.type === "part" || m.type === "error") {
+        run.queue.get(worker)!.shift();
+        if (m.type === "error") {
+          // 보조 Worker가 실패하면 그 그림은 주 Worker가 대신 다듬는다 (주 Worker 실패는 평소 오류 처리)
+          if (worker === w) return false;
+          sendPart(w, current);
+          return true;
+        }
+        run.parts[current] = m.part;
+        run.fractions[current] = 1;
+        if (run.parts.every(Boolean)) {
+          setPhase({ kind: "searching", fraction: 0.99, label: "결과 모으는 중" });
+          w.postMessage({ type: "merge", reqId: id, base: { ...req, texts: null }, initial: run.initial, parts: run.parts as ImprovedPart[] } satisfies MergeRequest);
+        }
+        return true;
+      }
+      return false;
+    };
+    for (const h of helpers) h.onmessage = (ev: MessageEvent<FinderResponse>) => { onPartMessage(h, ev.data); };
     w.onmessage = (ev: MessageEvent<FinderResponse>) => {
       const m = ev.data;
       if (m.reqId !== reqId.current) return;
+      if (m.type === "improve") {
+        parallelRun = { initial: m.initial, targets: m.targets, budgetMs: m.budgetMs, parts: m.targets.map(() => null), fractions: m.targets.map(() => 0), queue: new Map() };
+        const workers = [w, ...helpers];
+        m.targets.forEach((_, i) => sendPart(workers[i % workers.length], i));
+        return;
+      }
+      if (onPartMessage(w, m)) return;
+      if (m.type === "part") return;
       if (m.type === "progress") setPhase({ kind: "searching", fraction: m.fraction, label: m.label });
       else if (m.type === "error") {
         if (m.code === "no_cache") {

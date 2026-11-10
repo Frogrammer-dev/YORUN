@@ -4,7 +4,7 @@
 import { discoverRoutes } from "./discover";
 import { findRunningCourses } from "./runCourses";
 import { TimeBudget } from "./budget";
-import { budgetSlice, improveRoutes } from "./qualitySearch";
+import { budgetSlice, improveOneShape, improveRoutes, improveTargetIds, mergeImproved, type ImprovedEntry } from "./qualitySearch";
 import type { FindResult } from "./fit";
 import { project, type RoadGraph } from "./graph";
 import { findGroupRoutes } from "./group";
@@ -43,7 +43,18 @@ export type FinderRequest = {
   branches?: boolean;
   /** Keep selected-area candidates while comparing nearby streets as well. */
   nearby?: boolean;
+  /** 동네 추천 다듬기를 여러 Worker로 나눌 수 있으면 true (화면이 나눠 보낸다) */
+  parallel?: boolean;
 };
+
+export type ImprovedPart = { entries: ImprovedEntry[]; evaluated: number; partial: boolean };
+/** 보조 Worker가 미리 길 그래프를 만들어 둔다 */
+export type WarmRequest = { type: "warm"; base: FinderRequest };
+/** 그림 하나만 다듬는다 */
+export type PartRequest = { type: "part"; reqId: number; base: FinderRequest; initial: FindResult; shapeId: string; budgetMs: number };
+/** 그림별로 다듬은 후보를 합쳐 결과를 만든다 */
+export type MergeRequest = { type: "merge"; reqId: number; base: FinderRequest; initial: FindResult; parts: ImprovedPart[] };
+export type WorkerMessage = FinderRequest | WarmRequest | PartRequest | MergeRequest;
 
 export type FinderResponse =
   | { type: "progress"; reqId: number; fraction: number; label: string }
@@ -53,6 +64,8 @@ export type FinderResponse =
       result: FindResult;
       graph: { nodes: number; edges: number; dataTimestamp: string | null };
     }
+  | { type: "improve"; reqId: number; initial: FindResult; targets: string[]; budgetMs: number }
+  | { type: "part"; reqId: number; shapeId: string; part: ImprovedPart }
   | { type: "error"; reqId: number; code: "bad_data" | "no_roads" | "no_cache" | "internal"; message: string };
 
 let cache: { key: string; json: OverpassJson; graph: RoadGraph } | null = null;
@@ -60,10 +73,8 @@ const innerGraphs = new WeakMap<RoadGraph, Map<string, RoadGraph>>();
 
 const ctx = self as unknown as DedicatedWorkerGlobalScope;
 
-ctx.onmessage = (ev: MessageEvent<FinderRequest>) => {
-  const req = ev.data;
-  const post = (m: FinderResponse) => ctx.postMessage(m);
-  try {
+/** 길 데이터로 그래프·탐색 영역을 준비한다. 실패하면 오류를 보내고 null */
+function prepare(req: FinderRequest, post: (m: FinderResponse) => void) {
     const boxKey = `${req.dataBox.south},${req.dataBox.west},${req.dataBox.north},${req.dataBox.east}`;
     const gopts: GraphOptions = { excludeSteps: req.excludeSteps, detail: req.detail, avoidUnpaved: req.avoidUnpaved, avoidMajor: req.avoidMajor, preferLit: req.preferLit, preferCarFree: req.preferCarFree, avoidTunnels: req.avoidTunnels };
     const key = `${boxKey}|${JSON.stringify(gopts)}`;
@@ -104,8 +115,22 @@ ctx.onmessage = (ev: MessageEvent<FinderRequest>) => {
     const [minX, minY] = project(localGraph.origin, req.region.south, req.region.west);
     const [maxX, maxY] = project(localGraph.origin, req.region.north, req.region.east);
     const region = { minX, minY, maxX, maxY };
-    const onProgress = (fraction: number, label: string) => post({ type: "progress", reqId: req.reqId, fraction, label });
     const prefs = { avoidMajor: req.avoidMajor, preferLit: req.preferLit, preferCarFree: req.preferCarFree };
+    return { graph, localGraph, region, prefs, compareNearby };
+}
+
+ctx.onmessage = (ev: MessageEvent<WorkerMessage>) => {
+  const msg = ev.data;
+  const post = (m: FinderResponse) => ctx.postMessage(m);
+  try {
+    if (msg.type === "warm") { prepare(msg.base, () => {}); return; }
+    if (msg.type === "part") return runPart(msg, post);
+    if (msg.type === "merge") return runMerge(msg, post);
+    const req = msg;
+    const ready = prepare(req, post);
+    if (!ready) return;
+    const { graph, localGraph, region, prefs, compareNearby } = ready;
+    const onProgress = (fraction: number, label: string) => post({ type: "progress", reqId: req.reqId, fraction, label });
     let result: FindResult;
     if (req.mode === "running") {
       // 러닝 코스: 그림과 무관하게 출발점에서 돌아오는 쾌적한 고리
@@ -121,7 +146,8 @@ ctx.onmessage = (ev: MessageEvent<FinderRequest>) => {
     } else {
       const target = req.custom ? req.custom.parts[0].shape : req.shape ? SHAPE_BY_ID[req.shape] : null;
       const shapes = req.mode === "shape" && target ? [target] : SHAPES;
-      const budget = new TimeBudget(compareNearby ? 75_000 : Math.min(75_000, 45_000 * Math.max(1, Math.round((maxX-minX)/4500)) * Math.max(1, Math.round((maxY-minY)/4500))));
+      const totalMs = compareNearby ? 75_000 : Math.min(75_000, 45_000 * Math.max(1, Math.round((region.maxX-region.minX)/4500)) * Math.max(1, Math.round((region.maxY-region.minY)/4500)));
+      const budget = new TimeBudget(totalMs);
       const localEnd = compareNearby ? .6 : 1;
       result = discoverRoutes(localGraph, {
         mode: req.mode === "shape" && target ? "shape" : "discover",
@@ -136,6 +162,16 @@ ctx.onmessage = (ev: MessageEvent<FinderRequest>) => {
         budget: budgetSlice(budget,0,.3*localEnd),
         onProgress: (fraction,label) => onProgress(fraction*.3*localEnd,label),
       });
+      // 병렬 다듬기: 동네 추천의 상위 그림들을 여러 Worker가 나눠 다듬는다 (화면 쪽이 나눠 보내고 merge로 합친다).
+      // 그림마다 순차 탐색 때와 같은 시간을 주므로 그림 하나의 계산량은 같고, 기다리는 시간만 줄어든다.
+      if (req.parallel && !compareNearby && !(req.mode === "shape" && target)) {
+        const qopts = { mode: "discover" as const, shapes, region, minMeters: req.minMeters, maxMeters: req.maxMeters, prefs };
+        const targets = improveTargetIds(localGraph, result, qopts);
+        if (targets.length > 1) {
+          post({ type: "improve", reqId: req.reqId, initial: result, targets, budgetMs: Math.max(0, budget.remaining()) * totalMs / targets.length });
+          return;
+        }
+      }
       result = improveRoutes(localGraph,result,{
         mode: req.mode === "shape" && target ? "shape" : "discover", shapes, region,
         minMeters:req.minMeters, maxMeters:req.maxMeters, prefs,
@@ -162,6 +198,30 @@ ctx.onmessage = (ev: MessageEvent<FinderRequest>) => {
     }
     post({ type: "result", reqId: req.reqId, result, graph: { nodes: graph.n, edges: graph.edgeCount, dataTimestamp: graph.dataTimestamp } });
   } catch (e) {
-    post({ type: "error", reqId: req.reqId, code: "internal", message: (e as Error)?.message ?? "탐색 중 오류" });
+    post({ type: "error", reqId: "reqId" in msg ? msg.reqId : 0, code: "internal", message: (e as Error)?.message ?? "탐색 중 오류" });
   }
 };
+
+function discoverOptions(req: FinderRequest, region: { minX: number; minY: number; maxX: number; maxY: number }, prefs: { avoidMajor?: boolean; preferLit?: boolean; preferCarFree?: boolean }) {
+  return { mode: "discover" as const, shapes: SHAPES, region, minMeters: req.minMeters, maxMeters: req.maxMeters, prefs };
+}
+
+function runPart(msg: PartRequest, post: (m: FinderResponse) => void) {
+  const ready = prepare({ ...msg.base, reqId: msg.reqId, texts: null }, post);
+  if (!ready) return;
+  const shape = SHAPES.find((s) => s.id === msg.shapeId);
+  const part = improveOneShape(ready.localGraph, msg.initial, {
+    ...discoverOptions(msg.base, ready.region, ready.prefs),
+    budget: new TimeBudget(msg.budgetMs),
+    onProgress: (fraction) => post({ type: "progress", reqId: msg.reqId, fraction, label: shape ? `${shape.name}에 더 가까운 길` : "" }),
+  }, msg.shapeId);
+  post({ type: "part", reqId: msg.reqId, shapeId: msg.shapeId, part });
+}
+
+function runMerge(msg: MergeRequest, post: (m: FinderResponse) => void) {
+  const ready = prepare({ ...msg.base, reqId: msg.reqId, texts: null }, post);
+  if (!ready) return;
+  const result = mergeImproved(ready.localGraph, msg.initial, discoverOptions(msg.base, ready.region, ready.prefs), msg.parts);
+  const g = ready.graph;
+  post({ type: "result", reqId: msg.reqId, result, graph: { nodes: g.n, edges: g.edgeCount, dataTimestamp: g.dataTimestamp } });
+}
