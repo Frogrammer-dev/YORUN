@@ -326,6 +326,27 @@ test.describe("코스 찾기", () => {
     expect(card.y + card.height).toBeLessThanOrEqual(cta.y + 16);
   });
 
+  test("@mobile 윤곽 만들기: 기다리는 동안 지난 시간을 보여 주고 취소할 수 있다", async ({ page }) => {
+    await page.route("**/api/recognition/outline", async (route) => {
+      await new Promise((r) => setTimeout(r, 4000));
+      await route.fulfill({ status: 500, json: { message: "늦게 온 응답" } }).catch(() => {});
+    });
+    await page.goto("/routes");
+    await waitForMap(page);
+    await page.getByRole("radio", { name: /^내 그림/ }).click();
+    await page.getByRole("tab", { name: "글자·설명" }).click();
+    await page.getByPlaceholder(/귀 접힌 토끼/).fill("꼬리가 긴 고양이");
+    await page.getByRole("button", { name: "윤곽 만들기" }).click();
+    await expect(page.getByRole("button", { name: /윤곽 만드는 중… [1-9]초/ })).toBeVisible({ timeout: 4000 });
+    await expect(page.getByRole("status").filter({ hasText: "보통 10초 안팎" })).toBeVisible();
+    await page.getByRole("button", { name: "취소" }).click();
+    await expect(page.getByText("윤곽 만들기를 취소했어요.")).toBeVisible();
+    await expect(page.getByRole("button", { name: "윤곽 만들기" })).toBeEnabled();
+    // 취소한 요청의 늦은 응답은 화면을 바꾸지 않는다
+    await page.waitForTimeout(4500);
+    await expect(page.getByText("늦게 온 응답")).toHaveCount(0);
+  });
+
   test("@mobile 그림 버튼의 읽히는 이름이 보이는 글자로 시작한다", async ({ page }) => {
     await page.goto("/routes");
     await waitForMap(page);
