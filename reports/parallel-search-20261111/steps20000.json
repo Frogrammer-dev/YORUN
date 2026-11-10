@@ -1,0 +1,127 @@
+{
+  "criteria": "C1 동일, C2 1위 평균 ≥ -1·최악 ≥ -3·상위3 평균 ≥ -1",
+  "summary": {
+    "steps": 20000,
+    "c1": true,
+    "meanTop1Diff": 0,
+    "worstTop1Diff": 0,
+    "meanTop3Diff": 0,
+    "c2": true
+  },
+  "rows": [
+    {
+      "region": "해운대",
+      "nodes": 736,
+      "targets": [
+        "heart",
+        "star",
+        "circle"
+      ],
+      "c1Identical": true,
+      "seqTop1": 61,
+      "parTop1": 61,
+      "seqTop3": 61,
+      "parTop3": 61,
+      "seqCount": 1,
+      "parCount": 1,
+      "seqMs": 4723,
+      "parWallMs": 2342,
+      "parSumMs": 4864
+    },
+    {
+      "region": "강남",
+      "nodes": 1498,
+      "targets": [
+        "square",
+        "circle",
+        "heart"
+      ],
+      "c1Identical": true,
+      "seqTop1": 67,
+      "parTop1": 67,
+      "seqTop3": 64,
+      "parTop3": 64,
+      "seqCount": 2,
+      "parCount": 2,
+      "seqMs": 1271,
+      "parWallMs": 501,
+      "parSumMs": 1180
+    },
+    {
+      "region": "둔산",
+      "nodes": 1193,
+      "targets": [
+        "car",
+        "square",
+        "apple"
+      ],
+      "c1Identical": true,
+      "seqTop1": 77,
+      "parTop1": 77,
+      "seqTop3": 73.66666666666667,
+      "parTop3": 73.66666666666667,
+      "seqCount": 6,
+      "parCount": 6,
+      "seqMs": 6107,
+      "parWallMs": 2397,
+      "parSumMs": 6480
+    },
+    {
+      "region": "세종",
+      "nodes": 492,
+      "targets": [
+        "heart",
+        "star",
+        "circle"
+      ],
+      "c1Identical": true,
+      "seqTop1": 0,
+      "parTop1": 0,
+      "seqTop3": 0,
+      "parTop3": 0,
+      "seqCount": 0,
+      "parCount": 0,
+      "seqMs": 5152,
+      "parWallMs": 2127,
+      "parSumMs": 5489
+    },
+    {
+      "region": "서면",
+      "nodes": 1617,
+      "targets": [
+        "diamond",
+        "car",
+        "heart"
+      ],
+      "c1Identical": true,
+      "seqTop1": 72,
+      "parTop1": 72,
+      "seqTop3": 70,
+      "parTop3": 70,
+      "seqCount": 5,
+      "parCount": 5,
+      "seqMs": 2252,
+      "parWallMs": 791,
+      "parSumMs": 2321
+    },
+    {
+      "region": "광교",
+      "nodes": 731,
+      "targets": [
+        "diamond",
+        "heart",
+        "star"
+      ],
+      "c1Identical": true,
+      "seqTop1": 67,
+      "parTop1": 67,
+      "seqTop3": 65,
+      "parTop3": 65,
+      "seqCount": 2,
+      "parCount": 2,
+      "seqMs": 9965,
+      "parWallMs": 5285,
+      "parSumMs": 11545
+    }
+  ]
+}

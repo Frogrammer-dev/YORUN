@@ -3,10 +3,10 @@ import { pointSegDist, type RoadGraph } from './graph';
 import { resample, type ShapeDef } from './shapes';
 import type { Budget } from './budget';
 
-export interface OrderedContourOptions {bins:number;guideWeight:number;radiusFraction:number;reverse?:boolean;maxExpanded?:number;turnWeight?:number;turnMode?:'angle'|'sharp';normalizedCost?:boolean;expectedRoadMeters?:number;lengthWeight?:number;minMeters?:number;maxMeters?:number;budget?:Budget;}
+export interface OrderedContourOptions {bins:number;guideWeight:number;radiusFraction:number;reverse?:boolean;maxExpanded?:number;turnWeight?:number;turnMode?:'angle'|'sharp';normalizedCost?:boolean;expectedRoadMeters?:number;lengthWeight?:number;/** 정규화 비용에서 45° 이상 꺾임 한 번의 비용 계수 (기본 0.03) */turnCost?:number;minMeters?:number;maxMeters?:number;budget?:Budget;}
 /** Phase advances keep the exact road node fixed. Only road-edge transitions add path geometry. */
 export function orderedContourPath(g:RoadGraph,shape:ShapeDef,p:Placement,region:Region,start:number,options:OrderedContourOptions){
- const {bins,guideWeight,radiusFraction,reverse=false,maxExpanded=400000,turnWeight=80,turnMode='angle',normalizedCost=false,expectedRoadMeters=5000,lengthWeight=1,minMeters=3000,maxMeters=8000,budget}=options;
+ const {bins,guideWeight,radiusFraction,reverse=false,maxExpanded=400000,turnWeight=80,turnMode='angle',normalizedCost=false,expectedRoadMeters=5000,lengthWeight=1,turnCost=.03,minMeters=3000,maxMeters=8000,budget}=options;
  if(!Number.isFinite(minMeters)||!Number.isFinite(maxMeters)||minMeters<0||maxMeters<=0||minMeters>maxMeters||budget&&!budget.ok())return {path:null,expanded:0,states:0};
  let outline=placeShape(resample(shape.points,bins),p);if(reverse)outline=[outline[0],...outline.slice(1,-1).reverse(),outline[0]];
  const originalOutline=placeShape(shape.points,p),outlinePerimeter=originalOutline.slice(1).reduce((sum,b,i)=>sum+Math.hypot(b[0]-originalOutline[i][0],b[1]-originalOutline[i][1]),0);
@@ -41,7 +41,7 @@ export function orderedContourPath(g:RoadGraph,shape:ShapeDef,p:Placement,region
    let turn=0;if(edge!==m){const u=from[edge],dx=g.x[node]-g.x[u],dy=g.y[node]-g.y[u],ex=g.x[v]-g.x[node],ey=g.y[v]-g.y[node];turn=Math.acos(Math.max(-1,Math.min(1,(dx*ex+dy*ey)/(Math.hypot(dx,dy)*Math.hypot(ex,ey)||1))));}
    const deviation=(segment[node*bins+contourPhase]+segment[v*bins+contourPhase])/2;
    // Local approximation: expected route length is fixed, and raw-edge turns approximate final RDP turns.
-   const roadPenalty=normalizedCost?d*deviation/(.16*p.scale*expectedRoadMeters)+d*1e-7+.03/(expectedRoadMeters/1000)*+(turn>=Math.PI/4):d*(lengthWeight+guideWeight*deviation/tol)+turnWeight*(turnMode==='sharp'?+(turn>=Math.PI/4):turn);
+   const roadPenalty=normalizedCost?d*deviation/(.16*p.scale*expectedRoadMeters)+d*1e-7+turnCost/(expectedRoadMeters/1000)*+(turn>=Math.PI/4):d*(lengthWeight+guideWeight*deviation/tol)+turnWeight*(turnMode==='sharp'?+(turn>=Math.PI/4):turn);
    update(s,phase*stride+e,c+roadPenalty,len);
   }
  }
