@@ -32,8 +32,28 @@ it.each(["귀가 접힌 토끼", "사랑해", "♣", "왜가리", "야구장 외
 it.each([["flagged", 422], ["malformed", 503], ["offline", 503]])("blocks generation when input check is %s", async (kind, status) => {
   if (kind === "offline") upstream.mockRejectedValueOnce(new Error());
   else upstream.mockResolvedValueOnce(kind === "flagged" ? safety(true) : Response.json({ results: [] }));
+  upstream.mockResolvedValueOnce(reviewed("검토된 도형"));
   expect((await request("입력")).status).toBe(status);
-  expect(upstream).toHaveBeenCalledTimes(1);
+  // 안전 검사와 주제 검토는 함께 보내지만, 안전 검사가 막으면 생성 단계로 가지 않는다
+  expect(upstream.mock.calls.map(([url]) => new URL(url).pathname)).toEqual(["/v1/moderations", "/v1/responses"]);
+});
+it("sends the input check and the subject review together and reports step timings", async () => {
+  let release!: () => void;
+  const gate = new Promise<void>(r => { release = r; });
+  upstream.mockImplementationOnce(async () => { await gate; return safety(false); })
+    .mockImplementationOnce(async () => { release(); return reviewed("검토된 도형"); })
+    .mockResolvedValueOnce(Response.json({ data: [{ b64_json: await silhouettePng() }] })).mockResolvedValueOnce(safety(false));
+  const response = await request("도형");
+  // 검토가 안전 검사를 기다렸다면 gate가 풀리지 않아 끝나지 않는다
+  expect(response.status).toBe(200);
+  expect(response.headers.get("server-timing")).toMatch(/^check;dur=\d+, image;dur=\d+, verify;dur=\d+$/);
+});
+it("blocks with the safety reason even when the review also fails", async () => {
+  upstream.mockResolvedValueOnce(safety(true)).mockResolvedValueOnce(reviewed("", "off_topic"));
+  const res = await request("입력");
+  expect(res.status).toBe(422);
+  expect((await res.json()).code).toBe("unsafe_outline");
+  expect(upstream).toHaveBeenCalledTimes(2);
 });
 it("falls back to model points when the image step fails", async () => {
   upstream.mockResolvedValueOnce(safety(false)).mockResolvedValueOnce(reviewed("검토된 도형")).mockResolvedValueOnce(imageFailed()).mockResolvedValueOnce(generated()).mockResolvedValueOnce(safety(false));
