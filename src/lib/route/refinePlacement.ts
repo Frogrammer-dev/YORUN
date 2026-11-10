@@ -1,4 +1,4 @@
-import { evaluatePath, placeShape, type Evaluated, type Placement, type Region } from "./fit";
+import { evaluatePath, placeShape, TUNING, type Evaluated, type Placement, type Region } from "./fit";
 import type { RoadGraph } from "./graph";
 import type { ShapeDef } from "./shapes";
 import type { Budget } from "./budget";
@@ -29,7 +29,7 @@ export function refinePathPlacement(
     return e;
   };
   // Negative log of the unchanged, unrounded similarity expression. Lower is better.
-  const objective = (e: Evaluated, p: Placement) => e.meanDev / (.08 * p.scale) + Math.log1p(.03 * e.zigzagPerKm) - Math.log(.55 + .45 * e.featureCoverage) - e.spikes * Math.log(.9);
+  const objective = (e: Evaluated, p: Placement) => e.meanDev / (.08 * p.scale) + Math.log1p(TUNING.searchZigzag*e.zigzagPerKm) - Math.log(.55 + .45 * e.featureCoverage) - e.spikes * Math.log(.9);
   let bestP = { ...initial };
   let best = check(bestP);
   if (!best) return null;

@@ -1,6 +1,6 @@
 import { TimeBudget, type Budget } from './budget';
 import { overlap } from './discover';
-import { DistanceField, evaluatePath, placeShape, toCandidate, type FindResult, type Region, type RouteCandidate } from './fit';
+import { DistanceField, evaluatePath, placeShape, toCandidate, TUNING, type FindResult, type Region, type RouteCandidate } from './fit';
 import { hasEdge, project, type RoadGraph } from './graph';
 import { globalSearch } from './globalSearch';
 import { searchBlockLoops } from './loopSearch';
@@ -64,7 +64,7 @@ function assessor(g: RoadGraph, o: QualityOptions) {
     let fingerprint=2166136261;
     for(const ch of JSON.stringify(candidate.latlngs))fingerprint=Math.imul(fingerprint ^ ch.charCodeAt(0),16777619);
     candidate.id += `-q${(fingerprint>>>0).toString(36)}`;
-    const quality = e.meanDev/(.08*c.placement.scale) + Math.log1p(.03*e.zigzagPerKm) - Math.log(.55+.45*e.featureCoverage) - e.spikes*Math.log(.9)
+    const quality = e.meanDev/(.08*c.placement.scale) + Math.log1p(TUNING.searchZigzag*e.zigzagPerKm) - Math.log(.55+.45*e.featureCoverage) - e.spikes*Math.log(.9)
       + (o.prefs?.avoidMajor ? .15*candidate.roadInfo.major : 0)
       + (o.prefs?.preferLit && candidate.roadInfo.lit !== null ? .05*(1-candidate.roadInfo.lit) : 0)
       + (o.prefs?.preferCarFree ? .1*(1-candidate.roadInfo.carFree) : 0);
