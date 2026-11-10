@@ -79,17 +79,41 @@ export function useRoom(session: Session) {
 
   const schedulePersist = useCallback(() => {
     if (persistTimer.current) clearTimeout(persistTimer.current);
-    persistTimer.current = setTimeout(() => void persistNow(), 400);
+    persistTimer.current = setTimeout(() => {
+      persistTimer.current = null;
+      void persistNow();
+    }, 400);
+  }, [persistNow]);
+
+  // 0.4초 안에 화면을 떠나면 예약된 저장이 사라져 방금 건 작품을 잃었다: 떠날 때 남은 저장을 바로 한다
+  useEffect(() => {
+    const flush = () => {
+      if (!persistTimer.current) return;
+      clearTimeout(persistTimer.current);
+      persistTimer.current = null;
+      void persistNow();
+    };
+    window.addEventListener("pagehide", flush);
+    return () => {
+      window.removeEventListener("pagehide", flush);
+      flush();
+    };
   }, [persistNow]);
 
   const markDirty = useCallback(
     (next: RoomModel) => {
       editSeq.current++;
+      const itemsChanged = next.items.length !== modelRef.current.items.length;
       commit(next);
       setStatus("dirty");
-      schedulePersist();
+      // 작품을 걸거나 뺄 때는 기다리지 않고 저장한다 (끌기·회전 같은 연속 편집만 모아서 저장)
+      if (itemsChanged) {
+        if (persistTimer.current) clearTimeout(persistTimer.current);
+        persistTimer.current = null;
+        void persistNow();
+      } else schedulePersist();
     },
-    [commit, schedulePersist],
+    [commit, persistNow, schedulePersist],
   );
 
   // ───────── 서버 방 불러오기 ─────────

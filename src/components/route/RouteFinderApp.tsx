@@ -580,6 +580,11 @@ export function RouteFinderApp() {
           setPickingStart(false);
         }
         setSettings((v) => ({ ...v, ...patch }));
+        // 내 그림을 고르면 그리기 칸이 찾기 버튼 아래에 숨지 않게 시트를 펼치고 칸을 보여 준다
+        if (patch.shape === "custom" && settings.shape !== "custom") {
+          setSheetFull(true);
+          setTimeout(() => sheetScroll.current?.querySelector(".draw-canvas")?.scrollIntoView({ block: "center", behavior: "smooth" }), 250);
+        }
       }}
       onChooseArea={chooseArea}
       progress={phase.kind === "fetching" || phase.kind === "searching" ? phase : null}
@@ -681,7 +686,14 @@ export function RouteFinderApp() {
             {phase.kind === "done" && view === "results" && !trial && (
               <section className="sheet-section" aria-label="찾은 코스">
                 <div className="sheet-head">
-                  <h2>찾은 코스 {visible.length}개</h2>
+                  <h2>
+                    찾은 코스 {visible.length}개
+                    {visible.length > 1 && (
+                      <span className="cands-pos">
+                        {" "}· {Math.max(0, visible.findIndex((c) => c.id === selected)) + 1}/{visible.length} 옆으로 넘겨 보기
+                      </span>
+                    )}
+                  </h2>
                   <button type="button" className="btn btn-ghost btn-sm" onClick={goSettings}>
                     조건 바꾸기
                   </button>
@@ -694,7 +706,15 @@ export function RouteFinderApp() {
                   </p>
                 )}
                 {phase.candidates.length === 0 && (
-                  <p className="empty">이 영역·거리 조건에서는 그림이 잘 나오는 연결 코스를 찾지 못했어요. 지도를 옮기거나 거리 범위·그림·길 단순화를 바꿔 보세요. (끊긴 곳을 가짜 선으로 잇지 않아요.)</p>
+                  <>
+                    <p className="empty">
+                      이 영역·거리 조건에서는 그림이 잘 나오는 연결 코스를 찾지 못했어요.{" "}
+                      {phase.discover ? "하트·별처럼 정해진 그림을 고르면 같은 지도에서도 코스가 나올 수 있어요." : "지도를 옮기거나 거리 범위·그림·길 단순화를 바꿔 보세요."} (끊긴 곳을 가짜 선으로 잇지 않아요.)
+                    </p>
+                    <button type="button" className="btn btn-secondary wide" onClick={goSettings}>
+                      다른 그림 고르기
+                    </button>
+                  </>
                 )}
                 <CourseList candidates={visible} elev={elev} selected={selected} discover={phase.discover} onChoose={choose} onHover={setHover} />
                 {sel && (

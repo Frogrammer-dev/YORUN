@@ -40,7 +40,7 @@ export function HomeScreen() {
         <WeekChart />
         <div className="hub-head">
           <h2>오늘의 코스</h2>
-          <Link href="/room">작품방</Link>
+          <Link href="/room">작품방 보기</Link>
         </div>
         <RunEntry />
         <section className="hub-start" aria-label="코스 찾기">
