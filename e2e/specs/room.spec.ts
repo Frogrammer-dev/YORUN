@@ -42,7 +42,7 @@ test("끊긴 구간은 잇지 않고 구간별 선·단일점으로 전시", asy
   await expect(star.locator("circle")).toHaveCount(1);
 });
 
-test("버튼·키보드·드래그로 편집하고 기준선과 비교", async ({ page }) => {
+test("버튼·키보드·드래그로 편집", async ({ page }) => {
   await startWithHeart(page);
   await importGpx(page, "02-star-two-segments-gap.gpx", 2);
   const first = page.locator(".scene-item").first();
@@ -67,9 +67,8 @@ test("버튼·키보드·드래그로 편집하고 기준선과 비교", async (
   await page.mouse.move(box.x + box.width / 2 + 120, box.y + box.height / 2 + 60, { steps: 8 });
   await page.mouse.up();
   await expect.poll(() => second.getAttribute("transform")).not.toBe(t0);
-
-  await page.getByRole("button", { name: "기준선과 전시용 선 비교" }).click();
-  await expect(page.getByText(/정규화 기준선 \(\d+점\)/)).toBeVisible();
+  // 기준선·전시용 선 비교는 사용자 요청으로 없앴다
+  await expect(page.getByRole("button", { name: /기준선과 전시용 선 비교/ })).toHaveCount(0);
 });
 
 test("PNG 1000×750 내보내기", async ({ page }, info) => {

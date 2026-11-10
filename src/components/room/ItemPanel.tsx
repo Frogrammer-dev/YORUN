@@ -1,9 +1,9 @@
 "use client";
 // S-02 선택 편집 + S-03 작품 상세 패널.
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FRAMES, ROOM } from "@/lib/contracts/limits";
-import type { ArtworkView, Pt, RoomItem } from "@/lib/contracts/types";
+import type { ArtworkView, RoomItem } from "@/lib/contracts/types";
 import { formatDistance } from "@/lib/gpx/metrics";
 import { FRAME_LABELS } from "@/lib/render/scene";
 import type { RoomApi } from "./useRoom";
@@ -13,8 +13,6 @@ const STEP = 0.02;
 
 export function ItemPanel({ room, item, artwork, onClose }: { room: RoomApi; item: RoomItem; artwork: ArtworkView; onClose: () => void }) {
   const [title, setTitle] = useState(artwork.title);
-  const [compare, setCompare] = useState(false);
-  const [detail, setDetail] = useState<ArtworkView | null>(artwork.geometry ? artwork : null);
   const [confirmDelete, setConfirmDelete] = useState(false);
 
   // 다른 작품으로 바뀌면 제목 입력값을 그 작품 제목으로 되돌린다 (렌더 중 이전 값 비교: React 권장 방식)
@@ -23,9 +21,6 @@ export function ItemPanel({ room, item, artwork, onClose }: { room: RoomApi; ite
     setTitleOf(artwork.title);
     setTitle(artwork.title);
   }
-  useEffect(() => {
-    if (compare && !detail) void room.loadDetail(artwork.id).then(setDetail);
-  }, [compare, detail, artwork.id, room]);
 
   const u = (patch: Partial<Omit<RoomItem, "id" | "artworkId">>) => room.updateItem(item.id, patch);
   const simplified = artwork.renderPointCount < artwork.stats.pointCount;
@@ -175,10 +170,6 @@ export function ItemPanel({ room, item, artwork, onClose }: { room: RoomApi; ite
           )}
         </dl>
         <p className="hint">파일로 제공된 기록이며 실제 운동 여부는 확인하지 않아요. 지도와 원래 위치는 표시하지 않아요.</p>
-        <button type="button" className="btn" aria-expanded={compare} onClick={() => setCompare((v) => !v)}>
-          {compare ? "비교 닫기" : "기준선과 전시용 선 비교"}
-        </button>
-        {compare && (detail?.geometry ? <CompareView art={detail} color={item.style.strokeColor} /> : <p className="hint">불러오는 중…</p>)}
       </fieldset>
 
       <fieldset>
@@ -205,33 +196,5 @@ export function ItemPanel({ room, item, artwork, onClose }: { room: RoomApi; ite
         </div>
       </fieldset>
     </section>
-  );
-}
-
-/** FR-07: 정규화 기준선(회색)과 전시용 선(색)을 나란히 비교. 지도·원 위치는 없음. */
-function CompareView({ art, color }: { art: ArtworkView; color: string }) {
-  const g = art.geometry!;
-  const render = g.sourceSegments.map((seg, i) => g.renderIndices[i].map((k) => seg[k]));
-  return (
-    <div className="compare">
-      <CompareBox lines={g.sourceSegments} stroke="#555" label={`정규화 기준선 (${g.sourceSegments.flat().length}점)`} />
-      <CompareBox lines={render} stroke={color} label={`전시용 선 (${render.flat().length}점)`} />
-    </div>
-  );
-}
-
-const ptsAttr = (seg: Pt[]) => seg.map(([u, v]) => `${(u * 200).toFixed(2)},${(v * 200).toFixed(2)}`).join(" ");
-
-function CompareBox({ lines, stroke, label }: { lines: Pt[][]; stroke: string; label: string }) {
-  return (
-    <figure className="compare-fig">
-      <svg viewBox="0 0 200 200" role="img" aria-label={label}>
-        <rect width={200} height={200} fill="#fff" stroke="#ddd" />
-        {lines.map((l, i) =>
-          l.length === 1 ? <circle key={i} cx={l[0][0] * 200} cy={l[0][1] * 200} r={2} fill={stroke} /> : <polyline key={i} points={ptsAttr(l)} fill="none" stroke={stroke} strokeWidth={1.5} />,
-        )}
-      </svg>
-      <figcaption>{label}</figcaption>
-    </figure>
   );
 }
