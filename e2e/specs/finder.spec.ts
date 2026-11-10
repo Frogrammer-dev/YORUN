@@ -70,6 +70,27 @@ test("동네 추천: 길 데이터 한 번 받아 코스 목록·선·안내 표
   await expect(page.getByRole("button", { name: /단순 지도/ })).toBeVisible();
 });
 
+test("동네 추천: 코어가 적은 기기는 보조 Worker 없이 순차로 찾는다", async ({ page }) => {
+  await page.addInitScript(() => Object.defineProperty(navigator, "hardwareConcurrency", { get: () => 2 }));
+  const workers: string[] = [];
+  page.on("worker", (w) => { if (!/maplibre/.test(w.url())) workers.push(w.url()); });
+  await openFinder(page);
+  await searchCourses(page);
+  await expect(page.locator(".cand").first()).toBeVisible();
+  // 코스 찾기 Worker는 주 Worker 하나만 뜬다 (병렬이면 3개, 지도 라이브러리 Worker는 세지 않는다)
+  expect(workers.length).toBe(1);
+});
+
+test("동네 추천: 코어가 넉넉하면 Worker 3개로 나눠 찾는다", async ({ page }) => {
+  await page.addInitScript(() => Object.defineProperty(navigator, "hardwareConcurrency", { get: () => 8 }));
+  const workers: string[] = [];
+  page.on("worker", (w) => { if (!/maplibre/.test(w.url())) workers.push(w.url()); });
+  await openFinder(page);
+  await searchCourses(page);
+  await expect(page.locator(".cand").first()).toBeVisible();
+  expect(workers.length).toBe(3);
+});
+
 test("같은 영역에서 그림만 바꾸면 길 데이터를 다시 받지 않는다", async ({ page, apiCalls }) => {
   await openFinder(page);
   await page.getByRole("radio", { name: "네모" }).click();
