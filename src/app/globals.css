@@ -596,6 +596,8 @@ legend { font-weight: 700; font-size: var(--fs-callout); padding-right: var(--sp
 .draw-pad { margin-top: var(--sp-3); }
 .draw-canvas { display: block; width: 100%; max-width: 280px; aspect-ratio: 1; margin: 0 auto; border-radius: var(--r-md); background: var(--surface-2); box-shadow: inset 0 0 0 1px var(--line); touch-action: none; cursor: crosshair; }
 .draw-ink { stroke: var(--brand); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+/* 이어지지 않은 선: 그림에는 남지만 아직 코스 찾기에 쓰이지 않는다 */
+.draw-ink-open { stroke-dasharray: 2 9; }
 .draw-placeholder { fill: var(--text-3); font-size: 14px; font-family: var(--font-sans); pointer-events: none; }
 .draw-foot { display: flex; align-items: center; gap: var(--sp-2); }
 .draw-foot .hint { flex: 1; }

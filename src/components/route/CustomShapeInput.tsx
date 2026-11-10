@@ -144,8 +144,22 @@ function GroupPreview({ group }: { group: ShapeGroup }) {
   );
 }
 
+/** 시작점과 끝점이 획 크기의 25%보다 멀면 닫지 않은 선(직선·호)으로 본다 */
+export function isOpenStroke(s: readonly Pt[]): boolean {
+  const xs = s.map((p) => p[0]), ys = s.map((p) => p[1]);
+  const ext = Math.max(Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys));
+  return ext > 0 && Math.hypot(s[0][0] - s[s.length - 1][0], s[0][1] - s[s.length - 1][1]) > 0.25 * ext;
+}
+
+type Stroke = { pts: Pt[]; open: boolean };
+/** 경로 찾기에는 닫힌 획만 쓴다 (열린 선의 왕복 경로는 아직 지원하지 않는다) */
+const closedGroup = (list: Stroke[]) => {
+  const loops = list.filter((s) => !s.open).map((s) => s.pts);
+  return loops.length ? groupFromLoops(loops, { order: "given", minPartRatio: 0.08, maxParts: MAX_PARTS }) : null;
+};
+
 function DrawTab({ onChange }: { onChange: (g: ShapeGroup | null) => void }) {
-  const [strokes, setStrokes] = useState<Pt[][]>([]);
+  const [strokes, setStrokes] = useState<Stroke[]>([]);
   const [cur, setCur] = useState<Pt[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const drawing = useRef(false);
@@ -155,9 +169,9 @@ function DrawTab({ onChange }: { onChange: (g: ShapeGroup | null) => void }) {
     const r = svgRef.current!.getBoundingClientRect();
     return [((e.clientX - r.left) / r.width) * SIZE, ((e.clientY - r.top) / r.height) * SIZE];
   };
-  const update = (list: Pt[][]) => {
+  const update = (list: Stroke[]) => {
     setStrokes(list);
-    const g = list.length ? groupFromLoops(list, { order: "given", minPartRatio: 0.08, maxParts: MAX_PARTS }) : null;
+    const g = closedGroup(list);
     onChange(g);
     return g;
   };
@@ -169,7 +183,7 @@ function DrawTab({ onChange }: { onChange: (g: ShapeGroup | null) => void }) {
         className="draw-canvas"
         viewBox={`0 0 ${SIZE} ${SIZE}`}
         role="img"
-        aria-label="찾고 싶은 그림을 그리는 칸. 획마다 손을 떼면 시작점과 끝점이 이어져요. 여러 획을 그릴 수 있어요."
+        aria-label="찾고 싶은 그림을 그리는 칸. 시작점 가까이에서 손을 떼면 이어진 획, 멀리서 떼면 이어지지 않은 선이 돼요. 여러 획을 그릴 수 있어요."
         onPointerDown={(e) => {
           e.currentTarget.setPointerCapture(e.pointerId);
           drawing.current = true;
@@ -191,9 +205,11 @@ function DrawTab({ onChange }: { onChange: (g: ShapeGroup | null) => void }) {
             setError(`획은 ${MAX_PARTS}개까지 그릴 수 있어요.`);
             return;
           }
-          const before = strokes.length ? (groupFromLoops(strokes, { order: "given", minPartRatio: 0.08, maxParts: MAX_PARTS })?.parts.length ?? 0) : 0;
-          const g = update([...strokes, s]);
-          if (!g || g.parts.length <= before) setError("방금 획은 너무 작거나 안쪽이 없어서 빠졌어요. 조금 더 크게, 닫힌 모양으로 그려 주세요.");
+          const open = isOpenStroke(s);
+          const before = closedGroup(strokes)?.parts.length ?? 0;
+          const g = update([...strokes, { pts: s, open }]);
+          if (open) setError(g ? "이어지지 않은 선은 그림에 점선으로 남아요. 코스 찾기에는 아직 닫힌 획만 쓰여요." : "이어지지 않은 선은 그림에 점선으로 남아요. 코스 찾기에는 닫힌 획이 하나 이상 필요해요.");
+          else if (!g || g.parts.length <= before) setError("방금 획은 너무 작거나 안쪽이 없어서 빠졌어요. 조금 더 크게, 닫힌 모양으로 그려 주세요.");
         }}
         onPointerCancel={() => {
           drawing.current = false;
@@ -201,7 +217,7 @@ function DrawTab({ onChange }: { onChange: (g: ShapeGroup | null) => void }) {
         }}
       >
         {strokes.map((s, i) => (
-          <path key={i} d={s.map((p, k) => `${k ? "L" : "M"}${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join("") + "Z"} fill="none" className="draw-ink" />
+          <path key={i} d={s.pts.map((p, k) => `${k ? "L" : "M"}${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join("") + (s.open ? "" : "Z")} fill="none" className={s.open ? "draw-ink draw-ink-open" : "draw-ink"} />
         ))}
         {cur && <polyline points={cur.map((p) => p.join(",")).join(" ")} fill="none" className="draw-ink" />}
         {!strokes.length && !cur && (
@@ -212,7 +228,7 @@ function DrawTab({ onChange }: { onChange: (g: ShapeGroup | null) => void }) {
       </svg>
       <div className="draw-foot">
         <p className="hint" role={error ? "alert" : undefined}>
-          {error ?? "획마다 손을 떼면 시작점과 끝점이 이어져요. 떨어진 여러 획(예: 하트 두 개)도 그릴 수 있어요."}
+          {error ?? "시작점 가까이에서 손을 떼면 이어진 획이 되고, 멀리서 떼면 이어지지 않은 선(직선)으로 남아요. 떨어진 여러 획(예: 하트 두 개)도 그릴 수 있어요."}
         </p>
         {strokes.length > 0 && (
           <>

@@ -188,6 +188,24 @@ test("직접 그린 세모로 찾기", async ({ page }) => {
   expect(titles.every((t) => t.includes("내 그림"))).toBe(true);
 });
 
+test("이어지지 않은 직선도 그림에 남고, 코스 찾기에는 닫힌 획만 쓴다", async ({ page }) => {
+  await openFinder(page);
+  await page.getByRole("radio", { name: /직접 그리기/ }).click();
+  const button = page.getByRole("button", { name: "지금 보이는 지도에서 코스 찾기" });
+  // 직선 하나: 점선으로 남고, 닫힌 획이 없으므로 찾을 수 없다
+  await drawStroke(page, [[0.15, 0.2], [0.85, 0.3]]);
+  await expect(page.locator(".draw-canvas path.draw-ink-open")).toHaveCount(1);
+  await expect(page.getByText(/닫힌 획이 하나 이상 필요해요/)).toBeVisible();
+  await expect(button).toBeDisabled();
+  // 세모를 더하면 세모만으로 찾는다 (직선은 그대로 그림에 남는다)
+  await drawStroke(page, [[0.5, 0.4], [0.85, 0.9], [0.15, 0.9], [0.5, 0.42]]);
+  await expect(page.locator(".draw-canvas path.draw-ink")).toHaveCount(2);
+  await expect(page.locator(".draw-canvas path.draw-ink-open")).toHaveCount(1);
+  await expect(button).toBeEnabled();
+  await searchCourses(page);
+  expect(await page.locator(".cand").count()).toBeGreaterThan(0);
+});
+
 test("넓은 영역 10km는 5km 칸 4개로 나눠 받는다", async ({ page, apiCalls }) => {
   await openFinder(page);
   await page.getByRole("radio", { name: "네모" }).click();
