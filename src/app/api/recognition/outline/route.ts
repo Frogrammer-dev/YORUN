@@ -136,15 +136,31 @@ export function POST(req: Request) {
     active++;
     try {
       const signal = AbortSignal.any([req.signal, AbortSignal.timeout(45000)]);
-      await checkSafety(prompt, key, signal);
-      const subject = await reviewSubject(prompt, key, signal);
-      const group = await outlineFromImage(subject, key, signal) ?? await outlineFromPoints(subject, key, signal);
+      // 단계별 소요 시간을 Server-Timing으로 남긴다 (내용·입력은 담지 않는다)
+      const timing: string[] = [];
+      const timed = async <T,>(name: string, work: () => Promise<T>) => {
+        const start = performance.now();
+        try { return await work(); } finally { timing.push(`${name};dur=${Math.round(performance.now() - start)}`); }
+      };
+      // 글 안전 검사와 주제 검토는 서로 기다릴 필요가 없어 함께 보낸다.
+      // 둘 다 통과해야 생성으로 넘어가고, 안전 검사 결과를 먼저 따진다(차단 사유가 우선).
+      const stopReview = new AbortController();
+      const [moderation, reviewed] = await timed("check", () => Promise.allSettled([
+        checkSafety(prompt, key, signal).catch(error => { stopReview.abort(); throw error; }),
+        reviewSubject(prompt, key, AbortSignal.any([signal, stopReview.signal])),
+      ]));
+      if (moderation.status === "rejected") throw moderation.reason;
+      if (reviewed.status === "rejected") throw reviewed.reason;
+      const subject = reviewed.value;
+      const group = await timed("image", () => outlineFromImage(subject, key, signal)) ?? await timed("points", () => outlineFromPoints(subject, key, signal));
       if (!group) throw new HttpError(422, "invalid_outline", "뚜렷한 테두리를 만들기 어려워요. 옆모습이나 특징을 조금 더 묘사해 주세요.");
       const vertices = group.parts[0].shape.points.map(([x,y]) => `${128 + 216*x},${128 - 216*y}`).join(" ");
       const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256"><rect width="256" height="256" fill="white"/><polygon points="${vertices}" fill="none" stroke="black" stroke-width="5"/></svg>`;
       const png = await sharp(Buffer.from(svg)).png().toBuffer();
-      await checkSafety([{ type: "image_url", image_url: { url: "data:image/png;base64," + png.toString("base64") } }], key, signal);
-      return ok({ group });
+      await timed("verify", () => checkSafety([{ type: "image_url", image_url: { url: "data:image/png;base64," + png.toString("base64") } }], key, signal));
+      const response = ok({ group });
+      response.headers.set("Server-Timing", timing.join(", "));
+      return response;
     } finally { active--; }
   });
 }
